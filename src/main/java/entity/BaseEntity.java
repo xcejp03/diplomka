@@ -1,13 +1,23 @@
 package entity;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
 /**
  * Created by pcejka on 21.09.2016.
  */
-public class BaseEntity {
+@MappedSuperclass
+public abstract class BaseEntity {
+    @Id
+    @GeneratedValue
+    protected Long id;
 
-    /*
-     *
-      * přidat ID společné pro všechny
-     *
-     */
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

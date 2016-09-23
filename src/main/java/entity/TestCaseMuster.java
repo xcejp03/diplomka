@@ -1,5 +1,6 @@
 package entity;
 
+import javax.persistence.Entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -9,7 +10,8 @@ import java.util.List;
  * Při exekuci se natáhnou stepy vyplěněny jak je napsán bez výsledků testů. Stepy se budou po spuštněí
  * ukládat jako nové instance. V db pak bude - NE! bude to jinak.
  */
-public class TestCaseMuster {
+@Entity
+public class TestCaseMuster extends BaseEntity {
     private String name;
     private LocalDateTime createdDateTime;
     private LocalDateTime updatedDateTime;
