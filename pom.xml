@@ -11,7 +11,7 @@
     <properties>
         <spring.version>4.3.1.RELEASE</spring.version>
         <hibernate.version>4.3.8.Final</hibernate.version>
-        <jee.version>7.0</jee.version>
+        <jee.version>8.0</jee.version>
     </properties>
 
     <build>
@@ -28,6 +28,11 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.1-901-1.jdbc4</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
