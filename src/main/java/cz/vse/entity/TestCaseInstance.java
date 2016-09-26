@@ -1,6 +1,8 @@
 package cz.vse.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 /**
@@ -14,6 +16,12 @@ public class TestCaseInstance extends BaseEntity {
     private String name;
     private LocalDateTime createdDateTime;
     private LocalDateTime updatedDateTime;
+
+    @ManyToOne
+    @JoinColumn (name = "testCaseMuster_id")
     private TestCaseMuster testCaseMuster;
+
+    @ManyToOne
+    @JoinColumn (name = "testProject_id")
     private TestProject testProject;
 }

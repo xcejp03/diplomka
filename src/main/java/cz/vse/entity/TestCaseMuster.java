@@ -17,9 +17,9 @@ public class TestCaseMuster extends BaseEntity {
     private LocalDateTime createdDateTime;
     private LocalDateTime updatedDateTime;
 
-    @OneToMany
+    @OneToMany (mappedBy = "id")
     private List<TestStepMuster> testStepMusters;
 
-    @OneToMany
+    @OneToMany (mappedBy = "id")
     private List<TestCaseInstance> testCaseInstances;
 }

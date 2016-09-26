@@ -1,6 +1,9 @@
 package cz.vse.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.security.acl.Owner;
 import java.util.List;
 
@@ -10,6 +13,11 @@ import java.util.List;
 @Entity
 public class TestProject  extends BaseEntity{
     private String name;
+
+    @OneToMany (mappedBy = "id")
     private List<TestSuite> testSuites;
-    private Person ProjectOwner;
+
+    @ManyToOne
+    @JoinColumn (name = "projectOwner_id")
+    private Person projectOwner;
 }
