@@ -18,9 +18,12 @@ public class TestStepMuster extends BaseEntity {
     private String action;
     private String expected;
 
-    @ManyToMany
+    @ManyToMany //(mappedBy = "")
     private List<Defect> defects;
 
-    @OneToMany (mappedBy = "id")
+    @OneToMany (mappedBy = "testStepMuster")
     private List<TestStepInstance> testStepInstances;
+
+    @ManyToMany (mappedBy = "testStepMusters")
+    private List<TestCaseMuster> testCaseMusters;
 }

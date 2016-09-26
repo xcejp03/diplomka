@@ -18,11 +18,15 @@ public class TestStepInstance  extends BaseEntity{
     private String expected;
     private String actual;
 
-    @ManyToMany
-    private List<Defect> defects;
-
     @ManyToOne
     @JoinColumn (name = "testStepMuster_id")
     private TestStepMuster testStepMuster;
+
+    @ManyToMany (mappedBy = "testStepInstances")
+    private List<Defect> defects;
+
+    @ManyToOne
+    @JoinColumn (name = "testCaseInstance_id")
+    private TestCaseInstance testCaseInstance;
 
 }

@@ -10,30 +10,34 @@ import java.util.List;
 @Entity
 public class Defect extends BaseEntity {
     private String description;
+    private PriorityEnum priorityEnum;
+    private DefectStatusEnum defectStatusEnum;
+    private String AffectsVersion;
+//    private Clob file;
 
     @OneToMany (mappedBy = "id")
     private List<DefectComment> defectComments;
 
-    private PriorityEnum priorityEnum;
-
-    @ManyToMany //(mappedBy = "id")   // PROVĚŘIT SPRÁVNOST
+    @ManyToMany    // PROVĚŘIT SPRÁVNOST
+    @JoinTable (name = "DEFECT_TCI", joinColumns = @JoinColumn (name = "DEFECT_ID", referencedColumnName = "ID"),
+    inverseJoinColumns = @JoinColumn(name = "TCI_ID", referencedColumnName = "ID"))
     private List<TestCaseInstance> testCaseInstances;      //defect může být navázán TC nebo konkrétní step
 
-    @ManyToMany // (mappedBy = "id")
+
+    @ManyToMany    // PROVĚŘIT SPRÁVNOST
+    @JoinTable (name = "DEFECT_TSI", joinColumns = @JoinColumn (name = "DEFECT_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "TSI_ID", referencedColumnName = "ID"))
     private List<TestStepInstance> testStepInstances;      //nebo může být navázáno na oboje
 
-    @ManyToMany //(mappedBy = "id")
-    private List<TestProject> testProjects;                // i  na projekt může být navázáno
 
-    private String AffectsVersion;
 
     @ManyToOne
-    @JoinColumn (name = "person_id")
-    private Person Assignee;
-//    private Person Reporter;
-    private DefectStatusEnum defectStatusEnum;
-//    private Clob file;
+    @JoinColumn (name = "assignee_id")
+    private Person assignee;
 
-    public Defect() {
-    }
+    @ManyToOne
+    @JoinColumn (name = "reporter_id")
+    private Person reporter;
+
+
 }

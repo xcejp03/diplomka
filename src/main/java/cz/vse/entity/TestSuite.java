@@ -20,6 +20,6 @@ public class TestSuite extends BaseEntity {
     @JoinColumn (name = "testProject_id")
     private TestProject testProject;        //testsuit patří pod jeden projekt
 
-    @ManyToMany // (mappedBy = "id")
+    @ManyToMany  (mappedBy = "testSuites")
     private List<TestCaseMuster> testCaseMusters;      //testsuit se skládá z testcasů;
 }

@@ -1,9 +1,8 @@
 package cz.vse.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Created by pcejka on 21.09.2016.
@@ -21,7 +20,9 @@ public class TestCaseInstance extends BaseEntity {
     @JoinColumn (name = "testCaseMuster_id")
     private TestCaseMuster testCaseMuster;
 
-    @ManyToOne
-    @JoinColumn (name = "testProject_id")
-    private TestProject testProject;
+    @ManyToMany (mappedBy = "testCaseInstances")
+    private List<Defect> defects;
+
+    @OneToMany (mappedBy = "testCaseInstance")
+    private List<TestStepInstance> testStepInstances;
 }

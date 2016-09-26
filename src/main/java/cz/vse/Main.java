@@ -8,13 +8,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class Main {
 
-    public static void main (String[] args) {
-
-
+    public static void main(String[] args) {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("/ApplicationContext.xml");
-
-
+        System.exit(1);
 
 //        PopulateDatabase pd = (PopulateDatabase) context.getBean("populateDatabase");
 //        pd.createTestingData();

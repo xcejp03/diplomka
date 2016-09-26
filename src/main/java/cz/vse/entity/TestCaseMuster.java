@@ -1,7 +1,6 @@
 package cz.vse.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,9 +16,22 @@ public class TestCaseMuster extends BaseEntity {
     private LocalDateTime createdDateTime;
     private LocalDateTime updatedDateTime;
 
-    @OneToMany (mappedBy = "id")
-    private List<TestStepMuster> testStepMusters;
 
-    @OneToMany (mappedBy = "id")
+    @OneToMany (mappedBy = "testCaseMuster")
     private List<TestCaseInstance> testCaseInstances;
+
+    @ManyToOne
+    @JoinColumn (name = "testProject_id")
+    private TestProject testProject;
+
+
+    @ManyToMany
+    @JoinTable (name = "TCMUSTER_TESTSUITE", joinColumns = @JoinColumn (name = "TCMUSTER_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "TESTSUITE_ID", referencedColumnName = "ID"))
+    private List<TestSuite> testSuites;
+
+    @ManyToMany    // PROVĚŘIT SPRÁVNOST
+    @JoinTable (name = "TSMUSTER_TSMUSTER", joinColumns = @JoinColumn (name = "TCMUSTER_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "TSMUSTER_ID", referencedColumnName = "ID"))
+    private List<TestStepMuster> testStepMusters;
 }
