@@ -12,8 +12,11 @@ public class Main {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("/ApplicationContext.xml");
 
-        Pokusna pok = (Pokusna) context.getBean("pokusna");
-        pok.delej();
+//        Pokusna pok = (Pokusna) context.getBean("pokusna");
+//        pok.delej();
+
+        DBPopulator DBP = (DBPopulator) context.getBean("DBPopulator");
+        DBP.populateDatabase();
         System.exit(1);
 
 //        PopulateDatabase pd = (PopulateDatabase) context.getBean("populateDatabase");

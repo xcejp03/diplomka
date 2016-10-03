@@ -9,7 +9,7 @@
         <description>using oracle db in standalone server mode (asi)</description>
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>cz.vse.Pokusna</class>
+        <class>cz.vse.DBPopulator</class>
         <properties>
 
             <!--database connection-->
