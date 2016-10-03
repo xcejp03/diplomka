@@ -17,6 +17,10 @@ public class DefectComment extends BaseEntity{
     private String commentText;
 
     @ManyToOne
+    @JoinColumn (name = "defect_id")
+    private Defect defect;
+
+    @ManyToOne
     @JoinColumn (name = "author_id")
     private Person author;
 
@@ -34,6 +38,14 @@ public class DefectComment extends BaseEntity{
 
     public void setCommentText(String commentText) {
         this.commentText = commentText;
+    }
+
+    public Defect getDefect() {
+        return defect;
+    }
+
+    public void setDefect(Defect defect) {
+        this.defect = defect;
     }
 
     public Person getAuthor() {

@@ -15,8 +15,8 @@ public class Defect extends BaseEntity {
     private String AffectsVersion;
 //    private Clob file;
 
-    @OneToMany (mappedBy = "id")
-    private List<DefectComment> defectComments;
+//    @OneToMany (mappedBy = "id")
+//    private List<DefectComment> defectComments;
 
     @ManyToMany    // PROVĚŘIT SPRÁVNOST
     @JoinTable (name = "DEFECT_TCI", joinColumns = @JoinColumn (name = "DEFECT_ID", referencedColumnName = "ID"),
@@ -69,14 +69,6 @@ public class Defect extends BaseEntity {
 
     public void setAffectsVersion(String affectsVersion) {
         AffectsVersion = affectsVersion;
-    }
-
-    public List<DefectComment> getDefectComments() {
-        return defectComments;
-    }
-
-    public void setDefectComments(List<DefectComment> defectComments) {
-        this.defectComments = defectComments;
     }
 
     public List<TestCaseInstance> getTestCaseInstances() {
