@@ -43,9 +43,9 @@ public class DBPopulator {
 
     public void populateDatabase() {
         l.debug("populate database");
+        createPilotPerson();
         createPilotDefect();
         createPilotDefectComment();
-        createPilotPerson();
         createPilotTestCaseInstance();
         createPilotTestCaseMuster();
         createPilotTestProject();
@@ -53,6 +53,7 @@ public class DBPopulator {
         createPilotDefectComment();
         createPilotTestStepMuster();
         createPilotTestSuit();
+        l.info("population db is complete");
 
     }
 
