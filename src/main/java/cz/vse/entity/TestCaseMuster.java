@@ -34,4 +34,60 @@ public class TestCaseMuster extends BaseEntity {
     @JoinTable (name = "TSMUSTER_TSMUSTER", joinColumns = @JoinColumn (name = "TCMUSTER_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "TSMUSTER_ID", referencedColumnName = "ID"))
     private List<TestStepMuster> testStepMusters;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LocalDateTime getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    public void setCreatedDateTime(LocalDateTime createdDateTime) {
+        this.createdDateTime = createdDateTime;
+    }
+
+    public LocalDateTime getUpdatedDateTime() {
+        return updatedDateTime;
+    }
+
+    public void setUpdatedDateTime(LocalDateTime updatedDateTime) {
+        this.updatedDateTime = updatedDateTime;
+    }
+
+    public List<TestCaseInstance> getTestCaseInstances() {
+        return testCaseInstances;
+    }
+
+    public void setTestCaseInstances(List<TestCaseInstance> testCaseInstances) {
+        this.testCaseInstances = testCaseInstances;
+    }
+
+    public TestProject getTestProject() {
+        return testProject;
+    }
+
+    public void setTestProject(TestProject testProject) {
+        this.testProject = testProject;
+    }
+
+    public List<TestSuite> getTestSuites() {
+        return testSuites;
+    }
+
+    public void setTestSuites(List<TestSuite> testSuites) {
+        this.testSuites = testSuites;
+    }
+
+    public List<TestStepMuster> getTestStepMusters() {
+        return testStepMusters;
+    }
+
+    public void setTestStepMusters(List<TestStepMuster> testStepMusters) {
+        this.testStepMusters = testStepMusters;
+    }
 }

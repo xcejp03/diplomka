@@ -25,4 +25,52 @@ public class TestCaseInstance extends BaseEntity {
 
     @OneToMany (mappedBy = "testCaseInstance")
     private List<TestStepInstance> testStepInstances;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LocalDateTime getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    public void setCreatedDateTime(LocalDateTime createdDateTime) {
+        this.createdDateTime = createdDateTime;
+    }
+
+    public LocalDateTime getUpdatedDateTime() {
+        return updatedDateTime;
+    }
+
+    public void setUpdatedDateTime(LocalDateTime updatedDateTime) {
+        this.updatedDateTime = updatedDateTime;
+    }
+
+    public TestCaseMuster getTestCaseMuster() {
+        return testCaseMuster;
+    }
+
+    public void setTestCaseMuster(TestCaseMuster testCaseMuster) {
+        this.testCaseMuster = testCaseMuster;
+    }
+
+    public List<Defect> getDefects() {
+        return defects;
+    }
+
+    public void setDefects(List<Defect> defects) {
+        this.defects = defects;
+    }
+
+    public List<TestStepInstance> getTestStepInstances() {
+        return testStepInstances;
+    }
+
+    public void setTestStepInstances(List<TestStepInstance> testStepInstances) {
+        this.testStepInstances = testStepInstances;
+    }
 }

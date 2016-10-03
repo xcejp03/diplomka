@@ -20,5 +20,27 @@ public class DefectComment extends BaseEntity{
     @JoinColumn (name = "author_id")
     private Person author;
 
+    public LocalDateTime getCreatedDateTime() {
+        return createdDateTime;
+    }
 
+    public void setCreatedDateTime(LocalDateTime createdDateTime) {
+        this.createdDateTime = createdDateTime;
+    }
+
+    public String getCommentText() {
+        return commentText;
+    }
+
+    public void setCommentText(String commentText) {
+        this.commentText = commentText;
+    }
+
+    public Person getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Person author) {
+        this.author = author;
+    }
 }
