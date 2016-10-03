@@ -11,6 +11,9 @@ public class Main {
     public static void main(String[] args) {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("/ApplicationContext.xml");
+
+        Pokusna pok = (Pokusna) context.getBean("pokusna");
+        pok.delej();
         System.exit(1);
 
 //        PopulateDatabase pd = (PopulateDatabase) context.getBean("populateDatabase");
