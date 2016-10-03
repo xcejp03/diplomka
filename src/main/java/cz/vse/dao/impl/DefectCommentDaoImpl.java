@@ -3,6 +3,7 @@ package cz.vse.dao.impl;
 import cz.vse.dao.DefectCommentDao;
 import cz.vse.entity.DefectComment;
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -13,9 +14,10 @@ import java.util.List;
  * Created by pcejka on 03.10.2016.
  */
 @Repository
+@ImportResource("classpath:ApplicationContext.xml")
 public class DefectCommentDaoImpl implements DefectCommentDao {
     private final Logger l = Logger.getLogger(this.getClass());
-    @PersistenceContext
+    @PersistenceContext //(unitName = "persistenceUnit")
     EntityManager em;
 
     @Override
