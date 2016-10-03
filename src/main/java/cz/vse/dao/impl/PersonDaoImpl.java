@@ -23,21 +23,21 @@ public class PersonDaoImpl implements PersonDao {
     public void addPerson(Person person) {
         l.debug("Saving person: " + person);
         em.persist(person);
-        l.info("Person saved succsesfully. Person detail: " + person);
+        l.info("Person saved successfully. Person detail: " + person);
     }
 
     @Override
     public void deletePerson(Person person) {
         l.debug("Deleting person: " + person);
         em.remove(person);
-        l.info("Person deleted succsesfully. Person detail: " + person);
+        l.info("Person deleted successfully. Person detail: " + person);
     }
 
     @Override
     public void updatePerson(Person person) {
         l.debug("Updating person:" + person);
         em.merge(person);
-        l.info("Person updated succsesfully. Person detail: " + person);
+        l.info("Person updated successfully. Person detail: " + person);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class PersonDaoImpl implements PersonDao {
         l.debug("Getting all person");
 
         List<Person> resultList = em.createQuery("select p from Person p").getResultList();
-        l.info("Getted all persons succsesfully. Person detail: " + resultList.toString());
+        l.info("Gotten all persons successfully. Person detail: " + resultList.toString());
         return resultList;
 
     }
@@ -54,7 +54,7 @@ public class PersonDaoImpl implements PersonDao {
     public Person getPersonById(long id) {
         l.debug("Getting person by ID: " + id);
         Person person = em.find(Person.class, id);
-        l.info("Getted person succsesfully. Person detail: " + person);
+        l.info("Gotten person successfully. Person detail: " + person);
         return person;
 
     }

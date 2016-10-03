@@ -5,6 +5,8 @@ import cz.vse.entity.DefectComment;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
@@ -13,29 +15,43 @@ import java.util.List;
 @Repository
 public class DefectCommentDaoImpl implements DefectCommentDao {
     private final Logger l = Logger.getLogger(this.getClass());
+    @PersistenceContext
+    EntityManager em;
 
     @Override
     public void addDefectComment(DefectComment defectComment) {
-
+        l.debug("Saving DefectComment: " + defectComment);
+        em.persist(defectComment);
+        l.info("DefectComment saved successfully. DefectComment detail: " + defectComment);
     }
 
     @Override
     public void deleteDefectComment(DefectComment defectComment) {
-
+        l.debug("Deleting DefectComment: " + defectComment);
+        em.remove(defectComment);
+        l.info("DefectComment deleted successfully. DefectComment detail: " + defectComment);
     }
 
     @Override
     public void updateDefectComment(DefectComment defectComment) {
-
+        l.debug("Updating DefectComment: " + defectComment);
+        em.merge(defectComment);
+        l.info("DefectComment updated successfully. DefectComment detail: " + defectComment);
     }
 
     @Override
     public List<DefectComment> getAllDefectComment(DefectComment defectComment) {
-        return null;
+        l.debug("Getting all defectComment");
+        List<DefectComment> resultList = em.createQuery("select d from DefectComment d").getResultList();
+        l.info("DefectComments gotten successfully. DefectComments detail: " + resultList.toString());
+        return resultList;
     }
 
     @Override
     public DefectComment getDefectCommentById(long id) {
-        return null;
+        l.debug("Getting DefectComment by id: " + id);
+        DefectComment defectComment = em.find(DefectComment.class, id);
+        l.info("DefectComment gotten successfully. DefectComment detail: " + defectComment);
+        return defectComment;
     }
 }
