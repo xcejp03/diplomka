@@ -19,7 +19,7 @@ public class DefectCommentDaoImpl implements DefectCommentDao {
     EntityManager em;
 
     @Override
-    public void addDefectComment(DefectComment defectComment) {
+    public void saveDefectComment(DefectComment defectComment) {
         l.debug("Saving DefectComment: " + defectComment);
         em.persist(defectComment);
         l.info("DefectComment saved successfully. DefectComment detail: " + defectComment);

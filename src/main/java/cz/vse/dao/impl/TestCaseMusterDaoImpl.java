@@ -20,7 +20,7 @@ public class TestCaseMusterDaoImpl implements TestCaseMusterDao {
     EntityManager em;
 
     @Override
-    public void addTestCaseMuster(TestCaseMuster testCaseMuster) {
+    public void saveTestCaseMuster(TestCaseMuster testCaseMuster) {
         l.debug("Saving TestCaseMuster: " + testCaseMuster);
         em.persist(testCaseMuster);
         l.info("TestCaseMuster saved successfully. TestCaseMuster detail: " + testCaseMuster);

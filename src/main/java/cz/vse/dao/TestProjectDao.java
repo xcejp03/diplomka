@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface TestProjectDao {
 
-    public void addTestProject(TestProject testProject);
+    public void saveTestProject(TestProject testProject);
     public void deleteTestProject(TestProject testProject);
     public void updateTestProject(TestProject testProject);
     public List<TestProject> getAllTestProject();

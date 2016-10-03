@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface DefectCommentDao {
 
-    public void addDefectComment(DefectComment defectComment);
+    public void saveDefectComment(DefectComment defectComment);
     public void deleteDefectComment(DefectComment defectComment);
     public void updateDefectComment(DefectComment defectComment);
     public List<DefectComment> getAllDefectComment(DefectComment defectComment);

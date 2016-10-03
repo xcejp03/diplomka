@@ -20,7 +20,7 @@ public class PersonDaoImpl implements PersonDao {
     EntityManager em;
 
     @Override
-    public void addPerson(Person person) {
+    public void savePerson(Person person) {
         l.debug("Saving person: " + person);
         em.persist(person);
         l.info("Person saved successfully. Person detail: " + person);

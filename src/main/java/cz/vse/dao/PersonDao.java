@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface PersonDao {
 
-    public void addPerson (Person person);       //vrací ID uložené osoby nebo -1 při chybě
+    public void savePerson(Person person);       //vrací ID uložené osoby nebo -1 při chybě
     public void deletePerson (Person person);        //vrací true při úspěchu, false při chybě
     public void updatePerson (Person person);        //vrací true při úspěchu, false při chybě
     public List<Person> getAllPersons();

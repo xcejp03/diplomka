@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface TestCaseInstanceDao {
 
-    public void addTestCaseInstance(TestCaseInstance TestCaseInstance);
+    public void saveTestCaseInstance(TestCaseInstance TestCaseInstance);
     public void deleteTestCaseInstance(TestCaseInstance testCaseInstance);
     public void updateTestCaseInstance(TestCaseInstance testCaseInstance);
     public List<TestCaseInstance> getAllTestCaseInstance();

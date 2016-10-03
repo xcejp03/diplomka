@@ -19,7 +19,7 @@ public class TestStepInstanceDaoImpl implements TestStepInstanceDao {
     @PersistenceContext
     EntityManager em;
     @Override
-    public void addTestStepInstance(TestStepInstance testStepInstance) {
+    public void saveTestStepInstance(TestStepInstance testStepInstance) {
         l.debug("Saving testStepInstance: " + testStepInstance);
         em.persist(testStepInstance);
         l.info("TestStepInstance saved successfully. TestStepInstance detail: " + testStepInstance);

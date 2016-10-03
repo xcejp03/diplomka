@@ -19,7 +19,7 @@ public class TestSuiteDaoImpl implements TestSuiteDao {
     @PersistenceContext
     EntityManager em;
     @Override
-    public void addTestSuite(TestSuite testSuite) {
+    public void saveTestSuite(TestSuite testSuite) {
         l.debug("Saving testSuite: " + testSuite);
         em.persist(testSuite);
         l.info("TestSuite saved successfully. TestSuite detail: " + testSuite);

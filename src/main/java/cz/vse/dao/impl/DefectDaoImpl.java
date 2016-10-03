@@ -20,7 +20,7 @@ public class DefectDaoImpl implements DefectDao {
     EntityManager em;
 
     @Override
-    public void addDefect(Defect defect) {
+    public void saveDefect(Defect defect) {
         l.debug("Saving defect: " + defect);
         em.persist(defect);
         l.info("Defect saved successfully. Defect detail: " + defect);

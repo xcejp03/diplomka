@@ -19,7 +19,7 @@ public class TestCaseInstanceDaoImpl implements TestCaseInstanceDao {
     @PersistenceContext
     EntityManager em;
     @Override
-    public void addTestCaseInstance(TestCaseInstance testCaseInstance) {
+    public void saveTestCaseInstance(TestCaseInstance testCaseInstance) {
         l.debug("Saving TestCaseInstance: " + testCaseInstance);
         em.persist(testCaseInstance);
         l.info("TestCaseInstance saved successfully. TestCaseInstance detail: " + testCaseInstance);

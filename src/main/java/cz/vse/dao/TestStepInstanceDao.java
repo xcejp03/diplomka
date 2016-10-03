@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface TestStepInstanceDao {
 
-    public void addTestStepInstance(TestStepInstance testStepInstance);
+    public void saveTestStepInstance(TestStepInstance testStepInstance);
     public void deleteTestStepInstance(TestStepInstance testStepInstance);
     public void updateTestStepInstance(TestStepInstance testStepInstance);
     public List<TestStepInstance> getAllTestStepInstance();

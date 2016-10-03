@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface TestSuiteDao {
 
-    public void addTestSuite(TestSuite testSuite);
+    public void saveTestSuite(TestSuite testSuite);
     public void deleteTestSuite(TestSuite testSuite);
     public void updateTestSuite(TestSuite testSuite);
     public List<TestSuite> getAll(TestSuite testSuite);

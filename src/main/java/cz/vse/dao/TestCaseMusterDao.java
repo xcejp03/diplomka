@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface TestCaseMusterDao {
 
-    public void addTestCaseMuster(TestCaseMuster testCaseMuster);
+    public void saveTestCaseMuster(TestCaseMuster testCaseMuster);
     public void deleteTestCaseMuster(TestCaseMuster testCaseMuster);
     public void updateTestCaseMuster(TestCaseMuster testCaseMuster);
     public List<TestCaseMuster> getAllTestCaseMuster();

@@ -19,7 +19,7 @@ public class TestProjectDaoImpl implements TestProjectDao {
     @PersistenceContext
     EntityManager em;
     @Override
-    public void addTestProject(TestProject testProject) {
+    public void saveTestProject(TestProject testProject) {
         l.debug("Saving testProject: " + testProject);
         em.persist(testProject);
         l.info("TestProject saved successfully. TestProject detail: " + testProject);
