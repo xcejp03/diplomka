@@ -17,7 +17,7 @@ import java.util.List;
 public class DefectDaoImpl implements DefectDao {
     private final Logger l = Logger.getLogger(this.getClass());
     @PersistenceContext
-    EntityManager em;
+    EntityManager em ;
 
     @Override
     public void saveDefect(Defect defect) {
@@ -56,4 +56,5 @@ public class DefectDaoImpl implements DefectDao {
         l.info("Gotten defect successfully. Defect detail: " + defect);
         return null;
     }
+
 }

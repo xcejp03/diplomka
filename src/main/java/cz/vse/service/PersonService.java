@@ -10,16 +10,16 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PersonService {
-    @Autowired
-    private PersonDao personDao;
-
-    public long savePerson (Person person)  {
-        if (person != null) {
-            return personDao.savePerson(person);
-        }else {
-            throw  new IllegalArgumentException("Person cannot be saved.");
-        }
-
-    }
+//    @Autowired
+//    private PersonDao personDao;
+//
+//    public long savePerson (Person person)  {
+//        if (person != null) {
+//            return personDao.savePerson(person);
+//        }else {
+//            throw  new IllegalArgumentException("Person cannot be saved.");
+//        }
+//
+//    }
 
 }

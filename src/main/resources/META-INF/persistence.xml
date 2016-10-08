@@ -7,11 +7,11 @@
     <!--<persistence-unit name="tutorialUnit" transaction-type="RESOURCE_LOCAL">-->
 
 
-    <persistence-unit name="tutorialUnit" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="tutorialUnit2" transaction-type="RESOURCE_LOCAL">
         <description>using oracle db in standalone server mode (asi)</description>
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>cz.vse.dao.impl.DefectCommentDaoImpl</class>
+        <!--<class>cz.vse.dao.impl.DefectCommentDaoImpl</class>-->
         <properties>
 
             <!--database connection-->
@@ -20,7 +20,7 @@
             <property name="hibernate.connection.username" value="xcejp03"/>
             <property name="hibernate.connection.password" value="heslo"/>
             <!-- JPA parameters -->
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL9Dialect"/>
 
             <!--Hibernate parametry-->

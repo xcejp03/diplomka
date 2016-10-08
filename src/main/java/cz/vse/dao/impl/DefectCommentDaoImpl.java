@@ -17,7 +17,7 @@ import java.util.List;
 @ImportResource("classpath:ApplicationContext.xml")
 public class DefectCommentDaoImpl implements DefectCommentDao {
     private final Logger l = Logger.getLogger(this.getClass());
-    @PersistenceContext //(unitName = "persistenceUnit")
+    @PersistenceContext
     EntityManager em;
 
     @Override

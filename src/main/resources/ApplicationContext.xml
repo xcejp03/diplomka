@@ -18,38 +18,8 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="persistenceXmlLocation" value="persistence.xml"/>
+        <!--<property name="persistenceXmlLocation" value="persistence.xml"/>-->
     </bean>
-
-
-
-    <!--STARÝ CONTEXT-->
-    <!--<context:annotation-config/>-->
-    <!--<context:component-scan base-package="cz.inventi.dao, cz.inventi.entity"/>-->
-    <!--<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>-->
-    <!--<bean id="pokusna" class="cz.inventi.Pokusna"/>-->
-
-    <!--<bean id="customerDAO1" class="cz.inventi.dao.CustomerDao">-->
-    <!--<property name="jmeno" value="jmenoJedna"/>-->
-    <!--</bean>-->
-
-    <!--&lt;!&ndash;<bean id="customerDAO2" class="cz.inventi.dao.CustomerDao">&ndash;&gt;-->
-    <!--&lt;!&ndash;<property name="jmeno" value="jmenoDve"/>&ndash;&gt;-->
-    <!--&lt;!&ndash;</bean>&ndash;&gt;-->
-
-    <!--<bean id="entityManagerFactory"-->
-    <!--class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">-->
-    <!--<property name="persistenceUnitName" value="tutorialUnit"/>-->
-    <!--</bean>-->
-
-    <!--<bean id="transactionManager"-->
-    <!--class="org.springframework.orm.jpa.JpaTransactionManager">-->
-    <!--<property name="entityManagerFactory" ref="entityManagerFactory" />-->
-    <!--</bean>-->
-    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
-
-    <!--<bean id="customerDAO" class="cz.inventi.dao.CustomerDao">-->
-    <!--</bean>-->
 
 
 </beans>
