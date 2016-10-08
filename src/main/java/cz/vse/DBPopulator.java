@@ -2,14 +2,13 @@ package cz.vse;
 
 import cz.vse.dao.*;
 import cz.vse.entity.*;
+import cz.vse.service.DefectCommentService;
 import cz.vse.service.PersonService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +47,9 @@ public class DBPopulator {
     @Autowired
     private PersonService personService;
 
+    @Autowired
+    private DefectCommentService defectCommentService;
+
     public void populateDatabase() {
         l.debug("populate database");
 //        createAllDatasWithConstraints();
@@ -66,8 +68,7 @@ public class DBPopulator {
 //        defectDao.getAllDefects();
     }
 
-
-    public void createAllDatasWithConstraints()    {
+    public void createAllDatasWithConstraints() {
         Person person = new Person();
         person.setName(LocalDateTime.now().toString());
         person.setCreatedDate(LocalDateTime.now());
@@ -76,7 +77,6 @@ public class DBPopulator {
         personAssigne.setName("Assognee");
         Person personAuthor = new Person();
         personAuthor.setName("Defect author");
-
 
         //  DEFECT
         Defect defect = new Defect();
@@ -95,6 +95,10 @@ public class DBPopulator {
         //TEST PROJECT
         TestProject testProject = new TestProject();
         testProject.setName(LocalDateTime.now().toString());
+        List<Person> projectPersonList = new ArrayList<>();
+        projectPersonList.add(personAuthor);
+        testProject.setProjectMembers(projectPersonList);
+        testProject.setProjectOwner(personAssigne);
 
         //TEST SUITE
         TestSuite testSuite = new TestSuite();
@@ -102,11 +106,12 @@ public class DBPopulator {
         testSuite.setTestProject(testProject);
         List<TestSuite> testSuites = new ArrayList<>();
 
-        //TESTCASE MUSTER
+        //TEST CASE MUSTER
         TestCaseMuster testCaseMuster = new TestCaseMuster();
         testCaseMuster.setName(LocalDateTime.now().toString());
         testSuites.add(testSuite);
         testCaseMuster.setTestSuites(testSuites);
+        testCaseMuster.setTestProject(testProject);
 
         //TEST STEP MUSTER
         TestStepMuster testStepMuster = new TestStepMuster();
@@ -124,6 +129,9 @@ public class DBPopulator {
         testStepInstance.setActual("Actual behavior of test step instance");
         testStepInstance.setTestStepMuster(testStepMuster);
         testStepInstance.setTestCaseInstance(testCaseInstance);
+        List<Defect> stepInstanceDefectList = new ArrayList<>();
+        stepInstanceDefectList.add(defect);
+        testStepInstance.setDefects(stepInstanceDefectList);
 
         personDao.savePerson(personAssigne);
         personDao.savePerson(personAuthor);
@@ -137,12 +145,14 @@ public class DBPopulator {
         defectCommentDao.saveDefectComment(defectComment);
         testStepInstanceDao.saveTestStepInstance(testStepInstance);
         l.debug("naplnění db hotovo");
-
-
-
+        l.debug("test service pro defect comment");
+        defectCommentService.createComment(defect, personAssigne, "Text u defektu");
+        l.error(defectCommentService.findAllDefectsComments(defect).toString());
+        defectComment.setCommentText("upravený text v čase: "+LocalDateTime.now().toString());
+        defectCommentService.updateComment(defectComment);
+        l.error(defectCommentService.findAllDefectsComments(defect).toString());
 
     }
-
 
     private Person createPilotPerson() {
         Person person = new Person();
@@ -217,6 +227,5 @@ public class DBPopulator {
         return testSuite;
 
     }
-
 
 }

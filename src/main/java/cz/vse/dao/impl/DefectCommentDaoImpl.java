@@ -1,6 +1,7 @@
 package cz.vse.dao.impl;
 
 import cz.vse.dao.DefectCommentDao;
+import cz.vse.entity.Defect;
 import cz.vse.entity.DefectComment;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.ImportResource;
@@ -42,9 +43,9 @@ public class DefectCommentDaoImpl implements DefectCommentDao {
     }
 
     @Override
-    public List<DefectComment> getAllDefectComment(DefectComment defectComment) {
+    public List<DefectComment> getAllDefectComment(Defect defect) {
         l.debug("Getting all defectComment");
-        List<DefectComment> resultList = em.createQuery("select d from DefectComment d").getResultList();
+        List<DefectComment> resultList = em.createQuery("select dc from DefectComment dc where dc.defect = defect ").getResultList();
         l.info("DefectComments gotten successfully. DefectComments detail: " + resultList.toString());
         return resultList;
     }

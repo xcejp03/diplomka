@@ -55,4 +55,14 @@ public class DefectComment extends BaseEntity{
     public void setAuthor(Person author) {
         this.author = author;
     }
+
+    @Override
+    public String toString() {
+        return "DefectComment{" +
+                "createdDateTime=" + createdDateTime +
+                ", commentText='" + commentText + '\'' +
+                ", defect=" + defect +
+                ", author=" + author +
+                '}';
+    }
 }
