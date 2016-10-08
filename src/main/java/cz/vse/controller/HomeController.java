@@ -1,5 +1,6 @@
 package cz.vse.controller;
 
+import cz.vse.DBPopulator;
 import cz.vse.dao.PersonDao;
 import cz.vse.entity.Person;
 import org.apache.log4j.Logger;
@@ -19,6 +20,9 @@ public class HomeController {
     @Autowired
     PersonDao personDao;
 
+    @Autowired
+    DBPopulator dbPopulator;
+
     @RequestMapping(value = "home", method = RequestMethod.GET)
     public String home(ModelMap model) {
         l.error("home");
@@ -27,6 +31,8 @@ public class HomeController {
         l.error("im going to save person " + person);
         personDao.savePerson(person);
         l.error("After saving person");
+        dbPopulator.createAllDatasWithConstraints();
+        l.error("dbPopulator.createAllDatasWithConstraints(); hotovo");
         return "home";
     }
 
