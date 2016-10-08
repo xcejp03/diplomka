@@ -61,8 +61,8 @@ public class DefectComment extends BaseEntity{
         return "DefectComment{" +
                 "createdDateTime=" + createdDateTime +
                 ", commentText='" + commentText + '\'' +
-                ", defect=" + defect +
-                ", author=" + author +
+//                ", defect=" + defect +
+//                ", author=" + author +
                 '}';
     }
 }

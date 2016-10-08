@@ -2,7 +2,11 @@ package cz.vse.controller;
 
 import cz.vse.DBPopulator;
 import cz.vse.dao.PersonDao;
+import cz.vse.entity.Defect;
+import cz.vse.entity.DefectStatusEnum;
 import cz.vse.entity.Person;
+import cz.vse.entity.PriorityEnum;
+import cz.vse.service.DefectService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +27,9 @@ public class HomeController {
     @Autowired
     DBPopulator dbPopulator;
 
+    @Autowired
+    DefectService defectService;
+
     @RequestMapping(value = "home", method = RequestMethod.GET)
     public String home(ModelMap model) {
         l.error("home");
@@ -33,6 +40,25 @@ public class HomeController {
         l.error("After saving person");
         dbPopulator.createAllDatasWithConstraints();
         l.error("dbPopulator.createAllDatasWithConstraints(); hotovo");
+
+        return "home";
+    }
+
+    @RequestMapping(value = "defect", method = RequestMethod.GET)
+    public String defectTest(ModelMap model) {
+        l.error("defect");
+        Defect defect = new Defect();
+        defect.setDefectStatusEnum(DefectStatusEnum.open);
+        defect.setPriorityEnum(PriorityEnum.blocker);
+        defect.setAffectsVersion("betaverze");
+        defect.setDescription("Popis chyby pro testování");
+        defectService.createDefect(defect);
+        defectService.findAllDefects();
+        defect.setDescription("Updatovaný defect přes service");
+        defectService.updateDefect(defect);
+        defectService.findAllDefects();
+//        defectService.deleteDefect(defect);
+
         return "home";
     }
 

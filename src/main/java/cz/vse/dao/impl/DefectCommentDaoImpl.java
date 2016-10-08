@@ -6,6 +6,7 @@ import cz.vse.entity.DefectComment;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,6 +16,7 @@ import java.util.List;
  * Created by pcejka on 03.10.2016.
  */
 @Repository
+@Transactional("transactionManager")
 @ImportResource("classpath:ApplicationContext.xml")
 public class DefectCommentDaoImpl implements DefectCommentDao {
     private final Logger l = Logger.getLogger(this.getClass());

@@ -62,7 +62,6 @@ public class DefectCommentService {
         List<DefectComment> defectComment;
         defectComment = defectCommentDao.getAllDefectComment(defect);
         l.info("all defect's comments found");
-
         return defectComment;
     }
 }

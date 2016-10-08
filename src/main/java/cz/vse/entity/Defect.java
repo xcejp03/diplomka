@@ -102,4 +102,18 @@ public class Defect extends BaseEntity {
     public void setReporter(Person reporter) {
         this.reporter = reporter;
     }
+
+    @Override
+    public String toString() {
+        return "Defect{" +
+                "description='" + description + '\'' +
+                ", priorityEnum=" + priorityEnum +
+                ", defectStatusEnum=" + defectStatusEnum +
+                ", AffectsVersion='" + AffectsVersion + '\'' +
+                ", testCaseInstances=" + testCaseInstances +
+                ", testStepInstances=" + testStepInstances +
+//                ", assignee=" + assignee +
+//                ", reporter=" + reporter +
+                '}';
+    }
 }

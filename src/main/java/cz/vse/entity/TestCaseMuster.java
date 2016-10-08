@@ -90,4 +90,17 @@ public class TestCaseMuster extends BaseEntity {
     public void setTestStepMusters(List<TestStepMuster> testStepMusters) {
         this.testStepMusters = testStepMusters;
     }
+
+    @Override
+    public String toString() {
+        return "TestCaseMuster{" +
+                "name='" + name + '\'' +
+                ", createdDateTime=" + createdDateTime +
+                ", updatedDateTime=" + updatedDateTime +
+                ", testCaseInstances=" + testCaseInstances +
+                ", testProject=" + testProject +
+                ", testSuites=" + testSuites +
+                ", testStepMusters=" + testStepMusters +
+                '}';
+    }
 }

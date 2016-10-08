@@ -5,6 +5,7 @@ import cz.vse.entity.Defect;
 import cz.vse.entity.Person;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,6 +15,7 @@ import java.util.List;
  * Created by pcejka on 03.10.2016.
  */
 @Repository
+@Transactional("transactionManager")
 public class DefectDaoImpl implements DefectDao {
     private final Logger l = Logger.getLogger(this.getClass());
     @PersistenceContext
@@ -46,7 +48,7 @@ public class DefectDaoImpl implements DefectDao {
         l.debug("Getting all defect");
         List<Defect> resultList = em.createQuery("select d from Defect d").getResultList();
         l.info("Defects gotten successfully. Defect detail: " + resultList.toString());
-        return null;
+        return resultList;
     }
 
     @Override
@@ -54,7 +56,7 @@ public class DefectDaoImpl implements DefectDao {
         l.debug("Getting defect by id: " + id);
         Defect defect = em.find(Defect.class, id);
         l.info("Gotten defect successfully. Defect detail: " + defect);
-        return null;
+        return defect;
     }
 
 }
