@@ -37,16 +37,16 @@ public class DefectCommentService {
         l.info("comment created - service");
     }
 
-    public void deleteComment (DefectComment commentToDelete)   {
-        l.debug("deleting comment - service: "+ commentToDelete);
-        defectCommentDao.deleteDefectComment(commentToDelete);
-        l.info("comment deleted");
-    }
-
     public void updateComment (DefectComment commentToUpdate)   {
         l.debug("updating comment - service: "+commentToUpdate);
         defectCommentDao.updateDefectComment(commentToUpdate);
         l.info("comment updated");
+    }
+
+    public void deleteComment (DefectComment commentToDelete)   {
+        l.debug("deleting comment - service: "+ commentToDelete);
+        defectCommentDao.deleteDefectComment(commentToDelete);
+        l.info("comment deleted");
     }
 
     public DefectComment findCommentById (long id)   {

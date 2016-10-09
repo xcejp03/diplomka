@@ -46,6 +46,12 @@ public class DefectService {
         l.info("defect created - service: " + defect.toString());
     }
 
+    public void updateDefect(Defect defectToUpdate) {
+        l.debug("updating defect - service");
+        defectDao.updateDefect(defectToUpdate);
+        l.info("updating defect - service: " + defectToUpdate.toString());
+    }
+
     public void deleteDefect(Defect defectToDelete) {
         l.debug("deleting defect - service");
         defectDao.deleteDefect(defectToDelete);
@@ -58,12 +64,6 @@ public class DefectService {
         defectToDelete = defectDao.getDefectById(defectToDeleteId);
         defectDao.deleteDefect(defectToDelete);
         l.info("defect deleted - service: " + defectToDeleteId + " - " + defectToDelete.toString());
-    }
-
-    public void updateDefect(Defect defectToUpdate) {
-        l.debug("updating defect - service");
-        defectDao.updateDefect(defectToUpdate);
-        l.info("updating defect - service: " + defectToUpdate.toString());
     }
 
     public Defect findDefectById(long id) {
