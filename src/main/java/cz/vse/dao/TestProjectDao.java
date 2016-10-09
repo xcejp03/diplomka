@@ -12,6 +12,6 @@ public interface TestProjectDao {
     public void saveTestProject(TestProject testProject);
     public void deleteTestProject(TestProject testProject);
     public void updateTestProject(TestProject testProject);
-    public List<TestProject> getAllTestProject();
+    public List<TestProject> getAllTestProjects();
     public TestProject getTestProjectById(long id);
 }

@@ -12,6 +12,6 @@ public interface TestStepMusterDao {
     public void saveTestStepMuster(TestStepMuster testStepMuster);
     public void deleteTestStepMuster(TestStepMuster testStepMuster);
     public void updateTestStepMuster(TestStepMuster testStepMuster);
-    public List<TestStepMuster> getAllTestStepMuster();
+    public List<TestStepMuster> getAllTestStepMusters();
     public TestStepMuster getTestStepMusterById(long id);
 }

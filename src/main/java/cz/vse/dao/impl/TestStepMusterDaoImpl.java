@@ -40,7 +40,7 @@ public class TestStepMusterDaoImpl implements TestStepMusterDao {
     }
 
     @Override
-    public List<TestStepMuster> getAllTestStepMuster() {
+    public List<TestStepMuster> getAllTestStepMusters() {
         l.debug("Getting all testStepMuster");
         List<TestStepMuster> resultList = em.createQuery("select d from TestStepMuster d").getResultList();
         l.info("TestStepMusters gotten successfully. TestStepMuster detail: " + resultList.toString());

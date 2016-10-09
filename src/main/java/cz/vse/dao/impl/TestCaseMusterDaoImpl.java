@@ -41,7 +41,7 @@ public class TestCaseMusterDaoImpl implements TestCaseMusterDao {
     }
 
     @Override
-    public List<TestCaseMuster> getAllTestCaseMuster() {
+    public List<TestCaseMuster> getAllTestCaseMusters() {
         l.debug("Getting all TestCaseMuster");
         List<TestCaseMuster> resultList = em.createQuery("select t from TestCaseMuster t").getResultList();
         l.info("TestCaseMuster gotten successfully. TestCaseMuster detail: " + resultList.toString());

@@ -12,6 +12,6 @@ public interface TestCaseInstanceDao {
     public void saveTestCaseInstance(TestCaseInstance TestCaseInstance);
     public void deleteTestCaseInstance(TestCaseInstance testCaseInstance);
     public void updateTestCaseInstance(TestCaseInstance testCaseInstance);
-    public List<TestCaseInstance> getAllTestCaseInstance();
+    public List<TestCaseInstance> getAllTestCaseInstances();
     public TestCaseInstance getTestCaseInstanceById(long id);
 }

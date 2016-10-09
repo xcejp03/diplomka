@@ -12,6 +12,6 @@ public interface TestStepInstanceDao {
     public void saveTestStepInstance(TestStepInstance testStepInstance);
     public void deleteTestStepInstance(TestStepInstance testStepInstance);
     public void updateTestStepInstance(TestStepInstance testStepInstance);
-    public List<TestStepInstance> getAllTestStepInstance();
+    public List<TestStepInstance> getAllTestStepInstances();
     public TestStepInstance getTestStepInstanceById(long id);
 }

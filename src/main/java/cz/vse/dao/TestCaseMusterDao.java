@@ -12,6 +12,6 @@ public interface TestCaseMusterDao {
     public void saveTestCaseMuster(TestCaseMuster testCaseMuster);
     public void deleteTestCaseMuster(TestCaseMuster testCaseMuster);
     public void updateTestCaseMuster(TestCaseMuster testCaseMuster);
-    public List<TestCaseMuster> getAllTestCaseMuster();
+    public List<TestCaseMuster> getAllTestCaseMusters();
     public TestCaseMuster getTestCaseMusterById(long id);
 }

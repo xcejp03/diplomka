@@ -40,7 +40,7 @@ public class TestStepInstanceDaoImpl implements TestStepInstanceDao {
     }
 
     @Override
-    public List<TestStepInstance> getAllTestStepInstance() {
+    public List<TestStepInstance> getAllTestStepInstances() {
         l.debug("Getting all testStepInstance");
         List<TestStepInstance> resultList = em.createQuery("select d from TestStepInstance d").getResultList();
         l.info("TestStepInstances gotten successfully. TestStepInstance detail: " + resultList.toString());

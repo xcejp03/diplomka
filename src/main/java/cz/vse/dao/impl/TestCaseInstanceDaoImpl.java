@@ -40,7 +40,7 @@ public class TestCaseInstanceDaoImpl implements TestCaseInstanceDao {
     }
 
     @Override
-    public List<TestCaseInstance> getAllTestCaseInstance() {
+    public List<TestCaseInstance> getAllTestCaseInstances() {
         l.debug("Getting all TestCaseInstance");
         List<TestCaseInstance> resultList = em.createQuery("select t from TestCaseInstance t").getResultList();
         l.info("TestCaseInstance gotten successfully. TestCaseInstance detail: " + resultList.toString());
