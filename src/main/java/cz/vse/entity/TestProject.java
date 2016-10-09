@@ -68,10 +68,10 @@ public class TestProject  extends BaseEntity{
     public String toString() {
         return "TestProject{" +
                 "name='" + name + '\'' +
-                ", projectOwner=" + projectOwner +
-                ", projectMembers=" + projectMembers +
-                ", testSuites=" + testSuites +
-                ", testCaseMusters=" + testCaseMusters +
+//                ", projectOwner=" + projectOwner +
+//                ", projectMembers=" + projectMembers +
+//                ", testSuites=" + testSuites +
+//                ", testCaseMusters=" + testCaseMusters +
                 '}';
     }
 }

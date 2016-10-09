@@ -46,7 +46,7 @@ public class PersonService {
         l.info("person deleted - service: " + personToDelete);
     }
 
-    public void deletePersonById(long personToDeleteById) {
+    public void deletePerson(long personToDeleteById) {
         l.debug("deleting person - service");
         Person personToDelete;
         personToDelete = personDao.getPersonById(personToDeleteById);

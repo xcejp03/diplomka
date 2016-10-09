@@ -5,6 +5,7 @@ import cz.vse.entity.Defect;
 import cz.vse.entity.TestCaseInstance;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,6 +15,7 @@ import java.util.List;
  * Created by pcejka on 03.10.2016.
  */
 @Repository
+@Transactional
 public class TestCaseInstanceDaoImpl implements TestCaseInstanceDao {
     private final Logger l = Logger.getLogger(this.getClass());
     @PersistenceContext

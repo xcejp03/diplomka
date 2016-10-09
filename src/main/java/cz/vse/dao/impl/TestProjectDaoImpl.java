@@ -5,6 +5,7 @@ import cz.vse.entity.TestProject;
 import cz.vse.entity.TestProject;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,6 +15,7 @@ import java.util.List;
  * Created by pcejka on 03.10.2016.
  */
 @Repository
+@Transactional
 public class TestProjectDaoImpl implements TestProjectDao {
     private final Logger l = Logger.getLogger(this.getClass());
     @PersistenceContext
@@ -44,7 +46,7 @@ public class TestProjectDaoImpl implements TestProjectDao {
         l.debug("Getting all testProject");
         List<TestProject> resultList = em.createQuery("select d from TestProject d").getResultList();
         l.info("TestProjects gotten successfully. TestProject detail: " + resultList.toString());
-        return null;
+        return resultList;
     }
 
     @Override
@@ -52,6 +54,6 @@ public class TestProjectDaoImpl implements TestProjectDao {
         l.debug("Getting testProject by id: " + id);
         TestProject testProject = em.find(TestProject.class, id);
         l.info("Gotten testProject successfully. TestProject detail: " + testProject);
-        return null;
+        return testProject;
     }
 }
