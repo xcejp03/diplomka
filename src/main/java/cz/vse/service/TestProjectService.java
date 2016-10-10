@@ -1,26 +1,48 @@
 package cz.vse.service;
 
 import cz.vse.dao.TestProjectDao;
+import cz.vse.dto.TestProjectDTO;
 import cz.vse.entity.TestProject;
+import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by pcejka on 03.10.2016.
  */
 @Service
+//@Transactional
 public class TestProjectService {
     private final Logger l = Logger.getLogger(this.getClass());
 
     @Autowired
     TestProjectDao testProjectDao;
 
+    @Autowired
+    private MapperFacade mapper;
+
+
+    public void createTestProject(TestProjectDTO testProjectDTO) {
+        l.debug("creating testProject - service");
+        TestProject testProject = new TestProject();
+//        mapper.map(testProject, TestProjectDTO.class);
+        testProject =  mapper.map(testProjectDTO, TestProject.class);
+
+        testProjectDao.saveTestProject(testProject);
+        l.info("created testProject - service: " + testProject);
+    }
 
     public void createTestProject(TestProject testProject) {
         l.debug("creating testProject - service");
+        TestProjectDTO testProjectDTO = new TestProjectDTO();
+//        mapper.map(testProject, TestProjectDTO.class);
+        testProjectDTO =  mapper.map(testProject, TestProjectDTO.class);
+        l.info(testProjectDTO.toString());
         testProjectDao.saveTestProject(testProject);
         l.info("created testProject - service: " + testProject);
     }
@@ -53,11 +75,14 @@ public class TestProjectService {
         return testProject;
     }
 
-    public List<TestProject> findAllTestProjects() {
+    public List<TestProjectDTO> findAllTestProjects() {
         l.debug("finding all testProjects - service");
-        List<TestProject> testProjectList;
+        List<TestProject> testProjectList = new ArrayList<>();
+        List<TestProjectDTO> testProjectDTOList;
         testProjectList = testProjectDao.getAllTestProjects();
-        l.info("found all testProjects - service: " + testProjectList.toString());
-        return testProjectList;
+        testProjectDTOList =  mapper.mapAsList(testProjectList, TestProjectDTO.class);
+
+        l.info("found all testProjects - service: " + testProjectDTOList.toString());
+        return testProjectDTOList;
     }
 }

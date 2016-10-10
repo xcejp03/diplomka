@@ -78,9 +78,9 @@
         </tr>
         <tr>
             <td>
-                <select path="projectOwner" name="projectOwner">
+                <select path="projectOwner_id" name="projectOwner_id">
                     <c:forEach var="item" items="${listPersons}">
-                        <option value="${item}">${item.name}</option>
+                        <option value="${item.id}">${item.name}</option>
                     </c:forEach>
                 </select>
             </td>
@@ -132,7 +132,7 @@
             <tr>
                 <td>${testProject.id}</td>
                 <td>${testProject.name}</td>
-                <td>${testProject.projectOwner}</td>
+                <td>${testProject.projectOwner_id}</td>
                     <%--<td>${testProject.login}</td>--%>
                     <%--<td><a href="<c:url value='/edit/${person.id}' />" >Edit</a></td>--%>
                     <%--<td><a href="<c:url value='/remove/${person.id}' />" >Delete</a></td>--%>
