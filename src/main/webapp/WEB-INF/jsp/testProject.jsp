@@ -84,13 +84,13 @@
                     </c:forEach>
                 </select>
             </td>
-            <%--<td>--%>
-                <%--<select id="projectMembers" path="projectMembers" name="projectMembers">--%>
-                    <%--<c:forEach var="item" items="${listPersons}">--%>
-                        <%--<option value="${item}">${item.name}</option>--%>
-                    <%--</c:forEach>--%>
-                <%--</select>--%>
-            <%--</td>--%>
+            <td>
+                <select path="projectMembers_id" name="projectMembers_id">
+                    <c:forEach var="item" items="${listPersons}">
+                        <option value="${item}">${item.name}</option>
+                    </c:forEach>
+                </select>
+            </td>
         </tr>
             <%--<tr>--%>
             <%--<td>--%>

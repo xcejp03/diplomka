@@ -42,6 +42,7 @@ public class TestProjectDaoImpl implements TestProjectDao {
     }
 
     @Override
+    @Transactional
     public List<TestProject> getAllTestProjects() {
         l.debug("Getting all testProject");
         List<TestProject> resultList = em.createQuery("select d from TestProject d").getResultList();

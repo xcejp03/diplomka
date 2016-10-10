@@ -16,7 +16,7 @@ import java.util.List;
  * Created by pcejka on 03.10.2016.
  */
 @Service
-//@Transactional
+@Transactional
 public class TestProjectService {
     private final Logger l = Logger.getLogger(this.getClass());
 
@@ -80,6 +80,7 @@ public class TestProjectService {
         List<TestProject> testProjectList = new ArrayList<>();
         List<TestProjectDTO> testProjectDTOList;
         testProjectList = testProjectDao.getAllTestProjects();
+        l.warn("mezkrok");
         testProjectDTOList =  mapper.mapAsList(testProjectList, TestProjectDTO.class);
 
         l.info("found all testProjects - service: " + testProjectDTOList.toString());

@@ -11,9 +11,9 @@ public class TestProjectDTO extends BaseDTO {
 
     private String name;
 
-   // private List <Person> projectMembers;
-
     private Long projectOwner_id;
+
+    private List<Long> projectMembers_id;
 
     public String getName() {
         return name;
@@ -40,6 +40,14 @@ public class TestProjectDTO extends BaseDTO {
         this.projectOwner_id = projectOwner_id;
     }
 
+    public List<Long> getProjectMembers_id() {
+        return projectMembers_id;
+    }
+
+    public void setProjectMembers_id(List<Long> projectMembers_id) {
+        this.projectMembers_id = projectMembers_id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -48,7 +56,10 @@ public class TestProjectDTO extends BaseDTO {
 
         TestProjectDTO that = (TestProjectDTO) o;
 
-        return getName() != null ? getName().equals(that.getName()) : that.getName() == null;
+        if (getName() != null ? !getName().equals(that.getName()) : that.getName() != null) return false;
+        if (getProjectOwner_id() != null ? !getProjectOwner_id().equals(that.getProjectOwner_id()) : that.getProjectOwner_id() != null)
+            return false;
+        return getProjectMembers_id() != null ? getProjectMembers_id().equals(that.getProjectMembers_id()) : that.getProjectMembers_id() == null;
 
     }
 
@@ -56,6 +67,8 @@ public class TestProjectDTO extends BaseDTO {
     public int hashCode() {
         int result = super.hashCode();
         result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + (getProjectOwner_id() != null ? getProjectOwner_id().hashCode() : 0);
+        result = 31 * result + (getProjectMembers_id() != null ? getProjectMembers_id().hashCode() : 0);
         return result;
     }
 
@@ -63,9 +76,9 @@ public class TestProjectDTO extends BaseDTO {
     public String toString() {
         return "TestProjectDTO{" +
                 "name='" + name + '\'' +
+                ", projectOwner_id=" + projectOwner_id +
+                ", projectMembers=" + projectMembers_id +
                 '}';
     }
-
-
 }
 
