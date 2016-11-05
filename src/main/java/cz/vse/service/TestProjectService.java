@@ -30,7 +30,6 @@ public class TestProjectService {
     public void createTestProject(TestProjectDTO testProjectDTO) {
         l.debug("creating testProject - service");
         TestProject testProject = new TestProject();
-//        mapper.map(testProject, TestProjectDTO.class);
         testProject =  mapper.map(testProjectDTO, TestProject.class);
 
         testProjectDao.saveTestProject(testProject);
@@ -39,10 +38,6 @@ public class TestProjectService {
 
     public void createTestProject(TestProject testProject) {
         l.debug("creating testProject - service");
-        TestProjectDTO testProjectDTO = new TestProjectDTO();
-//        mapper.map(testProject, TestProjectDTO.class);
-        testProjectDTO =  mapper.map(testProject, TestProjectDTO.class);
-        l.info(testProjectDTO.toString());
         testProjectDao.saveTestProject(testProject);
         l.info("created testProject - service: " + testProject);
     }

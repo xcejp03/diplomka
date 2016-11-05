@@ -22,15 +22,6 @@ public class TestProjectDTO extends BaseDTO {
     public void setName(String name) {
         this.name = name;
     }
-/*
-    public List<Person> getProjectMembers() {
-        return projectMembers;
-    }
-
-    public void setProjectMembers(List<Person> projectMembers) {
-        this.projectMembers = projectMembers;
-    }
-*/
 
     public Long getProjectOwner_id() {
         return projectOwner_id;

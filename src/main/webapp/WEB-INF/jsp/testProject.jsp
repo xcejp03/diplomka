@@ -79,19 +79,42 @@
         </tr>
         <tr>
             <td>
-                <select path="projectOwner_id" name="projectOwner_id">
-                    <c:forEach var="item" items="${listPersons}">
-                        <option value="${item.id}">${item.name}</option>
-                    </c:forEach>
-                </select>
+                <form:label path="projectOwner_id">
+                    <spring:message text="projectOwner_id"/>
+                </form:label>
+                    <select path="projectOwner_id" name="projectOwner_id" >
+                        <c:forEach var="item" items="${listPersons}">
+                            <option value="${item.id}">${item.name}</option>
+                        </c:forEach>
+                    </select>
             </td>
+        </tr>
+   <tr>
             <td>
-                <select path="projectMembers_id" name="projectMembers_id">
+                <form:label path="projectMembers_id">
+                    <spring:message text="projectMembers_id"/>
+                </form:label>
+                    <select path="projectMembers_id" name="projectMembers_id" multiple size="12">
                     <c:forEach var="item" items="${listPersons}">
-                        <option value="${item}">${item.name}</option>
+                    <option value="${item.id}">${item.name}</option>
                     </c:forEach>
-                </select>
+                    </select>
             </td>
+        </tr>
+        <%--<tr>
+            <td>
+                <form>
+                    <select name="projectMembers_id" multiple size="5">
+                        <option>15</option>
+                        <option>20</option>
+                        <option>40</option>
+                        <option>41</option>
+                        <option>42</option>
+                        <option>43</option>
+                        <option>44</option>
+                    </select>
+                </form>
+            </td>--%>
         </tr>
             <%--<tr>--%>
             <%--<td>--%>

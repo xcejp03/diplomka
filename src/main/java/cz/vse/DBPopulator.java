@@ -97,7 +97,7 @@ public class DBPopulator {
         testProject.setName(LocalDateTime.now().toString());
         List<Person> projectPersonList = new ArrayList<>();
         projectPersonList.add(personAuthor);
-        testProject.setProjectMembers(projectPersonList);
+        testProject.setTestProjectMembers(projectPersonList);
         testProject.setProjectOwner(personAssigne);
 
         //TEST SUITE

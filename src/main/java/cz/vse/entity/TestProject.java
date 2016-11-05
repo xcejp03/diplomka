@@ -1,7 +1,6 @@
 package cz.vse.entity;
 
 import javax.persistence.*;
-import java.security.acl.Owner;
 import java.util.List;
 
 /**
@@ -16,7 +15,7 @@ public class TestProject  extends BaseEntity{
     private Person projectOwner;
 
     @ManyToMany (mappedBy = "testProjectsMember")
-    private List<Person> projectMembers;
+    private List<Person> testProjectMembers;
 
     @OneToMany (mappedBy = "testProject")
     private List<TestSuite> testSuites;
@@ -40,12 +39,12 @@ public class TestProject  extends BaseEntity{
         this.projectOwner = projectOwner;
     }
 
-    public List<Person> getProjectMembers() {
-        return projectMembers;
+    public List<Person> getTestProjectMembers() {
+        return testProjectMembers;
     }
 
-    public void setProjectMembers(List<Person> projectMembers) {
-        this.projectMembers = projectMembers;
+    public void setTestProjectMembers(List<Person> projectMembers) {
+        this.testProjectMembers = projectMembers;
     }
 
     public List<TestSuite> getTestSuites() {
