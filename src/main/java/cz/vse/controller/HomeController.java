@@ -2,12 +2,16 @@ package cz.vse.controller;
 
 import cz.vse.DBPopulator;
 import cz.vse.dao.PersonDao;
+import cz.vse.dto.DefectDTO;
+import cz.vse.dto.TestProjectDTO;
+import cz.vse.entity.Defect;
 import cz.vse.entity.Person;
 import cz.vse.service.DefectService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -55,6 +59,7 @@ public class HomeController {
 //        defectService.updateDefect(defect);
 //        defectService.findAllDefects();
 //        defectService.deleteDefect(defect);
+        model.addAttribute("defect", new DefectDTO());
         model.addAttribute("defectList", defectService.findAllDefects());
         l.debug("nic");
         return "defect";
@@ -91,6 +96,14 @@ public class HomeController {
 
         model.addAttribute("largestQuadruplet");
         return "home";
+    }
+
+    @RequestMapping(value = "defect", method = RequestMethod.POST)
+    public String createDefect(@ModelAttribute("testProject") DefectDTO defectDTO) {
+        l.error("/defect");
+
+        defectService.createDefect(defectDTO);
+        return "redirect:defect";
     }
 
 }

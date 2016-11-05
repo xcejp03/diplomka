@@ -1,6 +1,8 @@
 package cz.vse.mapping;
 
+import cz.vse.dto.DefectDTO;
 import cz.vse.dto.TestProjectDTO;
+import cz.vse.entity.Defect;
 import cz.vse.entity.TestProject;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.ConfigurableMapper;
@@ -40,7 +42,9 @@ public class MappingConfigurator extends ConfigurableMapper {   // implements Ap
                 .field("projectMembers{id}", "projectMembers_id")
                 .byDefault()
                 .register();
-
+        factory.classMap(Defect.class, DefectDTO.class)
+                .byDefault()
+                .register();
     }
 
     //   private void configureClassMaps() {

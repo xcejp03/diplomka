@@ -2,7 +2,11 @@ package cz.vse.service;
 
 import cz.vse.dao.DefectCommentDao;
 import cz.vse.dao.DefectDao;
+import cz.vse.dto.DefectDTO;
+import cz.vse.dto.TestProjectDTO;
 import cz.vse.entity.*;
+import ma.glasnost.orika.Mapper;
+import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,10 +26,21 @@ public class DefectService {
     @Autowired
     DefectDao defectDao;
 
+    @Autowired
+    private MapperFacade mapper;
+
     public void createDefect(Defect defect) {
         l.debug("creating defect - service");
         defectDao.saveDefect(defect);
         l.info("defect created - service: " + defect.toString());
+    }
+
+    public void createDefect(DefectDTO defectDTO) {
+        l.debug("creating defect - service");
+        Defect defect = new Defect();
+        defect = mapper.map(defectDTO, Defect.class);
+        defectDao.saveDefect(defect);
+        l.info("defect created - service: " + defectDTO.toString());
     }
 
     public void createDefect(String description, PriorityEnum priority, Person assignee,

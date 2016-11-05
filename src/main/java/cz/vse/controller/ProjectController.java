@@ -51,7 +51,7 @@ public class ProjectController {
 
 //        testProjectService.createTestProject(null);
 
-        return "testProject";
+        return "redirect:create";
     }
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
