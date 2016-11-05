@@ -41,7 +41,6 @@ public class MappingConfigurator extends ConfigurableMapper {   // implements Ap
                 .field("projectOwner.id", "projectOwner_id")
 
                 .field("testProjectMembers{id}", "projectMembers_id{}")
-//                .field("projectMembers.id", "projectMembers_id")
                 .byDefault()
                 .register();
 
