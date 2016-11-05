@@ -48,6 +48,7 @@
 <h1>
     Add a Person
 </h1>
+<h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\testProject.jsp</h3>
 
 <c:url var="addAction" value="/project/create"></c:url>
 

@@ -18,24 +18,24 @@ public class Defect extends BaseEntity {
 //    @OneToMany (mappedBy = "id")
 //    private List<DefectComment> defectComments;
 
-    @ManyToMany    // PROVĚŘIT SPRÁVNOST
+    @ManyToMany  // (fetch = FetchType.EAGER) // PROVĚŘIT SPRÁVNOST
     @JoinTable (name = "DEFECT_TCI", joinColumns = @JoinColumn (name = "DEFECT_ID", referencedColumnName = "ID"),
     inverseJoinColumns = @JoinColumn(name = "TCI_ID", referencedColumnName = "ID"))
     private List<TestCaseInstance> testCaseInstances;      //defect může být navázán TC nebo konkrétní step
 
 
-    @ManyToMany    // PROVĚŘIT SPRÁVNOST
+    @ManyToMany //  (fetch = FetchType.EAGER) // PROVĚŘIT SPRÁVNOST
     @JoinTable (name = "DEFECT_TSI", joinColumns = @JoinColumn (name = "DEFECT_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "TSI_ID", referencedColumnName = "ID"))
     private List<TestStepInstance> testStepInstances;      //nebo může být navázáno na oboje
 
 
 
-    @ManyToOne
+    @ManyToOne// (fetch = FetchType.EAGER)
     @JoinColumn (name = "assignee_id")
     private Person assignee;
 
-    @ManyToOne
+    @ManyToOne// (fetch = FetchType.EAGER)
     @JoinColumn (name = "reporter_id")
     private Person reporter;
 

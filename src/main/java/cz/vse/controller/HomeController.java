@@ -2,10 +2,7 @@ package cz.vse.controller;
 
 import cz.vse.DBPopulator;
 import cz.vse.dao.PersonDao;
-import cz.vse.entity.Defect;
-import cz.vse.entity.DefectStatusEnum;
 import cz.vse.entity.Person;
-import cz.vse.entity.PriorityEnum;
 import cz.vse.service.DefectService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by pcejka on 08.10.2016.
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("/home")
 public class HomeController {
     private final Logger l = Logger.getLogger(this.getClass());
     @Autowired
@@ -47,24 +44,25 @@ public class HomeController {
     @RequestMapping(value = "defect", method = RequestMethod.GET)
     public String defectTest(ModelMap model) {
         l.error("defect");
-        Defect defect = new Defect();
-        defect.setDefectStatusEnum(DefectStatusEnum.open);
-        defect.setPriorityEnum(PriorityEnum.blocker);
-        defect.setAffectsVersion("betaverze");
-        defect.setDescription("Popis chyby pro testování");
-        defectService.createDefect(defect);
-        defectService.findAllDefects();
-        defect.setDescription("Updatovaný defect přes service");
-        defectService.updateDefect(defect);
-        defectService.findAllDefects();
+//        Defect defect = new Defect();
+//        defect.setDefectStatusEnum(DefectStatusEnum.open);
+//        defect.setPriorityEnum(PriorityEnum.blocker);
+//        defect.setAffectsVersion("betaverze");
+//        defect.setDescription("Popis chyby pro testování");
+//        defectService.createDefect(defect);
+//        defectService.findAllDefects();
+//        defect.setDescription("Updatovaný defect přes service");
+//        defectService.updateDefect(defect);
+//        defectService.findAllDefects();
 //        defectService.deleteDefect(defect);
-
-        return "home";
+        model.addAttribute("defectList", defectService.findAllDefects());
+        l.debug("nic");
+        return "defect";
     }
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home2(ModelMap model) {
-        l.error("/home");
+        l.error("home2");
         Person person = new Person();
         person.setName("XXX");
         personDao.savePerson(person);
@@ -78,6 +76,17 @@ public class HomeController {
         l.error("/");
         Person person = new Person();
         person.setName("XXX");
+        personDao.savePerson(person);
+
+        model.addAttribute("largestQuadruplet");
+        return "home";
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public String home4(ModelMap model) {
+        l.error(" - ; base");
+        Person person = new Person();
+        person.setName("XXX2");
         personDao.savePerson(person);
 
         model.addAttribute("largestQuadruplet");

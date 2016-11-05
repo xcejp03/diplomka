@@ -12,5 +12,6 @@
 </head>
 <body>
 <h3>home XXX</h3>
+<h4>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\home.jsp</h4>
 </body>
 </html>

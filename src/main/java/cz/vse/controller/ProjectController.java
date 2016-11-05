@@ -9,7 +9,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,11 +50,12 @@ public class ProjectController {
 //            this.personService.updatePerson(p);
 
 //        testProjectService.createTestProject(null);
+
         return "testProject";
     }
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public String testik (Model model)  {
+    public String testik(Model model) {
         l.info("testik");
         List<Person> personList = new ArrayList<>();
         personList.add(personService.findPersonById(11));
@@ -70,7 +70,7 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/test2", method = RequestMethod.GET)
-    public String testik2 (Model model)  {
+    public String testik2(Model model) {
         l.info("testik");
         TestProject testProject = new TestProject();
         testProject.setName("XxX");
@@ -87,22 +87,10 @@ public class ProjectController {
     }
 
     @RequestMapping("/remove/{id}")
-    public String removePerson(@PathVariable("id") int id){
+    public String removePerson(@PathVariable("id") int id) {
         personService.deletePerson(id);
         return "person";
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 //    @RequestMapping(value = "/create", method = RequestMethod.GET)
 ////    public String createProjectForm(ModelMap model) {

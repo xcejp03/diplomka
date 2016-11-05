@@ -6,18 +6,51 @@
 <head>
     <title>Person Page</title>
     <style type="text/css">
-        .tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}
-        .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;}
-        .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;}
-        .tg .tg-4eph{background-color:#f9f9f9}
+        .tg {
+            border-collapse: collapse;
+            border-spacing: 0;
+            border-color: #ccc;
+        }
+
+        .tg td {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            padding: 10px 5px;
+            border-style: solid;
+            border-width: 1px;
+            overflow: hidden;
+            word-break: normal;
+            border-color: #ccc;
+            color: #333;
+            background-color: #fff;
+        }
+
+        .tg th {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: normal;
+            padding: 10px 5px;
+            border-style: solid;
+            border-width: 1px;
+            overflow: hidden;
+            word-break: normal;
+            border-color: #ccc;
+            color: #333;
+            background-color: #f0f0f0;
+        }
+
+        .tg .tg-4eph {
+            background-color: #f9f9f9
+        }
     </style>
 </head>
 <body>
 <h1>
     Add a Person
 </h1>
+<h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\person.jsp</h3>
 
-<c:url var="addAction" value="/project/create" ></c:url>
+<c:url var="addAction" value="/project/create"></c:url>
 
 <form:form action="${addAction}" commandName="person">
     <table>
@@ -29,8 +62,8 @@
                     </form:label>
                 </td>
                 <td>
-                    <form:input path="id" readonly="true" size="8"  disabled="true" />
-                    <form:hidden path="id" />
+                    <form:input path="id" readonly="true" size="8" disabled="true"/>
+                    <form:hidden path="id"/>
                 </td>
             </tr>
         </c:if>
@@ -41,7 +74,7 @@
                 </form:label>
             </td>
             <td>
-                <form:input path="name" />
+                <form:input path="name"/>
             </td>
         </tr>
         <tr>
@@ -51,7 +84,7 @@
                 </form:label>
             </td>
             <td>
-                <form:input path="login" />
+                <form:input path="login"/>
             </td>
         </tr>
         <tr>
@@ -61,18 +94,18 @@
                 </form:label>
             </td>
             <td>
-                <form:input path="pass" />
+                <form:input path="pass"/>
             </td>
         </tr>
         <tr>
             <td colspan="2">
                 <c:if test="${!empty person.name}">
                     <input type="submit"
-                           value="<spring:message text="Edit Person"/>" />
+                           value="<spring:message text="Edit Person"/>"/>
                 </c:if>
                 <c:if test="${empty person.name}">
                     <input type="submit"
-                           value="<spring:message text="Add Person"/>" />
+                           value="<spring:message text="Add Person"/>"/>
                 </c:if>
             </td>
         </tr>
@@ -96,8 +129,8 @@
                 <td>${person.name}</td>
                 <td>${person.login}</td>
                 <td>${person.pass}</td>
-                <td><a href="<c:url value='/project/edit/${person.id}' />" >Edit</a></td>
-                <td><a href="<c:url value='/project/remove/${person.id}' />" >Delete</a></td>
+                <td><a href="<c:url value='/project/edit/${person.id}' />">Edit</a></td>
+                <td><a href="<c:url value='/project/remove/${person.id}' />">Delete</a></td>
             </tr>
         </c:forEach>
     </table>
