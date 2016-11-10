@@ -7,20 +7,20 @@ import java.util.List;
  * Created by pcejka on 21.09.2016.
  */
 @Entity
-public class TestProject  extends BaseEntity{
+public class TestProject extends BaseEntity {
     private String name;
 
     @ManyToOne
-    @JoinColumn (name = "projectOwner_id")
+    @JoinColumn(name = "projectOwner_id")
     private Person projectOwner;
 
-    @ManyToMany (mappedBy = "testProjectsMember")
-    private List<Person> testProjectMembers;
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "testProjectsMember")
+    private List<Person> personMembers;
 
-    @OneToMany (mappedBy = "testProject")
+    @OneToMany(mappedBy = "testProject")
     private List<TestSuite> testSuites;
 
-    @OneToMany (mappedBy = "testProject")
+    @OneToMany(mappedBy = "testProject")
     private List<TestCaseMuster> testCaseMusters;
 
     public String getName() {
@@ -39,12 +39,12 @@ public class TestProject  extends BaseEntity{
         this.projectOwner = projectOwner;
     }
 
-    public List<Person> getTestProjectMembers() {
-        return testProjectMembers;
+    public List<Person> getPersonMembers() {
+        return personMembers;
     }
 
-    public void setTestProjectMembers(List<Person> projectMembers) {
-        this.testProjectMembers = projectMembers;
+    public void setPersonMembers(List<Person> personMembers) {
+        this.personMembers = personMembers;
     }
 
     public List<TestSuite> getTestSuites() {

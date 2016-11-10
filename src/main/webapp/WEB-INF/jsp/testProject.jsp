@@ -96,7 +96,7 @@
                 <form:label path="projectMembers_id">
                     <spring:message text="projectMembers_id"/>
                 </form:label>
-                </td>
+            </td>
             <td>
                 <select path="projectMembers_id" name="projectMembers_id" multiple size="12">
                     <c:forEach var="item" items="${listPersons}">
@@ -150,9 +150,10 @@
 <c:if test="${!empty listProjects}">
     <table class="tg">
         <tr>
-            <th width="80">Person ID</th>
-            <th width="120">Person Name</th>
+            <th width="80">Project ID</th>
+            <th width="120">Project Name</th>
             <th width="120">project owner</th>
+            <th width="190">project members</th>
             <th width="60">Edit</th>
             <th width="60">Delete</th>
         </tr>
@@ -161,6 +162,11 @@
                 <td>${testProject.id}</td>
                 <td>${testProject.name}</td>
                 <td>${testProject.projectOwner_id}</td>
+                <td>
+                    <c:forEach items="${testProject.projectMembers_id}" var="projectMember">
+                ${projectMember},
+                </c:forEach>
+                </td>
                     <%--<td>${testProject.login}</td>--%>
                     <%--<td><a href="<c:url value='/edit/${person.id}' />" >Edit</a></td>--%>
                     <%--<td><a href="<c:url value='/remove/${person.id}' />" >Delete</a></td>--%>

@@ -40,7 +40,7 @@ public class MappingConfigurator extends ConfigurableMapper {   // implements Ap
 
                 .field("projectOwner.id", "projectOwner_id")
 
-                .field("testProjectMembers{id}", "projectMembers_id{}")
+                .field("personMembers{id}", "projectMembers_id{}")
                 .byDefault()
                 .register();
 

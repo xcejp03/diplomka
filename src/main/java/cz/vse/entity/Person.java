@@ -20,7 +20,7 @@ public class Person extends BaseEntity {
 //    @ManyToMany (mappedBy = "id")
 //    private List<RoleEnum> roleEna;
 
-    @ManyToMany
+    @ManyToMany (cascade = CascadeType.ALL)
     @JoinTable(name = "PERSON_TESTPROJECT",
             joinColumns = @JoinColumn(name = "PERSON_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "TESTPROJECT_ID", referencedColumnName = "ID"))
