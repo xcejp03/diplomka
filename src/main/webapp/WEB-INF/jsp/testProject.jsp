@@ -4,7 +4,7 @@
 <%@ page session="false" %>
 <html>
 <head>
-    <title>Person Page</title>
+    <title>TestProject Page</title>
     <style type="text/css">
         .tg {
             border-collapse: collapse;
@@ -46,7 +46,7 @@
 </head>
 <body>
 <h1>
-    Add a Person
+    Add a Test Project
 </h1>
 <h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\testProject.jsp</h3>
 
@@ -134,11 +134,11 @@
             <td colspan="2">
                 <c:if test="${!empty testProject.name}">
                     <input type="submit"
-                           value="<spring:message text="Edit Person"/>"/>
+                           value="<spring:message text="Edit Project"/>"/>
                 </c:if>
                 <c:if test="${empty testProject.name}">
                     <input type="submit"
-                           value="<spring:message text="Add Person"/>"/>
+                           value="<spring:message text="Add Project"/>"/>
                 </c:if>
             </td>
         </tr>

@@ -39,7 +39,6 @@ public class MappingConfigurator extends ConfigurableMapper {   // implements Ap
         factory.classMap(TestProject.class, TestProjectDTO.class)
 
                 .field("projectOwner.id", "projectOwner_id")
-
                 .field("personMembers{id}", "projectMembers_id{}")
                 .byDefault()
                 .register();

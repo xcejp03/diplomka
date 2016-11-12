@@ -89,6 +89,10 @@ public class Person extends BaseEntity {
         this.testProjectsMember = testProjectsMember;
     }
 
+    public void addTestProjectMember (TestProject testProject)  {
+        this.testProjectsMember.add(testProject);
+    }
+
     public List<TestProject> getTestProjectsOwner() {
         return testProjectsOwner;
     }

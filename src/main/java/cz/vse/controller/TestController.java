@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,12 +77,16 @@ public class TestController {
         Person p1 = personService.findPersonById(25);
         Person p2 = personService.findPersonById(26);
         Person p3 = personService.findPersonById(27);
+        Person p4 = personService.findPersonById(3);
+        Person p5 = personService.findPersonById(4);
 
         TestProject testProject = testProjectService.findTestProjectById(33);
 
         List<Person> personList = new ArrayList<>();
         personList.add(p2);
         personList.add(p3);
+        personList.add(p4);
+        personList.add(p5);
 
         testProject.setProjectOwner(p1);
         testProject.setPersonMembers(personList);
@@ -92,12 +95,7 @@ public class TestController {
         testProjects.add(testProject);
         p3.setTestProjectsMember(testProjects);
 
-
-
-//        personService.updatePerson(p3);
-
         testProjectService.updateTestProject(testProject);
-        //testProjectService.createTestProject(testProjectDTO);
 
         return "test";
     }

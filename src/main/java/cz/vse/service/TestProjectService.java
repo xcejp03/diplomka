@@ -2,6 +2,7 @@ package cz.vse.service;
 
 import cz.vse.dao.TestProjectDao;
 import cz.vse.dto.TestProjectDTO;
+import cz.vse.entity.Person;
 import cz.vse.entity.TestProject;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
@@ -26,13 +27,40 @@ public class TestProjectService {
     @Autowired
     private MapperFacade mapper;
 
+    @Autowired
+    private PersonService personService;
+
+    @Autowired
+    private TestProjectService testProjectService;
 
     public void createTestProject(TestProjectDTO testProjectDTO) {
         l.debug("creating testProject - service");
         TestProject testProject = new TestProject();
-        testProject =  mapper.map(testProjectDTO, TestProject.class);
+        TestProject testProjectPersonById = new TestProject();
+        testProjectPersonById = mapper.map(testProjectDTO, TestProject.class);
+//přidat kód pro natáhnutí celé perzóny
 
-        testProjectDao.saveTestProject(testProject);
+        testProject = mapper.map(testProjectDTO, TestProject.class);
+        Person projectOwner = new Person();
+        projectOwner = personService.findPersonById(testProjectPersonById.getProjectOwner().getId());
+        testProject.setProjectOwner(projectOwner);
+        testProject.setPersonMembers(null);
+        testProjectDao.saveTestProject(testProject);    //uložit project
+
+        long testProjectId = testProject.getId();
+        testProject = null;
+        testProject = testProjectService.findTestProjectById(testProjectId);
+
+        List<Person> personMembersList = new ArrayList<>();
+        for (Person personForId : testProjectPersonById.getPersonMembers()) {
+            Person person = personService.findPersonById(personForId.getId());
+            person.addTestProjectMember(testProject);
+            personMembersList.add(person);
+
+        }
+        testProject.setPersonMembers(personMembersList);
+
+        testProjectService.updateTestProject(testProject);
         l.info("created testProject - service: " + testProject);
     }
 
@@ -76,7 +104,7 @@ public class TestProjectService {
         List<TestProjectDTO> testProjectDTOList;
         testProjectList = testProjectDao.getAllTestProjects();
         l.warn("mezkrok");
-        testProjectDTOList =  mapper.mapAsList(testProjectList, TestProjectDTO.class);
+        testProjectDTOList = mapper.mapAsList(testProjectList, TestProjectDTO.class);
 
         l.info("found all testProjects - service: " + testProjectDTOList.toString());
         return testProjectDTOList;
