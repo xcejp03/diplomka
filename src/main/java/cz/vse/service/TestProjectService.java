@@ -36,31 +36,16 @@ public class TestProjectService {
     public void createTestProject(TestProjectDTO testProjectDTO) {
         l.debug("creating testProject - service");
         TestProject testProject = new TestProject();
-        TestProject testProjectPersonById = new TestProject();
-        testProjectPersonById = mapper.map(testProjectDTO, TestProject.class);
-//přidat kód pro natáhnutí celé perzóny
-
         testProject = mapper.map(testProjectDTO, TestProject.class);
-        Person projectOwner = new Person();
-        projectOwner = personService.findPersonById(testProjectPersonById.getProjectOwner().getId());
-        testProject.setProjectOwner(projectOwner);
-        testProject.setPersonMembers(null);
-        testProjectDao.saveTestProject(testProject);    //uložit project
-
-        long testProjectId = testProject.getId();
-        testProject = null;
-        testProject = testProjectService.findTestProjectById(testProjectId);
 
         List<Person> personMembersList = new ArrayList<>();
-        for (Person personForId : testProjectPersonById.getPersonMembers()) {
+        for (Person personForId : testProject.getPersonMembers()) {
             Person person = personService.findPersonById(personForId.getId());
             person.addTestProjectMember(testProject);
             personMembersList.add(person);
-
         }
         testProject.setPersonMembers(personMembersList);
-
-        testProjectService.updateTestProject(testProject);
+        testProjectDao.saveTestProject(testProject);
         l.info("created testProject - service: " + testProject);
     }
 
