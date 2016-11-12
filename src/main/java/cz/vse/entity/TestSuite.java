@@ -17,11 +17,11 @@ public class TestSuite extends BaseEntity {
     private LocalDateTime updateDateTime;
 
     @ManyToOne
-    @JoinColumn (name = "testProject_id")
-    private TestProject testProject;        //testsuit patří pod jeden projekt
+    @JoinColumn (name = "project_id")
+    private Project project;        //testsuit patří pod jeden projekt
 
     @ManyToMany  (mappedBy = "testSuites")
-    private List<TestCaseMuster> testCaseMusters;      //testsuit se skládá z testcasů;
+    private List<TCMuster> TCMusters;      //testsuit se skládá z testcasů;
 
     public String getName() {
         return name;
@@ -47,20 +47,20 @@ public class TestSuite extends BaseEntity {
         this.updateDateTime = updateDateTime;
     }
 
-    public TestProject getTestProject() {
-        return testProject;
+    public Project getProject() {
+        return project;
     }
 
-    public void setTestProject(TestProject testProject) {
-        this.testProject = testProject;
+    public void setProject(Project project) {
+        this.project = project;
     }
 
-    public List<TestCaseMuster> getTestCaseMusters() {
-        return testCaseMusters;
+    public List<TCMuster> getTCMusters() {
+        return TCMusters;
     }
 
-    public void setTestCaseMusters(List<TestCaseMuster> testCaseMusters) {
-        this.testCaseMusters = testCaseMusters;
+    public void setTCMusters(List<TCMuster> TCMusters) {
+        this.TCMusters = TCMusters;
     }
 
     @Override
@@ -69,8 +69,8 @@ public class TestSuite extends BaseEntity {
                 "name='" + name + '\'' +
                 ", createdDateTime=" + createdDateTime +
                 ", updateDateTime=" + updateDateTime +
-                ", testProject=" + testProject +
-                ", testCaseMusters=" + testCaseMusters +
+                ", project=" + project +
+                ", TCMusters=" + TCMusters +
                 '}';
     }
 }

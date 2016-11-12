@@ -1,9 +1,9 @@
 package cz.vse.mapping;
 
 import cz.vse.dto.DefectDTO;
-import cz.vse.dto.TestProjectDTO;
+import cz.vse.dto.ProjectDTO;
 import cz.vse.entity.Defect;
-import cz.vse.entity.TestProject;
+import cz.vse.entity.Project;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.ConfigurableMapper;
 import org.springframework.stereotype.Component;
@@ -36,7 +36,7 @@ public class MappingConfigurator extends ConfigurableMapper {   // implements Ap
 //    }
 
     protected void configure(MapperFactory factory) {
-        factory.classMap(TestProject.class, TestProjectDTO.class)
+        factory.classMap(Project.class, ProjectDTO.class)
 
                 .field("projectOwner.id", "projectOwner_id")
                 .field("personMembers{id}", "projectMembers_id{}")
@@ -63,7 +63,7 @@ public class MappingConfigurator extends ConfigurableMapper {   // implements Ap
                 .byDefault()
                 .register();*/
 
-//        factory.classMap(TestProject.class, TestProjectDTO.class)
+//        factory.classMap(Project.class, ProjectDTO.class)
 //                .field("name", "name")
 ////                .field("company", "companyId")
 ////                .field("guarantor", "guarantorId")

@@ -1,6 +1,6 @@
 package cz.vse.dao;
 
-import cz.vse.entity.TestProject;
+import cz.vse.entity.Project;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ import java.util.List;
  */
 public interface TestProjectDao {
 
-    public void saveTestProject(TestProject testProject);
-    public void deleteTestProject(TestProject testProject);
-    public void updateTestProject(TestProject testProject);
-    public List<TestProject> getAllTestProjects();
-    public TestProject getTestProjectById(long id);
+    public void saveTestProject(Project project);
+    public void deleteTestProject(Project project);
+    public void updateTestProject(Project project);
+    public List<Project> getAllTestProjects();
+    public Project getTestProjectById(long id);
 }

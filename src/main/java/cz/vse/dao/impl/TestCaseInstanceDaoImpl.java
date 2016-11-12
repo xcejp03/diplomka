@@ -1,8 +1,7 @@
 package cz.vse.dao.impl;
 
 import cz.vse.dao.TestCaseInstanceDao;
-import cz.vse.entity.Defect;
-import cz.vse.entity.TestCaseInstance;
+import cz.vse.entity.TCInstance;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,39 +20,39 @@ public class TestCaseInstanceDaoImpl implements TestCaseInstanceDao {
     @PersistenceContext
     EntityManager em;
     @Override
-    public void saveTestCaseInstance(TestCaseInstance testCaseInstance) {
-        l.debug("Saving TestCaseInstance: " + testCaseInstance);
-        em.persist(testCaseInstance);
-        l.info("TestCaseInstance saved successfully. TestCaseInstance detail: " + testCaseInstance);
+    public void saveTestCaseInstance(TCInstance TCInstance) {
+        l.debug("Saving TCInstance: " + TCInstance);
+        em.persist(TCInstance);
+        l.info("TCInstance saved successfully. TCInstance detail: " + TCInstance);
     }
 
     @Override
-    public void deleteTestCaseInstance(TestCaseInstance testCaseInstance) {
-        l.debug("Deleting TestCaseInstance: " + testCaseInstance);
-        em.remove(testCaseInstance);
-        l.info("TestCaseInstance deleted successfully. TestCaseInstance detail: " + testCaseInstance);
+    public void deleteTestCaseInstance(TCInstance TCInstance) {
+        l.debug("Deleting TCInstance: " + TCInstance);
+        em.remove(TCInstance);
+        l.info("TCInstance deleted successfully. TCInstance detail: " + TCInstance);
     }
 
     @Override
-    public void updateTestCaseInstance(TestCaseInstance testCaseInstance) {
-        l.debug("Updating TestCaseInstance: " + testCaseInstance);
-        em.merge(testCaseInstance);
-        l.info("TestCaseInstance updated successfully. TestCaseInstance detail: " + testCaseInstance);
+    public void updateTestCaseInstance(TCInstance TCInstance) {
+        l.debug("Updating TCInstance: " + TCInstance);
+        em.merge(TCInstance);
+        l.info("TCInstance updated successfully. TCInstance detail: " + TCInstance);
     }
 
     @Override
-    public List<TestCaseInstance> getAllTestCaseInstances() {
-        l.debug("Getting all TestCaseInstance");
-        List<TestCaseInstance> resultList = em.createQuery("select t from TestCaseInstance t").getResultList();
-        l.info("TestCaseInstance gotten successfully. TestCaseInstance detail: " + resultList.toString());
+    public List<TCInstance> getAllTestCaseInstances() {
+        l.debug("Getting all TCInstance");
+        List<TCInstance> resultList = em.createQuery("select t from TCInstance t").getResultList();
+        l.info("TCInstance gotten successfully. TCInstance detail: " + resultList.toString());
         return null;
     }
 
     @Override
-    public TestCaseInstance getTestCaseInstanceById(long id) {
-        l.debug("Getting TestCaseInstance by id: " + id);
-        TestCaseInstance testCaseInstance = em.find(TestCaseInstance.class, id);
-        l.info("TestCaseInstance gotten successfully. TestCaseInstance detail: " + testCaseInstance);
+    public TCInstance getTestCaseInstanceById(long id) {
+        l.debug("Getting TCInstance by id: " + id);
+        TCInstance TCInstance = em.find(TCInstance.class, id);
+        l.info("TCInstance gotten successfully. TCInstance detail: " + TCInstance);
         return null;
     }
 }

@@ -11,18 +11,18 @@ import java.util.List;
  * ukládat jako nové instance. V db pak bude - NE! bude to jinak.
  */
 @Entity
-public class TestCaseMuster extends BaseEntity {
+public class TCMuster extends BaseEntity {
     private String name;
     private LocalDateTime createdDateTime;
     private LocalDateTime updatedDateTime;
 
 
-    @OneToMany (mappedBy = "testCaseMuster")
-    private List<TestCaseInstance> testCaseInstances;
+    @OneToMany (mappedBy = "TCMuster")
+    private List<TCInstance> TCInstances;
 
     @ManyToOne
-    @JoinColumn (name = "testProject_id")
-    private TestProject testProject;
+    @JoinColumn (name = "project_id")
+    private Project project;
 
 
     @ManyToMany
@@ -33,7 +33,7 @@ public class TestCaseMuster extends BaseEntity {
     @ManyToMany    // PROVĚŘIT SPRÁVNOST
     @JoinTable (name = "TSMUSTER_TSMUSTER", joinColumns = @JoinColumn (name = "TCMUSTER_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "TSMUSTER_ID", referencedColumnName = "ID"))
-    private List<TestStepMuster> testStepMusters;
+    private List<TSMuster> TSMusters;
 
     public String getName() {
         return name;
@@ -59,20 +59,20 @@ public class TestCaseMuster extends BaseEntity {
         this.updatedDateTime = updatedDateTime;
     }
 
-    public List<TestCaseInstance> getTestCaseInstances() {
-        return testCaseInstances;
+    public List<TCInstance> getTCInstances() {
+        return TCInstances;
     }
 
-    public void setTestCaseInstances(List<TestCaseInstance> testCaseInstances) {
-        this.testCaseInstances = testCaseInstances;
+    public void setTCInstances(List<TCInstance> TCInstances) {
+        this.TCInstances = TCInstances;
     }
 
-    public TestProject getTestProject() {
-        return testProject;
+    public Project getProject() {
+        return project;
     }
 
-    public void setTestProject(TestProject testProject) {
-        this.testProject = testProject;
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     public List<TestSuite> getTestSuites() {
@@ -83,24 +83,24 @@ public class TestCaseMuster extends BaseEntity {
         this.testSuites = testSuites;
     }
 
-    public List<TestStepMuster> getTestStepMusters() {
-        return testStepMusters;
+    public List<TSMuster> getTSMusters() {
+        return TSMusters;
     }
 
-    public void setTestStepMusters(List<TestStepMuster> testStepMusters) {
-        this.testStepMusters = testStepMusters;
+    public void setTSMusters(List<TSMuster> TSMusters) {
+        this.TSMusters = TSMusters;
     }
 
     @Override
     public String toString() {
-        return "TestCaseMuster{" +
+        return "TCMuster{" +
                 "name='" + name + '\'' +
                 ", createdDateTime=" + createdDateTime +
                 ", updatedDateTime=" + updatedDateTime +
-                ", testCaseInstances=" + testCaseInstances +
-                ", testProject=" + testProject +
+                ", TCInstances=" + TCInstances +
+                ", project=" + project +
                 ", testSuites=" + testSuites +
-                ", testStepMusters=" + testStepMusters +
+                ", TSMusters=" + TSMusters +
                 '}';
     }
 }

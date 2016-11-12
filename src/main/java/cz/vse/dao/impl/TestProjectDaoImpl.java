@@ -1,8 +1,7 @@
 package cz.vse.dao.impl;
 
 import cz.vse.dao.TestProjectDao;
-import cz.vse.entity.TestProject;
-import cz.vse.entity.TestProject;
+import cz.vse.entity.Project;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,40 +20,40 @@ public class TestProjectDaoImpl implements TestProjectDao {
     @PersistenceContext
     EntityManager em;
     @Override
-    public void saveTestProject(TestProject testProject) {
-        l.debug("Saving testProject: " + testProject);
-        em.persist(testProject);
-        l.info("TestProject saved successfully. TestProject detail: " + testProject);
+    public void saveTestProject(Project project) {
+        l.debug("Saving project: " + project);
+        em.persist(project);
+        l.info("Project saved successfully. Project detail: " + project);
     }
 
     @Override
-    public void deleteTestProject(TestProject testProject) {
-        l.debug("Deleting testProject: " + testProject);
-        em.remove(testProject);
-        l.info("TestProject deleted successfully. TestProject detail: " + testProject);
+    public void deleteTestProject(Project project) {
+        l.debug("Deleting project: " + project);
+        em.remove(project);
+        l.info("Project deleted successfully. Project detail: " + project);
     }
 
     @Override
-    public void updateTestProject(TestProject testProject) {
-        l.debug("Updating testProject: " + testProject);
-        em.merge(testProject);
-        l.info("TestProject updated successfully. TestProject detail: " + testProject);
+    public void updateTestProject(Project project) {
+        l.debug("Updating project: " + project);
+        em.merge(project);
+        l.info("Project updated successfully. Project detail: " + project);
     }
 
     @Override
     @Transactional
-    public List<TestProject> getAllTestProjects() {
-        l.debug("Getting all testProject");
-        List<TestProject> resultList = em.createQuery("select d from TestProject d").getResultList();
-        l.info("TestProjects gotten successfully. TestProject detail: " + resultList.toString());
+    public List<Project> getAllTestProjects() {
+        l.debug("Getting all project");
+        List<Project> resultList = em.createQuery("select d from Project d").getResultList();
+        l.info("TestProjects gotten successfully. Project detail: " + resultList.toString());
         return resultList;
     }
 
     @Override
-    public TestProject getTestProjectById(long id) {
-        l.debug("Getting testProject by id: " + id);
-        TestProject testProject = em.find(TestProject.class, id);
-        l.info("Gotten testProject successfully. TestProject detail: " + testProject);
-        return testProject;
+    public Project getTestProjectById(long id) {
+        l.debug("Getting project by id: " + id);
+        Project project = em.find(Project.class, id);
+        l.info("Gotten project successfully. Project detail: " + project);
+        return project;
     }
 }

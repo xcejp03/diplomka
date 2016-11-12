@@ -1,9 +1,8 @@
 package cz.vse.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -11,23 +10,20 @@ import java.util.List;
  * Created by pcejka on 21.09.2016.
  */
 @Entity
-public class TestStepInstance  extends BaseEntity{
+public class TSMuster extends BaseEntity {
     private LocalDateTime createdDateTime;
     private LocalDateTime updatedDateTime;
     private String action;
     private String expected;
-    private String actual;
 
-    @ManyToOne
-    @JoinColumn (name = "testStepMuster_id")
-    private TestStepMuster testStepMuster;
-
-    @ManyToMany (mappedBy = "testStepInstances")
+    @ManyToMany //(mappedBy = "")
     private List<Defect> defects;
 
-    @ManyToOne
-    @JoinColumn (name = "testCaseInstance_id")
-    private TestCaseInstance testCaseInstance;
+    @OneToMany (mappedBy = "TSMuster")
+    private List<TSInstance> TSInstances;
+
+    @ManyToMany (mappedBy = "TSMusters")
+    private List<TCMuster> TCMusters;
 
     public LocalDateTime getCreatedDateTime() {
         return createdDateTime;
@@ -61,22 +57,6 @@ public class TestStepInstance  extends BaseEntity{
         this.expected = expected;
     }
 
-    public String getActual() {
-        return actual;
-    }
-
-    public void setActual(String actual) {
-        this.actual = actual;
-    }
-
-    public TestStepMuster getTestStepMuster() {
-        return testStepMuster;
-    }
-
-    public void setTestStepMuster(TestStepMuster testStepMuster) {
-        this.testStepMuster = testStepMuster;
-    }
-
     public List<Defect> getDefects() {
         return defects;
     }
@@ -85,25 +65,32 @@ public class TestStepInstance  extends BaseEntity{
         this.defects = defects;
     }
 
-    public TestCaseInstance getTestCaseInstance() {
-        return testCaseInstance;
+    public List<TSInstance> getTSInstances() {
+        return TSInstances;
     }
 
-    public void setTestCaseInstance(TestCaseInstance testCaseInstance) {
-        this.testCaseInstance = testCaseInstance;
+    public void setTSInstances(List<TSInstance> TSInstances) {
+        this.TSInstances = TSInstances;
+    }
+
+    public List<TCMuster> getTCMusters() {
+        return TCMusters;
+    }
+
+    public void setTCMusters(List<TCMuster> TCMusters) {
+        this.TCMusters = TCMusters;
     }
 
     @Override
     public String toString() {
-        return "TestStepInstance{" +
+        return "TSMuster{" +
                 "createdDateTime=" + createdDateTime +
                 ", updatedDateTime=" + updatedDateTime +
                 ", action='" + action + '\'' +
                 ", expected='" + expected + '\'' +
-                ", actual='" + actual + '\'' +
-                ", testStepMuster=" + testStepMuster +
                 ", defects=" + defects +
-                ", testCaseInstance=" + testCaseInstance +
+                ", TSInstances=" + TSInstances +
+                ", TCMusters=" + TCMusters +
                 '}';
     }
 }

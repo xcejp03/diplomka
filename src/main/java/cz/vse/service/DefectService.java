@@ -3,9 +3,7 @@ package cz.vse.service;
 import cz.vse.dao.DefectCommentDao;
 import cz.vse.dao.DefectDao;
 import cz.vse.dto.DefectDTO;
-import cz.vse.dto.TestProjectDTO;
 import cz.vse.entity.*;
-import ma.glasnost.orika.Mapper;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +43,7 @@ public class DefectService {
 
     public void createDefect(String description, PriorityEnum priority, Person assignee,
                              Person reporter, DefectStatusEnum defectStatus, String affectVersion,
-                             List<TestCaseInstance> testCaseInstance, List<TestStepInstance> testStepInstance) {
+                             List<TCInstance> TCInstance, List<TSInstance> TSInstance) {
         l.debug("creating defect - service ");
         Defect defect = new Defect();
         defect.setDescription(description);
@@ -54,8 +52,8 @@ public class DefectService {
         defect.setReporter(reporter);
         defect.setDefectStatusEnum(defectStatus);
         defect.setAffectsVersion(affectVersion);
-        defect.setTestCaseInstances(testCaseInstance);
-        defect.setTestStepInstances(testStepInstance);
+        defect.setTCInstances(TCInstance);
+        defect.setTSInstances(TSInstance);
 
         defectDao.saveDefect(defect);
         l.info("defect created - service: " + defect.toString());

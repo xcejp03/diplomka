@@ -4,10 +4,10 @@ import cz.vse.DBPopulator;
 import cz.vse.dao.PersonDao;
 import cz.vse.dto.DefectDTO;
 import cz.vse.entity.Person;
-import cz.vse.entity.TestProject;
+import cz.vse.entity.Project;
 import cz.vse.service.DefectService;
 import cz.vse.service.PersonService;
-import cz.vse.service.TestProjectService;
+import cz.vse.service.ProjectService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,7 +39,7 @@ public class TestController {
     DefectService defectService;
 
     @Autowired
-    TestProjectService testProjectService;
+    ProjectService projectService;
 
 //    @RequestMapping(value = "person", method = RequestMethod.GET)
 //    public String person (ModelMap model)   {
@@ -80,7 +80,7 @@ public class TestController {
         Person p4 = personService.findPersonById(3);
         Person p5 = personService.findPersonById(4);
 
-        TestProject testProject = testProjectService.findTestProjectById(33);
+        Project project = projectService.findTestProjectById(33);
 
         List<Person> personList = new ArrayList<>();
         personList.add(p2);
@@ -88,14 +88,14 @@ public class TestController {
         personList.add(p4);
         personList.add(p5);
 
-        testProject.setProjectOwner(p1);
-        testProject.setPersonMembers(personList);
+        project.setProjectOwner(p1);
+        project.setPersonMembers(personList);
 
-        List<TestProject> testProjects = new ArrayList<>();
-        testProjects.add(testProject);
-        p3.setTestProjectsMember(testProjects);
+        List<Project> projects = new ArrayList<>();
+        projects.add(project);
+        p3.setProjectsMember(projects);
 
-        testProjectService.updateTestProject(testProject);
+        projectService.updateTestProject(project);
 
         return "test";
     }

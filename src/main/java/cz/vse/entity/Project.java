@@ -7,21 +7,21 @@ import java.util.List;
  * Created by pcejka on 21.09.2016.
  */
 @Entity
-public class TestProject extends BaseEntity {
+public class Project extends BaseEntity {
     private String name;
 
     @ManyToOne
     @JoinColumn(name = "projectOwner_id")
     private Person projectOwner;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "testProjectsMember")
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "projectsMember")
     private List<Person> personMembers;
 
-    @OneToMany(mappedBy = "testProject")
+    @OneToMany(mappedBy = "project")
     private List<TestSuite> testSuites;
 
-    @OneToMany(mappedBy = "testProject")
-    private List<TestCaseMuster> testCaseMusters;
+    @OneToMany(mappedBy = "project")
+    private List<TCMuster> TCMusters;
 
     public String getName() {
         return name;
@@ -55,22 +55,22 @@ public class TestProject extends BaseEntity {
         this.testSuites = testSuites;
     }
 
-    public List<TestCaseMuster> getTestCaseMusters() {
-        return testCaseMusters;
+    public List<TCMuster> getTCMusters() {
+        return TCMusters;
     }
 
-    public void setTestCaseMusters(List<TestCaseMuster> testCaseMusters) {
-        this.testCaseMusters = testCaseMusters;
+    public void setTCMusters(List<TCMuster> TCMusters) {
+        this.TCMusters = TCMusters;
     }
 
     @Override
     public String toString() {
-        return "TestProject{" +
+        return "Project{" +
                 "name='" + name + '\'' +
 //                ", projectOwner=" + projectOwner +
 //                ", projectMembers=" + projectMembers +
 //                ", testSuites=" + testSuites +
-//                ", testCaseMusters=" + testCaseMusters +
+//                ", TCMusters=" + TCMusters +
                 '}';
     }
 }

@@ -1,8 +1,7 @@
 package cz.vse.dao.impl;
 
 import cz.vse.dao.TestStepInstanceDao;
-import cz.vse.entity.TestStepInstance;
-import cz.vse.entity.TestStepInstance;
+import cz.vse.entity.TSInstance;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,39 +20,39 @@ public class TestStepInstanceDaoImpl implements TestStepInstanceDao {
     @PersistenceContext
     EntityManager em;
     @Override
-    public void saveTestStepInstance(TestStepInstance testStepInstance) {
-        l.debug("Saving testStepInstance: " + testStepInstance);
-        em.persist(testStepInstance);
-        l.info("TestStepInstance saved successfully. TestStepInstance detail: " + testStepInstance);
+    public void saveTestStepInstance(TSInstance TSInstance) {
+        l.debug("Saving TSInstance: " + TSInstance);
+        em.persist(TSInstance);
+        l.info("TSInstance saved successfully. TSInstance detail: " + TSInstance);
     }
 
     @Override
-    public void deleteTestStepInstance(TestStepInstance testStepInstance) {
-        l.debug("Deleting testStepInstance: " + testStepInstance);
-        em.remove(testStepInstance);
-        l.info("TestStepInstance deleted successfully. TestStepInstance detail: " + testStepInstance);
+    public void deleteTestStepInstance(TSInstance TSInstance) {
+        l.debug("Deleting TSInstance: " + TSInstance);
+        em.remove(TSInstance);
+        l.info("TSInstance deleted successfully. TSInstance detail: " + TSInstance);
     }
 
     @Override
-    public void updateTestStepInstance(TestStepInstance testStepInstance) {
-        l.debug("Updating testStepInstance: " + testStepInstance);
-        em.merge(testStepInstance);
-        l.info("TestStepInstance updated successfully. TestStepInstance detail: " + testStepInstance);
+    public void updateTestStepInstance(TSInstance TSInstance) {
+        l.debug("Updating TSInstance: " + TSInstance);
+        em.merge(TSInstance);
+        l.info("TSInstance updated successfully. TSInstance detail: " + TSInstance);
     }
 
     @Override
-    public List<TestStepInstance> getAllTestStepInstances() {
-        l.debug("Getting all testStepInstance");
-        List<TestStepInstance> resultList = em.createQuery("select d from TestStepInstance d").getResultList();
-        l.info("TestStepInstances gotten successfully. TestStepInstance detail: " + resultList.toString());
+    public List<TSInstance> getAllTestStepInstances() {
+        l.debug("Getting all TSInstance");
+        List<TSInstance> resultList = em.createQuery("select d from TSInstance d").getResultList();
+        l.info("TestStepInstances gotten successfully. TSInstance detail: " + resultList.toString());
         return null;
     }
 
     @Override
-    public TestStepInstance getTestStepInstanceById(long id) {
-        l.debug("Getting testStepInstance by id: " + id);
-        TestStepInstance testStepInstance = em.find(TestStepInstance.class, id);
-        l.info("Gotten testStepInstance successfully. TestStepInstance detail: " + testStepInstance);
+    public TSInstance getTestStepInstanceById(long id) {
+        l.debug("Getting TSInstance by id: " + id);
+        TSInstance TSInstance = em.find(TSInstance.class, id);
+        l.info("Gotten TSInstance successfully. TSInstance detail: " + TSInstance);
         return null;
     }
 }

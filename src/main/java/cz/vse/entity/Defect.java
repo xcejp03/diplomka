@@ -1,7 +1,6 @@
 package cz.vse.entity;
 
 import javax.persistence.*;
-import java.sql.Clob;
 import java.util.List;
 
 /**
@@ -21,13 +20,13 @@ public class Defect extends BaseEntity {
     @ManyToMany  // (fetch = FetchType.EAGER) // PROVĚŘIT SPRÁVNOST
     @JoinTable (name = "DEFECT_TCI", joinColumns = @JoinColumn (name = "DEFECT_ID", referencedColumnName = "ID"),
     inverseJoinColumns = @JoinColumn(name = "TCI_ID", referencedColumnName = "ID"))
-    private List<TestCaseInstance> testCaseInstances;      //defect může být navázán TC nebo konkrétní step
+    private List<TCInstance> TCInstances;      //defect může být navázán TC nebo konkrétní step
 
 
     @ManyToMany //  (fetch = FetchType.EAGER) // PROVĚŘIT SPRÁVNOST
     @JoinTable (name = "DEFECT_TSI", joinColumns = @JoinColumn (name = "DEFECT_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "TSI_ID", referencedColumnName = "ID"))
-    private List<TestStepInstance> testStepInstances;      //nebo může být navázáno na oboje
+    private List<TSInstance> TSInstances;      //nebo může být navázáno na oboje
 
 
 
@@ -71,20 +70,20 @@ public class Defect extends BaseEntity {
         AffectsVersion = affectsVersion;
     }
 
-    public List<TestCaseInstance> getTestCaseInstances() {
-        return testCaseInstances;
+    public List<TCInstance> getTCInstances() {
+        return TCInstances;
     }
 
-    public void setTestCaseInstances(List<TestCaseInstance> testCaseInstances) {
-        this.testCaseInstances = testCaseInstances;
+    public void setTCInstances(List<TCInstance> TCInstances) {
+        this.TCInstances = TCInstances;
     }
 
-    public List<TestStepInstance> getTestStepInstances() {
-        return testStepInstances;
+    public List<TSInstance> getTSInstances() {
+        return TSInstances;
     }
 
-    public void setTestStepInstances(List<TestStepInstance> testStepInstances) {
-        this.testStepInstances = testStepInstances;
+    public void setTSInstances(List<TSInstance> TSInstances) {
+        this.TSInstances = TSInstances;
     }
 
     public Person getAssignee() {
@@ -110,8 +109,8 @@ public class Defect extends BaseEntity {
                 ", priorityEnum=" + priorityEnum +
                 ", defectStatusEnum=" + defectStatusEnum +
                 ", AffectsVersion='" + AffectsVersion + '\'' +
-                ", testCaseInstances=" + testCaseInstances +
-                ", testStepInstances=" + testStepInstances +
+                ", TCInstances=" + TCInstances +
+                ", TSInstances=" + TSInstances +
 //                ", assignee=" + assignee +
 //                ", reporter=" + reporter +
                 '}';

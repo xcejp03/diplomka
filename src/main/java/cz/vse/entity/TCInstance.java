@@ -11,20 +11,20 @@ import java.util.List;
  * ukládat jako nové instance. V db pak bude - NE! bude to jinak.
  */
 @Entity
-public class TestCaseInstance extends BaseEntity {
+public class TCInstance extends BaseEntity {
     private String name;
     private LocalDateTime createdDateTime;
     private LocalDateTime updatedDateTime;
 
     @ManyToOne
-    @JoinColumn (name = "testCaseMuster_id")
-    private TestCaseMuster testCaseMuster;
+    @JoinColumn (name = "TCMuster_id")
+    private TCMuster TCMuster;
 
-    @ManyToMany (mappedBy = "testCaseInstances")
+    @ManyToMany (mappedBy = "TCInstances")
     private List<Defect> defects;
 
-    @OneToMany (mappedBy = "testCaseInstance")
-    private List<TestStepInstance> testStepInstances;
+    @OneToMany (mappedBy = "TCInstance")
+    private List<TSInstance> TSInstances;
 
     public String getName() {
         return name;
@@ -50,12 +50,12 @@ public class TestCaseInstance extends BaseEntity {
         this.updatedDateTime = updatedDateTime;
     }
 
-    public TestCaseMuster getTestCaseMuster() {
-        return testCaseMuster;
+    public TCMuster getTCMuster() {
+        return TCMuster;
     }
 
-    public void setTestCaseMuster(TestCaseMuster testCaseMuster) {
-        this.testCaseMuster = testCaseMuster;
+    public void setTCMuster(TCMuster TCMuster) {
+        this.TCMuster = TCMuster;
     }
 
     public List<Defect> getDefects() {
@@ -66,23 +66,23 @@ public class TestCaseInstance extends BaseEntity {
         this.defects = defects;
     }
 
-    public List<TestStepInstance> getTestStepInstances() {
-        return testStepInstances;
+    public List<TSInstance> getTSInstances() {
+        return TSInstances;
     }
 
-    public void setTestStepInstances(List<TestStepInstance> testStepInstances) {
-        this.testStepInstances = testStepInstances;
+    public void setTSInstances(List<TSInstance> TSInstances) {
+        this.TSInstances = TSInstances;
     }
 
     @Override
     public String toString() {
-        return "TestCaseInstance{" +
+        return "TCInstance{" +
                 "name='" + name + '\'' +
                 ", createdDateTime=" + createdDateTime +
                 ", updatedDateTime=" + updatedDateTime +
-                ", testCaseMuster=" + testCaseMuster +
+                ", TCMuster=" + TCMuster +
                 ", defects=" + defects +
-                ", testStepInstances=" + testStepInstances +
+                ", TSInstances=" + TSInstances +
                 '}';
     }
 }

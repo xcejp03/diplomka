@@ -1,13 +1,11 @@
 package cz.vse.dto;
 
-import cz.vse.entity.Person;
-
 import java.util.List;
 
 /**
  * Created by pcejka on 10.10.2016.
  */
-public class TestProjectDTO extends BaseDTO {
+public class ProjectDTO extends BaseDTO {
 
     private String name;
 
@@ -42,10 +40,10 @@ public class TestProjectDTO extends BaseDTO {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof TestProjectDTO)) return false;
+        if (!(o instanceof ProjectDTO)) return false;
         if (!super.equals(o)) return false;
 
-        TestProjectDTO that = (TestProjectDTO) o;
+        ProjectDTO that = (ProjectDTO) o;
 
         if (getName() != null ? !getName().equals(that.getName()) : that.getName() != null) return false;
         if (getProjectOwner_id() != null ? !getProjectOwner_id().equals(that.getProjectOwner_id()) : that.getProjectOwner_id() != null)
@@ -65,7 +63,7 @@ public class TestProjectDTO extends BaseDTO {
 
     @Override
     public String toString() {
-        return "TestProjectDTO{" +
+        return "ProjectDTO{" +
                 "name='" + name + '\'' +
                 ", projectOwner_id=" + projectOwner_id +
                 ", projectMembers=" + projectMembers_id +

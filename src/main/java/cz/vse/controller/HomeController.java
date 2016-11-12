@@ -3,8 +3,6 @@ package cz.vse.controller;
 import cz.vse.DBPopulator;
 import cz.vse.dao.PersonDao;
 import cz.vse.dto.DefectDTO;
-import cz.vse.dto.TestProjectDTO;
-import cz.vse.entity.Defect;
 import cz.vse.entity.Person;
 import cz.vse.service.DefectService;
 import org.apache.log4j.Logger;

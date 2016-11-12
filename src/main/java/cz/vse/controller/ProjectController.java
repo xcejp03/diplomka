@@ -1,10 +1,10 @@
 package cz.vse.controller;
 
-import cz.vse.dto.TestProjectDTO;
+import cz.vse.dto.ProjectDTO;
 import cz.vse.entity.Person;
-import cz.vse.entity.TestProject;
+import cz.vse.entity.Project;
 import cz.vse.service.PersonService;
-import cz.vse.service.TestProjectService;
+import cz.vse.service.ProjectService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +25,7 @@ import java.util.List;
 public class ProjectController {
     private final Logger l = Logger.getLogger(this.getClass());
     @Autowired
-    TestProjectService testProjectService;
+    ProjectService projectService;
 
     @Autowired
     PersonService personService;
@@ -33,18 +33,18 @@ public class ProjectController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createProjectForm(Model model) {
         l.info("request mapping project/create");
-        model.addAttribute("testProject", new TestProjectDTO());
-        model.addAttribute("listProjects", testProjectService.findAllTestProjects());
+        model.addAttribute("project", new ProjectDTO());
+        model.addAttribute("listProjects", projectService.findAllTestProjects());
         model.addAttribute("listPersons", personService.findAllPersons());
 
-        return "testProject";
+        return "project";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createProject(@ModelAttribute("testProject") TestProjectDTO testProjectDTO) {
+    public String createProject(@ModelAttribute("project") ProjectDTO projectDTO) {
 //        if(person.getId() == 0){
         //new person, add it
-        testProjectService.createTestProject(testProjectDTO);
+        projectService.createTestProject(projectDTO);
 //        }else{
         //existing person, call update
 //            this.personService.updatePerson(p);
@@ -61,21 +61,21 @@ public class ProjectController {
         personList.add(personService.findPersonById(11));
         personList.add(personService.findPersonById(12));
 // osoby jsou 10 a 11
-        TestProjectDTO testProjectDTO = new TestProjectDTO();
-        testProjectDTO.setName("XxX");
-//        testProjectDTO.setProjectMembers(personList);
-//        testProjectDTO.setProjectOwner(personService.findPersonById(10));
-        testProjectService.createTestProject(testProjectDTO);
+        ProjectDTO projectDTO = new ProjectDTO();
+        projectDTO.setName("XxX");
+//        projectDTO.setProjectMembers(personList);
+//        projectDTO.setProjectOwner(personService.findPersonById(10));
+        projectService.createTestProject(projectDTO);
         return "testProject";
     }
 
     @RequestMapping(value = "/test2", method = RequestMethod.GET)
     public String testik2(Model model) {
         l.info("testik");
-        TestProject testProject = new TestProject();
-        testProject.setName("XxX");
-        testProjectService.createTestProject(testProject);
-        return "testProject";
+        Project project = new Project();
+        project.setName("XxX");
+        projectService.createTestProject(project);
+        return "project";
     }
 
     @RequestMapping("/edit/{id}")

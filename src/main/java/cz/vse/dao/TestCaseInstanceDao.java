@@ -1,6 +1,6 @@
 package cz.vse.dao;
 
-import cz.vse.entity.TestCaseInstance;
+import cz.vse.entity.TCInstance;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ import java.util.List;
  */
 public interface TestCaseInstanceDao {
 
-    public void saveTestCaseInstance(TestCaseInstance TestCaseInstance);
-    public void deleteTestCaseInstance(TestCaseInstance testCaseInstance);
-    public void updateTestCaseInstance(TestCaseInstance testCaseInstance);
-    public List<TestCaseInstance> getAllTestCaseInstances();
-    public TestCaseInstance getTestCaseInstanceById(long id);
+    public void saveTestCaseInstance(TCInstance TCInstance);
+    public void deleteTestCaseInstance(TCInstance TCInstance);
+    public void updateTestCaseInstance(TCInstance TCInstance);
+    public List<TCInstance> getAllTestCaseInstances();
+    public TCInstance getTestCaseInstanceById(long id);
 }

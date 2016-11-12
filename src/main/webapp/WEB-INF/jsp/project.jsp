@@ -48,13 +48,13 @@
 <h1>
     Add a Test Project
 </h1>
-<h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\testProject.jsp</h3>
+<h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\project.jsp</h3>
 
 <c:url var="addAction" value="/project/create"></c:url>
 
-<form:form action="${addAction}" commandName="testProject">
+<form:form action="${addAction}" commandName="project">
     <table>
-        <c:if test="${!empty testProject.name}">
+        <c:if test="${!empty project.name}">
             <tr>
                 <td>
                     <form:label path="id">
@@ -132,11 +132,11 @@
             <%--</tr>--%>
         <tr>
             <td colspan="2">
-                <c:if test="${!empty testProject.name}">
+                <c:if test="${!empty project.name}">
                     <input type="submit"
                            value="<spring:message text="Edit Project"/>"/>
                 </c:if>
-                <c:if test="${empty testProject.name}">
+                <c:if test="${empty project.name}">
                     <input type="submit"
                            value="<spring:message text="Add Project"/>"/>
                 </c:if>
@@ -157,17 +157,17 @@
             <th width="60">Edit</th>
             <th width="60">Delete</th>
         </tr>
-        <c:forEach items="${listProjects}" var="testProject">
+        <c:forEach items="${listProjects}" var="project">
             <tr>
-                <td>${testProject.id}</td>
-                <td>${testProject.name}</td>
-                <td>${testProject.projectOwner_id}</td>
+                <td>${project.id}</td>
+                <td>${project.name}</td>
+                <td>${project.projectOwner_id}</td>
                 <td>
-                    <c:forEach items="${testProject.projectMembers_id}" var="projectMember">
+                    <c:forEach items="${project.projectMembers_id}" var="projectMember">
                 ${projectMember},
                 </c:forEach>
                 </td>
-                    <%--<td>${testProject.login}</td>--%>
+                    <%--<td>${project.login}</td>--%>
                     <%--<td><a href="<c:url value='/edit/${person.id}' />" >Edit</a></td>--%>
                     <%--<td><a href="<c:url value='/remove/${person.id}' />" >Delete</a></td>--%>
             </tr>

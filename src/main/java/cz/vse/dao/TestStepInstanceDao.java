@@ -1,6 +1,6 @@
 package cz.vse.dao;
 
-import cz.vse.entity.TestStepInstance;
+import cz.vse.entity.TSInstance;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ import java.util.List;
  */
 public interface TestStepInstanceDao {
 
-    public void saveTestStepInstance(TestStepInstance testStepInstance);
-    public void deleteTestStepInstance(TestStepInstance testStepInstance);
-    public void updateTestStepInstance(TestStepInstance testStepInstance);
-    public List<TestStepInstance> getAllTestStepInstances();
-    public TestStepInstance getTestStepInstanceById(long id);
+    public void saveTestStepInstance(TSInstance TSInstance);
+    public void deleteTestStepInstance(TSInstance TSInstance);
+    public void updateTestStepInstance(TSInstance TSInstance);
+    public List<TSInstance> getAllTestStepInstances();
+    public TSInstance getTestStepInstanceById(long id);
 }

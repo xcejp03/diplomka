@@ -1,8 +1,6 @@
 package cz.vse.entity;
 
 import javax.persistence.*;
-import javax.print.attribute.standard.MediaSize;
-import javax.websocket.ClientEndpoint;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -21,13 +19,13 @@ public class Person extends BaseEntity {
 //    private List<RoleEnum> roleEna;
 
     @ManyToMany (cascade = CascadeType.ALL)
-    @JoinTable(name = "PERSON_TESTPROJECT",
+    @JoinTable(name = "PERSON_PROJECT",
             joinColumns = @JoinColumn(name = "PERSON_ID", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "TESTPROJECT_ID", referencedColumnName = "ID"))
-    private List<TestProject> testProjectsMember;
+            inverseJoinColumns = @JoinColumn(name = "PROJECT_ID", referencedColumnName = "ID"))
+    private List<Project> projectsMember;
 
     @OneToMany(mappedBy = "projectOwner")
-    private List<TestProject> testProjectsOwner;
+    private List<Project> projectsOwner;
 
     @ManyToMany
     @JoinTable(name = "PERSON_DEFECTASSIGNEE",
@@ -81,24 +79,24 @@ public class Person extends BaseEntity {
         this.lastLogin = lastLogin;
     }
 
-    public List<TestProject> getTestProjectsMember() {
-        return testProjectsMember;
+    public List<Project> getProjectsMember() {
+        return projectsMember;
     }
 
-    public void setTestProjectsMember(List<TestProject> testProjectsMember) {
-        this.testProjectsMember = testProjectsMember;
+    public void setProjectsMember(List<Project> projectsMember) {
+        this.projectsMember = projectsMember;
     }
 
-    public void addTestProjectMember (TestProject testProject)  {
-        this.testProjectsMember.add(testProject);
+    public void addTestProjectMember (Project project)  {
+        this.projectsMember.add(project);
     }
 
-    public List<TestProject> getTestProjectsOwner() {
-        return testProjectsOwner;
+    public List<Project> getProjectsOwner() {
+        return projectsOwner;
     }
 
-    public void setTestProjectsOwner(List<TestProject> testProjectsOwner) {
-        this.testProjectsOwner = testProjectsOwner;
+    public void setProjectsOwner(List<Project> projectsOwner) {
+        this.projectsOwner = projectsOwner;
     }
 
     public List<Defect> getDefectsAssignee() {
@@ -125,8 +123,8 @@ public class Person extends BaseEntity {
                 ", pass='" + pass + '\'' +
                 ", createdDate=" + createdDate +
                 ", lastLogin=" + lastLogin +
-                ", testProjectsMember=" + testProjectsMember +
-                ", testProjectsOwner=" + testProjectsOwner +
+                ", projectsMember=" + projectsMember +
+                ", projectsOwner=" + projectsOwner +
                 ", defectsAssignee=" + defectsAssignee +
                 ", defectsReporter=" + defectsReporter +
                 '}';

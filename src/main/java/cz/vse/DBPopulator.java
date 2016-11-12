@@ -93,57 +93,57 @@ public class DBPopulator {
         defectComment.setDefect(defect);
 
         //TEST PROJECT
-        TestProject testProject = new TestProject();
-        testProject.setName(LocalDateTime.now().toString());
+        Project project = new Project();
+        project.setName(LocalDateTime.now().toString());
         List<Person> projectPersonList = new ArrayList<>();
         projectPersonList.add(personAuthor);
-        testProject.setPersonMembers(projectPersonList);
-        testProject.setProjectOwner(personAssigne);
+        project.setPersonMembers(projectPersonList);
+        project.setProjectOwner(personAssigne);
 
         //TEST SUITE
         TestSuite testSuite = new TestSuite();
         testSuite.setName(LocalDateTime.now().toString());
-        testSuite.setTestProject(testProject);
+        testSuite.setProject(project);
         List<TestSuite> testSuites = new ArrayList<>();
 
         //TEST CASE MUSTER
-        TestCaseMuster testCaseMuster = new TestCaseMuster();
-        testCaseMuster.setName(LocalDateTime.now().toString());
+        TCMuster TCMuster = new TCMuster();
+        TCMuster.setName(LocalDateTime.now().toString());
         testSuites.add(testSuite);
-        testCaseMuster.setTestSuites(testSuites);
-        testCaseMuster.setTestProject(testProject);
+        TCMuster.setTestSuites(testSuites);
+        TCMuster.setProject(project);
 
         //TEST STEP MUSTER
-        TestStepMuster testStepMuster = new TestStepMuster();
-        testStepMuster.setAction(LocalDateTime.now().toString());
-        testStepMuster.setExpected("Expected behavior of test step muster");
+        TSMuster TSMuster = new TSMuster();
+        TSMuster.setAction(LocalDateTime.now().toString());
+        TSMuster.setExpected("Expected behavior of test step muster");
 
         //TEST CASE INSTANCE
-        TestCaseInstance testCaseInstance = new TestCaseInstance();
-        testCaseInstance.setName(LocalDateTime.now().toString());
-        testCaseInstance.setTestCaseMuster(testCaseMuster);
+        TCInstance TCInstance = new TCInstance();
+        TCInstance.setName(LocalDateTime.now().toString());
+        TCInstance.setTCMuster(TCMuster);
 
         //TEST STEP INSTANCE
-        TestStepInstance testStepInstance = new TestStepInstance();
-        testStepInstance.setAction(LocalDateTime.now().toString());
-        testStepInstance.setActual("Actual behavior of test step instance");
-        testStepInstance.setTestStepMuster(testStepMuster);
-        testStepInstance.setTestCaseInstance(testCaseInstance);
+        TSInstance TSInstance = new TSInstance();
+        TSInstance.setAction(LocalDateTime.now().toString());
+        TSInstance.setActual("Actual behavior of test step instance");
+        TSInstance.setTSMuster(TSMuster);
+        TSInstance.setTCInstance(TCInstance);
         List<Defect> stepInstanceDefectList = new ArrayList<>();
         stepInstanceDefectList.add(defect);
-        testStepInstance.setDefects(stepInstanceDefectList);
+        TSInstance.setDefects(stepInstanceDefectList);
 
         personDao.savePerson(personAssigne);
         personDao.savePerson(personAuthor);
-        testProjectDao.saveTestProject(testProject);
+        testProjectDao.saveTestProject(project);
         testSuiteDao.saveTestSuite(testSuite);
         personDao.savePerson(person);
-        testCaseMusterDao.saveTestCaseMuster(testCaseMuster);
-        testStepMusterDao.saveTestStepMuster(testStepMuster);
-        testCaseInstanceDao.saveTestCaseInstance(testCaseInstance);
+        testCaseMusterDao.saveTestCaseMuster(TCMuster);
+        testStepMusterDao.saveTestStepMuster(TSMuster);
+        testCaseInstanceDao.saveTestCaseInstance(TCInstance);
         defectDao.saveDefect(defect);
         defectCommentDao.saveDefectComment(defectComment);
-        testStepInstanceDao.saveTestStepInstance(testStepInstance);
+        testStepInstanceDao.saveTestStepInstance(TSInstance);
         l.debug("naplnění db hotovo");
         l.debug("test service pro defect comment");
         defectCommentService.createComment(defect, personAssigne, "Text u defektu");
@@ -181,42 +181,42 @@ public class DBPopulator {
 
     }
 
-    private TestCaseInstance createPilotTestCaseInstance() {
-        TestCaseInstance testCaseInstance = new TestCaseInstance();
-        testCaseInstance.setName(LocalDateTime.now().toString());
-        testCaseInstanceDao.saveTestCaseInstance(testCaseInstance);
-        return testCaseInstance;
+    private TCInstance createPilotTestCaseInstance() {
+        TCInstance TCInstance = new TCInstance();
+        TCInstance.setName(LocalDateTime.now().toString());
+        testCaseInstanceDao.saveTestCaseInstance(TCInstance);
+        return TCInstance;
     }
 
-    private TestCaseMuster createPilotTestCaseMuster() {
-        TestCaseMuster testCaseMuster = new TestCaseMuster();
-        testCaseMuster.setName(LocalDateTime.now().toString());
-        testCaseMusterDao.saveTestCaseMuster(testCaseMuster);
-        return testCaseMuster;
+    private TCMuster createPilotTestCaseMuster() {
+        TCMuster TCMuster = new TCMuster();
+        TCMuster.setName(LocalDateTime.now().toString());
+        testCaseMusterDao.saveTestCaseMuster(TCMuster);
+        return TCMuster;
     }
 
-    private TestProject createPilotTestProject() {
-        TestProject testProject = new TestProject();
-        testProject.setName(LocalDateTime.now().toString());
-        testProjectDao.saveTestProject(testProject);
-        return testProject;
+    private Project createPilotTestProject() {
+        Project project = new Project();
+        project.setName(LocalDateTime.now().toString());
+        testProjectDao.saveTestProject(project);
+        return project;
     }
 
-    private TestStepInstance createPilotTestStepInstance() {
-        TestStepInstance testStepInstance = new TestStepInstance();
-        testStepInstance.setAction(LocalDateTime.now().toString());
-        testStepInstance.setActual("Actual behavior of test step instance");
-        testStepInstanceDao.saveTestStepInstance(testStepInstance);
-        return testStepInstance;
+    private TSInstance createPilotTestStepInstance() {
+        TSInstance TSInstance = new TSInstance();
+        TSInstance.setAction(LocalDateTime.now().toString());
+        TSInstance.setActual("Actual behavior of test step instance");
+        testStepInstanceDao.saveTestStepInstance(TSInstance);
+        return TSInstance;
 
     }
 
-    private TestStepMuster createPilotTestStepMuster() {
-        TestStepMuster testStepMuster = new TestStepMuster();
-        testStepMuster.setAction(LocalDateTime.now().toString());
-        testStepMuster.setExpected("Expected behavior of test step muster");
-        testStepMusterDao.saveTestStepMuster(testStepMuster);
-        return testStepMuster;
+    private TSMuster createPilotTestStepMuster() {
+        TSMuster TSMuster = new TSMuster();
+        TSMuster.setAction(LocalDateTime.now().toString());
+        TSMuster.setExpected("Expected behavior of test step muster");
+        testStepMusterDao.saveTestStepMuster(TSMuster);
+        return TSMuster;
 
     }
 

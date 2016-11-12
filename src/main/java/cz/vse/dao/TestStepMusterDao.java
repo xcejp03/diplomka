@@ -1,6 +1,6 @@
 package cz.vse.dao;
 
-import cz.vse.entity.TestStepMuster;
+import cz.vse.entity.TSMuster;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ import java.util.List;
  */
 public interface TestStepMusterDao {
 
-    public void saveTestStepMuster(TestStepMuster testStepMuster);
-    public void deleteTestStepMuster(TestStepMuster testStepMuster);
-    public void updateTestStepMuster(TestStepMuster testStepMuster);
-    public List<TestStepMuster> getAllTestStepMusters();
-    public TestStepMuster getTestStepMusterById(long id);
+    public void saveTestStepMuster(TSMuster TSMuster);
+    public void deleteTestStepMuster(TSMuster TSMuster);
+    public void updateTestStepMuster(TSMuster TSMuster);
+    public List<TSMuster> getAllTestStepMusters();
+    public TSMuster getTestStepMusterById(long id);
 }

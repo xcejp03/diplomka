@@ -1,8 +1,7 @@
 package cz.vse.dao.impl;
 
 import cz.vse.dao.TestCaseMusterDao;
-import cz.vse.entity.Defect;
-import cz.vse.entity.TestCaseMuster;
+import cz.vse.entity.TCMuster;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,39 +21,39 @@ public class TestCaseMusterDaoImpl implements TestCaseMusterDao {
     EntityManager em;
 
     @Override
-    public void saveTestCaseMuster(TestCaseMuster testCaseMuster) {
-        l.debug("Saving TestCaseMuster: " + testCaseMuster);
-        em.persist(testCaseMuster);
-        l.info("TestCaseMuster saved successfully. TestCaseMuster detail: " + testCaseMuster);
+    public void saveTestCaseMuster(TCMuster TCMuster) {
+        l.debug("Saving TCMuster: " + TCMuster);
+        em.persist(TCMuster);
+        l.info("TCMuster saved successfully. TCMuster detail: " + TCMuster);
     }
 
     @Override
-    public void deleteTestCaseMuster(TestCaseMuster testCaseMuster) {
-        l.debug("Deleting TestCaseMuster: " + testCaseMuster);
-        em.remove(testCaseMuster);
-        l.info("TestCaseMuster deleted successfully. TestCaseMuster detail: " + testCaseMuster);
+    public void deleteTestCaseMuster(TCMuster TCMuster) {
+        l.debug("Deleting TCMuster: " + TCMuster);
+        em.remove(TCMuster);
+        l.info("TCMuster deleted successfully. TCMuster detail: " + TCMuster);
     }
 
     @Override
-    public void updateTestCaseMuster(TestCaseMuster testCaseMuster) {
-        l.debug("Updating TestCaseMuster: " + testCaseMuster);
-        em.merge(testCaseMuster);
-        l.info("TestCaseMuster updated successfully. TestCaseMuster detail: " + testCaseMuster);
+    public void updateTestCaseMuster(TCMuster TCMuster) {
+        l.debug("Updating TCMuster: " + TCMuster);
+        em.merge(TCMuster);
+        l.info("TCMuster updated successfully. TCMuster detail: " + TCMuster);
     }
 
     @Override
-    public List<TestCaseMuster> getAllTestCaseMusters() {
-        l.debug("Getting all TestCaseMuster");
-        List<TestCaseMuster> resultList = em.createQuery("select t from TestCaseMuster t").getResultList();
-        l.info("TestCaseMuster gotten successfully. TestCaseMuster detail: " + resultList.toString());
+    public List<TCMuster> getAllTestCaseMusters() {
+        l.debug("Getting all TCMuster");
+        List<TCMuster> resultList = em.createQuery("select t from TCMuster t").getResultList();
+        l.info("TCMuster gotten successfully. TCMuster detail: " + resultList.toString());
         return null;
     }
 
     @Override
-    public TestCaseMuster getTestCaseMusterById(long id) {
-        l.debug("Getting TestCaseMuster by id: " + id);
-        TestCaseMuster testCaseMuster = em.find(TestCaseMuster.class, id);
-        l.info("TestCaseMuster gotten successfully. TestCaseMuster detail: " + testCaseMuster);
+    public TCMuster getTestCaseMusterById(long id) {
+        l.debug("Getting TCMuster by id: " + id);
+        TCMuster TCMuster = em.find(TCMuster.class, id);
+        l.info("TCMuster gotten successfully. TCMuster detail: " + TCMuster);
         return null;
     }
 }
