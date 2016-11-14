@@ -2,9 +2,11 @@ package cz.vse.service;
 
 import cz.vse.dao.DefectCommentDao;
 import cz.vse.dao.DefectDao;
+import cz.vse.dto.DefectCommentDTO;
 import cz.vse.entity.Defect;
 import cz.vse.entity.DefectComment;
 import cz.vse.entity.Person;
+import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,9 @@ public class DefectCommentService {
     @Autowired
     DefectDao defect;
 
+    @Autowired
+    private MapperFacade mapper;
+
     public void createComment(Defect defect, Person commentAuthor, String commentText) {
         l.debug("creating comment - service: " + commentText);
         DefectComment defectComment = new DefectComment();
@@ -37,14 +42,37 @@ public class DefectCommentService {
         l.info("comment created - service");
     }
 
+    public void createComment (DefectCommentDTO defectCommentDTO) {
+        l.debug("creating comment - service: ");
+        DefectComment defectComment = new DefectComment();
+        defectComment = mapper.map(defectCommentDTO, DefectComment.class);
+        defectCommentDao.saveDefectComment(defectComment);
+        l.info("comment created - service");
+    }
+
     public void updateComment (DefectComment commentToUpdate)   {
         l.debug("updating comment - service: "+commentToUpdate);
         defectCommentDao.updateDefectComment(commentToUpdate);
         l.info("comment updated");
     }
 
+    public void updateComment (DefectCommentDTO defectCommentDTO)   {
+        l.debug("updating comment - service: "+defectCommentDTO);
+        DefectComment defectComment = new DefectComment();
+        defectComment = mapper.map(defectCommentDTO, DefectComment.class);
+        defectCommentDao.updateDefectComment(defectComment);
+        l.info("comment updated");
+    }
+
     public void deleteComment (DefectComment commentToDelete)   {
         l.debug("deleting comment - service: "+ commentToDelete);
+        defectCommentDao.deleteDefectComment(commentToDelete);
+        l.info("comment deleted");
+    }
+    public void deleteComment (long id)   {
+        l.debug("deleting comment - service: "+ id);
+        DefectComment commentToDelete;
+        commentToDelete = defectCommentDao.getDefectCommentById(id);
         defectCommentDao.deleteDefectComment(commentToDelete);
         l.info("comment deleted");
     }
@@ -55,6 +83,14 @@ public class DefectCommentService {
         defectComment = defectCommentDao.getDefectCommentById(id);
         l.info("comment found");
         return defectComment;
+    }
+
+    public DefectCommentDTO findCommentDTOById (long id) {
+        l.debug("finding comment - service: " + id);
+        DefectComment defectComment = defectCommentDao.getDefectCommentById(id);
+        DefectCommentDTO defectCommentDTO = mapper.map(defectComment, DefectCommentDTO.class);
+        l.info("comment found");
+        return defectCommentDTO;
     }
 
     public List<DefectComment> findAllDefectsComments(Defect defect)  {

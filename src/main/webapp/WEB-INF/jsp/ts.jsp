@@ -48,13 +48,13 @@
 <h1>
     Add a Test Project
 </h1>
-<h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\project.jsp</h3>
+<h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\ts.jsp</h3>
 
-<c:url var="addAction" value="/project/create"></c:url>
+<c:url var="addAction" value="/ts/create"></c:url>
 
-<form:form action="${addAction}" commandName="project">
+<form:form action="${addAction}" commandName="ts">
     <table>
-        <c:if test="${!empty project.name}">
+        <c:if test="${!empty ts.action}">
             <tr>
                 <td>
                     <form:label path="id">
@@ -69,40 +69,32 @@
         </c:if>
         <tr>
             <td>
-                <form:label path="name">
-                    <spring:message text="Name"/>
+                <form:label path="action">
+                    <spring:message text="Action"/>
                 </form:label>
             </td>
             <td>
-                <form:input path="name"/>
+                <form:input path="action"/>
             </td>
         </tr>
         <tr>
             <td>
-                <form:label path="projectOwner_id">
-                    <spring:message text="projectOwner_id"/>
+                <form:label path="expected">
+                    <spring:message text="Expected"/>
                 </form:label>
             </td>
             <td>
-                <select path="projectOwner_id" name="projectOwner_id">
-                    <c:forEach var="item" items="${listPersons}">
-                        <option value="${item.id}">${item.name}</option>
-                    </c:forEach>
-                </select>
+                <form:input path="expected"/>
             </td>
         </tr>
         <tr>
             <td>
-                <form:label path="projectMembers_id">
-                    <spring:message text="projectMembers_id"/>
+                <form:label path="createddatetime">
+                    <spring:message text="Created"/>
                 </form:label>
             </td>
             <td>
-                <select path="projectMembers_id" name="projectMembers_id" multiple size="12">
-                    <c:forEach var="item" items="${listPersons}">
-                        <option value="${item.id}">${item.name}</option>
-                    </c:forEach>
-                </select>
+                <form:input path="createddatetime"/>
             </td>
         </tr>
             <%--<tr>
@@ -164,11 +156,12 @@
                 <td>${project.projectOwner_id}</td>
                 <td>
                     <c:forEach items="${project.projectMembers_id}" var="projectMember">
-                        ${projectMember},
-                    </c:forEach>
+                ${projectMember},
+                </c:forEach>
                 </td>
-                <td><a href="<c:url value='edit/${project.id}' />">Edit</a></td>
-                <td><a href="<c:url value='remove/${project.id}' />">Delete</a></td>
+                    <%--<td>${project.login}</td>--%>
+                    <%--<td><a href="<c:url value='/edit/${person.id}' />" >Edit</a></td>--%>
+                    <%--<td><a href="<c:url value='/remove/${person.id}' />" >Delete</a></td>--%>
             </tr>
         </c:forEach>
     </table>

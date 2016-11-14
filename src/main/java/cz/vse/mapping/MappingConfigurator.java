@@ -1,8 +1,12 @@
 package cz.vse.mapping;
 
+import cz.vse.dto.DefectCommentDTO;
 import cz.vse.dto.DefectDTO;
+import cz.vse.dto.PersonDTO;
 import cz.vse.dto.ProjectDTO;
 import cz.vse.entity.Defect;
+import cz.vse.entity.DefectComment;
+import cz.vse.entity.Person;
 import cz.vse.entity.Project;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.ConfigurableMapper;
@@ -42,10 +46,31 @@ public class MappingConfigurator extends ConfigurableMapper {   // implements Ap
                 .field("personMembers{id}", "projectMembers_id{}")
                 .byDefault()
                 .register();
-
+        factory.classMap(ProjectDTO.class, Project.class)
+                .field("projectOwner_id", "projectOwner.id")
+                .field("projectMembers_id{}", "personMembers{id}")
+                .byDefault()
+                .register();
+        factory.classMap(DefectCommentDTO.class, DefectComment.class)
+                .field("assignee_id", "assignee.id")
+                .field("reporter_id", "reporter.id")
+                .byDefault()
+                .register();
+        factory.classMap(DefectComment.class, DefectCommentDTO.class)
+                .field("assignee.id", "assignee_id")
+                .field("reporter.id", "reporter_id")
+                .byDefault()
+                .register();
         factory.classMap(Defect.class, DefectDTO.class)
                 .byDefault()
                 .register();
+        factory.classMap(DefectDTO.class, Defect.class)
+                .byDefault()
+                .register();
+        factory.classMap(Person.class, PersonDTO.class)
+                .byDefault()
+                .register();
+
     }
 
     //   private void configureClassMaps() {

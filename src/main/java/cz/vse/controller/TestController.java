@@ -95,7 +95,7 @@ public class TestController {
         projects.add(project);
         p3.setProjectsMember(projects);
 
-        projectService.updateTestProject(project);
+//        projectService.updateTestProject(project);
 
         return "test";
     }

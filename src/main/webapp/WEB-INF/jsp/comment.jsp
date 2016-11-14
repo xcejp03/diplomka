@@ -55,13 +55,13 @@
 </head>
 <body>
 <h1>Defecty v systemu</h1>
-<h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\defect.jsp</h3>
+<h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\comment.jsp</h3>
 
-<c:url var="addAction" value="/defect/create"></c:url>
+<c:url var="addAction" value="/comment/create"></c:url>
 
-<form:form action="${addAction}" commandName="defect">
+<form:form action="${addAction}" commandName="comment">
     <table>
-        <c:if test="${!empty defect.description}">
+        <c:if test="${!empty comment.description}">
             <tr>
                 <td>
                     <form:label path="id">

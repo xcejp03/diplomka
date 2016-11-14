@@ -50,7 +50,7 @@
 </h1>
 <h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\person.jsp</h3>
 
-<c:url var="addAction" value="/project/create"></c:url>
+<c:url var="addAction" value="/person/create"></c:url>
 
 <form:form action="${addAction}" commandName="person">
     <table>
@@ -120,6 +120,7 @@
             <th width="120">Person Name</th>
             <th width="120">Person Login</th>
             <th width="120">Person Password</th>
+            <th width="120">Person Created</th>
             <th width="60">Edit</th>
             <th width="60">Delete</th>
         </tr>
@@ -129,8 +130,9 @@
                 <td>${person.name}</td>
                 <td>${person.login}</td>
                 <td>${person.pass}</td>
-                <td><a href="<c:url value='/project/edit/${person.id}' />">Edit</a></td>
-                <td><a href="<c:url value='/project/remove/${person.id}' />">Delete</a></td>
+                <td>${person.createdDate}</td>
+                <td><a href="<c:url value='/person/edit/${person.id}' />">Edit</a></td>
+                <td><a href="<c:url value='/person/remove/${person.id}' />">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

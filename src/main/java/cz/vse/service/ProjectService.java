@@ -57,8 +57,20 @@ public class ProjectService {
         l.info("created project - service: " + project);
     }
 
-    public void updateTestProject(Project project) {
+    public void updateTestProject(ProjectDTO projectDTO) {
         l.debug("updating project - service");
+        Project project = new Project();
+        project = mapper.map(projectDTO, Project.class);
+
+        List<Person> personMembersList = new ArrayList<>();
+        if (project.getPersonMembers() != null) {
+            for (Person personForId : project.getPersonMembers()) {
+                Person person = personService.findPersonById(personForId.getId());
+                person.addTestProjectMember(project);
+                personMembersList.add(person);
+            }
+            project.setPersonMembers(personMembersList);
+        }
         testProjectDao.updateTestProject(project);
         l.info("updated project - service: " + project);
     }
@@ -81,8 +93,19 @@ public class ProjectService {
         l.debug("finding project - service");
         Project project;
         project = testProjectDao.getTestProjectById(id);
-        l.info("project founf - service: " + id + " - " + project);
+        l.info("project found - service: " + id + " - " + project);
         return project;
+    }
+
+    public ProjectDTO findTestProjectDTOById(long id) {
+        l.debug("finding project - service");
+        Project project;
+
+        project = testProjectDao.getTestProjectById(id);
+        ProjectDTO projectDTO = new ProjectDTO();
+        projectDTO = mapper.map(project, ProjectDTO.class);
+        l.info("projectDTO found - service: " + id + " - " + projectDTO);
+        return projectDTO;
     }
 
     public List<ProjectDTO> findAllTestProjects() {

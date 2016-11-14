@@ -59,10 +59,12 @@ public class DefectService {
         l.info("defect created - service: " + defect.toString());
     }
 
-    public void updateDefect(Defect defectToUpdate) {
+    public void updateDefect(DefectDTO defectDTO) {
         l.debug("updating defect - service");
-        defectDao.updateDefect(defectToUpdate);
-        l.info("updating defect - service: " + defectToUpdate.toString());
+        Defect defect = new Defect();
+        defect = mapper.map(defectDTO, Defect.class);
+        defectDao.updateDefect(defect);
+        l.info("updating defect - service: " + defectDTO.toString());
     }
 
     public void deleteDefect(Defect defectToDelete) {
@@ -84,6 +86,14 @@ public class DefectService {
         Defect defect = defectDao.getDefectById(id);
         l.info("found defect by id - service: " + id + " - " + defect.toString());
         return defect;
+}
+
+    public DefectDTO findDefectDTOById(long id) {
+        l.debug("finding defect by id - service");
+        Defect defect = defectDao.getDefectById(id);
+        DefectDTO defectDTO = mapper.map(defect, DefectDTO.class);
+        l.info("found defect by id - service: " + id + " - " + defectDTO.toString());
+        return defectDTO;
     }
 
     public List<Defect> findAllDefects() {
