@@ -1,49 +1,52 @@
 package cz.vse.dto;
 
+import cz.vse.entity.Defect;
+import cz.vse.entity.Person;
+
+import java.time.LocalDateTime;
+
 /**
  * Created by pcejka on 10.10.2016.
  */
 public class DefectCommentDTO extends BaseDTO {
 
-    private String description;
-    //    private PriorityEnum priorityEnum;
-//    private DefectStatusEnum defectStatusEnum;
-    private String AffectsVersion;
+    private LocalDateTime createdDateTime;
+    private String commentText;
 
-    private Long assignee_id;
+    private Long defect_id;
 
-    private Long reporter_id;
+    private Long author_id;
 
-    public String getDescription() {
-        return description;
+    public LocalDateTime getCreatedDateTime() {
+        return createdDateTime;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCreatedDateTime(LocalDateTime createdDateTime) {
+        this.createdDateTime = createdDateTime;
     }
 
-    public String getAffectsVersion() {
-        return AffectsVersion;
+    public String getCommentText() {
+        return commentText;
     }
 
-    public void setAffectsVersion(String affectsVersion) {
-        AffectsVersion = affectsVersion;
+    public void setCommentText(String commentText) {
+        this.commentText = commentText;
     }
 
-    public Long getAssignee_id() {
-        return assignee_id;
+    public Long getDefect_id() {
+        return defect_id;
     }
 
-    public void setAssignee_id(Long assignee_id) {
-        this.assignee_id = assignee_id;
+    public void setDefect_id(Long defect_id) {
+        this.defect_id = defect_id;
     }
 
-    public Long getReporter_id() {
-        return reporter_id;
+    public Long getAuthor_id() {
+        return author_id;
     }
 
-    public void setReporter_id(Long reporter_id) {
-        this.reporter_id = reporter_id;
+    public void setAuthor_id(Long author_id) {
+        this.author_id = author_id;
     }
 
     @Override
@@ -54,33 +57,24 @@ public class DefectCommentDTO extends BaseDTO {
 
         DefectCommentDTO that = (DefectCommentDTO) o;
 
-        if (getDescription() != null ? !getDescription().equals(that.getDescription()) : that.getDescription() != null)
+        if (getCreatedDateTime() != null ? !getCreatedDateTime().equals(that.getCreatedDateTime()) : that.getCreatedDateTime() != null)
             return false;
-        if (getAffectsVersion() != null ? !getAffectsVersion().equals(that.getAffectsVersion()) : that.getAffectsVersion() != null)
+        if (getCommentText() != null ? !getCommentText().equals(that.getCommentText()) : that.getCommentText() != null)
             return false;
-        if (getAssignee_id() != null ? !getAssignee_id().equals(that.getAssignee_id()) : that.getAssignee_id() != null)
+        if (getDefect_id() != null ? !getDefect_id().equals(that.getDefect_id()) : that.getDefect_id() != null)
             return false;
-        return getReporter_id() != null ? getReporter_id().equals(that.getReporter_id()) : that.getReporter_id() == null;
+        return getAuthor_id() != null ? getAuthor_id().equals(that.getAuthor_id()) : that.getAuthor_id() == null;
 
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
-        result = 31 * result + (getAffectsVersion() != null ? getAffectsVersion().hashCode() : 0);
-        result = 31 * result + (getAssignee_id() != null ? getAssignee_id().hashCode() : 0);
-        result = 31 * result + (getReporter_id() != null ? getReporter_id().hashCode() : 0);
+        result = 31 * result + (getCreatedDateTime() != null ? getCreatedDateTime().hashCode() : 0);
+        result = 31 * result + (getCommentText() != null ? getCommentText().hashCode() : 0);
+        result = 31 * result + (getDefect_id() != null ? getDefect_id().hashCode() : 0);
+        result = 31 * result + (getAuthor_id() != null ? getAuthor_id().hashCode() : 0);
         return result;
     }
-
-    @Override
-    public String toString() {
-        return "DefectCommentDTO{" +
-                "description='" + description + '\'' +
-                ", AffectsVersion='" + AffectsVersion + '\'' +
-                ", assignee_id=" + assignee_id +
-                ", reporter_id=" + reporter_id +
-                '}';
-    }
 }
+

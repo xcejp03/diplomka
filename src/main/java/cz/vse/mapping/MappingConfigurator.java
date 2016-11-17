@@ -52,13 +52,13 @@ public class MappingConfigurator extends ConfigurableMapper {   // implements Ap
                 .byDefault()
                 .register();
         factory.classMap(DefectCommentDTO.class, DefectComment.class)
-                .field("assignee_id", "assignee.id")
-                .field("reporter_id", "reporter.id")
+                .field("defect_id", "defect.id")
+                .field("author_id", "author.id")
                 .byDefault()
                 .register();
         factory.classMap(DefectComment.class, DefectCommentDTO.class)
-                .field("assignee.id", "assignee_id")
-                .field("reporter.id", "reporter_id")
+                .field("defect.id", "defect_id")
+                .field("author.id", "author_id")
                 .byDefault()
                 .register();
         factory.classMap(Defect.class, DefectDTO.class)
