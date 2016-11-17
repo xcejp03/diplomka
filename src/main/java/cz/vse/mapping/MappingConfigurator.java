@@ -9,6 +9,7 @@ import cz.vse.entity.DefectComment;
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
 import ma.glasnost.orika.MapperFactory;
+import ma.glasnost.orika.converter.ConverterFactory;
 import ma.glasnost.orika.impl.ConfigurableMapper;
 import org.springframework.stereotype.Component;
 
@@ -17,14 +18,14 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class MappingConfigurator extends ConfigurableMapper {   // implements ApplicationContextAware {
-//    public MappingConfigurator()    {
+    //    public MappingConfigurator()    {
 //        super(false);
 //    }
+//
 
-//    private MapperFactory factory;
 
 //    private ApplicationContext applicationContext;
-//
+
 //    private CustomMapperMap customMappers;      //asi bude potřeba
 
 /*    @Override
@@ -40,8 +41,10 @@ public class MappingConfigurator extends ConfigurableMapper {   // implements Ap
 //    }
 
     protected void configure(MapperFactory factory) {
+        ConverterFactory converterFactory = factory.getConverterFactory();
+        converterFactory.registerConverter("myDateConverter",new DateConverter());
+        factory.getConverterFactory().registerConverter(new DateConverter());
         factory.classMap(Project.class, ProjectDTO.class)
-
                 .field("projectOwner.id", "projectOwner_id")
                 .field("personMembers{id}", "projectMembers_id{}")
                 .byDefault()
@@ -54,6 +57,8 @@ public class MappingConfigurator extends ConfigurableMapper {   // implements Ap
         factory.classMap(DefectCommentDTO.class, DefectComment.class)
                 .field("defect_id", "defect.id")
                 .field("author_id", "author.id")
+                .fieldMap("createdDateTime", "createdDateTime").converter("DateConverter").add()
+                .field("createdDateTime", "createdDateTime")
                 .byDefault()
                 .register();
         factory.classMap(DefectComment.class, DefectCommentDTO.class)

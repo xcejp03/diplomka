@@ -61,7 +61,7 @@
 
 <form:form action="${addAction}" commandName="comment">
     <table>
-        <c:if test="${!empty comment.description}">
+        <c:if test="${!empty comment.commentText}">
             <tr>
                 <td>
                     <form:label path="id">
@@ -73,37 +73,67 @@
                     <form:hidden path="id"/>
                 </td>
             </tr>
+            <tr>
+                 <td>
+                <form:label path="createdDateTime">
+                    <spring:message text="createdDateTime"/>
+                </form:label>
+            </td>
+                <td>
+                    <form:input path="createdDateTime" readonly="true" size="8" disabled="true"/>
+                    <form:hidden path="createdDateTime"/>
+                </td>
+            </tr>
         </c:if>
         <tr>
             <td>
-                <form:label path="description">
-                    <spring:message text="description"/>
+                <form:label path="commentText">
+                    <spring:message text="text komentáře"/>
                 </form:label>
             </td>
             <td>
-                <form:input path="description"/>
+                <form:input path="commentText"/>
             </td>
         </tr>
         <tr>
             <td>
-                <form:label path="affectsVersion">
-                    <spring:message text="affectsVersion"/>
+                <form:label path="defect_id">
+                    <spring:message text="defect_id"/>
                 </form:label>
             </td>
             <td>
-                <form:input path="affectsVersion"/>
+                <select path="defect_id" name="defect_id">
+                    <c:forEach var="item" items="${listDefects}">
+                        <option value="${item.id}">${item.description}</option>
+                    </c:forEach>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form:label path="author_id">
+                    <spring:message text="author_id"/>
+                </form:label>
+            </td>
+            <td>
+                <select path="author_id" name="author_id">
+                    <c:forEach var="item" items="${listPersons}">
+                        <option value="${item.id}">${item.name}</option>
+                    </c:forEach>
+                </select>
             </td>
         </tr>
 
+
         <tr>
             <td colspan="2">
-                <c:if test="${!empty defect.description}">
+                <c:if test="${!empty comment.commentText}">
                     <input type="submit"
-                           value="<spring:message text="Edit defect"/>"/>
+                           value="<spring:message text="Edit comment"/>"/>
                 </c:if>
-                <c:if test="${empty defect.description}">
+                <c:if test="${empty comment.commentText}">
                     <input type="submit"
-                           value="<spring:message text="Add defect"/>"/>
+                           value="<spring:message text="Add comment"/>"/>
                 </c:if>
             </td>
         </tr>
@@ -111,23 +141,25 @@
 </form:form>
 
 
-<h3>Defects List</h3>
-<c:if test="${!empty defectList}">
+<h3>Comment List</h3>
+<c:if test="${!empty listComment}">
     <table class="tg">
         <tr>
-            <th width="80">Defect ID</th>
-            <th width="80">Defect affectsversion</th>
-            <th width="120">Defect Description</th>
+            <th width="80">Comment ID</th>
+            <th width="80">Comment createdDateTime</th>
+            <th width="80">Author id</th>
+            <th width="120">Comment text</th>
             <th width="40">Edit</th>
             <th width="50">Delete</th>
         </tr>
-        <c:forEach items="${defectList}" var="defect">
+        <c:forEach items="${listComment}" var="comment">
             <tr>
-                <td>${defect.id}</td>
-                <td>${defect.affectsVersion}</td>
-                <td>${defect.description}</td>
-                <td><a href="<c:url value='/defect/edit/${defect.id}' />">Edit</a></td>
-                <td><a href="<c:url value='/defect/remove/${defect.id}' />">Delete</a></td>
+                <td>${comment.id}</td>
+                <td>${comment.createdDateTime}</td>
+                <td>${comment.author_id}</td>
+                <td>${comment.commentText}</td>
+                <td><a href="<c:url value='/comment/edit/${comment.id}' />">Edit</a></td>
+                <td><a href="<c:url value='/comment/remove/${comment.id}' />">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

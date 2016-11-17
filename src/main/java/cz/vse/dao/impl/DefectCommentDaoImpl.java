@@ -52,6 +52,14 @@ public class DefectCommentDaoImpl implements DefectCommentDao {
         return resultList;
     }
 
+    public List<DefectComment> getAllDefectCommentAllTest() {
+        l.debug("Getting all defectComment");
+        List<DefectComment> resultList =
+                em.createQuery("select dc from DefectComment dc").getResultList();
+        l.info("DefectComments gotten successfully. DefectComments detail: " + resultList.toString());
+        return resultList;
+    }
+
     @Override
     public DefectComment getDefectCommentById(long id) {
         l.debug("Getting DefectComment by id: " + id);

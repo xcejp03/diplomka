@@ -34,7 +34,7 @@ public class ProjectController {
     public String createProjectForm(Model model) {
         l.info("request mapping project/create");
         model.addAttribute("project", new ProjectDTO());
-        model.addAttribute("listProjects", projectService.findAllTestProjects());
+        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
         model.addAttribute("listPersons", personService.findAllPersons());
 
         return "project";
@@ -58,7 +58,7 @@ public class ProjectController {
             l.info("/edit/{id}" + id);
 //            model.addAttribute("person", personService.findPersonById(id));
             model.addAttribute("project", projectService.findTestProjectDTOById(id));
-//            model.addAttribute("listProjects", projectService.findAllTestProjects());
+//            model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
             model.addAttribute("listPersons", personService.findAllPersons());
             return "project";
         }

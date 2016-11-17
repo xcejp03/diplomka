@@ -39,7 +39,7 @@ public class TSController {
     public String createProjectForm(Model model) {
         l.info("request mapping ts/create");
         model.addAttribute("ts", new TSDTO());
-        model.addAttribute("listProjects", projectService.findAllTestProjects());
+        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
 
         return "project";
     }

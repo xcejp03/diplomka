@@ -14,5 +14,6 @@ public interface DefectCommentDao {
     public void deleteDefectComment(DefectComment defectComment);
     public void updateDefectComment(DefectComment defectComment);
     public List<DefectComment> getAllDefectComment(Defect defect);
+    public List<DefectComment> getAllDefectCommentAllTest();
     public DefectComment getDefectCommentById(long id);
 }

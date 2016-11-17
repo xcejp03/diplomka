@@ -108,7 +108,7 @@ public class ProjectService {
         return projectDTO;
     }
 
-    public List<ProjectDTO> findAllTestProjects() {
+    public List<ProjectDTO> findAllTestProjectsDTO() {
         l.debug("finding all testProjects - service");
         List<Project> projectList = new ArrayList<>();
         List<ProjectDTO> projectDTOList;

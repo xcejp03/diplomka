@@ -46,6 +46,7 @@ public class DefectCommentService {
         l.debug("creating comment - service: ");
         DefectComment defectComment = new DefectComment();
         defectComment = mapper.map(defectCommentDTO, DefectComment.class);
+        defectComment.setCreatedDateTime(LocalDateTime.now());
         defectCommentDao.saveDefectComment(defectComment);
         l.info("comment created - service");
     }
@@ -99,5 +100,16 @@ public class DefectCommentService {
         defectComment = defectCommentDao.getAllDefectComment(defect);
         l.info("all defect's comments found");
         return defectComment;
+    }
+
+
+    public List<DefectCommentDTO> findAllDefectsCommentsDTOAllTest()  {
+        l.debug("finding all defect's comments - service: ");
+        List<DefectComment> defectCommentList;
+        defectCommentList = defectCommentDao.getAllDefectCommentAllTest();
+        List<DefectCommentDTO> defectCommentDTOList;
+        defectCommentDTOList = mapper.mapAsList(defectCommentList, DefectCommentDTO.class);
+        l.info("all defect's comments found");
+        return defectCommentDTOList;
     }
 }

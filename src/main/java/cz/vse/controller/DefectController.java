@@ -35,7 +35,7 @@ public class DefectController {
         model.addAttribute("defect", new DefectDTO());
         model.addAttribute("defectList", defectService.findAllDefects());
         model.addAttribute("listPersons", personService.findAllPersons());
-        model.addAttribute("listProjects", projectService.findAllTestProjects());
+        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
 
         return "defect";
     }

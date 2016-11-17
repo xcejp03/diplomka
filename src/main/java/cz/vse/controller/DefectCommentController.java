@@ -1,7 +1,6 @@
 package cz.vse.controller;
 
 import cz.vse.dto.DefectCommentDTO;
-import cz.vse.dto.DefectDTO;
 import cz.vse.service.DefectCommentService;
 import cz.vse.service.DefectService;
 import cz.vse.service.PersonService;
@@ -38,11 +37,12 @@ public class DefectCommentController {
     public String createDefect(Model model) {
         l.info("request mapping comment/create");
         model.addAttribute("comment", new DefectCommentDTO());
-        model.addAttribute("defectList", defectService.findAllDefects());
+        model.addAttribute("listComment", defectCommentService.findAllDefectsCommentsDTOAllTest());
+        model.addAttribute("listDefects", defectService.findAllDefects());
         model.addAttribute("listPersons", personService.findAllPersons());
-        model.addAttribute("listProjects", projectService.findAllTestProjects());
+        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
 
-        return "defect";
+        return "comment";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -59,19 +59,22 @@ public class DefectCommentController {
     }
 
     @RequestMapping("/edit/{id}")
-    public String editDefect(@PathVariable("id") int id, Model model) {
+    public String editComment(@PathVariable("id") long id, Model model) {
         l.info("/edit/{id}" + id);
-        model.addAttribute("defectComment", defectCommentService.findCommentDTOById(id));
-        model.addAttribute("defect", defectService.findDefectDTOById(id));
-        model.addAttribute("person", personService.findPersonById(id));
+        DefectCommentDTO commentDTO = defectCommentService.findCommentDTOById(id);
+        model.addAttribute("comment",commentDTO);
+        model.addAttribute("listDefects", defectService.findAllDefects());
+        model.addAttribute("listPersons", personService.findAllPersons());
+        model.addAttribute("defect", defectService.findDefectDTOById(commentDTO.getDefect_id()));
+        model.addAttribute("person", personService.findPersonById(commentDTO.getAuthor_id()));
 
-        return "defectComment";
+        return "comment";
     }
 
     @RequestMapping("/remove/{id}")
-    public String removeDefect(@PathVariable("id") int id) {
+    public String removeComment(@PathVariable("id") long id) {
         defectCommentService.deleteComment(id);
-        return "defectComment";
+        return "comment";
     }
 
 }
