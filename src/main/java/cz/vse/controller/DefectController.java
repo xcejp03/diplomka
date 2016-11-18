@@ -51,7 +51,7 @@ public class DefectController {
     }
 
     @RequestMapping("/edit/{id}")
-    public String editDefect(@PathVariable("id") int id, Model model) {
+    public String editDefect(@PathVariable("id") long id, Model model) {
         l.info("/edit/{id}" + id);
         model.addAttribute("defect", defectService.findDefectDTOById(id));
         model.addAttribute("person", personService.findPersonById(id));
@@ -60,7 +60,7 @@ public class DefectController {
     }
 
     @RequestMapping("/remove/{id}")
-    public String removeDefect(@PathVariable("id") int id, Model model) {
+    public String removeDefect(@PathVariable("id") long id, Model model) {
         defectService.deleteDefect(id);
         model.addAttribute("defect", new DefectDTO());
         return "redirect:/defect/create";

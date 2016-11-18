@@ -1,11 +1,5 @@
 package cz.vse.dto;
 
-import cz.vse.entity.Defect;
-import cz.vse.entity.TCMuster;
-import cz.vse.entity.TSInstance;
-
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,12 +10,13 @@ import java.util.List;
 
 
 
-public class TSDTO extends BaseDTO {
+public class TSMusterDTO extends BaseDTO {
 
     private LocalDateTime createdDateTime;
     private LocalDateTime updatedDateTime;
     private String action;
     private String expected;
+    private Long author_id;
 
     private List<Long> defects_id;
 
@@ -57,6 +52,7 @@ public class TSDTO extends BaseDTO {
         return expected;
     }
 
+
     public void setExpected(String expected) {
         this.expected = expected;
     }
@@ -83,6 +79,14 @@ public class TSDTO extends BaseDTO {
 
     public void setTCMusters_id(List<Long> TCMusters_id) {
         this.TCMusters_id = TCMusters_id;
+    }
+
+    public Long getAuthor_id() {
+        return author_id;
+    }
+
+    public void setAuthor_id(Long author_id) {
+        this.author_id = author_id;
     }
 }
 

@@ -46,7 +46,7 @@
 </head>
 <body>
 <h1>
-    Add a Test Project
+    Add a Test Step
 </h1>
 <h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\ts.jsp</h3>
 
@@ -54,7 +54,7 @@
 
 <form:form action="${addAction}" commandName="ts">
     <table>
-        <c:if test="${!empty ts.action}">
+        <c:if test="${!empty ts.id}">
             <tr>
                 <td>
                     <form:label path="id">
@@ -89,48 +89,28 @@
         </tr>
         <tr>
             <td>
-                <form:label path="createddatetime">
-                    <spring:message text="Created"/>
+                <form:label path="author_id">
+                    <spring:message text="Autor kroku"/>
                 </form:label>
             </td>
             <td>
-                <form:input path="createddatetime"/>
+                <select path="author_id" name="author_id">
+                    <c:forEach var="item" items="${listPersons}">
+                        <option value="${item.id}">${item.name}</option>
+                    </c:forEach>
+                </select>
             </td>
         </tr>
-            <%--<tr>
-                <td>
-                    <form>
-                        <select name="projectMembers_id" multiple size="5">
-                            <option>15</option>
-                            <option>20</option>
-                            <option>40</option>
-                            <option>41</option>
-                            <option>42</option>
-                            <option>43</option>
-                            <option>44</option>
-                        </select>
-                    </form>
-                </td>--%>
-        </tr>
-            <%--<tr>--%>
-            <%--<td>--%>
-            <%--<form:label path="login">--%>
-            <%--<spring:message text="login"/>--%>
-            <%--</form:label>--%>
-            <%--</td>--%>
-            <%--<td>--%>
-            <%--<form:input path="login"/>--%>
-            <%--</td>--%>
-            <%--</tr>--%>
+
         <tr>
             <td colspan="2">
-                <c:if test="${!empty project.name}">
+                <c:if test="${!empty ts.action}">
                     <input type="submit"
-                           value="<spring:message text="Edit Project"/>"/>
+                           value="<spring:message text="Edit TS"/>"/>
                 </c:if>
-                <c:if test="${empty project.name}">
+                <c:if test="${empty ts.action}">
                     <input type="submit"
-                           value="<spring:message text="Add Project"/>"/>
+                           value="<spring:message text="Add TS"/>"/>
                 </c:if>
             </td>
         </tr>
@@ -138,30 +118,25 @@
     </table>
 </form:form>
 <br>
-<h3>Projects List</h3>
-<c:if test="${!empty listProjects}">
+<h3>TS List</h3>
+<c:if test="${!empty listTSMusters}">
     <table class="tg">
         <tr>
-            <th width="80">Project ID</th>
-            <th width="120">Project Name</th>
-            <th width="120">project owner</th>
-            <th width="190">project members</th>
+            <th width="80">TS ID</th>
+            <th width="120">Action</th>
+            <th width="120">Expected</th>
+            <th width="190">Autor</th>
             <th width="60">Edit</th>
             <th width="60">Delete</th>
         </tr>
-        <c:forEach items="${listProjects}" var="project">
+        <c:forEach items="${listTSMusters}" var="ts">
             <tr>
-                <td>${project.id}</td>
-                <td>${project.name}</td>
-                <td>${project.projectOwner_id}</td>
-                <td>
-                    <c:forEach items="${project.projectMembers_id}" var="projectMember">
-                ${projectMember},
-                </c:forEach>
-                </td>
-                    <%--<td>${project.login}</td>--%>
-                    <%--<td><a href="<c:url value='/edit/${person.id}' />" >Edit</a></td>--%>
-                    <%--<td><a href="<c:url value='/remove/${person.id}' />" >Delete</a></td>--%>
+                <td>${ts.id}</td>
+                <td>${ts.action}</td>
+                <td>${ts.expected}</td>
+                <td>${ts.author_id}</td>
+                <td><a href="<c:url value='edit/${ts.id}' />">Edit</a></td>
+                <td><a href="<c:url value='remove/${ts.id}' />">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

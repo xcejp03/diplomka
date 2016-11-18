@@ -9,9 +9,9 @@ import java.util.List;
  */
 public interface TestStepMusterDao {
 
-    public void saveTestStepMuster(TSMuster TSMuster);
-    public void deleteTestStepMuster(TSMuster TSMuster);
-    public void updateTestStepMuster(TSMuster TSMuster);
+    public void saveTestStepMuster(TSMuster tsMuster);
+    public void deleteTestStepMuster(Long tsMusterId);
+    public void updateTestStepMuster(TSMuster tsMuster);
     public List<TSMuster> getAllTestStepMusters();
     public TSMuster getTestStepMusterById(long id);
 }

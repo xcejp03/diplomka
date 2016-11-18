@@ -27,10 +27,12 @@ public class TestStepMusterDaoImpl implements TestStepMusterDao {
     }
 
     @Override
-    public void deleteTestStepMuster(TSMuster TSMuster) {
-        l.debug("Deleting TSMuster: " + TSMuster);
-        em.remove(TSMuster);
-        l.info("TSMuster deleted successfully. TSMuster detail: " + TSMuster);
+    public void deleteTestStepMuster(Long tsMusterId) {
+        l.debug("Deleting TSMuster: " + tsMusterId);
+        TSMuster tsMuster;
+        tsMuster = getTestStepMusterById(tsMusterId);
+        em.remove(tsMuster);
+        l.info("TSMuster deleted successfully. TSMuster detail: " + tsMuster);
     }
 
     @Override
@@ -43,16 +45,16 @@ public class TestStepMusterDaoImpl implements TestStepMusterDao {
     @Override
     public List<TSMuster> getAllTestStepMusters() {
         l.debug("Getting all TSMuster");
-        List<TSMuster> resultList = em.createQuery("select d from TSMuster d").getResultList();
+        List<TSMuster> resultList = em.createQuery("select ts from TSMuster ts").getResultList();
         l.info("TestStepMusters gotten successfully. TSMuster detail: " + resultList.toString());
-        return null;
+        return resultList;
     }
 
     @Override
     public TSMuster getTestStepMusterById(long id) {
         l.debug("Getting TSMuster by id: " + id);
-        TSMuster TSMuster = em.find(TSMuster.class, id);
-        l.info("Gotten TSMuster successfully. TSMuster detail: " + TSMuster);
-        return null;
+        TSMuster tsMuster = em.find(TSMuster.class, id);
+        l.info("Gotten TSMuster successfully. TSMuster detail: " + tsMuster);
+        return tsMuster;
     }
 }

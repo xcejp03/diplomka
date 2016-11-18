@@ -1,13 +1,7 @@
 package cz.vse.mapping;
 
-import cz.vse.dto.DefectCommentDTO;
-import cz.vse.dto.DefectDTO;
-import cz.vse.dto.PersonDTO;
-import cz.vse.dto.ProjectDTO;
-import cz.vse.entity.Defect;
-import cz.vse.entity.DefectComment;
-import cz.vse.entity.Person;
-import cz.vse.entity.Project;
+import cz.vse.dto.*;
+import cz.vse.entity.*;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.converter.ConverterFactory;
 import ma.glasnost.orika.impl.ConfigurableMapper;
@@ -73,6 +67,14 @@ public class MappingConfigurator extends ConfigurableMapper {   // implements Ap
                 .byDefault()
                 .register();
         factory.classMap(Person.class, PersonDTO.class)
+                .byDefault()
+                .register();
+        factory.classMap(TSMuster.class, TSMusterDTO.class)
+                .field("author.id", "author_id")
+                .byDefault()
+                .register();
+        factory.classMap(TSMusterDTO.class, TSMuster.class)
+                .field("author_id", "author.id")
                 .byDefault()
                 .register();
 

@@ -1,8 +1,6 @@
 package cz.vse.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,6 +13,10 @@ public class TSMuster extends BaseEntity {
     private LocalDateTime updatedDateTime;
     private String action;
     private String expected;
+
+    @ManyToOne
+    @JoinColumn (name = "author_id")
+    private Person author;
 
     @ManyToMany //(mappedBy = "")
     private List<Defect> defects;
@@ -57,6 +59,14 @@ public class TSMuster extends BaseEntity {
         this.expected = expected;
     }
 
+    public Person getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Person author) {
+        this.author = author;
+    }
+
     public List<Defect> getDefects() {
         return defects;
     }
@@ -82,12 +92,51 @@ public class TSMuster extends BaseEntity {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TSMuster)) return false;
+
+        TSMuster tsMuster = (TSMuster) o;
+
+        if (getCreatedDateTime() != null ? !getCreatedDateTime().equals(tsMuster.getCreatedDateTime()) : tsMuster.getCreatedDateTime() != null)
+            return false;
+        if (getUpdatedDateTime() != null ? !getUpdatedDateTime().equals(tsMuster.getUpdatedDateTime()) : tsMuster.getUpdatedDateTime() != null)
+            return false;
+        if (getAction() != null ? !getAction().equals(tsMuster.getAction()) : tsMuster.getAction() != null)
+            return false;
+        if (getExpected() != null ? !getExpected().equals(tsMuster.getExpected()) : tsMuster.getExpected() != null)
+            return false;
+        if (getAuthor() != null ? !getAuthor().equals(tsMuster.getAuthor()) : tsMuster.getAuthor() != null)
+            return false;
+        if (getDefects() != null ? !getDefects().equals(tsMuster.getDefects()) : tsMuster.getDefects() != null)
+            return false;
+        if (getTSInstances() != null ? !getTSInstances().equals(tsMuster.getTSInstances()) : tsMuster.getTSInstances() != null)
+            return false;
+        return getTCMusters() != null ? getTCMusters().equals(tsMuster.getTCMusters()) : tsMuster.getTCMusters() == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getCreatedDateTime() != null ? getCreatedDateTime().hashCode() : 0;
+        result = 31 * result + (getUpdatedDateTime() != null ? getUpdatedDateTime().hashCode() : 0);
+        result = 31 * result + (getAction() != null ? getAction().hashCode() : 0);
+        result = 31 * result + (getExpected() != null ? getExpected().hashCode() : 0);
+        result = 31 * result + (getAuthor() != null ? getAuthor().hashCode() : 0);
+        result = 31 * result + (getDefects() != null ? getDefects().hashCode() : 0);
+        result = 31 * result + (getTSInstances() != null ? getTSInstances().hashCode() : 0);
+        result = 31 * result + (getTCMusters() != null ? getTCMusters().hashCode() : 0);
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "TSMuster{" +
                 "createdDateTime=" + createdDateTime +
                 ", updatedDateTime=" + updatedDateTime +
                 ", action='" + action + '\'' +
                 ", expected='" + expected + '\'' +
+                ", author=" + author +
                 ", defects=" + defects +
                 ", TSInstances=" + TSInstances +
                 ", TCMusters=" + TCMusters +

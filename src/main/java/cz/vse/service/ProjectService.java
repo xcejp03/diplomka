@@ -99,7 +99,6 @@ public class ProjectService {
     public ProjectDTO findTestProjectDTOById(long id) {
         l.debug("finding project - service");
         Project project;
-
         project = testProjectDao.getTestProjectById(id);
         ProjectDTO projectDTO = new ProjectDTO();
         projectDTO = mapper.map(project, ProjectDTO.class);

@@ -46,7 +46,7 @@ public class TestCaseMusterDaoImpl implements TestCaseMusterDao {
         l.debug("Getting all TCMuster");
         List<TCMuster> resultList = em.createQuery("select t from TCMuster t").getResultList();
         l.info("TCMuster gotten successfully. TCMuster detail: " + resultList.toString());
-        return null;
+        return resultList;
     }
 
     @Override
@@ -54,6 +54,6 @@ public class TestCaseMusterDaoImpl implements TestCaseMusterDao {
         l.debug("Getting TCMuster by id: " + id);
         TCMuster TCMuster = em.find(TCMuster.class, id);
         l.info("TCMuster gotten successfully. TCMuster detail: " + TCMuster);
-        return null;
+        return TCMuster;
     }
 }
