@@ -10,7 +10,7 @@ import java.util.List;
 public interface PersonDao {
 
     public long savePerson(Person person);       //vrací ID uložené osoby nebo -1 při chybě
-    public void deletePerson (Person person);        //vrací true při úspěchu, false při chybě
+    public void deletePerson (Long personId);        //vrací true při úspěchu, false při chybě
     public void updatePerson (Person person);        //vrací true při úspěchu, false při chybě
     public List<Person> getAllPersons();
     public Person getPersonById(long id);

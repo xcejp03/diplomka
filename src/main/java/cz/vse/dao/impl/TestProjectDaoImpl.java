@@ -27,10 +27,11 @@ public class TestProjectDaoImpl implements TestProjectDao {
     }
 
     @Override
-    public void deleteTestProject(Project project) {
-        l.debug("Deleting project: " + project);
+    public void deleteTestProject(Long projectId) {
+        l.debug("Deleting project: " + projectId);
+        Project project = getTestProjectById(projectId);
         em.remove(project);
-        l.info("Project deleted successfully. Project detail: " + project);
+        l.info("Project deleted successfully. Project detail: " + projectId);
     }
 
     @Override

@@ -21,6 +21,7 @@ public class DefectService {
     @Autowired
     DefectCommentDao defectCommentDao;
 
+
     @Autowired
     DefectDao defectDao;
 
@@ -69,16 +70,15 @@ public class DefectService {
 
     public void deleteDefect(Defect defectToDelete) {
         l.debug("deleting defect - service");
-        defectDao.deleteDefect(defectToDelete);
+        Long defectId = defectToDelete.getId();
+        defectDao.deleteDefect(defectId);
         l.info("defect deleted - service: " + defectToDelete.toString());
     }
 
     public void deleteDefect(long defectToDeleteId) {
         l.debug("deleting defect - service");
-        Defect defectToDelete;
-        defectToDelete = defectDao.getDefectById(defectToDeleteId);
-        defectDao.deleteDefect(defectToDelete);
-        l.info("defect deleted - service: " + defectToDeleteId + " - " + defectToDelete.toString());
+        defectDao.deleteDefect(defectToDeleteId);
+        l.info("defect deleted - service: " + defectToDeleteId);
     }
 
     public Defect findDefectById(long id) {

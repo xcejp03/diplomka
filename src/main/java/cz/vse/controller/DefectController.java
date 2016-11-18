@@ -41,14 +41,11 @@ public class DefectController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createProject(@ModelAttribute("person") DefectDTO defectDTO) {
+    public String createDefectPost(@ModelAttribute("person") DefectDTO defectDTO) {
         if (defectDTO.getId() == null) {
-            //new person, add it
             defectService.createDefect(defectDTO);
         } else {
-            //existing person, call update
             defectService.updateDefect(defectDTO);
-
         }
         return "redirect:create";
     }
@@ -63,8 +60,9 @@ public class DefectController {
     }
 
     @RequestMapping("/remove/{id}")
-    public String removeDefect(@PathVariable("id") int id) {
+    public String removeDefect(@PathVariable("id") int id, Model model) {
         defectService.deleteDefect(id);
+        model.addAttribute("defect", new DefectDTO());
         return "defect";
     }
 

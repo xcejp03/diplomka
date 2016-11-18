@@ -11,7 +11,7 @@ import java.util.List;
 public interface DefectCommentDao {
 
     public void saveDefectComment(DefectComment defectComment);
-    public void deleteDefectComment(DefectComment defectComment);
+    public void deleteDefectComment(Long id);
     public void updateDefectComment(DefectComment defectComment);
     public List<DefectComment> getAllDefectComment(Defect defect);
     public List<DefectComment> getAllDefectCommentAllTest();

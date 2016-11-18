@@ -77,16 +77,15 @@ public class ProjectService {
 
     public void deleteTestProject(Project projectToDelete) {
         l.debug("deleting project - service");
-        testProjectDao.deleteTestProject(projectToDelete);
+        Long projectId = projectToDelete.getId();
+        testProjectDao.deleteTestProject(projectId);
         l.info("project deleted - service: " + projectToDelete);
     }
 
     public void deleteTestProjectById(long testProjectToDeleteById) {
         l.debug("deleting project - service");
-        Project projectToDelete;
-        projectToDelete = testProjectDao.getTestProjectById(testProjectToDeleteById);
-        testProjectDao.deleteTestProject(projectToDelete);
-        l.info("project deleted - service: " + projectToDelete);
+        testProjectDao.deleteTestProject(testProjectToDeleteById);
+        l.info("project deleted - service: " + testProjectToDeleteById);
     }
 
     public Project findTestProjectById(long id) {

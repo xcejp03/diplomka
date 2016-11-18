@@ -30,8 +30,10 @@ public class DefectDaoImpl implements DefectDao {
     }
 
     @Override
-    public void deleteDefect(Defect defect) {
-        l.debug("Deleting defect: " + defect);
+    public void deleteDefect(long id) {
+        l.debug("Deleting defect: " + id);
+        Defect defect = new Defect();
+        defect = getDefectById(id);
         em.remove(defect);
         l.info("Defect deleted successfully. Defect detail: " + defect);
     }

@@ -31,10 +31,11 @@ public class DefectCommentDaoImpl implements DefectCommentDao {
     }
 
     @Override
-    public void deleteDefectComment(DefectComment defectComment) {
-        l.debug("Deleting DefectComment: " + defectComment);
-        em.remove(defectComment);
-        l.info("DefectComment deleted successfully. DefectComment detail: " + defectComment);
+    public void deleteDefectComment(Long defectCommentId) {
+        l.debug("Deleting DefectComment: " + defectCommentId);
+        DefectComment defectComment = getDefectCommentById(defectCommentId);
+        em.remove(defectCommentId);
+        l.info("DefectComment deleted successfully. DefectComment detail: " + defectCommentId);
     }
 
     @Override

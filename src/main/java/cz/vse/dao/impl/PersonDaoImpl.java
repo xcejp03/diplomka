@@ -30,8 +30,9 @@ public class PersonDaoImpl implements PersonDao {
     }
 
     @Override
-    public void deletePerson(Person person) {
-        l.debug("Deleting person: " + person);
+    public void deletePerson(Long personId) {
+        l.debug("Deleting person: " + personId);
+        Person person = getPersonById(personId);
         em.remove(person);
         l.info("Person deleted successfully. Person detail: " + person);
     }

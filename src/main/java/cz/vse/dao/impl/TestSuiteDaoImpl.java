@@ -28,10 +28,11 @@ public class TestSuiteDaoImpl implements TestSuiteDao {
     }
 
     @Override
-    public void deleteTestSuite(TestSuite testSuite) {
-        l.debug("Deleting testSuite: " + testSuite);
+    public void deleteTestSuite(Long testSuiteId) {
+        l.debug("Deleting testSuite: " + testSuiteId);
+        TestSuite testSuite = getTestSuiteById(testSuiteId);
         em.remove(testSuite);
-        l.info("TestSuite deleted successfully. TestSuite detail: " + testSuite);
+        l.info("TestSuite deleted successfully. TestSuite detail: " + testSuiteId);
     }
 
     @Override

@@ -55,16 +55,15 @@ public class PersonService {
 
     public void deletePerson(Person personToDelete) {
         l.debug("deleting person - service");
-        personDao.deletePerson(personToDelete);
+        Long personId = personToDelete.getId();
+        personDao.deletePerson(personId);
         l.info("person deleted - service: " + personToDelete);
     }
 
     public void deletePerson(long personToDeleteById) {
         l.debug("deleting person - service");
-        Person personToDelete = new Person();
-        personToDelete = personDao.getPersonById(personToDeleteById);
-        personDao.deletePerson(personToDelete);
-        l.info("person deleted - service: " + personToDelete);
+        personDao.deletePerson(personToDeleteById);
+        l.info("person deleted - service: " + personToDeleteById);
     }
 
     public Person findPersonById(long id) {

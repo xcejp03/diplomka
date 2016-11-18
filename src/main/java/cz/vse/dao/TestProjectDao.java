@@ -10,7 +10,7 @@ import java.util.List;
 public interface TestProjectDao {
 
     public void saveTestProject(Project project);
-    public void deleteTestProject(Project project);
+    public void deleteTestProject(Long projectId);
     public void updateTestProject(Project project);
     public List<Project> getAllTestProjects();
     public Project getTestProjectById(long id);

@@ -67,14 +67,13 @@ public class DefectCommentService {
 
     public void deleteComment (DefectComment commentToDelete)   {
         l.debug("deleting comment - service: "+ commentToDelete);
-        defectCommentDao.deleteDefectComment(commentToDelete);
+        Long comentId = commentToDelete.getId();
+        defectCommentDao.deleteDefectComment(comentId);
         l.info("comment deleted");
     }
     public void deleteComment (long id)   {
         l.debug("deleting comment - service: "+ id);
-        DefectComment commentToDelete;
-        commentToDelete = defectCommentDao.getDefectCommentById(id);
-        defectCommentDao.deleteDefectComment(commentToDelete);
+        defectCommentDao.deleteDefectComment(id);
         l.info("comment deleted");
     }
 

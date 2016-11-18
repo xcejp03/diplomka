@@ -11,7 +11,7 @@ import java.util.List;
 public interface DefectDao {
 
     public void saveDefect(Defect defect);       //vrací ID uložené osoby nebo -1 při chybě
-    public void deleteDefect(Defect defect);        //vrací true při úspěchu, false při chybě
+    public void deleteDefect(long id);        //vrací true při úspěchu, false při chybě
     public void updateDefect(Defect defect);        //vrací true při úspěchu, false při chybě
     public List<Defect> getAllDefects();
     public Defect getDefectById(long id);
