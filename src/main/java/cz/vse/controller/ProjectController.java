@@ -50,24 +50,24 @@ public class ProjectController {
 
             this.projectService.updateTestProject(projectDTO);
         }
-            return "redirect:create";
-        }
+        return "redirect:create";
+    }
 
-        @RequestMapping("/edit/{id}")
-        public String editProject ( @PathVariable("id") int id, Model model){
-            l.info("/edit/{id}" + id);
+    @RequestMapping("/edit/{id}")
+    public String editProject(@PathVariable("id") int id, Model model) {
+        l.info("/edit/{id}" + id);
 //            model.addAttribute("person", personService.findPersonById(id));
-            model.addAttribute("project", projectService.findTestProjectDTOById(id));
+        model.addAttribute("project", projectService.findTestProjectDTOById(id));
 //            model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
-            model.addAttribute("listPersons", personService.findAllPersons());
-            return "project";
-        }
+        model.addAttribute("listPersons", personService.findAllPersons());
+        return "project";
+    }
 
-        @RequestMapping("/remove/{id}")
-        public String removePerson ( @PathVariable("id") int id){
-            projectService.deleteTestProjectById(id);
-            return "project";
-        }
+    @RequestMapping("/remove/{id}")
+    public String removePerson(@PathVariable("id") int id) {
+        projectService.deleteTestProjectById(id);
+        return "redirect:/project/create";
+    }
 
 //    @RequestMapping(value = "/create", method = RequestMethod.GET)
 ////    public String createProjectForm(ModelMap model) {
@@ -105,29 +105,5 @@ public class ProjectController {
 //        personService.deletePerson(id);
 //        return "person";
 //    }
-
-        @RequestMapping(value = "/test", method = RequestMethod.GET)
-        public String testik (Model model){
-            l.info("testik");
-            List<Person> personList = new ArrayList<>();
-            personList.add(personService.findPersonById(11));
-            personList.add(personService.findPersonById(12));
-// osoby jsou 10 a 11
-            ProjectDTO projectDTO = new ProjectDTO();
-            projectDTO.setName("XxX");
-//        projectDTO.setProjectMembers(personList);
-//        projectDTO.setProjectOwner(personService.findPersonById(10));
-            projectService.createTestProject(projectDTO);
-            return "testProject";
-        }
-
-        @RequestMapping(value = "/test2", method = RequestMethod.GET)
-        public String testik2 (Model model){
-            l.info("testik");
-            Project project = new Project();
-            project.setName("XxX");
-            projectService.createTestProject(project);
-            return "project";
-        }
-    }
+}
 

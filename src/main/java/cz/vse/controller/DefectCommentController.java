@@ -74,7 +74,7 @@ public class DefectCommentController {
     @RequestMapping("/remove/{id}")
     public String removeComment(@PathVariable("id") long id) {
         defectCommentService.deleteComment(id);
-        return "comment";
+        return "redirect:/comment/create";
     }
 
 }
