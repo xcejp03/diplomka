@@ -63,7 +63,8 @@ public class DefectController {
     public String removeDefect(@PathVariable("id") int id, Model model) {
         defectService.deleteDefect(id);
         model.addAttribute("defect", new DefectDTO());
-        return "defect";
+        return "redirect:/defect/create";
+
     }
 
 }
