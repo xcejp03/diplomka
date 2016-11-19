@@ -153,8 +153,9 @@
         <tr>
             <th width="80">Project ID</th>
             <th width="120">Project Name</th>
-            <th width="120">project owner</th>
-            <th width="190">project members</th>
+            <th width="80">project owner</th>
+            <th width="80">project members</th>
+            <th width="120">Project TC</th>
             <th width="60">Edit</th>
             <th width="60">Delete</th>
         </tr>
@@ -166,6 +167,11 @@
                 <td>
                     <c:forEach items="${project.projectMembers_id}" var="projectMember">
                         ${projectMember},
+                    </c:forEach>
+                </td>
+                <td>
+                    <c:forEach items="${project.tcMusters_id}" var="tcMuster">
+                        ${tcMuster},
                     </c:forEach>
                 </td>
                 <td><a href="<c:url value='edit/${project.id}' />">Edit</a></td>

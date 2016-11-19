@@ -41,11 +41,13 @@ public class MappingConfigurator extends ConfigurableMapper {   // implements Ap
         factory.classMap(Project.class, ProjectDTO.class)
                 .field("projectOwner.id", "projectOwner_id")
                 .field("personMembers{id}", "projectMembers_id{}")
+                .field("tcMusters{id}", "tcMusters_id{}")
                 .byDefault()
                 .register();
         factory.classMap(ProjectDTO.class, Project.class)
                 .field("projectOwner_id", "projectOwner.id")
                 .field("projectMembers_id{}", "personMembers{id}")
+                .field("tcMusters_id{}", "tcMusters{id}")
                 .byDefault()
                 .register();
         factory.classMap(DefectCommentDTO.class, DefectComment.class)
