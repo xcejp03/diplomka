@@ -21,7 +21,7 @@ public class TestSuite extends BaseEntity {
     private Project project;        //testsuit patří pod jeden projekt
 
     @ManyToMany  (mappedBy = "testSuites")
-    private List<TCMuster> TCMusters;      //testsuit se skládá z testcasů;
+    private List<TCMuster> tcMusters;      //testsuit se skládá z testcasů;
 
     public String getName() {
         return name;
@@ -55,12 +55,12 @@ public class TestSuite extends BaseEntity {
         this.project = project;
     }
 
-    public List<TCMuster> getTCMusters() {
-        return TCMusters;
+    public List<TCMuster> getTcMusters() {
+        return tcMusters;
     }
 
-    public void setTCMusters(List<TCMuster> TCMusters) {
-        this.TCMusters = TCMusters;
+    public void setTcMusters(List<TCMuster> tcMusters) {
+        this.tcMusters = tcMusters;
     }
 
     @Override
@@ -70,7 +70,7 @@ public class TestSuite extends BaseEntity {
                 ", createdDateTime=" + createdDateTime +
                 ", updateDateTime=" + updateDateTime +
                 ", project=" + project +
-                ", TCMusters=" + TCMusters +
+                ", tcMusters=" + tcMusters +
                 '}';
     }
 }

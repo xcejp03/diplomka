@@ -29,14 +29,6 @@ public class TCMusterDTO extends BaseDTO {
         this.name = name;
     }
 
-    public Long getProject_id() {
-        return project_id;
-    }
-
-    public void setProject_id(Long project_id) {
-        this.project_id = project_id;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -48,7 +40,7 @@ public class TCMusterDTO extends BaseDTO {
         if (getCreatedDateTime() != null ? !getCreatedDateTime().equals(that.getCreatedDateTime()) : that.getCreatedDateTime() != null)
             return false;
         if (getName() != null ? !getName().equals(that.getName()) : that.getName() != null) return false;
-        return getProject_id() != null ? getProject_id().equals(that.getProject_id()) : that.getProject_id() == null;
+        return project_id != null ? project_id.equals(that.project_id) : that.project_id == null;
 
     }
 
@@ -57,7 +49,7 @@ public class TCMusterDTO extends BaseDTO {
         int result = super.hashCode();
         result = 31 * result + (getCreatedDateTime() != null ? getCreatedDateTime().hashCode() : 0);
         result = 31 * result + (getName() != null ? getName().hashCode() : 0);
-        result = 31 * result + (getProject_id() != null ? getProject_id().hashCode() : 0);
+        result = 31 * result + (project_id != null ? project_id.hashCode() : 0);
         return result;
     }
 
@@ -69,5 +61,12 @@ public class TCMusterDTO extends BaseDTO {
                 ", project_id=" + project_id +
                 '}';
     }
-}
 
+    public Long getProject_id() {
+        return project_id;
+    }
+
+    public void setProject_id(Long project_id) {
+        this.project_id = project_id;
+    }
+}

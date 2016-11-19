@@ -20,13 +20,13 @@ public class Defect extends BaseEntity {
     @ManyToMany  // (fetch = FetchType.EAGER) // PROVĚŘIT SPRÁVNOST
     @JoinTable (name = "DEFECT_TCI", joinColumns = @JoinColumn (name = "DEFECT_ID", referencedColumnName = "ID"),
     inverseJoinColumns = @JoinColumn(name = "TCI_ID", referencedColumnName = "ID"))
-    private List<TCInstance> TCInstances;      //defect může být navázán TC nebo konkrétní step
+    private List<TCInstance> tcInstances;      //defect může být navázán TC nebo konkrétní step
 
 
     @ManyToMany //  (fetch = FetchType.EAGER) // PROVĚŘIT SPRÁVNOST
     @JoinTable (name = "DEFECT_TSI", joinColumns = @JoinColumn (name = "DEFECT_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "TSI_ID", referencedColumnName = "ID"))
-    private List<TSInstance> TSInstances;      //nebo může být navázáno na oboje
+    private List<TSInstance> tsInstances;      //nebo může být navázáno na oboje
 
 
 
@@ -70,20 +70,20 @@ public class Defect extends BaseEntity {
         AffectsVersion = affectsVersion;
     }
 
-    public List<TCInstance> getTCInstances() {
-        return TCInstances;
+    public List<TCInstance> getTcInstances() {
+        return tcInstances;
     }
 
-    public void setTCInstances(List<TCInstance> TCInstances) {
-        this.TCInstances = TCInstances;
+    public void setTcInstances(List<TCInstance> TCInstances) {
+        this.tcInstances = TCInstances;
     }
 
-    public List<TSInstance> getTSInstances() {
-        return TSInstances;
+    public List<TSInstance> getTsInstances() {
+        return tsInstances;
     }
 
-    public void setTSInstances(List<TSInstance> TSInstances) {
-        this.TSInstances = TSInstances;
+    public void setTsInstances(List<TSInstance> TSInstances) {
+        this.tsInstances = TSInstances;
     }
 
     public Person getAssignee() {
@@ -109,8 +109,8 @@ public class Defect extends BaseEntity {
                 ", priorityEnum=" + priorityEnum +
                 ", defectStatusEnum=" + defectStatusEnum +
                 ", AffectsVersion='" + AffectsVersion + '\'' +
-                ", TCInstances=" + TCInstances +
-                ", TSInstances=" + TSInstances +
+                ", TCInstances=" + tcInstances +
+                ", TSInstances=" + tsInstances +
 //                ", assignee=" + assignee +
 //                ", reporter=" + reporter +
                 '}';

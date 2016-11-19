@@ -121,14 +121,14 @@ public class DBPopulator {
         //TEST CASE INSTANCE
         TCInstance TCInstance = new TCInstance();
         TCInstance.setName(LocalDateTime.now().toString());
-        TCInstance.setTCMuster(TCMuster);
+        TCInstance.setTcMuster(TCMuster);
 
         //TEST STEP INSTANCE
         TSInstance TSInstance = new TSInstance();
         TSInstance.setAction(LocalDateTime.now().toString());
         TSInstance.setActual("Actual behavior of test step instance");
-        TSInstance.setTSMuster(TSMuster);
-        TSInstance.setTCInstance(TCInstance);
+        TSInstance.setTsMuster(TSMuster);
+        TSInstance.setTcInstance(TCInstance);
         List<Defect> stepInstanceDefectList = new ArrayList<>();
         stepInstanceDefectList.add(defect);
         TSInstance.setDefects(stepInstanceDefectList);

@@ -17,14 +17,14 @@ public class TCInstance extends BaseEntity {
     private LocalDateTime updatedDateTime;
 
     @ManyToOne
-    @JoinColumn (name = "TCMuster_id")
-    private TCMuster TCMuster;
+    @JoinColumn (name = "tcMuster_id")
+    private TCMuster tcMuster;
 
-    @ManyToMany (mappedBy = "TCInstances")
+    @ManyToMany (mappedBy = "tcInstances")
     private List<Defect> defects;
 
-    @OneToMany (mappedBy = "TCInstance")
-    private List<TSInstance> TSInstances;
+    @OneToMany (mappedBy = "tcInstance")
+    private List<TSInstance> tsInstances;
 
     public String getName() {
         return name;
@@ -50,12 +50,12 @@ public class TCInstance extends BaseEntity {
         this.updatedDateTime = updatedDateTime;
     }
 
-    public TCMuster getTCMuster() {
-        return TCMuster;
+    public TCMuster getTcMuster() {
+        return tcMuster;
     }
 
-    public void setTCMuster(TCMuster TCMuster) {
-        this.TCMuster = TCMuster;
+    public void setTcMuster(TCMuster tcMuster) {
+        this.tcMuster = tcMuster;
     }
 
     public List<Defect> getDefects() {
@@ -66,23 +66,23 @@ public class TCInstance extends BaseEntity {
         this.defects = defects;
     }
 
-    public List<TSInstance> getTSInstances() {
-        return TSInstances;
+    public List<TSInstance> getTsInstances() {
+        return tsInstances;
     }
 
-    public void setTSInstances(List<TSInstance> TSInstances) {
-        this.TSInstances = TSInstances;
+    public void setTsInstances(List<TSInstance> tsInstances) {
+        this.tsInstances = tsInstances;
     }
 
     @Override
     public String toString() {
-        return "TCInstance{" +
+        return "tcInstance{" +
                 "name='" + name + '\'' +
                 ", createdDateTime=" + createdDateTime +
                 ", updatedDateTime=" + updatedDateTime +
-                ", TCMuster=" + TCMuster +
+                ", tcMuster=" + tcMuster +
                 ", defects=" + defects +
-                ", TSInstances=" + TSInstances +
+                ", tsInstances=" + tsInstances +
                 '}';
     }
 }

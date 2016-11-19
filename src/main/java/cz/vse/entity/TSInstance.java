@@ -19,15 +19,15 @@ public class TSInstance extends BaseEntity{
     private String actual;
 
     @ManyToOne
-    @JoinColumn (name = "TSMuster_id")
-    private TSMuster TSMuster;
+    @JoinColumn (name = "tsmuster_id")
+    private TSMuster tsMuster;
 
-    @ManyToMany (mappedBy = "TSInstances")
+    @ManyToMany (mappedBy = "tsInstances")
     private List<Defect> defects;
 
     @ManyToOne
-    @JoinColumn (name = "TCInstance_id")
-    private TCInstance TCInstance;
+    @JoinColumn (name = "tcinstance_id")
+    private TCInstance tcInstance;
 
     public LocalDateTime getCreatedDateTime() {
         return createdDateTime;
@@ -69,12 +69,12 @@ public class TSInstance extends BaseEntity{
         this.actual = actual;
     }
 
-    public TSMuster getTSMuster() {
-        return TSMuster;
+    public TSMuster getTsMuster() {
+        return tsMuster;
     }
 
-    public void setTSMuster(TSMuster TSMuster) {
-        this.TSMuster = TSMuster;
+    public void setTsMuster(TSMuster TSMuster) {
+        this.tsMuster = TSMuster;
     }
 
     public List<Defect> getDefects() {
@@ -85,12 +85,12 @@ public class TSInstance extends BaseEntity{
         this.defects = defects;
     }
 
-    public TCInstance getTCInstance() {
-        return TCInstance;
+    public TCInstance getTcInstance() {
+        return tcInstance;
     }
 
-    public void setTCInstance(TCInstance TCInstance) {
-        this.TCInstance = TCInstance;
+    public void setTcInstance(TCInstance tcInstance) {
+        this.tcInstance = tcInstance;
     }
 
     @Override
@@ -101,9 +101,9 @@ public class TSInstance extends BaseEntity{
                 ", action='" + action + '\'' +
                 ", expected='" + expected + '\'' +
                 ", actual='" + actual + '\'' +
-                ", TSMuster=" + TSMuster +
+                ", tsMuster=" + tsMuster +
                 ", defects=" + defects +
-                ", TCInstance=" + TCInstance +
+                ", tcInstance=" + tcInstance +
                 '}';
     }
 }

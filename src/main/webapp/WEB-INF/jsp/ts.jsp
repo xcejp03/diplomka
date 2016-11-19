@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -101,6 +102,20 @@
                 </select>
             </td>
         </tr>
+        <tr>
+            <td>
+                <form:label path="tcMusters_id">
+                    <spring:message text="Přiřazené pod TC"/>
+                </form:label>
+            </td>
+            <td>
+                <select path="tcMusters_id" name="tcMusters_id">
+                    <c:forEach var="item" items="${listTCMusters}">
+                        <option value="${item.id}">${item.name}</option>
+                    </c:forEach>
+                </select>
+            </td>
+        </tr>
 
         <tr>
             <td colspan="2">
@@ -126,6 +141,7 @@
             <th width="120">Action</th>
             <th width="120">Expected</th>
             <th width="190">Autor</th>
+            <th width="190">TC Musters</th>
             <th width="60">Edit</th>
             <th width="60">Delete</th>
         </tr>
@@ -135,8 +151,14 @@
                 <td>${ts.action}</td>
                 <td>${ts.expected}</td>
                 <td>${ts.author_id}</td>
+                <td>
+                    <c:forEach items="${ts.tcMusters_id}" var="tcMusters">
+                        ${tcMusters},
+                    </c:forEach>
+                </td>
                 <td><a href="<c:url value='edit/${ts.id}' />">Edit</a></td>
                 <td><a href="<c:url value='remove/${ts.id}' />">Delete</a></td>
+
             </tr>
         </c:forEach>
     </table>

@@ -21,7 +21,7 @@ public class Project extends BaseEntity {
     private List<TestSuite> testSuites;
 
     @OneToMany(mappedBy = "project")
-    private List<TCMuster> TCMusters;
+    private List<TCMuster> tcMusters;
 
     public String getName() {
         return name;
@@ -55,12 +55,12 @@ public class Project extends BaseEntity {
         this.testSuites = testSuites;
     }
 
-    public List<TCMuster> getTCMusters() {
-        return TCMusters;
+    public List<TCMuster> getTcMusters() {
+        return tcMusters;
     }
 
-    public void setTCMusters(List<TCMuster> TCMusters) {
-        this.TCMusters = TCMusters;
+    public void setTcMusters(List<TCMuster> TCMusters) {
+        this.tcMusters = TCMusters;
     }
 
 

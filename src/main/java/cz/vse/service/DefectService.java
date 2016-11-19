@@ -53,8 +53,8 @@ public class DefectService {
         defect.setReporter(reporter);
         defect.setDefectStatusEnum(defectStatus);
         defect.setAffectsVersion(affectVersion);
-        defect.setTCInstances(TCInstance);
-        defect.setTSInstances(TSInstance);
+        defect.setTcInstances(TCInstance);
+        defect.setTsInstances(TSInstance);
 
         defectDao.saveDefect(defect);
         l.info("defect created - service: " + defect.toString());

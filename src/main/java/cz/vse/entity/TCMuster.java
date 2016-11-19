@@ -17,8 +17,8 @@ public class TCMuster extends BaseEntity {
     private LocalDateTime updatedDateTime;
 
 
-    @OneToMany (mappedBy = "TCMuster")
-    private List<TCInstance> TCInstances;
+    @OneToMany (mappedBy = "tcMuster")
+    private List<TCInstance> tcInstances;
 
     @ManyToOne
     @JoinColumn (name = "project_id")
@@ -33,7 +33,7 @@ public class TCMuster extends BaseEntity {
     @ManyToMany    // PROVĚŘIT SPRÁVNOST
     @JoinTable (name = "TSMUSTER_TSMUSTER", joinColumns = @JoinColumn (name = "TCMUSTER_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "TSMUSTER_ID", referencedColumnName = "ID"))
-    private List<TSMuster> TSMusters;
+    private List<TSMuster> tsMusters;
 
     public String getName() {
         return name;
@@ -59,12 +59,12 @@ public class TCMuster extends BaseEntity {
         this.updatedDateTime = updatedDateTime;
     }
 
-    public List<TCInstance> getTCInstances() {
-        return TCInstances;
+    public List<TCInstance> getTcInstances() {
+        return tcInstances;
     }
 
-    public void setTCInstances(List<TCInstance> TCInstances) {
-        this.TCInstances = TCInstances;
+    public void setTcInstances(List<TCInstance> tcInstances) {
+        this.tcInstances = tcInstances;
     }
 
     public Project getProject() {
@@ -83,12 +83,12 @@ public class TCMuster extends BaseEntity {
         this.testSuites = testSuites;
     }
 
-    public List<TSMuster> getTSMusters() {
-        return TSMusters;
+    public List<TSMuster> getTsMusters() {
+        return tsMusters;
     }
 
-    public void setTSMusters(List<TSMuster> TSMusters) {
-        this.TSMusters = TSMusters;
+    public void setTsMusters(List<TSMuster> tsMusters) {
+        this.tsMusters = tsMusters;
     }
 
     @Override
@@ -103,13 +103,13 @@ public class TCMuster extends BaseEntity {
             return false;
         if (getUpdatedDateTime() != null ? !getUpdatedDateTime().equals(tcMuster.getUpdatedDateTime()) : tcMuster.getUpdatedDateTime() != null)
             return false;
-        if (getTCInstances() != null ? !getTCInstances().equals(tcMuster.getTCInstances()) : tcMuster.getTCInstances() != null)
+        if (getTcInstances() != null ? !getTcInstances().equals(tcMuster.getTcInstances()) : tcMuster.getTcInstances() != null)
             return false;
         if (getProject() != null ? !getProject().equals(tcMuster.getProject()) : tcMuster.getProject() != null)
             return false;
         if (getTestSuites() != null ? !getTestSuites().equals(tcMuster.getTestSuites()) : tcMuster.getTestSuites() != null)
             return false;
-        return getTSMusters() != null ? getTSMusters().equals(tcMuster.getTSMusters()) : tcMuster.getTSMusters() == null;
+        return getTsMusters() != null ? getTsMusters().equals(tcMuster.getTsMusters()) : tcMuster.getTsMusters() == null;
 
     }
 
@@ -118,10 +118,10 @@ public class TCMuster extends BaseEntity {
         int result = getName() != null ? getName().hashCode() : 0;
         result = 31 * result + (getCreatedDateTime() != null ? getCreatedDateTime().hashCode() : 0);
         result = 31 * result + (getUpdatedDateTime() != null ? getUpdatedDateTime().hashCode() : 0);
-        result = 31 * result + (getTCInstances() != null ? getTCInstances().hashCode() : 0);
+        result = 31 * result + (getTcInstances() != null ? getTcInstances().hashCode() : 0);
         result = 31 * result + (getProject() != null ? getProject().hashCode() : 0);
         result = 31 * result + (getTestSuites() != null ? getTestSuites().hashCode() : 0);
-        result = 31 * result + (getTSMusters() != null ? getTSMusters().hashCode() : 0);
+        result = 31 * result + (getTsMusters() != null ? getTsMusters().hashCode() : 0);
         return result;
     }
 
@@ -131,10 +131,10 @@ public class TCMuster extends BaseEntity {
                 "name='" + name + '\'' +
                 ", createdDateTime=" + createdDateTime +
                 ", updatedDateTime=" + updatedDateTime +
-                ", TCInstances=" + TCInstances +
+                ", tcInstances=" + tcInstances +
                 ", project=" + project +
                 ", testSuites=" + testSuites +
-                ", TSMusters=" + TSMusters +
+                ", tsMusters=" + tsMusters +
                 '}';
     }
 }

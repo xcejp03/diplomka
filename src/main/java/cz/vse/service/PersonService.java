@@ -3,7 +3,6 @@ package cz.vse.service;
 import cz.vse.dao.PersonDao;
 import cz.vse.dto.PersonDTO;
 import cz.vse.entity.Person;
-import cz.vse.entity.Project;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +22,6 @@ public class PersonService {
 
     @Autowired
     private MapperFacade mapper;
-//    @Autowired
-//    private PersonDao personDao;
-//
-//    public long savePerson (Person person)  {
-//        if (person != null) {
-//            return personDao.savePerson(person);
-//        }else {
-//            throw  new IllegalArgumentException("Person cannot be saved.");
-//        }
-//
-//    }
 
     public void createPerson(PersonDTO personDTO) {
         l.debug("creating person - service");

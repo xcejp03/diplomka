@@ -25,19 +25,19 @@ public class Person extends BaseEntity {
     private List<Project> projectsMember;
 
     @OneToMany(mappedBy = "projectOwner")
-    private List<Project> projectsOwner;
+    private List<Project> projectOwners;
 
     @ManyToMany
     @JoinTable(name = "PERSON_DEFECTASSIGNEE",
             joinColumns = @JoinColumn(name = "PERSON_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "DEFECT_ID", referencedColumnName = "ID"))
-    private List<Defect> defectsAssignee;
+    private List<Defect> defectAssignees;
 
     @ManyToMany
     @JoinTable(name = "PERSON_DEFECTREPORTER",
             joinColumns = @JoinColumn(name = "PERSON_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "DEFECT_ID", referencedColumnName = "ID"))
-    private List<Defect> defectsReporter;
+    private List<Defect> defectReporters;
 
     public String getName() {
         return name;
@@ -91,28 +91,28 @@ public class Person extends BaseEntity {
         this.projectsMember.add(project);
     }
 
-    public List<Project> getProjectsOwner() {
-        return projectsOwner;
+    public List<Project> getProjectOwners() {
+        return projectOwners;
     }
 
-    public void setProjectsOwner(List<Project> projectsOwner) {
-        this.projectsOwner = projectsOwner;
+    public void setProjectOwners(List<Project> projectsOwner) {
+        this.projectOwners = projectsOwner;
     }
 
-    public List<Defect> getDefectsAssignee() {
-        return defectsAssignee;
+    public List<Defect> getDefectAssignees() {
+        return defectAssignees;
     }
 
-    public void setDefectsAssignee(List<Defect> defectsAssignee) {
-        this.defectsAssignee = defectsAssignee;
+    public void setDefectAssignees(List<Defect> defectsAssignee) {
+        this.defectAssignees = defectsAssignee;
     }
 
-    public List<Defect> getDefectsReporter() {
-        return defectsReporter;
+    public List<Defect> getDefectReporters() {
+        return defectReporters;
     }
 
-    public void setDefectsReporter(List<Defect> defectsReporter) {
-        this.defectsReporter = defectsReporter;
+    public void setDefectReporters(List<Defect> defectsReporter) {
+        this.defectReporters = defectsReporter;
     }
 
     @Override
@@ -124,9 +124,9 @@ public class Person extends BaseEntity {
                 ", createdDate=" + createdDate +
                 ", lastLogin=" + lastLogin +
                 ", projectsMember=" + projectsMember +
-                ", projectsOwner=" + projectsOwner +
-                ", defectsAssignee=" + defectsAssignee +
-                ", defectsReporter=" + defectsReporter +
+                ", projectsOwner=" + projectOwners +
+                ", defectsAssignee=" + defectAssignees +
+                ", defectsReporter=" + defectReporters +
                 '}';
     }
 }

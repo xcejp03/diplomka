@@ -15,17 +15,17 @@ public class TSMuster extends BaseEntity {
     private String expected;
 
     @ManyToOne
-    @JoinColumn (name = "author_id")
+    @JoinColumn(name = "author_id")
     private Person author;
 
     @ManyToMany //(mappedBy = "")
     private List<Defect> defects;
 
-    @OneToMany (mappedBy = "TSMuster")
-    private List<TSInstance> TSInstances;
+    @OneToMany(mappedBy = "tsMuster")
+    private List<TSInstance> tsInstances;
 
-    @ManyToMany (mappedBy = "TSMusters")
-    private List<TCMuster> TCMusters;
+    @ManyToMany(mappedBy = "tsMusters")
+    private List<TCMuster> tcMusters;
 
     public LocalDateTime getCreatedDateTime() {
         return createdDateTime;
@@ -75,20 +75,20 @@ public class TSMuster extends BaseEntity {
         this.defects = defects;
     }
 
-    public List<TSInstance> getTSInstances() {
-        return TSInstances;
+    public List<TSInstance> getTsInstances() {
+        return tsInstances;
     }
 
-    public void setTSInstances(List<TSInstance> TSInstances) {
-        this.TSInstances = TSInstances;
+    public void setTsInstances(List<TSInstance> tsInstances) {
+        this.tsInstances = tsInstances;
     }
 
-    public List<TCMuster> getTCMusters() {
-        return TCMusters;
+    public List<TCMuster> getTcMusters() {
+        return tcMusters;
     }
 
-    public void setTCMusters(List<TCMuster> TCMusters) {
-        this.TCMusters = TCMusters;
+    public void setTcMusters(List<TCMuster> tcMusters) {
+        this.tcMusters = tcMusters;
     }
 
     @Override
@@ -110,9 +110,9 @@ public class TSMuster extends BaseEntity {
             return false;
         if (getDefects() != null ? !getDefects().equals(tsMuster.getDefects()) : tsMuster.getDefects() != null)
             return false;
-        if (getTSInstances() != null ? !getTSInstances().equals(tsMuster.getTSInstances()) : tsMuster.getTSInstances() != null)
+        if (getTsInstances() != null ? !getTsInstances().equals(tsMuster.getTsInstances()) : tsMuster.getTsInstances() != null)
             return false;
-        return getTCMusters() != null ? getTCMusters().equals(tsMuster.getTCMusters()) : tsMuster.getTCMusters() == null;
+        return getTcMusters() != null ? getTcMusters().equals(tsMuster.getTcMusters()) : tsMuster.getTcMusters() == null;
 
     }
 
@@ -124,8 +124,8 @@ public class TSMuster extends BaseEntity {
         result = 31 * result + (getExpected() != null ? getExpected().hashCode() : 0);
         result = 31 * result + (getAuthor() != null ? getAuthor().hashCode() : 0);
         result = 31 * result + (getDefects() != null ? getDefects().hashCode() : 0);
-        result = 31 * result + (getTSInstances() != null ? getTSInstances().hashCode() : 0);
-        result = 31 * result + (getTCMusters() != null ? getTCMusters().hashCode() : 0);
+        result = 31 * result + (getTsInstances() != null ? getTsInstances().hashCode() : 0);
+        result = 31 * result + (getTcMusters() != null ? getTcMusters().hashCode() : 0);
         return result;
     }
 
@@ -138,8 +138,8 @@ public class TSMuster extends BaseEntity {
                 ", expected='" + expected + '\'' +
                 ", author=" + author +
                 ", defects=" + defects +
-                ", TSInstances=" + TSInstances +
-                ", TCMusters=" + TCMusters +
+                ", tsInstances=" + tsInstances +
+                ", tcMusters=" + tcMusters +
                 '}';
     }
 }

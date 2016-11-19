@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -32,6 +33,7 @@ public class TCMusterService {
         l.debug("creating TCMuster - service");
         TCMuster tcMuster;
         tcMuster = mapper.map(tcMusterDTO, TCMuster.class);
+        tcMuster.setCreatedDateTime(LocalDateTime.now());
         testCaseMusterDao.saveTestCaseMuster(tcMuster);
         l.info("created TCMuster - service: " + tcMusterDTO);
     }

@@ -20,9 +20,9 @@ public class TSMusterDTO extends BaseDTO {
 
     private List<Long> defects_id;
 
-    private List<Long> TSInstances_id;
+    private List<Long> tsInstances_id;
 
-    private List<Long> TCMusters_id;
+    private List<Long> tcMusters_id;
 
     public LocalDateTime getCreatedDateTime() {
         return createdDateTime;
@@ -65,20 +65,20 @@ public class TSMusterDTO extends BaseDTO {
         this.defects_id = defects_id;
     }
 
-    public List<Long> getTSInstances_id() {
-        return TSInstances_id;
+    public List<Long> getTsInstances_id() {
+        return tsInstances_id;
     }
 
-    public void setTSInstances_id(List<Long> TSInstances_id) {
-        this.TSInstances_id = TSInstances_id;
+    public void setTsInstances_id(List<Long> tsInstances_id) {
+        this.tsInstances_id = tsInstances_id;
     }
 
-    public List<Long> getTCMusters_id() {
-        return TCMusters_id;
+    public List<Long> getTcMusters_id() {
+        return tcMusters_id;
     }
 
-    public void setTCMusters_id(List<Long> TCMusters_id) {
-        this.TCMusters_id = TCMusters_id;
+    public void setTcMusters_id(List<Long> tcMusters_id) {
+        this.tcMusters_id = tcMusters_id;
     }
 
     public Long getAuthor_id() {
