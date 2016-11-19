@@ -7,9 +7,6 @@ import java.util.List;
  * Created by pcejka on 10.10.2016.
  */
 
-
-
-
 public class TSMusterDTO extends BaseDTO {
 
     private LocalDateTime createdDateTime;
@@ -22,7 +19,7 @@ public class TSMusterDTO extends BaseDTO {
 
     private List<Long> tsInstances_id;
 
-    private List<Long> tcMusters_id;
+    private Long tcMuster_id;
 
     public LocalDateTime getCreatedDateTime() {
         return createdDateTime;
@@ -52,7 +49,6 @@ public class TSMusterDTO extends BaseDTO {
         return expected;
     }
 
-
     public void setExpected(String expected) {
         this.expected = expected;
     }
@@ -73,12 +69,12 @@ public class TSMusterDTO extends BaseDTO {
         this.tsInstances_id = tsInstances_id;
     }
 
-    public List<Long> getTcMusters_id() {
-        return tcMusters_id;
+    public Long getTcMuster_id() {
+        return tcMuster_id;
     }
 
-    public void setTcMusters_id(List<Long> tcMusters_id) {
-        this.tcMusters_id = tcMusters_id;
+    public void setTcMuster_id(Long tcMuster_id) {
+        this.tcMuster_id = tcMuster_id;
     }
 
     public Long getAuthor_id() {

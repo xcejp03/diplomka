@@ -30,9 +30,7 @@ public class TCMuster extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "TESTSUITE_ID", referencedColumnName = "ID"))
     private List<TestSuite> testSuites;
 
-    @ManyToMany    // PROVĚŘIT SPRÁVNOST
-    @JoinTable (name = "TSMUSTER_TSMUSTER", joinColumns = @JoinColumn (name = "TCMUSTER_ID", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "TSMUSTER_ID", referencedColumnName = "ID"))
+    @OneToMany (mappedBy = "tcMuster")
     private List<TSMuster> tsMusters;
 
     public String getName() {

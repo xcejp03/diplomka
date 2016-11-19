@@ -24,8 +24,9 @@ public class TSMuster extends BaseEntity {
     @OneToMany(mappedBy = "tsMuster")
     private List<TSInstance> tsInstances;
 
-    @ManyToMany(mappedBy = "tsMusters")
-    private List<TCMuster> tcMusters;
+    @ManyToOne
+    @JoinColumn (name = "tcMuster_id")
+    private TCMuster tcMuster;
 
     public LocalDateTime getCreatedDateTime() {
         return createdDateTime;
@@ -83,12 +84,12 @@ public class TSMuster extends BaseEntity {
         this.tsInstances = tsInstances;
     }
 
-    public List<TCMuster> getTcMusters() {
-        return tcMusters;
+    public TCMuster getTcMuster() {
+        return tcMuster;
     }
 
-    public void setTcMusters(List<TCMuster> tcMusters) {
-        this.tcMusters = tcMusters;
+    public void setTcMuster(TCMuster tcMuster) {
+        this.tcMuster = tcMuster;
     }
 
     @Override
@@ -112,7 +113,7 @@ public class TSMuster extends BaseEntity {
             return false;
         if (getTsInstances() != null ? !getTsInstances().equals(tsMuster.getTsInstances()) : tsMuster.getTsInstances() != null)
             return false;
-        return getTcMusters() != null ? getTcMusters().equals(tsMuster.getTcMusters()) : tsMuster.getTcMusters() == null;
+        return getTcMuster() != null ? getTcMuster().equals(tsMuster.getTcMuster()) : tsMuster.getTcMuster() == null;
 
     }
 
@@ -125,21 +126,7 @@ public class TSMuster extends BaseEntity {
         result = 31 * result + (getAuthor() != null ? getAuthor().hashCode() : 0);
         result = 31 * result + (getDefects() != null ? getDefects().hashCode() : 0);
         result = 31 * result + (getTsInstances() != null ? getTsInstances().hashCode() : 0);
-        result = 31 * result + (getTcMusters() != null ? getTcMusters().hashCode() : 0);
+        result = 31 * result + (getTcMuster() != null ? getTcMuster().hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "TSMuster{" +
-                "createdDateTime=" + createdDateTime +
-                ", updatedDateTime=" + updatedDateTime +
-                ", action='" + action + '\'' +
-                ", expected='" + expected + '\'' +
-                ", author=" + author +
-                ", defects=" + defects +
-                ", tsInstances=" + tsInstances +
-                ", tcMusters=" + tcMusters +
-                '}';
     }
 }

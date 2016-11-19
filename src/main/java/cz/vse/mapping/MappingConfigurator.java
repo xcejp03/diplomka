@@ -71,12 +71,12 @@ public class MappingConfigurator extends ConfigurableMapper {   // implements Ap
                 .register();
         factory.classMap(TSMuster.class, TSMusterDTO.class)
                 .field("author.id", "author_id")
-                .field("tcMusters{id}", "tcMusters_id{}")
+                .field("tcMuster.id", "tcMuster_id")
                 .byDefault()
                 .register();
         factory.classMap(TSMusterDTO.class, TSMuster.class)
                 .field("author_id", "author.id")
-                .field("tcMusters_id{}", "tcMusters{id}")
+                .field("tcMuster_id", "tcMuster.id")
                 .byDefault()
                 .register();
         factory.classMap(TCMuster.class, TCMusterDTO.class)
