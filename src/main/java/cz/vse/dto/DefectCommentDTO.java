@@ -76,5 +76,15 @@ public class DefectCommentDTO extends BaseDTO {
         result = 31 * result + (getAuthor_id() != null ? getAuthor_id().hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "DefectCommentDTO{" +
+                "createdDateTime=" + createdDateTime +
+                ", commentText='" + commentText + '\'' +
+                ", defect_id=" + defect_id +
+                ", author_id=" + author_id +
+                '}';
+    }
 }
 

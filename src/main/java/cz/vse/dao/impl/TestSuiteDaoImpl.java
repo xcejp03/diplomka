@@ -47,7 +47,7 @@ public class TestSuiteDaoImpl implements TestSuiteDao {
         l.debug("Getting all testSuite");
         List<TestSuite> resultList = em.createQuery("select d from TestSuite d").getResultList();
         l.info("TestSuites gotten successfully. TestSuite detail: " + resultList.toString());
-        return null;
+        return resultList;
     }
 
     @Override
@@ -55,6 +55,14 @@ public class TestSuiteDaoImpl implements TestSuiteDao {
         l.debug("Getting testSuite by id: " + id);
         TestSuite testSuite = em.find(TestSuite.class, id);
         l.info("Gotten testSuite successfully. TestSuite detail: " + testSuite);
-        return null;
+        return testSuite;
+    }
+
+    @Override
+    public List<TestSuite> getAllTestSuites() {
+        l.debug("Getting all testSuite");
+        List<TestSuite> resultList = em.createQuery("select d from TestSuite d").getResultList();
+        l.info("TestSuites gotten successfully. TestSuite detail: "); // + resultList.toString());
+        return resultList;
     }
 }

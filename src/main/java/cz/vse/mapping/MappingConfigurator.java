@@ -41,13 +41,11 @@ public class MappingConfigurator extends ConfigurableMapper {   // implements Ap
         factory.classMap(Project.class, ProjectDTO.class)
                 .field("projectOwner.id", "projectOwner_id")
                 .field("personMembers{id}", "projectMembers_id{}")
-                .field("tcMusters{id}", "tcMusters_id{}")
                 .byDefault()
                 .register();
         factory.classMap(ProjectDTO.class, Project.class)
                 .field("projectOwner_id", "projectOwner.id")
                 .field("projectMembers_id{}", "personMembers{id}")
-                .field("tcMusters_id{}", "tcMusters{id}")
                 .byDefault()
                 .register();
         factory.classMap(DefectCommentDTO.class, DefectComment.class)
@@ -93,6 +91,17 @@ public class MappingConfigurator extends ConfigurableMapper {   // implements Ap
                 .field("tsMusters_id{}", "tsMusters{id}")
 //                .fieldMap("createdDateTime", "createdDateTime").converter("DateConverter").add()
 //                .field("createdDateTime", "createdDateTime")
+                .byDefault()
+                .register();
+        factory.classMap(TestSuite.class, TestSuiteDTO.class)
+                .field("project.id", "project_id")
+                .field("tcMusters{id}", "tcMusters_id{}")
+                .byDefault()
+                .register();
+        factory.classMap(TestSuiteDTO.class, TestSuite.class)
+                .field("project_id", "project.id")
+                .field("tcMusters_id{}", "tcMusters{id}")
+                // datum?
                 .byDefault()
                 .register();
     }

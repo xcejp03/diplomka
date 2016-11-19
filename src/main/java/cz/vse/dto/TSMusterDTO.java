@@ -84,5 +84,19 @@ public class TSMusterDTO extends BaseDTO {
     public void setAuthor_id(Long author_id) {
         this.author_id = author_id;
     }
+
+    @Override
+    public String toString() {
+        return "TSMusterDTO{" +
+                "createdDateTime=" + createdDateTime +
+                ", updatedDateTime=" + updatedDateTime +
+                ", action='" + action + '\'' +
+                ", expected='" + expected + '\'' +
+                ", author_id=" + author_id +
+                ", defects_id=" + defects_id +
+                ", tsInstances_id=" + tsInstances_id +
+                ", tcMuster_id=" + tcMuster_id +
+                '}';
+    }
 }
 

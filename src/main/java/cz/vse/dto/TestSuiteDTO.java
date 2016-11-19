@@ -1,27 +1,17 @@
-package cz.vse.entity;
+package cz.vse.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * Created by pcejka on 21.09.2016.
+ * Created by pcejka on 19.11.2016.
  */
-@Entity
-public class TestSuite extends BaseEntity {
-    private String name;        //testsuit je možné si pojmenovat
+public class TestSuiteDTO extends BaseDTO{
+    private String name;
     private LocalDateTime createdDateTime;          // datum vytvoření testsuitu;
     private LocalDateTime updateDateTime;
-
-    @ManyToOne
-    @JoinColumn (name = "project_id")
-    private Project project;        //testsuit patří pod jeden projekt
-
-    @ManyToMany  (mappedBy = "testSuites")
-    private List<TCMuster> tcMusters;      //testsuit se skládá z testcasů;
+    private Long project_id;
+    private List<Long> tcMusters_id;
 
     public String getName() {
         return name;
@@ -47,27 +37,30 @@ public class TestSuite extends BaseEntity {
         this.updateDateTime = updateDateTime;
     }
 
-    public Project getProject() {
-        return project;
+    public Long getProject_id() {
+        return project_id;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setProject_id(Long project_id) {
+        this.project_id = project_id;
     }
 
-    public List<TCMuster> getTcMusters() {
-        return tcMusters;
+    public List<Long> getTcMusters_id() {
+        return tcMusters_id;
     }
 
-    public void setTcMusters(List<TCMuster> tcMusters) {
-        this.tcMusters = tcMusters;
+    public void setTcMusters_id(List<Long> tcMusters_id) {
+        this.tcMusters_id = tcMusters_id;
     }
 
     @Override
     public String toString() {
-        return "TestSuite{" +
+        return "TestSuiteDTO{" +
                 "name='" + name + '\'' +
                 ", createdDateTime=" + createdDateTime +
+                ", updateDateTime=" + updateDateTime +
+                ", project_id=" + project_id +
+                ", tcMusters_id=" + tcMusters_id +
                 '}';
     }
 }

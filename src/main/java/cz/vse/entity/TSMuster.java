@@ -129,4 +129,18 @@ public class TSMuster extends BaseEntity {
         result = 31 * result + (getTcMuster() != null ? getTcMuster().hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "TSMuster{" +
+                "createdDateTime=" + createdDateTime +
+                ", updatedDateTime=" + updatedDateTime +
+                ", action='" + action + '\'' +
+                ", expected='" + expected + '\'' +
+                ", author=" + author +
+                ", defects=" + defects +
+                ", tsInstances=" + tsInstances +
+                ", tcMuster=" + tcMuster +
+                '}';
+    }
 }

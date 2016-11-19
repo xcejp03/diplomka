@@ -14,4 +14,5 @@ public interface TestSuiteDao {
     public void updateTestSuite(TestSuite testSuite);
     public List<TestSuite> getAll(TestSuite testSuite);
     public TestSuite getTestSuiteById(long id);
+    public List<TestSuite> getAllTestSuites();
 }

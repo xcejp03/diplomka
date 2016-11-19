@@ -17,8 +17,8 @@ public class TCMuster extends BaseEntity {
     private LocalDateTime updatedDateTime;
 
 
-    @OneToMany (mappedBy = "tcMuster")
-    private List<TCInstance> tcInstances;
+//    @OneToMany (mappedBy = "tcMuster")
+//    private List<TCInstance> tcInstances;
 
     @ManyToOne
     @JoinColumn (name = "project_id")
@@ -57,13 +57,6 @@ public class TCMuster extends BaseEntity {
         this.updatedDateTime = updatedDateTime;
     }
 
-    public List<TCInstance> getTcInstances() {
-        return tcInstances;
-    }
-
-    public void setTcInstances(List<TCInstance> tcInstances) {
-        this.tcInstances = tcInstances;
-    }
 
     public Project getProject() {
         return project;
@@ -90,6 +83,18 @@ public class TCMuster extends BaseEntity {
     }
 
     @Override
+    public String toString() {
+        return "TCMuster{" +
+                "name='" + name + '\'' +
+                ", createdDateTime=" + createdDateTime +
+                ", updatedDateTime=" + updatedDateTime +
+                ", project=" + project +
+                ", testSuites="+
+                ", tsMusters=" +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof TCMuster)) return false;
@@ -100,8 +105,6 @@ public class TCMuster extends BaseEntity {
         if (getCreatedDateTime() != null ? !getCreatedDateTime().equals(tcMuster.getCreatedDateTime()) : tcMuster.getCreatedDateTime() != null)
             return false;
         if (getUpdatedDateTime() != null ? !getUpdatedDateTime().equals(tcMuster.getUpdatedDateTime()) : tcMuster.getUpdatedDateTime() != null)
-            return false;
-        if (getTcInstances() != null ? !getTcInstances().equals(tcMuster.getTcInstances()) : tcMuster.getTcInstances() != null)
             return false;
         if (getProject() != null ? !getProject().equals(tcMuster.getProject()) : tcMuster.getProject() != null)
             return false;
@@ -116,23 +119,9 @@ public class TCMuster extends BaseEntity {
         int result = getName() != null ? getName().hashCode() : 0;
         result = 31 * result + (getCreatedDateTime() != null ? getCreatedDateTime().hashCode() : 0);
         result = 31 * result + (getUpdatedDateTime() != null ? getUpdatedDateTime().hashCode() : 0);
-        result = 31 * result + (getTcInstances() != null ? getTcInstances().hashCode() : 0);
         result = 31 * result + (getProject() != null ? getProject().hashCode() : 0);
         result = 31 * result + (getTestSuites() != null ? getTestSuites().hashCode() : 0);
         result = 31 * result + (getTsMusters() != null ? getTsMusters().hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "TCMuster{" +
-                "name='" + name + '\'' +
-                ", createdDateTime=" + createdDateTime +
-                ", updatedDateTime=" + updatedDateTime +
-                ", tcInstances=" + tcInstances +
-                ", project=" + project +
-                ", testSuites=" + testSuites +
-                ", tsMusters=" + tsMusters +
-                '}';
     }
 }
