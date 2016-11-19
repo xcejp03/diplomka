@@ -117,4 +117,12 @@ public class ProjectService {
         l.info("found all testProjects - service: " + projectDTOList.toString());
         return projectDTOList;
     }
+
+    public List<Project> findAllTestProjects() {
+        l.debug("finding all testProjects - service");
+        List<Project> projectList = new ArrayList<>();
+        projectList = testProjectDao.getAllTestProjects();
+        l.info("found all testProjects - service: " + projectList.toString());
+        return projectList;
+    }
 }

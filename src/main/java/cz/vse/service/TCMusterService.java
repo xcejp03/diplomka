@@ -1,7 +1,9 @@
 package cz.vse.service;
 
 import cz.vse.dao.TestCaseMusterDao;
+import cz.vse.dto.TCMusterDTO;
 import cz.vse.entity.TCMuster;
+import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,16 +19,35 @@ public class TCMusterService {
     @Autowired
     private TestCaseMusterDao testCaseMusterDao;
 
-    public void createTestCaseMuster(TCMuster TCMuster) {
+    @Autowired
+    private MapperFacade mapper;
+
+    public void createTestCaseMuster(TCMuster tcMuster) {
         l.debug("creating TCMuster - service");
-        testCaseMusterDao.saveTestCaseMuster(TCMuster);
-        l.info("created TCMuster - service: " + TCMuster);
+        testCaseMusterDao.saveTestCaseMuster(tcMuster);
+        l.info("created TCMuster - service: " + tcMuster);
     }
 
-    public void updateTestCaseMuster(TCMuster TCMuster) {
+    public void createTestCaseMuster(TCMusterDTO tcMusterDTO) {
+        l.debug("creating TCMuster - service");
+        TCMuster tcMuster;
+        tcMuster = mapper.map(tcMusterDTO, TCMuster.class);
+        testCaseMusterDao.saveTestCaseMuster(tcMuster);
+        l.info("created TCMuster - service: " + tcMusterDTO);
+    }
+
+    public void updateTestCaseMuster(TCMuster tcMuster) {
         l.debug("updating TCMuster - service");
-        testCaseMusterDao.updateTestCaseMuster(TCMuster);
-        l.info("updated TCMuster - service: " + TCMuster);
+        testCaseMusterDao.updateTestCaseMuster(tcMuster);
+        l.info("updated TCMuster - service: " + tcMuster);
+    }
+
+    public void updateTestCaseMuster(TCMusterDTO tcMusterDTO) {
+        l.debug("updating TCMuster - service");
+        TCMuster tcMuster;
+        tcMuster = mapper.map(tcMusterDTO, TCMuster.class);
+        testCaseMusterDao.updateTestCaseMuster(tcMuster);
+        l.info("updated TCMuster - service: " + tcMuster);
     }
 
     public void deleteTestCaseMuster(TCMuster TCMusterToDelete) {
@@ -45,10 +66,20 @@ public class TCMusterService {
 
     public TCMuster findTestCaseMusterById(long id) {
         l.debug("finding TCMuster - service");
-        TCMuster TCMuster;
-        TCMuster = testCaseMusterDao.getTestCaseMusterById(id);
-        l.info("TCMuster founf - service: " + id + " - " + TCMuster);
-        return TCMuster;
+        TCMuster tcMuster;
+        tcMuster = testCaseMusterDao.getTestCaseMusterById(id);
+        l.info("TCMuster found - service: " + id + " - " + tcMuster);
+        return tcMuster;
+    }
+
+    public TCMusterDTO findTestCaseMusterDTOById(long id) {
+        l.debug("finding TCMusterDTO - service");
+        TCMuster tcMuster;
+        TCMusterDTO tcMusterDTO;
+        tcMuster = testCaseMusterDao.getTestCaseMusterById(id);
+        tcMusterDTO = mapper.map(tcMuster, TCMusterDTO.class);
+        l.info("TCMuster found - service: " + id + " - " + tcMusterDTO);
+        return tcMusterDTO;
     }
 
     public List<TCMuster> findAllTestCaseMusters() {
@@ -58,5 +89,15 @@ public class TCMusterService {
         l.info("found all testCaseMusters - service: " + TCMusterList.toString());
         return TCMusterList;
     }
-    
+
+    public List<TCMusterDTO> findAllTestCaseMustersDTO() {
+        l.debug("finding all testCaseMustersDTO - service");
+        List<TCMuster> tcMusterList;
+        List<TCMusterDTO> tcMusterDTOList;
+        tcMusterList = testCaseMusterDao.getAllTestCaseMusters();
+        tcMusterDTOList = mapper.mapAsList(tcMusterList, TCMusterDTO.class);
+        l.info("found all testCaseMusters - service: " + tcMusterDTOList.toString());
+        return tcMusterDTOList;
+    }
+
 }

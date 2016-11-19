@@ -4,7 +4,7 @@
 <%@ page session="false" %>
 <html>
 <head>
-    <title>Test Step Page</title>
+    <title>Test Case Page</title>
     <style type="text/css">
         .tg {
             border-collapse: collapse;
@@ -46,15 +46,15 @@
 </head>
 <body>
 <h1>
-    Add a Test Step
+    Add a Test Case
 </h1>
-<h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\ts.jsp</h3>
+<h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\tc.jsp</h3>
 
-<c:url var="addAction" value="/ts/create"></c:url>
+<c:url var="addAction" value="/tc/create"></c:url>
 
-<form:form action="${addAction}" commandName="ts">
+<form:form action="${addAction}" commandName="tc">
     <table>
-        <c:if test="${!empty ts.id}">
+        <c:if test="${!empty tc.id}">
             <tr>
                 <td>
                     <form:label path="id">
@@ -69,34 +69,34 @@
         </c:if>
         <tr>
             <td>
-                <form:label path="action">
-                    <spring:message text="Action"/>
+                <form:label path="name">
+                    <spring:message text="Name"/>
                 </form:label>
             </td>
             <td>
-                <form:input path="action"/>
+                <form:input path="name"/>
             </td>
         </tr>
+        <%--<tr>--%>
+            <%--<td>--%>
+                <%--<form:label path="createdDateTime">--%>
+                    <%--<spring:message text="Created"/>--%>
+                <%--</form:label>--%>
+            <%--</td>--%>
+            <%--<td>--%>
+                <%--<form:input path="createdDateTime"/>--%>
+            <%--</td>--%>
+        <%--</tr>--%>
         <tr>
             <td>
-                <form:label path="expected">
-                    <spring:message text="Expected"/>
+                <form:label path="project_id">
+                    <spring:message text="Test Project"/>
                 </form:label>
             </td>
             <td>
-                <form:input path="expected"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form:label path="author_id">
-                    <spring:message text="Autor kroku"/>
-                </form:label>
-            </td>
-            <td>
-                <select path="author_id" name="author_id">
-                    <c:forEach var="item" items="${listPersons}">
-                        <option value="${item.id}">${item.name}</option>
+                <select path="project_id" name="project_id">
+                    <c:forEach var="item" items="${listProjects}">
+                        <option value="${item.id}" selected="">${item.name}</option>
                     </c:forEach>
                 </select>
             </td>
@@ -104,13 +104,13 @@
 
         <tr>
             <td colspan="2">
-                <c:if test="${!empty ts.action}">
+                <c:if test="${!empty tc.name}">
                     <input type="submit"
-                           value="<spring:message text="Edit TS"/>"/>
+                           value="<spring:message text="Edit TC"/>"/>
                 </c:if>
-                <c:if test="${empty ts.action}">
+                <c:if test="${empty tc.name}">
                     <input type="submit"
-                           value="<spring:message text="Add TS"/>"/>
+                           value="<spring:message text="Add TC"/>"/>
                 </c:if>
             </td>
         </tr>
@@ -118,25 +118,25 @@
     </table>
 </form:form>
 <br>
-<h3>TS List</h3>
-<c:if test="${!empty listTSMusters}">
+<h3>TC List</h3>
+<c:if test="${!empty listTCMusters}">
     <table class="tg">
         <tr>
-            <th width="80">TS ID</th>
-            <th width="120">Action</th>
-            <th width="120">Expected</th>
-            <th width="190">Autor</th>
+            <th width="80">TC ID</th>
+            <th width="120">Name</th>
+            <th width="120">Created</th>
+            <th width="190">Project</th>
             <th width="60">Edit</th>
             <th width="60">Delete</th>
         </tr>
-        <c:forEach items="${listTSMusters}" var="ts">
+        <c:forEach items="${listTCMusters}" var="tc">
             <tr>
-                <td>${ts.id}</td>
-                <td>${ts.action}</td>
-                <td>${ts.expected}</td>
-                <td>${ts.author_id}</td>
-                <td><a href="<c:url value='edit/${ts.id}' />">Edit</a></td>
-                <td><a href="<c:url value='remove/${ts.id}' />">Delete</a></td>
+                <td>${tc.id}</td>
+                <td>${tc.name}</td>
+                <td>${tc.createdDateTime}</td>
+                <td>${tc.project_id}</td>
+                <td><a href="<c:url value='edit/${tc.id}' />">Edit</a></td>
+                <td><a href="<c:url value='remove/${tc.id}' />">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

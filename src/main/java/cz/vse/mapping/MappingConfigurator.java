@@ -77,7 +77,16 @@ public class MappingConfigurator extends ConfigurableMapper {   // implements Ap
                 .field("author_id", "author.id")
                 .byDefault()
                 .register();
-
+        factory.classMap(TCMuster.class, TCMusterDTO.class)
+                .field("project.id", "project_id")
+                .exclude("createdDateTime")
+                .byDefault()
+                .register();
+        factory.classMap(TCMusterDTO.class, TCMuster.class)
+                .field("project_id", "project.id")
+                .exclude("createdDateTime")
+                .byDefault()
+                .register();
     }
 
     //   private void configureClassMaps() {

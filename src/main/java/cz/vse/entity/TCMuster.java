@@ -92,6 +92,40 @@ public class TCMuster extends BaseEntity {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TCMuster)) return false;
+
+        TCMuster tcMuster = (TCMuster) o;
+
+        if (getName() != null ? !getName().equals(tcMuster.getName()) : tcMuster.getName() != null) return false;
+        if (getCreatedDateTime() != null ? !getCreatedDateTime().equals(tcMuster.getCreatedDateTime()) : tcMuster.getCreatedDateTime() != null)
+            return false;
+        if (getUpdatedDateTime() != null ? !getUpdatedDateTime().equals(tcMuster.getUpdatedDateTime()) : tcMuster.getUpdatedDateTime() != null)
+            return false;
+        if (getTCInstances() != null ? !getTCInstances().equals(tcMuster.getTCInstances()) : tcMuster.getTCInstances() != null)
+            return false;
+        if (getProject() != null ? !getProject().equals(tcMuster.getProject()) : tcMuster.getProject() != null)
+            return false;
+        if (getTestSuites() != null ? !getTestSuites().equals(tcMuster.getTestSuites()) : tcMuster.getTestSuites() != null)
+            return false;
+        return getTSMusters() != null ? getTSMusters().equals(tcMuster.getTSMusters()) : tcMuster.getTSMusters() == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getName() != null ? getName().hashCode() : 0;
+        result = 31 * result + (getCreatedDateTime() != null ? getCreatedDateTime().hashCode() : 0);
+        result = 31 * result + (getUpdatedDateTime() != null ? getUpdatedDateTime().hashCode() : 0);
+        result = 31 * result + (getTCInstances() != null ? getTCInstances().hashCode() : 0);
+        result = 31 * result + (getProject() != null ? getProject().hashCode() : 0);
+        result = 31 * result + (getTestSuites() != null ? getTestSuites().hashCode() : 0);
+        result = 31 * result + (getTSMusters() != null ? getTSMusters().hashCode() : 0);
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "TCMuster{" +
                 "name='" + name + '\'' +

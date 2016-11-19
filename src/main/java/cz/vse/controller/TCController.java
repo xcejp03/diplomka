@@ -1,0 +1,71 @@
+package cz.vse.controller;
+
+import cz.vse.dto.TCMusterDTO;
+import cz.vse.dto.TSMusterDTO;
+import cz.vse.service.PersonService;
+import cz.vse.service.ProjectService;
+import cz.vse.service.TCMusterService;
+import cz.vse.service.TSMusterService;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+/**
+ * Created by pcejka on 09.10.2016.
+ */
+@Controller
+@RequestMapping("/tc")
+public class TCController {
+    private final Logger l = Logger.getLogger(this.getClass());
+    @Autowired
+    ProjectService projectService;
+
+    @Autowired
+    PersonService personService;
+
+    @Autowired
+    TSMusterService tsMusterService;
+
+    @Autowired
+    TCMusterService tcMusterService;
+
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public String createTC(Model model) {
+        l.info("request mapping tc/create");
+        model.addAttribute("tc", new TCMusterDTO());
+        model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMustersDTO());
+        model.addAttribute("listTSMusters", tsMusterService.findAllTestStepMustersDTO());
+        model.addAttribute("listProjects", projectService.findAllTestProjects());
+        return "tc";
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public String createTSPost(@ModelAttribute("project") TCMusterDTO tcMusterDTO) {
+        if (tcMusterDTO.getId() == null) {
+            tcMusterService.createTestCaseMuster(tcMusterDTO);
+        } else {
+            tcMusterService.updateTestCaseMuster(tcMusterDTO);
+        }
+        return "redirect:create";
+    }
+
+    @RequestMapping("/edit/{id}")
+    public String editTSMuster(@PathVariable("id") long id, Model model) {
+        l.info("/edit/{id}" + id);
+        model.addAttribute("tc", tcMusterService.findTestCaseMusterDTOById(id));
+        model.addAttribute("listPersons", personService.findAllPersons());
+        model.addAttribute("listProjects", projectService.findAllTestProjects());
+        return "tc";
+    }
+
+    @RequestMapping("/remove/{id}")
+    public String removePerson(@PathVariable("id") long id) {
+        tcMusterService.deleteTestCaseMusterById(id);
+        return "redirect:/tc/create";
+    }
+}
