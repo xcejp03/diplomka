@@ -127,7 +127,8 @@
             <th width="80">TC ID</th>
             <th width="120">Name</th>
             <th width="120">Created</th>
-            <th width="190">Project</th>
+            <th width="60">Project</th>
+            <th width="120">TS</th>
             <th width="60">Edit</th>
             <th width="60">Delete</th>
         </tr>
@@ -137,6 +138,11 @@
                 <td>${tc.name}</td>
                 <td>${tc.createdDateTime}</td>
                 <td>${tc.project_id}</td>
+                    <td>
+                    <c:forEach items="${tc.tsMusters_id}" var="tsMusters">
+                    ${tsMusters},
+                    </c:forEach>
+                    </td>
                 <td><a href="<c:url value='edit/${tc.id}' />">Edit</a></td>
                 <td><a href="<c:url value='remove/${tc.id}' />">Delete</a></td>
             </tr>

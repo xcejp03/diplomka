@@ -140,8 +140,9 @@
             <th width="80">TS ID</th>
             <th width="120">Action</th>
             <th width="120">Expected</th>
-            <th width="190">Autor</th>
-            <th width="190">TC Musters</th>
+            <th width="80">Autor</th>
+            <th width="80">TC Musters</th>
+            <th width="120">Created date time</th>
             <th width="60">Edit</th>
             <th width="60">Delete</th>
         </tr>
@@ -152,6 +153,7 @@
                 <td>${ts.expected}</td>
                 <td>${ts.author_id}</td>
                 <td>${ts.tcMuster_id}</td>
+                <td>${ts.createdDateTime}</td>
                 <%--<td>--%>
                     <%--<c:forEach items="${ts.tcMuster_id}" var="tcMusters">--%>
                         <%--${tcMusters},--%>
