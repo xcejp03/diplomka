@@ -74,6 +74,10 @@ public class TCMuster extends BaseEntity {
         this.testSuites = testSuites;
     }
 
+    public void addTestSuites(TestSuite testSuite)  {
+        this.testSuites.add(testSuite);
+    }
+
     public List<TSMuster> getTsMusters() {
         return tsMusters;
     }

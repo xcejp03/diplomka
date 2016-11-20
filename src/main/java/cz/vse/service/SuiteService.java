@@ -1,11 +1,8 @@
 package cz.vse.service;
 
 import cz.vse.dao.TestSuiteDao;
-import cz.vse.dao.impl.TestSuiteDaoImpl;
-import cz.vse.dto.ProjectDTO;
 import cz.vse.dto.TestSuiteDTO;
-import cz.vse.entity.Person;
-import cz.vse.entity.Project;
+import cz.vse.entity.TCMuster;
 import cz.vse.entity.TestSuite;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
@@ -35,25 +32,27 @@ public class SuiteService {
     private PersonService personService;
 
     @Autowired
-    private SuiteService projectService;
+    private SuiteService suiteService;
+
+    @Autowired
+    private TCMusterService tcMusterService;
 
     public void createTestSuite(TestSuiteDTO testSuiteDTO) {
         l.debug("creating test suite - service");
         TestSuite testSuite = new TestSuite();
         testSuite = mapper.map(testSuiteDTO, TestSuite.class);
         testSuite.setCreatedDateTime(LocalDateTime.now());
-        testSuiteDao.saveTestSuite(testSuite);
 
-        /*List<Person> personMembersList = new ArrayList<>();
-        if (project.getPersonMembers() != null) {
-            for (Person personForId : project.getPersonMembers()) {
-                Person person = personService.findPersonById(personForId.getId());
-                person.addTestProjectMember(project);
-                personMembersList.add(person);
+        List<TCMuster> tcMusterList = new ArrayList<>();
+        if (testSuite.getTcMusters() != null) {
+            for (TCMuster tcMusterForId : testSuite.getTcMusters()) {
+                TCMuster tcMuster = tcMusterService.findTestCaseMusterById(tcMusterForId.getId());
+                tcMuster.addTestSuites(testSuite);
+                tcMusterList.add(tcMuster);
             }
-            project.setPersonMembers(personMembersList);
+            testSuite.setTcMusters(tcMusterList);
         }
-        testProjectDao.saveTestProject(project);*/
+        testSuiteDao.saveTestSuite(testSuite);
         l.info("created test suite - service: " + testSuiteDTO);
     }
 
@@ -67,18 +66,16 @@ public class SuiteService {
         l.debug("updating test suite - service");
         TestSuite testSuite = new TestSuite();
         testSuite = mapper.map(testSuiteDTO, TestSuite.class);
-        testSuiteDao.updateTestSuite(testSuite);
-
-       /* List<Person> personMembersList = new ArrayList<>();
-        if (project.getPersonMembers() != null) {
-            for (Person personForId : project.getPersonMembers()) {
-                Person person = personService.findPersonById(personForId.getId());
-                person.addTestProjectMember(project);
-                personMembersList.add(person);
+        List<TCMuster> tcMusterList = new ArrayList<>();
+        if (testSuite.getTcMusters() != null) {
+            for (TCMuster tcMusterForId : testSuite.getTcMusters()) {
+                TCMuster tcMuster = tcMusterService.findTestCaseMusterById(tcMusterForId.getId());
+                tcMuster.addTestSuites(testSuite);
+                tcMusterList.add(tcMuster);
             }
-            project.setPersonMembers(personMembersList);
+            testSuite.setTcMusters(tcMusterList);
         }
-        testProjectDao.updateTestProject(project);*/
+        testSuiteDao.updateTestSuite(testSuite);
         l.info("updated test suite - service: " + testSuiteDTO);
     }
 
