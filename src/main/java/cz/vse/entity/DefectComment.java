@@ -59,7 +59,7 @@ public class DefectComment extends BaseEntity{
     @Override
     public String toString() {
         return "DefectComment{" +
-                "createdDateTime=" + createdDateTime +
+//                "createdDateTime=" + createdDateTime +
                 ", commentText='" + commentText + '\'' +
 //                ", defect=" + defect +
 //                ", author=" + author +

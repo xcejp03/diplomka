@@ -5,6 +5,7 @@ import cz.vse.entity.Person;
 import cz.vse.entity.Project;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
+import cz.vse.service.SuiteService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,12 +31,16 @@ public class ProjectController {
     @Autowired
     PersonService personService;
 
+    @Autowired
+    SuiteService suiteService;
+
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createProjectForm(Model model) {
         l.info("request mapping project/create");
         model.addAttribute("project", new ProjectDTO());
         model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
         model.addAttribute("listPersons", personService.findAllPersons());
+        model.addAttribute("listSuites", suiteService.findAllTestSuites());
 
         return "project";
     }

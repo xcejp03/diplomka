@@ -88,7 +88,7 @@ public class TCMusterService {
         l.debug("finding all testCaseMusters - service");
         List<TCMuster> TCMusterList;
         TCMusterList = testCaseMusterDao.getAllTestCaseMusters();
-        l.info("found all testCaseMusters - service: " + TCMusterList.toString());
+        l.info("found all testCaseMusters - service: ");
         return TCMusterList;
     }
 
@@ -98,7 +98,7 @@ public class TCMusterService {
         List<TCMusterDTO> tcMusterDTOList;
         tcMusterList = testCaseMusterDao.getAllTestCaseMusters();
         tcMusterDTOList = mapper.mapAsList(tcMusterList, TCMusterDTO.class);
-        l.info("found all testCaseMusters - service: " + tcMusterDTOList.toString());
+        l.info("found all testCaseMusters - service: ");
         return tcMusterDTOList;
     }
 

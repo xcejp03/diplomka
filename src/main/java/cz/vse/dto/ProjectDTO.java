@@ -11,6 +11,7 @@ public class ProjectDTO extends BaseDTO {
     private Long projectOwner_id;
     private List<Long> projectMembers_id;
     private List<Long> tcMusters_id;
+    private List<Long> suites_id;
 
     public String getName() {
         return name;
@@ -42,6 +43,14 @@ public class ProjectDTO extends BaseDTO {
 
     public void setTcMusters_id(List<Long> tcMusters_id) {
         this.tcMusters_id = tcMusters_id;
+    }
+
+    public List<Long> getSuites_id() {
+        return suites_id;
+    }
+
+    public void setSuites_id(List<Long> suites_id) {
+        this.suites_id = suites_id;
     }
 
     @Override

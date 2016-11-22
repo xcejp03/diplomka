@@ -109,8 +109,8 @@ public class Defect extends BaseEntity {
                 ", priorityEnum=" + priorityEnum +
                 ", defectStatusEnum=" + defectStatusEnum +
                 ", AffectsVersion='" + AffectsVersion + '\'' +
-                ", TCInstances=" + tcInstances +
-                ", TSInstances=" + tsInstances +
+//                ", TCInstances=" + tcInstances +
+//                ", TSInstances=" + tsInstances +
 //                ", assignee=" + assignee +
 //                ", reporter=" + reporter +
                 '}';

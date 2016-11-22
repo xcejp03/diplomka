@@ -78,11 +78,11 @@ public class TCInstance extends BaseEntity {
     public String toString() {
         return "tcInstance{" +
                 "name='" + name + '\'' +
-                ", createdDateTime=" + createdDateTime +
-                ", updatedDateTime=" + updatedDateTime +
-                ", tcMuster=" + tcMuster +
-                ", defects=" + defects +
-                ", tsInstances=" + tsInstances +
+//                ", createdDateTime=" + createdDateTime +
+//                ", updatedDateTime=" + updatedDateTime +
+//                ", tcMuster=" + tcMuster +
+//                ", defects=" + defects +
+//                ", tsInstances=" + tsInstances +
                 '}';
     }
 }

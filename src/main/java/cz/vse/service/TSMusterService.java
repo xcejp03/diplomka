@@ -76,7 +76,7 @@ public class TSMusterService {
         l.debug("finding all testStepMusters - service");
         List<TSMuster> TSMusterList;
         TSMusterList = testStepMusterDao.getAllTestStepMusters();
-        l.info("found all testStepMusters - service: " + TSMusterList.toString());
+        l.info("found all testStepMusters - service: ");
         return TSMusterList;
     }
     public List<TSMusterDTO> findAllTestStepMustersDTO() {
@@ -85,7 +85,7 @@ public class TSMusterService {
         List<TSMusterDTO> tsMusterDTOList;
         tsMusterList = testStepMusterDao.getAllTestStepMusters();
         tsMusterDTOList = mapper.mapAsList(tsMusterList, TSMusterDTO.class);
-        l.info("found all testStepMusters - service: " + tsMusterList.toString());
+        l.info("found all testStepMusters - service: ");
         return tsMusterDTOList;
     }
 

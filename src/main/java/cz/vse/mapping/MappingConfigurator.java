@@ -17,7 +17,6 @@ public class MappingConfigurator extends ConfigurableMapper {   // implements Ap
 //    }
 //
 
-
 //    private ApplicationContext applicationContext;
 
 //    private CustomMapperMap customMappers;      //asi bude potřeba
@@ -36,16 +35,18 @@ public class MappingConfigurator extends ConfigurableMapper {   // implements Ap
 
     protected void configure(MapperFactory factory) {
         ConverterFactory converterFactory = factory.getConverterFactory();
-        converterFactory.registerConverter("myDateConverter",new DateConverter());
+        converterFactory.registerConverter("myDateConverter", new DateConverter());
         factory.getConverterFactory().registerConverter(new DateConverter());
         factory.classMap(Project.class, ProjectDTO.class)
                 .field("projectOwner.id", "projectOwner_id")
                 .field("personMembers{id}", "projectMembers_id{}")
+                .field("testSuites{id}", "suites_id{}")
                 .byDefault()
                 .register();
         factory.classMap(ProjectDTO.class, Project.class)
                 .field("projectOwner_id", "projectOwner.id")
                 .field("projectMembers_id{}", "personMembers{id}")
+                .field("suites_id{}", "testSuites{id}")
                 .byDefault()
                 .register();
         factory.classMap(DefectCommentDTO.class, DefectComment.class)
@@ -82,8 +83,8 @@ public class MappingConfigurator extends ConfigurableMapper {   // implements Ap
         factory.classMap(TCMuster.class, TCMusterDTO.class)
                 .field("project.id", "project_id")
                 .field("tsMusters{id}", "tsMusters_id{}")
-                .fieldMap("createdDateTime", "createdDateTime").converter("DateConverter").add()
-                .field("createdDateTime", "createdDateTime")
+//                .fieldMap("createdDateTime", "createdDateTime").converter("DateConverter").add()
+//                .field("createdDateTime", "createdDateTime")
                 .byDefault()
                 .register();
         factory.classMap(TCMusterDTO.class, TCMuster.class)

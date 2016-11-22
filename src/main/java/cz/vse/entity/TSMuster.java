@@ -1,5 +1,7 @@
 package cz.vse.entity;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -133,14 +135,10 @@ public class TSMuster extends BaseEntity {
     @Override
     public String toString() {
         return "TSMuster{" +
-                "createdDateTime=" + createdDateTime +
-                ", updatedDateTime=" + updatedDateTime +
+
                 ", action='" + action + '\'' +
                 ", expected='" + expected + '\'' +
-                ", author=" + author +
-                ", defects=" + defects +
-                ", tsInstances=" + tsInstances +
-                ", tcMuster=" + tcMuster +
+
                 '}';
     }
 }

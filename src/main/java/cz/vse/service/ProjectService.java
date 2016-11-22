@@ -114,7 +114,7 @@ public class ProjectService {
         l.warn("mezkrok");
         projectDTOList = mapper.mapAsList(projectList, ProjectDTO.class);
 
-        l.info("found all testProjects - service: " + projectDTOList.toString());
+        l.info("found all testProjects - service: " );
         return projectDTOList;
     }
 
@@ -122,7 +122,7 @@ public class ProjectService {
         l.debug("finding all testProjects - service");
         List<Project> projectList = new ArrayList<>();
         projectList = testProjectDao.getAllTestProjects();
-        l.info("found all testProjects - service: " + projectList.toString());
+        l.info("found all testProjects - service: ");
         return projectList;
     }
 }

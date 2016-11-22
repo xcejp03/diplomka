@@ -121,12 +121,12 @@ public class Person extends BaseEntity {
                 "name='" + name + '\'' +
                 ", login='" + login + '\'' +
                 ", pass='" + pass + '\'' +
-                ", createdDate=" + createdDate +
-                ", lastLogin=" + lastLogin +
-                ", projectsMember=" + projectsMember +
-                ", projectsOwner=" + projectOwners +
-                ", defectsAssignee=" + defectAssignees +
-                ", defectsReporter=" + defectReporters +
+//                ", createdDate=" + createdDate +
+//                ", lastLogin=" + lastLogin +
+//                ", projectsMember=" + projectsMember +
+//                ", projectsOwner=" + projectOwners +
+//                ", defectsAssignee=" + defectAssignees +
+//                ", defectsReporter=" + defectReporters +
                 '}';
     }
 }

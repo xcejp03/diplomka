@@ -1,5 +1,7 @@
 package cz.vse.entity;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -30,7 +32,7 @@ public class TCMuster extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "TESTSUITE_ID", referencedColumnName = "ID"))
     private List<TestSuite> testSuites;
 
-    @OneToMany (mappedBy = "tcMuster")
+    @OneToMany (mappedBy = "tcMuster", fetch = FetchType.EAGER)
     private List<TSMuster> tsMusters;
 
     public String getName() {
@@ -90,11 +92,6 @@ public class TCMuster extends BaseEntity {
     public String toString() {
         return "TCMuster{" +
                 "name='" + name + '\'' +
-                ", createdDateTime=" + createdDateTime +
-                ", updatedDateTime=" + updatedDateTime +
-                ", project=" + project +
-                ", testSuites="+
-                ", tsMusters=" +
                 '}';
     }
 

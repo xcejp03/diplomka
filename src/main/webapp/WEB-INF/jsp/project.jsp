@@ -106,6 +106,20 @@
                 </select>
             </td>
         </tr>
+        <tr>
+            <td>
+                <form:label path="suites_id">
+                    <spring:message text="Suites"/>
+                </form:label>
+            </td>
+            <td>
+                <select path="suites_id" name="suites_id" multiple size="12">
+                    <c:forEach var="item" items="${listSuites}">
+                        <option value="${item.id}">${item.name}</option>
+                    </c:forEach>
+                </select>
+            </td>
+        </tr>
             <%--<tr>
                 <td>
                     <form>
@@ -156,6 +170,7 @@
             <th width="80">project owner</th>
             <th width="80">project members</th>
             <th width="120">Project TC</th>
+            <th width="120">Project Suite</th>
             <th width="60">Edit</th>
             <th width="60">Delete</th>
         </tr>
@@ -172,6 +187,11 @@
                 <td>
                     <c:forEach items="${project.tcMusters_id}" var="tcMuster">
                         ${tcMuster},
+                    </c:forEach>
+                </td>
+                <td>
+                    <c:forEach items="${project.suites_id}" var="suite">
+                        ${suite},
                     </c:forEach>
                 </td>
                 <td><a href="<c:url value='edit/${project.id}' />">Edit</a></td>
