@@ -1,4 +1,4 @@
-package cz.vse.mapping;
+package cz.vse.mapping.converter;
 
 import ma.glasnost.orika.CustomConverter;
 import ma.glasnost.orika.metadata.Type;

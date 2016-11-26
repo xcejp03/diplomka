@@ -13,6 +13,7 @@ public class TCMusterDTO extends BaseDTO {
     private String name;
     private Long project_id;
     private List<Long> tsMusters_id;
+    private List<Long> tcInstances_id;
 
     public LocalDateTime getCreatedDateTime() {
         return createdDateTime;
@@ -36,6 +37,14 @@ public class TCMusterDTO extends BaseDTO {
 
     public void setTsMusters_id(List<Long> tsMusters_id) {
         this.tsMusters_id = tsMusters_id;
+    }
+
+    public List<Long> getTcInstances_id() {
+        return tcInstances_id;
+    }
+
+    public void setTcInstances_id(List<Long> tcInstances_id) {
+        this.tcInstances_id = tcInstances_id;
     }
 
     @Override

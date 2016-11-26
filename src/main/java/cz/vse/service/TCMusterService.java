@@ -1,7 +1,9 @@
 package cz.vse.service;
 
 import cz.vse.dao.TestCaseMusterDao;
+import cz.vse.dto.TCInstanceRunDTO;
 import cz.vse.dto.TCMusterDTO;
+import cz.vse.entity.TCInstance;
 import cz.vse.entity.TCMuster;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
@@ -22,6 +24,12 @@ public class TCMusterService {
 
     @Autowired
     private MapperFacade mapper;
+
+    @Autowired
+    private TSInstanceService tsInstanceService;
+
+    @Autowired
+    private TCInstanceService tcInstanceService;
 
     public void createTestCaseMuster(TCMuster tcMuster) {
         l.debug("creating TCMuster - service");
@@ -102,4 +110,11 @@ public class TCMusterService {
         return tcMusterDTOList;
     }
 
+    public TCMuster findTestCaseMusterByTCInstanceId(long tcInstanceId) {
+        TCInstance tcInstance;
+        TCMuster tcMuster;
+        tcInstance = tcInstanceService.findTestCaseInstanceById(tcInstanceId);
+        tcMuster = findTestCaseMusterById(tcInstance.getTcMuster().getId());
+        return tcMuster;
+    }
 }

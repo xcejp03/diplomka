@@ -40,7 +40,7 @@ public class TSController {
         model.addAttribute("listTSMusters", tsMusterService.findAllTestStepMustersDTO());
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMusters());
-        return "ts";
+        return "tsCreate";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -59,7 +59,7 @@ public class TSController {
         model.addAttribute("ts", tsMusterService.findTestStepMusterDTOById(id));
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMusters());
-        return "ts";
+        return "tsCreate";
     }
 
     @RequestMapping("/remove/{id}")

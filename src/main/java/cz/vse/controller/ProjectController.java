@@ -42,7 +42,7 @@ public class ProjectController {
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listSuites", suiteService.findAllTestSuites());
 
-        return "project";
+        return "projectCreate";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)

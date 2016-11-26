@@ -29,6 +29,17 @@ public class DefectController {
     @Autowired
     DefectService defectService;
 
+    @RequestMapping( method = RequestMethod.GET)
+    public String defectDefault(Model model) {
+        l.info("request mapping defect/create");
+        model.addAttribute("defect", new DefectDTO());
+        model.addAttribute("defectList", defectService.findAllDefects());
+        model.addAttribute("listPersons", personService.findAllPersons());
+        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
+
+        return "tabulkaDefaultVypis";
+    }
+
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createDefect(Model model) {
         l.info("request mapping defect/create");
@@ -37,7 +48,7 @@ public class DefectController {
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
 
-        return "defect";
+        return "defectCreate";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -56,7 +67,7 @@ public class DefectController {
         model.addAttribute("defect", defectService.findDefectDTOById(id));
         model.addAttribute("person", personService.findPersonById(id));
 
-        return "defect";
+        return "defectCreate";
     }
 
     @RequestMapping("/remove/{id}")

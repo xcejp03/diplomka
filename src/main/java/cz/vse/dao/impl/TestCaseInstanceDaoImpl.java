@@ -20,24 +20,25 @@ public class TestCaseInstanceDaoImpl implements TestCaseInstanceDao {
     @PersistenceContext
     EntityManager em;
     @Override
-    public void saveTestCaseInstance(TCInstance TCInstance) {
-        l.debug("Saving TCInstance: " + TCInstance);
-        em.persist(TCInstance);
-        l.info("TCInstance saved successfully. TCInstance detail: " + TCInstance);
+    public void saveTestCaseInstance(TCInstance tcInstance) {
+        l.debug("Saving TCInstance: " + tcInstance);
+        em.persist(tcInstance);
+//        l.info(tcInstance.getId());
+        l.info("TCInstance saved successfully. TCInstance detail: " + tcInstance);
     }
 
     @Override
-    public void deleteTestCaseInstance(TCInstance TCInstance) {
-        l.debug("Deleting TCInstance: " + TCInstance);
-        em.remove(TCInstance);
-        l.info("TCInstance deleted successfully. TCInstance detail: " + TCInstance);
+    public void deleteTestCaseInstance(TCInstance tcInstance) {
+        l.debug("Deleting TCInstance: " + tcInstance);
+        em.remove(tcInstance);
+        l.info("TCInstance deleted successfully. TCInstance detail: " + tcInstance);
     }
 
     @Override
-    public void updateTestCaseInstance(TCInstance TCInstance) {
-        l.debug("Updating TCInstance: " + TCInstance);
-        em.merge(TCInstance);
-        l.info("TCInstance updated successfully. TCInstance detail: " + TCInstance);
+    public void updateTestCaseInstance(TCInstance tcInstance) {
+        l.debug("Updating TCInstance: " + tcInstance);
+        em.merge(tcInstance);
+        l.info("TCInstance updated successfully. TCInstance detail: " + tcInstance);
     }
 
     @Override
@@ -45,14 +46,14 @@ public class TestCaseInstanceDaoImpl implements TestCaseInstanceDao {
         l.debug("Getting all TCInstance");
         List<TCInstance> resultList = em.createQuery("select t from TCInstance t").getResultList();
         l.info("TCInstance gotten successfully. TCInstance detail: " + resultList.toString());
-        return null;
+        return resultList;
     }
 
     @Override
     public TCInstance getTestCaseInstanceById(long id) {
         l.debug("Getting TCInstance by id: " + id);
-        TCInstance TCInstance = em.find(TCInstance.class, id);
-        l.info("TCInstance gotten successfully. TCInstance detail: " + TCInstance);
-        return null;
+        TCInstance tcInstance = em.find(TCInstance.class, id);
+        l.info("TCInstance gotten successfully. TCInstance detail: " + tcInstance);
+        return tcInstance;
     }
 }

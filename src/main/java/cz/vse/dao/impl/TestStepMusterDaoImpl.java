@@ -1,6 +1,7 @@
 package cz.vse.dao.impl;
 
 import cz.vse.dao.TestStepMusterDao;
+import cz.vse.entity.TSInstance;
 import cz.vse.entity.TSMuster;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
@@ -56,5 +57,15 @@ public class TestStepMusterDaoImpl implements TestStepMusterDao {
         TSMuster tsMuster = em.find(TSMuster.class, id);
         l.info("Gotten TSMuster successfully. TSMuster detail: " + tsMuster);
         return tsMuster;
+    }
+
+    @Override
+    public List<TSMuster> getAllTestStepMustersByTCMusterId(long id) {
+        List<TSMuster> resultList;
+        resultList = em.createQuery("select tsm from TSMuster tsm where tsm.tcMuster.id = :id")
+                .setParameter("id", id)
+                .getResultList();
+        l.info("resultList: "+resultList.toString());
+        return resultList;
     }
 }

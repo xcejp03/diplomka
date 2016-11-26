@@ -25,6 +25,7 @@ public class PersonDaoImpl implements PersonDao {
     public long savePerson(Person person) {
         l.debug("Saving person: " + person);
         em.persist(person);
+        l.fatal(person.getId());
         l.info("Person saved successfully. Person detail: " + person);
         return -1;
     }

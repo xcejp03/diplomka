@@ -9,9 +9,10 @@ import java.util.List;
  */
 public interface TestStepInstanceDao {
 
-    public void saveTestStepInstance(TSInstance TSInstance);
-    public void deleteTestStepInstance(TSInstance TSInstance);
-    public void updateTestStepInstance(TSInstance TSInstance);
-    public List<TSInstance> getAllTestStepInstances();
-    public TSInstance getTestStepInstanceById(long id);
+    void saveTestStepInstance(TSInstance TSInstance);
+    void deleteTestStepInstance(TSInstance TSInstance);
+    void updateTestStepInstance(TSInstance TSInstance);
+    List<TSInstance> getAllTestStepInstances();
+    TSInstance getTestStepInstanceById(long id);
+    List<TSInstance> getAllTestStepInstancesByTCInstanceId(long id);
 }

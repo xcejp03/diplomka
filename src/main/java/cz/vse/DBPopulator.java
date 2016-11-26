@@ -126,7 +126,7 @@ public class DBPopulator {
         //TEST STEP INSTANCE
         TSInstance TSInstance = new TSInstance();
         TSInstance.setAction(LocalDateTime.now().toString());
-        TSInstance.setActual("Actual behavior of test step instance");
+        TSInstance.setResult("Actual behavior of test step instance");
         TSInstance.setTsMuster(TSMuster);
         TSInstance.setTcInstance(TCInstance);
         List<Defect> stepInstanceDefectList = new ArrayList<>();
@@ -205,7 +205,7 @@ public class DBPopulator {
     private TSInstance createPilotTestStepInstance() {
         TSInstance TSInstance = new TSInstance();
         TSInstance.setAction(LocalDateTime.now().toString());
-        TSInstance.setActual("Actual behavior of test step instance");
+        TSInstance.setResult("Actual behavior of test step instance");
         testStepInstanceDao.saveTestStepInstance(TSInstance);
         return TSInstance;
 

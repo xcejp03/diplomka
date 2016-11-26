@@ -2,6 +2,7 @@ package cz.vse.service;
 
 import cz.vse.dao.TestStepMusterDao;
 import cz.vse.dto.TSMusterDTO;
+import cz.vse.entity.TSInstance;
 import cz.vse.entity.TSMuster;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
@@ -89,4 +90,9 @@ public class TSMusterService {
         return tsMusterDTOList;
     }
 
+    public List<TSMuster> findAllTestStepMustersByTCMusterId(long tcMusterId) {
+        List<TSMuster> tsMusters;
+        tsMusters = testStepMusterDao.getAllTestStepMustersByTCMusterId(tcMusterId);
+        return tsMusters;
+    }
 }

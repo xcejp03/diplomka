@@ -75,6 +75,36 @@ public class TCInstance extends BaseEntity {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TCInstance)) return false;
+
+        TCInstance that = (TCInstance) o;
+
+        if (getName() != null ? !getName().equals(that.getName()) : that.getName() != null) return false;
+        if (getCreatedDateTime() != null ? !getCreatedDateTime().equals(that.getCreatedDateTime()) : that.getCreatedDateTime() != null)
+            return false;
+        if (getUpdatedDateTime() != null ? !getUpdatedDateTime().equals(that.getUpdatedDateTime()) : that.getUpdatedDateTime() != null)
+            return false;
+        if (getTcMuster() != null ? !getTcMuster().equals(that.getTcMuster()) : that.getTcMuster() != null)
+            return false;
+        if (getDefects() != null ? !getDefects().equals(that.getDefects()) : that.getDefects() != null) return false;
+        return getTsInstances() != null ? getTsInstances().equals(that.getTsInstances()) : that.getTsInstances() == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getName() != null ? getName().hashCode() : 0;
+        result = 31 * result + (getCreatedDateTime() != null ? getCreatedDateTime().hashCode() : 0);
+        result = 31 * result + (getUpdatedDateTime() != null ? getUpdatedDateTime().hashCode() : 0);
+        result = 31 * result + (getTcMuster() != null ? getTcMuster().hashCode() : 0);
+        result = 31 * result + (getDefects() != null ? getDefects().hashCode() : 0);
+        result = 31 * result + (getTsInstances() != null ? getTsInstances().hashCode() : 0);
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "tcInstance{" +
                 "name='" + name + '\'' +

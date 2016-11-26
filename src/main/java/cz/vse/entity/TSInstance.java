@@ -16,7 +16,7 @@ public class TSInstance extends BaseEntity{
     private LocalDateTime updatedDateTime;
     private String action;
     private String expected;
-    private String actual;
+    private String result;
 
     @ManyToOne
     @JoinColumn (name = "tsmuster_id")
@@ -61,12 +61,12 @@ public class TSInstance extends BaseEntity{
         this.expected = expected;
     }
 
-    public String getActual() {
-        return actual;
+    public String getResult() {
+        return result;
     }
 
-    public void setActual(String actual) {
-        this.actual = actual;
+    public void setResult(String actual) {
+        this.result = actual;
     }
 
     public TSMuster getTsMuster() {
@@ -100,7 +100,7 @@ public class TSInstance extends BaseEntity{
 //                ", updatedDateTime=" + updatedDateTime +
                 ", action='" + action + '\'' +
                 ", expected='" + expected + '\'' +
-                ", actual='" + actual + '\'' +
+                ", actual='" + result + '\'' +
 //                ", tsMuster=" + tsMuster +
 //                ", defects=" + defects +
 //                ", tcInstance=" + tcInstance +

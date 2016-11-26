@@ -37,7 +37,7 @@ public class PersonController {
         model.addAttribute("person", new PersonDTO());
         model.addAttribute("listPersons", personService.findAllPersons());
 
-        return "person";
+        return "personCreate";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -60,7 +60,7 @@ public class PersonController {
         Project project = new Project();
         project.setName("XxX");
         projectService.createTestProject(project);
-        return "project";
+        return "projectCreate";
     }
 
     @RequestMapping("/edit/{id}")

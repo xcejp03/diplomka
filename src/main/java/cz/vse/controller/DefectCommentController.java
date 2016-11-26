@@ -42,7 +42,7 @@ public class DefectCommentController {
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
 
-        return "comment";
+        return "commentCreate";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -68,7 +68,7 @@ public class DefectCommentController {
         model.addAttribute("defect", defectService.findDefectDTOById(commentDTO.getDefect_id()));
         model.addAttribute("person", personService.findPersonById(commentDTO.getAuthor_id()));
 
-        return "comment";
+        return "commentCreate";
     }
 
     @RequestMapping("/remove/{id}")

@@ -20,24 +20,24 @@ public class TestStepInstanceDaoImpl implements TestStepInstanceDao {
     @PersistenceContext
     EntityManager em;
     @Override
-    public void saveTestStepInstance(TSInstance TSInstance) {
-        l.debug("Saving TSInstance: " + TSInstance);
-        em.persist(TSInstance);
-        l.info("TSInstance saved successfully. TSInstance detail: " + TSInstance);
+    public void saveTestStepInstance(TSInstance tsInstance) {
+        l.debug("Saving TSInstance: " + tsInstance);
+        em.persist(tsInstance);
+        l.info("TSInstance saved successfully. TSInstance detail: " + tsInstance);
     }
 
     @Override
-    public void deleteTestStepInstance(TSInstance TSInstance) {
-        l.debug("Deleting TSInstance: " + TSInstance);
-        em.remove(TSInstance);
-        l.info("TSInstance deleted successfully. TSInstance detail: " + TSInstance);
+    public void deleteTestStepInstance(TSInstance tsInstance) {
+        l.debug("Deleting TSInstance: " + tsInstance);
+        em.remove(tsInstance);
+        l.info("TSInstance deleted successfully. TSInstance detail: " + tsInstance);
     }
 
     @Override
-    public void updateTestStepInstance(TSInstance TSInstance) {
-        l.debug("Updating TSInstance: " + TSInstance);
-        em.merge(TSInstance);
-        l.info("TSInstance updated successfully. TSInstance detail: " + TSInstance);
+    public void updateTestStepInstance(TSInstance tsInstance) {
+        l.debug("Updating TSInstance: " + tsInstance);
+        em.merge(tsInstance);
+        l.info("TSInstance updated successfully. TSInstance detail: " + tsInstance);
     }
 
     @Override
@@ -54,5 +54,15 @@ public class TestStepInstanceDaoImpl implements TestStepInstanceDao {
         TSInstance TSInstance = em.find(TSInstance.class, id);
         l.info("Gotten TSInstance successfully. TSInstance detail: " + TSInstance);
         return null;
+    }
+
+    @Override
+    public List<TSInstance> getAllTestStepInstancesByTCInstanceId(long id) {
+        List<TSInstance> resultList;
+        resultList = em.createQuery("select tsi from TSInstance tsi where tsi.tcInstance.id = :id")
+                .setParameter("id", id)
+                .getResultList();
+        l.info("resultList: "+resultList.toString());
+        return resultList;
     }
 }

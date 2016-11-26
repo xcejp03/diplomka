@@ -1,0 +1,115 @@
+package cz.vse.service;
+
+import cz.vse.dao.TestCaseMusterDao;
+import cz.vse.dto.TCInstanceRunDTO;
+import cz.vse.entity.TCInstance;
+import cz.vse.entity.TCMuster;
+import cz.vse.entity.TSInstance;
+import cz.vse.entity.TSMuster;
+import ma.glasnost.orika.MapperFacade;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by pcejka on 03.10.2016.
+ */
+@Service
+public class TCService {
+    private final Logger l = Logger.getLogger(this.getClass());
+    @Autowired
+    private TestCaseMusterDao testCaseMusterDao;
+
+    @Autowired
+    private MapperFacade mapper;
+
+    @Autowired
+    private TSInstanceService tsInstanceService;
+
+    @Autowired
+    private TCInstanceService tcInstanceService;
+
+    @Autowired
+    private TCMusterService tcMusterService;
+
+    @Autowired
+    private TSMusterService tsMusterService;
+
+    public TCInstanceRunDTO runNewTC(long tcMusterId) {
+        TCInstance tcInstance;
+        TCInstanceRunDTO tcInstanceRunDTO;
+
+        tcInstance = createAndSaveTCInstanceFromTCMusterId(tcMusterId);
+
+        tcInstanceRunDTO = mapper.map(tcInstance, TCInstanceRunDTO.class);
+        l.info(tcInstanceRunDTO);
+        return tcInstanceRunDTO;
+    }
+
+    /**
+     * Mapuje TCMudster na TC instnace. Nahrazuje (obchází orika).
+     * ZJISTIT JAK TO UDĚLAT PŘES ORIKU
+     *
+     * @param tcMuster
+     * @return
+     */
+    private TCInstance mapTCMusterToTCInstance(TCMuster tcMuster) {
+        TCInstance tcInstanceMapped = new TCInstance();
+        tcInstanceMapped.setName(tcMuster.getName());
+        tcInstanceMapped.setTcMuster(tcMuster);
+        return tcInstanceMapped;
+    }
+
+    private List<TSInstance> mapTSMusterToTSInstance(List<TSMuster> tsMusterList) {
+        List<TSInstance> tsInstanceMappedList = new ArrayList<>();
+        TSInstance tsInstance;  // = new TSInstance();
+        for (TSMuster tsMuster : tsMusterList) {
+            tsInstance = new TSInstance();
+            l.debug(tsMuster);
+            tsInstance.setTsMuster(tsMuster);
+            tsInstanceMappedList.add(tsInstance);
+        }
+        return tsInstanceMappedList;
+    }
+
+    private TCInstance createAndSaveTCInstanceFromTCMusterId(long tcMusterId) {
+        TCMuster tcMuster;
+        TCInstance tcInstance = new TCInstance();
+        List<TSInstance> tsInstanceList = new ArrayList<>();
+
+        tcMuster = tcMusterService.findTestCaseMusterById(tcMusterId);
+
+        tcInstance = mapTCMusterToTCInstance(tcMuster);
+        tcInstance.setCreatedDateTime(LocalDateTime.now());
+//        tcInstance.setTsInstances(tsInstanceList);
+
+        tcInstanceService.createTestCaseInstance(tcInstance);
+
+        tsInstanceList = createAndSaveTSInstanceFromTCMusterId(tcMuster.getId(), tcInstance);
+
+
+        return tcInstance;
+    }
+
+    private List<TSInstance> createAndSaveTSInstanceFromTCMusterId(long tcMusterId, TCInstance tcInstance) {
+        TCMuster tcMuster;
+        List<TSMuster> tsMusterList;
+        List<TSInstance> tsInstanceList;
+
+        tsMusterList = tsMusterService.findAllTestStepMustersByTCMusterId(tcMusterId);
+        tsInstanceList = mapTSMusterToTSInstance(tsMusterList);
+        tsInstanceList = mapper.mapAsList(tsMusterList, TSInstance.class);
+
+        for (TSInstance tsInstance : tsInstanceList) {
+            tsInstance.setTcInstance(tcInstance);
+            tsInstanceService.createTestStepInstance(tsInstance);
+        }
+
+        l.info(tsInstanceList);
+        return tsInstanceList;
+    }
+}

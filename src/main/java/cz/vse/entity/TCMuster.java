@@ -1,7 +1,5 @@
 package cz.vse.entity;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,21 +16,19 @@ public class TCMuster extends BaseEntity {
     private LocalDateTime createdDateTime;
     private LocalDateTime updatedDateTime;
 
-
-//    @OneToMany (mappedBy = "tcMuster")
-//    private List<TCInstance> tcInstances;
+    @OneToMany(mappedBy = "tcMuster", fetch = FetchType.EAGER)
+    private List<TCInstance> tcInstances;
 
     @ManyToOne
-    @JoinColumn (name = "project_id")
+    @JoinColumn(name = "project_id")
     private Project project;
 
-
     @ManyToMany
-    @JoinTable (name = "TCMUSTER_TESTSUITE", joinColumns = @JoinColumn (name = "TCMUSTER_ID", referencedColumnName = "ID"),
+    @JoinTable(name = "TCMUSTER_TESTSUITE", joinColumns = @JoinColumn(name = "TCMUSTER_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "TESTSUITE_ID", referencedColumnName = "ID"))
     private List<TestSuite> testSuites;
 
-    @OneToMany (mappedBy = "tcMuster", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "tcMuster", fetch = FetchType.EAGER)
     private List<TSMuster> tsMusters;
 
     public String getName() {
@@ -59,7 +55,6 @@ public class TCMuster extends BaseEntity {
         this.updatedDateTime = updatedDateTime;
     }
 
-
     public Project getProject() {
         return project;
     }
@@ -76,7 +71,7 @@ public class TCMuster extends BaseEntity {
         this.testSuites = testSuites;
     }
 
-    public void addTestSuites(TestSuite testSuite)  {
+    public void addTestSuites(TestSuite testSuite) {
         this.testSuites.add(testSuite);
     }
 
@@ -93,6 +88,14 @@ public class TCMuster extends BaseEntity {
         return "TCMuster{" +
                 "name='" + name + '\'' +
                 '}';
+    }
+
+    public List<TCInstance> getTcInstances() {
+        return tcInstances;
+    }
+
+    public void setTcInstances(List<TCInstance> tcInstances) {
+        this.tcInstances = tcInstances;
     }
 
     @Override

@@ -104,12 +104,12 @@
         </tr>
         <tr>
             <td>
-                <form:label path="tcMuster_id">
+                <form:label path="tcMusters_id">
                     <spring:message text="Prirazene pod TC"/>
                 </form:label>
             </td>
             <td>
-                <select path="tcMuster_id" name="tcMuster_id">
+                <select path="tcMusters_id" name="tcMusters_id">
                     <c:forEach var="item" items="${listTCMusters}">
                         <option value="${item.id}">${item.name}</option>
                     </c:forEach>
@@ -152,10 +152,10 @@
                 <td>${ts.action}</td>
                 <td>${ts.expected}</td>
                 <td>${ts.author_id}</td>
-                <td>${ts.tcMuster_id}</td>
+                <td>${ts.tcMusters_id}</td>
                 <td>${ts.createdDateTime}</td>
                 <%--<td>--%>
-                    <%--<c:forEach items="${ts.tcMuster_id}" var="tcMusters">--%>
+                    <%--<c:forEach items="${ts.tcMusters_id}" var="tcMusters">--%>
                         <%--${tcMusters},--%>
                     <%--</c:forEach>--%>
                 <%--</td>--%>

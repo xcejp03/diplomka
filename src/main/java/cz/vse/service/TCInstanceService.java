@@ -1,11 +1,14 @@
 package cz.vse.service;
 
 import cz.vse.dao.TestCaseInstanceDao;
+import cz.vse.dao.TestStepInstanceDao;
 import cz.vse.entity.TCInstance;
+import cz.vse.entity.TSInstance;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,22 +20,27 @@ public class TCInstanceService {
     @Autowired
     private TestCaseInstanceDao testCaseInstanceDao;
 
-    public void createTestCaseInstance(TCInstance TCInstance) {
+    @Autowired
+    private TestStepInstanceDao testStepInstanceDao;
+
+    public void createTestCaseInstance(TCInstance tcInstance) {
         l.debug("creating TCInstance - service");
-        testCaseInstanceDao.saveTestCaseInstance(TCInstance);
-        l.info("created TCInstance - service: " + TCInstance);
+
+
+        testCaseInstanceDao.saveTestCaseInstance(tcInstance);
+        l.info("created TCInstance - service: " + tcInstance);
     }
 
-    public void updateTestCaseInstance(TCInstance TCInstance) {
+    public void updateTestCaseInstance(TCInstance tcInstance) {
         l.debug("updating TCInstance - service");
-        testCaseInstanceDao.updateTestCaseInstance(TCInstance);
-        l.info("updated TCInstance - service: " + TCInstance);
+        testCaseInstanceDao.updateTestCaseInstance(tcInstance);
+        l.info("updated TCInstance - service: " + tcInstance);
     }
 
-    public void deleteTestCaseInstance(TCInstance TCInstanceToDelete) {
+    public void deleteTestCaseInstance(TCInstance tcInstanceToDelete) {
         l.debug("deleting TCInstance - service");
-        testCaseInstanceDao.deleteTestCaseInstance(TCInstanceToDelete);
-        l.info("TCInstance deleted - service: " + TCInstanceToDelete);
+        testCaseInstanceDao.deleteTestCaseInstance(tcInstanceToDelete);
+        l.info("TCInstance deleted - service: " + tcInstanceToDelete);
     }
 
     public void deleteTestCaseInstanceById(long testCaseInstanceToDeleteById) {
@@ -45,10 +53,10 @@ public class TCInstanceService {
 
     public TCInstance findTestCaseInstanceById(long id) {
         l.debug("finding TCInstance - service");
-        TCInstance TCInstance;
-        TCInstance = testCaseInstanceDao.getTestCaseInstanceById(id);
-        l.info("TCInstance founf - service: " + id + " - " + TCInstance);
-        return TCInstance;
+        TCInstance tcInstance;
+        tcInstance = testCaseInstanceDao.getTestCaseInstanceById(id);
+        l.info("TCInstance founf - service: " + id + " - " + tcInstance);
+        return tcInstance;
     }
 
     public List<TCInstance> findAllTestCaseInstances() {
@@ -58,4 +66,12 @@ public class TCInstanceService {
         l.info("found all testCaseInstances - service: " + TCInstanceList.toString());
         return TCInstanceList;
     }
+
+    public List<TSInstance> findAllTSInstancesByTCInstanceId(long id) {
+        List<TSInstance> tsInstanceList = new ArrayList<>();
+        tsInstanceList = testStepInstanceDao.getAllTestStepInstancesByTCInstanceId(id);
+
+        return tsInstanceList;
+    }
+
 }
