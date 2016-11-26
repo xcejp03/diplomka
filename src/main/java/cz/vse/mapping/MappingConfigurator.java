@@ -123,6 +123,7 @@ public class MappingConfigurator extends ConfigurableMapper {   // implements Ap
 //        .exclude("tsMuster")
                 .register();
         factory.classMap(TCInstance.class, TCInstanceRunDTO.class)
+                .field("id", "id")
                 .field("name", "name")
                 .field("tcMuster.id", "tcMusters_id")
                 .field("tsInstances{id}", "tsInstances_id{}")

@@ -23,9 +23,11 @@ public class TCInstanceService {
     @Autowired
     private TestStepInstanceDao testStepInstanceDao;
 
+    @Autowired
+    private TCMusterService tcMusterService;
+
     public void createTestCaseInstance(TCInstance tcInstance) {
         l.debug("creating TCInstance - service");
-
 
         testCaseInstanceDao.saveTestCaseInstance(tcInstance);
         l.info("created TCInstance - service: " + tcInstance);
@@ -67,6 +69,12 @@ public class TCInstanceService {
         return TCInstanceList;
     }
 
+    /**
+     * přendat do TS!!!!!!
+     *
+     * @param id
+     * @return
+     */
     public List<TSInstance> findAllTSInstancesByTCInstanceId(long id) {
         List<TSInstance> tsInstanceList = new ArrayList<>();
         tsInstanceList = testStepInstanceDao.getAllTestStepInstancesByTCInstanceId(id);
@@ -74,4 +82,9 @@ public class TCInstanceService {
         return tsInstanceList;
     }
 
+    public List<TCInstance> findAllTCInstancesByTCMusterId(long id) {
+        List<TCInstance> tcInstanceList;
+        tcInstanceList = testCaseInstanceDao.getAllTCInstancesByTCMusterId(id);
+        return tcInstanceList;
+    }
 }

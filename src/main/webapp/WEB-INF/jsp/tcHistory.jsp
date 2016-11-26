@@ -1,13 +1,18 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: pcejka
+  Date: 25.11.2016
+  Time: 16:07
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ page session="false" %>
 <html>
 <head>
-    <title>Run TC</title>
 
-    <title>TestProject Page</title>
+    <title>TC dashboard</title>
     <style type="text/css">
         .tg {
             border-collapse: collapse;
@@ -48,48 +53,42 @@
     </style>
 </head>
 <body>
-<%--
-tcInstance
-listTSInstances
---%>
-<c:url var="addAction" value="/tc/run/${tc.id}"></c:url>
-<h1>Spuštěný test: ${tcInstance.name} - ${tcInstance.id}</h1>
+<h1>TC v systemu</h1>
+<h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\tcHistory.jsp</h3>
 
-<h3>Test stepy List</h3>
+<c:url var="addAction" value="/tc"></c:url>
 
 
-<c:if test="${!empty listTSInstances}">
-    <p>Není empty</p>
+<h3>TC List listTCInstances</h3>
+<c:if test="${!empty listTCInstances}">
     <table class="tg">
         <tr>
-            <th width="40">TS ID</th>
-            <th width="80">Akce</th>
-            <th width="120">Očekávaný výsledek</th>
-            <th width="80">Výsledek</th>
+            <th width="40">TC ID</th>
+            <th width="80">TC name</th>
+            <th width="80">TC createdDateTime</th>
             <th width="40">Edit</th>
-            <th width="50">Delete</th>
+            <th width="40">Delete</th>
         </tr>
-        <c:forEach items="${listTSInstances}" var="ts">
+        <c:forEach items="${listTCInstances}" var="tc">
             <tr>
-                <td>${ts.id}gg</td>
-                <td>${ts.action}gg</td>
-                <td>${ts.expected}ff</td>
-                <td>${ts.result}</td>
-                    <%--<td>--%>
-                    <%--<c:forEach items="${project.projectMembers_id}" var="projectMember">--%>
-                    <%--${projectMember},--%>
+                <td>${tc.id}</td>
+                <td>${tc.name}</td>
+                <td>${tc.createdDateTime}</td>
+                <%--<td>--%>
+                    <%--<c:forEach items="${tc.tsMusters_id}" var="tsMuster">--%>
+                        <%--${tsMuster},--%>
                     <%--</c:forEach>--%>
-                    <%--</td>--%>
-                <td><a href="<c:url value='/ts/edit/${ts.id}' />">Edit</a></td>
-                <td><a href="<c:url value='/ts/remove/${ts.id}' />">Delete</a></td>
+                <%--</td>--%>
+                <%--<td>--%>
+                    <%--<c:forEach items="${tc.tcInstances_id}" var="tsMuster">--%>
+                        <%--${tsMuster},--%>
+                    <%--</c:forEach>--%>
+                <%--</td>--%>
+                <td><a href="<c:url value='/tc/edit/${tc.id}' />">Edit</a></td>
+                <td><a href="<c:url value='/tc/remove/${tc.id}' />">Delete</a></td>
             </tr>
         </c:forEach>
     </table>
 </c:if>
-
-
-
-
-
 </body>
 </html>

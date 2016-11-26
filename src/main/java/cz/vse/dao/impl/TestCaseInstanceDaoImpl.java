@@ -2,6 +2,7 @@ package cz.vse.dao.impl;
 
 import cz.vse.dao.TestCaseInstanceDao;
 import cz.vse.entity.TCInstance;
+import cz.vse.entity.TCMuster;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,7 @@ public class TestCaseInstanceDaoImpl implements TestCaseInstanceDao {
     private final Logger l = Logger.getLogger(this.getClass());
     @PersistenceContext
     EntityManager em;
+
     @Override
     public void saveTestCaseInstance(TCInstance tcInstance) {
         l.debug("Saving TCInstance: " + tcInstance);
@@ -55,5 +57,23 @@ public class TestCaseInstanceDaoImpl implements TestCaseInstanceDao {
         TCInstance tcInstance = em.find(TCInstance.class, id);
         l.info("TCInstance gotten successfully. TCInstance detail: " + tcInstance);
         return tcInstance;
+    }
+
+    @Override
+    public List<TCInstance> getAllTCInstancesByTCMuster(TCMuster tcMuster) {
+        List<TCInstance> resultList;
+        resultList = em.createQuery("select tci from TCInstance tci where tci.tcMuster =:tcMuster")
+                .setParameter("tcMuster", tcMuster)
+                .getResultList();
+        return resultList;
+    }
+
+    @Override
+    public List<TCInstance> getAllTCInstancesByTCMusterId(long id) {
+        List<TCInstance> resultList;
+        resultList = em.createQuery("select tci from TCInstance tci where tci.tcMuster.id =:id")
+                .setParameter("id", id)
+                .getResultList();
+        return resultList;
     }
 }

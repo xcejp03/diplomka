@@ -87,10 +87,8 @@ public class TCController {
 
     @RequestMapping("/run/{id}")
     public String runTCMuster(Model model, @PathVariable("id") long id) {
-
         TCInstanceRunDTO tcInstanceRunDTO;
         tcInstanceRunDTO = tcService.runNewTC(id);
-
         model.addAttribute("tcInstance", tcInstanceRunDTO);
         model.addAttribute("listTSInstances", tcInstanceService.
                 findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
@@ -100,15 +98,12 @@ public class TCController {
         return "tcRun";       //opravit/dokončit
     }
 
-    @RequestMapping("/run2/{id}")
-    public String runTCMuster2(Model model, @PathVariable("id") long id) {
-
-        TCInstanceRunDTO tcInstanceRunDTO;
-        tcInstanceRunDTO = tcService.runNewTC(id);
-
-
-        l.debug("bla bla"+tcInstanceRunDTO);
-
-        return "tcRun";       //opravit/dokončit
+    @RequestMapping("/history/{id}")
+    public String showTCHistory(@PathVariable("id") long id, Model model) {
+        l.info("/history/{id}" + id);
+        model.addAttribute("tc", tcMusterService.findTestCaseMusterDTOById(id));
+        model.addAttribute("listTCInstances", tcInstanceService.findAllTCInstancesByTCMusterId(id));
+        return "tcHistory";
     }
+
 }
