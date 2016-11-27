@@ -45,15 +45,15 @@ public class TestStepInstanceDaoImpl implements TestStepInstanceDao {
         l.debug("Getting all TSInstance");
         List<TSInstance> resultList = em.createQuery("select d from TSInstance d").getResultList();
         l.info("TestStepInstances gotten successfully. TSInstance detail: " + resultList.toString());
-        return null;
+        return resultList;
     }
 
     @Override
     public TSInstance getTestStepInstanceById(long id) {
         l.debug("Getting TSInstance by id: " + id);
-        TSInstance TSInstance = em.find(TSInstance.class, id);
-        l.info("Gotten TSInstance successfully. TSInstance detail: " + TSInstance);
-        return null;
+        TSInstance tsInstance = em.find(TSInstance.class, id);
+        l.info("Gotten TSInstance successfully. TSInstance detail: " + tsInstance);
+        return tsInstance;
     }
 
     @Override

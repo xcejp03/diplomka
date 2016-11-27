@@ -80,7 +80,7 @@ listTSInstances
                     <%--${projectMember},--%>
                     <%--</c:forEach>--%>
                     <%--</td>--%>
-                <td><a href="<c:url value='/ts/edit/${ts.id}' />">Edit</a></td>
+                <td><a href="<c:url value='/ts/run/${ts.id}' />">Edit</a></td>
                 <td><a href="<c:url value='/ts/remove/${ts.id}' />">Delete</a></td>
             </tr>
         </c:forEach>

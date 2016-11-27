@@ -2,8 +2,10 @@ package cz.vse.service;
 
 import cz.vse.dao.TestCaseInstanceDao;
 import cz.vse.dao.TestStepInstanceDao;
+import cz.vse.dto.TCInstanceRunDTO;
 import cz.vse.entity.TCInstance;
 import cz.vse.entity.TSInstance;
+import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,9 @@ public class TCInstanceService {
 
     @Autowired
     private TCMusterService tcMusterService;
+
+    @Autowired
+    private MapperFacade mapper;
 
     public void createTestCaseInstance(TCInstance tcInstance) {
         l.debug("creating TCInstance - service");
@@ -86,5 +91,12 @@ public class TCInstanceService {
         List<TCInstance> tcInstanceList;
         tcInstanceList = testCaseInstanceDao.getAllTCInstancesByTCMusterId(id);
         return tcInstanceList;
+    }
+
+    public TCInstanceRunDTO findTCInstanceRunDTOById(long id) {
+        TCInstance tcInstance = findTestCaseInstanceById(id);
+        TCInstanceRunDTO tcInstanceRunDTO = mapper.map(tcInstance, TCInstanceRunDTO.class);
+
+        return tcInstanceRunDTO;
     }
 }

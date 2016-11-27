@@ -23,7 +23,7 @@ public class TCInstance extends BaseEntity {
     @ManyToMany (mappedBy = "tcInstances")
     private List<Defect> defects;
 
-    @OneToMany (mappedBy = "tcInstance")
+    @OneToMany (mappedBy = "tcInstance", fetch = FetchType.EAGER)
     private List<TSInstance> tsInstances;
 
     public String getName() {

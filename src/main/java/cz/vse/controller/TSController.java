@@ -1,10 +1,9 @@
 package cz.vse.controller;
 
+import cz.vse.dto.TSInstanceRunDTO;
 import cz.vse.dto.TSMusterDTO;
-import cz.vse.service.PersonService;
-import cz.vse.service.ProjectService;
-import cz.vse.service.TCMusterService;
-import cz.vse.service.TSMusterService;
+import cz.vse.entity.TSInstance;
+import cz.vse.service.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +32,9 @@ public class TSController {
     @Autowired
     TCMusterService tcMusterService;
 
+    @Autowired
+    TSInstanceService tsInstanceService;
+
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createTS(Model model) {
         l.info("request mapping ts/create");
@@ -44,11 +46,11 @@ public class TSController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createTSPost(@ModelAttribute("project") TSMusterDTO TSMusterDTO) {
-        if (TSMusterDTO.getId() == null) {
-            tsMusterService.createTestStepMuster(TSMusterDTO);
+    public String createTSPost(@ModelAttribute("project") TSMusterDTO tsMusterDTO) {
+        if (tsMusterDTO.getId() == null) {
+            tsMusterService.createTestStepMuster(tsMusterDTO);
         } else {
-            tsMusterService.updateTestStepMuster(TSMusterDTO);
+            tsMusterService.updateTestStepMuster(tsMusterDTO);
         }
         return "redirect:create";
     }
@@ -56,10 +58,26 @@ public class TSController {
     @RequestMapping("/edit/{id}")
     public String editTSMuster(@PathVariable("id") long id, Model model) {
         l.info("/edit/{id}" + id);
-        model.addAttribute("ts", tsMusterService.findTestStepMusterDTOById(id));
+
+        model.addAttribute("ts", tsMusterService.findTestStepMusterById(id));
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMusters());
         return "tsCreate";
+    }
+
+    @RequestMapping(value = "/run", method = RequestMethod.POST)
+    public String runTSInstance(@ModelAttribute("ts") TSInstanceRunDTO tsInstanceRunDTO) {
+        Long tcInstanceId = tsInstanceRunDTO.getTcInstance_id();
+        l.info("/run/{id} - post" );
+        tsInstanceService.updateTestStepInstance(tsInstanceRunDTO);
+        return "redirect:/tc/show/"+tcInstanceId;
+    }
+
+    @RequestMapping(value = "/run/{id}", method = RequestMethod.GET)
+    public String runTSInstancePost(@PathVariable("id") long id, Model model) {
+        l.info("/run/{id}" + id);
+        model.addAttribute("ts", tsInstanceService.findTestStepInstanceRunDTOById(id));
+        return "tsRun";
     }
 
     @RequestMapping("/remove/{id}")

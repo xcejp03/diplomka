@@ -1,18 +1,15 @@
 package cz.vse.dto;
 
-import java.util.List;
-
 /**
  * Created by pcejka on 10.10.2016.
  */
 
-public class TSInstanceDTO extends BaseDTO {
+public class TSInstanceRunDTO extends BaseDTO {
 
     private String action;
     private String expected;
-    private Long tsMuster_id;
-    private Long tcInstance_id;
     private String result;
+    private Long tcInstance_id;
 
     public String getAction() {
         return action;
@@ -30,12 +27,12 @@ public class TSInstanceDTO extends BaseDTO {
         this.expected = expected;
     }
 
-    public Long getTsMuster_id() {
-        return tsMuster_id;
+    public String getResult() {
+        return result;
     }
 
-    public void setTsMuster_id(Long tsMuster_id) {
-        this.tsMuster_id = tsMuster_id;
+    public void setResult(String result) {
+        this.result = result;
     }
 
     public Long getTcInstance_id() {
@@ -44,13 +41,5 @@ public class TSInstanceDTO extends BaseDTO {
 
     public void setTcInstance_id(Long tcInstance_id) {
         this.tcInstance_id = tcInstance_id;
-    }
-
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
     }
 }

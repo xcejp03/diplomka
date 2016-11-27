@@ -79,6 +79,7 @@ public class TCController {
         return "tcCreate";
     }
 
+
     @RequestMapping("/remove/{id}")
     public String removeTCMuster(@PathVariable("id") long id) {
         tcMusterService.deleteTestCaseMusterById(id);
@@ -98,7 +99,21 @@ public class TCController {
         return "tcRun";       //opravit/dokončit
     }
 
-    @RequestMapping("/history/{id}")
+
+    @RequestMapping("/show/{id}")
+    public String showTCMuster(Model model, @PathVariable("id") long id) {
+        TCInstanceRunDTO tcInstanceRunDTO;
+        tcInstanceRunDTO = tcInstanceService.findTCInstanceRunDTOById(id);
+        model.addAttribute("tcInstance", tcInstanceRunDTO);
+        model.addAttribute("listTSInstances", tcInstanceService.
+                findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
+
+        l.debug("bla bla");
+
+        return "tcRun";
+    }
+
+        @RequestMapping("/history/{id}")
     public String showTCHistory(@PathVariable("id") long id, Model model) {
         l.info("/history/{id}" + id);
         model.addAttribute("tc", tcMusterService.findTestCaseMusterDTOById(id));

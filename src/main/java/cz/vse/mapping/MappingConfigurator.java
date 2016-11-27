@@ -129,6 +129,29 @@ public class MappingConfigurator extends ConfigurableMapper {   // implements Ap
                 .field("tsInstances{id}", "tsInstances_id{}")
                 .field("id", "tcInstance_id")
                 .register();
+//        factory.classMap(TSInstanceRunDTO.class, TSInstance.class)
+////                .mapNulls(false)
+////                .mapNullsInReverse(false)
+////                .exclude("action")
+////                .exclude("expected")
+////                .field("action", "action")
+////                .field("result", "action")
+//                .exclude("tsMuster")
+//                .exclude("tcInstance")
+//                .register();
+        factory.classMap(TSInstance.class, TSInstanceRunDTO.class)
+                .field("tcInstance.id", "tcInstance_id")
+//                .mapNulls(false)
+//                .mapNullsInReverse(false)
+//                .field("action", "action")
+//                .field("expected", "expected")
+//                .field("result", "result")
+//                .exclude("tsMuster")
+//                .exclude("tcInstance")
+//                .exclude("expected")
+//                .field("expected", "result")
+                .byDefault()
+                .register();
     }
 
     //   private void configureClassMaps() {
