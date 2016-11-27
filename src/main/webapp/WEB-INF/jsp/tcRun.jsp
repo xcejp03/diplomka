@@ -56,6 +56,7 @@ listTSInstances
 <h1>Spuštěný test: ${tcInstance.name} - ${tcInstance.id}</h1>
 
 <h3>Test stepy List</h3>
+<a href="<c:url value='/tc/history/${tcInstance.tcMusters_id}'/>">Historie TC</a>
 
 
 <c:if test="${!empty listTSInstances}">
