@@ -38,6 +38,9 @@ public class ProjectService {
         Project project = new Project();
         project = mapper.map(projectDTO, Project.class);
 
+        /**
+         * entita musí být nastavena z obou směrů - předělat
+         */
         List<Person> personMembersList = new ArrayList<>();
         if (project.getPersonMembers() != null) {
             for (Person personForId : project.getPersonMembers()) {
@@ -114,7 +117,7 @@ public class ProjectService {
         l.warn("mezkrok");
         projectDTOList = mapper.mapAsList(projectList, ProjectDTO.class);
 
-        l.info("found all testProjects - service: " );
+        l.info("found all testProjects - service: ");
         return projectDTOList;
     }
 

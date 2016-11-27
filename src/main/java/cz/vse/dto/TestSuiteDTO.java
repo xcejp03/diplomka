@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class TestSuiteDTO extends BaseDTO{
     private String name;
-    private LocalDateTime createdDateTime;          // datum vytvoření testsuitu;
+    private LocalDateTime createdDateTime;
     private LocalDateTime updateDateTime;
     private Long project_id;
     private List<Long> tcMusters_id;

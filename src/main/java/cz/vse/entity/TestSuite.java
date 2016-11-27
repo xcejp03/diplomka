@@ -17,10 +17,10 @@ public class TestSuite extends BaseEntity {
     private LocalDateTime updateDateTime;
 
     @ManyToOne
-    @JoinColumn (name = "project_id")
+    @JoinColumn(name = "project_id")
     private Project project;        //testsuit patří pod jeden projekt
 
-    @ManyToMany  (mappedBy = "testSuites")
+    @ManyToMany(mappedBy = "testSuites")
     private List<TCMuster> tcMusters;      //testsuit se skládá z testcasů;
 
     public String getName() {

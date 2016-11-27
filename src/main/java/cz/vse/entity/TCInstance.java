@@ -17,13 +17,13 @@ public class TCInstance extends BaseEntity {
     private LocalDateTime updatedDateTime;
 
     @ManyToOne
-    @JoinColumn (name = "tcMuster_id")
+    @JoinColumn(name = "tcMuster_id")
     private TCMuster tcMuster;
 
-    @ManyToMany (mappedBy = "tcInstances")
+    @ManyToMany(mappedBy = "tcInstances")
     private List<Defect> defects;
 
-    @OneToMany (mappedBy = "tcInstance", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "tcInstance", fetch = FetchType.EAGER)
     private List<TSInstance> tsInstances;
 
     public String getName() {

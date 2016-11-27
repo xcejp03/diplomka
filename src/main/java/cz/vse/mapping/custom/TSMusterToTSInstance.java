@@ -10,11 +10,10 @@ import org.springframework.stereotype.Component;
  * Created by pcejka on 26.11.2016.
  */
 @Component
-public class TSMusterToTSInstance extends CustomMapper<TSMuster, TSInstance>{
+public class TSMusterToTSInstance extends CustomMapper<TSMuster, TSInstance> {
     @Override
     public void mapAtoB(TSMuster tsMuster, TSInstance tsInstance, MappingContext context) {
         tsInstance.setTsMuster(tsMuster);
     }
-
 
 }

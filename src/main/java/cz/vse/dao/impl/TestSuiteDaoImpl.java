@@ -2,7 +2,6 @@ package cz.vse.dao.impl;
 
 import cz.vse.dao.TestSuiteDao;
 import cz.vse.entity.TestSuite;
-import cz.vse.entity.TestSuite;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +19,7 @@ public class TestSuiteDaoImpl implements TestSuiteDao {
     private final Logger l = Logger.getLogger(this.getClass());
     @PersistenceContext
     EntityManager em;
+
     @Override
     public void saveTestSuite(TestSuite testSuite) {
         l.debug("Saving testSuite: " + testSuite);

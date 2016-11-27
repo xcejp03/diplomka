@@ -63,7 +63,6 @@ public class Project extends BaseEntity {
         this.tcMusters = TCMusters;
     }
 
-
     @Override
     public String toString() {
         return "Project{" +

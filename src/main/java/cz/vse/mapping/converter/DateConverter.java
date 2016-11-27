@@ -3,7 +3,6 @@ package cz.vse.mapping.converter;
 import ma.glasnost.orika.CustomConverter;
 import ma.glasnost.orika.metadata.Type;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -14,7 +13,6 @@ public class DateConverter extends CustomConverter<LocalDateTime, LocalDateTime>
     @Override
     public LocalDateTime convert(LocalDateTime localDateTime, Type<? extends LocalDateTime> type) {
 
-
-        return  (LocalDateTime.from(localDateTime));
+        return (LocalDateTime.from(localDateTime));
     }
 }

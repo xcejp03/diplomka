@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by pcejka on 10.10.2016.
  */
-public abstract class BaseDTO implements Serializable{
+public abstract class BaseDTO implements Serializable {
 
     protected Long id;
 

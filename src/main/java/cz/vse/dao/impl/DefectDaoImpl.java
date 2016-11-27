@@ -2,7 +2,6 @@ package cz.vse.dao.impl;
 
 import cz.vse.dao.DefectDao;
 import cz.vse.entity.Defect;
-import cz.vse.entity.Person;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +18,7 @@ import java.util.List;
 public class DefectDaoImpl implements DefectDao {
     private final Logger l = Logger.getLogger(this.getClass());
     @PersistenceContext
-    EntityManager em ;
+    EntityManager em;
 
     @Override
     public void saveDefect(Defect defect) {

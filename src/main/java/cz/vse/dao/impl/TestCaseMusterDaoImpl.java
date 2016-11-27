@@ -45,7 +45,7 @@ public class TestCaseMusterDaoImpl implements TestCaseMusterDao {
     public List<TCMuster> getAllTestCaseMusters() {
         l.debug("Getting all TCMuster");
         List<TCMuster> resultList = em.createQuery("select t from TCMuster t").getResultList();
-        l.info("TCMuster gotten successfully. TCMuster detail: " ); //+ resultList.toString()); DĚLÁ PROBLÉMY STACK OVERFLOW
+        l.info("TCMuster gotten successfully. TCMuster detail: "); //+ resultList.toString()); DĚLÁ PROBLÉMY STACK OVERFLOW
         return resultList;
     }
 

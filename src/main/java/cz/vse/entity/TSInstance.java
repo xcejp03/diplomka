@@ -11,7 +11,7 @@ import java.util.List;
  * Created by pcejka on 21.09.2016.
  */
 @Entity
-public class TSInstance extends BaseEntity{
+public class TSInstance extends BaseEntity {
     private LocalDateTime createdDateTime;
     private LocalDateTime updatedDateTime;
     private String action;
@@ -19,14 +19,14 @@ public class TSInstance extends BaseEntity{
     private String result;
 
     @ManyToOne
-    @JoinColumn (name = "tsmuster_id")
+    @JoinColumn(name = "tsmuster_id")
     private TSMuster tsMuster;
 
-    @ManyToMany (mappedBy = "tsInstances")
+    @ManyToMany(mappedBy = "tsInstances")
     private List<Defect> defects;
 
     @ManyToOne
-    @JoinColumn (name = "tcinstance_id")
+    @JoinColumn(name = "tcinstance_id")
     private TCInstance tcInstance;
 
     public LocalDateTime getCreatedDateTime() {

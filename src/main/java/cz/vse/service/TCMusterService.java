@@ -1,7 +1,6 @@
 package cz.vse.service;
 
 import cz.vse.dao.TestCaseMusterDao;
-import cz.vse.dto.TCInstanceRunDTO;
 import cz.vse.dto.TCMusterDTO;
 import cz.vse.entity.TCInstance;
 import cz.vse.entity.TCMuster;

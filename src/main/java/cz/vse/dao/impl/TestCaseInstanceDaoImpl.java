@@ -25,7 +25,6 @@ public class TestCaseInstanceDaoImpl implements TestCaseInstanceDao {
     public void saveTestCaseInstance(TCInstance tcInstance) {
         l.debug("Saving TCInstance: " + tcInstance);
         em.persist(tcInstance);
-//        l.info(tcInstance.getId());
         l.info("TCInstance saved successfully. TCInstance detail: " + tcInstance);
     }
 
