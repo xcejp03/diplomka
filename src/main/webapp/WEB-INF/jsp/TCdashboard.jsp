@@ -69,7 +69,6 @@
             <th width="40">tcMusters_id</th>
             <th width="40">tcInstances_id</th>
             <th width="40">Edit</th>
-            <th width="40">Delete</th>
             <th width="50">History</th>
             <th width="40">Run</th>
         </tr>
@@ -89,7 +88,6 @@
                     </c:forEach>
                 </td>
                 <td><a href="<c:url value='/tc/edit/${tc.id}' />">Edit</a></td>
-                <td><a href="<c:url value='/tc/remove/${tc.id}' />">Delete</a></td>
                 <td><a href="<c:url value='/tc/history/${tc.id}' />">History</a></td>
                 <td><a href="<c:url value='/tc/run/${tc.id}' />">Run</a></td>
             </tr>
