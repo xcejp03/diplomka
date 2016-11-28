@@ -14,27 +14,7 @@ import org.springframework.stereotype.Component;
  * Created by pcejka on 10.10.2016.
  */
 @Component
-public class MappingConfigurator extends ConfigurableMapper {   // implements ApplicationContextAware {
-    //    public MappingConfigurator()    {
-//        super(false);
-//    }
-//
-
-//    private ApplicationContext applicationContext;
-
-    private CustomMapperMap customMappers;      //asi bude potřeba
-
-/*    @Override
-    protected void configure(final MapperFactory factory) {
-        this.factory = factory;
-        configureConverters(applicationContext);
-        configureCustomMappers();
-    }*/
-
-//    @Override
-//    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-//
-//    }
+public class MappingConfigurator extends ConfigurableMapper {
 
     protected void configure(MapperFactory factory) {
         ConverterFactory converterFactory = factory.getConverterFactory();
@@ -57,13 +37,17 @@ public class MappingConfigurator extends ConfigurableMapper {   // implements Ap
                 .byDefault()
                 .register();
         factory.classMap(DefectCommentDTO.class, DefectComment.class)
+                .mapNullsInReverse(false)
+                .mapNulls(false)
                 .field("defect_id", "defect.id")
                 .field("author_id", "author.id")
-                .fieldMap("createdDateTime", "createdDateTime").converter("DateConverter").add()
-                .field("createdDateTime", "createdDateTime")
+//                .fieldMap("createdDateTime", "createdDateTime").converter("DateConverter").add()
+//                .field("createdDateTime", "createdDateTime")
                 .byDefault()
                 .register();
         factory.classMap(DefectComment.class, DefectCommentDTO.class)
+                .mapNullsInReverse(false)
+                .mapNulls(false)
                 .field("defect.id", "defect_id")
                 .field("author.id", "author_id")
                 .byDefault()
@@ -129,16 +113,6 @@ public class MappingConfigurator extends ConfigurableMapper {   // implements Ap
                 .field("tsInstances{id}", "tsInstances_id{}")
                 .field("id", "tcInstance_id")
                 .register();
-//        factory.classMap(TSInstanceRunDTO.class, TSInstance.class)
-////                .mapNulls(false)
-////                .mapNullsInReverse(false)
-////                .exclude("action")
-////                .exclude("expected")
-////                .field("action", "action")
-////                .field("result", "action")
-//                .exclude("tsMuster")
-//                .exclude("tcInstance")
-//                .register();
         factory.classMap(TSInstance.class, TSInstanceRunDTO.class)
                 .field("tcInstance.id", "tcInstance_id")
 //                .mapNulls(false)
@@ -153,29 +127,4 @@ public class MappingConfigurator extends ConfigurableMapper {   // implements Ap
                 .byDefault()
                 .register();
     }
-
-    //   private void configureClassMaps() {
-/*        factory.classMap(Academy.class, AcademyForm.class)
-                .field("company", "companyId")
-                .field("guarantor", "guarantorId")
-                .customize((Mapper<Academy, AcademyForm>) customMappers.get(Academy.class, AcademyForm.class))
-                .byDefault()
-                .register();
-
-        factory.classMap(LessonParticipation.class, LessonRatingDTO.class)
-                .field("lesson.date", "date")
-                .field("rating.rating", "rating")
-                .field("rating.verbalRating", "verbalRating")
-                .byDefault()
-                .register();*/
-
-//        factory.classMap(Project.class, ProjectDTO.class)
-//                .field("name", "name")
-////                .field("company", "companyId")
-////                .field("guarantor", "guarantorId")
-//                .byDefault()
-//                .register();
-//
-//    }
-
 }

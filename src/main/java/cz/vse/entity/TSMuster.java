@@ -1,7 +1,5 @@
 package cz.vse.entity;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,7 +25,7 @@ public class TSMuster extends BaseEntity {
     private List<TSInstance> tsInstances;
 
     @ManyToOne
-    @JoinColumn (name = "tcMuster_id")
+    @JoinColumn(name = "tcMuster_id")
     private TCMuster tcMuster;
 
     public LocalDateTime getCreatedDateTime() {

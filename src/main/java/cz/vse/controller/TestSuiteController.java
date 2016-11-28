@@ -60,7 +60,6 @@ public class TestSuiteController {
     @RequestMapping("/edit/{id}")
     public String editTestSuite(@PathVariable("id") int id, Model model) {
         l.info("/edit/{id}" + id);
-//            model.addAttribute("person", personService.findPersonById(id));
         model.addAttribute("suiteDTO", suiteService.findTestSuiteDTOById(id));
         model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
         model.addAttribute("listPersons", personService.findAllPersons());

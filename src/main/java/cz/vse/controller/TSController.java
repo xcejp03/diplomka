@@ -2,7 +2,6 @@ package cz.vse.controller;
 
 import cz.vse.dto.TSInstanceRunDTO;
 import cz.vse.dto.TSMusterDTO;
-import cz.vse.entity.TSInstance;
 import cz.vse.service.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,9 +67,9 @@ public class TSController {
     @RequestMapping(value = "/run", method = RequestMethod.POST)
     public String runTSInstance(@ModelAttribute("ts") TSInstanceRunDTO tsInstanceRunDTO) {
         Long tcInstanceId = tsInstanceRunDTO.getTcInstance_id();
-        l.info("/run/{id} - post" );
+        l.info("/run/{id} - post");
         tsInstanceService.updateTestStepInstance(tsInstanceRunDTO);
-        return "redirect:/tc/show/"+tcInstanceId;
+        return "redirect:/tc/show/" + tcInstanceId;
     }
 
     @RequestMapping(value = "/run/{id}", method = RequestMethod.GET)

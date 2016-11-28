@@ -60,6 +60,9 @@
 
 
 <h3>TC List listTCInstances</h3>
+
+<a href="<c:url value='/tc'/>">Přehled TC</a>
+
 <c:if test="${!empty listTCInstances}">
     <table class="tg">
         <tr>

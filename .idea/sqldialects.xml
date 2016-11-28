@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/SELECT_t___FROM_public_person_t.sql" dialect="PostgreSQL" />
-    <file url="file://$PROJECT_DIR$/SELECT_t___FROM_public_testproject_t.sql" dialect="PostgreSQL" />
-  </component>
-</project>

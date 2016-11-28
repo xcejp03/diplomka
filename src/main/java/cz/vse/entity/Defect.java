@@ -12,30 +12,23 @@ public class Defect extends BaseEntity {
     private PriorityEnum priorityEnum;
     private DefectStatusEnum defectStatusEnum;
     private String AffectsVersion;
-//    private Clob file;
-
-//    @OneToMany (mappedBy = "id")
-//    private List<DefectComment> defectComments;
 
     @ManyToMany  // (fetch = FetchType.EAGER) // PROVĚŘIT SPRÁVNOST
-    @JoinTable (name = "DEFECT_TCI", joinColumns = @JoinColumn (name = "DEFECT_ID", referencedColumnName = "ID"),
-    inverseJoinColumns = @JoinColumn(name = "TCI_ID", referencedColumnName = "ID"))
+    @JoinTable(name = "DEFECT_TCI", joinColumns = @JoinColumn(name = "DEFECT_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "TCI_ID", referencedColumnName = "ID"))
     private List<TCInstance> tcInstances;      //defect může být navázán TC nebo konkrétní step
 
-
     @ManyToMany //  (fetch = FetchType.EAGER) // PROVĚŘIT SPRÁVNOST
-    @JoinTable (name = "DEFECT_TSI", joinColumns = @JoinColumn (name = "DEFECT_ID", referencedColumnName = "ID"),
+    @JoinTable(name = "DEFECT_TSI", joinColumns = @JoinColumn(name = "DEFECT_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "TSI_ID", referencedColumnName = "ID"))
-    private List<TSInstance> tsInstances;      //nebo může být navázáno na oboje
-
-
+    private List<TSInstance> tsInstances;
 
     @ManyToOne// (fetch = FetchType.EAGER)
-    @JoinColumn (name = "assignee_id")
+    @JoinColumn(name = "assignee_id")
     private Person assignee;
 
     @ManyToOne// (fetch = FetchType.EAGER)
-    @JoinColumn (name = "reporter_id")
+    @JoinColumn(name = "reporter_id")
     private Person reporter;
 
     public String getDescription() {

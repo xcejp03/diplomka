@@ -93,9 +93,7 @@ public class TCController {
         model.addAttribute("listTSInstances", tcInstanceService.
                 findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
 
-        l.debug("bla bla");
-
-        return "tcRun";       //opravit/dokončit
+        return "tcRun";
     }
 
     @RequestMapping("/show/{id}")
@@ -105,8 +103,6 @@ public class TCController {
         model.addAttribute("tcInstance", tcInstanceRunDTO);
         model.addAttribute("listTSInstances", tcInstanceService.
                 findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
-
-        l.debug("bla bla");
 
         return "tcRun";
     }

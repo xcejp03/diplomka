@@ -21,7 +21,6 @@ public class DefectService {
     @Autowired
     DefectCommentDao defectCommentDao;
 
-
     @Autowired
     DefectDao defectDao;
 
@@ -86,7 +85,7 @@ public class DefectService {
         Defect defect = defectDao.getDefectById(id);
         l.info("found defect by id - service: " + id + " - " + defect.toString());
         return defect;
-}
+    }
 
     public DefectDTO findDefectDTOById(long id) {
         l.debug("finding defect by id - service");

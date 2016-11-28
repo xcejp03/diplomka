@@ -1,8 +1,5 @@
 package cz.vse.dto;
 
-import cz.vse.entity.Defect;
-import cz.vse.entity.Person;
-
 import java.time.LocalDateTime;
 
 /**

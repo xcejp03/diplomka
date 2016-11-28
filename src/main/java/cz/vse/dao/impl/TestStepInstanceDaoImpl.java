@@ -19,6 +19,7 @@ public class TestStepInstanceDaoImpl implements TestStepInstanceDao {
     private final Logger l = Logger.getLogger(this.getClass());
     @PersistenceContext
     EntityManager em;
+
     @Override
     public void saveTestStepInstance(TSInstance tsInstance) {
         l.debug("Saving TSInstance: " + tsInstance);
@@ -62,7 +63,7 @@ public class TestStepInstanceDaoImpl implements TestStepInstanceDao {
         resultList = em.createQuery("select tsi from TSInstance tsi where tsi.tcInstance.id = :id")
                 .setParameter("id", id)
                 .getResultList();
-        l.info("resultList: "+resultList.toString());
+        l.info("resultList: " + resultList.toString());
         return resultList;
     }
 }

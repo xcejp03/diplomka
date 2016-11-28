@@ -11,9 +11,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 <head>
-    <title>DEfekty v systemu</title>
-
-    <title>Person Page</title>
+    <title>Komentáře</title>
     <style type="text/css">
         .tg {
             border-collapse: collapse;
@@ -54,8 +52,8 @@
     </style>
 </head>
 <body>
-<h1>Defecty v systemu</h1>
-<h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\comment.jsp</h3>
+<h1>Komentáře k defektům v systemu</h1>
+<h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\commentCreate.jsp</h3>
 
 <c:url var="addAction" value="/comment/create"></c:url>
 
@@ -73,17 +71,17 @@
                     <form:hidden path="id"/>
                 </td>
             </tr>
-            <tr>
+       <%--     <tr>
                  <td>
                 <form:label path="createdDateTime">
                     <spring:message text="createdDateTime"/>
                 </form:label>
             </td>
                 <td>
-                    <form:input path="createdDateTime" readonly="true" size="8" disabled="true"/>
+                    <form:input path="createdDateTime" readonly="true" size="8" disabled="false"/>
                     <form:hidden path="createdDateTime"/>
                 </td>
-            </tr>
+            </tr>--%>
         </c:if>
         <tr>
             <td>
@@ -142,7 +140,7 @@
 
 
 <h3>Comment List</h3>
-<c:if test="${!empty listComment}">
+<c:if test="${!empty listComments}">
     <table class="tg">
         <tr>
             <th width="80">Comment ID</th>
@@ -152,7 +150,7 @@
             <th width="40">Edit</th>
             <th width="50">Delete</th>
         </tr>
-        <c:forEach items="${listComment}" var="comment">
+        <c:forEach items="${listComments}" var="comment">
             <tr>
                 <td>${comment.id}</td>
                 <td>${comment.createdDateTime}</td>
