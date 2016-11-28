@@ -58,8 +58,8 @@ public class DefectCommentService {
 
     public void updateComment(DefectCommentDTO defectCommentDTO) {
         l.debug("updating comment - service: " + defectCommentDTO);
-        DefectComment defectComment = new DefectComment();
-        defectComment = mapper.map(defectCommentDTO, DefectComment.class);
+        DefectComment defectComment = findCommentById(defectCommentDTO.getId());
+        mapper.map(defectCommentDTO, defectComment);
         defectCommentDao.updateDefectComment(defectComment);
         l.info("comment updated");
     }
