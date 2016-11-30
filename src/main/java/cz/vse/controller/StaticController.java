@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/static")
 public class StaticController {
     private final Logger l = Logger.getLogger(this.getClass());
-
+//
     @RequestMapping(value={"/", "index"}, method=RequestMethod.GET)
     public ModelAndView index() {
         return new ModelAndView("index");
