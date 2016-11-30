@@ -1,119 +1,35 @@
 package cz.vse.service;
 
-import cz.vse.dao.TestCaseMusterDao;
 import cz.vse.dto.TCMusterDTO;
-import cz.vse.entity.TCInstance;
 import cz.vse.entity.TCMuster;
-import ma.glasnost.orika.MapperFacade;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
  * Created by pcejka on 03.10.2016.
  */
-@Service
-public class TCMusterService {
-    private final Logger l = Logger.getLogger(this.getClass());
-    @Autowired
-    private TestCaseMusterDao testCaseMusterDao;
+public interface TCMusterService {
 
-    @Autowired
-    private MapperFacade mapper;
+    void createTestCaseMuster(TCMuster tcMuster);
 
-    @Autowired
-    private TSInstanceService tsInstanceService;
+    void createTestCaseMuster(TCMusterDTO tcMusterDTO);
 
-    @Autowired
-    private TCInstanceService tcInstanceService;
+    void updateTestCaseMuster(TCMuster tcMuster);
 
-    public void createTestCaseMuster(TCMuster tcMuster) {
-        l.debug("creating TCMuster - service");
-        testCaseMusterDao.saveTestCaseMuster(tcMuster);
-        l.info("created TCMuster - service: " + tcMuster);
-    }
+    void updateTestCaseMuster(TCMusterDTO tcMusterDTO);
 
-    public void createTestCaseMuster(TCMusterDTO tcMusterDTO) {
-        l.debug("creating TCMuster - service");
-        TCMuster tcMuster;
-        tcMuster = mapper.map(tcMusterDTO, TCMuster.class);
-        tcMuster.setCreatedDateTime(LocalDateTime.now());
-        testCaseMusterDao.saveTestCaseMuster(tcMuster);
-        l.info("created TCMuster - service: " + tcMusterDTO);
-    }
+    void deleteTestCaseMuster(TCMuster TCMusterToDelete);
 
-    public void updateTestCaseMuster(TCMuster tcMuster) {
-        l.debug("updating TCMuster - service");
-        testCaseMusterDao.updateTestCaseMuster(tcMuster);
-        l.info("updated TCMuster - service: " + tcMuster);
-    }
+    void deleteTestCaseMusterById(long testCaseMusterToDeleteById);
 
-    public void updateTestCaseMuster(TCMusterDTO tcMusterDTO) {
-        l.debug("updating TCMuster - service");
-        TCMuster tcMuster;
-        tcMuster = mapper.map(tcMusterDTO, TCMuster.class);
-        testCaseMusterDao.updateTestCaseMuster(tcMuster);
-        l.info("updated TCMuster - service: " + tcMuster);
-    }
+    TCMuster findTestCaseMusterById(long id);
 
-    public void deleteTestCaseMuster(TCMuster TCMusterToDelete) {
-        l.debug("deleting TCMuster - service");
-        testCaseMusterDao.deleteTestCaseMuster(TCMusterToDelete);
-        l.info("TCMuster deleted - service: " + TCMusterToDelete);
-    }
+    TCMusterDTO findTestCaseMusterDTOById(long id);
 
-    public void deleteTestCaseMusterById(long testCaseMusterToDeleteById) {
-        l.debug("deleting TCMuster - service");
-        TCMuster TCMusterToDelete;
-        TCMusterToDelete = testCaseMusterDao.getTestCaseMusterById(testCaseMusterToDeleteById);
-        testCaseMusterDao.deleteTestCaseMuster(TCMusterToDelete);
-        l.info("TCMuster deleted - service: " + TCMusterToDelete);
-    }
+    List<TCMuster> findAllTestCaseMusters();
 
-    public TCMuster findTestCaseMusterById(long id) {
-        l.debug("finding TCMuster - service");
-        TCMuster tcMuster;
-        tcMuster = testCaseMusterDao.getTestCaseMusterById(id);
-        l.info("TCMuster found - service: " + id + " - " + tcMuster);
-        return tcMuster;
-    }
+    List<TCMusterDTO> findAllTestCaseMustersDTO();
 
-    public TCMusterDTO findTestCaseMusterDTOById(long id) {
-        l.debug("finding TCMusterDTO - service");
-        TCMuster tcMuster;
-        TCMusterDTO tcMusterDTO;
-        tcMuster = testCaseMusterDao.getTestCaseMusterById(id);
-        tcMusterDTO = mapper.map(tcMuster, TCMusterDTO.class);
-        l.info("TCMuster found - service: " + id + " - " + tcMusterDTO);
-        return tcMusterDTO;
-    }
+    TCMuster findTestCaseMusterByTCInstanceId(long tcInstanceId);
 
-    public List<TCMuster> findAllTestCaseMusters() {
-        l.debug("finding all testCaseMusters - service");
-        List<TCMuster> TCMusterList;
-        TCMusterList = testCaseMusterDao.getAllTestCaseMusters();
-        l.info("found all testCaseMusters - service: ");
-        return TCMusterList;
-    }
-
-    public List<TCMusterDTO> findAllTestCaseMustersDTO() {
-        l.debug("finding all testCaseMustersDTO - service");
-        List<TCMuster> tcMusterList;
-        List<TCMusterDTO> tcMusterDTOList;
-        tcMusterList = testCaseMusterDao.getAllTestCaseMusters();
-        tcMusterDTOList = mapper.mapAsList(tcMusterList, TCMusterDTO.class);
-        l.info("found all testCaseMusters - service: ");
-        return tcMusterDTOList;
-    }
-
-    public TCMuster findTestCaseMusterByTCInstanceId(long tcInstanceId) {
-        TCInstance tcInstance;
-        TCMuster tcMuster;
-        tcInstance = tcInstanceService.findTestCaseInstanceById(tcInstanceId);
-        tcMuster = findTestCaseMusterById(tcInstance.getTcMuster().getId());
-        return tcMuster;
-    }
 }

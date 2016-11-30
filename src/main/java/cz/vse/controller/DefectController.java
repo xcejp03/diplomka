@@ -1,7 +1,7 @@
 package cz.vse.controller;
 
 import cz.vse.dto.DefectDTO;
-import cz.vse.service.DefectService;
+import cz.vse.service.impl.DefectServiceImpl;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
 import org.apache.log4j.Logger;
@@ -27,7 +27,7 @@ public class DefectController {
     PersonService personService;
 
     @Autowired
-    DefectService defectService;
+    DefectServiceImpl defectService;
 
     @RequestMapping( method = RequestMethod.GET)
     public String defectDefault(Model model) {

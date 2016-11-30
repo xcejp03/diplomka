@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Repository
 @Transactional("transactionManager")
-@ImportResource("classpath:ApplicationContext.xml")
+//@ImportResource("classpath:ApplicationContext.xml")
 public class DefectCommentDaoImpl implements DefectCommentDao {
     private final Logger l = Logger.getLogger(this.getClass());
     @PersistenceContext
