@@ -7,7 +7,7 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.1.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
 >
-    <!-- NOVÝ CONTEXT -->
+    <!-- NOVĂť CONTEXT -->
 
     <context:annotation-config/>
     <context:component-scan base-package="cz.vse"/>
