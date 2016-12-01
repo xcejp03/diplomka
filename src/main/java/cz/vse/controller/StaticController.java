@@ -34,7 +34,7 @@ public class StaticController {
 
     @RequestMapping(value = "/2", method = RequestMethod.GET)
     public String tcDefault2(Model model) {
-        l.info("request mapping /tc");
+        l.info("request mapping /tc  já");
 
         return "staticweb";
     }

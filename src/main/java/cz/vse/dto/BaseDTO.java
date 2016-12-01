@@ -7,6 +7,8 @@ import java.io.Serializable;
  */
 public abstract class BaseDTO implements Serializable {
 
+    private static final long serialVersionUID = -5481230886750874916L;
+
     protected Long id;
 
     public Long getId() {
