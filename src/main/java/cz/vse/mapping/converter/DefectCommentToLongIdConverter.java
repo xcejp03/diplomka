@@ -1,11 +1,11 @@
 package cz.vse.mapping.converter;
 
-import cz.vse.entity.Person;
+import cz.vse.entity.DefectComment;
 import org.springframework.stereotype.Component;
 
 /**
  * Created by pcejka on 02.12.2016.
  */
 @Component
-public class PersonToLongIdConverter extends AbstractEntityToIdConverter<Person, Long> {
+public class DefectCommentToLongIdConverter extends AbstractEntityToIdConverter<DefectComment, Long> {
 }
