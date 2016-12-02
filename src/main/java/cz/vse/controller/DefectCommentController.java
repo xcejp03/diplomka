@@ -37,7 +37,7 @@ public class DefectCommentController {
     public String createDefect(Model model) {
         l.info("request mapping comment/create");
         model.addAttribute("comment", new DefectCommentDTO());
-        model.addAttribute("listComment", defectCommentService.findAllDefectsCommentsDTOAllTest());
+        model.addAttribute("listComments", defectCommentService.findAllDefectsCommentsDTOAllTest());
         model.addAttribute("listDefects", defectService.findAllDefects());
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());

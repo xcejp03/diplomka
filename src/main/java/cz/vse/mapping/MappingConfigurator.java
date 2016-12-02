@@ -15,6 +15,13 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class MappingConfigurator extends ConfigurableMapper {
+//    public MappingConfigurator() {
+//        super(false);
+//    }
+//
+//    private MapperFactory factory;
+//
+//    private ApplicationContext applicationContext;
 
     protected void configure(MapperFactory factory) {
         ConverterFactory converterFactory = factory.getConverterFactory();

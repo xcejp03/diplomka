@@ -92,6 +92,7 @@ public class TSMuster extends BaseEntity {
         this.tcMuster = tcMuster;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

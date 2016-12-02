@@ -3,6 +3,7 @@ package cz.vse.service.impl;
 import cz.vse.dao.TestStepMusterDao;
 import cz.vse.dto.TSMusterDTO;
 import cz.vse.entity.TSMuster;
+import cz.vse.repository.TSMusterRepository;
 import cz.vse.service.TSMusterService;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
@@ -20,6 +21,9 @@ public class TSMusterServiceImpl implements TSMusterService {
     private final Logger l = Logger.getLogger(this.getClass());
 
     @Autowired
+    private TSMusterRepository tsMusterRepository;
+
+    @Autowired
     TestStepMusterDao testStepMusterDao;
     @Autowired
     private MapperFacade mapper;
@@ -29,7 +33,7 @@ public class TSMusterServiceImpl implements TSMusterService {
         TSMuster tsMuster = new TSMuster();
         tsMuster = mapper.map(tsMusterDTO, TSMuster.class);
         tsMuster.setCreatedDateTime(LocalDateTime.now());
-        testStepMusterDao.saveTestStepMuster(tsMuster);
+        tsMusterRepository.save(tsMuster);
         l.info("created TSMuster - service: " + tsMusterDTO);
     }
 
@@ -37,7 +41,7 @@ public class TSMusterServiceImpl implements TSMusterService {
         l.debug("updating TSMuster - service");
         TSMuster tsMuster;
         tsMuster = mapper.map(tsMusterDTO, TSMuster.class);
-        testStepMusterDao.updateTestStepMuster(tsMuster);
+        tsMusterRepository.save(tsMuster);
         l.info("updated TSMuster - service: " + tsMuster);
     }
 
@@ -45,20 +49,20 @@ public class TSMusterServiceImpl implements TSMusterService {
         l.debug("deleting TSMuster - service");
         Long tsMusterId;
         tsMusterId = TSMusterToDelete.getId();
-        testStepMusterDao.deleteTestStepMuster(tsMusterId);
+        tsMusterRepository.delete(tsMusterId);
         l.info("TSMuster deleted - service: " + tsMusterId);
     }
 
     public void deleteTestStepMuster(Long tsMusterId) {
         l.debug("deleting TSMuster - service");
-        testStepMusterDao.deleteTestStepMuster(tsMusterId);
+        tsMusterRepository.delete(tsMusterId);
         l.info("TSMuster deleted - service: " + tsMusterId);
     }
 
     public TSMuster findTestStepMusterById(long id) {
         l.debug("finding TSMuster - service");
         TSMuster TSMuster;
-        TSMuster = testStepMusterDao.getTestStepMusterById(id);
+        TSMuster = tsMusterRepository.findOne(id);
         l.info("TSMuster founf - service: " + id + " - " + TSMuster);
         return TSMuster;
     }
@@ -67,7 +71,7 @@ public class TSMusterServiceImpl implements TSMusterService {
         l.debug("finding TSMuster - service");
         TSMuster tsMuster;
         TSMusterDTO tsMusterDTO;
-        tsMuster = testStepMusterDao.getTestStepMusterById(id);
+        tsMuster = tsMusterRepository.findOne(id);
         tsMusterDTO = mapper.map(tsMuster, TSMusterDTO.class);
         l.info("TSMuster founf - service: " + id + " - " + tsMuster);
         return tsMusterDTO;
@@ -76,7 +80,7 @@ public class TSMusterServiceImpl implements TSMusterService {
     public List<TSMuster> findAllTestStepMusters() {
         l.debug("finding all testStepMusters - service");
         List<TSMuster> TSMusterList;
-        TSMusterList = testStepMusterDao.getAllTestStepMusters();
+        TSMusterList = tsMusterRepository.findAll();
         l.info("found all testStepMusters - service: ");
         return TSMusterList;
     }
@@ -85,15 +89,15 @@ public class TSMusterServiceImpl implements TSMusterService {
         l.debug("finding all testStepMustersDTO - service");
         List<TSMuster> tsMusterList;
         List<TSMusterDTO> tsMusterDTOList;
-        tsMusterList = testStepMusterDao.getAllTestStepMusters();
+        tsMusterList = tsMusterRepository.findAll();
         tsMusterDTOList = mapper.mapAsList(tsMusterList, TSMusterDTO.class);
         l.info("found all testStepMusters - service: ");
         return tsMusterDTOList;
     }
 
-    public List<TSMuster> findAllTestStepMustersByTCMusterId(long tcMusterId) {
-        List<TSMuster> tsMusters;
-        tsMusters = testStepMusterDao.getAllTestStepMustersByTCMusterId(tcMusterId);
-        return tsMusters;
-    }
+//    public List<TSMuster> findAllTestStepMustersByTCMusterId(long tcMusterId) {
+//        List<TSMuster> tsMusters;
+//        tsMusters = tsMusterRepository.findAllTestStepMustersByTCMusterId(tcMusterId);
+//        return tsMusters;
+//    }
 }

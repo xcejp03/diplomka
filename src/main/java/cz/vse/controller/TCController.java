@@ -90,8 +90,7 @@ public class TCController {
         TCInstanceRunDTO tcInstanceRunDTO;
         tcInstanceRunDTO = tcService.runNewTC(id);
         model.addAttribute("tcInstance", tcInstanceRunDTO);
-        model.addAttribute("listTSInstances", tcInstanceService.
-                findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
+//         model.addAttribute("listTSInstances", tsInstanceService.findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
 
         return "tcRun";
     }
@@ -101,8 +100,8 @@ public class TCController {
         TCInstanceRunDTO tcInstanceRunDTO;
         tcInstanceRunDTO = tcInstanceService.findTCInstanceRunDTOById(id);
         model.addAttribute("tcInstance", tcInstanceRunDTO);
-        model.addAttribute("listTSInstances", tcInstanceService.
-                findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
+//        model.addAttribute("listTSInstances", tsInstanceService.
+//                findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
 
         return "tcRun";
     }
@@ -111,7 +110,7 @@ public class TCController {
     public String showTCHistory(@PathVariable("id") long id, Model model) {
         l.info("/history/{id}" + id);
         model.addAttribute("tc", tcMusterService.findTestCaseMusterDTOById(id));
-        model.addAttribute("listTCInstances", tcInstanceService.findAllTCInstancesByTCMusterId(id));
+//        model.addAttribute("listTCInstances", tcInstanceService.findAllTCInstancesByTCMusterId(id));
         return "tcHistory";
     }
 

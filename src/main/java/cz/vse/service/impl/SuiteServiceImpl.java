@@ -1,10 +1,9 @@
 package cz.vse.service.impl;
 
-import cz.vse.dao.TestSuiteDao;
 import cz.vse.dto.TestSuiteDTO;
 import cz.vse.entity.TCMuster;
 import cz.vse.entity.TestSuite;
-import cz.vse.service.PersonService;
+import cz.vse.repository.SuiteRepository;
 import cz.vse.service.SuiteService;
 import cz.vse.service.TCMusterService;
 import ma.glasnost.orika.MapperFacade;
@@ -26,13 +25,11 @@ public class SuiteServiceImpl implements SuiteService {
     private final Logger l = Logger.getLogger(this.getClass());
 
     @Autowired
+    SuiteRepository suiteRepository;
+
+    @Autowired
     private MapperFacade mapper;
 
-    @Autowired
-    private TestSuiteDao testSuiteDao;
-
-    @Autowired
-    private PersonService personService;
 
     @Autowired
     private TCMusterService tcMusterService;
@@ -52,13 +49,13 @@ public class SuiteServiceImpl implements SuiteService {
             }
             testSuite.setTcMusters(tcMusterList);
         }
-        testSuiteDao.saveTestSuite(testSuite);
+        suiteRepository.save(testSuite);
         l.info("created test suite - service: " + testSuiteDTO);
     }
 
     public void createTestSuite(TestSuite testSuite) {
         l.debug("creating test suite - service");
-        testSuiteDao.saveTestSuite(testSuite);
+        suiteRepository.save(testSuite);
         l.info("created test suite - service: " + testSuite);
     }
 
@@ -75,27 +72,27 @@ public class SuiteServiceImpl implements SuiteService {
             }
             testSuite.setTcMusters(tcMusterList);
         }
-        testSuiteDao.updateTestSuite(testSuite);
+        suiteRepository.save(testSuite);
         l.info("updated test suite - service: " + testSuiteDTO);
     }
 
     public void deleteTestSuite(TestSuite testSuite) {
         l.debug("deleting test suite - service");
         Long testSuiteId = testSuite.getId();
-        testSuiteDao.deleteTestSuite(testSuiteId);
+        suiteRepository.delete(testSuiteId);
         l.info("test suite deleted - service: " + testSuite);
     }
 
     public void deleteTestSuiteById(long id) {
         l.debug("deleting test suite - service");
-        testSuiteDao.deleteTestSuite(id);
+        suiteRepository.delete(id);
         l.info("test suite deleted - service: " + id);
     }
 
     public TestSuite findTestSuiteById(long id) {
         l.debug("finding test suite - service");
         TestSuite testSuite;
-        testSuite = testSuiteDao.getTestSuiteById(id);
+        testSuite = suiteRepository.findOne(id);
         l.info("test suit found - service: " + id + " - " + testSuite);
         return testSuite;
     }
@@ -104,7 +101,7 @@ public class SuiteServiceImpl implements SuiteService {
         l.debug("finding test suite - service");
         TestSuite testSuite;
         TestSuiteDTO testSuiteDTO;
-        testSuite = testSuiteDao.getTestSuiteById(id);
+        testSuite = suiteRepository.findOne(id);
         testSuiteDTO = mapper.map(testSuite, TestSuiteDTO.class);
 
         l.info("projectDTO found - service: " + id + " - " + testSuiteDTO.toString());
@@ -116,7 +113,7 @@ public class SuiteServiceImpl implements SuiteService {
         List<TestSuite> testSuiteList;
         List<TestSuiteDTO> testSuiteDTOList;
 
-        testSuiteList = testSuiteDao.getAllTestSuites();
+        testSuiteList = suiteRepository.findAll();
         l.warn("mezikrok");
         testSuiteDTOList = mapper.mapAsList(testSuiteList, TestSuiteDTO.class);
 
@@ -126,8 +123,8 @@ public class SuiteServiceImpl implements SuiteService {
 
     public List<TestSuite> findAllTestSuites() {
         l.debug("finding all testSuites - service");
-        List<TestSuite> testSuites = new ArrayList<>();
-        testSuites = testSuiteDao.getAllTestSuites();
+        List<TestSuite> testSuites;
+        testSuites = suiteRepository.findAll();
         l.info("found all testSuites - service: " + testSuites.toString());
         return testSuites;
     }

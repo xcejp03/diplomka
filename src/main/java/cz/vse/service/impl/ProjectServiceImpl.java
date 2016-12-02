@@ -4,6 +4,7 @@ import cz.vse.dao.TestProjectDao;
 import cz.vse.dto.ProjectDTO;
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
+import cz.vse.repository.ProjectRepository;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
 import ma.glasnost.orika.MapperFacade;
@@ -22,10 +23,10 @@ import java.util.List;
 @Transactional
 public class ProjectServiceImpl implements ProjectService {
     private final Logger l = Logger.getLogger(this.getClass());
-
     @Autowired
     TestProjectDao testProjectDao;
-
+    @Autowired
+    private ProjectRepository projectRepository;
     @Autowired
     private MapperFacade mapper;
 
@@ -34,7 +35,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     public void createTestProject(ProjectDTO projectDTO) {
         l.debug("creating project - service");
-        Project project = new Project();
+        Project project;
         project = mapper.map(projectDTO, Project.class);
 
         /**
@@ -49,19 +50,19 @@ public class ProjectServiceImpl implements ProjectService {
             }
             project.setPersonMembers(personMembersList);
         }
-        testProjectDao.saveTestProject(project);
+        projectRepository.save(project);
         l.info("created project - service: " + project);
     }
 
     public void createTestProject(Project project) {
         l.debug("creating project - service");
-        testProjectDao.saveTestProject(project);
+        projectRepository.save(project);
         l.info("created project - service: " + project);
     }
 
     public void updateTestProject(ProjectDTO projectDTO) {
         l.debug("updating project - service");
-        Project project = new Project();
+        Project project;
         project = mapper.map(projectDTO, Project.class);
 
         List<Person> personMembersList = new ArrayList<>();
@@ -73,27 +74,26 @@ public class ProjectServiceImpl implements ProjectService {
             }
             project.setPersonMembers(personMembersList);
         }
-        testProjectDao.updateTestProject(project);
+        projectRepository.save(project);
         l.info("updated project - service: " + project);
     }
 
     public void deleteTestProject(Project projectToDelete) {
         l.debug("deleting project - service");
-        Long projectId = projectToDelete.getId();
-        testProjectDao.deleteTestProject(projectId);
+        projectRepository.delete(projectToDelete);
         l.info("project deleted - service: " + projectToDelete);
     }
 
     public void deleteTestProjectById(long testProjectToDeleteById) {
         l.debug("deleting project - service");
-        testProjectDao.deleteTestProject(testProjectToDeleteById);
+        projectRepository.delete(testProjectToDeleteById);
         l.info("project deleted - service: " + testProjectToDeleteById);
     }
 
     public Project findTestProjectById(long id) {
         l.debug("finding project - service");
         Project project;
-        project = testProjectDao.getTestProjectById(id);
+        project = projectRepository.findOne(id);
         l.info("project found - service: " + id + " - " + project);
         return project;
     }
@@ -101,8 +101,8 @@ public class ProjectServiceImpl implements ProjectService {
     public ProjectDTO findTestProjectDTOById(long id) {
         l.debug("finding project - service");
         Project project;
-        project = testProjectDao.getTestProjectById(id);
-        ProjectDTO projectDTO = new ProjectDTO();
+        ProjectDTO projectDTO;
+        project = projectRepository.findOne(id);
         projectDTO = mapper.map(project, ProjectDTO.class);
         l.info("projectDTO found - service: " + id + " - " + projectDTO);
         return projectDTO;
@@ -110,9 +110,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     public List<ProjectDTO> findAllTestProjectsDTO() {
         l.debug("finding all testProjects - service");
-        List<Project> projectList = new ArrayList<>();
+        List<Project> projectList;
         List<ProjectDTO> projectDTOList;
-        projectList = testProjectDao.getAllTestProjects();
+        projectList = projectRepository.findAll();
         l.warn("mezkrok");
         projectDTOList = mapper.mapAsList(projectList, ProjectDTO.class);
 
@@ -122,8 +122,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     public List<Project> findAllTestProjects() {
         l.debug("finding all testProjects - service");
-        List<Project> projectList = new ArrayList<>();
-        projectList = testProjectDao.getAllTestProjects();
+        List<Project> projectList;
+        projectList = projectRepository.findAll();
         l.info("found all testProjects - service: ");
         return projectList;
     }

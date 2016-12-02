@@ -1,9 +1,7 @@
 package cz.vse.controller;
 
 import cz.vse.dto.PersonDTO;
-import cz.vse.entity.Project;
 import cz.vse.service.PersonService;
-import cz.vse.service.ProjectService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/person")
 public class PersonController {
     private final Logger l = Logger.getLogger(this.getClass());
-    @Autowired
-    ProjectService projectService;
 
     @Autowired
     PersonService personService;
@@ -47,20 +43,12 @@ public class PersonController {
         return "redirect:create";
     }
 
-    @RequestMapping(value = "/test2", method = RequestMethod.GET)
-    public String testik2(Model model) {
-        l.info("testik");
-        Project project = new Project();
-        project.setName("XxX");
-        projectService.createTestProject(project);
-        return "projectCreate";
-    }
 
     @RequestMapping("/edit/{id}")
     public String editPerson(@PathVariable("id") int id, Model model) {
         l.info("/edit/{id}" + id);
         model.addAttribute("person", personService.findPersonById(id));
-        return "person";
+        return "personCreate";
     }
 
     @RequestMapping("/remove/{id}")

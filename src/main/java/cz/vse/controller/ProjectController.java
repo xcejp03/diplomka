@@ -57,7 +57,8 @@ public class ProjectController {
         l.info("/edit/{id}" + id);
         model.addAttribute("project", projectService.findTestProjectDTOById(id));
         model.addAttribute("listPersons", personService.findAllPersons());
-        return "project";
+        model.addAttribute("listSuites", suiteService.findAllTestSuites());
+        return "projectCreate";
     }
 
     @RequestMapping("/remove/{id}")

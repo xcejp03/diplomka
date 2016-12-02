@@ -1,7 +1,6 @@
 package cz.vse.mapping.converter;
 
 import cz.vse.entity.TestSuite;
-import cz.vse.repository.base.BaseRepository;
 import org.springframework.stereotype.Component;
 
 /**

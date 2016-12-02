@@ -96,18 +96,18 @@ public class TCServiceImpl implements TCService {
     public List<TSInstance> createAndSaveTSInstanceFromTCMusterId(long tcMusterId, TCInstance tcInstance) {
         TCMuster tcMuster;
         List<TSMuster> tsMusterList;
-        List<TSInstance> tsInstanceList;
+        List<TSInstance> tsInstanceList = null;
 
-        tsMusterList = tsMusterService.findAllTestStepMustersByTCMusterId(tcMusterId);
-        tsInstanceList = mapTSMusterToTSInstance(tsMusterList);
-        tsInstanceList = mapper.mapAsList(tsMusterList, TSInstance.class);
+//        tsMusterList = tsMusterService.findAllTestStepMustersByTCMusterId(tcMusterId);
+//        tsInstanceList = mapTSMusterToTSInstance(tsMusterList);
+//        tsInstanceList = mapper.mapAsList(tsMusterList, TSInstance.class);
 
-        for (TSInstance tsInstance : tsInstanceList) {
-            tsInstance.setTcInstance(tcInstance);
-            tsInstanceService.createTestStepInstance(tsInstance);
-        }
+//        for (TSInstance tsInstance : tsInstanceList) {
+//            tsInstance.setTcInstance(tcInstance);
+//            tsInstanceService.createTestStepInstance(tsInstance);
+//        }
 
-        l.info(tsInstanceList);
+//        l.info(tsInstanceList);
         return tsInstanceList;
     }
 }

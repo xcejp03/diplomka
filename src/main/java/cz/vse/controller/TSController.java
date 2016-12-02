@@ -45,7 +45,7 @@ public class TSController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createTSPost(@ModelAttribute("project") TSMusterDTO tsMusterDTO) {
+    public String createTSPost(@ModelAttribute("ts") TSMusterDTO tsMusterDTO) {
         if (tsMusterDTO.getId() == null) {
             tsMusterService.createTestStepMuster(tsMusterDTO);
         } else {
@@ -58,7 +58,7 @@ public class TSController {
     public String editTSMuster(@PathVariable("id") long id, Model model) {
         l.info("/edit/{id}" + id);
 
-        model.addAttribute("ts", tsMusterService.findTestStepMusterById(id));
+        model.addAttribute("ts", tsMusterService.findTestStepMusterDTOById(id));
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMusters());
         return "tsCreate";

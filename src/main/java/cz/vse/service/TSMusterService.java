@@ -26,6 +26,6 @@ public interface TSMusterService {
 
     List<TSMusterDTO> findAllTestStepMustersDTO();
 
-    List<TSMuster> findAllTestStepMustersByTCMusterId(long tcMusterId);
+//    List<TSMuster> findAllTestStepMustersByTCMusterId(long tcMusterId);
 
 }

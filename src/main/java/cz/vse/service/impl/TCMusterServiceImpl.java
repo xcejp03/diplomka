@@ -4,6 +4,7 @@ import cz.vse.dao.TestCaseMusterDao;
 import cz.vse.dto.TCMusterDTO;
 import cz.vse.entity.TCInstance;
 import cz.vse.entity.TCMuster;
+import cz.vse.repository.TCMusterRepository;
 import cz.vse.service.TCInstanceService;
 import cz.vse.service.TCMusterService;
 import ma.glasnost.orika.MapperFacade;
@@ -21,6 +22,9 @@ import java.util.List;
 public class TCMusterServiceImpl implements TCMusterService{
     private final Logger l = Logger.getLogger(this.getClass());
     @Autowired
+    private TCMusterRepository tcMusterRepository;
+
+    @Autowired
     private TestCaseMusterDao testCaseMusterDao;
 
     @Autowired
@@ -33,7 +37,7 @@ public class TCMusterServiceImpl implements TCMusterService{
 
     public void createTestCaseMuster(TCMuster tcMuster) {
         l.debug("creating TCMuster - service");
-        testCaseMusterDao.saveTestCaseMuster(tcMuster);
+        tcMusterRepository.save(tcMuster);
         l.info("created TCMuster - service: " + tcMuster);
     }
 
@@ -42,13 +46,13 @@ public class TCMusterServiceImpl implements TCMusterService{
         TCMuster tcMuster;
         tcMuster = mapper.map(tcMusterDTO, TCMuster.class);
         tcMuster.setCreatedDateTime(LocalDateTime.now());
-        testCaseMusterDao.saveTestCaseMuster(tcMuster);
+        tcMusterRepository.save(tcMuster);
         l.info("created TCMuster - service: " + tcMusterDTO);
     }
 
     public void updateTestCaseMuster(TCMuster tcMuster) {
         l.debug("updating TCMuster - service");
-        testCaseMusterDao.updateTestCaseMuster(tcMuster);
+        tcMusterRepository.save(tcMuster);
         l.info("updated TCMuster - service: " + tcMuster);
     }
 
@@ -56,28 +60,27 @@ public class TCMusterServiceImpl implements TCMusterService{
         l.debug("updating TCMuster - service");
         TCMuster tcMuster;
         tcMuster = mapper.map(tcMusterDTO, TCMuster.class);
-        testCaseMusterDao.updateTestCaseMuster(tcMuster);
+        tcMusterRepository.save(tcMuster);
         l.info("updated TCMuster - service: " + tcMuster);
     }
 
     public void deleteTestCaseMuster(TCMuster TCMusterToDelete) {
         l.debug("deleting TCMuster - service");
-        testCaseMusterDao.deleteTestCaseMuster(TCMusterToDelete);
+        tcMusterRepository.delete(TCMusterToDelete);
         l.info("TCMuster deleted - service: " + TCMusterToDelete);
     }
 
     public void deleteTestCaseMusterById(long testCaseMusterToDeleteById) {
         l.debug("deleting TCMuster - service");
         TCMuster TCMusterToDelete;
-        TCMusterToDelete = testCaseMusterDao.getTestCaseMusterById(testCaseMusterToDeleteById);
-        testCaseMusterDao.deleteTestCaseMuster(TCMusterToDelete);
-        l.info("TCMuster deleted - service: " + TCMusterToDelete);
+        tcMusterRepository.delete(testCaseMusterToDeleteById);
+        l.info("TCMuster deleted - service: " + testCaseMusterToDeleteById);
     }
 
     public TCMuster findTestCaseMusterById(long id) {
         l.debug("finding TCMuster - service");
         TCMuster tcMuster;
-        tcMuster = testCaseMusterDao.getTestCaseMusterById(id);
+        tcMuster = tcMusterRepository.findOne(id);
         l.info("TCMuster found - service: " + id + " - " + tcMuster);
         return tcMuster;
     }
@@ -86,7 +89,7 @@ public class TCMusterServiceImpl implements TCMusterService{
         l.debug("finding TCMusterDTO - service");
         TCMuster tcMuster;
         TCMusterDTO tcMusterDTO;
-        tcMuster = testCaseMusterDao.getTestCaseMusterById(id);
+        tcMuster = tcMusterRepository.findOne(id);
         tcMusterDTO = mapper.map(tcMuster, TCMusterDTO.class);
         l.info("TCMuster found - service: " + id + " - " + tcMusterDTO);
         return tcMusterDTO;
@@ -95,7 +98,7 @@ public class TCMusterServiceImpl implements TCMusterService{
     public List<TCMuster> findAllTestCaseMusters() {
         l.debug("finding all testCaseMusters - service");
         List<TCMuster> TCMusterList;
-        TCMusterList = testCaseMusterDao.getAllTestCaseMusters();
+        TCMusterList = tcMusterRepository.findAll();
         l.info("found all testCaseMusters - service: ");
         return TCMusterList;
     }
@@ -104,7 +107,7 @@ public class TCMusterServiceImpl implements TCMusterService{
         l.debug("finding all testCaseMustersDTO - service");
         List<TCMuster> tcMusterList;
         List<TCMusterDTO> tcMusterDTOList;
-        tcMusterList = testCaseMusterDao.getAllTestCaseMusters();
+        tcMusterList = tcMusterRepository.findAll();
         tcMusterDTOList = mapper.mapAsList(tcMusterList, TCMusterDTO.class);
         l.info("found all testCaseMusters - service: ");
         return tcMusterDTOList;

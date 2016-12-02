@@ -2,7 +2,6 @@ package cz.vse.service;
 
 import cz.vse.dto.TCInstanceRunDTO;
 import cz.vse.entity.TCInstance;
-import cz.vse.entity.TSInstance;
 
 import java.util.List;
 
@@ -23,9 +22,7 @@ public interface TCInstanceService {
 
     List<TCInstance> findAllTestCaseInstances();
 
-    List<TSInstance> findAllTSInstancesByTCInstanceId(long id);
-
-    List<TCInstance> findAllTCInstancesByTCMusterId(long id);
+//    List<TCInstance> findAllTCInstancesByTCMusterId(long id);
 
     TCInstanceRunDTO findTCInstanceRunDTOById(long id);
 

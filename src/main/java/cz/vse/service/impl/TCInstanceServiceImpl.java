@@ -1,17 +1,15 @@
 package cz.vse.service.impl;
 
-import cz.vse.dao.TestCaseInstanceDao;
-import cz.vse.dao.TestStepInstanceDao;
 import cz.vse.dto.TCInstanceRunDTO;
 import cz.vse.entity.TCInstance;
-import cz.vse.entity.TSInstance;
+import cz.vse.repository.TCInstanceRepository;
 import cz.vse.service.TCInstanceService;
+import cz.vse.service.TCMusterService;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,12 +18,10 @@ import java.util.List;
 @Service
 public class TCInstanceServiceImpl implements TCInstanceService {
     private final Logger l = Logger.getLogger(this.getClass());
-    @Autowired
-    private TestCaseInstanceDao testCaseInstanceDao;
 
-    @Autowired
-    private TestStepInstanceDao testStepInstanceDao;
+    @Autowired TCMusterService tcMusterService;
 
+    @Autowired TCInstanceRepository tcInstanceRepository;
 
     @Autowired
     private MapperFacade mapper;
@@ -33,34 +29,32 @@ public class TCInstanceServiceImpl implements TCInstanceService {
     public void createTestCaseInstance(TCInstance tcInstance) {
         l.debug("creating TCInstance - service");
 
-        testCaseInstanceDao.saveTestCaseInstance(tcInstance);
+        tcInstanceRepository.save(tcInstance);
         l.info("created TCInstance - service: " + tcInstance);
     }
 
     public void updateTestCaseInstance(TCInstance tcInstance) {
         l.debug("updating TCInstance - service");
-        testCaseInstanceDao.updateTestCaseInstance(tcInstance);
+        tcInstanceRepository.save(tcInstance);
         l.info("updated TCInstance - service: " + tcInstance);
     }
 
     public void deleteTestCaseInstance(TCInstance tcInstanceToDelete) {
         l.debug("deleting TCInstance - service");
-        testCaseInstanceDao.deleteTestCaseInstance(tcInstanceToDelete);
+        tcInstanceRepository.delete(tcInstanceToDelete);
         l.info("TCInstance deleted - service: " + tcInstanceToDelete);
     }
 
     public void deleteTestCaseInstanceById(long testCaseInstanceToDeleteById) {
         l.debug("deleting TCInstance - service");
-        TCInstance TCInstanceToDelete;
-        TCInstanceToDelete = testCaseInstanceDao.getTestCaseInstanceById(testCaseInstanceToDeleteById);
-        testCaseInstanceDao.deleteTestCaseInstance(TCInstanceToDelete);
-        l.info("TCInstance deleted - service: " + TCInstanceToDelete);
+        tcInstanceRepository.delete(testCaseInstanceToDeleteById);
+        l.info("TCInstance deleted - service: " + testCaseInstanceToDeleteById);
     }
 
     public TCInstance findTestCaseInstanceById(long id) {
         l.debug("finding TCInstance - service");
         TCInstance tcInstance;
-        tcInstance = testCaseInstanceDao.getTestCaseInstanceById(id);
+        tcInstance = tcInstanceRepository.findOne(id);
         l.info("TCInstance founf - service: " + id + " - " + tcInstance);
         return tcInstance;
     }
@@ -68,29 +62,17 @@ public class TCInstanceServiceImpl implements TCInstanceService {
     public List<TCInstance> findAllTestCaseInstances() {
         l.debug("finding all testCaseInstances - service");
         List<TCInstance> TCInstanceList;
-        TCInstanceList = testCaseInstanceDao.getAllTestCaseInstances();
+        TCInstanceList = tcInstanceRepository.findAll();
         l.info("found all testCaseInstances - service: " + TCInstanceList.toString());
         return TCInstanceList;
     }
 
-    /**
-     * přendat do TS!!!!!!
-     *
-     * @param id
-     * @return
-     */
-    public List<TSInstance> findAllTSInstancesByTCInstanceId(long id) {
-        List<TSInstance> tsInstanceList = new ArrayList<>();
-        tsInstanceList = testStepInstanceDao.getAllTestStepInstancesByTCInstanceId(id);
 
-        return tsInstanceList;
-    }
-
-    public List<TCInstance> findAllTCInstancesByTCMusterId(long id) {
-        List<TCInstance> tcInstanceList;
-        tcInstanceList = testCaseInstanceDao.getAllTCInstancesByTCMusterId(id);
-        return tcInstanceList;
-    }
+//    public List<TCInstance> findAllTCInstancesByTCMusterId(long id) {
+//        List<TCInstance> tcInstanceList;
+//        tcInstanceList = tcInstanceRepository.findByTCMusterId(id);
+//        return tcInstanceList;
+//    }
 
     public TCInstanceRunDTO findTCInstanceRunDTOById(long id) {
         TCInstance tcInstance = findTestCaseInstanceById(id);
@@ -98,4 +80,6 @@ public class TCInstanceServiceImpl implements TCInstanceService {
 
         return tcInstanceRunDTO;
     }
+
+
 }

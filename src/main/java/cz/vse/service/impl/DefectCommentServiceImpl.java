@@ -6,6 +6,7 @@ import cz.vse.dto.DefectCommentDTO;
 import cz.vse.entity.Defect;
 import cz.vse.entity.DefectComment;
 import cz.vse.entity.Person;
+import cz.vse.repository.DefectCommentRepository;
 import cz.vse.service.DefectCommentService;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
@@ -19,14 +20,14 @@ import java.util.List;
  * Created by pcejka on 03.10.2016.
  */
 @Service
-public class DefectCommentServiceImpl implements DefectCommentService{
+public class DefectCommentServiceImpl implements DefectCommentService {
     private final Logger l = Logger.getLogger(this.getClass());
     @Autowired
-    DefectCommentDao defectCommentDao;
-
-    @Autowired
     DefectDao defect;
-
+    @Autowired
+    private DefectCommentDao defectCommentDao;
+    @Autowired
+    private DefectCommentRepository defectCommentRepository;
     @Autowired
     private MapperFacade mapper;
 
@@ -38,22 +39,22 @@ public class DefectCommentServiceImpl implements DefectCommentService{
         defectComment.setCreatedDateTime(LocalDateTime.now());
         defectComment.setCommentText(commentText);
 
-        defectCommentDao.saveDefectComment(defectComment);
+        defectCommentRepository.save(defectComment);
         l.info("comment created - service");
     }
 
     public void createComment(DefectCommentDTO defectCommentDTO) {
         l.debug("creating comment - service: ");
-        DefectComment defectComment = new DefectComment();
+        DefectComment defectComment;
         defectComment = mapper.map(defectCommentDTO, DefectComment.class);
         defectComment.setCreatedDateTime(LocalDateTime.now());
-        defectCommentDao.saveDefectComment(defectComment);
+        defectCommentRepository.save(defectComment);
         l.info("comment created - service");
     }
 
     public void updateComment(DefectComment commentToUpdate) {
         l.debug("updating comment - service: " + commentToUpdate);
-        defectCommentDao.updateDefectComment(commentToUpdate);
+        defectCommentRepository.save(commentToUpdate);
         l.info("comment updated");
     }
 
@@ -61,34 +62,33 @@ public class DefectCommentServiceImpl implements DefectCommentService{
         l.debug("updating comment - service: " + defectCommentDTO);
         DefectComment defectComment = findCommentById(defectCommentDTO.getId());
         mapper.map(defectCommentDTO, defectComment);
-        defectCommentDao.updateDefectComment(defectComment);
+        defectCommentRepository.save(defectComment);
         l.info("comment updated");
     }
 
     public void deleteComment(DefectComment commentToDelete) {
         l.debug("deleting comment - service: " + commentToDelete);
-        Long comentId = commentToDelete.getId();
-        defectCommentDao.deleteDefectComment(comentId);
+        defectCommentRepository.delete(commentToDelete);
         l.info("comment deleted");
     }
 
     public void deleteComment(long id) {
         l.debug("deleting comment - service: " + id);
-        defectCommentDao.deleteDefectComment(id);
+        defectCommentRepository.delete(id);
         l.info("comment deleted");
     }
 
     public DefectComment findCommentById(long id) {
         l.debug("finding comment - service: " + id);
         DefectComment defectComment;
-        defectComment = defectCommentDao.getDefectCommentById(id);
+        defectComment = defectCommentRepository.findOne(id);
         l.info("comment found");
         return defectComment;
     }
 
     public DefectCommentDTO findCommentDTOById(long id) {
         l.debug("finding comment - service: " + id);
-        DefectComment defectComment = defectCommentDao.getDefectCommentById(id);
+        DefectComment defectComment = defectCommentRepository.findOne(id);
         DefectCommentDTO defectCommentDTO = mapper.map(defectComment, DefectCommentDTO.class);
         l.info("comment found");
         return defectCommentDTO;
@@ -105,7 +105,7 @@ public class DefectCommentServiceImpl implements DefectCommentService{
     public List<DefectCommentDTO> findAllDefectsCommentsDTOAllTest() {
         l.debug("finding all defect's comments - service: ");
         List<DefectComment> defectCommentList;
-        defectCommentList = defectCommentDao.getAllDefectCommentAllTest();
+        defectCommentList = defectCommentRepository.findAll();
         List<DefectCommentDTO> defectCommentDTOList;
         defectCommentDTOList = mapper.mapAsList(defectCommentList, DefectCommentDTO.class);
         l.info("all defect's comments found");

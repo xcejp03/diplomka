@@ -4,6 +4,7 @@ import cz.vse.dao.DefectCommentDao;
 import cz.vse.dao.DefectDao;
 import cz.vse.dto.DefectDTO;
 import cz.vse.entity.*;
+import cz.vse.repository.DefectRepository;
 import cz.vse.service.DefectService;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
@@ -20,6 +21,9 @@ public class DefectServiceImpl implements DefectService {
 
     private final Logger l = Logger.getLogger(this.getClass());
     @Autowired
+    DefectRepository defectRepository;
+
+    @Autowired
     DefectCommentDao defectCommentDao;
 
     @Autowired
@@ -30,15 +34,15 @@ public class DefectServiceImpl implements DefectService {
 
     public void createDefect(Defect defect) {
         l.debug("creating defect - service");
-        defectDao.saveDefect(defect);
+        defectRepository.save(defect);
         l.info("defect created - service: " + defect.toString());
     }
 
     public void createDefect(DefectDTO defectDTO) {
         l.debug("creating defect - service");
-        Defect defect = new Defect();
+        Defect defect;
         defect = mapper.map(defectDTO, Defect.class);
-        defectDao.saveDefect(defect);
+        defectRepository.save(defect);
         l.info("defect created - service: " + defectDTO.toString());
     }
 
@@ -56,7 +60,7 @@ public class DefectServiceImpl implements DefectService {
         defect.setTcInstances(TCInstance);
         defect.setTsInstances(TSInstance);
 
-        defectDao.saveDefect(defect);
+        defectRepository.save(defect);
         l.info("defect created - service: " + defect.toString());
     }
 
@@ -64,33 +68,34 @@ public class DefectServiceImpl implements DefectService {
         l.debug("updating defect - service");
         Defect defect = new Defect();
         defect = mapper.map(defectDTO, Defect.class);
-        defectDao.updateDefect(defect);
+        defectRepository.save(defect);
         l.info("updating defect - service: " + defectDTO.toString());
     }
 
     public void deleteDefect(Defect defectToDelete) {
         l.debug("deleting defect - service");
         Long defectId = defectToDelete.getId();
-        defectDao.deleteDefect(defectId);
+        defectRepository.delete(defectToDelete);
         l.info("defect deleted - service: " + defectToDelete.toString());
     }
 
     public void deleteDefect(long defectToDeleteId) {
         l.debug("deleting defect - service");
-        defectDao.deleteDefect(defectToDeleteId);
+        defectRepository.delete(defectToDeleteId);
         l.info("defect deleted - service: " + defectToDeleteId);
     }
 
     public Defect findDefectById(long id) {
         l.debug("finding defect by id - service");
-        Defect defect = defectDao.getDefectById(id);
+        Defect defect;
+        defect = defectRepository.findOne(id);
         l.info("found defect by id - service: " + id + " - " + defect.toString());
         return defect;
     }
 
     public DefectDTO findDefectDTOById(long id) {
         l.debug("finding defect by id - service");
-        Defect defect = defectDao.getDefectById(id);
+        Defect defect = defectRepository.findOne(id);
         DefectDTO defectDTO = mapper.map(defect, DefectDTO.class);
         l.info("found defect by id - service: " + id + " - " + defectDTO.toString());
         return defectDTO;
@@ -98,7 +103,7 @@ public class DefectServiceImpl implements DefectService {
 
     public List<Defect> findAllDefects() {
         l.debug("finding all defects - service");
-        List<Defect> defectList = defectDao.getAllDefects();
+        List<Defect> defectList = defectRepository.findAll();
         l.info("found all defects - service: " + defectList.toString());
         return defectList;
     }
