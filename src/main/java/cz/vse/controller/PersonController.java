@@ -34,11 +34,9 @@ public class PersonController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createProject(@ModelAttribute("person") PersonDTO personDTO) {
         if (personDTO.getId() == null) {
-            //new person, add it
             personService.createPerson(personDTO);
         } else {
-            //existing person, call update
-            this.personService.updatePerson(personDTO);
+            personService.updatePerson(personDTO);
         }
         return "redirect:create";
     }
@@ -46,7 +44,7 @@ public class PersonController {
 
     @RequestMapping("/edit/{id}")
     public String editPerson(@PathVariable("id") int id, Model model) {
-        l.info("/edit/{id}" + id);
+        l.info("/edit/" + id);
         model.addAttribute("person", personService.findPersonById(id));
         return "personCreate";
     }
