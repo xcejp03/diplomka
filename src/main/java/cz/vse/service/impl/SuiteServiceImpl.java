@@ -40,15 +40,15 @@ public class SuiteServiceImpl implements SuiteService {
         testSuite = mapper.map(testSuiteDTO, TestSuite.class);
         testSuite.setCreatedDateTime(LocalDateTime.now());
 
-        List<TCMuster> tcMusterList = new ArrayList<>();
-        if (testSuite.getTcMusters() != null) {
-            for (TCMuster tcMusterForId : testSuite.getTcMusters()) {
-                TCMuster tcMuster = tcMusterService.findTestCaseMusterById(tcMusterForId.getId());
-                tcMuster.addTestSuites(testSuite);
-                tcMusterList.add(tcMuster);
-            }
-            testSuite.setTcMusters(tcMusterList);
-        }
+//        List<TCMuster> tcMusterList = new ArrayList<>();
+//        if (testSuite.getTcMusters() != null) {
+//            for (TCMuster tcMusterForId : testSuite.getTcMusters()) {
+//                TCMuster tcMuster = tcMusterService.findTestCaseMusterById(tcMusterForId.getId());
+//                tcMuster.addTestSuites(testSuite);
+//                tcMusterList.add(tcMuster);
+//            }
+//            testSuite.setTcMusters(tcMusterList);
+//        }
         suiteRepository.save(testSuite);
         l.info("created test suite - service: " + testSuiteDTO);
     }

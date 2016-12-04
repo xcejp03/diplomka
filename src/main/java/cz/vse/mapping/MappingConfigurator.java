@@ -2,9 +2,7 @@ package cz.vse.mapping;
 
 import cz.vse.dto.*;
 import cz.vse.entity.*;
-import cz.vse.mapping.utils.CustomMapperMap;
 import ma.glasnost.orika.Converter;
-import ma.glasnost.orika.Mapper;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.ConfigurableMapper;
 import org.springframework.beans.BeansException;
@@ -27,13 +25,13 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
 
     private ApplicationContext applicationContext;
 
-    private CustomMapperMap customMappers;
+//    private CustomMapperMap customMappers;
 
     @Override
     protected void configure(final MapperFactory factory) {
         this.factory = factory;
         configureConverters(applicationContext);
-        configureCustomMappers();
+//        configureCustomMappers();
     }
 
     @Override
@@ -53,19 +51,21 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
     public void addConverter(final Converter<?, ?> converter) {
         factory.getConverterFactory().registerConverter(converter);
     }
-
-    private void configureCustomMappers() {
-        final Map<String, Mapper> mappers = applicationContext.getBeansOfType(Mapper.class);
-        customMappers = new CustomMapperMap(mappers.values());
-    }
+//
+//    private void configureCustomMappers() {
+//        final Map<String, Mapper> mappers = applicationContext.getBeansOfType(Mapper.class);
+//        customMappers = new CustomMapperMap(mappers.values());
+//    }
 
     private void configureClassMaps()   {
 
         factory.classMap(Project.class, ProjectDTO.class)
-                .field("projectOwner.id", "projectOwner_id")
-                .field("personMembers{id}", "projectMembers_id")
-                .field("testSuites{id}", "suites_id")
-                .field("tcMusters{id}", "tcMusters_id")
+                .mapNullsInReverse(false)
+                .mapNulls(false)
+                .field("projectOwner", "projectOwner_id")
+                .field("personMembers", "projectMembers_id")
+                .field("testSuites", "suites_id")
+                .field("tcMusters", "tcMusters_id")
                 .byDefault()
                 .register();
             factory.classMap(DefectCommentDTO.class, DefectComment.class)
@@ -80,30 +80,29 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
         factory.classMap(Defect.class, DefectDTO.class)
                 .byDefault()
                 .register();
-        factory.classMap(DefectDTO.class, Defect.class)
-                .byDefault()
-                .register();
         factory.classMap(Person.class, PersonDTO.class)
                 .mapNullsInReverse(false)
                 .mapNulls(false)
                 .byDefault()
                 .register();
         factory.classMap(TSMuster.class, TSMusterDTO.class)
-                .field("author.id", "author_id")
-                .field("tcMuster.id", "tcMuster_id")
+                .field("author", "author_id")
+                .field("tcMuster", "tcMuster_id")
                 .byDefault()
                 .register();
         factory.classMap(TCMuster.class, TCMusterDTO.class)
-                .field("project.id", "project_id")
-                .field("tsMusters{id}", "tsMusters_id")
-                .field("tcInstances{id}", "tcInstances_id")
+                .field("project", "project_id")
+                .field("tsMusters", "tsMusters_id")
+                .field("tcInstances", "tcInstances_id")
 //                .fieldMap("createdDateTime", "createdDateTime").converter("DateConverter").add()
 //                .field("createdDateTime", "createdDateTime")
                 .byDefault()
                 .register();
         factory.classMap(TestSuite.class, TestSuiteDTO.class)
-                .field("project.id", "project_id")
-                .field("tcMusters{id}", "tcMusters_id")
+                .field("tcMusters", "tcMusters_id")
+                .field("project", "project_id")
+//                .field("project.id", "project_id")
+//                .field("tcMusters{id}", "tcMusters_id")
                 .byDefault()
                 .register();
         factory.classMap(TSMuster.class, TSInstance.class)
@@ -117,12 +116,12 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
         factory.classMap(TCInstance.class, TCInstanceRunDTO.class)
                 .field("id", "id")
                 .field("name", "name")
-                .field("tcMuster.id", "tcMusters_id")
-                .field("tsInstances{id}", "tsInstances_id")
+                .field("tcMuster", "tcMusters_id")
+                .field("tsInstances", "tsInstances_id")
                 .field("id", "tcInstance_id")
                 .register();
         factory.classMap(TSInstance.class, TSInstanceRunDTO.class)
-                .field("tcInstance.id", "tcInstance_id")
+                .field("tcInstance", "tcInstance_id")
 //                .mapNulls(false)
 //                .mapNullsInReverse(false)
 //                .field("action", "action")

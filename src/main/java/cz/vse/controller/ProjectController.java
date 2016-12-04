@@ -43,11 +43,9 @@ public class ProjectController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createProject(@ModelAttribute("project") ProjectDTO projectDTO) {
         if (projectDTO.getId() == null) {
-            //new person, add it
             projectService.createTestProject(projectDTO);
         } else {
-            //existing person, call update
-            this.projectService.updateTestProject(projectDTO);
+            projectService.updateTestProject(projectDTO);
         }
         return "redirect:create";
     }

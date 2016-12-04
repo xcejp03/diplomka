@@ -37,7 +37,7 @@ public class ProjectServiceImpl implements ProjectService {
         l.debug("creating project - service");
         Project project;
         project = mapper.map(projectDTO, Project.class);
-
+        l.info("po mapování");
         /**
          * entita musí být nastavena z obou směrů - předělat
          */

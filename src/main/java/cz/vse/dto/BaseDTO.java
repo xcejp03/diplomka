@@ -1,13 +1,13 @@
 package cz.vse.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 
 /**
  * Created by pcejka on 10.10.2016.
  */
 public abstract class BaseDTO implements Serializable {
-
-    private static final long serialVersionUID = -5481230886750874916L;
 
     protected Long id;
 
@@ -17,6 +17,11 @@ public abstract class BaseDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @JsonIgnore
+    public boolean isNew() {
+        return getId() == null;
     }
 
     @Override
