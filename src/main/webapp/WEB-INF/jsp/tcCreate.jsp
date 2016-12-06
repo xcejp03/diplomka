@@ -120,8 +120,8 @@
     </table>
 </form:form>
 <br>
-<h3>TC List</h3>
 <c:if test="${!empty listTCMusters}">
+<h3>TC List</h3>
     <table class="tg">
         <tr>
             <th width="80">TC ID</th>

@@ -138,8 +138,8 @@
     </table>
 </form:form>
 
+<h3>Comment List</h3>
 <c:if test="${!empty listComments}">
-    <h3>Comment List</h3>
     <table class="tg">
         <tr>
             <th width="80">Comment ID</th>

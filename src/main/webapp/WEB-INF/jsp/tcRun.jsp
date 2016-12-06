@@ -55,10 +55,10 @@ listTSInstances
 <c:url var="addAction" value="/tc/run/${tc.id}"></c:url>
 <h1>Spuštěný test: ${tcInstance.name} - ${tcInstance.id}</h1>
 
-<h3>Test stepy List</h3>
-<p></p><a href="<c:url value='/tc/history/${tcInstance.tcMusters_id}'/>">Historie TC</a></p>
-
 <c:if test="${!empty listTSInstances}">
+    <h3>Test stepy List</h3>
+    <p></p><a href="<c:url value='/tc/history/${tcInstance.tcMusters_id}'/>">Historie TC</a></p>
+
     <p>Není empty</p>
     <table class="tg">
         <tr>
@@ -86,9 +86,6 @@ listTSInstances
         </c:forEach>
     </table>
 </c:if>
-
-
-
 
 
 </body>

@@ -110,9 +110,8 @@
     </table>
 </form:form>
 
-
-<h3>Defects List</h3>
 <c:if test="${!empty defectList}">
+<h3>Defects List</h3>
     <table class="tg">
         <tr>
             <th width="80">Defect ID</th>

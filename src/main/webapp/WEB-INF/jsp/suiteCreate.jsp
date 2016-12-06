@@ -122,8 +122,9 @@
     </table>
 </form:form>
 <br>
-<h3>Test Suite List</h3>
+
 <c:if test="${!empty listSuitesDTO}">
+<h3>Test Suite List</h3>
     <table class="tg">
         <tr>
             <th width="80">Suite ID</th>
