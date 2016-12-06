@@ -61,8 +61,8 @@ public class SuiteServiceImpl implements SuiteService {
 
     public void updateTestSuite(TestSuiteDTO testSuiteDTO) {
         l.debug("updating test suite - service");
-        TestSuite testSuite = new TestSuite();
-        testSuite = mapper.map(testSuiteDTO, TestSuite.class);
+        TestSuite testSuite = suiteRepository.findOne(testSuiteDTO.getId());
+        mapper.map(testSuiteDTO, testSuite);
         List<TCMuster> tcMusterList = new ArrayList<>();
         if (testSuite.getTcMusters() != null) {
             for (TCMuster tcMusterForId : testSuite.getTcMusters()) {
