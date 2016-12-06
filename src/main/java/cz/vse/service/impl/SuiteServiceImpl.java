@@ -4,6 +4,7 @@ import cz.vse.dto.TestSuiteDTO;
 import cz.vse.entity.TCMuster;
 import cz.vse.entity.TestSuite;
 import cz.vse.repository.SuiteRepository;
+import cz.vse.repository.TCMusterRepository;
 import cz.vse.service.SuiteService;
 import cz.vse.service.TCMusterService;
 import ma.glasnost.orika.MapperFacade;
@@ -34,21 +35,24 @@ public class SuiteServiceImpl implements SuiteService {
     @Autowired
     private TCMusterService tcMusterService;
 
+    @Autowired
+    TCMusterRepository tcMusterRepository;
+
     public void createTestSuite(TestSuiteDTO testSuiteDTO) {
         l.debug("creating test suite - service");
-        TestSuite testSuite = suiteRepository.findOne(testSuiteDTO.getId());
+        TestSuite testSuite = new TestSuite();
         mapper.map(testSuiteDTO, testSuite);
         testSuite.setCreatedDateTime(LocalDateTime.now());
-
-//        List<TCMuster> tcMusterList = new ArrayList<>();
-//        if (testSuite.getTcMusters() != null) {
-//            for (TCMuster tcMusterForId : testSuite.getTcMusters()) {
-//                TCMuster tcMuster = tcMusterService.findTestCaseMusterById(tcMusterForId.getId());
-//                tcMuster.addTestSuites(testSuite);
-//                tcMusterList.add(tcMuster);
-//            }
-//            testSuite.setTcMusters(tcMusterList);
-//        }
+        suiteRepository.save(testSuite);
+        List<TCMuster> tcMusterList = new ArrayList<>();
+        if (testSuite.getTcMusters() != null) {
+            for (TCMuster tcMusterForId : testSuite.getTcMusters()) {
+                TCMuster tcMuster = tcMusterRepository.findOne(tcMusterForId.getId());
+                tcMuster.addTestSuites(testSuite);
+                tcMusterList.add(tcMuster);
+            }
+            testSuite.setTcMusters(tcMusterList);
+        }
         suiteRepository.save(testSuite);
         l.info("created test suite - service: " + testSuiteDTO);
     }
