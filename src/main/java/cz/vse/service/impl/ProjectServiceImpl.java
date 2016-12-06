@@ -4,9 +4,11 @@ import cz.vse.dao.TestProjectDao;
 import cz.vse.dto.ProjectDTO;
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
+import cz.vse.entity.TestSuite;
 import cz.vse.repository.ProjectRepository;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
+import cz.vse.service.SuiteService;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,9 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     private PersonService personService;
 
+    @Autowired
+    private SuiteService suiteService;
+
     public void createTestProject(ProjectDTO projectDTO) {
         l.debug("creating project - service");
         Project project;
@@ -50,6 +55,13 @@ public class ProjectServiceImpl implements ProjectService {
             }
             project.setPersonMembers(personMembersList);
         }
+
+        if (project.getTestSuites() !=null) {
+            for (TestSuite suiteForId : project.getTestSuites()) {
+                suiteForId.setProject(project);
+            }
+
+        }
         projectRepository.save(project);
         l.info("created project - service: " + project);
     }
@@ -62,8 +74,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     public void updateTestProject(ProjectDTO projectDTO) {
         l.debug("updating project - service");
-        Project project;
-        project = mapper.map(projectDTO, Project.class);
+        Project project = projectRepository.findOne(projectDTO.getId());
+        mapper.map(projectDTO, project);
 
         List<Person> personMembersList = new ArrayList<>();
         if (project.getPersonMembers() != null) {

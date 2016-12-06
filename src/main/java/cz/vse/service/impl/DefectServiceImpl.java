@@ -66,8 +66,8 @@ public class DefectServiceImpl implements DefectService {
 
     public void updateDefect(DefectDTO defectDTO) {
         l.debug("updating defect - service");
-        Defect defect = new Defect();
-        defect = mapper.map(defectDTO, Defect.class);
+        Defect defect = defectRepository.findOne(defectDTO.getId());
+        mapper.map(defectDTO, defect);
         defectRepository.save(defect);
         l.info("updating defect - service: " + defectDTO.toString());
     }

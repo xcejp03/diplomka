@@ -39,8 +39,8 @@ public class TSMusterServiceImpl implements TSMusterService {
 
     public void updateTestStepMuster(TSMusterDTO tsMusterDTO) {
         l.debug("updating TSMuster - service");
-        TSMuster tsMuster;
-        tsMuster = mapper.map(tsMusterDTO, TSMuster.class);
+        TSMuster tsMuster = tsMusterRepository.findOne(tsMusterDTO.getId());
+        mapper.map(tsMusterDTO, tsMuster);
         tsMusterRepository.save(tsMuster);
         l.info("updated TSMuster - service: " + tsMuster);
     }

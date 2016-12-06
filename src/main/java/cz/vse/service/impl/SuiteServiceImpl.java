@@ -36,8 +36,8 @@ public class SuiteServiceImpl implements SuiteService {
 
     public void createTestSuite(TestSuiteDTO testSuiteDTO) {
         l.debug("creating test suite - service");
-        TestSuite testSuite = new TestSuite();
-        testSuite = mapper.map(testSuiteDTO, TestSuite.class);
+        TestSuite testSuite = suiteRepository.findOne(testSuiteDTO.getId());
+        mapper.map(testSuiteDTO, testSuite);
         testSuite.setCreatedDateTime(LocalDateTime.now());
 
 //        List<TCMuster> tcMusterList = new ArrayList<>();

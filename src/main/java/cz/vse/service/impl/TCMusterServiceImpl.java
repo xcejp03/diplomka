@@ -1,6 +1,5 @@
 package cz.vse.service.impl;
 
-import cz.vse.dao.TestCaseMusterDao;
 import cz.vse.dto.TCMusterDTO;
 import cz.vse.entity.TCInstance;
 import cz.vse.entity.TCMuster;
@@ -23,9 +22,6 @@ public class TCMusterServiceImpl implements TCMusterService{
     private final Logger l = Logger.getLogger(this.getClass());
     @Autowired
     private TCMusterRepository tcMusterRepository;
-
-    @Autowired
-    private TestCaseMusterDao testCaseMusterDao;
 
     @Autowired
     private MapperFacade mapper;
@@ -58,8 +54,8 @@ public class TCMusterServiceImpl implements TCMusterService{
 
     public void updateTestCaseMuster(TCMusterDTO tcMusterDTO) {
         l.debug("updating TCMuster - service");
-        TCMuster tcMuster;
-        tcMuster = mapper.map(tcMusterDTO, TCMuster.class);
+        TCMuster tcMuster = tcMusterRepository.findOne(tcMusterDTO.getId());
+        mapper.map(tcMusterDTO, tcMuster);
         tcMusterRepository.save(tcMuster);
         l.info("updated TCMuster - service: " + tcMuster);
     }
