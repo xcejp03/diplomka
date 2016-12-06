@@ -58,9 +58,8 @@
 
 <c:url var="addAction" value="/tc"></c:url>
 
-
-<h3>TC List</h3>
 <c:if test="${!empty listTCMusters}">
+<h3>TC List</h3>
     <table class="tg">
         <tr>
             <th width="40">TC ID</th>
