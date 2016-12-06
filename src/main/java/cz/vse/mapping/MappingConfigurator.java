@@ -63,7 +63,7 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .mapNullsInReverse(false)
                 .mapNulls(false)
                 .field("projectOwner", "projectOwner_id")
-                .field("personMembers", "projectMembers_id")
+                .field("personMembers{id}", "projectMembers_id{}")
                 .field("testSuites", "suites_id")
                 .field("tcMusters", "tcMusters_id")
                 .byDefault()
@@ -78,6 +78,8 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .byDefault()
                 .register();
         factory.classMap(Defect.class, DefectDTO.class)
+                .mapNullsInReverse(false)
+                .mapNulls(false)
                 .byDefault()
                 .register();
         factory.classMap(Person.class, PersonDTO.class)
@@ -86,11 +88,15 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .byDefault()
                 .register();
         factory.classMap(TSMuster.class, TSMusterDTO.class)
+                .mapNullsInReverse(false)
+                .mapNulls(false)
                 .field("author", "author_id")
                 .field("tcMuster", "tcMuster_id")
                 .byDefault()
                 .register();
         factory.classMap(TCMuster.class, TCMusterDTO.class)
+                .mapNullsInReverse(false)
+                .mapNulls(false)
                 .field("project", "project_id")
                 .field("tsMusters", "tsMusters_id")
                 .field("tcInstances", "tcInstances_id")
@@ -99,6 +105,8 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .byDefault()
                 .register();
         factory.classMap(TestSuite.class, TestSuiteDTO.class)
+                .mapNullsInReverse(false)
+                .mapNulls(false)
                 .field("tcMusters", "tcMusters_id")
                 .field("project", "project_id")
 //                .field("project.id", "project_id")
@@ -106,6 +114,8 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .byDefault()
                 .register();
         factory.classMap(TSMuster.class, TSInstance.class)
+                .mapNullsInReverse(false)
+                .mapNulls(false)
                 .field("action", "action")
                 .field("expected", "expected")
 //                .customize((Mapper)    customMapper)
@@ -114,6 +124,8 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
 //        .exclude("tsMuster")
                 .register();
         factory.classMap(TCInstance.class, TCInstanceRunDTO.class)
+                .mapNullsInReverse(false)
+                .mapNulls(false)
                 .field("id", "id")
                 .field("name", "name")
                 .field("tcMuster", "tcMusters_id")
@@ -121,7 +133,10 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .field("id", "tcInstance_id")
                 .register();
         factory.classMap(TSInstance.class, TSInstanceRunDTO.class)
+                .mapNullsInReverse(false)
+                .mapNulls(false)
                 .field("tcInstance", "tcInstance_id")
+
 //                .mapNulls(false)
 //                .mapNullsInReverse(false)
 //                .field("action", "action")
