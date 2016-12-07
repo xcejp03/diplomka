@@ -78,16 +78,6 @@
                 <form:input path="name"/>
             </td>
         </tr>
-        <%--<tr>--%>
-            <%--<td>--%>
-                <%--<form:label path="createdDateTime">--%>
-                    <%--<spring:message text="Created"/>--%>
-                <%--</form:label>--%>
-            <%--</td>--%>
-            <%--<td>--%>
-                <%--<form:input path="createdDateTime"/>--%>
-            <%--</td>--%>
-        <%--</tr>--%>
         <tr>
             <td>
                 <form:label path="project_id">

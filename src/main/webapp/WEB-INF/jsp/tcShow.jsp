@@ -76,11 +76,6 @@ listTSInstances
                 <td>${ts.action}</td>
                 <td>${ts.expected}</td>
                 <td>${ts.result}</td>
-                    <%--<td>--%>
-                    <%--<c:forEach items="${project.projectMembers_id}" var="projectMember">--%>
-                    <%--${projectMember},--%>
-                    <%--</c:forEach>--%>
-                    <%--</td>--%>
                 <td><a href="<c:url value='/ts/run/${ts.id}' />">Edit</a></td>
                 <td><a href="<c:url value='/ts/instance/remove/${ts.id}' />">Delete</a></td>
             </tr>

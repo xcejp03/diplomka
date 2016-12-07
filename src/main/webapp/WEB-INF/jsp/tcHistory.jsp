@@ -77,16 +77,6 @@
                 <td>${tc.id}</td>
                 <td>${tc.name}</td>
                 <td>${tc.createdDateTime}</td>
-                    <%--<td>--%>
-                    <%--<c:forEach items="${tc.tsMusters_id}" var="tsMuster">--%>
-                    <%--${tsMuster},--%>
-                    <%--</c:forEach>--%>
-                    <%--</td>--%>
-                    <%--<td>--%>
-                    <%--<c:forEach items="${tc.tcInstances_id}" var="tsMuster">--%>
-                    <%--${tsMuster},--%>
-                    <%--</c:forEach>--%>
-                    <%--</td>--%>
                 <td><a href="<c:url value='/tc/instance/remove/${tc.id}' />">Delete</a></td>
                 <td><a href="<c:url value='/tc/show/${tc.id}' />">Show</a></td>
             </tr>

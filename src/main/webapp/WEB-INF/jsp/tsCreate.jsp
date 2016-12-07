@@ -154,11 +154,6 @@
                 <td>${ts.author_id}</td>
                 <td>${ts.tcMuster_id}</td>
                 <td>${ts.createdDateTime}</td>
-                <%--<td>--%>
-                    <%--<c:forEach items="${ts.tcMusters_id}" var="tcMusters">--%>
-                        <%--${tcMusters},--%>
-                    <%--</c:forEach>--%>
-                <%--</td>--%>
                 <td><a href="<c:url value='edit/${ts.id}' />">Edit</a></td>
                 <td><a href="<c:url value='remove/${ts.id}' />">Delete</a></td>
 
