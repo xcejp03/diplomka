@@ -1,7 +1,5 @@
 package cz.vse.service.impl;
 
-import cz.vse.dao.DefectCommentDao;
-import cz.vse.dao.DefectDao;
 import cz.vse.dto.DefectDTO;
 import cz.vse.entity.*;
 import cz.vse.repository.DefectRepository;
@@ -23,11 +21,6 @@ public class DefectServiceImpl implements DefectService {
     @Autowired
     DefectRepository defectRepository;
 
-    @Autowired
-    DefectCommentDao defectCommentDao;
-
-    @Autowired
-    DefectDao defectDao;
 
     @Autowired
     private MapperFacade mapper;

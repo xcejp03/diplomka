@@ -1,6 +1,5 @@
 package cz.vse.service.impl;
 
-import cz.vse.dao.PersonDao;
 import cz.vse.dto.PersonDTO;
 import cz.vse.entity.Person;
 import cz.vse.repository.PersonRepository;
@@ -19,8 +18,6 @@ import java.util.List;
 @Service
 public class PersonServiceImpl implements PersonService {
     private final Logger l = Logger.getLogger(this.getClass());
-    @Autowired
-    PersonDao personDao;
 
     @Autowired
     private MapperFacade mapper;

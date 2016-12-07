@@ -1,6 +1,5 @@
 package cz.vse.service.impl;
 
-import cz.vse.dao.TestStepInstanceDao;
 import cz.vse.dto.TSInstanceRunDTO;
 import cz.vse.entity.TCInstance;
 import cz.vse.entity.TSInstance;
@@ -28,8 +27,6 @@ public class TSInstanceServiceImpl implements TSInstanceService {
     @Autowired
     private TCInstanceRepository tcInstanceRepository;
 
-    @Autowired
-    private TestStepInstanceDao testStepInstanceDao;
 
     @Autowired
     private MapperFacade mapper;

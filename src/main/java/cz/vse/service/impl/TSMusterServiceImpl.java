@@ -1,6 +1,5 @@
 package cz.vse.service.impl;
 
-import cz.vse.dao.TestStepMusterDao;
 import cz.vse.dto.TSMusterDTO;
 import cz.vse.entity.TCMuster;
 import cz.vse.entity.TSMuster;
@@ -24,8 +23,6 @@ public class TSMusterServiceImpl implements TSMusterService {
     @Autowired
     private TSMusterRepository tsMusterRepository;
 
-    @Autowired
-    TestStepMusterDao testStepMusterDao;
     @Autowired
     private MapperFacade mapper;
 

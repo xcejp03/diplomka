@@ -1,13 +1,12 @@
 package cz.vse.service.impl;
 
-import cz.vse.dao.DefectCommentDao;
-import cz.vse.dao.DefectDao;
 import cz.vse.dto.DefectCommentDTO;
 import cz.vse.entity.Defect;
 import cz.vse.entity.DefectComment;
 import cz.vse.entity.Person;
 import cz.vse.repository.DefectCommentRepository;
 import cz.vse.service.DefectCommentService;
+import cz.vse.service.DefectService;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +22,12 @@ import java.util.List;
 public class DefectCommentServiceImpl implements DefectCommentService {
     private final Logger l = Logger.getLogger(this.getClass());
     @Autowired
-    DefectDao defect;
-    @Autowired
-    private DefectCommentDao defectCommentDao;
-    @Autowired
     private DefectCommentRepository defectCommentRepository;
     @Autowired
     private MapperFacade mapper;
+
+    @Autowired
+    private DefectService defectService;
 
     public void createComment(Defect defect, Person commentAuthor, String commentText) {
         l.debug("creating comment - service: " + commentText);
@@ -96,10 +94,19 @@ public class DefectCommentServiceImpl implements DefectCommentService {
 
     public List<DefectComment> findAllDefectsComments(Defect defect) {
         l.debug("finding all defect's comments - service: " + defect);
-        List<DefectComment> defectComment;
-        defectComment = defectCommentDao.getAllDefectComment(defect);
+        List<DefectComment> defectCommentList;
+        defectCommentList = defectCommentRepository.findAllDefectCommentsByDefect(defect);
         l.info("all defect's comments found");
-        return defectComment;
+        return defectCommentList;
+    }
+
+    public List<DefectComment> findAllDefectsCommentsByDefectId(Long defectId) {
+        l.debug("finding all defect's comments - service: " + defectId);
+        List<DefectComment> defectCommentList;
+        Defect defect = defectService.findDefectById(defectId);
+        defectCommentList = defectCommentRepository.findAllDefectCommentsByDefect(defect);
+        l.info("all defect's comments found");
+        return defectCommentList;
     }
 
     public List<DefectCommentDTO> findAllDefectsCommentsDTOAllTest() {

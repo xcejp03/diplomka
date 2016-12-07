@@ -1,6 +1,5 @@
 package cz.vse.service.impl;
 
-import cz.vse.dao.TestProjectDao;
 import cz.vse.dto.ProjectDTO;
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
@@ -25,8 +24,6 @@ import java.util.List;
 @Transactional
 public class ProjectServiceImpl implements ProjectService {
     private final Logger l = Logger.getLogger(this.getClass());
-    @Autowired
-    TestProjectDao testProjectDao;
     @Autowired
     private ProjectRepository projectRepository;
     @Autowired
