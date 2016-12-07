@@ -14,7 +14,7 @@ public class Project extends BaseEntity {
     @JoinColumn(name = "projectOwner_id")
     private Person projectOwner;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "projectsMember")
+    @ManyToMany(mappedBy = "projectsMember")
     private List<Person> personMembers;
 
     @OneToMany(mappedBy = "project")

@@ -1,134 +1,31 @@
 package cz.vse.service;
 
-import cz.vse.dao.TestSuiteDao;
 import cz.vse.dto.TestSuiteDTO;
-import cz.vse.entity.TCMuster;
 import cz.vse.entity.TestSuite;
-import ma.glasnost.orika.MapperFacade;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by pcejka on 03.10.2016.
  */
-@Service
-@Transactional
-public class SuiteService {
-    private final Logger l = Logger.getLogger(this.getClass());
+public interface SuiteService {
 
-    @Autowired
-    private MapperFacade mapper;
+    void createTestSuite(TestSuiteDTO testSuiteDTO);
 
-    @Autowired
-    private TestSuiteDao testSuiteDao;
+    void createTestSuite(TestSuite testSuite);
 
-    @Autowired
-    private PersonService personService;
+    void updateTestSuite(TestSuiteDTO testSuiteDTO);
 
-    @Autowired
-    private SuiteService suiteService;
+    void deleteTestSuite(TestSuite testSuite);
 
-    @Autowired
-    private TCMusterService tcMusterService;
+    void deleteTestSuiteById(long id);
 
-    public void createTestSuite(TestSuiteDTO testSuiteDTO) {
-        l.debug("creating test suite - service");
-        TestSuite testSuite = new TestSuite();
-        testSuite = mapper.map(testSuiteDTO, TestSuite.class);
-        testSuite.setCreatedDateTime(LocalDateTime.now());
+    TestSuite findTestSuiteById(long id);
 
-        List<TCMuster> tcMusterList = new ArrayList<>();
-        if (testSuite.getTcMusters() != null) {
-            for (TCMuster tcMusterForId : testSuite.getTcMusters()) {
-                TCMuster tcMuster = tcMusterService.findTestCaseMusterById(tcMusterForId.getId());
-                tcMuster.addTestSuites(testSuite);
-                tcMusterList.add(tcMuster);
-            }
-            testSuite.setTcMusters(tcMusterList);
-        }
-        testSuiteDao.saveTestSuite(testSuite);
-        l.info("created test suite - service: " + testSuiteDTO);
-    }
+    TestSuiteDTO findTestSuiteDTOById(long id);
 
-    public void createTestSuite(TestSuite testSuite) {
-        l.debug("creating test suite - service");
-        testSuiteDao.saveTestSuite(testSuite);
-        l.info("created test suite - service: " + testSuite);
-    }
+    List<TestSuiteDTO> findAllTestSuitesDTO();
 
-    public void updateTestSuite(TestSuiteDTO testSuiteDTO) {
-        l.debug("updating test suite - service");
-        TestSuite testSuite = new TestSuite();
-        testSuite = mapper.map(testSuiteDTO, TestSuite.class);
-        List<TCMuster> tcMusterList = new ArrayList<>();
-        if (testSuite.getTcMusters() != null) {
-            for (TCMuster tcMusterForId : testSuite.getTcMusters()) {
-                TCMuster tcMuster = tcMusterService.findTestCaseMusterById(tcMusterForId.getId());
-                tcMuster.addTestSuites(testSuite);
-                tcMusterList.add(tcMuster);
-            }
-            testSuite.setTcMusters(tcMusterList);
-        }
-        testSuiteDao.updateTestSuite(testSuite);
-        l.info("updated test suite - service: " + testSuiteDTO);
-    }
+    List<TestSuite> findAllTestSuites();
 
-    public void deleteTestSuite(TestSuite testSuite) {
-        l.debug("deleting test suite - service");
-        Long testSuiteId = testSuite.getId();
-        testSuiteDao.deleteTestSuite(testSuiteId);
-        l.info("test suite deleted - service: " + testSuite);
-    }
-
-    public void deleteTestSuiteById(long id) {
-        l.debug("deleting test suite - service");
-        testSuiteDao.deleteTestSuite(id);
-        l.info("test suite deleted - service: " + id);
-    }
-
-    public TestSuite findTestSuiteById(long id) {
-        l.debug("finding test suite - service");
-        TestSuite testSuite;
-        testSuite = testSuiteDao.getTestSuiteById(id);
-        l.info("test suit found - service: " + id + " - " + testSuite);
-        return testSuite;
-    }
-
-    public TestSuiteDTO findTestSuiteDTOById(long id) {
-        l.debug("finding test suite - service");
-        TestSuite testSuite;
-        TestSuiteDTO testSuiteDTO;
-        testSuite = testSuiteDao.getTestSuiteById(id);
-        testSuiteDTO = mapper.map(testSuite, TestSuiteDTO.class);
-
-        l.info("projectDTO found - service: " + id + " - " + testSuiteDTO.toString());
-        return testSuiteDTO;
-    }
-
-    public List<TestSuiteDTO> findAllTestSuitesDTO() {
-        l.debug("finding all testSuites - service");
-        List<TestSuite> testSuiteList;
-        List<TestSuiteDTO> testSuiteDTOList;
-
-        testSuiteList = testSuiteDao.getAllTestSuites();
-        l.warn("mezikrok");
-        testSuiteDTOList = mapper.mapAsList(testSuiteList, TestSuiteDTO.class);
-
-        l.info("found all testSuites - service: " + testSuiteDTOList.toString());
-        return testSuiteDTOList;
-    }
-
-    public List<TestSuite> findAllTestSuites() {
-        l.debug("finding all testSuites - service");
-        List<TestSuite> testSuites = new ArrayList<>();
-        testSuites = testSuiteDao.getAllTestSuites();
-        l.info("found all testSuites - service: " + testSuites.toString());
-        return testSuites;
-    }
 }

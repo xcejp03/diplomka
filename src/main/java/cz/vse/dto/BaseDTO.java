@@ -1,5 +1,7 @@
 package cz.vse.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 
 /**
@@ -15,6 +17,11 @@ public abstract class BaseDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @JsonIgnore
+    public boolean isNew() {
+        return getId() == null;
     }
 
     @Override

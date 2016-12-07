@@ -1,102 +1,29 @@
 package cz.vse.service;
 
-import cz.vse.dao.TestCaseInstanceDao;
-import cz.vse.dao.TestStepInstanceDao;
 import cz.vse.dto.TCInstanceRunDTO;
 import cz.vse.entity.TCInstance;
-import cz.vse.entity.TSInstance;
-import ma.glasnost.orika.MapperFacade;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by pcejka on 03.10.2016.
  */
-@Service
-public class TCInstanceService {
-    private final Logger l = Logger.getLogger(this.getClass());
-    @Autowired
-    private TestCaseInstanceDao testCaseInstanceDao;
+public interface TCInstanceService {
 
-    @Autowired
-    private TestStepInstanceDao testStepInstanceDao;
+    void createTestCaseInstance(TCInstance tcInstance);
 
-    @Autowired
-    private TCMusterService tcMusterService;
+    void updateTestCaseInstance(TCInstance tcInstance);
 
-    @Autowired
-    private MapperFacade mapper;
+    void deleteTestCaseInstance(TCInstance tcInstanceToDelete);
 
-    public void createTestCaseInstance(TCInstance tcInstance) {
-        l.debug("creating TCInstance - service");
+    void deleteTestCaseInstanceById(long testCaseInstanceToDeleteById);
 
-        testCaseInstanceDao.saveTestCaseInstance(tcInstance);
-        l.info("created TCInstance - service: " + tcInstance);
-    }
+    TCInstance findTestCaseInstanceById(long id);
 
-    public void updateTestCaseInstance(TCInstance tcInstance) {
-        l.debug("updating TCInstance - service");
-        testCaseInstanceDao.updateTestCaseInstance(tcInstance);
-        l.info("updated TCInstance - service: " + tcInstance);
-    }
+    List<TCInstance> findAllTestCaseInstances();
 
-    public void deleteTestCaseInstance(TCInstance tcInstanceToDelete) {
-        l.debug("deleting TCInstance - service");
-        testCaseInstanceDao.deleteTestCaseInstance(tcInstanceToDelete);
-        l.info("TCInstance deleted - service: " + tcInstanceToDelete);
-    }
+    List<TCInstance> findAllTCInstancesByTCMusterId(long id);
 
-    public void deleteTestCaseInstanceById(long testCaseInstanceToDeleteById) {
-        l.debug("deleting TCInstance - service");
-        TCInstance TCInstanceToDelete;
-        TCInstanceToDelete = testCaseInstanceDao.getTestCaseInstanceById(testCaseInstanceToDeleteById);
-        testCaseInstanceDao.deleteTestCaseInstance(TCInstanceToDelete);
-        l.info("TCInstance deleted - service: " + TCInstanceToDelete);
-    }
+    TCInstanceRunDTO findTCInstanceRunDTOById(long id);
 
-    public TCInstance findTestCaseInstanceById(long id) {
-        l.debug("finding TCInstance - service");
-        TCInstance tcInstance;
-        tcInstance = testCaseInstanceDao.getTestCaseInstanceById(id);
-        l.info("TCInstance founf - service: " + id + " - " + tcInstance);
-        return tcInstance;
-    }
-
-    public List<TCInstance> findAllTestCaseInstances() {
-        l.debug("finding all testCaseInstances - service");
-        List<TCInstance> TCInstanceList;
-        TCInstanceList = testCaseInstanceDao.getAllTestCaseInstances();
-        l.info("found all testCaseInstances - service: " + TCInstanceList.toString());
-        return TCInstanceList;
-    }
-
-    /**
-     * přendat do TS!!!!!!
-     *
-     * @param id
-     * @return
-     */
-    public List<TSInstance> findAllTSInstancesByTCInstanceId(long id) {
-        List<TSInstance> tsInstanceList = new ArrayList<>();
-        tsInstanceList = testStepInstanceDao.getAllTestStepInstancesByTCInstanceId(id);
-
-        return tsInstanceList;
-    }
-
-    public List<TCInstance> findAllTCInstancesByTCMusterId(long id) {
-        List<TCInstance> tcInstanceList;
-        tcInstanceList = testCaseInstanceDao.getAllTCInstancesByTCMusterId(id);
-        return tcInstanceList;
-    }
-
-    public TCInstanceRunDTO findTCInstanceRunDTOById(long id) {
-        TCInstance tcInstance = findTestCaseInstanceById(id);
-        TCInstanceRunDTO tcInstanceRunDTO = mapper.map(tcInstance, TCInstanceRunDTO.class);
-
-        return tcInstanceRunDTO;
-    }
 }

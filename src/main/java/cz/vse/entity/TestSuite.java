@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by pcejka on 21.09.2016.
  */
-@Entity
+@Entity (name = "testsuite")
 public class TestSuite extends BaseEntity {
     private String name;        //testsuit je možné si pojmenovat
     private LocalDateTime createdDateTime;          // datum vytvoření testsuitu;
@@ -63,6 +63,7 @@ public class TestSuite extends BaseEntity {
         this.tcMusters = tcMusters;
     }
 
+
     @Override
     public String toString() {
         return "TestSuite{" +
@@ -70,4 +71,5 @@ public class TestSuite extends BaseEntity {
 //                ", createdDateTime=" + createdDateTime +
                 '}';
     }
+
 }

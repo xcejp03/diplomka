@@ -1,87 +1,29 @@
 package cz.vse.service;
 
-import cz.vse.dao.TestStepInstanceDao;
 import cz.vse.dto.TSInstanceRunDTO;
 import cz.vse.entity.TSInstance;
-import ma.glasnost.orika.MapperFacade;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by pcejka on 03.10.2016.
  */
-@Service
-public class TSInstanceService {
-    private final Logger l = Logger.getLogger(this.getClass());
+public interface TSInstanceService {
+    void createTestStepInstance(TSInstance tsInstance);
 
-    @Autowired
-    private TestStepInstanceDao testStepInstanceDao;
+    void updateTestStepInstance(TSInstance tsInstance);
 
-    @Autowired
-    private MapperFacade mapper;
+    void updateTestStepInstance(TSInstanceRunDTO tsInstanceRunDTO);
 
-    public void createTestStepInstance(TSInstance tsInstance) {
-        l.debug("creating TSInstance - service");
-        testStepInstanceDao.saveTestStepInstance(tsInstance);
-        l.info("created TSInstance - service: " + tsInstance);
-    }
+    void deleteTestStepInstance(TSInstance tsInstanceToDelete);
 
-    public void updateTestStepInstance(TSInstance tsInstance) {
-        l.debug("updating TSInstance - service");
-        testStepInstanceDao.updateTestStepInstance(tsInstance);
-        l.info("updated TSInstance - service: " + tsInstance);
-    }
+    void deleteTestStepInstanceById(long testStepInstanceToDeleteById);
 
-    public void updateTestStepInstance(TSInstanceRunDTO tsInstanceRunDTO) {
-        l.debug("updating TSInstance - service");
-        TSInstance tsInstance = findTestStepInstanceById(tsInstanceRunDTO.getId());
+    TSInstance findTestStepInstanceById(long id);
 
-        mapper.map(tsInstanceRunDTO, tsInstance);
-        l.info(tsInstance);
+    TSInstanceRunDTO findTestStepInstanceRunDTOById(long id);
 
-//        tsInstance = mapper.map(tsInstanceRunDTO, TSInstance.class);
-        testStepInstanceDao.updateTestStepInstance(tsInstance);
-        l.info("updated TSInstance - service: " + tsInstance);
-    }
+    List<TSInstance> findAllTestStepInstances();
 
-    public void deleteTestStepInstance(TSInstance tsInstanceToDelete) {
-        l.debug("deleting TSInstance - service");
-        testStepInstanceDao.deleteTestStepInstance(tsInstanceToDelete);
-        l.info("TSInstance deleted - service: " + tsInstanceToDelete);
-    }
-
-    public void deleteTestStepInstanceById(long testStepInstanceToDeleteById) {
-        l.debug("deleting TSInstance - service");
-        TSInstance TSInstanceToDelete;
-        TSInstanceToDelete = testStepInstanceDao.getTestStepInstanceById(testStepInstanceToDeleteById);
-        testStepInstanceDao.deleteTestStepInstance(TSInstanceToDelete);
-        l.info("TSInstance deleted - service: " + TSInstanceToDelete);
-    }
-
-    public TSInstance findTestStepInstanceById(long id) {
-        l.debug("finding TSInstance - service");
-        TSInstance tsInstance;
-        tsInstance = testStepInstanceDao.getTestStepInstanceById(id);
-        l.info("TSInstance founf - service: " + id + " - " + tsInstance);
-        return tsInstance;
-    }
-
-    public TSInstanceRunDTO findTestStepInstanceRunDTOById(long id) {
-        l.debug("finding TSInstance - service");
-        TSInstance tsInstance = testStepInstanceDao.getTestStepInstanceById(id);
-        TSInstanceRunDTO tsInstanceRunDTO = mapper.map(tsInstance, TSInstanceRunDTO.class);
-        l.info("TSInstance founf - service: " + id + " - " + tsInstanceRunDTO);
-        return tsInstanceRunDTO;
-    }
-
-    public List<TSInstance> findAllTestStepInstances() {
-        l.debug("finding all testStepInstances - service");
-        List<TSInstance> tsInstanceList;
-        tsInstanceList = testStepInstanceDao.getAllTestStepInstances();
-        l.info("found all testStepInstances - service: " + tsInstanceList.toString());
-        return tsInstanceList;
-    }
+    List<TSInstance> findAllTSInstancesByTCInstanceId(Long id);
 }

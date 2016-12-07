@@ -122,8 +122,9 @@
     </table>
 </form:form>
 <br>
-<h3>Test Suite List</h3>
+
 <c:if test="${!empty listSuitesDTO}">
+<h3>Test Suite List</h3>
     <table class="tg">
         <tr>
             <th width="80">Suite ID</th>
@@ -141,8 +142,8 @@
                 <td>${suite.project_id}</td>
                 <td>${suite.createdDateTime}</td>
                 <td>
-                    <c:forEach items="${suite.tcMusters_id}" var="tcMuster">
-                        ${tcMuster},
+                    <c:forEach items="${suite.tcMusters_id}" var="tCMuster">
+                        ${tCMuster},
                     </c:forEach>
                 </td>
                 <td><a href="<c:url value='edit/${suite.id}' />">Edit</a></td>

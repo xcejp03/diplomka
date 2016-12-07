@@ -49,7 +49,7 @@
 <h1>
     Add a Person
 </h1>
-<h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\person.jsp</h3>
+<h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\personCreate.jsp</h3>
 
 <c:url var="addAction" value="/person/create"></c:url>
 
@@ -113,8 +113,8 @@
     </table>
 </form:form>
 <br>
-<h3>Persons List</h3>
 <c:if test="${!empty listPersons}">
+<h3>Persons List</h3>
     <table class="tg">
         <tr>
             <th width="80">Person ID</th>

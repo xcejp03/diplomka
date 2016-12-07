@@ -26,7 +26,7 @@ public class TSMuster extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "tcMuster_id")
-    private TCMuster tcMuster;
+    private TCMuster tCMuster;
 
     public LocalDateTime getCreatedDateTime() {
         return createdDateTime;
@@ -84,13 +84,14 @@ public class TSMuster extends BaseEntity {
         this.tsInstances = tsInstances;
     }
 
-    public TCMuster getTcMuster() {
-        return tcMuster;
+    public TCMuster gettCMuster() {
+        return tCMuster;
     }
 
-    public void setTcMuster(TCMuster tcMuster) {
-        this.tcMuster = tcMuster;
+    public void settCMuster(TCMuster tCMuster) {
+        this.tCMuster = tCMuster;
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -113,7 +114,7 @@ public class TSMuster extends BaseEntity {
             return false;
         if (getTsInstances() != null ? !getTsInstances().equals(tsMuster.getTsInstances()) : tsMuster.getTsInstances() != null)
             return false;
-        return getTcMuster() != null ? getTcMuster().equals(tsMuster.getTcMuster()) : tsMuster.getTcMuster() == null;
+        return gettCMuster() != null ? gettCMuster().equals(tsMuster.gettCMuster()) : tsMuster.gettCMuster() == null;
 
     }
 
@@ -126,7 +127,7 @@ public class TSMuster extends BaseEntity {
         result = 31 * result + (getAuthor() != null ? getAuthor().hashCode() : 0);
         result = 31 * result + (getDefects() != null ? getDefects().hashCode() : 0);
         result = 31 * result + (getTsInstances() != null ? getTsInstances().hashCode() : 0);
-        result = 31 * result + (getTcMuster() != null ? getTcMuster().hashCode() : 0);
+        result = 31 * result + (gettCMuster() != null ? gettCMuster().hashCode() : 0);
         return result;
     }
 

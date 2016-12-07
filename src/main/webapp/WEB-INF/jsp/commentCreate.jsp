@@ -71,17 +71,6 @@
                     <form:hidden path="id"/>
                 </td>
             </tr>
-       <%--     <tr>
-                 <td>
-                <form:label path="createdDateTime">
-                    <spring:message text="createdDateTime"/>
-                </form:label>
-            </td>
-                <td>
-                    <form:input path="createdDateTime" readonly="true" size="8" disabled="false"/>
-                    <form:hidden path="createdDateTime"/>
-                </td>
-            </tr>--%>
         </c:if>
         <tr>
             <td>
@@ -137,7 +126,6 @@
         </tr>
     </table>
 </form:form>
-
 
 <h3>Comment List</h3>
 <c:if test="${!empty listComments}">

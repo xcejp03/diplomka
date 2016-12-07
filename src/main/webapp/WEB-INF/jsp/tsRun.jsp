@@ -101,7 +101,6 @@
         <tr>
 
             <td>
-                <%--<form:input path="tcInstance_id" readonly="true" size="8" disabled="true"/>--%>
                 <form:hidden path="tcInstance_id"/>
             </td>
         </tr>

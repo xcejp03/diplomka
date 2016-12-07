@@ -2,7 +2,7 @@ package cz.vse.controller;
 
 import cz.vse.dto.DefectCommentDTO;
 import cz.vse.service.DefectCommentService;
-import cz.vse.service.DefectService;
+import cz.vse.service.impl.DefectServiceImpl;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
 import org.apache.log4j.Logger;
@@ -28,7 +28,7 @@ public class DefectCommentController {
     PersonService personService;
 
     @Autowired
-    DefectService defectService;
+    DefectServiceImpl defectService;
 
     @Autowired
     DefectCommentService defectCommentService;
@@ -37,7 +37,7 @@ public class DefectCommentController {
     public String createDefect(Model model) {
         l.info("request mapping comment/create");
         model.addAttribute("comment", new DefectCommentDTO());
-        model.addAttribute("listComment", defectCommentService.findAllDefectsCommentsDTOAllTest());
+        model.addAttribute("listComments", defectCommentService.findAllDefectsCommentsDTOAllTest());
         model.addAttribute("listDefects", defectService.findAllDefects());
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());

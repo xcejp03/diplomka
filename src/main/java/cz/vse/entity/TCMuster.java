@@ -16,7 +16,7 @@ public class TCMuster extends BaseEntity {
     private LocalDateTime createdDateTime;
     private LocalDateTime updatedDateTime;
 
-    @OneToMany(mappedBy = "tcMuster", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "tCMuster", fetch = FetchType.EAGER)
     private List<TCInstance> tcInstances;
 
     @ManyToOne
@@ -28,7 +28,7 @@ public class TCMuster extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "TESTSUITE_ID", referencedColumnName = "ID"))
     private List<TestSuite> testSuites;
 
-    @OneToMany(mappedBy = "tcMuster", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "tCMuster", fetch = FetchType.EAGER)
     private List<TSMuster> tsMusters;
 
     public String getName() {

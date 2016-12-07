@@ -49,7 +49,7 @@
 <h1>
     Add a Test Step
 </h1>
-<h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\ts.jsp</h3>
+<h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\tsCreate.jsp</h3>
 
 <c:url var="addAction" value="/ts/create"></c:url>
 
@@ -104,12 +104,12 @@
         </tr>
         <tr>
             <td>
-                <form:label path="tcMusters_id">
+                <form:label path="tcMuster_id">
                     <spring:message text="Prirazene pod TC"/>
                 </form:label>
             </td>
             <td>
-                <select path="tcMusters_id" name="tcMusters_id">
+                <select path="tcMuster_id" name="tcMuster_id">
                     <c:forEach var="item" items="${listTCMusters}">
                         <option value="${item.id}">${item.name}</option>
                     </c:forEach>
@@ -133,8 +133,8 @@
     </table>
 </form:form>
 <br>
-<h3>TS List</h3>
 <c:if test="${!empty listTSMusters}">
+    <h3>TS List</h3>
     <table class="tg">
         <tr>
             <th width="80">TS ID</th>
@@ -152,13 +152,8 @@
                 <td>${ts.action}</td>
                 <td>${ts.expected}</td>
                 <td>${ts.author_id}</td>
-                <td>${ts.tcMusters_id}</td>
+                <td>${ts.tcMuster_id}</td>
                 <td>${ts.createdDateTime}</td>
-                <%--<td>--%>
-                    <%--<c:forEach items="${ts.tcMusters_id}" var="tcMusters">--%>
-                        <%--${tcMusters},--%>
-                    <%--</c:forEach>--%>
-                <%--</td>--%>
                 <td><a href="<c:url value='edit/${ts.id}' />">Edit</a></td>
                 <td><a href="<c:url value='remove/${ts.id}' />">Delete</a></td>
 

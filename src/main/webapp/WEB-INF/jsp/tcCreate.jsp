@@ -78,16 +78,6 @@
                 <form:input path="name"/>
             </td>
         </tr>
-        <%--<tr>--%>
-            <%--<td>--%>
-                <%--<form:label path="createdDateTime">--%>
-                    <%--<spring:message text="Created"/>--%>
-                <%--</form:label>--%>
-            <%--</td>--%>
-            <%--<td>--%>
-                <%--<form:input path="createdDateTime"/>--%>
-            <%--</td>--%>
-        <%--</tr>--%>
         <tr>
             <td>
                 <form:label path="project_id">
@@ -120,8 +110,8 @@
     </table>
 </form:form>
 <br>
-<h3>TC List</h3>
 <c:if test="${!empty listTCMusters}">
+<h3>TC List</h3>
     <table class="tg">
         <tr>
             <th width="80">TC ID</th>

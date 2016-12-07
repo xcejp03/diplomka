@@ -18,12 +18,12 @@ public class TCInstance extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "tcMuster_id")
-    private TCMuster tcMuster;
+    private TCMuster tCMuster;
 
     @ManyToMany(mappedBy = "tcInstances")
     private List<Defect> defects;
 
-    @OneToMany(mappedBy = "tcInstance", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "tCInstance")//, fetch = FetchType.EAGER)
     private List<TSInstance> tsInstances;
 
     public String getName() {
@@ -50,12 +50,12 @@ public class TCInstance extends BaseEntity {
         this.updatedDateTime = updatedDateTime;
     }
 
-    public TCMuster getTcMuster() {
-        return tcMuster;
+    public TCMuster gettCMuster() {
+        return tCMuster;
     }
 
-    public void setTcMuster(TCMuster tcMuster) {
-        this.tcMuster = tcMuster;
+    public void settCMuster(TCMuster tCMuster) {
+        this.tCMuster = tCMuster;
     }
 
     public List<Defect> getDefects() {
@@ -86,7 +86,7 @@ public class TCInstance extends BaseEntity {
             return false;
         if (getUpdatedDateTime() != null ? !getUpdatedDateTime().equals(that.getUpdatedDateTime()) : that.getUpdatedDateTime() != null)
             return false;
-        if (getTcMuster() != null ? !getTcMuster().equals(that.getTcMuster()) : that.getTcMuster() != null)
+        if (gettCMuster() != null ? !gettCMuster().equals(that.gettCMuster()) : that.gettCMuster() != null)
             return false;
         if (getDefects() != null ? !getDefects().equals(that.getDefects()) : that.getDefects() != null) return false;
         return getTsInstances() != null ? getTsInstances().equals(that.getTsInstances()) : that.getTsInstances() == null;
@@ -98,7 +98,7 @@ public class TCInstance extends BaseEntity {
         int result = getName() != null ? getName().hashCode() : 0;
         result = 31 * result + (getCreatedDateTime() != null ? getCreatedDateTime().hashCode() : 0);
         result = 31 * result + (getUpdatedDateTime() != null ? getUpdatedDateTime().hashCode() : 0);
-        result = 31 * result + (getTcMuster() != null ? getTcMuster().hashCode() : 0);
+        result = 31 * result + (gettCMuster() != null ? gettCMuster().hashCode() : 0);
         result = 31 * result + (getDefects() != null ? getDefects().hashCode() : 0);
         result = 31 * result + (getTsInstances() != null ? getTsInstances().hashCode() : 0);
         return result;
@@ -110,7 +110,7 @@ public class TCInstance extends BaseEntity {
                 "name='" + name + '\'' +
 //                ", createdDateTime=" + createdDateTime +
 //                ", updatedDateTime=" + updatedDateTime +
-//                ", tcMuster=" + tcMuster +
+//                ", tCMuster=" + tCMuster +
 //                ", defects=" + defects +
 //                ", tsInstances=" + tsInstances +
                 '}';

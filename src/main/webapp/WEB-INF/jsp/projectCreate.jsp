@@ -47,9 +47,9 @@
 </head>
 <body>
 <h1>
-    Add a Test Project
+    Add a Test Project íáýž
 </h1>
-<h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\project.jsp</h3>
+<h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\projectCreate.jsp</h3>
 
 <c:url var="addAction" value="/project/create"></c:url>
 
@@ -161,8 +161,8 @@
     </table>
 </form:form>
 <br>
-<h3>Projects List</h3>
 <c:if test="${!empty listProjects}">
+    <h3>Projects List</h3>
     <table class="tg">
         <tr>
             <th width="80">Project ID</th>
@@ -185,8 +185,8 @@
                     </c:forEach>
                 </td>
                 <td>
-                    <c:forEach items="${project.tcMusters_id}" var="tcMuster">
-                        ${tcMuster},
+                    <c:forEach items="${project.tcMusters_id}" var="tCMuster">
+                        ${tCMuster},
                     </c:forEach>
                 </td>
                 <td>
