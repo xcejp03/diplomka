@@ -5,6 +5,7 @@ import cz.vse.entity.TCInstance;
 import cz.vse.entity.TCMuster;
 import cz.vse.entity.TSInstance;
 import cz.vse.entity.TSMuster;
+import cz.vse.repository.TCMusterRepository;
 import cz.vse.service.*;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
@@ -38,6 +39,9 @@ public class TCServiceImpl implements TCService {
     @Autowired
     private TSMusterService tsMusterService;
 
+    @Autowired
+    private TCMusterRepository tcMusterRepository;
+
     public TCInstanceRunDTO runNewTC(long tcMusterId) {
         TCInstance tcInstance;
         TCInstanceRunDTO tcInstanceRunDTO;
@@ -59,7 +63,7 @@ public class TCServiceImpl implements TCService {
     public TCInstance mapTCMusterToTCInstance(TCMuster tcMuster) {
         TCInstance tcInstanceMapped = new TCInstance();
         tcInstanceMapped.setName(tcMuster.getName());
-        tcInstanceMapped.setTcMuster(tcMuster);
+        tcInstanceMapped.settCMuster(tcMuster);
         return tcInstanceMapped;
     }
 
@@ -84,7 +88,7 @@ public class TCServiceImpl implements TCService {
 
         tcInstance = mapTCMusterToTCInstance(tcMuster);
         tcInstance.setCreatedDateTime(LocalDateTime.now());
-//        tcInstance.setTsInstances(tsInstanceList);
+        tcInstance.setTsInstances(tsInstanceList);
 
         tcInstanceService.createTestCaseInstance(tcInstance);
 
@@ -94,20 +98,20 @@ public class TCServiceImpl implements TCService {
     }
 
     public List<TSInstance> createAndSaveTSInstanceFromTCMusterId(long tcMusterId, TCInstance tcInstance) {
-        TCMuster tcMuster;
+        TCMuster tcMuster = tcMusterRepository.findOne(tcMusterId);
         List<TSMuster> tsMusterList;
         List<TSInstance> tsInstanceList = null;
 
-//        tsMusterList = tsMusterService.findAllTestStepMustersByTCMusterId(tcMusterId);
-//        tsInstanceList = mapTSMusterToTSInstance(tsMusterList);
-//        tsInstanceList = mapper.mapAsList(tsMusterList, TSInstance.class);
+        tsMusterList = tsMusterService.findAllTestStepMustersByTCMuster(tcMuster);
+        tsInstanceList = mapTSMusterToTSInstance(tsMusterList);
+        tsInstanceList = mapper.mapAsList(tsMusterList, TSInstance.class);
 
-//        for (TSInstance tsInstance : tsInstanceList) {
-//            tsInstance.setTcInstance(tcInstance);
-//            tsInstanceService.createTestStepInstance(tsInstance);
-//        }
+        for (TSInstance tsInstance : tsInstanceList) {
+            tsInstance.settCInstance(tcInstance);
+            tsInstanceService.createTestStepInstance(tsInstance);
+        }
 
-//        l.info(tsInstanceList);
+        l.info(tsInstanceList);
         return tsInstanceList;
     }
 }

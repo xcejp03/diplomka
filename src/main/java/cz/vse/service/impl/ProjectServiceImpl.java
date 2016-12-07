@@ -55,7 +55,6 @@ public class ProjectServiceImpl implements ProjectService {
             }
             project.setPersonMembers(personMembersList);
         }
-
         if (project.getTestSuites() !=null) {
             for (TestSuite suiteForId : project.getTestSuites()) {
                 suiteForId.setProject(project);

@@ -34,6 +34,9 @@ public class TSController {
     @Autowired
     TSInstanceService tsInstanceService;
 
+    @Autowired
+    TCInstanceService tcInstanceService;
+
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createTS(Model model) {
         l.info("request mapping ts/create");
@@ -67,7 +70,7 @@ public class TSController {
     @RequestMapping(value = "/run", method = RequestMethod.POST)
     public String runTSInstance(@ModelAttribute("ts") TSInstanceRunDTO tsInstanceRunDTO) {
         Long tcInstanceId = tsInstanceRunDTO.getTcInstance_id();
-        l.info("/run/{id} - post");
+        l.info("/run/ - post");
         tsInstanceService.updateTestStepInstance(tsInstanceRunDTO);
         return "redirect:/tc/show/" + tcInstanceId;
     }
@@ -80,8 +83,15 @@ public class TSController {
     }
 
     @RequestMapping("/remove/{id}")
-    public String removePerson(@PathVariable("id") long id) {
+    public String removeTSMuster(@PathVariable("id") long id) {
         tsMusterService.deleteTestStepMuster(id);
         return "redirect:/ts/create";
+    }
+
+    @RequestMapping("/instance/remove/{id}")
+    public String removeTSInstance(@PathVariable("id") long id) {
+        Long tcInstanceId = tsInstanceService.findTestStepInstanceById(id).gettCInstance().getId();
+        tsInstanceService.deleteTestStepInstanceById(id);
+        return "redirect:/tc/show/"+tcInstanceId;
     }
 }

@@ -27,7 +27,7 @@ public class TSInstance extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "tcinstance_id")
-    private TCInstance tcInstance;
+    private TCInstance tCInstance;
 
     public LocalDateTime getCreatedDateTime() {
         return createdDateTime;
@@ -85,12 +85,12 @@ public class TSInstance extends BaseEntity {
         this.defects = defects;
     }
 
-    public TCInstance getTcInstance() {
-        return tcInstance;
+    public TCInstance gettCInstance() {
+        return tCInstance;
     }
 
-    public void setTcInstance(TCInstance tcInstance) {
-        this.tcInstance = tcInstance;
+    public void settCInstance(TCInstance tCInstance) {
+        this.tCInstance = tCInstance;
     }
 
     @Override
@@ -103,7 +103,7 @@ public class TSInstance extends BaseEntity {
                 ", actual='" + result + '\'' +
 //                ", tsMuster=" + tsMuster +
 //                ", defects=" + defects +
-//                ", tcInstance=" + tcInstance +
+//                ", tCInstance=" + tCInstance +
                 '}';
     }
 }

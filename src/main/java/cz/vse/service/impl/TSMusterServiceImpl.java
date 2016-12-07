@@ -2,6 +2,7 @@ package cz.vse.service.impl;
 
 import cz.vse.dao.TestStepMusterDao;
 import cz.vse.dto.TSMusterDTO;
+import cz.vse.entity.TCMuster;
 import cz.vse.entity.TSMuster;
 import cz.vse.repository.TSMusterRepository;
 import cz.vse.service.TSMusterService;
@@ -41,6 +42,7 @@ public class TSMusterServiceImpl implements TSMusterService {
         l.debug("updating TSMuster - service");
         TSMuster tsMuster = tsMusterRepository.findOne(tsMusterDTO.getId());
         mapper.map(tsMusterDTO, tsMuster);
+        tsMuster.setUpdatedDateTime(LocalDateTime.now());
         tsMusterRepository.save(tsMuster);
         l.info("updated TSMuster - service: " + tsMuster);
     }
@@ -95,9 +97,9 @@ public class TSMusterServiceImpl implements TSMusterService {
         return tsMusterDTOList;
     }
 
-//    public List<TSMuster> findAllTestStepMustersByTCMusterId(long tcMusterId) {
-//        List<TSMuster> tsMusters;
-//        tsMusters = tsMusterRepository.findAllTestStepMustersByTCMusterId(tcMusterId);
-//        return tsMusters;
-//    }
+    public List<TSMuster> findAllTestStepMustersByTCMuster(TCMuster tcMuster) {
+        List<TSMuster> tsMusters;
+        tsMusters = tsMusterRepository.findAllTestStepMustersByTCMuster(tcMuster);
+        return tsMusters;
+    }
 }

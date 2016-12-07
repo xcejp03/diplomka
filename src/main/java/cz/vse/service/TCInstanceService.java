@@ -22,7 +22,7 @@ public interface TCInstanceService {
 
     List<TCInstance> findAllTestCaseInstances();
 
-//    List<TCInstance> findAllTCInstancesByTCMusterId(long id);
+    List<TCInstance> findAllTCInstancesByTCMusterId(long id);
 
     TCInstanceRunDTO findTCInstanceRunDTOById(long id);
 

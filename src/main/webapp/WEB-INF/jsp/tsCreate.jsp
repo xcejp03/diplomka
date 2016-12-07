@@ -49,7 +49,7 @@
 <h1>
     Add a Test Step
 </h1>
-<h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\ts.jsp</h3>
+<h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\tsCreate.jsp</h3>
 
 <c:url var="addAction" value="/ts/create"></c:url>
 

@@ -33,7 +33,6 @@ public class PersonServiceImpl implements PersonService {
         Person person;
         person = mapper.map(personDTO, Person.class);
         person.setCreatedDate(LocalDateTime.now());
-
         personRepository.save(person);
         l.info("created person - service: " + person);
     }

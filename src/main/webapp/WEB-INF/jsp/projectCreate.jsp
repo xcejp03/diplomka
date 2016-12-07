@@ -185,8 +185,8 @@
                     </c:forEach>
                 </td>
                 <td>
-                    <c:forEach items="${project.tcMusters_id}" var="tcMuster">
-                        ${tcMuster},
+                    <c:forEach items="${project.tcMusters_id}" var="tCMuster">
+                        ${tCMuster},
                     </c:forEach>
                 </td>
                 <td>

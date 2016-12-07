@@ -48,6 +48,7 @@ public class TCMusterServiceImpl implements TCMusterService{
 
     public void updateTestCaseMuster(TCMuster tcMuster) {
         l.debug("updating TCMuster - service");
+        tcMuster.setUpdatedDateTime(LocalDateTime.now());
         tcMusterRepository.save(tcMuster);
         l.info("updated TCMuster - service: " + tcMuster);
     }
@@ -113,7 +114,7 @@ public class TCMusterServiceImpl implements TCMusterService{
         TCInstance tcInstance;
         TCMuster tcMuster;
         tcInstance = tcInstanceService.findTestCaseInstanceById(tcInstanceId);
-        tcMuster = findTestCaseMusterById(tcInstance.getTcMuster().getId());
+        tcMuster = findTestCaseMusterById(tcInstance.gettCMuster().getId());
         return tcMuster;
     }
 }

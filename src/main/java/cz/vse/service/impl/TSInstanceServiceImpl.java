@@ -2,7 +2,9 @@ package cz.vse.service.impl;
 
 import cz.vse.dao.TestStepInstanceDao;
 import cz.vse.dto.TSInstanceRunDTO;
+import cz.vse.entity.TCInstance;
 import cz.vse.entity.TSInstance;
+import cz.vse.repository.TCInstanceRepository;
 import cz.vse.repository.TSInstanceRepository;
 import cz.vse.service.TSInstanceService;
 import ma.glasnost.orika.MapperFacade;
@@ -10,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -23,6 +26,9 @@ public class TSInstanceServiceImpl implements TSInstanceService {
     private TSInstanceRepository tsInstanceRepository;
 
     @Autowired
+    private TCInstanceRepository tcInstanceRepository;
+
+    @Autowired
     private TestStepInstanceDao testStepInstanceDao;
 
     @Autowired
@@ -30,12 +36,14 @@ public class TSInstanceServiceImpl implements TSInstanceService {
 
     public void createTestStepInstance(TSInstance tsInstance) {
         l.debug("creating TSInstance - service");
+        tsInstance.setCreatedDateTime(LocalDateTime.now());
         tsInstanceRepository.save(tsInstance);
         l.info("created TSInstance - service: " + tsInstance);
     }
 
     public void updateTestStepInstance(TSInstance tsInstance) {
         l.debug("updating TSInstance - service");
+        tsInstance.setUpdatedDateTime(LocalDateTime.now());
         tsInstanceRepository.save(tsInstance);
         l.info("updated TSInstance - service: " + tsInstance);
     }
@@ -45,6 +53,7 @@ public class TSInstanceServiceImpl implements TSInstanceService {
         TSInstance tsInstance = findTestStepInstanceById(tsInstanceRunDTO.getId());
 
         mapper.map(tsInstanceRunDTO, tsInstance);
+        tsInstance.setUpdatedDateTime(LocalDateTime.now());
         l.info(tsInstance);
 
 //        tsInstance = mapper.map(tsInstanceRunDTO, TSInstance.class);
@@ -73,11 +82,13 @@ public class TSInstanceServiceImpl implements TSInstanceService {
         return tsInstance;
     }
 
-//    public List<TSInstance> findAllTSInstancesByTCInstanceId(Long id) {
-//        List<TSInstance> tsInstanceList;
-//        tsInstanceList = tsInstanceRepository.findAllTestStepInstancesByTCInstanceId(id);
-//        return tsInstanceList;
-//    }
+    public List<TSInstance> findAllTSInstancesByTCInstanceId(Long id) {
+        List<TSInstance> tsInstanceList;
+
+        TCInstance tcInstance = tcInstanceRepository.findOne(id);
+        tsInstanceList = tsInstanceRepository.findAllTestStepInstancesByTCInstance(tcInstance);
+        return tsInstanceList;
+    }
 
 
     public TSInstanceRunDTO findTestStepInstanceRunDTOById(long id) {

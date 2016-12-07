@@ -25,6 +25,5 @@ public interface TSInstanceService {
 
     List<TSInstance> findAllTestStepInstances();
 
-//    List<TSInstance> findAllTSInstancesByTCInstanceId(Long id);
-
+    List<TSInstance> findAllTSInstancesByTCInstanceId(Long id);
 }

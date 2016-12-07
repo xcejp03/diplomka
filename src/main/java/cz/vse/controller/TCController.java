@@ -85,14 +85,21 @@ public class TCController {
         return "redirect:/tc/create";
     }
 
+    @RequestMapping("/instance/remove/{id}")
+    public String removeTInstance(@PathVariable("id") long id) {
+        Long tcInstanceMusterId = tcInstanceService.findTestCaseInstanceById(id).gettCMuster().getId();
+        tcInstanceService.deleteTestCaseInstanceById(id);
+        return "redirect:/tc/history/"+tcInstanceMusterId;
+    }
+
     @RequestMapping("/run/{id}")
     public String runTCMuster(Model model, @PathVariable("id") long id) {
         TCInstanceRunDTO tcInstanceRunDTO;
         tcInstanceRunDTO = tcService.runNewTC(id);
         model.addAttribute("tcInstance", tcInstanceRunDTO);
-//         model.addAttribute("listTSInstances", tsInstanceService.findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
+        model.addAttribute("listTSInstances", tsInstanceService.findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
 
-        return "tcRun";
+        return "tcShow";
     }
 
     @RequestMapping("/show/{id}")
@@ -100,17 +107,17 @@ public class TCController {
         TCInstanceRunDTO tcInstanceRunDTO;
         tcInstanceRunDTO = tcInstanceService.findTCInstanceRunDTOById(id);
         model.addAttribute("tcInstance", tcInstanceRunDTO);
-//        model.addAttribute("listTSInstances", tsInstanceService.
-//                findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
+        model.addAttribute("listTSInstances", tsInstanceService.
+                findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
 
-        return "tcRun";
+        return "tcShow";
     }
 
     @RequestMapping("/history/{id}")
     public String showTCHistory(@PathVariable("id") long id, Model model) {
         l.info("/history/{id}" + id);
         model.addAttribute("tc", tcMusterService.findTestCaseMusterDTOById(id));
-//        model.addAttribute("listTCInstances", tcInstanceService.findAllTCInstancesByTCMusterId(id));
+        model.addAttribute("listTCInstances", tcInstanceService.findAllTCInstancesByTCMusterId(id));
         return "tcHistory";
     }
 

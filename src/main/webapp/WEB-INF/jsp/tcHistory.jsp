@@ -69,7 +69,6 @@
             <th width="40">TC ID</th>
             <th width="80">TC name</th>
             <th width="80">TC createdDateTime</th>
-            <th width="40">Edit</th>
             <th width="40">Delete</th>
             <th width="40">Show</th>
         </tr>
@@ -88,8 +87,7 @@
                     <%--${tsMuster},--%>
                     <%--</c:forEach>--%>
                     <%--</td>--%>
-                <td><a href="<c:url value='/tc/edit/${tc.id}' />">Edit</a></td>
-                <td><a href="<c:url value='/tc/remove/${tc.id}' />">Delete</a></td>
+                <td><a href="<c:url value='/tc/instance/remove/${tc.id}' />">Delete</a></td>
                 <td><a href="<c:url value='/tc/show/${tc.id}' />">Show</a></td>
             </tr>
         </c:forEach>

@@ -2,7 +2,9 @@ package cz.vse.service.impl;
 
 import cz.vse.dto.TCInstanceRunDTO;
 import cz.vse.entity.TCInstance;
+import cz.vse.entity.TCMuster;
 import cz.vse.repository.TCInstanceRepository;
+import cz.vse.repository.TCMusterRepository;
 import cz.vse.service.TCInstanceService;
 import cz.vse.service.TCMusterService;
 import ma.glasnost.orika.MapperFacade;
@@ -10,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -24,6 +27,9 @@ public class TCInstanceServiceImpl implements TCInstanceService {
     @Autowired TCInstanceRepository tcInstanceRepository;
 
     @Autowired
+    TCMusterRepository tcMusterRepository;
+
+    @Autowired
     private MapperFacade mapper;
 
     public void createTestCaseInstance(TCInstance tcInstance) {
@@ -35,6 +41,7 @@ public class TCInstanceServiceImpl implements TCInstanceService {
 
     public void updateTestCaseInstance(TCInstance tcInstance) {
         l.debug("updating TCInstance - service");
+        tcInstance.setUpdatedDateTime(LocalDateTime.now());
         tcInstanceRepository.save(tcInstance);
         l.info("updated TCInstance - service: " + tcInstance);
     }
@@ -68,11 +75,12 @@ public class TCInstanceServiceImpl implements TCInstanceService {
     }
 
 
-//    public List<TCInstance> findAllTCInstancesByTCMusterId(long id) {
-//        List<TCInstance> tcInstanceList;
-//        tcInstanceList = tcInstanceRepository.findByTCMusterId(id);
-//        return tcInstanceList;
-//    }
+    public List<TCInstance> findAllTCInstancesByTCMusterId(long id) {
+        List<TCInstance> tcInstanceList;
+        TCMuster tcMuster = tcMusterRepository.findOne(id);
+        tcInstanceList = tcInstanceRepository.findByTCMuster(tcMuster);
+        return tcInstanceList;
+    }
 
     public TCInstanceRunDTO findTCInstanceRunDTOById(long id) {
         TCInstance tcInstance = findTestCaseInstanceById(id);

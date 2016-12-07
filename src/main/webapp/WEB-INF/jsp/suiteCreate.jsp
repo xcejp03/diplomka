@@ -142,8 +142,8 @@
                 <td>${suite.project_id}</td>
                 <td>${suite.createdDateTime}</td>
                 <td>
-                    <c:forEach items="${suite.tcMusters_id}" var="tcMuster">
-                        ${tcMuster},
+                    <c:forEach items="${suite.tcMusters_id}" var="tCMuster">
+                        ${tCMuster},
                     </c:forEach>
                 </td>
                 <td><a href="<c:url value='edit/${suite.id}' />">Edit</a></td>

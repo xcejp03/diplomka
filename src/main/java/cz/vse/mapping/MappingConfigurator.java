@@ -91,7 +91,7 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .mapNullsInReverse(false)
                 .mapNulls(false)
                 .field("author", "author_id")
-                .field("tcMuster", "tcMuster_id")
+                .field("tCMuster", "tcMuster_id")
                 .byDefault()
                 .register();
         factory.classMap(TCMuster.class, TCMusterDTO.class)
@@ -128,14 +128,14 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .mapNulls(false)
                 .field("id", "id")
                 .field("name", "name")
-                .field("tcMuster", "tcMusters_id")
+                .field("tCMuster", "tcMusters_id")
                 .field("tsInstances", "tsInstances_id")
                 .field("id", "tcInstance_id")
                 .register();
         factory.classMap(TSInstance.class, TSInstanceRunDTO.class)
                 .mapNullsInReverse(false)
                 .mapNulls(false)
-                .field("tcInstance", "tcInstance_id")
+                .field("tCInstance", "tcInstance_id")
 
 //                .mapNulls(false)
 //                .mapNullsInReverse(false)

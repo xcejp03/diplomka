@@ -49,11 +49,12 @@
 </head>
 <body>
 <%--
-tcInstance
+tCInstance
 listTSInstances
 --%>
 <c:url var="addAction" value="/tc/run/${tc.id}"></c:url>
 <h1>Spuštěný test: ${tcInstance.name} - ${tcInstance.id}</h1>
+<h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\WEB-INF\jsp\tcShow.jsp</h3>
 
 <c:if test="${!empty listTSInstances}">
     <h3>Test stepy List</h3>
@@ -71,9 +72,9 @@ listTSInstances
         </tr>
         <c:forEach items="${listTSInstances}" var="ts">
             <tr>
-                <td>${ts.id}gg</td>
-                <td>${ts.action}gg</td>
-                <td>${ts.expected}ff</td>
+                <td>${ts.id}</td>
+                <td>${ts.action}</td>
+                <td>${ts.expected}</td>
                 <td>${ts.result}</td>
                     <%--<td>--%>
                     <%--<c:forEach items="${project.projectMembers_id}" var="projectMember">--%>
@@ -81,7 +82,7 @@ listTSInstances
                     <%--</c:forEach>--%>
                     <%--</td>--%>
                 <td><a href="<c:url value='/ts/run/${ts.id}' />">Edit</a></td>
-                <td><a href="<c:url value='/ts/remove/${ts.id}' />">Delete</a></td>
+                <td><a href="<c:url value='/ts/instance/remove/${ts.id}' />">Delete</a></td>
             </tr>
         </c:forEach>
     </table>
