@@ -69,6 +69,18 @@ public class TestController {
 
         return "projectCreate";
     }
+    @RequestMapping(value = "/thym", method = RequestMethod.GET)
+    public String thyme (Model model) {
+        l.info("request mapping project/create");
+//        model.addAttribute("project", new ProjectDTO());
+//        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
+//        model.addAttribute("listPersons", personService.findAllPersons());
+//        model.addAttribute("listSuites", suiteService.findAllTestSuites());
+//
+//        projectService.createTestProject(createProjectData());
+
+        return "thyme";
+    }
 
     @RequestMapping(value = "/dto", method = RequestMethod.GET)
     public String createProjectDTO(Model model) {

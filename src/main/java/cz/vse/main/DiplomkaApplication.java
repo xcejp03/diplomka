@@ -11,20 +11,23 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.scheduling.annotation.EnableAsync;
 
-    @SpringBootApplication
-    @Configuration
-    @ComponentScan(basePackages = ConfigConstants.COMPONENT_SCAN_BASE_PACKAGE)
-    @EnableAutoConfiguration
-    @EnableAsync
-    @EnableAspectJAutoProxy
-    public class DiplomkaApplication extends SpringBootServletInitializer {
+@SpringBootApplication(exclude = {org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration.class})
+@Configuration
+@ComponentScan(basePackages = ConfigConstants.COMPONENT_SCAN_BASE_PACKAGE)
+@EnableAutoConfiguration
+@EnableAsync
+@EnableAspectJAutoProxy
+public class DiplomkaApplication extends SpringBootServletInitializer {
 
-        @Override
-        protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-            return application.sources(DiplomkaApplication.class);
-        }
+    public static void main(String[] args) {
+        SpringApplication.run(DiplomkaApplication.class, args);
 
-        public static void main(String[] args) {
-            SpringApplication.run(DiplomkaApplication.class, args);
-        }
     }
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+
+        return application.sources(DiplomkaApplication.class);
+    }
+
+}
