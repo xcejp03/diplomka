@@ -64,4 +64,12 @@ public class ProjectController {
         projectService.deleteTestProjectById(id);
         return "redirect:/project/create";
     }
+
+    @RequestMapping("{id}")
+    public String ProjectList(@PathVariable("id") int id, Model model) {
+        l.info("{id}/list" + id);
+        model.addAttribute("listProjects", projectService.findAllTestProjectsByUserIdDTO(id));
+        model.addAttribute("person", personService.findPersonById(id));
+        return "ProjectList";
+    }
 }

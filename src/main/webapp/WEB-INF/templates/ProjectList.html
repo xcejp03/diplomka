@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf tutorial: exercise 6</title>
+    <link rel="stylesheet" href="../../../css/main-static.css" th:href="@{/css/main.css}"/>
+    <meta charset="utf-8"/>
+
+</head>
+<body>
+<h1>Seznam dostupných projektů pro <span style="font-style: italic"
+                                         th:text="${person.login}">přihlášeného uživatele</span></h1>
+<h2>Project list</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Název</th>
+        <th>Detail</th>
+        <th>Statistika</th>
+        <th>Založit Defect</th>
+        <th>Test Suity</th>
+    </tr>
+    </thead>
+    <tbody th:remove="all-but-first">
+    <tr th:each="project : ${listProjects}">
+        <td th:text="${project.id}">00</td>
+        <td th:text="${project.name}">Projekt</td>
+        <td><a href="www.seznam.cz">detail</a></td>
+        <td><a href="www.seznam.cz">statistika</a></td>
+        <td><a href="www.seznam.cz">Založit Defekt</a></td>
+        <td><a href="http://www.google.com">Test Suity</a></td>
+    </tr>
+
+    </tbody>
+</table>
+
+
+</body>
+</html>

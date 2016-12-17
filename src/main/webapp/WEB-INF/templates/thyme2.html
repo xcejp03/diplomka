@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf tutorial: exercise 6</title>
+    <link rel="stylesheet" href="../../../css/main-static.css" th:href="@{/css/main.css}" />
+    <meta charset="utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery UI Dialog - Animation</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#dialog" ).dialog({
+                autoOpen: false,
+                show: {
+                    effect: "blind",
+                    duration: 1000
+                },
+                hide: {
+                    effect: "explode",
+                    duration: 1000
+                }
+            });
+
+            $( "#opener" ).on( "click", function() {
+                $( "#dialog" ).dialog( "open" );
+            });
+        } );
+    </script>
+</head>
+<body>
+
+<div id="dialog" title="Basic dialog">
+    <p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+</div>
+
+<button id="opener">Open Dialog</button>
+
+
+<body>
+<h1>Thymeleaf tutorial - Solution for exercise 6: iteration</h1>
+<h2>Product list</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>login</th>
+    </tr>
+    </thead>
+    <tbody th:remove="all-but-first">
+    <tr th:each="person : ${listPersons}">
+        <td th:text="${person.id}">Red chair</td>
+        <td th:text="${person.name}">Red chairname</td>
+        <td th:text="${person.login}">Red chairlogin</td>
+    </tr>
+    <tr>
+        <td>White table</td>
+        <td>$200</td>
+    </tr>
+    <tr>
+        <td>Reb table</td>
+        <td>$200</td>
+    </tr>
+    <tr>
+        <td>Blue table</td>
+        <td>$200</td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+
+</body>
+</html>

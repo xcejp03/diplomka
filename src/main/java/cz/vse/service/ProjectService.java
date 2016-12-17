@@ -1,6 +1,7 @@
 package cz.vse.service;
 
 import cz.vse.dto.ProjectDTO;
+import cz.vse.dto.ProjectsNamesDTO;
 import cz.vse.entity.Project;
 
 import java.util.List;
@@ -27,5 +28,7 @@ public interface ProjectService {
     List<ProjectDTO> findAllTestProjectsDTO();
 
     List<Project> findAllTestProjects();
+
+    List<ProjectsNamesDTO> findAllTestProjectsByUserIdDTO(long id);
 
 }

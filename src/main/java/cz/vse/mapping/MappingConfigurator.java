@@ -136,16 +136,9 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .mapNullsInReverse(false)
                 .mapNulls(false)
                 .field("tCInstance", "tcInstance_id")
-
-//                .mapNulls(false)
-//                .mapNullsInReverse(false)
-//                .field("action", "action")
-//                .field("expected", "expected")
-//                .field("result", "result")
-//                .exclude("tsMuster")
-//                .exclude("tcInstance")
-//                .exclude("expected")
-//                .field("expected", "result")
+                .byDefault()
+                .register();
+        factory.classMap(Project.class, ProjectsNamesDTO.class)
                 .byDefault()
                 .register();
     }

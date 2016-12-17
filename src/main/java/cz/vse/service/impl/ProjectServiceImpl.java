@@ -1,6 +1,7 @@
 package cz.vse.service.impl;
 
 import cz.vse.dto.ProjectDTO;
+import cz.vse.dto.ProjectsNamesDTO;
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
 import cz.vse.entity.TestSuite;
@@ -52,7 +53,7 @@ public class ProjectServiceImpl implements ProjectService {
             }
             project.setPersonMembers(personMembersList);
         }
-        if (project.getTestSuites() !=null) {
+        if (project.getTestSuites() != null) {
             for (TestSuite suiteForId : project.getTestSuites()) {
                 suiteForId.setProject(project);
             }
@@ -82,7 +83,7 @@ public class ProjectServiceImpl implements ProjectService {
             }
             project.setPersonMembers(personMembersList);
         }
-        if (project.getTestSuites() !=null) {
+        if (project.getTestSuites() != null) {
             for (TestSuite suiteForId : project.getTestSuites()) {
                 suiteForId.setProject(project);
             }
@@ -140,5 +141,12 @@ public class ProjectServiceImpl implements ProjectService {
         projectList = projectRepository.findAll();
         l.info("found all testProjects - service: ");
         return projectList;
+    }
+
+    @Override
+    public List<ProjectsNamesDTO> findAllTestProjectsByUserIdDTO(long id) {
+        List<ProjectsNamesDTO> projectsNamesDTOList;
+        projectsNamesDTOList = projectRepository.findAllProjectsByPersonMembersId(id);
+        return projectsNamesDTOList;
     }
 }
