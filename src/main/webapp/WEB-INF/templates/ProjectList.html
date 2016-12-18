@@ -5,6 +5,15 @@
     <link rel="stylesheet" href="../../../css/main-static.css" th:href="@{/css/main.css}"/>
     <meta charset="utf-8"/>
 
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" href="/resources/demos/style.css"/>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script type='text/javascript' src='../script.js'></script>
+
 </head>
 <body>
 <h1>Seznam dostupných projektů pro <span style="font-style: italic"
@@ -23,10 +32,12 @@
     </tr>
     </thead>
     <tbody th:remove="all-but-first">
-    <tr th:each="project : ${listProjects}">
-        <td th:text="${project.id}">00</td>
-        <td th:text="${project.name}">Projekt</td>
-        <td><a href="www.seznam.cz">detail</a></td>
+    <tr th:each="projectXX : ${listProjects}">
+        <td th:text="${projectXX.id}">00</td>
+        <td th:text="${projectXX.name}">Projekt</td>
+        <td><a href="#" class="opener"
+               th:attr="data-name=${projectXX.name}, data-owner=${projectXX.projectOwner}">Detail</a></td>
+
         <td><a href="www.seznam.cz">statistika</a></td>
         <td><a href="www.seznam.cz">Založit Defekt</a></td>
         <td><a href="http://www.google.com">Test Suity</a></td>
@@ -34,7 +45,13 @@
 
     </tbody>
 </table>
+<div id="detailDialog" title="Basic dialog">
 
+    <h2>Detail projektu: <span id="spanDataName"></span></h2>
+    <h3>Vlastník projektu: <span id="spanDataOwnerName"> | </span></h3>
 
+    <p>This is an animated dialog which is useful for displaying information.
+        The dialog window can be moved, resized and closed with the 'x' icon.</p>
+</div>
 </body>
 </html>

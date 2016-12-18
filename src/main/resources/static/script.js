@@ -8,7 +8,7 @@ $(function () {
 });
 
 $(function () {
-    $("#dialog").dialog({
+    $("#detailDialog").dialog({
         autoOpen: false,
         buttons: {
             Ok: function () {
@@ -25,9 +25,18 @@ $(function () {
         }
     });
 
-    $("#opener").on("click", function () {
-        $("#dialog").dialog("open");
+    // $(".opener").on("click", function () {
+    $(".opener").click(function () {
+        var dataAttr = $(this).data();
+        $('#spanDataName').html(dataAttr.name);
+        $('#spanDataOwnerName').html(dataAttr.owner);
+        // $('#spanDataDes').html(dataAttr.description);
+        // $('#spanDataPrice').html(dataAttr.price);
+        // $("#dialog-form").dialog("open");
+        $("#detailDialog").dialog("open");
     });
 });
+
+
 
 
