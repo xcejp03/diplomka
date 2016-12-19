@@ -32,11 +32,11 @@
     </tr>
     </thead>
     <tbody th:remove="all-but-first">
-    <tr th:each="projectXX : ${listProjects}">
-        <td th:text="${projectXX.id}">00</td>
-        <td th:text="${projectXX.name}">Projekt</td>
+    <tr th:each="project : ${listProjects}">
+        <td th:text="${project.id}">00</td>
+        <td th:text="${project.name}">Projekt</td>
         <td><a href="#" class="opener"
-               th:attr="data-name=${projectXX.name}, data-owner=${projectXX.projectOwner}">Detail</a></td>
+               th:attr="data-name=${project.name}, data-owner=${project.projectOwnerName}">Detail</a></td>
 
         <td><a href="www.seznam.cz">statistika</a></td>
         <td><a href="www.seznam.cz">Založit Defekt</a></td>

@@ -7,12 +7,22 @@ public class ProjectsNamesDTO extends BaseDTO {
 
     private String name;
 
+    private String projectOwnerName;
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getProjectOwnerName() {
+        return projectOwnerName;
+    }
+
+    public void setProjectOwnerName(String projectOwnerName) {
+        this.projectOwnerName = projectOwnerName;
     }
 
     @Override

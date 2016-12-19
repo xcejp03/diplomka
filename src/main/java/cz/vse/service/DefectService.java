@@ -28,4 +28,6 @@ public interface DefectService {
     DefectDTO findDefectDTOById(long id);
 
     List<Defect> findAllDefects();
+
+    List<DefectDTO> findAllDefectDTO();
 }

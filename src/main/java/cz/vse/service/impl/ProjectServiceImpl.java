@@ -143,10 +143,22 @@ public class ProjectServiceImpl implements ProjectService {
         return projectList;
     }
 
-    @Override
     public List<ProjectsNamesDTO> findAllTestProjectsByUserIdDTO(long id) {
         List<ProjectsNamesDTO> projectsNamesDTOList;
-        projectsNamesDTOList = projectRepository.findAllProjectsByPersonMembersId(id);
+        List<Project> projectList;
+        projectList = projectRepository.findAllProjectsByPersonMembersId(id);
+        projectsNamesDTOList =mapper.mapAsList(projectList, ProjectsNamesDTO.class);
         return projectsNamesDTOList;
     }
+
+//    public List<ProjectsNamesDTO> findAllTestProjectsByMemberIdDTO(long id) {
+//        List<Project> projectList;
+//        List<ProjectDTO> projectDTOList;
+//        projectList = projectRepository.findAllProjectsByPersonMembersId(id);
+//        projectDTOList = mapper.mapAsList(projectList, ProjectDTO.class);
+//
+//        l.info("domapovano");
+//        return projectDTOList;
+//    }
+
 }

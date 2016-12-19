@@ -72,4 +72,14 @@ public class PersonServiceImpl implements PersonService {
         return personList;
     }
 
+    public List<PersonDTO> findAllPersonsDTO() {
+        l.debug("finding all persons - service");
+        List<Person> personList;
+        List<PersonDTO> personDTOList;
+        personList = personRepository.findAll();
+        personDTOList = mapper.mapAsList(personList, PersonDTO.class);
+        l.info("found all persons - service: " + personList.toString());
+        return personDTOList;
+    }
+
 }

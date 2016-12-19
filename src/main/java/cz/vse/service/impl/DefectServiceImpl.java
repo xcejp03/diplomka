@@ -21,7 +21,6 @@ public class DefectServiceImpl implements DefectService {
     @Autowired
     DefectRepository defectRepository;
 
-
     @Autowired
     private MapperFacade mapper;
 
@@ -101,4 +100,14 @@ public class DefectServiceImpl implements DefectService {
         return defectList;
     }
 
+    @Override
+    public List<DefectDTO> findAllDefectDTO() {
+        l.debug("finding defect by id - service");
+        List<Defect> defectList;
+        List<DefectDTO> defectDTOList;
+        defectList = defectRepository.findAll();
+        defectDTOList = mapper.mapAsList(defectList, DefectDTO.class);
+
+        return defectDTOList;
+    }
 }
