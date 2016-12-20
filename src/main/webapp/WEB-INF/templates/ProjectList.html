@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Thymeleaf tutorial: exercise 6</title>
+    <title>ProjectList</title>
     <link rel="stylesheet" href="../../../css/main-static.css" th:href="@{/css/main.css}"/>
     <meta charset="utf-8"/>
-
+    <script type='text/javascript' src='../script.js'></script>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
@@ -36,16 +36,18 @@
         <td th:text="${project.id}">00</td>
         <td th:text="${project.name}">Projekt</td>
         <td><a href="#" class="opener"
-               th:attr="data-name=${project.name}, data-owner=${project.projectOwnerName}">Detail</a></td>
+               th:attr="data-name=${project.name}, data-owner=${project.projectOwnerName}" data-id="#detailDialog">Detail</a>
+        </td>
 
-        <td><a href="www.seznam.cz">statistika</a></td>
+        <td><a href="#" class="opener" data-id="#statisticsDialog">statistika</a></td>
         <td><a href="www.seznam.cz">Založit Defekt</a></td>
         <td><a href="http://www.google.com">Test Suity</a></td>
     </tr>
 
     </tbody>
 </table>
-<div id="detailDialog" title="Basic dialog">
+<!--<div id="detailDialog" title="Detail projektu">-->
+<div id="detailDialog" title="Detail projektu">
 
     <h2>Detail projektu: <span id="spanDataName"></span></h2>
     <h3>Vlastník projektu: <span id="spanDataOwnerName"> | </span></h3>
@@ -53,5 +55,24 @@
     <p>This is an animated dialog which is useful for displaying information.
         The dialog window can be moved, resized and closed with the 'x' icon.</p>
 </div>
+
+<div id="statisticsDialog" title="Statistika projektu">
+
+    <h2>Počet TC: </h2>
+    <h3>Počet chyb:</h3>
+    <h3>Hotové TC:</h3>
+
+</div>
+
+<button class="opener"  data-id="#dialog1" >english</button>
+<div  class="dialog" id="dialog1"  title="Dialog Title">this is also very important</div>
+<br></br>
+
+<button class="opener" data-id="#dialog2">espaňa</button>
+<div class="dialog" id="dialog2" title="Dialog Title">this is also very important</div>
+
+<button class="opener" data-id="#dialog3">espaňa</button>
+<div class="dialog" id="dialog3" title="Dialog Title">this is also very important</div>
+
 </body>
 </html>
