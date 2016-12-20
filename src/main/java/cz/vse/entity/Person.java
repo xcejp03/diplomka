@@ -2,7 +2,9 @@ package cz.vse.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by pcejka on 21.09.2016.
@@ -14,8 +16,11 @@ public class Person extends BaseEntity {
     private String pass;
     private LocalDateTime createdDate;
     private LocalDateTime lastLogin;
+    private boolean enabled;
 
-    private String testPole;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private Set<UserRole> userRole = new HashSet<>(0);
+
 
 //    @ManyToMany (mappedBy = "id")
 //    private List<RoleEnum> roleEna;
@@ -40,6 +45,26 @@ public class Person extends BaseEntity {
             joinColumns = @JoinColumn(name = "PERSON_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "DEFECT_ID", referencedColumnName = "ID"))
     private List<Defect> defectReporters;
+
+
+
+    public Person() {
+    }
+
+    public Person(String username, String password, boolean enabled) {
+        this.login = username;
+        this.pass = password;
+        this.enabled = enabled;
+    }
+
+    public Person(String username, String password, boolean enabled, Set<UserRole> userRole) {
+        this.login = username;
+        this.pass = password;
+        this.enabled = enabled;
+        this.userRole = userRole;
+    }
+
+
 
     public String getName() {
         return name;
@@ -117,12 +142,22 @@ public class Person extends BaseEntity {
         this.defectReporters = defectsReporter;
     }
 
-    public String getTestPole() {
-        return testPole;
+
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setTestPole(String testPole) {
-        this.testPole = testPole;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+
+    public Set<UserRole> getUserRole() {
+        return this.userRole;
+    }
+
+    public void setUserRole(Set<UserRole> userRole) {
+        this.userRole = userRole;
     }
 
     @Override

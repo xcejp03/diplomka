@@ -1,13 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
+    <title>ProjectList</title>
+    <link rel="stylesheet" href="../../../css/main-static.css" th:href="@{/css/main.css}"/>
+    <meta charset="utf-8"/>
+    <script type='text/javascript' src='../script.js'></script>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" href="/resources/demos/style.css"/>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href="http://t4t5.github.io/sweetalert/dist/sweetalert.css" rel="stylesheet"/>
+    <script src="http://t4t5.github.io/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script type='text/javascript' src='../script.js'></script>
+
     <meta charset="UTF-8">
     <title>Diplomka - index</title>
 </head>
+
 <body bgcolor="#f0f8ff">
 <h1>Index</h1>
 <h3>C:\workspace\IntelliJ\diplomka\src\main\webapp\index.html</h3>
+The sec:authentication attribute is used to print logged user name and roles:
+Logged user: <span sec:authentication="name">nemám jméno</span>
+Roles: <span sec:authentication="principal.authorities">nenačetlo se to</span>
 
+<br>
+
+
+<div sec:authorize="isAuthenticated()">
+    This content is only shown to authenticated users.
+</div>
+<div sec:authorize="hasAuthority('ROLE_ADMIN')">
+    This content is only shown to administrators.
+</div>
+<div sec:authorize="hasRole('ROLE_NIC')">
+    This content is only shown to Ničemovi.
+</div>
+<div sec:authorize="hasAuthority('ROLE_USER')">
+    This content is only shown to users.
+</div>
 
 </body>
 </html>
