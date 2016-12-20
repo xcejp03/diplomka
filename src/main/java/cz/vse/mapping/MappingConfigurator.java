@@ -140,6 +140,7 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .register();
         factory.classMap(Project.class, ProjectsNamesDTO.class)
                 .field("projectOwner.name", "projectOwnerName")
+                .field("testSuites{id}", "suiteIdList{}")
                 .byDefault()
                 .register();
     }

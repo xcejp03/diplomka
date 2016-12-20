@@ -71,7 +71,6 @@ public class ProjectController {
     @RequestMapping("{id}")
     public String ProjectList(@PathVariable("id") int id, Model model) {
         l.info("{id}/list" + id);
-//        List<ProjectsNamesDTO> listProjectsDTO = projectService.findAllTestProjectsByUserIdDTO(id);
         List<ProjectsNamesDTO> listProjectsNameDTO = projectService.findAllTestProjectsByUserIdDTO(id);
         model.addAttribute("listProjects", listProjectsNameDTO);
         model.addAttribute("person", personService.findPersonById(id));
