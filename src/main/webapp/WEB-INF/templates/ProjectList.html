@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="/resources/demos/style.css"/>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href="http://t4t5.github.io/sweetalert/dist/sweetalert.css" rel="stylesheet"/>
+    <script src="http://t4t5.github.io/sweetalert/dist/sweetalert.min.js"></script>
 
     <script type='text/javascript' src='../script.js'></script>
 
@@ -40,8 +42,8 @@
         </td>
 
         <td><a href="#" class="opener" data-id="#statisticsDialog">statistika</a></td>
-        <td><a href="www.seznam.cz">Založit Defekt</a></td>
-        <td><a href="http://www.google.com">Test Suity</a></td>
+        <td><a href="/defect/create">Založit Defekt</a></td>
+        <td><a th:href="@{'/suites/'+${project.suiteIdList}}">Test Suity</a></td>
     </tr>
 
     </tbody>
@@ -64,15 +66,14 @@
 
 </div>
 
-<button class="opener"  data-id="#dialog1" >english</button>
-<div  class="dialog" id="dialog1"  title="Dialog Title">this is also very important</div>
-<br></br>
+<button onclick="alert('sdfds')">alerty</button>
 
-<button class="opener" data-id="#dialog2">espaňa</button>
-<div class="dialog" id="dialog2" title="Dialog Title">this is also very important</div>
+<button onclick="swal('sdfds')">alerty swal</button>
 
-<button class="opener" data-id="#dialog3">espaňa</button>
-<div class="dialog" id="dialog3" title="Dialog Title">this is also very important</div>
+<button  class="alertik">alerty klas</button>
+
+<button id="alerton">alerty id</button>
+
 
 </body>
 </html>
