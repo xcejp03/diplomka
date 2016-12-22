@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Spring Security Example</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<h1>Welcome!</h1>
+
+<!--<p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>-->
+<div sec:authorize="isAuthenticated()">
+  1  This content is only shown to authenticated users.
+</div>
+<div sec:authorize="hasRole('ADMIN')">
+ 2   This content is only shown to administrators.ROLE_ADMIN
+</div>
+<div sec:authorize="hasRole('USER')">
+ 3   This content is only shown to users.ROLE_USER'
+</div>
+<div sec:authorize="hasRole('XXX')">
+ 4   This content is only shown to users. XXX
+</div>
+
+<div th:if="${#httpServletRequest.isUserInRole('ROLE_USER')}">
+5    This content is only shown to users. XXX is usder role
+</div>
+
+<div th:if="${#httpServletRequest.isUserInRole('XXX')}">
+ 6   This content is only shown to users. XXX is usder role - ono
+</div>
+<div style="font-style: oblique">hasAutority</div>
+
+<div sec:authorize="hasAuthority('PERMISSION_ACCESS_SITE')">
+  7  This content is only shown to users. PERMISSION_ACCESS_SITE
+</div>
+<div style="font-style: italic">#authorization.expression('hasRole(''ROLE_USER'')</div>
+
+<!--<div th:if="${#authorization.expression('hasRole(''USER'')')}">-->
+<!--jen pro 'hasRole(''ROLE_USER'')-->
+<!--</div>-->
+<div style="font: Vivaldi">#authentication.name</div>
+<!--<div th:text="${#authentication.name}">-->
+    <!--The value of the "name" property of the authentication object should appear here.-->
+<!--</div>-->
+
+
+</body>
+</html>

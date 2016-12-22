@@ -1,6 +1,5 @@
 package cz.vse.controller;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,10 +13,6 @@ public class LoginController {
     // Login form
     @RequestMapping("/login")
     public String login() {
-
-        String password = "heslo";
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        System.out.println(" HESLO XXX: " + passwordEncoder.encode(password));
 
         return "login";
     }

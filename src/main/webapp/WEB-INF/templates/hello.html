@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Hello World!</title>
+        <meta charset="utf-8"/>
+    </head>
+    <body>
+        <!--<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>-->
+
+        <div style="font-style: oblique">Seznam omezeného obsahu</div>
+        <div sec:authorize="hasRole('XXX')">
+         1   This content is only shown to users. XXX
+        </div>
+        <div sec:authorize="hasRole('XXXmmmmm')">
+          2  This content is only shown to users. NIKOMU
+        </div>
+
+        <div sec:authorize="hasRole('USER')">
+           3 This content is only shown to users. USER
+        </div>
+    </body>
+</html>

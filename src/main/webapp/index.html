@@ -14,7 +14,8 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link href="http://t4t5.github.io/sweetalert/dist/sweetalert.css" rel="stylesheet"/>
     <script src="http://t4t5.github.io/sweetalert/dist/sweetalert.min.js"></script>
-
+    <!--http://www.thymeleaf.org/extras/spring-security-->
+    <!--xmlns="http://www.thymeleaf.org/extras/spring-security"-->
     <script type='text/javascript' src='../script.js'></script>
 
     <meta charset="UTF-8">
@@ -31,18 +32,80 @@ Roles: <span sec:authentication="principal.authorities">nenačetlo se to</span>
 <br>
 
 
+<div xmlns="http://www.thymeleaf.org/extras/spring-security" authorize="isAuthenticated()">
+    This content is only shown to authenticated users.
+</div>
+<br>
+------
+<br>
+<div xmlns="http://www.thymeleaf.org/extras/spring-security" authorize="hasAuthority('ROLE_ADMIN')">
+    This content is only shown to administrators.
+</div>
+<br>
+------
+<br>
+<div xmlns="http://www.thymeleaf.org/extras/spring-security" authorize="hasRole('ROLE_NIC')">
+    This content is only shown to Ničemovi.
+</div>
+<br>
+------
+<br>
+<div xmlns="http://www.thymeleaf.org/extras/spring-security" authorize="hasAuthority('ROLE_USER')">
+    This content is only shown to users.
+</div>
+<br>
+------
+<br>
+druhý namespace
+<br>
+------
+<br>
+
 <div sec:authorize="isAuthenticated()">
     This content is only shown to authenticated users.
 </div>
+<br>
+------
+<br>
 <div sec:authorize="hasAuthority('ROLE_ADMIN')">
     This content is only shown to administrators.
 </div>
+<br>
+------
+<br>
 <div sec:authorize="hasRole('ROLE_NIC')">
     This content is only shown to Ničemovi.
 </div>
+<br>
+------
+<br>
 <div sec:authorize="hasAuthority('ROLE_USER')">
     This content is only shown to users.
 </div>
+<br>
+------
+<br>
 
+
+<br>
+-----
+<br>
+
+<span th:text="${#authorization.expression('isAuthenticated()')} ?
+               'the user is logged in' :
+               'the user is NOT logged in'">gggggg
+</span>
+Add a class on html element:
+
+<span th:classappend="${#authorization.expression('isAuthenticated()')} ? 'active'">ggggg
+</span>
+<br>
+------
+<br>
+<sec:authorize access="hasRole('supervisor')">
+
+    This content will only be visible to users who have the "supervisor" authority in their list of <tt>GrantedAuthority</tt>s.
+
+</sec:authorize>
 </body>
 </html>

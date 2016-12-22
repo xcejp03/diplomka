@@ -19,7 +19,7 @@ public class Person extends BaseEntity {
     private boolean enabled;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    private Set<UserRole> userRole = new HashSet<>(0);
+    private Set<UserRole> userRole = new HashSet<UserRole>(0);
 
 
 //    @ManyToMany (mappedBy = "id")

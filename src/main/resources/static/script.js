@@ -39,7 +39,7 @@ $(function () {
 
 $(function () {
     $("#alerton").click(function () {
-        swal("#alerton  preš click");
+        swal("#alerton  preclick");
     })
 })
 
