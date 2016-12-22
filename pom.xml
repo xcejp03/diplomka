@@ -8,7 +8,7 @@
     <artifactId>diplomka</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-
+<!-- nic se neděje-->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
