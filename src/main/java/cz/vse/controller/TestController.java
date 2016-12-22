@@ -167,6 +167,11 @@ public class TestController {
         return project;
 
     }
+    @RequestMapping(value = "/bs", method = RequestMethod.GET)
+    public String testujBootstrap() {
+        return "bootstrap";
+    }
+
 
 
 }

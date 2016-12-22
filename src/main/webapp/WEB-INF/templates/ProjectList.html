@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://java.sun.com/jsf/html">
 <head>
     <title>ProjectList</title>
     <link rel="stylesheet" href="../../../css/main-static.css" th:href="@{/css/main.css}"/>
@@ -16,13 +16,21 @@
 
     <script type='text/javascript' src='../script.js'></script>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
+<div class="container">
+<div class="jumbotron">
 <h1>Seznam dostupných projektů pro <span style="font-style: italic"
                                          th:text="${person.login}">přihlášeného uživatele</span></h1>
+</div>
 <h2>Project list</h2>
-
-<table>
+</div>
+<table class="table table-striped">
     <thead>
     <tr>
         <th>ID</th>
@@ -45,9 +53,11 @@
         <td><a href="/defect/create">Založit Defekt</a></td>
         <td><a th:href="@{'/suites/'+${project.suiteIdList}}">Test Suity</a></td>
     </tr>
-
     </tbody>
 </table>
+<button type="button">Text tlačítka</button>
+<button type="button" class="btn btn-primary">Text tlačítka 2</button>
+<button type="button" class="btn btn-primary">News <span class="badge">5</span></button>
 <!--<div id="detailDialog" title="Detail projektu">-->
 <div id="detailDialog" title="Detail projektu">
 
@@ -66,11 +76,11 @@
 
 </div>
 
-<button onclick="alert('sdfds')">alerty</button>
+<button onclick="alert('sdfds')" class="btn btn-default">alerty</button>
 
-<button onclick="swal('sdfds')">alerty swal</button>
+<button onclick="swal('sdfds')" class="btn btn-default">alerty swal</button>
 
-<button  class="alertik">alerty klas</button>
+<div class="btn btn-default"><button  class="alertik">alerty klas</button></div>
 
 <button id="alerton">alerty id</button>
 
