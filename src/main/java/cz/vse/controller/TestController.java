@@ -172,8 +172,15 @@ public class TestController {
         return "bootstrap";
     }
 
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String bootstrapIndex() {
+        return "index";
+    }
 
-
+    @RequestMapping(value = "/form", method = RequestMethod.GET)
+    public String bootstrapForm() {
+        return "form";
+    }
 }
 
 

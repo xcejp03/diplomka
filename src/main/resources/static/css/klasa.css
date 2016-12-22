@@ -1,0 +1,23 @@
+body {
+    background-color: #5eeb18;
+}
+
+h1 {
+    color: navy;
+    margin-left: 20px;
+}
+
+td {
+
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 10px 5px;
+    border-style: solid;
+    border-width: 1px;
+    overflow: hidden;
+    word-break: normal;
+    border-color: #00cc1a;
+    color: #123303;
+    background-color: #f02941;
+}
