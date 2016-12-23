@@ -8,6 +8,7 @@ import java.util.List;
 /**
  * Created by pcejka on 03.10.2016.
  */
+//@Service("userDetailsService")
 public interface PersonService {
     void createPerson(PersonDTO personDTO);
 
