@@ -80,7 +80,8 @@ public class TestController {
 //        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
         model.addAttribute("listPersons", personService.findAllPersons());
 //        model.addAttribute("listSuites", suiteService.findAllTestSuites());
-//
+        model.addAttribute("vlozit");
+
 //        projectService.createTestProject(createProjectData());
 
         return "thyme";
