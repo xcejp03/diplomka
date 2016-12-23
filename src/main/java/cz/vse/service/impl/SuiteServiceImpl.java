@@ -1,10 +1,13 @@
 package cz.vse.service.impl;
 
 import cz.vse.dto.TestSuiteDTO;
+import cz.vse.entity.Project;
 import cz.vse.entity.TCMuster;
 import cz.vse.entity.TestSuite;
 import cz.vse.repository.SuiteRepository;
 import cz.vse.repository.TCMusterRepository;
+import cz.vse.service.PersonService;
+import cz.vse.service.ProjectService;
 import cz.vse.service.SuiteService;
 import cz.vse.service.TCMusterService;
 import ma.glasnost.orika.MapperFacade;
@@ -31,6 +34,11 @@ public class SuiteServiceImpl implements SuiteService {
     @Autowired
     private MapperFacade mapper;
 
+    @Autowired
+    private PersonService personService;
+
+    @Autowired
+    private ProjectService projectService;
 
     @Autowired
     private TCMusterService tcMusterService;
@@ -133,4 +141,22 @@ public class SuiteServiceImpl implements SuiteService {
         l.info("found all testSuites - service: " + testSuites.toString());
         return testSuites;
     }
+
+    public List<TestSuite> findAllTestSuitesByProjectId(Long projectId) {
+        List<TestSuite> testSuiteList;
+        Project project = projectService.findTestProjectById(projectId);
+        testSuiteList = suiteRepository.findAllTestSuitesByProject(project);
+        return testSuiteList;
+    }
+
+    public List<TestSuiteDTO> findAllTestSuitesDTOByProjectId(Long projectId) {
+        List<TestSuiteDTO> testSuiteDTOList;
+        List<TestSuite> testSuiteList;
+        Project project = projectService.findTestProjectById(projectId);
+        testSuiteList = suiteRepository.findAllTestSuitesByProject(project);
+        testSuiteDTOList = mapper.mapAsList(testSuiteList, TestSuiteDTO.class);
+        return testSuiteDTOList;
+    }
+
+
 }

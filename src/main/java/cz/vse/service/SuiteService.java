@@ -28,4 +28,8 @@ public interface SuiteService {
 
     List<TestSuite> findAllTestSuites();
 
+    List<TestSuite> findAllTestSuitesByProjectId(Long projectId);
+
+    List<TestSuiteDTO> findAllTestSuitesDTOByProjectId(Long projectId);
+
 }

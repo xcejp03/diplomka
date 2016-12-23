@@ -103,7 +103,7 @@ public class ProjectController {
         l.info("User Authentication: " + auth);
         Person person = personService.findPersonByAuthentication(auth);
         Long personId = person.getId();
-        l.info("Person is "+person.getId()+" - " +person.getName());
+        l.info("Person is " + person.getId() + " - " + person.getName());
 
         List<ProjectsNamesDTO> listProjectsNameDTO = projectService.findAllTestProjectsByUserIdDTO(personId);
         model.addAttribute("listProjects", listProjectsNameDTO);

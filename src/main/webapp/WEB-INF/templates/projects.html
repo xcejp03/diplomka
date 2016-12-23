@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="cs" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -22,17 +20,11 @@
     <!--Moje importy-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
     <link rel="stylesheet" href="/resources/demos/style.css"/>
-
     <div th:replace="/fragment/thymeFragment :: scripts"/>
-
     <link href="http://t4t5.github.io/sweetalert/dist/sweetalert.css" rel="stylesheet"/>
     <script src="http://t4t5.github.io/sweetalert/dist/sweetalert.min.js"></script>
     <script type='text/javascript' src='../script.js'></script>
-
-
-
 </head>
-
 <body>
 
 <!-- Navigation -->
@@ -45,7 +37,7 @@
     <div class="row">
         <div class="col-md-12">
             <!--<h1 class="page-header">404-->
-                <!--<small>Page Not Found</small>-->
+            <!--<small>Page Not Found</small>-->
             <!--</h1>-->
             <ol class="breadcrumb">
                 <li><a href="index">Home</a>
@@ -89,7 +81,7 @@
 
             <td><a href="#" class="opener" data-id="#statisticsDialog">statistika</a></td>
             <td><a href="/defect/create">Založit Defekt</a></td>
-            <td><a th:href="@{'/suites/'+${project.suiteIdList}}">Test Suity</a></td>
+            <td><a th:href="@{'/suites-by-project/'+${project.id}}">Test Suity</a></td>
         </tr>
         </tbody>
     </table>
