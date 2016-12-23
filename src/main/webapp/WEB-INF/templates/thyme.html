@@ -3,6 +3,7 @@
 <head>
     <title>Thymeleaf tutorial: exercise 6</title>
     <link rel="stylesheet" href="../../../css/main-static.css" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" href="/css/klasa.css" th:href="@{/css/klasa.css}" />
 
 
     <meta charset="utf-8"/>
@@ -64,10 +65,21 @@
     </tbody>
 </table>
 sssss
+<br/>
+<div th:fragment="vlozit">
+</div>
 
 <div id="detailDialog" title="Basic dialog">
     <p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
 </div>
+<!--<div th:replace="@{'/' + ${vlozit}} :: ${vlozit}"></div>-->
+<div th:replace="vlozit :: vkladanyFragment"></div>
+<h1>ted nic</h1>
+<hr/>
+<p> a bude druhý fragmernt</p>
+<div th:replace="vlozit :: vkladanyFragment2"></div>
+<!--<div th:replace="@{'/templates/thymeFragment.html'"></div>-->
+
 
 <button id="opener">Open Dialog</button>
 

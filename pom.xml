@@ -8,7 +8,7 @@
     <artifactId>diplomka</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-<!-- nic se neděje-->
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -177,6 +177,11 @@
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
             <version>2.1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>3.3.4</version>
         </dependency>
         <dependency>
             <groupId>javax</groupId>
