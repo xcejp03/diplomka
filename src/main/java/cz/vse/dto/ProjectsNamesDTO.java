@@ -1,12 +1,14 @@
 package cz.vse.dto;
 
+import org.apache.log4j.Logger;
+
 import java.util.List;
 
 /**
  * Created by pcejka on 10.10.2016.
  */
 public class ProjectsNamesDTO extends BaseDTO {
-
+    private final Logger l = Logger.getLogger(this.getClass());
     private String name;
 
     private String projectOwnerName;
@@ -22,6 +24,7 @@ public class ProjectsNamesDTO extends BaseDTO {
     }
 
     public String getProjectOwnerName() {
+        l.info("Getting projectOwnerName: " + projectOwnerName);
         return projectOwnerName;
     }
 

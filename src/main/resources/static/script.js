@@ -1,6 +1,6 @@
-// $(function () {
-//     $("#datepicker").datepicker();
-// });
+$(function () {
+    $("#datepicker").datepicker();
+});
 
 
 $(function () {
@@ -22,10 +22,13 @@ $(function () {
     });
 
     $(".opener").click(function () {
-        var id = $(this).data('id');
-        $(id).dialog("open");
+        var dataAttr = $(this).data();
+        $('#spanDataName').html(dataAttr.name);
+        $('#spanDataOwnerName').html(dataAttr.owner);
+        $(dataAttr.id).dialog("open");
     });
 });
+
 
 $(function () {
     $(".alertik").click(function () {
