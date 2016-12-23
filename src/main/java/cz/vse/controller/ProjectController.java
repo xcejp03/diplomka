@@ -69,6 +69,15 @@ public class ProjectController {
     }
 
     @RequestMapping("{id}")
+    public String projects(@PathVariable("id") int id, Model model) {
+        l.info("{id}/list" + id);
+        List<ProjectsNamesDTO> listProjectsNameDTO = projectService.findAllTestProjectsByUserIdDTO(id);
+        model.addAttribute("listProjects", listProjectsNameDTO);
+        model.addAttribute("person", personService.findPersonById(id));
+        return "projects";
+    }
+
+    @RequestMapping("{id}/old")
     public String ProjectList(@PathVariable("id") int id, Model model) {
         l.info("{id}/list" + id);
         List<ProjectsNamesDTO> listProjectsNameDTO = projectService.findAllTestProjectsByUserIdDTO(id);

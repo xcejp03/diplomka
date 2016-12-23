@@ -13,8 +13,6 @@
     <link rel="stylesheet" href="/resources/demos/style.css"/>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
     <script type='text/javascript' src='../script.js'></script>
 </head>
 <body>
@@ -66,22 +64,34 @@
 </table>
 sssss
 <br/>
-<div th:fragment="vlozit">
-</div>
 
-<div id="detailDialog" title="Basic dialog">
-    <p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
-</div>
-<!--<div th:replace="@{'/' + ${vlozit}} :: ${vlozit}"></div>-->
-<div th:replace="vlozit :: vkladanyFragment"></div>
-<h1>ted nic</h1>
-<hr/>
-<p> a bude druhý fragmernt</p>
-<div th:replace="vlozit :: vkladanyFragment2"></div>
-<!--<div th:replace="@{'/templates/thymeFragment.html'"></div>-->
+<td><a href="#" class="opener"
+       th:attr="data-name=jmeno52, data-owner=vlastnik15" data-id="#detailDialog">Detail</a>
+</td>
+
+<td><a href="#" class="opener" data-id="#statisticsDialog">statistika</a></td>
 
 
 <button id="opener">Open Dialog</button>
+<br/>
+
+
+<div id="detailDialog" title="Detail projektu">
+
+    <h2>Detail projektu: <span id="spanDataName"></span></h2>
+    <h3>Vlastník projektu: <span id="spanDataOwnerName"> | </span></h3>
+
+    <p>This is an animated dialog which is useful for displaying information.
+        The dialog window can be moved, resized and closed with the 'x' icon.</p>
+</div>
+
+<div id="statisticsDialog" title="Statistika projektu">
+
+    <h2>Počet TC: </h2>
+    <h3>Počet chyb:</h3>
+    <h3>Hotové TC:</h3>
+
+</div>
 
 
 </body>

@@ -1,10 +1,6 @@
-/**
- * Created by pcejk on 16.12.2016.
- */
-
-$(function () {
-    $("#datepicker").datepicker();
-});
+// $(function () {
+//     $("#datepicker").datepicker();
+// });
 
 
 $(function () {

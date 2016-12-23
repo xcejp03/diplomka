@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="cs" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Modern Business - Start Bootstrap Template</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link href="/css/modern-business.css" rel="stylesheet"/>
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+    <!--Moje importy-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" href="/resources/demos/style.css"/>
+
+    <div th:replace="/fragment/thymeFragment :: scripts"></div>
+
+    <link href="http://t4t5.github.io/sweetalert/dist/sweetalert.css" rel="stylesheet"/>
+    <script src="http://t4t5.github.io/sweetalert/dist/sweetalert.min.js"></script>
+    <script type='text/javascript' src='../script.js'></script>
+
+
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<div th:replace="/fragment/thymeFragment :: menu"></div>
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header">404
+                <small>Page Not Found</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="index">Home</a>
+                </li>
+                <li class="active">Projects</li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1 class="error-404">Seznam dostupných projektů pro <span style="font-style: italic"
+                                                                           th:text="${person.login}">přihlášeného uživatele</span>
+                </h1>
+            </div>
+        </div>
+    </div>
+
+    <h1>Project list</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Název</th>
+            <th>Detail</th>
+            <th>Statistika</th>
+            <th>Založit Defect</th>
+            <th>Test Suity</th>
+        </tr>
+        </thead>
+        <tbody th:remove="all-but-first">
+        <tr th:each="project : ${listProjects}">
+            <td th:text="${project.id}">00</td>
+            <td th:text="${project.name}">Projekt</td>
+            <td><a href="#" class="opener"
+                   th:attr="data-name=${project.name}, data-owner=${project.projectOwnerName}" data-id="#detailDialog">Detail</a>
+            </td>
+
+            <td><a href="#" class="opener" data-id="#statisticsDialog">statistika</a></td>
+            <td><a href="/defect/create">Založit Defekt</a></td>
+            <td><a th:href="@{'/suites/'+${project.suiteIdList}}">Test Suity</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div id="detailDialog" title="Detail projektu">
+
+        <h2>Detail projektu: <span id="spanDataName"></span></h2>
+        <h3>Vlastník projektu: <span id="spanDataOwnerName"> | </span></h3>
+
+        <p>This is an animated dialog which is useful for displaying information.
+            The dialog window can be moved, resized and closed with the 'x' icon.</p>
+    </div>
+
+    <div id="statisticsDialog" title="Statistika projektu">
+
+        <h2>Počet TC: </h2>
+        <h3>Počet chyb:</h3>
+        <h3>Hotové TC:</h3>
+
+    </div>
+
+    <button onclick="alert('sdfds')" class="btn btn-default">alerty</button>
+
+    <button onclick="swal('sdfds')" class="btn btn-default">alerty swal</button>
+
+    <div class="btn btn-default">
+        <button class="alertik">alerty klas</button>
+    </div>
+
+    <button id="alerton">alerty id</button>
+
+
+    <!-- Footer -->
+    <div th:replace="/fragment/thymeFragment :: footer"></div>
+
+</div>
+<!-- /.container -->
+
+<!-- jQuery -->
+<script src="/js/jquery.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
+<!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+<div th:replace="/fragment/thymeFragment :: scripts"></div>
+
+<!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
+<!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+
+</body>
+
+</html>
