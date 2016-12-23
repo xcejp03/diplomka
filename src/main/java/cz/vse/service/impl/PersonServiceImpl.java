@@ -8,6 +8,7 @@ import cz.vse.service.PersonService;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -93,6 +94,14 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
         return personDTOList;
     }
 
+    public Person findPersonByLogin(String login) {
+        return personRepository.findByLogin(login);
+    }
+
+    public Person findPersonByName(String name) {
+        return personRepository.findByName(name);
+    }
+
 
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(final String username)
@@ -128,6 +137,13 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
         List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);
         l.info("Granted autority: " + Result);
         return Result;
+    }
+
+    public Person findPersonByAuthentication(Authentication auth) {
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        Person person = findPersonByLogin(userDetail.getUsername());
+        return person;
+
     }
 
 }

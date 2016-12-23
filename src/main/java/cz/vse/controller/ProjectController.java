@@ -2,6 +2,7 @@ package cz.vse.controller;
 
 import cz.vse.dto.ProjectDTO;
 import cz.vse.dto.ProjectsNamesDTO;
+import cz.vse.entity.Person;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
 import cz.vse.service.SuiteService;
@@ -80,7 +81,7 @@ public class ProjectController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         l.error(auth);
         String name = auth.getName();
-        l.error("XXX: "+name);
+        l.error("XXX: " + name);
         return "projects";
     }
 
@@ -96,17 +97,18 @@ public class ProjectController {
         return "ProjectList";
     }
 
-    @RequestMapping("/project")
+    @RequestMapping()
     public String projectsByLoggedUser(Model model) {
-        l.info("{id}/list");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        l.info("User Authentication: "+ auth);
-        int USER_ID = 1;
-        List<ProjectsNamesDTO> listProjectsNameDTO = projectService.findAllTestProjectsByUserIdDTO(USER_ID);
+        l.info("User Authentication: " + auth);
+        Person person = personService.findPersonByAuthentication(auth);
+        Long personId = person.getId();
+        l.info("Person is "+person.getId()+" - " +person.getName());
+
+        List<ProjectsNamesDTO> listProjectsNameDTO = projectService.findAllTestProjectsByUserIdDTO(personId);
         model.addAttribute("listProjects", listProjectsNameDTO);
-        model.addAttribute("person", personService.findPersonById(USER_ID));
-        String name = auth.getName();
-        l.error("XXX: "+name);
+        model.addAttribute("person", personService.findPersonById(personId));
+
         return "projects";
     }
 }
