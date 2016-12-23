@@ -167,6 +167,7 @@ public class TestController {
         return project;
 
     }
+
     @RequestMapping(value = "/bs", method = RequestMethod.GET)
     public String testujBootstrap() {
         return "bootstrap";
@@ -177,10 +178,88 @@ public class TestController {
         return "index";
     }
 
-    @RequestMapping(value = "/form", method = RequestMethod.GET)
-    public String bootstrapForm() {
-        return "form";
+    @RequestMapping(value = "/about", method = RequestMethod.GET)
+    public String bootstrapAbout() {
+        return "about";
     }
+
+    @RequestMapping(value = "/services", method = RequestMethod.GET)
+    public String bootstrapServices() {
+        return "services";
+    }
+
+    @RequestMapping(value = "/contact", method = RequestMethod.GET)
+    public String bootstrapContact() {
+        return "contact";
+    }
+
+    @RequestMapping(value = "/portfolio-1-col", method = RequestMethod.GET)
+    public String bootstrapCol1() {
+        return "portfolio-1-col";
+    }
+
+    @RequestMapping(value = "/portfolio-2-col", method = RequestMethod.GET)
+    public String bootstrapCol2() {
+        return "portfolio-2-col";
+    }
+
+    @RequestMapping(value = "/portfolio-3-col", method = RequestMethod.GET)
+    public String bootstrapCol3() {
+        return "portfolio-3-col";
+    }
+
+    @RequestMapping(value = "/portfolio-4-col", method = RequestMethod.GET)
+    public String bootstrapCol4() {
+        return "portfolio-4-col";
+    }
+
+    @RequestMapping(value = "/portfolio-item", method = RequestMethod.GET)
+    public String bootstrapCol0() {
+        return "portfolio-item";
+    }
+
+    @RequestMapping(value = "/blog-home-1", method = RequestMethod.GET)
+    public String bootstrapBlogHome1() {
+        return "blog-home-1";
+    }
+
+    @RequestMapping(value = "/blog-home-2", method = RequestMethod.GET)
+    public String bootstrapBlogHome2() {
+        return "blog-home-2";
+    }
+
+    @RequestMapping(value = "/blog-post", method = RequestMethod.GET)
+    public String bootstrapBlogPost() {
+        return "blog-post";
+    }
+
+    @RequestMapping(value = "/404", method = RequestMethod.GET)
+    public String bootstrap404() {
+        return "404";
+    }
+
+    @RequestMapping(value = "/full-width", method = RequestMethod.GET)
+    public String bootstrapFullWidth() {
+        return "full-width";
+    }
+
+    @RequestMapping(value = "/sidebar", method = RequestMethod.GET)
+    public String bootstrapSideBar() {
+        return "sidebar";
+    }
+
+    @RequestMapping(value = "/faq", method = RequestMethod.GET)
+    public String bootstrapFaq() {
+        return "faq";
+    }
+
+    @RequestMapping(value = "/pricing", method = RequestMethod.GET)
+    public String bootstrapPricing() {
+        return "pricing";
+    }
+
+
 }
+
 
 
