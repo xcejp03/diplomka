@@ -7,6 +7,8 @@ import cz.vse.service.ProjectService;
 import cz.vse.service.SuiteService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -74,6 +76,11 @@ public class ProjectController {
         List<ProjectsNamesDTO> listProjectsNameDTO = projectService.findAllTestProjectsByUserIdDTO(id);
         model.addAttribute("listProjects", listProjectsNameDTO);
         model.addAttribute("person", personService.findPersonById(id));
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        l.error(auth);
+        String name = auth.getName();
+        l.error("XXX: "+name);
         return "projects";
     }
 
@@ -83,6 +90,23 @@ public class ProjectController {
         List<ProjectsNamesDTO> listProjectsNameDTO = projectService.findAllTestProjectsByUserIdDTO(id);
         model.addAttribute("listProjects", listProjectsNameDTO);
         model.addAttribute("person", personService.findPersonById(id));
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        l.error(auth);
+        String name = auth.getName();
         return "ProjectList";
+    }
+
+    @RequestMapping("/project")
+    public String projectsByLoggedUser(Model model) {
+        l.info("{id}/list");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        l.info("User Authentication: "+ auth);
+        int USER_ID = 1;
+        List<ProjectsNamesDTO> listProjectsNameDTO = projectService.findAllTestProjectsByUserIdDTO(USER_ID);
+        model.addAttribute("listProjects", listProjectsNameDTO);
+        model.addAttribute("person", personService.findPersonById(USER_ID));
+        String name = auth.getName();
+        l.error("XXX: "+name);
+        return "projects";
     }
 }

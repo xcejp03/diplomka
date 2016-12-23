@@ -15,10 +15,6 @@ public class Person extends BaseEntity {
     private LocalDateTime createdDate;
     private LocalDateTime lastLogin;
 
-    private String testPole;
-
-//    @ManyToMany (mappedBy = "id")
-//    private List<RoleEnum> roleEna;
 
     @ManyToMany //(cascade = CascadeType.ALL)
     @JoinTable(name = "PERSON_PROJECT",
@@ -117,13 +113,6 @@ public class Person extends BaseEntity {
         this.defectReporters = defectsReporter;
     }
 
-    public String getTestPole() {
-        return testPole;
-    }
-
-    public void setTestPole(String testPole) {
-        this.testPole = testPole;
-    }
 
     @Override
     public String toString() {
