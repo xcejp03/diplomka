@@ -1,54 +1,131 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
->
+<html lang="cs" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Spring Security Example </title>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Login page</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link href="/css/modern-business.css" rel="stylesheet"/>
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+    <!--Moje importy-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" href="/resources/demos/style.css"/>
+
+    <div th:replace="/fragment/thymeFragment :: scripts"/>
+
+    <link href="http://t4t5.github.io/sweetalert/dist/sweetalert.css" rel="stylesheet"/>
+    <script src="http://t4t5.github.io/sweetalert/dist/sweetalert.min.js"></script>
+    <script type='text/javascript' src='../script.js'></script>
 </head>
 <body>
-<h1>WEB-INF/templates/login.html</h1>
-<!--<div th:if="${param.error}">-->
-<!--Invalid username and password.-->
-<!--</div>-->
-<!--<div th:if="${param.logout}">-->
-<!--You have been logged out.-->
-<!--</div>-->
-<!--<form th:action="@{/login}" method="post">-->
-<!--<div><label> User Name : <input type="text" name="username"/> </label></div>-->
-<!--<div><label> Password: <input type="password" name="password"/> </label></div>-->
-<!--<div><input type="submit" value="Sign In"/></div>-->
-<!--</form>-->
-<!--</body>-->
-<!--</html>-->
+<!-- Navigation -->
+<div th:replace="/fragment/thymeFragment :: menu"></div>
+<!-- Page Content -->
+<div class="container">
 
-<!--<div th:if test="${not empty error}">-->
-<!--<div class="error">${error}</div>-->
-<!--</div>-->
-<!--<div  th:if test="${not empty msg}">-->
-<!--<div class="msg">${msg}</div>-->
-<!--</div>-->
+    <!-- Page Heading/Breadcrumbs -->
+    <div class="row">
+        <div class="col-md-12">
+            <!--<h1 class="page-header">404-->
+            <!--<small>Page Not Found</small>-->
+            <!--</h1>-->
+            <ol class="breadcrumb">
+                <li><a href="index">Home</a>
+                </li>
+                <li class="active">Projects</li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
 
-<form th:action="@{/login}" method='POST'>
+    <div class="row">
 
-    <table>
-        <tr>
-            <td>User:</td>
-            <td><input type='text' name='username'/></td>
-        </tr>
-        <tr>
-            <td>Password:</td>
-            <td><input type='password' name='password'/></td>
-        </tr>
-        <tr>
-            <td colspan='2'><input name="submit" type="submit"
-                                   value="submit"/></td>
-        </tr>
-    </table>
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1>Login page</h1>
+            </div>
+        </div>
+    </div>
 
-    <input type="hidden" name="${_csrf.parameterName}"
-           value="${_csrf.token}"/>
+    <!--<form th:action="@{/login}" method='POST'>-->
 
-</form>
+        <!--<table>-->
+            <!--<tr>-->
+                <!--<td>User:</td>-->
+                <!--<td><input type='text' name='username'/></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td>Password:</td>-->
+                <!--<td><input type='password' name='password'/></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td colspan='2'><input name="submit" type="submit"-->
+                                       <!--value="submit"/></td>-->
+            <!--</tr>-->
+        <!--</table>-->
+
+        <!--<input type="hidden" name="${_csrf.parameterName}"-->
+               <!--value="${_csrf.token}"/>-->
+
+    <!--</form>-->
 
 
+    <div class="row">
+        <div class="col-md-4">
+            <div class="well">
+                <p th:if="${loginError}" class="error">Wrong user or password</p>
+                <form th:action="@{/login}" method="post">
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label for="username">Username</label>:
+                            <input type="text" id="username" name="username" class="form-control" autofocus="autofocus"/> <br/>
+                        </div>
+                    </div>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label for="password">Password</label>:
+                            <input type="password" id="password" class="form-control" name="password"/> <br/>
+                        </div>
+                    </div>
+                    <input type="submit" value="Log in" class="btn btn-primary"/>
+                    <input type="hidden" name="${_csrf.parameterName}"
+                           value="${_csrf.token}"/>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Footer -->
+            <div th:replace="/fragment/thymeFragment :: footer"></div>
+        </div>
+    </div>
+    <!-- /.container -->
+    <!-- jQuery -->
+    <script src="/js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+
+    <!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
+    <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+    <div th:replace="/fragment/thymeFragment :: scripts"></div>
+
+    <!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
+    <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+</div>
 </body>
+
 </html>

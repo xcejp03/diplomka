@@ -65,7 +65,7 @@ public class MainController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!(auth instanceof AnonymousAuthenticationToken)) {
             UserDetails userDetail = (UserDetails) auth.getPrincipal();
-            model.addObject("username", userDetail.getUsername());
+            model.addObject("403", userDetail.getUsername());
         }
 
         model.setViewName("403");

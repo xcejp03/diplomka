@@ -38,7 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-                .antMatchers( "/login", "/home", "/index", "/resources/**", "/static/**", "/", "/test/thym", "/thyme", "../script.js", "/script.js", "/css/**","/resources/static/**", "/resources/static", "/resources/static/css", "/resources/static/css/**").permitAll()
+                .antMatchers( "/login", "/home", "/index", "/resources/**", "/static/**", "/", "/test/thym", "/thyme", "../script.js", "/script.js", "/css/**",
+                        "/resources/static/**", "/resources/static", "/resources/static/css", "/resources/static/css/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").failureUrl("/login-error")
