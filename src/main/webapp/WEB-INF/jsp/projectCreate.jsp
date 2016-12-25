@@ -137,12 +137,12 @@
         </tr>
             <%--<tr>--%>
             <%--<td>--%>
-            <%--<form:label path="login">--%>
-            <%--<spring:message text="login"/>--%>
+            <%--<form:label path="username">--%>
+            <%--<spring:message text="username"/>--%>
             <%--</form:label>--%>
             <%--</td>--%>
             <%--<td>--%>
-            <%--<form:input path="login"/>--%>
+            <%--<form:input path="username"/>--%>
             <%--</td>--%>
             <%--</tr>--%>
         <tr>

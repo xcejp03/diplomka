@@ -95,7 +95,7 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
     }
 
     public Person findPersonByLogin(String login) {
-        return personRepository.findByLogin(login);
+        return personRepository.findByUsername(login);
     }
 
     public Person findPersonByName(String name) {
@@ -107,7 +107,7 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
     public UserDetails loadUserByUsername(final String username)
             throws UsernameNotFoundException {
         l.info("load user:" + username);
-        Person user = personRepository.findByLogin(username);
+        Person user = personRepository.findByUsername(username);
         l.info("uživatel: " + user);
         List<GrantedAuthority> authorities =
                 buildUserAuthority(user.getUserRole());
@@ -121,7 +121,7 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
     private User buildUserForAuthentication(Person user,
                                             List<GrantedAuthority> authorities) {
         l.info("build new user");
-        return new User(user.getLogin(), user.getPass(),
+        return new User(user.getUsername(), user.getPassword(),
                 user.isEnabled(), true, true, true, authorities);
     }
 

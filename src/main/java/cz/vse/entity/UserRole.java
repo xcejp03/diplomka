@@ -17,12 +17,13 @@ public class UserRole extends BaseEntity {
     @JoinColumn(name = "login")
     private Person user;
     private String role;
+    private String username;
 
     public UserRole() {
     }
 
-    public UserRole(Person user, String role) {
-        this.user = user;
+    public UserRole(String user, String role) {
+        this.username = user;
         this.role = role;
     }
 
@@ -43,4 +44,11 @@ public class UserRole extends BaseEntity {
         this.role = role;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

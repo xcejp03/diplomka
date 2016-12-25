@@ -49,14 +49,14 @@
     <tr>
         <th>id</th>
         <th>name</th>
-        <th>login</th>
+        <th>username</th>
     </tr>
     </thead>
     <tbody th:remove="all-but-first">
     <tr th:each="person : ${listPersons}">
         <td th:text="${person.id}">Red chair</td>
         <td th:text="${person.name}">Red chairname</td>
-        <td th:text="${person.login}">Red chairlogin</td>
+        <td th:text="${person.username}">Red chairlogin</td>
     </tr>
     <tr>
         <td>White table</td>

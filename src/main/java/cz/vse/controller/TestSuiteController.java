@@ -73,5 +73,15 @@ public class TestSuiteController {
         return "redirect:/suite/create";
     }
 
+    @RequestMapping("/suites-by-project/{id}")
+    public String suitesByProject(@PathVariable("id") long id, Model model) {
+        l.info("/suites-by-project/{id} - "+id);
+
+        model.addAttribute("listSuitesDTO", suiteService.findAllTestSuitesDTOByProjectId(id));
+        model.addAttribute("project", projectService.findTestProjectById(id));
+        return "suites";
+    }
+
+
 }
 

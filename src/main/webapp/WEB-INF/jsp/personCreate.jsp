@@ -80,22 +80,22 @@
         </tr>
         <tr>
             <td>
-                <form:label path="login">
-                    <spring:message text="login"/>
+                <form:label path="username">
+                    <spring:message text="username"/>
                 </form:label>
             </td>
             <td>
-                <form:input path="login"/>
+                <form:input path="username"/>
             </td>
         </tr>
         <tr>
             <td>
-                <form:label path="pass">
+                <form:label path="password">
                     <spring:message text="Password"/>
                 </form:label>
             </td>
             <td>
-                <form:input path="pass"/>
+                <form:input path="password"/>
             </td>
         </tr>
         <tr>
@@ -129,8 +129,8 @@
             <tr>
                 <td>${person.id}</td>
                 <td>${person.name}</td>
-                <td>${person.login}</td>
-                <td>${person.pass}</td>
+                <td>${person.username}</td>
+                <td>${person.password}</td>
                 <td>${person.createdDate}</td>
                 <td><a href="<c:url value='/person/edit/${person.id}' />">Edit</a></td>
                 <td><a href="<c:url value='/person/remove/${person.id}' />">Delete</a></td>
