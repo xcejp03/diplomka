@@ -1,5 +1,6 @@
 package cz.vse.controller;
 
+import cz.vse.dto.PersonDTO;
 import cz.vse.dto.ProjectDTO;
 import cz.vse.dto.ProjectsNamesDTO;
 import cz.vse.entity.Person;
@@ -39,11 +40,12 @@ public class ProjectController {
     public String createProjectForm(Model model) {
         l.info("request mapping project/create");
         model.addAttribute("project", new ProjectDTO());
+        model.addAttribute("person", new PersonDTO());
         model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listSuites", suiteService.findAllTestSuites());
 
-        return "projectCreate";
+        return "project";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
