@@ -111,15 +111,35 @@
     </footer>
 </div>
 
-<div th:fragment="scripts">
+<div th:fragment="headImports">
+    <!--Bootstrap Core CSS-->
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!--Custom CSS-->
+    <link href="/css/modern-business.css" rel="stylesheet"/>
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+
     <!-- jQuery -->
     <script src="/js/jquery.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
 
+
     <!--Moje jQuery-->
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+
+
+
+    <link href="http://t4t5.github.io/sweetalert/dist/sweetalert.css" rel="stylesheet"/>
+    <script src="http://t4t5.github.io/sweetalert/dist/sweetalert.min.js"></script>
+
+    <!--Můj java script-->
+    <script type='text/javascript' src='/script.js'></script>
 
 </div>

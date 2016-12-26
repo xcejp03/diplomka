@@ -8,22 +8,10 @@
     <meta name="author" content=""/>
 
     <title>Modern Business - Start Bootstrap Template</title>
-    <!-- Bootstrap Core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
 
-    <!-- Custom CSS -->
-    <link href="/css/modern-business.css" rel="stylesheet"/>
-
-    <!-- Custom Fonts -->
-    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-
-    <!--Moje importy-->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
-    <link rel="stylesheet" href="/resources/demos/style.css"/>
-    <div th:replace="/fragment/thymeFragment :: scripts"/>
-    <link href="http://t4t5.github.io/sweetalert/dist/sweetalert.css" rel="stylesheet"/>
-    <script src="http://t4t5.github.io/sweetalert/dist/sweetalert.min.js"></script>
-    <script type='text/javascript' src='/script.js'></script>
+    <!--importované přes fragment-->
+    <div th:replace="/fragment/thymeFragment :: headImports"/>
+    <!--importované přes fragment - konec-->
 </head>
 <body>
 
@@ -120,17 +108,6 @@
 </div>
 <!-- /.container -->
 
-<!-- jQuery -->
-<script src="/js/jquery.js"></script>
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
-
-<!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
-<!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
-<div th:replace="/fragment/thymeFragment :: scripts"></div>
-
-<!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
-<!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
 
 </body>
 
