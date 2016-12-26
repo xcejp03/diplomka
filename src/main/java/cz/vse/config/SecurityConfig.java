@@ -42,12 +42,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+//                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers( "/login", "/home", "/index", "/resources/**", "/static/**", "/", "/test/thym", "/thyme", "../script.js", "/script.js", "/css/**",
                         "/resources/static/**", "/resources/static", "/resources/static/css", "/resources/static/css/**").permitAll()
+                .antMatchers( "/login", "/home", "/index", "/", "/test/thym", "/thyme", "/font-awesome/**", "/font-awesome/", "/font-awesome").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login").failureUrl("/login-error")
+                .formLogin().loginPage("/login")
+                .defaultSuccessUrl("/")
+                .failureUrl("/login-error")
                 .usernameParameter("username").passwordParameter("password")
                 .and()
                 .logout().logoutSuccessUrl("/login?logout")

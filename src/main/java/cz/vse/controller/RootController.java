@@ -51,6 +51,16 @@ public class RootController {
     }
 
 
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String index(Model model) {
+        l.info("request mapping root/index");
+//        model.addAttribute("project", new ProjectDTO());
+//        model.addAttribute("person", new PersonDTO());
+//        model.addAttribute("listPersons", personService.findAllPersons());
+
+        return "index";
+    }
+
 }
 
 

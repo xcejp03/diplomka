@@ -10,10 +10,10 @@
     <meta name="author" content=""/>
 
     <title>Login page</title>
-    <!-- Bootstrap Core CSS -->
+    Bootstrap Core CSS
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
 
-    <!-- Custom CSS -->
+    Custom CSS
     <link href="/css/modern-business.css" rel="stylesheet"/>
 
     <!-- Custom Fonts -->
@@ -21,13 +21,13 @@
 
     <!--Moje importy-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
-    <link rel="stylesheet" href="/resources/demos/style.css"/>
-
+    <!--importované přes fragment-->
     <div th:replace="/fragment/thymeFragment :: scripts"/>
-
+    <!--importované přes fragment - konec-->
     <link href="http://t4t5.github.io/sweetalert/dist/sweetalert.css" rel="stylesheet"/>
     <script src="http://t4t5.github.io/sweetalert/dist/sweetalert.min.js"></script>
-    <script type='text/javascript' src='../script.js'></script>
+    <script type='text/javascript' src='/css/script.js'></script>
+    <script type='text/javascript' src='/script.js'></script>
 </head>
 <body>
 <!-- Navigation -->
@@ -61,23 +61,23 @@
 
     <!--<form th:action="@{/login}" method='POST'>-->
 
-        <!--<table>-->
-            <!--<tr>-->
-                <!--<td>User:</td>-->
-                <!--<td><input type='text' name='username'/></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td>Password:</td>-->
-                <!--<td><input type='password' name='password'/></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td colspan='2'><input name="submit" type="submit"-->
-                                       <!--value="submit"/></td>-->
-            <!--</tr>-->
-        <!--</table>-->
+    <!--<table>-->
+    <!--<tr>-->
+    <!--<td>User:</td>-->
+    <!--<td><input type='text' name='username'/></td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--<td>Password:</td>-->
+    <!--<td><input type='password' name='password'/></td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--<td colspan='2'><input name="submit" type="submit"-->
+    <!--value="submit"/></td>-->
+    <!--</tr>-->
+    <!--</table>-->
 
-        <!--<input type="hidden" name="${_csrf.parameterName}"-->
-               <!--value="${_csrf.token}"/>-->
+    <!--<input type="hidden" name="${_csrf.parameterName}"-->
+    <!--value="${_csrf.token}"/>-->
 
     <!--</form>-->
 
@@ -86,11 +86,12 @@
         <div class="col-md-4">
             <div class="well">
                 <p th:if="${loginError}" class="error">Wrong user or password</p>
-                <form th:action="@{/login}" method="post">
+                <form th:action="@{/login}" method="post" default-target-url="/index">
                     <div class="control-group form-group">
                         <div class="controls">
                             <label for="username">Username</label>:
-                            <input type="text" id="username" name="username" class="form-control" autofocus="autofocus"/> <br/>
+                            <input type="text" id="username" name="username" class="form-control"
+                                   autofocus="autofocus"/> <br/>
                         </div>
                     </div>
                     <div class="control-group form-group">
