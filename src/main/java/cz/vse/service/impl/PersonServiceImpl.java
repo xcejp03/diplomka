@@ -8,6 +8,7 @@ import cz.vse.service.PersonService;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,6 +16,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,6 +45,7 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
         Person person;
         person = mapper.map(personDTO, Person.class);
         person.setCreatedDate(LocalDateTime.now());
+        person.setPassword(hashPasswordForUser(personDTO.getPassword()));
         personRepository.save(person);
         l.info("created person - service: " + person);
     }
@@ -95,7 +99,7 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
     }
 
     public Person findPersonByLogin(String login) {
-        return personRepository.findByLogin(login);
+        return personRepository.findByUsername(login);
     }
 
     public Person findPersonByName(String name) {
@@ -107,7 +111,7 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
     public UserDetails loadUserByUsername(final String username)
             throws UsernameNotFoundException {
         l.info("load user:" + username);
-        Person user = personRepository.findByLogin(username);
+        Person user = personRepository.findByUsername(username);
         l.info("uživatel: " + user);
         List<GrantedAuthority> authorities =
                 buildUserAuthority(user.getUserRole());
@@ -121,7 +125,7 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
     private User buildUserForAuthentication(Person user,
                                             List<GrantedAuthority> authorities) {
         l.info("build new user");
-        return new User(user.getLogin(), user.getPass(),
+        return new User(user.getUsername(), user.getPassword(),
                 user.isEnabled(), true, true, true, authorities);
     }
 
@@ -143,7 +147,13 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
         UserDetails userDetail = (UserDetails) auth.getPrincipal();
         Person person = findPersonByLogin(userDetail.getUsername());
         return person;
+    }
 
+    private String hashPasswordForUser(String passwordUnhashed) {
+        String passwordHashed;
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        passwordHashed = encoder.encode(passwordUnhashed);
+        return passwordHashed;
     }
 
 }

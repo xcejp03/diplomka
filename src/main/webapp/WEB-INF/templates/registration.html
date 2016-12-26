@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Registration</title>
+
+    <!--importované přes fragment-->
+    <div th:replace="/fragment/thymeFragment :: headImports"/>
+    <!--importované přes fragment - konec-->
+
+</head>
+
+<body>
+<!-- Navigation -->
+<div th:replace="/fragment/thymeFragment :: menu"></div>
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header">
+                <small>WEB-INF/templates/registration.html</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="/index">Home</a>
+                </li>
+                <li class="active">Registration</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="container">
+
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="well">
+                    <form th:action="@{/person/create}" method="post" default-target-url="/index">
+
+                        <span th:if="${person.id != null}" th:remove="tag">
+                            <div class=" control-group form-group">
+                            <div class="controls">
+                                <label for="id">ID</label>:
+                                <input type="text" id="id" name="id" th:value="${person.id}" readonly="true"
+                                       class="form-control"/>
+                            </div>
+                        </div>
+                        </span>
+
+                        <div class=" control-group form-group">
+                            <div class="controls">
+                                <label for="name">Jméno</label>:
+                                <input type="text" id="name" th:value="${person.name}" name="name" class="form-control"
+                                       autofocus="autofocus"/>
+                            </div>
+                        </div>
+
+                        <div class=" control-group form-group">
+                            <div class="controls">
+                                <label for="username">Uživatelské jméno</label>:
+                                <input type="text" id="username" th:value="${person.username}" name="username"
+                                       class="form-control"/>
+                            </div>
+                        </div>
+
+                        <span th:if="${person.id == null}" th:remove="tag">
+                        <div class="control-group form-group">
+                            <div class="controls">
+                                <label for="password">Password</label>:
+                                <input type="password" id="password" class="form-control" name="password"
+                                       autocomplete="false"/> <br/>
+                            </div>
+                        </div>
+                        </span>
+
+                        <span th:if="${person.id != null}" th:remove="tag">
+                        <div class="control-group form-group">
+                            <div class="controls">
+                                <label for="enabled">Aktivní</label>:
+                                <input type="checkbox" th:checked="${person.enabled}" name="enabled" id="enabled" class="checkbox"/>
+                                <!--<input type="enabled" id="enabled" class="form-control" name="enabled"/> <br/>-->
+                            </div>
+                        </div>
+                        </span>
+
+                        <span th:if="${person.id != null}" th:remove="tag">
+                             <input type="submit" value="Upravit" class="btn btn-primary"/>
+                        </span>
+                        <span th:if="${person.id == null}" th:remove="tag">
+                             <input type="submit" value="Založit" class="btn btn-primary"/>
+                        </span>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Page Content - End-->
+        <!-- Footer -->
+        <div th:replace="/fragment/thymeFragment :: footer"></div>
+
+    </div>
+</div>
+<!-- /.container -->
+
+<!-- jQuery -->
+<script src="/js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<div th:replace="/fragment/thymeFragment :: script"></div>
+</body>
+
+</html>

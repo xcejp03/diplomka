@@ -12,8 +12,8 @@ import java.util.Set;
 @Entity(name = "Person")
 public class Person extends BaseEntity {
     private String name;
-    private String login;
-    private String pass;
+    private String username;
+    private String password;
     private LocalDateTime createdDate;
     private LocalDateTime lastLogin;
     private boolean enabled;
@@ -52,20 +52,20 @@ public class Person extends BaseEntity {
         this.name = name;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getPass() {
-        return pass;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public LocalDateTime getCreatedDate() {
@@ -125,14 +125,14 @@ public class Person extends BaseEntity {
     }
 
     public Person(String username, String password, boolean enabled) {
-        this.login = username;
-        this.pass = password;
+        this.username = username;
+        this.password = password;
         this.enabled = enabled;
     }
 
     public Person(String username, String password, boolean enabled, Set<UserRole> userRole) {
-        this.login = username;
-        this.pass = password;
+        this.username = username;
+        this.password = password;
         this.enabled = enabled;
         this.userRole = userRole;
     }
@@ -157,8 +157,8 @@ public class Person extends BaseEntity {
     public String toString() {
         return "Person{" +
                 "name='" + name + '\'' +
-                ", login='" + login + '\'' +
-                ", pass='" + pass + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
 //                ", createdDate=" + createdDate +
 //                ", lastLogin=" + lastLogin +
 //                ", projectsMember=" + projectsMember +

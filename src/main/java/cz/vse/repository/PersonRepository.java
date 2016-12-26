@@ -9,5 +9,5 @@ import cz.vse.repository.base.BaseRepository;
 public interface PersonRepository extends BaseRepository<Person> {
     Person findByName(String username);
 
-    Person findByLogin(String username);
+    Person findByUsername(String username);
 }

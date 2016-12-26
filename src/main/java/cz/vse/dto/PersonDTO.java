@@ -7,10 +7,11 @@ import java.time.LocalDateTime;
  */
 public class PersonDTO extends BaseDTO {
     private String name;
-    private String login;
-    private String pass;
+    private String username;
+    private String password;
     private LocalDateTime createdDate;
     private LocalDateTime lastLogin;
+    private Boolean enabled;
 
     public String getName() {
         return name;
@@ -20,20 +21,21 @@ public class PersonDTO extends BaseDTO {
         this.name = name;
     }
 
-    public String getLogin() {
-        return login;
+
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getPass() {
-        return pass;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public LocalDateTime getCreatedDate() {
@@ -52,40 +54,20 @@ public class PersonDTO extends BaseDTO {
         this.lastLogin = lastLogin;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof PersonDTO)) return false;
-        if (!super.equals(o)) return false;
-
-        PersonDTO personDTO = (PersonDTO) o;
-
-        if (getName() != null ? !getName().equals(personDTO.getName()) : personDTO.getName() != null) return false;
-        if (getLogin() != null ? !getLogin().equals(personDTO.getLogin()) : personDTO.getLogin() != null) return false;
-        if (getPass() != null ? !getPass().equals(personDTO.getPass()) : personDTO.getPass() != null) return false;
-        if (getCreatedDate() != null ? !getCreatedDate().equals(personDTO.getCreatedDate()) : personDTO.getCreatedDate() != null)
-            return false;
-        return getLastLogin() != null ? getLastLogin().equals(personDTO.getLastLogin()) : personDTO.getLastLogin() == null;
-
+    public Boolean getEnabled() {
+        return enabled;
     }
 
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
-        result = 31 * result + (getLogin() != null ? getLogin().hashCode() : 0);
-        result = 31 * result + (getPass() != null ? getPass().hashCode() : 0);
-        result = 31 * result + (getCreatedDate() != null ? getCreatedDate().hashCode() : 0);
-        result = 31 * result + (getLastLogin() != null ? getLastLogin().hashCode() : 0);
-        return result;
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override
     public String toString() {
         return "PersonDTO{" +
                 "name='" + name + '\'' +
-                ", login='" + login + '\'' +
-                ", pass='" + pass + '\'' +
+                ", login='" + username + '\'' +
+                ", pass='" + password + '\'' +
                 ", createdDate=" + createdDate +
                 ", lastLogin=" + lastLogin +
                 '}';

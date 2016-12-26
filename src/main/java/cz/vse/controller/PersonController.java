@@ -28,7 +28,7 @@ public class PersonController {
         model.addAttribute("person", new PersonDTO());
         model.addAttribute("listPersons", personService.findAllPersons());
 
-        return "personCreate";
+        return "registration";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -45,8 +45,8 @@ public class PersonController {
     @RequestMapping("/edit/{id}")
     public String editPerson(@PathVariable("id") int id, Model model) {
         l.info("/edit/" + id);
-        model.addAttribute("person", personService.findPersonById(id));
-        return "personCreate";
+        model.addAttribute("personDTO", personService.findPersonById(id));
+        return "registration";
     }
 
     @RequestMapping("/remove/{id}")

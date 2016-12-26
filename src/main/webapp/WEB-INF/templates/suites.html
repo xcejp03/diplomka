@@ -7,12 +7,12 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
-    <title>Projects</title>
-
+    <title>Test suites</title>
     <!--importované přes fragment-->
     <div th:replace="/fragment/thymeFragment :: headImports"/>
     <!--importované přes fragment - konec-->
 </head>
+
 <body>
 
 <!-- Navigation -->
@@ -24,13 +24,13 @@
     <!-- Page Heading/Breadcrumbs -->
     <div class="row">
         <div class="col-md-12">
-            <!--<h1 class="page-header">404-->          <!--vypadá hezky-->
+            <!--<h1 class="page-header">404-->
             <!--<small>Page Not Found</small>-->
             <!--</h1>-->
             <ol class="breadcrumb">
                 <li><a href="index">Home</a>
                 </li>
-                <li class="active">Projects</li>
+                <li class="active">Suites</li>
             </ol>
         </div>
     </div>
@@ -40,36 +40,48 @@
 
         <div class="col-md-12">
             <div class="jumbotron">
-                <h1 class="error-404">Seznam dostupných projektů pro <span style="font-style: italic"
-                                                                           th:text="${person.username}">přihlášeného uživatele</span>
+                <h1 class="error-404">Seznam Test Suitů v projektu <span style="font-style: italic"
+                                                                           th:text="${project.name}">Projekt nezískán</span>
                 </h1>
             </div>
         </div>
     </div>
 
-    <h1>Project list</h1>
+    <h1> Test Suite list</h1>
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>ID</th>
+            <th>Suite ID</th>
             <th>Název</th>
-            <th>Detail</th>
-            <th>Statistika</th>
-            <th>Založit Defect</th>
-            <th>Test Suity</th>
+            <th>Suite project id</th>
+            <th>Suite created</th>
+            <th>Suite TC musters</th>
         </tr>
         </thead>
         <tbody th:remove="all-but-first">
-        <tr th:each="project : ${listProjects}">
-            <td th:text="${project.id}">00</td>
-            <td th:text="${project.name}">Projekt</td>
-            <td><a href="#" class="opener"
-                   th:attr="data-name=${project.name}, data-owner=${project.projectOwnerName}" data-id="#detailDialog">Detail</a>
+        <tr th:each="suite : ${listSuitesDTO}">
+            <td th:text="${suite.id}">00</td>
+            <td th:text="${suite.name}">Projekt</td>
+            <td th:text="${suite.project_id}">Projekt</td>
+            <td th:text="${suite.createdDateTime}">Projekt</td>
+
+            <td>
+                <span th:each="muster_id : ${suite.tcMusters_id}" ><span th:text="${muster_id}"></span> ,</span>
             </td>
 
-            <td><a href="#" class="opener" data-id="#statisticsDialog">statistika</a></td>
-            <td><a href="/defect/create">Založit Defekt</a></td>
-            <td><a th:href="@{'/suite/suites-by-project/'+${project.id}}">Test Suity</a></td>
+            <!--<td th:text="${suite.name}">Projekt</td>-->
+            <!--<td th:text="${suite.name}">Projekt</td>-->
+            <!--<td th:text="${suite.name}">Projekt</td>-->
+
+
+
+            <!--<td><a href="#" class="opener"-->
+                   <!--th:attr="data-name=${project.name}, data-owner=${project.projectOwnerName}" data-id="#detailDialog">Detail</a>-->
+            <!--</td>-->
+
+            <!--<td><a href="#" class="opener" data-id="#statisticsDialog">statistika</a></td>-->
+            <!--<td><a href="/defect/create">Založit Defekt</a></td>-->
+            <!--<td><a th:href="@{'/suites-by-project/'+${project.id}}">Test Suity</a></td>-->
         </tr>
         </tbody>
     </table>

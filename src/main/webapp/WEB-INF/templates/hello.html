@@ -6,6 +6,7 @@
     </head>
     <body>
         <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+        <h2>WEB-INF/templates/hello.html</h2>
 
         <div style="font-style: oblique">Seznam omezeného obsahu</div>
         <div sec:authorize="hasRole('XXX')">

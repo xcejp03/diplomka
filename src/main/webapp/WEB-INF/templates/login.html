@@ -10,24 +10,12 @@
     <meta name="author" content=""/>
 
     <title>Login page</title>
-    <!-- Bootstrap Core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
 
-    <!-- Custom CSS -->
-    <link href="/css/modern-business.css" rel="stylesheet"/>
 
-    <!-- Custom Fonts -->
-    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <!--importované přes fragment-->
+    <div th:replace="/fragment/thymeFragment :: headImports"/>
+    <!--importované přes fragment - konec-->
 
-    <!--Moje importy-->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
-    <link rel="stylesheet" href="/resources/demos/style.css"/>
-
-    <div th:replace="/fragment/thymeFragment :: scripts"/>
-
-    <link href="http://t4t5.github.io/sweetalert/dist/sweetalert.css" rel="stylesheet"/>
-    <script src="http://t4t5.github.io/sweetalert/dist/sweetalert.min.js"></script>
-    <script type='text/javascript' src='../script.js'></script>
 </head>
 <body>
 <!-- Navigation -->
@@ -38,9 +26,6 @@
     <!-- Page Heading/Breadcrumbs -->
     <div class="row">
         <div class="col-md-12">
-            <!--<h1 class="page-header">404-->
-            <!--<small>Page Not Found</small>-->
-            <!--</h1>-->
             <ol class="breadcrumb">
                 <li><a href="index">Home</a>
                 </li>
@@ -62,12 +47,13 @@
     <div class="row">
         <div class="col-md-4">
             <div class="well">
-                <p th:if="${loginError}" class="error">Wrong user or password</p>
-                <form th:action="@{/login.html}" method="post">
+                <p th:if="${loginError}" class="error">Wrong user or pass</p>
+                <form th:action="@{/login}" method="post" default-target-url="/index">
                     <div class="control-group form-group">
                         <div class="controls">
                             <label for="username">Username</label>:
-                            <input type="text" id="username" name="username" class="form-control" autofocus="autofocus"/> <br/>
+                            <input type="text" id="username" name="username" class="form-control"
+                                   autofocus="autofocus"/> <br/>
                         </div>
                     </div>
                     <div class="control-group form-group">
@@ -77,10 +63,21 @@
                         </div>
                     </div>
                     <input type="submit" value="Log in" class="btn btn-primary"/>
+                    <input type="hidden" name="${_csrf.parameterName}"
+                           value="${_csrf.token}"/>
                 </form>
             </div>
         </div>
     </div>
+    <td><a href="#" class="opener" data-id="#statisticsDialog">statistika</a></td>
+    <div id="statisticsDialog" title="Statistika projektu">
+
+        <h2>Počet TC: </h2>
+        <h3>Počet chyb:</h3>
+        <h3>Hotové TC:</h3>
+
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <!-- Footer -->
@@ -88,17 +85,6 @@
         </div>
     </div>
     <!-- /.container -->
-    <!-- jQuery -->
-    <script src="/js/jquery.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/js/bootstrap.min.js"></script>
-
-    <!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
-    <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
-    <div th:replace="/fragment/thymeFragment :: scripts"></div>
-
-    <!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
-    <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
 </div>
 </body>
 

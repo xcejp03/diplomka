@@ -43,7 +43,7 @@ public class DefectController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createDefect(Model model) {
         l.info("request mapping defect/create");
-        model.addAttribute("defect", new DefectDTO());
+        model.addAttribute("defectDTO", new DefectDTO());
         model.addAttribute("defectList", defectService.findAllDefects());
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
@@ -64,7 +64,7 @@ public class DefectController {
     @RequestMapping("/edit/{id}")
     public String editDefect(@PathVariable("id") long id, Model model) {
         l.info("/edit/{id}" + id);
-        model.addAttribute("defect", defectService.findDefectDTOById(id));
+        model.addAttribute("defectDTO", defectService.findDefectDTOById(id));
         model.addAttribute("person", personService.findPersonById(id));
 
         return "defectCreate";

@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.sql.DataSource;
+
 /**
  * Created by pcejk on 20.12.2016.
  */
@@ -20,45 +22,38 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
+    DataSource dataSource;
+
+    @Autowired
     @Qualifier("userDetailsService")
     UserDetailsService userDetailsService;
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-            /*auth.inMemoryAuthentication().withUser("mkyong").password("123456").roles("USER");
-            auth.inMemoryAuthentication().withUser("admin").password("123456").roles("ADMIN");
-            auth.inMemoryAuthentication().withUser("dba").password("123456").roles("DBA");*/
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-/*
         http.authorizeRequests()
-                .antMatchers("/admin*/
-/**").access("hasRole('ROLE_ADMIN')")
- .antMatchers("/dba*/
-/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_DBA')")
- .and().formLogin();
- */
-        http
-                .formLogin()
-                .loginPage("/login.html")
-                .failureUrl("/login-error.html")
+//                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/login", "/home", "/index", "/", "/thyme", "/script.js").permitAll()
+                .antMatchers("/test/thym", "/font-awesome/**" ).permitAll()
+                .anyRequest().authenticated()
                 .and()
-                .logout()
-                .logoutSuccessUrl("/index.html");
-
-//        http.authorizeRequests().antMatchers("/admin/**")
-//                .access("hasRole('ROLE_ADMIN')").and().formLogin()
-//                .loginPage("/login").failureUrl("/login?error")
-//                .usernameParameter("username")
-//                .passwordParameter("password")
-//                .and().logout().logoutSuccessUrl("/login?logout")
-//                .and().csrf()
-//                .and().exceptionHandling().accessDeniedPage("/403");
+                .formLogin().loginPage("/login")
+                .defaultSuccessUrl("/")
+                .failureUrl("/login-error")
+                .usernameParameter("username").passwordParameter("password")
+                .and()
+                .logout().logoutSuccessUrl("/login?logout")
+                .and()
+                .exceptionHandling().accessDeniedPage("/403")
+                .and()
+                .csrf();
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
