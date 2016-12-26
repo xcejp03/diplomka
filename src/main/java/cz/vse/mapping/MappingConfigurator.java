@@ -83,8 +83,8 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .byDefault()
                 .register();
         factory.classMap(Person.class, PersonDTO.class)
-                .mapNullsInReverse(false)
-                .mapNulls(false)
+//                .mapNullsInReverse(false)
+//                .mapNulls(false)
                 .byDefault()
                 .register();
         factory.classMap(TSMuster.class, TSMusterDTO.class)

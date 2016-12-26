@@ -11,6 +11,7 @@ public class PersonDTO extends BaseDTO {
     private String password;
     private LocalDateTime createdDate;
     private LocalDateTime lastLogin;
+    private Boolean enabled;
 
     public String getName() {
         return name;
@@ -53,6 +54,13 @@ public class PersonDTO extends BaseDTO {
         this.lastLogin = lastLogin;
     }
 
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
 
     @Override
     public String toString() {

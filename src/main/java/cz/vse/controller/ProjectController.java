@@ -45,7 +45,7 @@ public class ProjectController {
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listSuites", suiteService.findAllTestSuites());
 
-        return "project";
+        return "projectCreate";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -61,7 +61,7 @@ public class ProjectController {
     @RequestMapping("/edit/{id}")
     public String editProject(@PathVariable("id") int id, Model model) {
         l.info("/edit/{id}" + id);
-        model.addAttribute("project", projectService.findTestProjectDTOById(id));
+        model.addAttribute("projectDTO", projectService.findTestProjectDTOById(id));
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listSuites", suiteService.findAllTestSuites());
         return "projectCreate";
@@ -84,7 +84,7 @@ public class ProjectController {
         l.error(auth);
         String name = auth.getName();
         l.error("XXX: " + name);
-        return "projects";
+        return "project";
     }
 
     @RequestMapping("{id}/old")

@@ -9,7 +9,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
-    <title>Create Project</title>
+    <title>Create Test Suite</title>
 
     <!--importované přes fragment-->
     <div th:replace="/fragment/thymeFragment :: headImports"/>
@@ -28,7 +28,7 @@
     <div class="row">
         <div class="col-md-12">
             <h1 class="page-header">
-                <small>WEB-INF/templates/project.html</small>
+                <small>WEB-INF/templates/suite.html</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/index">Home</a>
@@ -44,69 +44,74 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="well">
-                    <form th:action="@{/project/create}" method="post" default-target-url="/index">
+                    <form th:action="@{/suite/create}" method="post" default-target-url="/index">
 
-                        <span th:if="${project.id != null}" th:remove="tag">
+                        <span th:if="${suiteDTO.id != null}" th:remove="tag">
                             <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="id">ID</label>:
-                                <input type="text" id="id" name="id" class="form-control"/>
+                                <input type="text" id="id" th:value="${suiteDTO.id}" readonly="true" name="id"
+                                       class="form-control"/>
                             </div>
                         </div>
                         </span>
 
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="name">Jméno</label>:
-                                <input type="text" id="name" name="name" class="form-control"
+                                <label for="name">Název</label>:
+                                <input type="text" id="name" name="name" th:value="${suiteDTO.name}" class="form-control"
                                        autofocus="autofocus"/>
                             </div>
                         </div>
 
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="projectOwner_id">Vlastník</label>:
+                                <label for="project_id">Projekt</label>:
 
-                                <select class="form-control" id="projectOwner_id" name="projectOwner_id">
-                                    <option th:each="person : ${listPersons}"
-                                            th:value="${person.id}"
-                                            th:text="${person.name}">jméno vlastníka
+                                <select class="form-control" id="project_id" name="project_id">
+                                    <option th:each="project : ${listProjects}"
+                                            th:value="${project.id}"
+                                            th:text="${project.name}">jméno projektu
                                     </option>
                                 </select>
-
                             </div>
                         </div>
 
                         <div class="control-group form-group">
                             <div class="controls">
-                                <label for="projectMembers_id">Členové</label>:
+                                <label for="tcMusters_id">TC vzory</label>:
 
-                                <select class="form-control" id="projectMembers_id" name="projectMembers_id"
+                                <select class="form-control" id="tcMusters_id" name="tcMusters_id"
                                         multiple="multiple" size="10">
-                                    <option th:each="person : ${listPersons}"
-                                            th:value="${person.id}"
-                                            th:text="${person.name}">jména členů
+                                    <option th:each="tcmuster : ${listTcMusters}"
+                                            th:value="${tcmuster.id}"
+                                            th:text="${tcmuster.name}">tc vzory
                                     </option>
                                 </select>
 
                             </div>
                         </div>
 
-                        <div class="control-group form-group">
-                            <div class="controls">
-                                <label for="suites_id">Test suity</label>:
+                        <!--<div class="control-group form-group">-->
+                        <!--<div class="controls">-->
+                        <!--<label for="projectMembers_id">Členové</label>:-->
 
-                                <select class="form-control" id="suites_id" name="suites_id" multiple="multiple" size="10">
-                                    <option th:each="suite : ${listSuites}"
-                                            th:value="${suite.id}"
-                                            th:text="${suite.name}">test suity
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <input type="submit" value="Vytvořit" class="btn btn-primary"/>
-                        <input type="hidden" name="${_csrf.parameterName}"
-                               value="${_csrf.token}"/>
+                        <!--<select class="form-control" id="projectMembers_id" name="projectMembers_id"-->
+                        <!--multiple="multiple" size="10">-->
+                        <!--<option th:each="person : ${listPersons}"-->
+                        <!--th:value="${person.id}"-->
+                        <!--th:text="${person.name}">jména členů-->
+                        <!--</option>-->
+                        <!--</select>-->
+
+                        <!--</div>-->
+                        <!--</div>-->
+                        <span th:if="${suiteDTO.id != null}" th:remove="tag">
+                             <input type="submit" value="Upravit" class="btn btn-primary"/>
+                        </span>
+                        <span th:if="${suiteDTO.id == null}" th:remove="tag">
+                             <input type="submit" value="Vytvořit" class="btn btn-primary"/>
+                        </span>
 
                     </form>
                 </div>

@@ -36,7 +36,7 @@ public class DefectCommentController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createDefect(Model model) {
         l.info("request mapping comment/create");
-        model.addAttribute("comment", new DefectCommentDTO());
+        model.addAttribute("commentDTO", new DefectCommentDTO());
         model.addAttribute("listComments", defectCommentService.findAllDefectsCommentsDTOAllTest());
         model.addAttribute("listDefects", defectService.findAllDefects());
         model.addAttribute("listPersons", personService.findAllPersons());
@@ -62,7 +62,7 @@ public class DefectCommentController {
     public String editComment(@PathVariable("id") long id, Model model) {
         l.info("/edit/{id}" + id);
         DefectCommentDTO commentDTO = defectCommentService.findCommentDTOById(id);
-        model.addAttribute("comment",commentDTO);
+        model.addAttribute("commentDTO",commentDTO);
         model.addAttribute("listDefects", defectService.findAllDefects());
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("defect", defectService.findDefectDTOById(commentDTO.getDefect_id()));

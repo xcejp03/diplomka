@@ -44,7 +44,7 @@ public class TestSuiteController {
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listTcMusters", tcMusterService.findAllTestCaseMusters());
 
-        return "suiteCreate";
+        return "suite";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -79,7 +79,7 @@ public class TestSuiteController {
 
         model.addAttribute("listSuitesDTO", suiteService.findAllTestSuitesDTOByProjectId(id));
         model.addAttribute("project", projectService.findTestProjectById(id));
-        return "suites";
+        return "suitesCreate";
     }
 
 

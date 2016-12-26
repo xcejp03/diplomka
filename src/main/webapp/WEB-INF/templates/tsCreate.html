@@ -9,7 +9,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
-    <title>Registration</title>
+    <title>Create Test Step</title>
 
     <!--importované přes fragment-->
     <div th:replace="/fragment/thymeFragment :: headImports"/>
@@ -28,12 +28,12 @@
     <div class="row">
         <div class="col-md-12">
             <h1 class="page-header">
-                <small>WEB-INF/templates/registration.html</small>
+                <small>WEB-INF/templates/tsCreate.html</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/index">Home</a>
                 </li>
-                <li class="active">Registration</li>
+                <li class="active">Test step create</li>
             </ol>
         </div>
     </div>
@@ -41,17 +41,16 @@
     <!-- Page Content -->
     <div class="container">
 
-
         <div class="row">
             <div class="col-md-4">
                 <div class="well">
-                    <form th:action="@{/person/create}" method="post" default-target-url="/index">
+                    <form th:action="@{/ts/create}" method="post" default-target-url="/index">
 
-                        <span th:if="${person.id != null}" th:remove="tag">
+                        <span th:if="${tsDTO.id != null}" th:remove="tag">
                             <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="id">ID</label>:
-                                <input type="text" id="id" name="id" th:value="${person.id}" readonly="true"
+                                <input type="text" id="id" th:value="${tsDTO.id}" readonly="true" name="id"
                                        class="form-control"/>
                             </div>
                         </div>
@@ -59,53 +58,57 @@
 
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="name">Jméno</label>:
-                                <input type="text" id="name" th:value="${person.name}" name="name" class="form-control"
+                                <label for="action">Akce</label>:
+                                <input type="text" id="action" name="action" th:value="${tsDTO.action}" class="form-control"
                                        autofocus="autofocus"/>
                             </div>
                         </div>
 
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="username">Uživatelské jméno</label>:
-                                <input type="text" id="username" th:value="${person.username}" name="username"
-                                       class="form-control"/>
+                                <label for="expected">Očekávané chování</label>:
+                                <input type="text" id="expected" name="expected" th:value="${tsDTO.expected}" class="form-control"
+                                      />
                             </div>
                         </div>
 
-                        <span th:if="${person.id == null}" th:remove="tag">
-                        <div class="control-group form-group">
+                        <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="password">Password</label>:
-                                <input type="password" id="password" class="form-control" name="password"
-                                       autocomplete="false"/> <br/>
+                                <label for="project_id">Autor kroku</label>:
+
+                                <select class="form-control" id="project_id" name="project_id">
+                                    <option th:each="author_id : ${listPersons}"
+                                            th:value="${author_id.id}"
+                                            th:text="${author_id.name}">jméno autora
+                                    </option>
+                                </select>
                             </div>
                         </div>
-                        </span>
 
-                        <span th:if="${person.id != null}" th:remove="tag">
-                        <div class="control-group form-group">
-                            <div class="controls">
-                                <label for="enabled">Aktivní</label>:
-                                <input type="checkbox" th:checked="${person.enabled}" name="enabled" id="enabled" class="checkbox"/>
-                                <!--<input type="enabled" id="enabled" class="form-control" name="enabled"/> <br/>-->
+                            <div class=" control-group form-group">
+                                <div class="controls">
+                                    <label for="tcMuster_id">tcMuster_id</label>:
+
+                                    <select class="form-control" id="tcMuster_id" name="tcMuster_id">
+                                        <option th:each="tcMuster_id : ${listTCMusters}"
+                                                th:value="${tcMuster_id.id}"
+                                                th:text="${tcMuster_id.name}">jméno tcMuster
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        </span>
 
-                        <span th:if="${person.id != null}" th:remove="tag">
+                        <span th:if="${tsDTO.id != null}" th:remove="tag">
                              <input type="submit" value="Upravit" class="btn btn-primary"/>
                         </span>
-                        <span th:if="${person.id == null}" th:remove="tag">
-                             <input type="submit" value="Založit" class="btn btn-primary"/>
+                        <span th:if="${tsDTO.id == null}" th:remove="tag">
+                             <input type="submit" value="Vytvořit" class="btn btn-primary"/>
                         </span>
-
 
                     </form>
                 </div>
             </div>
         </div>
-
 
         <!--Page Content - End-->
         <!-- Footer -->

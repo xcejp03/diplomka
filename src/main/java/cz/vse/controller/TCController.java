@@ -53,7 +53,7 @@ public class TCController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createTC(Model model) {
         l.info("request mapping tc/create");
-        model.addAttribute("tc", new TCMusterDTO());
+        model.addAttribute("tcDTO", new TCMusterDTO());
         model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMustersDTO());
         model.addAttribute("listTSMusters", tsMusterService.findAllTestStepMustersDTO());
         model.addAttribute("listProjects", projectService.findAllTestProjects());
@@ -73,7 +73,7 @@ public class TCController {
     @RequestMapping("/edit/{id}")
     public String editTCMuster(@PathVariable("id") long id, Model model) {
         l.info("/edit/{id}" + id);
-        model.addAttribute("tc", tcMusterService.findTestCaseMusterDTOById(id));
+        model.addAttribute("tcDTO", tcMusterService.findTestCaseMusterDTOById(id));
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listProjects", projectService.findAllTestProjects());
         return "tcCreate";

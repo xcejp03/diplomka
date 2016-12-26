@@ -40,7 +40,7 @@ public class TSController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createTS(Model model) {
         l.info("request mapping ts/create");
-        model.addAttribute("ts", new TSMusterDTO());
+        model.addAttribute("tsDTO", new TSMusterDTO());
         model.addAttribute("listTSMusters", tsMusterService.findAllTestStepMustersDTO());
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMusters());
@@ -61,7 +61,7 @@ public class TSController {
     public String editTSMuster(@PathVariable("id") long id, Model model) {
         l.info("/edit/{id}" + id);
 
-        model.addAttribute("ts", tsMusterService.findTestStepMusterDTOById(id));
+        model.addAttribute("tsDTO", tsMusterService.findTestStepMusterDTOById(id));
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMusters());
         return "tsCreate";
