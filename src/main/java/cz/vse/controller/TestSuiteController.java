@@ -44,7 +44,7 @@ public class TestSuiteController {
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listTcMusters", tcMusterService.findAllTestCaseMusters());
 
-        return "suite";
+        return "suiteCreate";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
