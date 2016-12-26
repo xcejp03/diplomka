@@ -65,7 +65,7 @@
 //        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 //        if (!(auth instanceof AnonymousAuthenticationToken)) {
 //            UserDetails userDetail = (UserDetails) auth.getPrincipal();
-//            model.addObject("403", userDetail.getUsername());
+//            model.addObject("403", userDetail.getLogin());
 //        }
 //
 //        model.setViewName("403");

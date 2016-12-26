@@ -28,7 +28,7 @@ public class PersonController {
         model.addAttribute("person", new PersonDTO());
         model.addAttribute("listPersons", personService.findAllPersons());
 
-        return "personCreate";
+        return "registration";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)

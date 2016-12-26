@@ -7,7 +7,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
-    <title>Modern Business - Start Bootstrap Template</title>
+    <title>Projects</title>
 
     <!--importované přes fragment-->
     <div th:replace="/fragment/thymeFragment :: headImports"/>
@@ -24,7 +24,7 @@
     <!-- Page Heading/Breadcrumbs -->
     <div class="row">
         <div class="col-md-12">
-            <!--<h1 class="page-header">404-->
+            <!--<h1 class="page-header">404-->          <!--vypadá hezky-->
             <!--<small>Page Not Found</small>-->
             <!--</h1>-->
             <ol class="breadcrumb">
@@ -41,7 +41,7 @@
         <div class="col-md-12">
             <div class="jumbotron">
                 <h1 class="error-404">Seznam dostupných projektů pro <span style="font-style: italic"
-                                                                           th:text="${person.username}">přihlášeného uživatele</span>
+                                                                           th:text="${person.login}">přihlášeného uživatele</span>
                 </h1>
             </div>
         </div>
