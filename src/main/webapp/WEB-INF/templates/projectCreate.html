@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Create Project</title>
+
+    <!--importované přes fragment-->
+    <div th:replace="/fragment/thymeFragment :: headImports"/>
+    <!--importované přes fragment - konec-->
+
+</head>
+
+<body>
+<!-- Navigation -->
+<div th:replace="/fragment/thymeFragment :: menu"></div>
+
+<!-- Page Content -->
+<div class="container">
+    defect
+    <!-- Page Heading/Breadcrumbs -->
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header">
+                <small>WEB-INF/templates/project.html</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="/index">Home</a>
+                </li>
+                <li class="active">Project create</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="well">
+                    <form th:action="@{/project/create}" method="post" default-target-url="/index">
+
+                        <span th:if="${projectDTO.id != null}" th:remove="tag">
+                            <div class=" control-group form-group">
+                            <div class="controls">
+                                <label for="id">ID</label>:
+                                <input type="text" id="id" name="id" th:value="${projectDTO.id}" class="form-control" readonly="true"/>
+                            </div>
+                        </div>
+                        </span>
+
+                        <div class=" control-group form-group">
+                            <div class="controls">
+                                <label for="name">Jméno</label>:
+                                <input type="text" id="name" th:value="${projectDTO.name}" name="name" class="form-control"
+                                       autofocus="autofocus"/>
+                            </div>
+                        </div>
+
+                        <div class=" control-group form-group">
+                            <div class="controls">
+                                <label for="projectOwner_id">Vlastník</label>:
+
+                                <select class="form-control" id="projectOwner_id" name="projectOwner_id">
+                                    <option th:each="person : ${listPersons}"
+                                            th:value="${person.id}"
+                                            th:text="${person.name}">jméno vlastníka
+                                    </option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="control-group form-group">
+                            <div class="controls">
+                                <label for="projectMembers_id">Členové</label>:
+
+                                <select class="form-control" id="projectMembers_id" name="projectMembers_id"
+                                        multiple="multiple" size="10">
+                                    <option th:each="person : ${listPersons}"
+                                            th:value="${person.id}"
+                                            th:text="${person.name}">jména členů
+                                    </option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="control-group form-group">
+                            <div class="controls">
+                                <label for="suites_id">Test suity</label>:
+
+                                <select class="form-control" id="suites_id" name="suites_id" multiple="multiple" size="10">
+                                    <option th:each="suite : ${listSuites}"
+                                            th:value="${suite.id}"
+                                            th:text="${suite.name}">test suity
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <input type="submit" value="Vytvořit" class="btn btn-primary"/>
+                        <input type="hidden" name="${_csrf.parameterName}"
+                               value="${_csrf.token}"/>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!--Page Content - End-->
+        <!-- Footer -->
+        <div th:replace="/fragment/thymeFragment :: footer"></div>
+
+    </div>
+</div>
+<!-- /.container -->
+
+<!-- jQuery -->
+<script src="/js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<div th:replace="/fragment/thymeFragment :: script"></div>
+</body>
+
+</html>
