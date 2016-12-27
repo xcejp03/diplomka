@@ -54,7 +54,6 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
         factory.getConverterFactory().registerConverter(converter);
     }
 
-    //
     private void configureCustomMappers() {
         final Map<String, Mapper> mappers = applicationContext.getBeansOfType(Mapper.class);
         customMappers = new CustomMapperMap(mappers.values());
@@ -79,8 +78,6 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .mapNulls(false)
                 .field("defect_id", "defect.id")
                 .field("author_id", "author.id")
-//                .fieldMap("createdDateTime", "createdDateTime").converter("DateConverter").add()
-//                .field("createdDateTime", "createdDateTime")
                 .byDefault()
                 .register();
         factory.classMap(Defect.class, DefectDTO.class)
@@ -89,8 +86,8 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .byDefault()
                 .register();
         factory.classMap(Person.class, PersonDTO.class)
-//                .mapNullsInReverse(false)
-//                .mapNulls(false)
+                .mapNullsInReverse(false)
+                .mapNulls(false)
                 .byDefault()
                 .register();
         factory.classMap(TSMuster.class, TSMusterDTO.class)
@@ -107,34 +104,21 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .field("tsMusters", "tsMusters_id")
                 .field("tcInstances", "tcInstances_id")
                 .field("testSuites", "testSuite_id")
-//                .fieldMap("createdDateTime", "createdDateTime").converter("DateConverter").add()
-//                .field("createdDateTime", "createdDateTime")
                 .byDefault()
                 .register();
         factory.classMap(TestSuite.class, TestSuiteDTO.class)
-//                .mapNullsInReverse(false)
-//                .mapNulls(false)
+                .mapNullsInReverse(false)
+                .mapNulls(false)
                 .field("tcMusters", "tcMusters_id")
                 .field("project", "project_id")
-//                .field("project.id", "project_id")
-//                .field("tcMusters{id}", "tcMusters_id")
+                .field("project.id", "project_id")
+                .field("tcMusters{id}", "tcMusters_id")
                 .byDefault()
                 .register();
         factory.classMap(TSInstance.class, TSMuster.class)
                 .mapNullsInReverse(false)
                 .mapNulls(false)
-                .customize(new CustomMapper<TSInstance, TSMuster>() {
-//                    @Override
-//                    public void mapAtoB(TSInstance tsInstance, TSMuster tsMuster, MappingContext context) {
-//                        tsInstance.setTsMuster(tsMuster);
-//                        super.mapAtoB(tsInstance, tsMuster, context);
-//                    }
-                    @Override
-                    public void mapBtoA(TSMuster tsMuster, TSInstance tsInstance, MappingContext context) {
-                        tsInstance.setTsMuster(tsMuster);
-                        super.mapBtoA(tsMuster, tsInstance, context);
-                    }
-                })
+                .customize((Mapper<TSInstance, TSMuster>) customMappers.get(TSInstance.class, TSMuster.class))
                 .byDefault()
                 .register();
         factory.classMap(TCInstance.class, TCInstanceRunDTO.class)
