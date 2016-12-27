@@ -57,6 +57,7 @@ public class TCMusterServiceImpl implements TCMusterService{
         l.debug("updating TCMuster - service");
         TCMuster tcMuster = tcMusterRepository.findOne(tcMusterDTO.getId());
         mapper.map(tcMusterDTO, tcMuster);
+        tcMuster.setUpdatedDateTime(LocalDateTime.now());
         tcMusterRepository.save(tcMuster);
         l.info("updated TCMuster - service: " + tcMuster);
     }
