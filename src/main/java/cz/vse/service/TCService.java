@@ -13,11 +13,11 @@ import java.util.List;
  */
 public interface TCService {
 
-    TCInstanceRunDTO runNewTC(long tcMusterId);
+    TCInstanceRunDTO runNewTC(long tcMusterId, Person person);
     TCInstance mapTCMusterToTCInstance(TCMuster tcMuster);
     List<TSInstance> mapTSMusterToTSInstance(List<TSMuster> tsMusterList);
-    TCInstance createAndSaveTCInstanceFromTCMusterId(long tcMusterId);
-    List<TSInstance> createAndSaveTSInstanceFromTCMusterId(long tcMusterId, TCInstance tcInstance);
+//    TCInstance createAndSaveTCInstanceFromTCMusterId(long tcMusterId, Person person);
+//    List<TSInstance> createAndSaveTSInstanceFromTCMusterId(long tcMusterId, TCInstance tcInstance);
 
     List<TCMusterDTO> findAllTCMustersDTO();
     List<TCMuster> findAllTCMusters();

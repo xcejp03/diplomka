@@ -2,9 +2,12 @@ package cz.vse.controller;
 
 import cz.vse.dto.TSInstanceRunDTO;
 import cz.vse.dto.TSMusterDTO;
+import cz.vse.entity.Person;
 import cz.vse.service.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -71,7 +74,11 @@ public class TSController {
     public String runTSInstance(@ModelAttribute("ts") TSInstanceRunDTO tsInstanceRunDTO) {
         Long tcInstanceId = tsInstanceRunDTO.getTcInstance_id();
         l.info("/run/ - post");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Person person = personService.findPersonByAuthentication(auth);
+        tsInstanceRunDTO.setTester_id(person.getId());
         tsInstanceService.updateTestStepInstance(tsInstanceRunDTO);
+
         return "redirect:/tc/show/" + tcInstanceId;
     }
 

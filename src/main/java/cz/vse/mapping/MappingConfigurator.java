@@ -2,10 +2,12 @@ package cz.vse.mapping;
 
 import cz.vse.dto.*;
 import cz.vse.entity.*;
-import ma.glasnost.orika.Converter;
-import ma.glasnost.orika.MapperFactory;
+import cz.vse.mapping.utils.CustomMapperMap;
+import cz.vse.repository.TSMusterRepository;
+import ma.glasnost.orika.*;
 import ma.glasnost.orika.impl.ConfigurableMapper;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
@@ -25,13 +27,13 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
 
     private ApplicationContext applicationContext;
 
-//    private CustomMapperMap customMappers;
+    private CustomMapperMap customMappers;
 
     @Override
     protected void configure(final MapperFactory factory) {
         this.factory = factory;
         configureConverters(applicationContext);
-//        configureCustomMappers();
+        configureCustomMappers();
     }
 
     @Override
@@ -51,13 +53,17 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
     public void addConverter(final Converter<?, ?> converter) {
         factory.getConverterFactory().registerConverter(converter);
     }
-//
-//    private void configureCustomMappers() {
-//        final Map<String, Mapper> mappers = applicationContext.getBeansOfType(Mapper.class);
-//        customMappers = new CustomMapperMap(mappers.values());
-//    }
 
-    private void configureClassMaps()   {
+    //
+    private void configureCustomMappers() {
+        final Map<String, Mapper> mappers = applicationContext.getBeansOfType(Mapper.class);
+        customMappers = new CustomMapperMap(mappers.values());
+    }
+
+    @Autowired
+    TSMusterRepository tsMusterRepository;
+
+    private void configureClassMaps() {
 
         factory.classMap(Project.class, ProjectDTO.class)
                 .mapNullsInReverse(false)
@@ -68,7 +74,7 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .field("tcMusters", "tcMusters_id")
                 .byDefault()
                 .register();
-            factory.classMap(DefectCommentDTO.class, DefectComment.class)
+        factory.classMap(DefectCommentDTO.class, DefectComment.class)
                 .mapNullsInReverse(false)
                 .mapNulls(false)
                 .field("defect_id", "defect.id")
@@ -106,23 +112,30 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .byDefault()
                 .register();
         factory.classMap(TestSuite.class, TestSuiteDTO.class)
-                .mapNullsInReverse(false)
-                .mapNulls(false)
+//                .mapNullsInReverse(false)
+//                .mapNulls(false)
                 .field("tcMusters", "tcMusters_id")
                 .field("project", "project_id")
 //                .field("project.id", "project_id")
 //                .field("tcMusters{id}", "tcMusters_id")
                 .byDefault()
                 .register();
-        factory.classMap(TSMuster.class, TSInstance.class)
+        factory.classMap(TSInstance.class, TSMuster.class)
                 .mapNullsInReverse(false)
                 .mapNulls(false)
-                .field("action", "action")
-                .field("expected", "expected")
-//                .customize((Mapper)    customMapper)
-//                .fieldMap("action", "tsMuster").converter("TSMusterConverter").add()
-//                .field("tsMuster")
-//        .exclude("tsMuster")
+                .customize(new CustomMapper<TSInstance, TSMuster>() {
+//                    @Override
+//                    public void mapAtoB(TSInstance tsInstance, TSMuster tsMuster, MappingContext context) {
+//                        tsInstance.setTsMuster(tsMuster);
+//                        super.mapAtoB(tsInstance, tsMuster, context);
+//                    }
+                    @Override
+                    public void mapBtoA(TSMuster tsMuster, TSInstance tsInstance, MappingContext context) {
+                        tsInstance.setTsMuster(tsMuster);
+                        super.mapBtoA(tsMuster, tsInstance, context);
+                    }
+                })
+                .byDefault()
                 .register();
         factory.classMap(TCInstance.class, TCInstanceRunDTO.class)
                 .mapNullsInReverse(false)
@@ -132,11 +145,13 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .field("tCMuster", "tcMusters_id")
                 .field("tsInstances", "tsInstances_id")
                 .field("id", "tcInstance_id")
+                .field("tester", "tester_id")
                 .register();
         factory.classMap(TSInstance.class, TSInstanceRunDTO.class)
                 .mapNullsInReverse(false)
                 .mapNulls(false)
                 .field("tCInstance", "tcInstance_id")
+                .field("tester", "tester_id")
                 .byDefault()
                 .register();
         factory.classMap(Project.class, ProjectsNamesDTO.class)

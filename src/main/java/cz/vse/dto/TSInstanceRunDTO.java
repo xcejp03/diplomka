@@ -10,6 +10,7 @@ public class TSInstanceRunDTO extends BaseDTO {
     private String expected;
     private String result;
     private Long tcInstance_id;
+    private Long tester_id;
 
     public String getAction() {
         return action;
@@ -41,5 +42,13 @@ public class TSInstanceRunDTO extends BaseDTO {
 
     public void setTcInstance_id(Long tcInstance_id) {
         this.tcInstance_id = tcInstance_id;
+    }
+
+    public Long getTester_id() {
+        return tester_id;
+    }
+
+    public void setTester_id(Long tester_id) {
+        this.tester_id = tester_id;
     }
 }

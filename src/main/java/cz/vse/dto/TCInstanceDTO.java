@@ -1,5 +1,7 @@
 package cz.vse.dto;
 
+import cz.vse.entity.Person;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,6 +14,7 @@ public class TCInstanceDTO extends BaseDTO {
     private String name;
     private Long tcMuster_id;
     private List<Long> tsInstances_id;
+    private Long tester_id;
 
     public String getName() {
         return name;
@@ -35,5 +38,13 @@ public class TCInstanceDTO extends BaseDTO {
 
     public void setTsInstances_id(List<Long> tsInstances_id) {
         this.tsInstances_id = tsInstances_id;
+    }
+
+    public Long getTester_id() {
+        return tester_id;
+    }
+
+    public void setTester_id(Long tester_id) {
+        this.tester_id = tester_id;
     }
 }

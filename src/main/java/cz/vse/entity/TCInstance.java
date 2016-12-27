@@ -26,6 +26,10 @@ public class TCInstance extends BaseEntity {
     @OneToMany(mappedBy = "tCInstance")//, fetch = FetchType.EAGER)
     private List<TSInstance> tsInstances;
 
+    @ManyToOne
+    @JoinColumn(name = "tester_id")
+    private Person tester;
+
     public String getName() {
         return name;
     }
@@ -72,6 +76,14 @@ public class TCInstance extends BaseEntity {
 
     public void setTsInstances(List<TSInstance> tsInstances) {
         this.tsInstances = tsInstances;
+    }
+
+    public Person getTester() {
+        return tester;
+    }
+
+    public void setTester(Person tester) {
+        this.tester = tester;
     }
 
     @Override

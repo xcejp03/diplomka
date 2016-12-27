@@ -13,6 +13,7 @@ public class TSInstanceDTO extends BaseDTO {
     private Long tsMuster_id;
     private Long tcInstance_id;
     private String result;
+    private String tester_id;
 
     public String getAction() {
         return action;
@@ -52,5 +53,13 @@ public class TSInstanceDTO extends BaseDTO {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public String getTester_id() {
+        return tester_id;
+    }
+
+    public void setTester_id(String tester_id) {
+        this.tester_id = tester_id;
     }
 }

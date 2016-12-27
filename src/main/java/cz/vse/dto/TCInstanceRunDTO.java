@@ -12,6 +12,7 @@ public class TCInstanceRunDTO extends BaseDTO {
     private Long tcMusters_id;
     private Long tcInstance_id;
     private List<Long> tsInstances_id;
+    private Long tester_id;
 
     public String getName() {
         return name;
@@ -39,6 +40,14 @@ public class TCInstanceRunDTO extends BaseDTO {
 
     public Long getTcInstance_id() {
         return tcInstance_id;
+    }
+
+    public Long getTester_id() {
+        return tester_id;
+    }
+
+    public void setTester_id(Long tester_id) {
+        this.tester_id = tester_id;
     }
 
     public void setTcInstance_id(Long tcInstance_id) {

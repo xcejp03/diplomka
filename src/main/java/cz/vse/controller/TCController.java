@@ -2,9 +2,12 @@ package cz.vse.controller;
 
 import cz.vse.dto.TCInstanceRunDTO;
 import cz.vse.dto.TCMusterDTO;
+import cz.vse.entity.Person;
 import cz.vse.service.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -98,7 +101,10 @@ public class TCController {
     @RequestMapping("/run/{id}")
     public String runTCMuster(Model model, @PathVariable("id") long id) {
         TCInstanceRunDTO tcInstanceRunDTO;
-        tcInstanceRunDTO = tcService.runNewTC(id);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Person person = personService.findPersonByAuthentication(auth);
+        Long personId = person.getId();
+        tcInstanceRunDTO = tcService.runNewTC(id, person);
         model.addAttribute("tcInstance", tcInstanceRunDTO);
         model.addAttribute("listTSInstances", tsInstanceService.findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
 

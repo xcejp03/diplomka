@@ -29,6 +29,10 @@ public class TSInstance extends BaseEntity {
     @JoinColumn(name = "tcinstance_id")
     private TCInstance tCInstance;
 
+    @ManyToOne
+    @JoinColumn(name = "tester_id")
+    private Person tester;
+
     public LocalDateTime getCreatedDateTime() {
         return createdDateTime;
     }
@@ -91,6 +95,14 @@ public class TSInstance extends BaseEntity {
 
     public void settCInstance(TCInstance tCInstance) {
         this.tCInstance = tCInstance;
+    }
+
+    public Person getTester() {
+        return tester;
+    }
+
+    public void setTester(Person tester) {
+        this.tester = tester;
     }
 
     @Override

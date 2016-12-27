@@ -43,11 +43,11 @@ public class TCServiceImpl implements TCService {
     @Autowired
     private SuiteService suiteService;
 
-    public TCInstanceRunDTO runNewTC(long tcMusterId) {
+    public TCInstanceRunDTO runNewTC(long tcMusterId, Person person) {
         TCInstance tcInstance;
         TCInstanceRunDTO tcInstanceRunDTO;
 
-        tcInstance = createAndSaveTCInstanceFromTCMusterId(tcMusterId);
+        tcInstance = createAndSaveTCInstanceFromTCMusterId(tcMusterId, person);
 
         tcInstanceRunDTO = mapper.map(tcInstance, TCInstanceRunDTO.class);
         l.info(tcInstanceRunDTO);
@@ -80,7 +80,7 @@ public class TCServiceImpl implements TCService {
         return tsInstanceMappedList;
     }
 
-    public TCInstance createAndSaveTCInstanceFromTCMusterId(long tcMusterId) {
+    private TCInstance createAndSaveTCInstanceFromTCMusterId(long tcMusterId, Person tester) {
         TCMuster tcMuster;
         TCInstance tcInstance = new TCInstance();
         List<TSInstance> tsInstanceList = new ArrayList<>();
@@ -90,6 +90,7 @@ public class TCServiceImpl implements TCService {
         tcInstance = mapTCMusterToTCInstance(tcMuster);
         tcInstance.setCreatedDateTime(LocalDateTime.now());
         tcInstance.setTsInstances(tsInstanceList);
+        tcInstance.setTester(tester);
 
         tcInstanceService.createTestCaseInstance(tcInstance);
 
@@ -98,14 +99,26 @@ public class TCServiceImpl implements TCService {
         return tcInstance;
     }
 
-    public List<TSInstance> createAndSaveTSInstanceFromTCMusterId(long tcMusterId, TCInstance tcInstance) {
+    private List<TSInstance> createAndSaveTSInstanceFromTCMusterId(long tcMusterId, TCInstance tcInstance) {
         TCMuster tcMuster = tcMusterRepository.findOne(tcMusterId);
         List<TSMuster> tsMusterList;
-        List<TSInstance> tsInstanceList = null;
+        List<TSInstance> tsInstanceList;
+        List<TSInstance> tsInstanceListMapped;
+        List<TSInstance> vsechny = new ArrayList<>();
+        List<TSInstance> vsechny2 = new ArrayList<>();
+////////////////
 
         tsMusterList = tsMusterService.findAllTestStepMustersByTCMuster(tcMuster);
-        tsInstanceList = mapTSMusterToTSInstance(tsMusterList);
-        tsInstanceList = mapper.mapAsList(tsMusterList, TSInstance.class);
+        tsInstanceList =  mapper.mapAsList(tsMusterList, TSInstance.class);
+
+        mapper.map(tsMusterList, vsechny);
+        vsechny2 = mapper.mapAsList(tsMusterList, TSInstance.class);
+//        tsInstanceList = mapper.mapAsList(tsMusterList, TSInstance.class);
+//        mapper.map(tsMusterList, tsInstanceList);
+//        tsInstanceListMapped = mapTSMusterToTSInstance(tsMusterList);
+//        mapper.map(tsInstanceList, tsInstanceListMapped);
+//        mapper.map(tsInstanceListMapped, tsInstanceList);
+        l.info(tsInstanceList);
 
         for (TSInstance tsInstance : tsInstanceList) {
             tsInstance.settCInstance(tcInstance);
@@ -121,13 +134,13 @@ public class TCServiceImpl implements TCService {
         List<TCMusterDTO> tcMusterDTOList;
         List<TCMuster> tcMusterList = tcMusterRepository.findAll();
         tcMusterDTOList = mapper.mapAsList(tcMusterList, TCMusterDTO.class);
-        return  tcMusterDTOList;
+        return tcMusterDTOList;
     }
 
     @Override
     public List<TCMuster> findAllTCMusters() {
         List<TCMuster> tcMusterList;
-        tcMusterList =  tcMusterRepository.findAll();
+        tcMusterList = tcMusterRepository.findAll();
         return tcMusterList;
     }
 
