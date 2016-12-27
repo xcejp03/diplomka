@@ -1,10 +1,8 @@
 package cz.vse.service.impl;
 
 import cz.vse.dto.TCInstanceRunDTO;
-import cz.vse.entity.TCInstance;
-import cz.vse.entity.TCMuster;
-import cz.vse.entity.TSInstance;
-import cz.vse.entity.TSMuster;
+import cz.vse.dto.TCMusterDTO;
+import cz.vse.entity.*;
 import cz.vse.repository.TCMusterRepository;
 import cz.vse.service.*;
 import ma.glasnost.orika.MapperFacade;
@@ -41,6 +39,9 @@ public class TCServiceImpl implements TCService {
 
     @Autowired
     private TCMusterRepository tcMusterRepository;
+
+    @Autowired
+    private SuiteService suiteService;
 
     public TCInstanceRunDTO runNewTC(long tcMusterId) {
         TCInstance tcInstance;
@@ -113,5 +114,30 @@ public class TCServiceImpl implements TCService {
 
         l.info(tsInstanceList);
         return tsInstanceList;
+    }
+
+    @Override
+    public List<TCMusterDTO> findAllTCMustersDTO() {
+        List<TCMusterDTO> tcMusterDTOList;
+        List<TCMuster> tcMusterList = tcMusterRepository.findAll();
+        tcMusterDTOList = mapper.mapAsList(tcMusterList, TCMusterDTO.class);
+        return  tcMusterDTOList;
+    }
+
+    @Override
+    public List<TCMuster> findAllTCMusters() {
+        List<TCMuster> tcMusterList;
+        tcMusterList =  tcMusterRepository.findAll();
+        return tcMusterList;
+    }
+
+    @Override
+    public List<TCMusterDTO> findAllTCMustersDTOBySuiteId(Long id) {
+        List<TCMusterDTO> tcMusterDTOList;
+        List<TCMuster> tcMusterList;
+        TestSuite testSuite = suiteService.findTestSuiteById(id);
+        tcMusterList = tcMusterRepository.findAllTCMustersDTOByTestSuites(testSuite);
+        tcMusterDTOList = mapper.mapAsList(tcMusterList, TCMusterDTO.class);
+        return tcMusterDTOList;
     }
 }

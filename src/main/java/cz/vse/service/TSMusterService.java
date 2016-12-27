@@ -1,5 +1,6 @@
 package cz.vse.service;
 
+import cz.vse.dto.TCMusterDTO;
 import cz.vse.dto.TSMusterDTO;
 import cz.vse.entity.TCMuster;
 import cz.vse.entity.TSMuster;
@@ -29,4 +30,7 @@ public interface TSMusterService {
 
     List<TSMuster> findAllTestStepMustersByTCMuster (TCMuster tcMuster);
 
+    List<TSMusterDTO> findAllTSMustersDTOByTCMusterId(Long id);
+
+    List<TSMuster>findAllTSMustersByTCMuster (TCMuster tcMuster);
 }

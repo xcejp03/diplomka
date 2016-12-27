@@ -92,6 +92,14 @@ public class TSController {
     public String removeTSInstance(@PathVariable("id") long id) {
         Long tcInstanceId = tsInstanceService.findTestStepInstanceById(id).gettCInstance().getId();
         tsInstanceService.deleteTestStepInstanceById(id);
-        return "redirect:/tc/show/"+tcInstanceId;
+        return "redirect:/tc/show/" + tcInstanceId;
+    }
+
+    @RequestMapping("/ts-by-tcmuster/{id}")
+    public String tsByTC(@PathVariable("id") long id, Model model) {
+        l.info("/ts-by-tc/{id} - " + id);
+        model.addAttribute("listTSDTO", tsMusterService.findAllTSMustersDTOByTCMusterId(id));
+        model.addAttribute("tc", tcMusterService.findTestCaseMusterById(id));
+        return "tss";
     }
 }

@@ -40,6 +40,9 @@ public class TCController {
     @Autowired
     TCService tcService;
 
+    @Autowired
+    SuiteService suiteService;
+
     @RequestMapping(method = RequestMethod.GET)
     public String tcDefault(Model model) {
         l.info("request mapping /tc");
@@ -89,7 +92,7 @@ public class TCController {
     public String removeTInstance(@PathVariable("id") long id) {
         Long tcInstanceMusterId = tcInstanceService.findTestCaseInstanceById(id).gettCMuster().getId();
         tcInstanceService.deleteTestCaseInstanceById(id);
-        return "redirect:/tc/history/"+tcInstanceMusterId;
+        return "redirect:/tc/history/" + tcInstanceMusterId;
     }
 
     @RequestMapping("/run/{id}")
@@ -119,6 +122,15 @@ public class TCController {
         model.addAttribute("tc", tcMusterService.findTestCaseMusterDTOById(id));
         model.addAttribute("listTCInstances", tcInstanceService.findAllTCInstancesByTCMusterId(id));
         return "tcHistory";
+    }
+
+    @RequestMapping(value = "/tc-by-suite/{id}",  method = RequestMethod.GET)
+    public String tcBySuite(@PathVariable("id") long id, Model model) {
+        l.info("/tc-by-suite/{id} - " + id);
+
+        model.addAttribute("listTCDTO",tcService.findAllTCMustersDTOBySuiteId(id));
+        model.addAttribute("suite", suiteService.findTestSuiteById(id));
+        return "tcs";
     }
 
 }

@@ -39,7 +39,7 @@ public class ProjectController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createProjectForm(Model model) {
         l.info("request mapping project/create");
-        model.addAttribute("project", new ProjectDTO());
+        model.addAttribute("projectDTO", new ProjectDTO());
         model.addAttribute("person", new PersonDTO());
         model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
         model.addAttribute("listPersons", personService.findAllPersons());
@@ -87,19 +87,7 @@ public class ProjectController {
         return "project";
     }
 
-    @RequestMapping("{id}/old")
-    public String ProjectList(@PathVariable("id") int id, Model model) {
-        l.info("{id}/list" + id);
-        List<ProjectsNamesDTO> listProjectsNameDTO = projectService.findAllTestProjectsByUserIdDTO(id);
-        model.addAttribute("listProjects", listProjectsNameDTO);
-        model.addAttribute("person", personService.findPersonById(id));
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        l.error(auth);
-        String name = auth.getName();
-        return "ProjectList";
-    }
-
-    @RequestMapping()
+    @RequestMapping(value = "/projects", method = RequestMethod.GET)
     public String projectsByLoggedUser(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         l.info("User Authentication: " + auth);

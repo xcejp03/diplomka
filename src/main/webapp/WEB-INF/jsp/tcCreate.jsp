@@ -111,7 +111,7 @@
 </form:form>
 <br>
 <c:if test="${!empty listTCMusters}">
-<h3>TC List</h3>
+    <h3>TC List</h3>
     <table class="tg">
         <tr>
             <th width="80">TC ID</th>
@@ -128,11 +128,11 @@
                 <td>${tc.name}</td>
                 <td>${tc.createdDateTime}</td>
                 <td>${tc.project_id}</td>
-                    <td>
+                <td>
                     <c:forEach items="${tc.tsMusters_id}" var="tsMusters">
-                    ${tsMusters},
+                        ${tsMusters},
                     </c:forEach>
-                    </td>
+                </td>
                 <td><a href="<c:url value='edit/${tc.id}' />">Edit</a></td>
                 <td><a href="<c:url value='remove/${tc.id}' />">Delete</a></td>
             </tr>

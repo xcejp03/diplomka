@@ -57,6 +57,7 @@
             <th>Statistika</th>
             <th>Založit Defect</th>
             <th>Test Suity</th>
+            <th>Edit Project</th>
         </tr>
         </thead>
         <tbody th:remove="all-but-first">
@@ -70,6 +71,7 @@
             <td><a href="#" class="opener" data-id="#statisticsDialog">statistika</a></td>
             <td><a href="/defect/create">Založit Defekt</a></td>
             <td><a th:href="@{'/suite/suites-by-project/'+${project.id}}">Test Suity</a></td>
+            <td><a th:href="@{'/project/edit/'+${project.id}}">Editace</a></td>
         </tr>
         </tbody>
     </table>

@@ -7,7 +7,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
-    <title>Test suites</title>
+    <title>Test Cases</title>
     <!--importované přes fragment-->
     <div th:replace="/fragment/thymeFragment :: headImports"/>
     <!--importované přes fragment - konec-->
@@ -30,7 +30,7 @@
             <ol class="breadcrumb">
                 <li><a href="index">Home</a>
                 </li>
-                <li class="active">Suites</li>
+                <li class="active">TC vzory</li>
             </ol>
         </div>
     </div>
@@ -40,42 +40,42 @@
 
         <div class="col-md-12">
             <div class="jumbotron">
-                <h1 class="error-404">Seznam Test Suitů v projektu <span style="font-style: italic"
-                                                                           th:text="${project.name}">Projekt nezískán</span>
+                <h1 class="error-404">Seznam Test Casů v Test Suitu <span style="font-style: italic"
+                                                                           th:text="${suite.name}">Test suite nezískán</span>
                 </h1>
             </div>
         </div>
     </div>
 
-    <h1> Test Suite list</h1>
+    <h1> Test Cases list</h1>
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Suite ID</th>
+            <th>TC ID</th>
             <th>Název</th>
-            <th>Suite project id</th>
-            <th>Suite created</th>
-            <th>Suite TC musters</th>
-            <th>Test Cases</th>
+            <th>TC project id</th>
+            <th>TC created</th>
+            <th>Test Suity</th>
+            <th>Test Stepy</th>
             <th>Editace</th>
         </tr>
         </thead>
         <tbody th:remove="all-but-first">
-        <tr th:each="suite : ${listSuitesDTO}">
-            <td th:text="${suite.id}">00</td>
-            <td th:text="${suite.name}">Projekt</td>
-            <td th:text="${suite.project_id}">Projekt</td>
-            <td th:text="${suite.createdDateTime}">Projekt</td>
+        <tr th:each="tc : ${listTCDTO}">
+            <td th:text="${tc.id}">00</td>
+            <td th:text="${tc.name}">Projekt</td>
+            <td th:text="${tc.project_id}">Projekt</td>
+            <td th:text="${tc.createdDateTime}">datum a čas vytvoření</td>
             <td>
-                <span th:each="muster_id : ${suite.tcMusters_id}" ><span th:text="${muster_id}"></span> ,</span>
+                <span th:each="muster_id : ${tc.tsMusters_id}" ><span th:text="${muster_id}"></span> ,</span>
             </td>
-            <td><a th:href="@{'/tc/tc-by-suite/'+${suite.id}}">Test Cases</a></td>
-            <td><a th:href="@{'/suite/edit/'+${suite.id}}">editace</a></td>
+            <td><a th:href="@{'/ts/ts-by-tcmuster/'+${tc.id}}">Test Stepy</a></td>
+            <td><a th:href="@{'/tc/edit/'+${tc.id}}">editace</a></td>
         </tr>
         </tbody>
     </table>
 
-    <p><a href="/suite/create" class="btn btn-default">Založit Test Suite</a></p>
+    <p><a href="/tc/create" class="btn btn-default">Založit Test Case</a></p>
 
     <div id="detailDialog" title="Detail projektu">
 

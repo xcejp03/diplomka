@@ -79,7 +79,7 @@ public class TestSuiteController {
 
         model.addAttribute("listSuitesDTO", suiteService.findAllTestSuitesDTOByProjectId(id));
         model.addAttribute("project", projectService.findTestProjectById(id));
-        return "suitesCreate";
+        return "suites";
     }
 
 

@@ -74,9 +74,9 @@
 
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="project_id">Autor kroku</label>:
+                                <label for="author_id">Autor kroku</label>:
 
-                                <select class="form-control" id="project_id" name="project_id">
+                                <select class="form-control" id="author_id" name="author_id">
                                     <option th:each="author_id : ${listPersons}"
                                             th:value="${author_id.id}"
                                             th:text="${author_id.name}">jméno autora

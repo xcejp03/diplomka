@@ -4,6 +4,7 @@ import cz.vse.dto.TSMusterDTO;
 import cz.vse.entity.TCMuster;
 import cz.vse.entity.TSMuster;
 import cz.vse.repository.TSMusterRepository;
+import cz.vse.service.TCMusterService;
 import cz.vse.service.TSMusterService;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
@@ -25,6 +26,9 @@ public class TSMusterServiceImpl implements TSMusterService {
 
     @Autowired
     private MapperFacade mapper;
+
+    @Autowired
+    private TCMusterService tcMusterService;
 
     public void createTestStepMuster(TSMusterDTO tsMusterDTO) {
         l.debug("creating TSMuster - service");
@@ -98,5 +102,22 @@ public class TSMusterServiceImpl implements TSMusterService {
         List<TSMuster> tsMusters;
         tsMusters = tsMusterRepository.findAllTestStepMustersByTCMuster(tcMuster);
         return tsMusters;
+    }
+
+    @Override
+    public List<TSMuster> findAllTSMustersByTCMuster(TCMuster tcMuster) {
+        List<TSMuster> tsMusterList = tsMusterRepository.findAllTSMustersByTCMuster(tcMuster);
+        return tsMusterList;
+    }
+
+    @Override
+    public List<TSMusterDTO> findAllTSMustersDTOByTCMusterId(Long id) {
+        List<TSMusterDTO> tsMusterDTOList;
+        List<TSMuster> tsMusterList;
+        TCMuster tcMuster = tcMusterService.findTestCaseMusterById(id);
+        tsMusterList = tsMusterRepository.findAllTSMustersByTCMuster(tcMuster);
+        tsMusterDTOList = mapper.mapAsList(tsMusterList, TSMusterDTO.class);
+
+        return tsMusterDTOList;
     }
 }

@@ -1,10 +1,10 @@
 package cz.vse.service;
 
+import cz.vse.dto.ProjectDTO;
+import cz.vse.dto.ProjectsNamesDTO;
 import cz.vse.dto.TCInstanceRunDTO;
-import cz.vse.entity.TCInstance;
-import cz.vse.entity.TCMuster;
-import cz.vse.entity.TSInstance;
-import cz.vse.entity.TSMuster;
+import cz.vse.dto.TCMusterDTO;
+import cz.vse.entity.*;
 
 import java.util.List;
 
@@ -18,4 +18,8 @@ public interface TCService {
     List<TSInstance> mapTSMusterToTSInstance(List<TSMuster> tsMusterList);
     TCInstance createAndSaveTCInstanceFromTCMusterId(long tcMusterId);
     List<TSInstance> createAndSaveTSInstanceFromTCMusterId(long tcMusterId, TCInstance tcInstance);
+
+    List<TCMusterDTO> findAllTCMustersDTO();
+    List<TCMuster> findAllTCMusters();
+    List<TCMusterDTO> findAllTCMustersDTOBySuiteId(Long id);
 }
