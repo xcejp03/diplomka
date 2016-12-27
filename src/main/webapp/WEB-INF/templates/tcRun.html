@@ -7,7 +7,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
-    <title>Test Cases</title>
+    <title>Test Case Run</title>
     <!--importované přes fragment-->
     <div th:replace="/fragment/thymeFragment :: headImports"/>
     <!--importované přes fragment - konec-->
@@ -30,7 +30,7 @@
             <ol class="breadcrumb">
                 <li><a href="index">Home</a>
                 </li>
-                <li class="active">TC vzory</li>
+                <li class="active">TC run</li>
             </ol>
         </div>
     </div>
@@ -40,46 +40,41 @@
 
         <div class="col-md-12">
             <div class="jumbotron">
-                <h1 class="error-404">Seznam Test Casů v Test Suitu <span style="font-style: italic"
-                                                                           th:text="${suite.name}">Test suite nezískán</span>
+                <h1 class="error-404">Spuštěn Test Case Instance<span style="font-style: italic"
+                                                                           th:text="${tcInstance.name}">Test case nezískán</span>
                 </h1>
             </div>
         </div>
     </div>
 
-    <h1> Test Cases list</h1>
+    <h1> Test Step list</h1>
+
+    <a th:href="@{'/tc/history/'+${tcInstance.tcMusters_id}}">Historie TC</a>
+
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>TC ID</th>
-            <th>Název</th>
-            <th>TC project id</th>
-            <th>TC created</th>
-            <th>Test Suity</th>
-            <th>Test Stepy</th>
-            <th>Editace</th>
-            <th>Historie</th>
-            <th>Run</th>
+            <th>TS ID</th>
+            <th>Akce</th>
+            <th>Očekávaný výsledek</th>
+            <th>Výsledek</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
         </thead>
         <tbody th:remove="all-but-first">
-        <tr th:each="tc : ${listTCDTO}">
-            <td th:text="${tc.id}">00</td>
-            <td th:text="${tc.name}">Projekt</td>
-            <td th:text="${tc.project_id}">Projekt</td>
-            <td th:text="${tc.createdDateTime}">datum a čas vytvoření</td>
-            <td>
-                <span th:each="muster_id : ${tc.tsMusters_id}" ><span th:text="${muster_id}"></span> ,</span>
-            </td>
-            <td><a th:href="@{'/ts/ts-by-tcmuster/'+${tc.id}}">Test Stepy</a></td>
-            <td><a th:href="@{'/tc/edit/'+${tc.id}}">editace</a></td>
-            <td><a th:href="@{'/tc/history/'+${tc.id}}">historie</a></td>
-            <td><a th:href="@{'/tc/run/'+${tc.id}}">run</a></td>
+        <tr th:each="ts : ${listTSInstances}">
+            <td th:text="${ts.id}">00</td>
+            <td th:text="${ts.action}">Projekt</td>
+            <td th:text="${ts.expected}">Projekt</td>
+            <td th:text="${ts.result}">Projekt</td>
+            <td><a th:href="@{'/ts/run/'+${ts.id}}">editace</a></td>
+            <td><a th:href="@{'/ts/instance/remove/'+${ts.id}}">Delete</a></td>
+
         </tr>
         </tbody>
     </table>
 
-    <p><a href="/tc/create" class="btn btn-default">Založit Test Case</a></p>
 
     <div id="detailDialog" title="Detail projektu">
 

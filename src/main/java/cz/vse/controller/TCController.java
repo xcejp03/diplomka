@@ -102,7 +102,7 @@ public class TCController {
         model.addAttribute("tcInstance", tcInstanceRunDTO);
         model.addAttribute("listTSInstances", tsInstanceService.findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
 
-        return "tcShow";
+        return "tcRun";
     }
 
     @RequestMapping("/show/{id}")
@@ -113,7 +113,7 @@ public class TCController {
         model.addAttribute("listTSInstances", tsInstanceService.
                 findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
 
-        return "tcShow";
+        return "tcRun";
     }
 
     @RequestMapping("/history/{id}")

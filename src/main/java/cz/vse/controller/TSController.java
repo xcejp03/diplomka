@@ -78,7 +78,7 @@ public class TSController {
     @RequestMapping(value = "/run/{id}", method = RequestMethod.GET)
     public String runTSInstancePost(@PathVariable("id") long id, Model model) {
         l.info("/run/{id}" + id);
-        model.addAttribute("ts", tsInstanceService.findTestStepInstanceRunDTOById(id));
+        model.addAttribute("tsDTO", tsInstanceService.findTestStepInstanceRunDTOById(id));
         return "tsRun";
     }
 

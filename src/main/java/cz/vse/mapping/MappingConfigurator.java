@@ -100,6 +100,7 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .field("project", "project_id")
                 .field("tsMusters", "tsMusters_id")
                 .field("tcInstances", "tcInstances_id")
+                .field("testSuites", "testSuite_id")
 //                .fieldMap("createdDateTime", "createdDateTime").converter("DateConverter").add()
 //                .field("createdDateTime", "createdDateTime")
                 .byDefault()
