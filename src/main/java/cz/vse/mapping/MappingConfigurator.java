@@ -68,7 +68,8 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .mapNullsInReverse(false)
                 .mapNulls(false)
                 .field("projectOwner", "projectOwner_id")
-                .field("personMembers{id}", "projectMembers_id{}")
+//                .field("personMembers{id}", "projectMembers_id{}")
+                .field("personMembers", "projectMembers_id")
                 .field("testSuites", "suites_id")
                 .field("tcMusters", "tcMusters_id")
                 .byDefault()
@@ -111,8 +112,8 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .mapNulls(false)
                 .field("tcMusters", "tcMusters_id")
                 .field("project", "project_id")
-                .field("project.id", "project_id")
-                .field("tcMusters{id}", "tcMusters_id")
+                .field("tcMusters", "tcMusters_id")
+//                .field("tcMusters{id}", "tcMusters_id")
                 .byDefault()
                 .register();
         factory.classMap(TSInstance.class, TSMuster.class)
@@ -140,7 +141,8 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .register();
         factory.classMap(Project.class, ProjectsNamesDTO.class)
                 .field("projectOwner.name", "projectOwnerName")
-                .field("testSuites{id}", "suiteIdList{}")
+//                .field("testSuites{id}", "suiteIdList{}")
+                .field("testSuites", "suiteIdList")
                 .byDefault()
                 .register();
     }

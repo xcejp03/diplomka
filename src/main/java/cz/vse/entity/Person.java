@@ -23,7 +23,7 @@ public class Person extends BaseEntity {
     private Set<UserRole> userRole = new HashSet<>(0);
 
 
-    @ManyToMany //(cascade = CascadeType.ALL)
+    @ManyToMany (cascade = CascadeType.MERGE, fetch=FetchType.EAGER)
     @JoinTable(name = "PERSON_PROJECT",
             joinColumns = @JoinColumn(name = "PERSON_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "PROJECT_ID", referencedColumnName = "ID"))

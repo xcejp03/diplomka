@@ -74,21 +74,21 @@ public class ProjectServiceImpl implements ProjectService {
         Project project = projectRepository.findOne(projectDTO.getId());
         mapper.map(projectDTO, project);
 
-        List<Person> personMembersList = new ArrayList<>();
-        if (project.getPersonMembers() != null) {
-            for (Person personForId : project.getPersonMembers()) {
-                Person person = personService.findPersonById(personForId.getId());
-                person.addTestProjectMember(project);
-                personMembersList.add(person);
-            }
-            project.setPersonMembers(personMembersList);
-        }
-        if (project.getTestSuites() != null) {
-            for (TestSuite suiteForId : project.getTestSuites()) {
-                suiteForId.setProject(project);
-            }
-
-        }
+//        List<Person> personMembersList = new ArrayList<>();
+//        if (project.getPersonMembers() != null) {
+//            for (Person personForId : project.getPersonMembers()) {
+//                Person person = personService.findPersonById(personForId.getId());
+//                person.addTestProjectMember(project);
+//                personMembersList.add(person);
+//            }
+//            project.setPersonMembers(personMembersList);
+//        }
+//        if (project.getTestSuites() != null) {
+//            for (TestSuite suiteForId : project.getTestSuites()) {
+//                suiteForId.setProject(project);
+//            }
+//
+//        }
         projectRepository.save(project);
         l.info("updated project - service: " + project);
     }

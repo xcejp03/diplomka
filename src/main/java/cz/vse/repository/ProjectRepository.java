@@ -9,5 +9,6 @@ import java.util.List;
  * Created by pcejka on 28.11.2016.
  */
 public interface ProjectRepository extends BaseRepository<Project> {
+    Project findById(long id);
     List<Project> findAllProjectsByPersonMembersId(Long id);
 }
