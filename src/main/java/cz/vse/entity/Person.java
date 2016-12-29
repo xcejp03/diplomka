@@ -23,7 +23,7 @@ public class Person extends BaseEntity {
     private Set<UserRole> userRole = new HashSet<>(0);
 
 
-    @ManyToMany (cascade = CascadeType.MERGE, fetch=FetchType.EAGER)
+    @ManyToMany (cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     @JoinTable(name = "PERSON_PROJECT",
             joinColumns = @JoinColumn(name = "PERSON_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "PROJECT_ID", referencedColumnName = "ID"))
@@ -94,6 +94,10 @@ public class Person extends BaseEntity {
 
     public void addTestProjectMember(Project project) {
         this.projectsMember.add(project);
+    }
+
+    public void removeTestProjectMember (Project project)   {
+        this.projectsMember.remove(project);
     }
 
     public List<Project> getProjectOwners() {

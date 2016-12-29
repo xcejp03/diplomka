@@ -15,6 +15,10 @@ public interface PersonService {
 
     void updatePerson(PersonDTO personDTO);
 
+    void updatePerson(Person person);
+
+    void updatePerson(List<Person> personList);
+
     void deletePerson(Person personToDelete);
 
     void deletePerson(long personToDeleteById);

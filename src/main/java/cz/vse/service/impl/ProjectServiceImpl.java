@@ -9,12 +9,15 @@ import cz.vse.repository.ProjectRepository;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
 import cz.vse.service.SuiteService;
+import cz.vse.utils.HelpService;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.PreRemove;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,31 +39,38 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     private SuiteService suiteService;
 
+    @Autowired
+    private HelpService hs;
+
     public void createTestProject(ProjectDTO projectDTO) {
         l.debug("creating project - service");
         Project project;
         project = mapper.map(projectDTO, Project.class);
         l.info("po mapování");
-        /**
-         * entita musí být nastavena z obou směrů - předělat
-         */
         List<Person> personMembersList = new ArrayList<>();
-        if (project.getPersonMembers() != null) {
-            for (Person personForId : project.getPersonMembers()) {
-                Person person = personService.findPersonById(personForId.getId());
-                person.addTestProjectMember(project);
-                personMembersList.add(person);
-            }
-            project.setPersonMembers(personMembersList);
-        }
-        if (project.getTestSuites() != null) {
-            for (TestSuite suiteForId : project.getTestSuites()) {
-                suiteForId.setProject(project);
-            }
+        personMembersList = project.getPersonMembers();
+        List<Person> savedPersonList = personMembersList;
 
-        }
-        projectRepository.save(project);
+        Long projectSavedId = hs.saveProject(project);
+        Project projectSav = projectRepository.findById(projectSavedId);
+        refreshPersons(projectSav.getId(), savedPersonList);
+
         l.info("created project - service: " + project);
+    }
+
+    private void refreshPersons(Long projectId, List<Person> personMembersList) {
+        Project project = projectRepository.findById(projectId);
+        List<Project> projectList = new ArrayList<>();
+        projectList.add(project);
+
+        List<Person> refreshedPersonMemberList = new ArrayList<>();
+        project.setPersonMembers(refreshedPersonMemberList);
+        for (Person person : personMembersList) {
+            l.info("person - " + person);
+            person.setProjectsMember(projectList);
+            refreshedPersonMemberList.add(person);
+            l.info("vypisuju projectList - " + projectList);
+        }
     }
 
     public void createTestProject(Project project) {
@@ -73,25 +83,45 @@ public class ProjectServiceImpl implements ProjectService {
         l.debug("updating project - service");
         Project project = projectRepository.findOne(projectDTO.getId());
         mapper.map(projectDTO, project);
+        List<Person> personList;
+        personList = project.getPersonMembers();
 
-//        List<Person> personMembersList = new ArrayList<>();
-//        if (project.getPersonMembers() != null) {
-//            for (Person personForId : project.getPersonMembers()) {
-//                Person person = personService.findPersonById(personForId.getId());
+//        clearProjectsPersonMembers(project);
+        List<Person> personMembersList = new ArrayList<>();
+        if (project.getPersonMembers() != null) {
+            for (Person personForId : project.getPersonMembers()) {
+                Person person = personService.findPersonById(personForId.getId());
+                person.getProjectsMember().clear();
 //                person.addTestProjectMember(project);
-//                personMembersList.add(person);
-//            }
-//            project.setPersonMembers(personMembersList);
-//        }
-//        if (project.getTestSuites() != null) {
-//            for (TestSuite suiteForId : project.getTestSuites()) {
-//                suiteForId.setProject(project);
-//            }
-//
-//        }
+                personMembersList.add(person);
+            }
+            project.setPersonMembers(personMembersList);
+        }
+        if (project.getTestSuites() != null) {
+            for (TestSuite suiteForId : project.getTestSuites()) {
+                suiteForId.setProject(project);
+            }
+
+        }
         projectRepository.save(project);
         l.info("updated project - service: " + project);
     }
+
+    private void clearProjectsPersonMembers(Project project) {
+        List<Person> personList = project.getPersonMembers();
+        List<Person> personEmptyList = new ArrayList<>();
+
+        for (Person person : personList) {
+            person.getProjectsMember().remove(project);
+//            person.removeTestProjectMember(project);
+//            personService.updatePerson(person);
+            project.getPersonMembers().remove(person);
+        }
+        project.setPersonMembers(personEmptyList);
+        projectRepository.save(project);
+
+    }
+
 
     public void deleteTestProject(Project projectToDelete) {
         l.debug("deleting project - service");
@@ -147,7 +177,7 @@ public class ProjectServiceImpl implements ProjectService {
         List<ProjectsNamesDTO> projectsNamesDTOList;
         List<Project> projectList;
         projectList = projectRepository.findAllProjectsByPersonMembersId(id);
-        projectsNamesDTOList =mapper.mapAsList(projectList, ProjectsNamesDTO.class);
+        projectsNamesDTOList = mapper.mapAsList(projectList, ProjectsNamesDTO.class);
         return projectsNamesDTOList;
     }
 

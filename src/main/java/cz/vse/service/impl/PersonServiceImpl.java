@@ -19,6 +19,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
@@ -58,6 +59,16 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
         person.setLastLogin(LocalDateTime.now());
         personRepository.save(person);
         l.info("updated person - service: " + person);
+    }
+
+    public void updatePerson (Person person){
+        personRepository.save(person);
+    }
+
+//    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void updatePerson (List<Person> personList){
+        List<Person> personListLocal = personList;
+        personRepository.save(personListLocal);
     }
 
     public void deletePerson(Person personToDelete) {
