@@ -4,7 +4,7 @@ $(function () {
 
 
 $(function () {
-    $("#detailDialog, #statisticsDialog, #dialog1,#dialog2, #dialog3").dialog({
+    $("#detailDialog, #statisticsDialog, #moreDialog,#membersDialog, #dialog3").dialog({
         autoOpen: false,
         buttons: {
             Ok: function () {
@@ -25,6 +25,7 @@ $(function () {
         var dataAttr = $(this).data();
         $('#spanDataName').html(dataAttr.name);
         $('#spanDataOwnerName').html(dataAttr.owner);
+        $('#spanDataProjectId').html(dataAttr.project);
         $(dataAttr.id).dialog("open");
     });
 });
