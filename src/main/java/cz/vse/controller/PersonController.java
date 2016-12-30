@@ -25,7 +25,7 @@ public class PersonController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createProjectForm(Model model) {
         l.info("request mapping person/create");
-        model.addAttribute("person", new PersonDTO());
+        model.addAttribute("personDTO", new PersonDTO());
         model.addAttribute("listPersons", personService.findAllPersons());
 
         return "registration";
@@ -46,6 +46,15 @@ public class PersonController {
     public String editPerson(@PathVariable("id") int id, Model model) {
         l.info("/edit/" + id);
         model.addAttribute("personDTO", personService.findPersonById(id));
+        model.addAttribute("personDTOList", personService.findAllPersonsDTO());
+        return "registration";
+    }
+
+    @RequestMapping("/edit")
+    public String editAllPerson(Model model) {
+//        model.addAttribute("personDTO", personService.findPersonById(id));
+        model.addAttribute("personDTOList", personService.findAllPersonsDTO());
+
         return "registration";
     }
 
