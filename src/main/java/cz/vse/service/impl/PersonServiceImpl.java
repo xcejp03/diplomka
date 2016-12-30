@@ -8,7 +8,6 @@ import cz.vse.service.PersonService;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,7 +18,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
@@ -47,6 +45,7 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
         person = mapper.map(personDTO, Person.class);
         person.setCreatedDate(LocalDateTime.now());
         person.setPassword(hashPasswordForUser(personDTO.getPassword()));
+        person.setEnabled(true);
         personRepository.save(person);
         l.info("created person - service: " + person);
     }
@@ -55,7 +54,7 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
         l.debug("updating person - service");
         Person person = personRepository.findOne(personDTO.getId());
         mapper.map(personDTO, person);
-        person.setLastLogin(LocalDateTime.now());
+        person.setLastLogged(LocalDateTime.now());
         personRepository.save(person);
         l.info("updated person - service: " + person);
     }

@@ -15,7 +15,7 @@ public class Person extends BaseEntity {
     private String username;
     private String password;
     private LocalDateTime createdDate;
-    private LocalDateTime lastLogin;
+    private LocalDateTime lastLogged;
     private boolean enabled;
 
 
@@ -73,12 +73,12 @@ public class Person extends BaseEntity {
         this.createdDate = createdDate;
     }
 
-    public LocalDateTime getLastLogin() {
-        return lastLogin;
+    public LocalDateTime getLastLogged() {
+        return lastLogged;
     }
 
-    public void setLastLogin(LocalDateTime lastLogin) {
-        this.lastLogin = lastLogin;
+    public void setLastLogged(LocalDateTime lastLogged) {
+        this.lastLogged = lastLogged;
     }
 
     public List<Project> getProjectsMember() {
@@ -161,7 +161,7 @@ public class Person extends BaseEntity {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
 //                ", createdDate=" + createdDate +
-//                ", lastLogin=" + lastLogin +
+//                ", lastLogged=" + lastLogged +
 //                ", projectsMember=" + projectsMember +
 //                ", projectsOwner=" + projectOwners +
 //                ", defectsAssignee=" + defectAssignees +
