@@ -52,24 +52,26 @@
         <thead>
         <tr>
             <th>Suite ID</th>
+            <th sec:authorize="hasAuthority('ANALYTIC')">Stav</th>
             <th>Název</th>
             <th>Detail</th>
-            <th>Vytvořeno</th>
+            <th sec:authorize="hasAuthority('ANALYTIC')">Vytvořeno</th>
             <th>Test Cases</th>
-            <th>Editace</th>
+            <th sec:authorize="hasAuthority('ANALYTIC')">Editace</th>
             <th>Více</th>
         </tr>
         </thead>
         <tbody th:remove="all-but-first">
         <tr th:each="suite : ${listSuitesDTO}">
             <td th:text="${suite.id}">00</td>
+            <td sec:authorize="hasAuthority('ANALYTIC')">Výsledek Suitu</td>
             <td th:text="${suite.name}">Projekt</td>
             <td><a href="#" class="opener"
                    th:attr="data-name=${suite.name}" data-id="#detailDialog">Detail</a>
             </td>
-            <td th:text="${suite.createdDateTime}">Projekt</td>
+            <td th:text="${suite.createdDateTime}" sec:authorize="hasAuthority('ANALYTIC')">Projekt</td>
             <td><a th:href="@{'/tc/tc-by-suite/'+${suite.id}}">Test Cases</a></td>
-            <td><a th:href="@{'/suite/edit/'+${suite.id}}">editace</a></td>
+            <td><a th:href="@{'/suite/edit/'+${suite.id}}" sec:authorize="hasAuthority('ANALYTIC')">editace</a></td>
             <td><a href="#" class="opener" data-id="#moreDialog"
                    th:attr="data-objectid=${suite.id},data-updated=${suite.updateDateTime}"
             >Více</a>
@@ -91,22 +93,15 @@
         <a href="/defect/create" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Založit defekt</a>
         <a th:href="@{'/suite/delete/'}" class="btn btn-default" sec:authorize="hasAuthority('ANALYTIC')">Smazat</a>
         <a href="/defect/defects" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Seznam Defektů</a>
+        <a href="#" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Nahlásit chybu</a>
     </div>
 
     <div id="detailDialog" title="Detail projektu">
         <h3>Detail test suitu: <span id="spanDataName"></span></h3>
         <h3>Autor Test Suitu: <span id="spanDataOwnerName"> </span></h3>
-        <h3>Datum poslední úpravy: <span id="spanDataUpdated"> </span></h3>
+        <h3 sec:authorize="hasAuthority('ANALYTIC')">Datum poslední úpravy: <span id="spanDataUpdated"> </span></h3>
         <h3>Počet TC: </h3>
-    </div>
-
-    <div id="membersDialog" title="Členové projektu" sec:authorize="hasAuthority('ANALYTIC')">
-        <div class="well"><h3>členové projektu</h3>
-        </div>
-        <h3>analytici</h3>
-        <h3>testeři</h3>
-        <h3>všichni</h3>
-        <p>//chybí dodělat</p>
+        <h3 sec:authorize="hasAuthority('TESTER')">Stav TC: XXX prošlo a YYY je failed</h3>
     </div>
 
 
