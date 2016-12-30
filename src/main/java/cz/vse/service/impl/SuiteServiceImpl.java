@@ -80,6 +80,7 @@ public class SuiteServiceImpl implements SuiteService {
             for (TCMuster tcMusterForId : testSuite.getTcMusters()) {
                 TCMuster tcMuster = tcMusterService.findTestCaseMusterById(tcMusterForId.getId());
                 tcMuster.addTestSuites(testSuite);
+
                 tcMusterList.add(tcMuster);
             }
             testSuite.setTcMusters(tcMusterList);

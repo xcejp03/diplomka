@@ -25,7 +25,8 @@ $(function () {
         var dataAttr = $(this).data();
         $('#spanDataName').html(dataAttr.name);
         $('#spanDataOwnerName').html(dataAttr.owner);
-        $('#spanDataProjectId').html(dataAttr.project);
+        $('#spanDataObjectId').html(dataAttr.objectid);
+        $('#spanDataUpdated').html(dataAttr.updated);
         $(dataAttr.id).dialog("open");
     });
 });
