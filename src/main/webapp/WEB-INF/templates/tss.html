@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="cs" xmlns:th="http://www.thymeleaf.org">
+<html lang="cs" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/security/tags">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -13,7 +14,7 @@
     <!--importované přes fragment - konec-->
 </head>
 
-<body>
+<body sec:authorize="hasAuthority('ANALYTIC')">
 
 <!-- Navigation -->
 <div th:replace="/fragment/thymeFragment :: menu"></div>
@@ -41,7 +42,7 @@
         <div class="col-md-12">
             <div class="jumbotron">
                 <h1 class="error-404">Seznam Test Stepů v Test Casu <span style="font-style: italic"
-                                                                           th:text="${tc.name}">Test case nezískán</span>
+                                                                          th:text="${tc.name}">Test case nezískán</span>
                 </h1>
             </div>
         </div>
@@ -52,56 +53,49 @@
         <thead>
         <tr>
             <th>TS ID</th>
+            <th>Detail</th>
             <th>Akce</th>
             <th>Očekávané chování</th>
-            <th>Autor</th>
-            <th>TC Musters</th>
-            <th>Created date time</th>
+            <th>Vytvořeno</th>
             <th>Editace</th>
+            <th>Více</th>
         </tr>
         </thead>
         <tbody th:remove="all-but-first">
         <tr th:each="ts : ${listTSDTO}">
             <td th:text="${ts.id}">00</td>
-            <td th:text="${ts.action}">Projekt</td>
-            <td th:text="${ts.expected}">Projekt</td>
-            <td th:text="${ts.author_id}">Projekt</td>
-            <td th:text="${ts.tcMuster_id}">Projekt</td>
-            <td th:text="${ts.createdDateTime}">Projekt</td>
-            <td><a th:href="@{'/ts/edit/'+${ts.id}}">editace</a></td>
-
+            <td><a href="#" class="opener"
+                   th:attr="data-name=${tc.name}, data-updated=${ts.updatedDateTime}, data-owner=${ts.author_id}"
+                   data-id="#detailDialog">Detail</a>
+            </td>
+            <td th:text="${ts.action}">Akce</td>
+            <td th:text="${ts.expected}">Expected</td>
+            <td th:text="${ts.createdDateTime}">Vytvořeno</td>
+            <td><a th:href="@{'/ts/edit/'+${ts.id}}">Editace</a></td>
+            <td><a href="#" class="opener"
+                   th:attr="data-objectid=${ts.id}" data-id="#moreDialog">Více</a>
+            </td>
         </tr>
         </tbody>
     </table>
 
-    <p><a href="/ts/create" class="btn btn-default">Založit Test Step</a></p>
+    <p><a href="/ts/create" class="btn btn-default">Nový Test Step</a></p>
+
+    <!--dialogová okna-->
+    <div id="moreDialog" title="Více">
+        <h3>TC ID: <span id="spanDataObjectId"></span></h3>
+        <a href="/defect/create" class="btn btn-default" >Založit defekt</a>
+        <a th:href="@{'/ts/delete/'}" class="btn btn-default">Smazat</a>
+        <a href="/defect/defects" class="btn btn-default">Seznam Defektů</a>
+    </div>
 
     <div id="detailDialog" title="Detail projektu">
-
-        <h2>Detail projektu: <span id="spanDataName"></span></h2>
-        <h3>Vlastník projektu: <span id="spanDataOwnerName"> | </span></h3>
-
-        <p>This is an animated dialog which is useful for displaying information.
-            The dialog window can be moved, resized and closed with the 'x' icon.</p>
+        <h3>Detail Test Stepu <span id="spanDataName"></span></h3>
+        <h3>Autor test Stepu: <span id="spanDataOwnerName"> </span></h3>
+        <h3>Počet Test Stepů: //dodělat</h3>
+        <h4>Datum poslední úpravy: <span id="spanDataUpdated"></span></h4>
+        <h4>Autor poslední úpravy: </h4>
     </div>
-
-    <div id="statisticsDialog" title="Statistika projektu">
-
-        <h2>Počet TC: </h2>
-        <h3>Počet chyb:</h3>
-        <h3>Hotové TC:</h3>
-
-    </div>
-
-    <button onclick="alert('sdfds')" class="btn btn-default">alerty</button>
-
-    <button onclick="swal('sdfds')" class="btn btn-default">alerty swal</button>
-
-    <div class="btn btn-default">
-        <button class="alertik">alerty klas</button>
-    </div>
-
-    <button id="alerton">alerty id</button>
 
 
     <!-- Footer -->
