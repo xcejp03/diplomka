@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="cs" xmlns:th="http://www.thymeleaf.org">
+<html lang="cs" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/security/tags">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -41,7 +42,7 @@
         <div class="col-md-12">
             <div class="jumbotron">
                 <h1 class="error-404">Seznam Test Casů v Test Suitu <span style="font-style: italic"
-                                                                           th:text="${suite.name}">Test suite nezískán</span>
+                                                                          th:text="${suite.name}">Test suite nezískán</span>
                 </h1>
             </div>
         </div>
@@ -52,62 +53,56 @@
         <thead>
         <tr>
             <th>TC ID</th>
+            <th sec:authorize="hasAuthority('TESTER')">Stav</th>
             <th>Název</th>
-            <th>TC project id</th>
-            <th>TC created</th>
-            <th>Test Suity</th>
-            <th>Test Stepy</th>
-            <th>Editace</th>
-            <th>Historie</th>
-            <th>Run</th>
+            <th>Detail 5</th>
+            <th sec:authorize="hasAuthority('ANALYTIC')">Vytvořeno</th>
+            <th sec:authorize="hasAuthority('ANALYTIC')">Editace</th>
+            <th sec:authorize="hasAuthority('TESTER')">Historie</th>
+            <th sec:authorize="hasAuthority('TESTER')">Spustit</th>
+            <th sec:authorize="hasAuthority('ANALYTIC')">Test Stepy</th>
+            <th>Více</th>
         </tr>
         </thead>
         <tbody th:remove="all-but-first">
         <tr th:each="tc : ${listTCDTO}">
             <td th:text="${tc.id}">00</td>
-            <td th:text="${tc.name}">Projekt</td>
-            <td th:text="${tc.project_id}">Projekt</td>
-            <td th:text="${tc.createdDateTime}">datum a čas vytvoření</td>
-            <td>
-                <span th:each="muster_id : ${tc.tsMusters_id}" ><span th:text="${muster_id}"></span> ,</span>
+            <td sec:authorize="hasAuthority('TESTER')">Stav TC</td>
+            <td th:text="${tc.name}">Název</td>
+            <td><a href="#" class="opener"
+                   th:attr="data-name=${tc.name}"
+                   data-id="#detailDialog">Detail</a>
             </td>
-            <td><a th:href="@{'/ts/ts-by-tcmuster/'+${tc.id}}">Test Stepy</a></td>
-            <td><a th:href="@{'/tc/edit/'+${tc.id}}">editace</a></td>
-            <td><a th:href="@{'/tc/history/'+${tc.id}}">historie</a></td>
-            <td><a th:href="@{'/tc/run/'+${tc.id}}">run</a></td>
+            <td th:text="${tc.createdDateTime}" sec:authorize="hasAuthority('ANALYTIC')">datum a čas vytvoření</td>
+            <td sec:authorize="hasAuthority('ANALYTIC')"><a th:href="@{'/tc/edit/'+${tc.id}}">editace</a></td>
+            <td sec:authorize="hasAuthority('TESTER')"><a th:href="@{'/tc/history/'+${tc.id}}">historie</a></td>
+            <td sec:authorize="hasAuthority('TESTER')"><a th:href="@{'/tc/run/'+${tc.id}}" >run</a></td>
+            <td sec:authorize="hasAuthority('ANALYTIC')"><a th:href="@{'/ts/ts-by-tcmuster/'+${tc.id}}">Test Stepy</a></td>
+            <td><a href="#" class="opener"
+                   th:attr="data-objectid=${tc.id}" data-id="#moreDialog">Více</a>
+            </td>
         </tr>
         </tbody>
     </table>
 
-    <p><a href="/tc/create" class="btn btn-default">Založit Test Case</a></p>
+    <p><a href="/tc/create" class="btn btn-default" sec:authorize="hasAuthority('ANALYTIC')">Založit Test Case</a></p>
+
+    <!--dialogová okna-->
+    <div id="moreDialog" title="Více">
+        <h3>TC ID: <span id="spanDataObjectId"></span></h3>
+        <a href="/defect/create" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Založit defekt</a>
+        <a th:href="@{'/tc/delete/'}" class="btn btn-default" sec:authorize="hasAuthority('ANALYTIC')">Smazat</a>
+        <a href="/defect/defects" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Seznam Defektů</a>
+    </div>
 
     <div id="detailDialog" title="Detail projektu">
-
-        <h2>Detail projektu: <span id="spanDataName"></span></h2>
-        <h3>Vlastník projektu: <span id="spanDataOwnerName"> | </span></h3>
-
-        <p>This is an animated dialog which is useful for displaying information.
-            The dialog window can be moved, resized and closed with the 'x' icon.</p>
-    </div>
-
-    <div id="statisticsDialog" title="Statistika projektu">
-
-        <h2>Počet TC: </h2>
-        <h3>Počet chyb:</h3>
-        <h3>Hotové TC:</h3>
+        <h3>Detail Test Casu <span id="spanDataName"></span></h3>
+        <h3>Autor test casu: <span id="spanDataOwnerName"> </span></h3>
+        <h3>Počet Test Stepů: //dodělat</h3>
+        <h4>Datum poslední úpravy: </h4>
+        <h4>Autor poslední úpravy: </h4>
 
     </div>
-
-    <button onclick="alert('sdfds')" class="btn btn-default">alerty</button>
-
-    <button onclick="swal('sdfds')" class="btn btn-default">alerty swal</button>
-
-    <div class="btn btn-default">
-        <button class="alertik">alerty klas</button>
-    </div>
-
-    <button id="alerton">alerty id</button>
-
 
     <!-- Footer -->
     <div th:replace="/fragment/thymeFragment :: footer"></div>

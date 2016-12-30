@@ -71,7 +71,7 @@
             </td>
             <td th:text="${suite.createdDateTime}" sec:authorize="hasAuthority('ANALYTIC')">Projekt</td>
             <td><a th:href="@{'/tc/tc-by-suite/'+${suite.id}}">Test Cases</a></td>
-            <td><a th:href="@{'/suite/edit/'+${suite.id}}" sec:authorize="hasAuthority('ANALYTIC')">editace</a></td>
+            <td sec:authorize="hasAuthority('ANALYTIC')"><a th:href="@{'/suite/edit/'+${suite.id}}">editace</a></td>
             <td><a href="#" class="opener" data-id="#moreDialog"
                    th:attr="data-objectid=${suite.id},data-updated=${suite.updateDateTime}"
             >Více</a>

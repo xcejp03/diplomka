@@ -87,7 +87,7 @@
                     <td sec:authorize="hasAuthority('ANALYTIC')"><a
                             th:href="@{'/project/edit/'+${project.id}}">Editace</a></td>
                     <td><a href="#" class="opener"
-                           th:attr="data-id=${project.id}" data-id="#moreDialog">Více</a>
+                           th:attr="data-objectid=${project.id}" data-id="#moreDialog">Více</a>
                     </td>
                 </tr>
                 </tbody>
@@ -104,7 +104,7 @@
 
     <!--dialogová okna-->
     <div id="moreDialog" title="Více">
-        <h3>Project ID: <span id="spanDataId"></span></h3>
+        <h3>Project ID: <span id="spanDataObjectId"></span></h3>
         <a href="/defect/create" class="btn btn-default" sec:authorize="hasAuthority('TESTER')" >Založit defekt</a>
         <a href="#" class="btn btn-default" sec:authorize="hasAuthority('ANALYTIC')">Žádost o smazání</a>
         <a href="/defect/defects" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Seznam Defektů</a>
