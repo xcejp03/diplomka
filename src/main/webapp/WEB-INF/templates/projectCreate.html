@@ -94,14 +94,16 @@
 
                         <div class="control-group form-group">
                             <div class="controls">
-                                <label for="suites_id">Test suity</label>:
 
-                                <select class="form-control" id="suites_id" name="suites_id" multiple="multiple" size="10">
-                                    <option th:each="suite : ${listSuites}"
-                                            th:value="${suite.id}"
-                                            th:text="${suite.name}">test suity
-                                    </option>
-                                </select>
+                                <h3> Test suity se nepřidávají v projektu, ale v test suitu se přidá projekt</h3>
+                                <!--<label for="suites_id">Test suity</label>:-->
+
+                                <!--<select class="form-control" id="suites_id" name="suites_id" multiple="multiple" size="10">-->
+                                    <!--<option th:each="suite : ${listSuites}"-->
+                                            <!--th:value="${suite.id}"-->
+                                            <!--th:text="${suite.name}">test suity-->
+                                    <!--</option>-->
+                                <!--</select>-->
                             </div>
                         </div>
                         <input type="submit" value="Vytvořit" class="btn btn-primary"/>

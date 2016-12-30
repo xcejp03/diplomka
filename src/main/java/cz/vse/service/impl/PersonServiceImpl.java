@@ -54,21 +54,18 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
     public void updatePerson(PersonDTO personDTO) {
         l.debug("updating person - service");
         Person person = personRepository.findOne(personDTO.getId());
-//        person = mapper.map(personDTO, Person.class);
         mapper.map(personDTO, person);
         person.setLastLogin(LocalDateTime.now());
         personRepository.save(person);
         l.info("updated person - service: " + person);
     }
 
-    public void updatePerson (Person person){
+    public void updatePerson(Person person) {
         personRepository.save(person);
     }
 
-//    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void updatePerson (List<Person> personList){
-        List<Person> personListLocal = personList;
-        personRepository.save(personListLocal);
+    public void updatePerson(List<Person> personList) {
+        personRepository.save(personList);
     }
 
     public void deletePerson(Person personToDelete) {

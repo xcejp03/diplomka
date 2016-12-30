@@ -14,7 +14,10 @@ public class Project extends BaseEntity {
     @JoinColumn(name = "projectOwner_id")
     private Person projectOwner;
 
-    @ManyToMany(mappedBy = "projectsMember", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @ManyToMany (cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinTable(name = "PERSON_PROJECT",
+            joinColumns = @JoinColumn(name = "PROJECT_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "PERSON_ID", referencedColumnName = "ID"))
     private List<Person> personMembers;
 
     @OneToMany(mappedBy = "project")

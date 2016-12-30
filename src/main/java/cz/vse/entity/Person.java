@@ -23,10 +23,7 @@ public class Person extends BaseEntity {
     private Set<UserRole> userRole = new HashSet<>(0);
 
 
-    @ManyToMany (cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-    @JoinTable(name = "PERSON_PROJECT",
-            joinColumns = @JoinColumn(name = "PERSON_ID", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "PROJECT_ID", referencedColumnName = "ID"))
+    @ManyToMany(mappedBy = "personMembers", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     private List<Project> projectsMember;
 
     @OneToMany(mappedBy = "projectOwner")
