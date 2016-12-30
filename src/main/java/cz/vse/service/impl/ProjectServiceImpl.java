@@ -1,5 +1,6 @@
 package cz.vse.service.impl;
 
+import cz.vse.dto.PersonDTO;
 import cz.vse.dto.ProjectDTO;
 import cz.vse.dto.ProjectsNamesDTO;
 import cz.vse.entity.Person;

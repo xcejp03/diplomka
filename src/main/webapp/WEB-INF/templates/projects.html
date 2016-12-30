@@ -59,14 +59,14 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <!--sec:authorize="hasAuthority('ANALYTIK')"-->
+                    <!--sec:authorize="hasAuthority('ANALYTIC')"-->
                     <th>ID</th>
                     <th>Název</th>
-                    <th sec:authorize="hasAuthority('ANALYTIK')">Členové</th>
+                    <th sec:authorize="hasAuthority('ANALYTIC')">Členové</th>
                     <th>Detail</th>
                     <th sec:authorize="hasAuthority('TESTER')">Založit Defect</th>
                     <th>Test Suity</th>
-                    <th sec:authorize="hasAuthority('ANALYTIK')">Edit Project</th>
+                    <th sec:authorize="hasAuthority('ANALYTIC')">Edit Project</th>
                     <th>Více</th>
                 </tr>
                 </thead>
@@ -74,8 +74,9 @@
                 <tr th:each="project : ${listProjects}">
                     <td th:text="${project.id}">00</td>
                     <td th:text="${project.name}">Projekt</td>
-                    <td sec:authorize="hasAuthority('ANALYTIK')"><a href="#" class="opener"
-                           th:attr="data-project=${project.id}" data-id="#membersDialog">Členové</a>
+                    <td sec:authorize="hasAuthority('ANALYTIC')"><a href="#" class="opener"
+                                                                    th:attr="data-project=${project.id}"
+                                                                    data-id="#membersDialog">Členové</a>
                     </td>
                     <td><a href="#" class="opener"
                            th:attr="data-name=${project.name}, data-owner=${project.projectOwnerName}"
@@ -83,7 +84,7 @@
                     </td>
                     <td sec:authorize="hasAuthority('TESTER')"><a href="/defect/create">Založit Defekt</a></td>
                     <td><a th:href="@{'/suite/suites-by-project/'+${project.id}}">Test Suity</a></td>
-                    <td sec:authorize="hasAuthority('ANALYTIK')"><a
+                    <td sec:authorize="hasAuthority('ANALYTIC')"><a
                             th:href="@{'/project/edit/'+${project.id}}">Editace</a></td>
                     <td><a href="#" class="opener"
                            th:attr="data-project=${project.id}" data-id="#moreDialog">Více</a>
@@ -94,7 +95,7 @@
         </div>
     </div>
 
-    <div class="row" sec:authorize="hasAuthority('ANALYTIK')">
+    <div class="row" sec:authorize="hasAuthority('ANALYTIC')">
         <div class="col-md-4">
             <a href="/suite/create" class="btn btn-default">Založit Test Suite</a>
         </div>
@@ -104,37 +105,25 @@
     <!--dialogová okna-->
     <div id="moreDialog" title="Více">
         <h3>Project ID: <span id="spanDataProjectId"></span></h3>
-        <a href="/defect/create" class="btn btn-default">Založit defekt</a>
-        <a href="#" class="btn btn-default">Žádost o smazání</a>
-        <a href="/defect/defects" class="btn btn-default">Seznam Defektů</a>
-
+        <a href="/defect/create" class="btn btn-default" sec:authorize="hasAuthority('TESTER')" >Založit defekt</a>
+        <a href="#" class="btn btn-default" sec:authorize="hasAuthority('ANALYTIC')">Žádost o smazání</a>
+        <a href="/defect/defects" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Seznam Defektů</a>
     </div>
 
     <div id="detailDialog" title="Detail projektu">
-
-        <h2>Detail projektu: <span id="spanDataName"></span></h2>
-        <h3>Vlastník projektu: <span id="spanDataOwnerName"> | </span></h3>
-
-        <p>This is an animated dialog which is useful for displaying information.
-            The dialog window can be moved, resized and closed with the 'x' icon.</p>
+        <h3>Detail projektu: <span id="spanDataName"></span></h3>
+        <h3>Vlastník projektu: <span id="spanDataOwnerName"> </span></h3>
+        <h3>Počet Test Suitů: //dodělat</h3>
     </div>
 
-    <div id="membersDialog" title="Členové projektu">
+    <div id="membersDialog" title="Členové projektu" sec:authorize="hasAuthority('ANALYTIC')">
         <div class="well"><h3>členové projektu</h3>
-            <div>analytici</div>
-            <div>testeři</div>
         </div>
+        <h3>analytici</h3>
+        <h3>testeři</h3>
+        <h3>všichni</h3>
+        <p>//chybí dodělat</p>
     </div>
-
-    <button onclick="alert('sdfds')" class="btn btn-default">alerty</button>
-
-    <button onclick="swal('sdfds')" class="btn btn-default">alerty swal</button>
-
-    <div class="btn btn-default">
-        <button class="alertik">alerty klas</button>
-    </div>
-
-    <button id="alerton">alerty id</button>
 
 
     <!-- Footer -->
@@ -142,8 +131,5 @@
 
 </div>
 <!-- /.container -->
-
-
 </body>
-
 </html>
