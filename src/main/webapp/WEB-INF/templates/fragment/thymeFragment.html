@@ -21,8 +21,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/index">Start Bootstrap</a> <span sec:authentication="principal.username" class="navbar-brand"/>
+                <a class="navbar-brand" href="/index">Start Bootstrap</a>
+                <span th:if="${#authentication != null}">
+                    <span sec:authentication="principal.username" class="navbar-brand"></span>
+                    </span>
             </div>
+
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
@@ -133,7 +137,6 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
-
 
 
     <link href="http://t4t5.github.io/sweetalert/dist/sweetalert.css" rel="stylesheet"/>
