@@ -88,6 +88,14 @@
                                             th:text="${tcmuster.name}">tc vzory
                                     </option>
                                 </select>
+                                <script>
+                                    var multipleSelection = $('.multipleSelection').bootstrapDualListbox({
+                                        nonSelectedListLabel: 'Non-selected',
+                                        selectedListLabel: 'Selected',
+                                        preserveSelectionOnMove: 'moved',
+                                        moveOnSelect: true,
+                                    });
+                                </script>
 
                             </div>
                         </div>

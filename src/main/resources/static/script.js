@@ -5,10 +5,9 @@ $(function () {
 });
 
 
-function addIdToURL(element)
-{
+function addIdToURL(element) {
     var dataAttr = $(this).data();
-    $(element).attr('href', function() {
+    $(element).attr('href', function () {
         return this.href + editId;
     });
 }
@@ -36,7 +35,7 @@ $(function () {
         $('#spanDataName').html(dataAttr.name);
         $('#spanDataOwnerName').html(dataAttr.owner);
         $('#spanDataObjectId').html(dataAttr.objectid);
-        $('#spanDataUpdated').html('sss'+dataAttr.updated);
+        $('#spanDataUpdated').html('sss' + dataAttr.updated);
         editId = dataAttr.objectid;
         $(dataAttr.id).dialog("open");
     });
@@ -53,6 +52,13 @@ $(function () {
         swal("#alerton  preš click");
     })
 })
+
+
+
+
+
+
+
 
 
 

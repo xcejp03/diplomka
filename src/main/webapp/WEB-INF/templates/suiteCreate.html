@@ -81,14 +81,21 @@
                             <div class="controls">
                                 <label for="tcMusters_id">TC vzory</label>:
 
-                                <select class="form-control" id="tcMusters_id" name="tcMusters_id"
+                                <select class="multipleSelection" id="tcMusters_id" name="tcMusters_id"
                                         multiple="multiple" size="10">
                                     <option th:each="tcmuster : ${listTcMusters}"
                                             th:value="${tcmuster.id}"
                                             th:text="${tcmuster.name}">tc vzory
                                     </option>
                                 </select>
-
+                                <script>
+                                    var multipleSelection = $('.multipleSelection').bootstrapDualListbox({
+                                        nonSelectedListLabel: 'Non-selected',
+                                        selectedListLabel: 'Selected',
+                                        preserveSelectionOnMove: 'moved',
+                                        moveOnSelect: true,
+                                    });
+                                </script>
                             </div>
                         </div>
 

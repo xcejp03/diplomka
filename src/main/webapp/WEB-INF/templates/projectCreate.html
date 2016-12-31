@@ -15,6 +15,13 @@
     <div th:replace="/fragment/thymeFragment :: headImports"/>
     <!--importované přes fragment - konec-->
 
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/src/bootstrap-duallistbox.css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
+    <script src="/src/jquery.bootstrap-duallistbox.js"></script>
 </head>
 
 <body>
@@ -41,8 +48,9 @@
     <!-- Page Content -->
     <div class="container">
 
+
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-8">
                 <div class="well">
                     <form th:action="@{/project/create}" method="post" default-target-url="/index">
 
@@ -50,7 +58,8 @@
                             <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="id">ID</label>:
-                                <input type="text" id="id" name="id" th:value="${projectDTO.id}" class="form-control" readonly="true"/>
+                                <input type="text" id="id" name="id" th:value="${projectDTO.id}" class="form-control"
+                                       readonly="true"/>
                             </div>
                         </div>
                         </span>
@@ -58,36 +67,30 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="name">Jméno</label>:
-                                <input type="text" id="name" th:value="${projectDTO.name}" name="name" class="form-control"
+                                <input type="text" id="name" th:value="${projectDTO.name}" name="name"
+                                       class="form-control"
                                        autofocus="autofocus"/>
-                            </div>
-                        </div>
-
-                        <div class=" control-group form-group">
-                            <div class="controls">
-                                <label for="projectOwner_id">Vlastník</label>:
-
-                                <select class="form-control" id="projectOwner_id" name="projectOwner_id">
-                                    <option th:each="person : ${listPersons}"
-                                            th:value="${person.id}"
-                                            th:text="${person.name}">jméno vlastníka
-                                    </option>
-                                </select>
-
                             </div>
                         </div>
 
                         <div class="control-group form-group">
                             <div class="controls">
                                 <label for="projectMembers_id">Členové</label>:
-
-                                <select class="form-control" id="projectMembers_id" name="projectMembers_id"
+                                <select id="projectMembers_id" name="projectMembers_id" class="multipleSelection"
                                         multiple="multiple" size="10">
                                     <option th:each="person : ${listPersons}"
                                             th:value="${person.id}"
                                             th:text="${person.name}">jména členů
                                     </option>
                                 </select>
+                                <script>
+                                    var multipleSelection = $('.multipleSelection').bootstrapDualListbox({
+                                        nonSelectedListLabel: 'Non-selected',
+                                        selectedListLabel: 'Selected',
+                                        preserveSelectionOnMove: 'moved',
+                                        moveOnSelect: true,
+                                    });
+                                </script>
 
                             </div>
                         </div>
@@ -99,10 +102,10 @@
                                 <!--<label for="suites_id">Test suity</label>:-->
 
                                 <!--<select class="form-control" id="suites_id" name="suites_id" multiple="multiple" size="10">-->
-                                    <!--<option th:each="suite : ${listSuites}"-->
-                                            <!--th:value="${suite.id}"-->
-                                            <!--th:text="${suite.name}">test suity-->
-                                    <!--</option>-->
+                                <!--<option th:each="suite : ${listSuites}"-->
+                                <!--th:value="${suite.id}"-->
+                                <!--th:text="${suite.name}">test suity-->
+                                <!--</option>-->
                                 <!--</select>-->
                             </div>
                         </div>
