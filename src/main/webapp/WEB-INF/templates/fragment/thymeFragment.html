@@ -21,10 +21,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/index">Start Bootstrap</a>
-                <span th:if="${#authentication != null}">
+
+                <span sec:authorize="!hasAuthority('ROLE_ANONYMOUS')">
                     <span sec:authentication="principal.username" class="navbar-brand"></span>
-                    </span>
+                </span>
+
+                <a class="navbar-brand" href="/index">Start Bootstrap</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
