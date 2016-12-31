@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://java.sun.com/jsf/html">
+<head>
+    <title>ProjectList</title>
+    <link rel="stylesheet" href="../../../css/main-static.css" th:href="@{/css/main.css}"/>
+    <meta charset="utf-8"/>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" href="/resources/demos/style.css"/>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href="http://t4t5.github.io/sweetalert/dist/sweetalert.css" rel="stylesheet"/>
+    <script src="http://t4t5.github.io/sweetalert/dist/sweetalert.min.js"></script>
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type='text/javascript' src='../script.js'></script>
+</head>
+<body>
+<div class="container">
+<div class="jumbotron">
+<!--<h1>Seznam dostupných projektů pro <span style="font-style: italic"-->
+                                         <!--th:text="${person.login}">přihlášeného uživatele</span></h1>-->
+</div>
+<h2>Project list</h2>
+</div>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Název</th>
+        <th>Detail</th>
+        <th>Statistika</th>
+        <th>Založit Defect</th>
+        <th>Test Suity</th>
+    </tr>
+    </thead>
+    <tbody th:remove="all-but-first">
+    <tr th:each="project : ${listProjects}">
+        <td th:text="${project.id}">00</td>
+        <td th:text="${project.name}">Projekt</td>
+        <td><a href="#" class="opener"
+               th:attr="data-name=${project.name}, data-owner=${project.projectOwnerName}" data-id="#detailDialog">Detail</a>
+        </td>
+
+        <td><a href="#" class="opener" data-id="#statisticsDialog">statistika</a></td>
+        <td><a href="/defect/create">Založit Defekt</a></td>
+        <td><a th:href="@{'/suites/'+${project.suiteIdList}}">Test Suity</a></td>
+    </tr>
+    </tbody>
+</table>
+<button type="button">Text tlačítka</button>
+<button type="button" class="btn btn-primary">Text tlačítka 2</button>
+<button type="button" class="btn btn-primary">News <span class="badge">5</span></button>
+<!--<div id="detailDialog" title="Detail projektu">-->
+<div id="detailDialog" title="Detail projektu">
+
+    <h2>Detail projektu: <span id="spanDataName"></span></h2>
+    <h3>Vlastník projektu: <span id="spanDataOwnerName"> | </span></h3>
+
+    <p>This is an animated dialog which is useful for displaying information.
+        The dialog window can be moved, resized and closed with the 'x' icon.</p>
+</div>
+
+<div id="statisticsDialog" title="Statistika projektu">
+
+    <h2>Počet TC: </h2>
+    <h3>Počet chyb:</h3>
+    <h3>Hotové TC:</h3>
+
+</div>
+
+<button onclick="alert('sdfds')" class="btn btn-default">alerty</button>
+
+<button onclick="swal('sdfds')" class="btn btn-default">alerty swal</button>
+
+<div class="btn btn-default"><button  class="alertik">alerty klas</button></div>
+
+<button id="alerton">alerty id</button>
+
+
+</body>
+</html>

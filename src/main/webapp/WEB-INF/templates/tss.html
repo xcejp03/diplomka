@@ -85,8 +85,9 @@
     <div id="moreDialog" title="Více">
         <h3>TC ID: <span id="spanDataObjectId"></span></h3>
         <a href="/defect/create" class="btn btn-default" >Založit defekt</a>
-        <a th:href="@{'/ts/delete/'}" class="btn btn-default">Smazat</a>
+        <a href="/ts/remove/" onclick="addIdToURL(this)" class="btn btn-default">Smazat</a>
         <a href="/defect/defects" class="btn btn-default">Seznam Defektů</a>
+
     </div>
 
     <div id="detailDialog" title="Detail projektu">

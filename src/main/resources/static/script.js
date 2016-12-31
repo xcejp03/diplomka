@@ -1,7 +1,17 @@
+var editId = 'nenačetlose';
+
 $(function () {
     $("#datepicker").datepicker();
 });
 
+
+function addIdToURL(element)
+{
+    var dataAttr = $(this).data();
+    $(element).attr('href', function() {
+        return this.href + editId;
+    });
+}
 
 $(function () {
     $("#detailDialog, #statisticsDialog, #moreDialog,#membersDialog, #dialog3").dialog({
@@ -26,11 +36,11 @@ $(function () {
         $('#spanDataName').html(dataAttr.name);
         $('#spanDataOwnerName').html(dataAttr.owner);
         $('#spanDataObjectId').html(dataAttr.objectid);
-        $('#spanDataUpdated').html(dataAttr.updated);
+        $('#spanDataUpdated').html('sss'+dataAttr.updated);
+        editId = dataAttr.objectid;
         $(dataAttr.id).dialog("open");
     });
 });
-
 
 $(function () {
     $(".alertik").click(function () {
