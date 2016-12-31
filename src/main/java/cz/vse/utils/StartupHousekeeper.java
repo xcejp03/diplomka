@@ -10,6 +10,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,13 @@ public class StartupHousekeeper {
         l.info("QQQQQQQ");
 //        clearProjectMembers();
 //        l.fatal("Výpis projektu: " + projectRepository.findOne(10L));
+        playSoundAfterStart();
         System.out.println("PPPPPPP");
+    }
+
+    public void playSoundAfterStart()    {
+        final Runnable runnable = (Runnable) Toolkit.getDefaultToolkit().getDesktopProperty("win.sound.exclamation");
+        if (runnable != null) runnable.run();
     }
 
     private void clearProjectMembers() {
