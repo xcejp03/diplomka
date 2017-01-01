@@ -79,7 +79,7 @@
                                 <select class="form-control" id="project_id" name="project_id">
                                     <option th:each="project : ${listProjects}"
                                             th:value="${project.id}"
-                                            th:selected="${#strings.contains(project.id, suiteDTO.project_id)}"
+                                            th:selected="${suiteDTO.project_id != null} ? ${#strings.contains(project.id, suiteDTO.project_id)}"
                                             th:text="${project.name}">jméno projektu
                                     </option>
                                 </select>
