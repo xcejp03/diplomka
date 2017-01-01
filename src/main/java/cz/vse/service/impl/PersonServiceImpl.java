@@ -2,9 +2,12 @@ package cz.vse.service.impl;
 
 import cz.vse.dto.PersonDTO;
 import cz.vse.entity.Person;
+import cz.vse.entity.Project;
 import cz.vse.entity.UserRole;
 import cz.vse.repository.PersonRepository;
+import cz.vse.repository.ProjectRepository;
 import cz.vse.service.PersonService;
+import cz.vse.service.ProjectService;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +41,9 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
 
     @Autowired
     private PersonRepository personRepository;
+
+    @Autowired
+    private ProjectService projectService;
 
     public void createPerson(PersonDTO personDTO) {
         l.debug("creating person - service");
@@ -104,6 +110,31 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
         l.info("found all persons - service: " + personList.toString());
         return personDTOList;
     }
+
+    public List<Person> findAllPersonByProject(Project project)   {
+        List<Person> personList;
+        personList = personRepository.findAllPersonByProjectsMember(project);
+        return personList;
+    }
+
+    public List<PersonDTO> findAllPersonDTOByProjectId (long id)    {
+        Project project;
+        List<Person> personList;
+        List<PersonDTO> personDTOList;
+        project = projectService.findTestProjectById(id);
+        personList = findAllPersonByProject(project);
+        personDTOList = mapper.mapAsList(personList, PersonDTO.class);
+        return personDTOList;
+    }
+
+    public List<Person> findAllPersonByProjectId (long id)    {
+        Project project;
+        List<Person> personList;
+        project = projectService.findTestProjectById(id);
+        personList = findAllPersonByProject(project);
+        return personList;
+    }
+
 
     public Person findPersonByLogin(String login) {
         return personRepository.findByUsername(login);

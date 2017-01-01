@@ -2,6 +2,7 @@ package cz.vse.service;
 
 import cz.vse.dto.PersonDTO;
 import cz.vse.entity.Person;
+import cz.vse.entity.Project;
 import org.springframework.security.core.Authentication;
 
 import java.util.List;
@@ -28,6 +29,12 @@ public interface PersonService {
     List<Person> findAllPersons();
 
     List<PersonDTO> findAllPersonsDTO();
+
+    List<Person> findAllPersonByProject(Project project);
+
+    List<Person> findAllPersonByProjectId (long id);
+
+    List<PersonDTO> findAllPersonDTOByProjectId (long id);
 
     Person findPersonByLogin(String login);
 

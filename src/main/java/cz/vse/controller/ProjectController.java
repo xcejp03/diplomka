@@ -63,6 +63,8 @@ public class ProjectController {
         l.info("/edit/{id}" + id);
         model.addAttribute("projectDTO", projectService.findTestProjectDTOById(id));
         model.addAttribute("listPersons", personService.findAllPersons());
+        model.addAttribute("listMembersDTO", personService.findAllPersonDTOByProjectId(id));
+        model.addAttribute("listMembers", personService.findAllPersonByProjectId(id));
         model.addAttribute("listSuites", suiteService.findAllTestSuites());
         return "projectCreate";
     }

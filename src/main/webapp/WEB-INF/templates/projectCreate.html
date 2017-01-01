@@ -96,7 +96,8 @@
                                         multiple="multiple" size="10">
                                     <option th:each="person : ${listPersons}"
                                             th:value="${person.id}"
-                                            th:text="${person.name}">jména členů
+                                            th:selected="${listMembers != null} ? ${#lists.contains(listMembers, person)}"
+                                            th:text="${person.name}">jména person
                                     <option value="Test">Test</option>
                                     <option value="Prof">Prof</option>
                                     <option value="Live">Live</option>
