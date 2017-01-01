@@ -92,7 +92,7 @@
                                 <select id="tcMusters_id" name="tcMusters_id" class="multipleSelection2"
                                         multiple="multiple" size="10">
                                     <option th:each="tcmuster : ${listTcMustersDTO}"
-                                            th:selected="${#lists.contains(ListTcmusterdto, tcmuster)}"
+                                            th:selected="${ListTcmusterdto != null} ? ${#lists.contains(ListTcmusterdto, tcmuster)}"
                                             th:value="${tcmuster.id}"
                                             th:text="${tcmuster.name}">tc vzory
                                     </option>

@@ -59,7 +59,8 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="action">Akce</label>:
-                                <input type="text" id="action" name="action" th:value="${tsDTO.action}" class="form-control"
+                                <input type="text" id="action" name="action" th:value="${tsDTO.action}"
+                                       class="form-control"
                                        autofocus="autofocus"/>
                             </div>
                         </div>
@@ -67,8 +68,9 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="expected">Očekávané chování</label>:
-                                <input type="text" id="expected" name="expected" th:value="${tsDTO.expected}" class="form-control"
-                                      />
+                                <input type="text" id="expected" name="expected" th:value="${tsDTO.expected}"
+                                       class="form-control"
+                                />
                             </div>
                         </div>
 
@@ -78,6 +80,7 @@
 
                                 <select class="form-control" id="author_id" name="author_id">
                                     <option th:each="author_id : ${listPersons}"
+                                            th:selected="${tsDTO.author_id != null} ? ${#strings.contains(author_id.id, tsDTO.author_id)}"
                                             th:value="${author_id.id}"
                                             th:text="${author_id.name}">jméno autora
                                     </option>
@@ -85,18 +88,19 @@
                             </div>
                         </div>
 
-                            <div class=" control-group form-group">
-                                <div class="controls">
-                                    <label for="tcMuster_id">tcMuster_id</label>:
+                        <div class=" control-group form-group">
+                            <div class="controls">
+                                <label for="tcMuster_id">tcMuster_id</label>:
 
-                                    <select class="form-control" id="tcMuster_id" name="tcMuster_id">
-                                        <option th:each="tcMuster_id : ${listTCMusters}"
-                                                th:value="${tcMuster_id.id}"
-                                                th:text="${tcMuster_id.name}">jméno tcMuster
-                                        </option>
-                                    </select>
-                                </div>
+                                <select class="form-control" id="tcMuster_id" name="tcMuster_id">
+                                    <option th:each="tcMuster_id : ${listTCMusters}"
+                                            th:selected="${tsDTO.tcMuster_id != null} ? ${#strings.contains(tcMuster_id.id, tsDTO.tcMuster_id)}"
+                                            th:value="${tcMuster_id.id}"
+                                            th:text="${tcMuster_id.name}">jméno tcMuster
+                                    </option>
+                                </select>
                             </div>
+                        </div>
 
                         <span th:if="${tsDTO.id != null}" th:remove="tag">
                              <input type="submit" value="Upravit" class="btn btn-primary"/>
