@@ -4,6 +4,7 @@ import cz.vse.entity.Person;
 import cz.vse.entity.Project;
 import cz.vse.repository.PersonRepository;
 import cz.vse.repository.ProjectRepository;
+import cz.vse.service.RoleService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -24,6 +25,12 @@ public class StartupHousekeeper {
     @Autowired
     private ProjectRepository projectRepository;
 
+    @Autowired
+    private RoleService roleService;
+
+    @Autowired
+    private HelpService helpService;
+
     @EventListener(ContextRefreshedEvent.class)
     public void contextRefreshedEvent() {
         // do whatever you need here
@@ -32,13 +39,25 @@ public class StartupHousekeeper {
         l.info("QQQQQQQ");
 //        clearProjectMembers();
 //        l.fatal("Výpis projektu: " + projectRepository.findOne(10L));
+//        helpService.userRoleTesty();
+//        userRoleTesty();
         playSoundAfterStart();
+
         System.out.println("PPPPPPP");
     }
 
     public void playSoundAfterStart()    {
         final Runnable runnable = (Runnable) Toolkit.getDefaultToolkit().getDesktopProperty("win.sound.exclamation");
         if (runnable != null) runnable.run();
+    }
+
+    private void userRoleTesty()    {
+
+//        Person person = personRepository.findById(100);
+//        l.info(person);
+//        person.getUserRole().clear();
+//        personRepository.save(person);
+
     }
 
     private void clearProjectMembers() {

@@ -89,6 +89,8 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
         factory.classMap(Person.class, PersonDTO.class)
                 .mapNullsInReverse(false)
                 .mapNulls(false)
+                .customize((Mapper<Person, PersonDTO>) customMappers.get(Person.class, PersonDTO.class))
+//                .field("userRole", "userRolesEnum")
                 .byDefault()
                 .register();
         factory.classMap(TSMuster.class, TSMusterDTO.class)

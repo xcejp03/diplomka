@@ -1,6 +1,10 @@
 package cz.vse.dto;
 
+import cz.vse.entity.RoleEnum;
+import cz.vse.entity.UserRole;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Created by pcejka on 10.10.2016.
@@ -12,6 +16,7 @@ public class PersonDTO extends BaseDTO {
     private LocalDateTime createdDate;
     private LocalDateTime lastLogged;
     private Boolean enabled;
+    private List<RoleEnum> userRolesEnum;
 
     public String getName() {
         return name;
@@ -60,6 +65,14 @@ public class PersonDTO extends BaseDTO {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public List<RoleEnum> getUserRolesEnum() {
+        return userRolesEnum;
+    }
+
+    public void setUserRolesEnum(List<RoleEnum> userRolesEnum) {
+        this.userRolesEnum = userRolesEnum;
     }
 
     @Override

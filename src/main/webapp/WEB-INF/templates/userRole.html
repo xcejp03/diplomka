@@ -9,11 +9,12 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
-    <title>Nastavení uživatelských rolí</title>
+    <title>Registration</title>
 
     <!--importované přes fragment-->
     <div th:replace="/fragment/thymeFragment :: headImports"/>
     <!--importované přes fragment - konec-->
+
     <!--duallistbox3-->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css"/>
@@ -22,6 +23,7 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
     <script src="/src/jquery.bootstrap-duallistbox.js"></script>
+
 </head>
 
 <body>
@@ -35,95 +37,133 @@
     <div class="row">
         <div class="col-md-12">
             <h1 class="page-header">
-                <small>WEB-INF/templates/userRole.html</small>
+                <small>WEB-INF/templates/registration.html</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/index">Home</a>
                 </li>
-                <li class="active">role</li>
+                <li class="active">Registration</li>
             </ol>
         </div>
     </div>
 
     <!-- Page Content -->
+    <div class="row">
+
+    </div>
+
     <div class="container">
-
-        <div class="row">
-            <div class="col-md-8">
-                <div class="well">
-                    <form th:action="@{/person/create}" method="post" default-target-url="/index">
-
+        <div th:if="${personDTO != null}" th:remove="tag">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="well">
+                        <form th:action="@{/person/role}" method="post" default-target-url="/index">
+                        <span th:if="${personDTO.id != null}" th:remove="tag">
                             <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="id">ID uživatele</label>:
-                                <input type="text" id="id" th:value="${personDTO.id}" readonly="true" name="id"
+                                <label for="id">ID</label>:
+                                <input type="text" id="id" name="id" th:value="${personDTO.id}" readonly="true"
                                        class="form-control"/>
                             </div>
                         </div>
+                        </span>
 
-                        <div class=" control-group form-group">
-                            <div class="controls">
-                                <label for="name">Jméno</label>:
-                                <input type="text" id="name" name="name" th:value="${personDTO.name}"
-                                       class="form-control"/>
+                            <div class=" control-group form-group">
+                                <div class="controls">
+                                    <label for="name">Jméno</label>:
+                                    <input type="text" id="name" th:value="${personDTO.name}" name="name"
+                                           class="form-control"
+                                           readonly="true"/>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class=" control-group form-group">
-                            <div class="controls">
-                                <label for="name">Uživatelské jméno</label>:
-                                <input type="text" id="username" name="username" th:value="${personDTO.username}"
-                                       class="form-control"/>
+                            <div class=" control-group form-group">
+                                <div class="controls">
+                                    <label for="username">Uživatelské jméno</label>:
+                                    <input type="text" id="username" th:value="${personDTO.username}" name="username"
+                                           readonly="true"
+                                           class="form-control"/>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class=" control-group form-group">
-                            <div class="controls">
-                                <label for="project_id">Projekt</label>:
 
-                                <select class="form-control" id="project_id" name="project_id">
-                                    <option th:each="project : ${listProjects}"
-                                            th:value="${project.id}"
-                                            th:selected="${suiteDTO.project_id != null} ? ${#strings.contains(project.id, suiteDTO.project_id)}"
-                                            th:text="${project.name}">jméno projektu
-                                    </option>
-                                </select>
+                            <div class="control-group form-group">
+                                <div class="controls">
+                                    <label for="userRolesEnum">Nastavení rolí</label>:
+                                    <select id="userRolesEnum" name="userRolesEnum" class="multipleSelection3"
+                                            multiple="multiple" size="10">
+                                         <option th:each="role : ${enumRoles}"
+                                                 th:selected="${listUserRoles != null} ? ${#sets.contains(userEnumRoleList, role)}"
+                                                 th:value="${role}"
+                                                 th:text="${role}">tc vzory
+                                        </option>
+
+
+                                    </select>
+                                    <script>
+                                        var multipleSelection3 = $('.multipleSelection3').bootstrapDualListbox({
+                                            nonSelectedListLabel: 'Non-selected',
+                                            selectedListLabel: 'Selected',
+                                            preserveSelectionOnMove: 'moved',
+                                            moveOnSelect: true,
+                                        });
+                                    </script>
+                                </div>
                             </div>
-                        </div>
 
+
+                            <span th:if="${personDTO.id != null}" th:remove="tag">
                         <div class="control-group form-group">
                             <div class="controls">
-                                <label for="tcMusters_id">TC vzory</label>:
-                                <select id="tcMusters_id" name="tcMusters_id" class="multipleSelection2"
-                                        multiple="multiple" size="10">
-                                    <option th:each="tcmuster : ${listTcMustersDTO}"
-                                            th:selected="${ListTcmusterdto != null} ? ${#lists.contains(ListTcmusterdto, tcmuster)}"
-                                            th:value="${tcmuster.id}"
-                                            th:text="${tcmuster.name}">tc vzory
-                                    </option>
-                                </select>
-                                <script>
-                                    var multipleSelection2 = $('.multipleSelection2').bootstrapDualListbox({
-                                        nonSelectedListLabel: 'Non-selected',
-                                        selectedListLabel: 'Selected',
-                                        preserveSelectionOnMove: 'moved',
-                                        moveOnSelect: true,
-                                    });
-                                </script>
+                                <label for="enabled">Aktivní</label>:
+                                <input type="checkbox" th:checked="${personDTO.enabled}" name="enabled" id="enabled"
+                                       readonly="true"
+                                       class="checkbox"/>
                             </div>
                         </div>
+                        </span>
 
-                        <span th:if="${suiteDTO.id != null}" th:remove="tag">
+                            <span th:if="${personDTO.id != null}" th:remove="tag">
                              <input type="submit" value="Upravit" class="btn btn-primary"/>
                         </span>
-                        <span th:if="${suiteDTO.id == null}" th:remove="tag">
-                             <input type="submit" value="Vytvořit" class="btn btn-primary"/>
+                            <span th:if="${personDTO.id == null}" th:remove="tag">
+                             <input type="submit" value="Založit" class="btn btn-primary"/>
                         </span>
-
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div th:if="${not #lists.isEmpty(personDTOList)}" th:remove="tag">
+                    <h1>Seznam uživatelů</h1>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>ID uživatele</th>
+                            <th>Jméno</th>
+                            <th>Login</th>
+                            <th>Vytvořen</th>
+                            <th>Poslední přihlášení</th>
+                            <th>Editovat</th>
+                        </tr>
+                        </thead>
+                        <tbody th:remove="all-but-first">
+                        <tr th:each="user : ${personDTOList}">
+                            <td th:text="${user.id}">00</td>
+                            <td th:text="${user.name}">Projekt</td>
+                            <td th:text="${user.username}">Projekt</td>
+                            <td th:text="${user.createdDate}">Projekt</td>
+                            <td th:text="${user.lastLogged}">Projekt</td>
+                            <td><a th:href="@{'/person/edit/'+${user.id}}">Editace</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
 
         <!--Page Content - End-->
         <!-- Footer -->
@@ -138,6 +178,7 @@
 
 <!-- Bootstrap Core JavaScript -->
 <script src="/js/bootstrap.min.js"></script>
+
 <div th:replace="/fragment/thymeFragment :: script"></div>
 </body>
 

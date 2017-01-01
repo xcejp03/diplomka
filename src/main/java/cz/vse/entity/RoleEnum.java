@@ -9,7 +9,8 @@ import javax.persistence.Entity;
 public enum RoleEnum {
     ADMIN ("ADMIN"),
     TESTER ("TESTER"),
-    ANALYTIC ("ANALYTIC");
+    ANALYTIC ("ANALYTIC"),
+    ZKOUSKA("ZKOUSKA");
 
     private String roleString;
 

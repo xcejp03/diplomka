@@ -1,7 +1,9 @@
 package cz.vse.controller;
 
 import cz.vse.dto.PersonDTO;
+import cz.vse.entity.RoleEnum;
 import cz.vse.service.PersonService;
+import cz.vse.service.RoleService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,9 @@ public class PersonController {
 
     @Autowired
     PersonService personService;
+
+    @Autowired
+    RoleService roleService;
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createProjectForm(Model model) {
@@ -47,6 +52,9 @@ public class PersonController {
         l.info("/edit/" + id);
         model.addAttribute("personDTO", personService.findPersonById(id));
         model.addAttribute("personDTOList", personService.findAllPersonsDTO());
+        model.addAttribute("enumRoles", RoleEnum.values());
+        model.addAttribute("userEnumRoleList", roleService.findUsersRoleEnum(id));
+        model.addAttribute("listUserRoles", personService.findPersonById(id).getUserRole());
         return "registration";
     }
 
@@ -64,13 +72,25 @@ public class PersonController {
         return "redirect:/person/create";
     }
 
-    @RequestMapping("/role")
-    public String editPersonRole(Model model) {
+    @RequestMapping(value = "/role", method = RequestMethod.GET)
+    public String editPersonRoleGET(Model model) {
         l.info("person/role");
-//        model.addAttribute("personDTO", personService.findPersonById(id));
+        long id = 100L;
+        model.addAttribute("personDTO", personService.findPersonById(id));
         model.addAttribute("personDTOList", personService.findAllPersonsDTO());
-        return "registration";
+        model.addAttribute("enumRoles", RoleEnum.values());
+        model.addAttribute("userEnumRoleList", roleService.findUsersRoleEnum(id));
+        model.addAttribute("listUserRoles", personService.findPersonById(id).getUserRole());
+        return "userRole";
     }
+    @RequestMapping(value = "/role", method = RequestMethod.POST)
+    public String editPersonRolePOST(PersonDTO personDTO) {
+        l.info("person/role saving");
+
+        roleService.updateRoleForUser(personDTO);
+        return "userRole";
+    }
+
 
 }
 

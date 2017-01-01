@@ -8,6 +8,9 @@ import cz.vse.entity.Person;
 import cz.vse.entity.Project;
 import cz.vse.repository.PersonRepository;
 import cz.vse.repository.ProjectRepository;
+import cz.vse.repository.UserRoleRepository;
+import cz.vse.service.RoleService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -19,11 +22,28 @@ import java.util.List;
 @Service
 @Transactional
 public class HelpService {
+    private final Logger l = Logger.getLogger(this.getClass());
     @Autowired
     private ProjectRepository projectRepository;
 
     @Autowired
     private PersonRepository personRepository;
+
+    @Autowired
+    private RoleService roleService;
+
+    @Autowired
+    private UserRoleRepository userRoleRepository;
+
+    public void userRoleTesty()    {
+        Person person = personRepository.findById(100);
+        l.info(person);
+        person.getUserRole().clear();
+        personRepository.save(person);
+
+        userRoleRepository.delete(person.getUserRole());
+
+    }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Long saveProject(Project project) {
