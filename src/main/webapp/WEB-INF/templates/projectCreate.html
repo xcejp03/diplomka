@@ -82,6 +82,11 @@
                                     <option th:each="person : ${listPersons}"
                                             th:value="${person.id}"
                                             th:text="${person.name}">jména členů
+                                    <option value="Test">Test</option>
+                                    <option value="Prof">Prof</option>
+                                    <option value="Live">Live</option>
+                                    <option value="Off">Off</option>
+                                    <option value="On">On</option>
                                     </option>
                                 </select>
                                 <script>
@@ -92,6 +97,7 @@
                                         moveOnSelect: true,
                                     });
                                 </script>
+                                <button onclick="myFunction()">Zavolej funkci</button>
 
                             </div>
                         </div>

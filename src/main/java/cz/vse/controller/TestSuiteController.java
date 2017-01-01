@@ -61,9 +61,14 @@ public class TestSuiteController {
     public String editTestSuite(@PathVariable("id") int id, Model model) {
         l.info("/edit/{id}" + id);
         model.addAttribute("suiteDTO", suiteService.findTestSuiteDTOById(id));
+        model.addAttribute("suiteE", suiteService.findTestSuiteById(id));
         model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listTcMusters", tcMusterService.findAllTestCaseMusters());
+        model.addAttribute("listTcMustersDTO", tcMusterService.findAllTestCaseMustersDTO());
+        model.addAttribute("ListTcmusterdto", tcMusterService.findAllTestCaseMustersDTOByTestSuiteId(suiteService.findTestSuiteDTOById(id).getId()));
+        model.addAttribute("tcmusterdto", tcMusterService.findTestCaseMusterDTOById(suiteService.findTestSuiteDTOById(id).getId()));
+
         return "suiteCreate";
     }
 

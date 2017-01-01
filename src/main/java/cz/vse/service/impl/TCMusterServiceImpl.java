@@ -3,7 +3,9 @@ package cz.vse.service.impl;
 import cz.vse.dto.TCMusterDTO;
 import cz.vse.entity.TCInstance;
 import cz.vse.entity.TCMuster;
+import cz.vse.entity.TestSuite;
 import cz.vse.repository.TCMusterRepository;
+import cz.vse.service.SuiteService;
 import cz.vse.service.TCInstanceService;
 import cz.vse.service.TCMusterService;
 import ma.glasnost.orika.MapperFacade;
@@ -18,7 +20,7 @@ import java.util.List;
  * Created by pcejka on 03.10.2016.
  */
 @Service
-public class TCMusterServiceImpl implements TCMusterService{
+public class TCMusterServiceImpl implements TCMusterService {
     private final Logger l = Logger.getLogger(this.getClass());
     @Autowired
     private TCMusterRepository tcMusterRepository;
@@ -26,7 +28,8 @@ public class TCMusterServiceImpl implements TCMusterService{
     @Autowired
     private MapperFacade mapper;
 
-
+    @Autowired
+    private SuiteService suiteService;
 
     @Autowired
     private TCInstanceService tcInstanceService;
@@ -117,5 +120,23 @@ public class TCMusterServiceImpl implements TCMusterService{
         tcInstance = tcInstanceService.findTestCaseInstanceById(tcInstanceId);
         tcMuster = findTestCaseMusterById(tcInstance.gettCMuster().getId());
         return tcMuster;
+    }
+
+    @Override
+    public List<TCMuster> findAllTestCaseMustersByTestSuite(TestSuite testSuite) {
+        List<TCMuster> tcMusterList;
+        tcMusterList = tcMusterRepository.findAllTCMustersDTOByTestSuites(testSuite);
+        return tcMusterList;
+    }
+
+    @Override
+    public List<TCMusterDTO> findAllTestCaseMustersDTOByTestSuiteId(long id) {
+        TestSuite testSuite;
+        List<TCMuster> tcMusterList;
+        List<TCMusterDTO> tcMusterDTOList;
+        testSuite = suiteService.findTestSuiteById(id);
+        tcMusterList = findAllTestCaseMustersByTestSuite(testSuite);
+        tcMusterDTOList = mapper.mapAsList(tcMusterList, TCMusterDTO.class);
+        return tcMusterDTOList;
     }
 }

@@ -12,4 +12,5 @@ import java.util.List;
  */
 public interface TCMusterRepository extends BaseRepository<TCMuster> {
     List<TCMuster> findAllTCMustersDTOByTestSuites(TestSuite testSuite);
+
 }

@@ -4,6 +4,11 @@ $(function () {
     $("#datepicker").datepicker();
 });
 
+function myFunction() {
+    document.getElementById("#tcMusters_id").options[1].selected = true;
+    alert();
+
+}
 
 function addIdToURL(element) {
     var dataAttr = $(this).data();
