@@ -3,11 +3,13 @@ package cz.vse.service.impl;
 import cz.vse.dto.PersonDTO;
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
+import cz.vse.entity.RoleEnum;
 import cz.vse.entity.UserRole;
 import cz.vse.repository.PersonRepository;
 import cz.vse.repository.ProjectRepository;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
+import cz.vse.service.RoleService;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.management.relation.Role;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -45,6 +48,9 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
     @Autowired
     private ProjectService projectService;
 
+    @Autowired
+    private RoleService roleService;
+
     public void createPerson(PersonDTO personDTO) {
         l.debug("creating person - service");
         Person person;
@@ -52,6 +58,7 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
         person.setCreatedDate(LocalDateTime.now());
         person.setPassword(hashPasswordForUser(personDTO.getPassword()));
         person.setEnabled(true);
+
         personRepository.save(person);
         l.info("created person - service: " + person);
     }
@@ -111,13 +118,13 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
         return personDTOList;
     }
 
-    public List<Person> findAllPersonByProject(Project project)   {
+    public List<Person> findAllPersonByProject(Project project) {
         List<Person> personList;
         personList = personRepository.findAllPersonByProjectsMember(project);
         return personList;
     }
 
-    public List<PersonDTO> findAllPersonDTOByProjectId (long id)    {
+    public List<PersonDTO> findAllPersonDTOByProjectId(long id) {
         Project project;
         List<Person> personList;
         List<PersonDTO> personDTOList;
@@ -127,7 +134,7 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
         return personDTOList;
     }
 
-    public List<Person> findAllPersonByProjectId (long id)    {
+    public List<Person> findAllPersonByProjectId(long id) {
         Project project;
         List<Person> personList;
         project = projectService.findTestProjectById(id);
@@ -151,8 +158,7 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
         l.info("load user:" + username);
         Person user = personRepository.findByUsername(username);
         l.info("uživatel: " + user);
-        List<GrantedAuthority> authorities =
-                buildUserAuthority(user.getUserRole());
+        List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRole());
         l.info("roile uživatele:" + authorities);
         return buildUserForAuthentication(user, authorities);
 
@@ -173,7 +179,7 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
         l.info(" builUserAuthority");
         // Build user's authorities
         for (UserRole userRole : userRoles) {
-            setAuths.add(new SimpleGrantedAuthority(userRole.getRole()));
+            setAuths.add(new SimpleGrantedAuthority(userRole.getRole().getRoleString()));
         }
 
         List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);

@@ -1,13 +1,30 @@
 package cz.vse.entity;
 
+import javax.persistence.Entity;
+
 /**
  * Created by pcejka on 21.09.2016.
  */
+//@Entity
 public enum RoleEnum {
-    admin,
-    tester,
-    test_analytik,
-    test_manager
+    ADMIN ("ADMIN"),
+    TESTER ("TESTER"),
+    ANALYTIC ("ANALYTIC");
+
+    private String roleString;
+
+    RoleEnum(String roleString) {
+        this.roleString = roleString;
+    }
+
+    @Override
+    public String toString() {
+        return roleString;
+    }
+
+    public String getRoleString() {
+        return roleString;
+    }
 
 }
 

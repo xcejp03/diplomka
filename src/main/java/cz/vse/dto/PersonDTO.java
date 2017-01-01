@@ -10,7 +10,7 @@ public class PersonDTO extends BaseDTO {
     private String username;
     private String password;
     private LocalDateTime createdDate;
-    private LocalDateTime lastLogin;
+    private LocalDateTime lastLogged;
     private Boolean enabled;
 
     public String getName() {
@@ -46,12 +46,12 @@ public class PersonDTO extends BaseDTO {
         this.createdDate = createdDate;
     }
 
-    public LocalDateTime getLastLogin() {
-        return lastLogin;
+    public LocalDateTime getLastLogged() {
+        return lastLogged;
     }
 
-    public void setLastLogin(LocalDateTime lastLogin) {
-        this.lastLogin = lastLogin;
+    public void setLastLogged(LocalDateTime lastLogged) {
+        this.lastLogged = lastLogged;
     }
 
     public Boolean getEnabled() {
@@ -69,7 +69,7 @@ public class PersonDTO extends BaseDTO {
                 ", login='" + username + '\'' +
                 ", pass='" + password + '\'' +
                 ", createdDate=" + createdDate +
-                ", lastLogin=" + lastLogin +
+                ", lastLogged=" + lastLogged +
                 '}';
     }
 }

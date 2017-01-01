@@ -52,9 +52,9 @@ public class PersonController {
 
     @RequestMapping("/edit")
     public String editAllPerson(Model model) {
-//        model.addAttribute("personDTO", personService.findPersonById(id));
         model.addAttribute("personDTOList", personService.findAllPersonsDTO());
-
+        model.addAttribute("personDTO", new PersonDTO());
+        model.addAttribute("listPersons", personService.findAllPersons());
         return "registration";
     }
 
@@ -62,6 +62,14 @@ public class PersonController {
     public String removePerson(@PathVariable("id") int id) {
         personService.deletePerson(id);
         return "redirect:/person/create";
+    }
+
+    @RequestMapping("/role")
+    public String editPersonRole(Model model) {
+        l.info("person/role");
+//        model.addAttribute("personDTO", personService.findPersonById(id));
+        model.addAttribute("personDTOList", personService.findAllPersonsDTO());
+        return "registration";
     }
 
 }
