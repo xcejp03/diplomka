@@ -101,11 +101,18 @@
         </div>
         <div class="col-md-8"></div>
     </div>
+    <br/>
+    <div class="row" sec:authorize="hasAuthority('ADMIN')">
+        <div class="col-md-4">
+            <a href="/project/create" class="btn btn-default">Založit Projekt</a>
+        </div>
+        <div class="col-md-8"></div>
+    </div>
 
     <!--dialogová okna-->
     <div id="moreDialog" title="Více">
         <h3>Project ID: <span id="spanDataObjectId"></span></h3>
-        <a href="/defect/create" class="btn btn-default" sec:authorize="hasAuthority('TESTER')" >Založit defekt</a>
+        <a href="/defect/create" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Založit defekt</a>
         <a href="#" class="btn btn-default" sec:authorize="hasAuthority('ANALYTIC')">Žádost o smazání</a>
         <a href="/defect/defects" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Seznam Defektů</a>
     </div>
