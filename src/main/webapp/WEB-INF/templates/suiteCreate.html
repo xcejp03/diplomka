@@ -79,7 +79,7 @@
                                 <select class="form-control" id="project_id" name="project_id">
                                     <option th:each="project : ${listProjects}"
                                             th:value="${project.id}"
-                                            th:selected="${suiteDTO.id}"
+                                            th:selected="${#strings.contains(project.id, suiteDTO.project_id)}"
                                             th:text="${project.name}">jméno projektu
                                     </option>
                                 </select>
@@ -87,12 +87,12 @@
                         </div>
 
                         <div class="control-group form-group">
-                            <div class="controls" th:with="xxx=${ListTcmusterdto}">
+                            <div class="controls">
                                 <label for="tcMusters_id">TC vzory</label>:
                                 <select id="tcMusters_id" name="tcMusters_id" class="multipleSelection2"
                                         multiple="multiple" size="10">
                                     <option th:each="tcmuster : ${listTcMustersDTO}"
-                                            th:selected="${#lists.contains(xxx, tcmuster)}"
+                                            th:selected="${#lists.contains(ListTcmusterdto, tcmuster)}"
                                             th:value="${tcmuster.id}"
                                             th:text="${tcmuster.name}">tc vzory
                                     </option>
