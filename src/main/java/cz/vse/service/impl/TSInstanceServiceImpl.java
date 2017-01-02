@@ -9,6 +9,7 @@ import cz.vse.service.TSInstanceService;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -80,10 +81,11 @@ public class TSInstanceServiceImpl implements TSInstanceService {
     }
 
     public List<TSInstance> findAllTSInstancesByTCInstanceId(Long id) {
+        l.info("finding TSInstances by TC id - "+id);
         List<TSInstance> tsInstanceList;
 
         TCInstance tcInstance = tcInstanceRepository.findOne(id);
-        tsInstanceList = tsInstanceRepository.findAllTestStepInstancesByTCInstance(tcInstance);
+        tsInstanceList = tsInstanceRepository.findAllTestStepInstancesByTCInstanceOrderById(tcInstance);
         return tsInstanceList;
     }
 
@@ -99,7 +101,7 @@ public class TSInstanceServiceImpl implements TSInstanceService {
     public List<TSInstance> findAllTestStepInstances() {
         l.debug("finding all testStepInstances - service");
         List<TSInstance> tsInstanceList;
-        tsInstanceList = tsInstanceRepository.findAll();
+        tsInstanceList = tsInstanceRepository.findAll(new Sort(Sort.Direction.ASC, "id"));
         l.info("found all testStepInstances - service: " + tsInstanceList.toString());
         return tsInstanceList;
     }

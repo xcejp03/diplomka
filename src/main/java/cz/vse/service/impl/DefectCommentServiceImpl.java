@@ -95,7 +95,7 @@ public class DefectCommentServiceImpl implements DefectCommentService {
     public List<DefectComment> findAllDefectsComments(Defect defect) {
         l.debug("finding all defect's comments - service: " + defect);
         List<DefectComment> defectCommentList;
-        defectCommentList = defectCommentRepository.findAllDefectCommentsByDefect(defect);
+        defectCommentList = defectCommentRepository.findAllDefectCommentsByDefectOrderById(defect);
         l.info("all defect's comments found");
         return defectCommentList;
     }
@@ -104,7 +104,7 @@ public class DefectCommentServiceImpl implements DefectCommentService {
         l.debug("finding all defect's comments - service: " + defectId);
         List<DefectComment> defectCommentList;
         Defect defect = defectService.findDefectById(defectId);
-        defectCommentList = defectCommentRepository.findAllDefectCommentsByDefect(defect);
+        defectCommentList = defectCommentRepository.findAllDefectCommentsByDefectOrderById(defect);
         l.info("all defect's comments found");
         return defectCommentList;
     }

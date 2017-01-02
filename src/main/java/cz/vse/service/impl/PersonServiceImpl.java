@@ -3,10 +3,8 @@ package cz.vse.service.impl;
 import cz.vse.dto.PersonDTO;
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
-import cz.vse.entity.RoleEnum;
 import cz.vse.entity.UserRole;
 import cz.vse.repository.PersonRepository;
-import cz.vse.repository.ProjectRepository;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
 import cz.vse.service.RoleService;
@@ -25,7 +23,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.management.relation.Role;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -120,7 +117,7 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
 
     public List<Person> findAllPersonByProject(Project project) {
         List<Person> personList;
-        personList = personRepository.findAllPersonByProjectsMember(project);
+        personList = personRepository.findAllPersonByProjectsMemberOrderById(project);
         return personList;
     }
 

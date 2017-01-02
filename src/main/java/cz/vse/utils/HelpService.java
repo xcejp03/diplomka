@@ -54,7 +54,7 @@ public class HelpService {
 // use in your method
 
     public void prihlasit() {
-        Person user = personService.findPersonByLogin("alfred");
+        Person user = personService.findPersonByLogin("tester");
         List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRole());
 
         UserDetails userDetails = new UserDetails() {

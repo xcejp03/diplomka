@@ -55,6 +55,7 @@
         <thead>
         <tr>
             <th>TS ID</th>
+            <th>Status</th>
             <th>Akce</th>
             <th>Očekávaný výsledek</th>
             <th>Výsledek</th>
@@ -65,6 +66,7 @@
         <tbody th:remove="all-but-first">
         <tr th:each="ts : ${listTSInstances}">
             <td th:text="${ts.id}">00</td>
+            <td th:text="${ts.status}">Status</td>
             <td th:text="${ts.action}">Projekt</td>
             <td th:text="${ts.expected}">Projekt</td>
             <td th:text="${ts.result}">Projekt</td>

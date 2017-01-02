@@ -53,7 +53,7 @@ public class TestController {
         TCInstance tcInstance = tcInstanceRepository.findOne(id);
         l.info(tcInstance);
 
-        List<TSInstance> tsInstanceList = tsInstanceRepository.findAllTestStepInstancesByTCInstance(tcInstance);
+        List<TSInstance> tsInstanceList = tsInstanceRepository.findAllTestStepInstancesByTCInstanceOrderById(tcInstance);
         l.info(tsInstanceList);
         return "tcRun";
     }

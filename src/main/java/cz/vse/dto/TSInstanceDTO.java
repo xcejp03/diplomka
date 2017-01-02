@@ -1,5 +1,7 @@
 package cz.vse.dto;
 
+import cz.vse.entity.StatusEnum;
+
 import java.util.List;
 
 /**
@@ -14,6 +16,7 @@ public class TSInstanceDTO extends BaseDTO {
     private Long tcInstance_id;
     private String result;
     private String tester_id;
+    private StatusEnum status;
 
     public String getAction() {
         return action;
@@ -61,5 +64,13 @@ public class TSInstanceDTO extends BaseDTO {
 
     public void setTester_id(String tester_id) {
         this.tester_id = tester_id;
+    }
+
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusEnum status) {
+        this.status = status;
     }
 }

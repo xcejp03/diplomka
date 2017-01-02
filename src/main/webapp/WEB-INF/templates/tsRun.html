@@ -81,6 +81,20 @@
 
                         <div class=" control-group form-group">
                             <div class="controls">
+                                <label for="status">Status</label>:
+
+                                <select class="form-control" id="status" name="status" th:with="statuses=${T(cz.vse.entity.StatusEnum).values()}">
+                                    <option th:each="status : ${statuses}"
+                                            th:value="${status}"
+                                            th:selected="${tsDTO.status != null} ? ${#arrays.contains(tsDTO.status, status)}"
+                                            th:text="${status}">jméno projektu
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class=" control-group form-group">
+                            <div class="controls">
                                 <input type="hidden" id="tcInstance_id" name="tcInstance_id" th:value="${tsDTO.tcInstance_id}" class="form-control"/>
                             </div>
                         </div>

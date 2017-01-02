@@ -17,6 +17,7 @@ public class TSInstance extends BaseEntity {
     private String action;
     private String expected;
     private String result;
+    private StatusEnum status;
 
     @ManyToOne
     @JoinColumn(name = "tsmuster_id")
@@ -103,6 +104,14 @@ public class TSInstance extends BaseEntity {
 
     public void setTester(Person tester) {
         this.tester = tester;
+    }
+
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusEnum status) {
+        this.status = status;
     }
 
     @Override

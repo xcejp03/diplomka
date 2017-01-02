@@ -10,5 +10,5 @@ import java.util.List;
  * Created by pcejka on 28.11.2016.
  */
 public interface TSInstanceRepository extends BaseRepository<TSInstance> {
-    List<TSInstance> findAllTestStepInstancesByTCInstance(TCInstance tcInstance);
+    List<TSInstance> findAllTestStepInstancesByTCInstanceOrderById(TCInstance tcInstance);
 }
