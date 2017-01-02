@@ -125,7 +125,7 @@ public class TCMusterServiceImpl implements TCMusterService {
     @Override
     public List<TCMuster> findAllTestCaseMustersByTestSuite(TestSuite testSuite) {
         List<TCMuster> tcMusterList;
-        tcMusterList = tcMusterRepository.findAllTCMustersDTOByTestSuites(testSuite);
+        tcMusterList = tcMusterRepository.findAllTCMustersDTOByTestSuitesOrderById(testSuite);
         return tcMusterList;
     }
 

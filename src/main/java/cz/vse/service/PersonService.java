@@ -30,9 +30,9 @@ public interface PersonService {
 
     List<PersonDTO> findAllPersonsDTO();
 
-    List<Person> findAllPersonByProject(Project project);
+    List<Person> findAllPersonByProjectOrderById(Project project);
 
-    List<Person> findAllPersonByProjectId (long id);
+    List<Person> findAllPersonByProjectIdOrderById(long id);
 
     List<PersonDTO> findAllPersonDTOByProjectId (long id);
 

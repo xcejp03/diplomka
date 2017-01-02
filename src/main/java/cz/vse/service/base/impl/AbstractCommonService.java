@@ -12,6 +12,7 @@ import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Sort;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,7 @@ public abstract class AbstractCommonService<
     @Override
     public List<GETALLDTO> getAll() {
         if (getAllDtoClass != null) {
-            List<E> entities = repository.findAll();
+            List<E> entities = repository.findAll(new Sort(Sort.Direction.ASC, "id"));
             return mapper.mapAsList(entities, getAllDtoClass);
         }
 

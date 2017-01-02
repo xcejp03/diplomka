@@ -1,11 +1,8 @@
 package cz.vse.service.impl;
 
-import cz.vse.dto.PersonDTO;
 import cz.vse.dto.ProjectDTO;
 import cz.vse.dto.ProjectsNamesDTO;
-import cz.vse.entity.Person;
 import cz.vse.entity.Project;
-import cz.vse.entity.TestSuite;
 import cz.vse.repository.ProjectRepository;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
@@ -15,11 +12,8 @@ import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.PreRemove;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -122,7 +116,7 @@ public class ProjectServiceImpl implements ProjectService {
     public List<ProjectsNamesDTO> findAllTestProjectsByUserIdDTO(long id) {
         List<ProjectsNamesDTO> projectsNamesDTOList;
         List<Project> projectList;
-        projectList = projectRepository.findAllProjectsByPersonMembersId(id);
+        projectList = projectRepository.findAllProjectsByPersonMembersIdOrderById(id);
         projectsNamesDTOList = mapper.mapAsList(projectList, ProjectsNamesDTO.class);
         return projectsNamesDTOList;
     }

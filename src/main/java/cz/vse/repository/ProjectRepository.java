@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface ProjectRepository extends BaseRepository<Project> {
     Project findById(long id);
-    List<Project> findAllProjectsByPersonMembersId(Long id);
+    List<Project> findAllProjectsByPersonMembersIdOrderById(Long id);
 }

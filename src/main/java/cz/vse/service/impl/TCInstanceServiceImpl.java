@@ -78,7 +78,7 @@ public class TCInstanceServiceImpl implements TCInstanceService {
     public List<TCInstance> findAllTCInstancesByTCMusterId(long id) {
         List<TCInstance> tcInstanceList;
         TCMuster tcMuster = tcMusterRepository.findOne(id);
-        tcInstanceList = tcInstanceRepository.findByTCMuster(tcMuster);
+        tcInstanceList = tcInstanceRepository.findByTCMusterOrderById(tcMuster);
         return tcInstanceList;
     }
 

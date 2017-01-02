@@ -115,7 +115,7 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
         return personDTOList;
     }
 
-    public List<Person> findAllPersonByProject(Project project) {
+    public List<Person> findAllPersonByProjectOrderById(Project project) {
         List<Person> personList;
         personList = personRepository.findAllPersonByProjectsMemberOrderById(project);
         return personList;
@@ -126,16 +126,16 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
         List<Person> personList;
         List<PersonDTO> personDTOList;
         project = projectService.findTestProjectById(id);
-        personList = findAllPersonByProject(project);
+        personList = findAllPersonByProjectOrderById(project);
         personDTOList = mapper.mapAsList(personList, PersonDTO.class);
         return personDTOList;
     }
 
-    public List<Person> findAllPersonByProjectId(long id) {
+    public List<Person> findAllPersonByProjectIdOrderById(long id) {
         Project project;
         List<Person> personList;
         project = projectService.findTestProjectById(id);
-        personList = findAllPersonByProject(project);
+        personList = findAllPersonByProjectOrderById(project);
         return personList;
     }
 

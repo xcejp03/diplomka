@@ -10,7 +10,7 @@ import java.util.List;
  * Created by pcejka on 28.11.2016.
  */
 public interface SuiteRepository extends BaseRepository<TestSuite> {
-    List<TestSuite> findAllTestSuitesByProject(Project project);
+    List<TestSuite> findAllTestSuitesByProjectOrderById(Project project);
 
 
 

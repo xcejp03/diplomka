@@ -2,32 +2,16 @@ package cz.vse.service.impl;
 
 import cz.vse.dto.PersonDTO;
 import cz.vse.entity.Person;
-import cz.vse.entity.Project;
 import cz.vse.entity.RoleEnum;
 import cz.vse.entity.UserRole;
-import cz.vse.repository.PersonRepository;
 import cz.vse.repository.UserRoleRepository;
 import cz.vse.service.PersonService;
-import cz.vse.service.ProjectService;
 import cz.vse.service.RoleService;
 import ma.glasnost.orika.MapperFacade;
-import org.apache.catalina.Role;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -55,14 +39,14 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public List<UserRole> findAllUserRolesByUser(Person user) {
-        List<UserRole> userRoleList = userRoleRepository.findAllUsersRoleByUser(user);
+        List<UserRole> userRoleList = userRoleRepository.findAllUsersRoleByUserOrderById(user);
         return userRoleList;
     }
 
     @Override
     public List<UserRole> findAllUserRolesByUserId(long id) {
         Person user = personService.findPersonById(id);
-        List<UserRole> userRoleList = userRoleRepository.findAllUsersRoleByUser(user);
+        List<UserRole> userRoleList = userRoleRepository.findAllUsersRoleByUserOrderById(user);
         return userRoleList;
     }
 
@@ -101,7 +85,7 @@ public class RoleServiceImpl implements RoleService {
         Person user = personService.findPersonById(id);
         List<UserRole> userRoleList;
         List<RoleEnum> roleEnumList = new ArrayList<>();
-        userRoleList = userRoleRepository.findAllUsersRoleByUser(user);
+        userRoleList = userRoleRepository.findAllUsersRoleByUserOrderById(user);
         for (UserRole role : userRoleList) {
             roleEnumList.add(role.getRole());
         }

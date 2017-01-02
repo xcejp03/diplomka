@@ -100,13 +100,13 @@ public class TSMusterServiceImpl implements TSMusterService {
 
     public List<TSMuster> findAllTestStepMustersByTCMuster(TCMuster tcMuster) {
         List<TSMuster> tsMusters;
-        tsMusters = tsMusterRepository.findAllTestStepMustersByTCMuster(tcMuster);
+        tsMusters = tsMusterRepository.findAllTestStepMustersByTCMusterOrderById(tcMuster);
         return tsMusters;
     }
 
     @Override
     public List<TSMuster> findAllTSMustersByTCMuster(TCMuster tcMuster) {
-        List<TSMuster> tsMusterList = tsMusterRepository.findAllTSMustersByTCMuster(tcMuster);
+        List<TSMuster> tsMusterList = tsMusterRepository.findAllTSMustersByTCMusterOrderById(tcMuster);
         return tsMusterList;
     }
 
@@ -115,7 +115,7 @@ public class TSMusterServiceImpl implements TSMusterService {
         List<TSMusterDTO> tsMusterDTOList;
         List<TSMuster> tsMusterList;
         TCMuster tcMuster = tcMusterService.findTestCaseMusterById(id);
-        tsMusterList = tsMusterRepository.findAllTSMustersByTCMuster(tcMuster);
+        tsMusterList = tsMusterRepository.findAllTSMustersByTCMusterOrderById(tcMuster);
         tsMusterDTOList = mapper.mapAsList(tsMusterList, TSMusterDTO.class);
 
         return tsMusterDTOList;

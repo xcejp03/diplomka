@@ -12,7 +12,7 @@ import java.util.List;
 public interface PersonRepository extends BaseRepository<Person> {
     Person findById(long id);
     Person findByName(String username);
-    List<Person> findAllPersonByProjectsMember(Project project);
+    List<Person> findAllPersonByProjectsMemberOrderById(Project project);
 
     Person findByUsername(String username);
 }

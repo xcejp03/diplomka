@@ -146,7 +146,7 @@ public class SuiteServiceImpl implements SuiteService {
     public List<TestSuite> findAllTestSuitesByProjectId(Long projectId) {
         List<TestSuite> testSuiteList;
         Project project = projectService.findTestProjectById(projectId);
-        testSuiteList = suiteRepository.findAllTestSuitesByProject(project);
+        testSuiteList = suiteRepository.findAllTestSuitesByProjectOrderById(project);
         return testSuiteList;
     }
 
@@ -154,7 +154,7 @@ public class SuiteServiceImpl implements SuiteService {
         List<TestSuiteDTO> testSuiteDTOList;
         List<TestSuite> testSuiteList;
         Project project = projectService.findTestProjectById(projectId);
-        testSuiteList = suiteRepository.findAllTestSuitesByProject(project);
+        testSuiteList = suiteRepository.findAllTestSuitesByProjectOrderById(project);
         testSuiteDTOList = mapper.mapAsList(testSuiteList, TestSuiteDTO.class);
         return testSuiteDTOList;
     }

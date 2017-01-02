@@ -149,7 +149,7 @@ public class TCServiceImpl implements TCService {
         List<TCMusterDTO> tcMusterDTOList;
         List<TCMuster> tcMusterList;
         TestSuite testSuite = suiteService.findTestSuiteById(id);
-        tcMusterList = tcMusterRepository.findAllTCMustersDTOByTestSuites(testSuite);
+        tcMusterList = tcMusterRepository.findAllTCMustersDTOByTestSuitesOrderById(testSuite);
         tcMusterDTOList = mapper.mapAsList(tcMusterList, TCMusterDTO.class);
         return tcMusterDTOList;
     }

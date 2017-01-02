@@ -10,6 +10,6 @@ import java.util.List;
  * Created by pcejka on 28.11.2016.
  */
 public interface DefectCommentRepository extends BaseRepository<DefectComment> {
-    List<DefectComment> findAllDefectCommentsByDefect(Defect defect);
+    List<DefectComment> findAllDefectCommentsByDefectOrderById(Defect defect);
 
 }

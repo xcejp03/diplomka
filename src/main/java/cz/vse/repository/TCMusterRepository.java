@@ -11,6 +11,6 @@ import java.util.List;
  * Created by pcejka on 28.11.2016.
  */
 public interface TCMusterRepository extends BaseRepository<TCMuster> {
-    List<TCMuster> findAllTCMustersDTOByTestSuites(TestSuite testSuite);
+    List<TCMuster> findAllTCMustersDTOByTestSuitesOrderById(TestSuite testSuite);
 
 }
