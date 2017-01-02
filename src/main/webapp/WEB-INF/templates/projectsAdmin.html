@@ -8,7 +8,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
-    <title>Projects</title>
+    <title>Projekty</title>
 
     <!--importované přes fragment-->
     <div th:replace="/fragment/thymeFragment :: headImports"/>
@@ -44,9 +44,7 @@
 
         <div class="col-md-12">
             <div class="jumbotron">
-                <h1 class="error-404">Seznam dostupných projektů pro <span style="font-style: italic"
-                                                                           th:text="${person.username}">přihlášeného uživatele</span>
-                </h1>
+                <h1 class="error-404">Seznam projektů v systému</h1>
             </div>
         </div>
     </div>
@@ -54,42 +52,25 @@
     <div class="row">
         <div class="col-md-12">
 
-            <div sec:authorize="hasRole('ROLE_ADMIN')">
-                This content is only shown to administrators.
-            </div>
-
-
             <h1>Project list</h1>
             <table class="table table-striped" id="table_id">
                 <thead>
                 <tr>
-                    <!--sec:authorize="hasAuthority('ANALYTIC')"-->
                     <th>ID</th>
                     <th>Název</th>
-                    <th sec:authorize="hasAuthority('ANALYTIC')">Členové</th>
                     <th>Detail</th>
-                    <th sec:authorize="hasAuthority('TESTER')">Založit Defect</th>
-                    <th>Test Suity</th>
-                    <th sec:authorize="hasAuthority('ANALYTIC')">Edit Project</th>
+                    <th>Edit</th>
                     <th>Více</th>
                 </tr>
                 </thead>
                 <tbody th:remove="all-but-first">
-                <tr th:each="project : ${listProjects}">
+                <tr th:each="project : ${projectsDTOList}">
                     <td th:text="${project.id}">00</td>
-                    <td th:text="${project.name}">Projekt</td>
-                    <td sec:authorize="hasAuthority('ANALYTIC')"><a href="#" class="opener"
-                                                                    th:attr="data-project=${project.id}"
-                                                                    data-id="#membersDialog">Členové</a>
-                    </td>
+                    <td th:text="${project.name}">Jméno</td>
                     <td><a href="#" class="opener"
-                           th:attr="data-name=${project.name}, data-owner=${project.projectOwnerName}"
-                           data-id="#detailDialog">Detail</a>
+                           th:attr="data-objectid=${project.id}" data-id="#detailDialog">Detail</a>
                     </td>
-                    <td sec:authorize="hasAuthority('TESTER')"><a href="/defect/create">Založit Defekt</a></td>
-                    <td><a th:href="@{'/suite/suites-by-project/'+${project.id}}">Test Suity</a></td>
-                    <td sec:authorize="hasAuthority('ANALYTIC')"><a
-                            th:href="@{'/project/edit/'+${project.id}}">Editace</a></td>
+                    <td><a th:href="@{'/project/edit/'+${project.id}}">Editace</a></td>
                     <td><a href="#" class="opener"
                            th:attr="data-objectid=${project.id}" data-id="#moreDialog">Více</a>
                     </td>
@@ -99,26 +80,20 @@
         </div>
     </div>
 
-    <div class="row" sec:authorize="hasAuthority('ANALYTIC')">
-        <div class="col-md-4">
-            <a href="/suite/create" class="btn btn-default">Založit Test Suite</a>
-        </div>
-        <div class="col-md-8"></div>
-    </div>
-    <br/>
-    <div class="row" sec:authorize="hasAuthority('ADMIN')">
+    <div class="row">
         <div class="col-md-4">
             <a href="/project/create" class="btn btn-default">Založit Projekt</a>
         </div>
         <div class="col-md-8"></div>
     </div>
+    <br/>
 
     <!--dialogová okna-->
     <div id="moreDialog" title="Více">
         <h3>Project ID: <span id="spanDataObjectId"></span></h3>
-        <a href="/defect/create" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Založit defekt</a>
-        <a href="#" class="btn btn-default" sec:authorize="hasAuthority('ANALYTIC')">Žádost o smazání</a>
-        <a href="/defect/defects" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Seznam Defektů</a>
+        <a href="/defect/create" class="btn btn-default">Založit defekt</a>
+        <a href="#" class="btn btn-default">Žádost o smazání</a>
+        <a href="/defect/defects" class="btn btn-default">Seznam Defektů</a>
     </div>
 
     <div id="detailDialog" title="Detail projektu">
@@ -126,16 +101,6 @@
         <h3>Vlastník projektu: <span id="spanDataOwnerName"> </span></h3>
         <h3>Počet Test Suitů: //dodělat</h3>
     </div>
-
-    <div id="membersDialog" title="Členové projektu" sec:authorize="hasAuthority('ANALYTIC')">
-        <div class="well"><h3>členové projektu</h3>
-        </div>
-        <h3>analytici</h3>
-        <h3>testeři</h3>
-        <h3>všichni</h3>
-        <p>//chybí dodělat</p>
-    </div>
-
 
     <!-- Footer -->
     <div th:replace="/fragment/thymeFragment :: footer"></div>

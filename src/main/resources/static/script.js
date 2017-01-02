@@ -58,6 +58,9 @@ $(function () {
     })
 })
 
+$(document).ready( function () {
+    $('#table_id, #usersAdmin, #projectsAdmin, #suitesAdmin, #tcsAdmin ').DataTable();
+} );
 
 
 
