@@ -89,12 +89,13 @@ public class RoleServiceImpl implements RoleService {
         userRoleRepository.delete(personFromDB.getUserRole());
 //        userRoleRepository.save(personFromDTO.getUserRole());
 //
-        for (RoleEnum role : personDTO.getUserRolesEnum()) {
-            userRoleList.add(new UserRole(personFromDB, role));
+        if (personDTO.getUserRolesEnum() != null) {
+            for (RoleEnum role : personDTO.getUserRolesEnum()) {
+                userRoleList.add(new UserRole(personFromDB, role));
+            }
+            userRoleRepository.save(userRoleList);
         }
-        userRoleRepository.save(userRoleList);
     }
-
 
     public List<RoleEnum> findUsersRoleEnum(long id) {
         Person user = personService.findPersonById(id);

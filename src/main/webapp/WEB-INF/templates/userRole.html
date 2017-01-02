@@ -37,7 +37,7 @@
     <div class="row">
         <div class="col-md-12">
             <h1 class="page-header">
-                <small>WEB-INF/templates/registration.html</small>
+                <small>WEB-INF/templates/userRole.html</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/index">Home</a>
@@ -156,7 +156,7 @@
                             <td th:text="${user.username}">Projekt</td>
                             <td th:text="${user.createdDate}">Projekt</td>
                             <td th:text="${user.lastLogged}">Projekt</td>
-                            <td><a th:href="@{'/person/edit/'+${user.id}}">Editace</a></td>
+                            <td><a th:href="@{'/person/role/'+${user.id}}">Editace</a></td>
                         </tr>
                         </tbody>
                     </table>

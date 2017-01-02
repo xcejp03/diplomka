@@ -75,20 +75,29 @@ public class PersonController {
     @RequestMapping(value = "/role", method = RequestMethod.GET)
     public String editPersonRoleGET(Model model) {
         l.info("person/role");
-        long id = 100L;
-        model.addAttribute("personDTO", personService.findPersonById(id));
         model.addAttribute("personDTOList", personService.findAllPersonsDTO());
+        model.addAttribute("enumRoles", RoleEnum.values());
+        return "userRole";
+    }
+    @RequestMapping(value = "/role/{id}", method = RequestMethod.GET)
+    public String editPersonRoleGETWithId(@PathVariable("id") int id, Model model) {
+        l.info("person/role");
+        model.addAttribute("personDTO", personService.findPersonById(id));
+//        model.addAttribute("personDTOList", personService.findAllPersonsDTO());
         model.addAttribute("enumRoles", RoleEnum.values());
         model.addAttribute("userEnumRoleList", roleService.findUsersRoleEnum(id));
         model.addAttribute("listUserRoles", personService.findPersonById(id).getUserRole());
         return "userRole";
     }
-    @RequestMapping(value = "/role", method = RequestMethod.POST)
-    public String editPersonRolePOST(PersonDTO personDTO) {
-        l.info("person/role saving");
 
+    @RequestMapping(value = "/role", method = RequestMethod.POST)
+    public String editPersonRolePOST(Model model, PersonDTO personDTO) {
+        l.info("person/role saving");
+//        model.addAttribute("personDTO", new PersonDTO());
+//        model.addAttribute("personDTOList", personService.findAllPersonsDTO());
+        model.addAttribute("enumRoles", RoleEnum.values());
         roleService.updateRoleForUser(personDTO);
-        return "userRole";
+        return "redirect:role";
     }
 
 
