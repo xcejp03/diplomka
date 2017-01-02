@@ -75,6 +75,7 @@ public class TCServiceImpl implements TCService {
             tsInstance = new TSInstance();
             l.debug(tsMuster);
             tsInstance.setTsMuster(tsMuster);
+            tsInstance.setStatus(StatusEnum.NORUN);
             tsInstanceMappedList.add(tsInstance);
         }
         return tsInstanceMappedList;

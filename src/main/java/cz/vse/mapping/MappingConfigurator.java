@@ -93,13 +93,6 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
 //                .field("userRole", "userRolesEnum")
                 .byDefault()
                 .register();
-        factory.classMap(TSMuster.class, TSMusterDTO.class)
-                .mapNullsInReverse(false)
-                .mapNulls(false)
-                .field("author", "author_id")
-                .field("tCMuster", "tcMuster_id")
-                .byDefault()
-                .register();
         factory.classMap(TCMuster.class, TCMusterDTO.class)
                 .mapNullsInReverse(false)
                 .mapNulls(false)
@@ -107,6 +100,14 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .field("tsMusters", "tsMusters_id")
                 .field("tcInstances", "tcInstances_id")
                 .field("testSuites", "testSuite_id")
+                .customize((Mapper<TCMuster, TCMusterDTO>) customMappers.get(TCMuster.class, TCMusterDTO.class))
+                .byDefault()
+                .register();
+        factory.classMap(TSMuster.class, TSMusterDTO.class)
+                .mapNullsInReverse(false)
+                .mapNulls(false)
+                .field("author", "author_id")
+                .field("tCMuster", "tcMuster_id")
                 .byDefault()
                 .register();
         factory.classMap(TestSuite.class, TestSuiteDTO.class)
@@ -139,6 +140,15 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .mapNulls(false)
                 .field("tCInstance", "tcInstance_id")
                 .field("tester", "tester_id")
+                .byDefault()
+                .register();
+        factory.classMap(TCInstance.class, TCInstanceDTO.class)
+                .mapNullsInReverse(false)
+                .mapNulls(false)
+//                .field("tCInstance", "tcInstance_id")
+                .field("tester", "tester_id")
+                .field("tCMuster", "tcMuster_id")
+                .customize((Mapper<TCInstance, TCInstanceDTO>) customMappers.get(TCInstance.class, TCInstanceDTO.class))
                 .byDefault()
                 .register();
         factory.classMap(Project.class, ProjectsNamesDTO.class)

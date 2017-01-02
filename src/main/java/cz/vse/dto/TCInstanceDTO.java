@@ -1,6 +1,7 @@
 package cz.vse.dto;
 
 import cz.vse.entity.Person;
+import cz.vse.entity.StatusEnum;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,6 +16,8 @@ public class TCInstanceDTO extends BaseDTO {
     private Long tcMuster_id;
     private List<Long> tsInstances_id;
     private Long tester_id;
+    private StatusEnum status;
+    private LocalDateTime createdDateTime;
 
     public String getName() {
         return name;
@@ -46,5 +49,21 @@ public class TCInstanceDTO extends BaseDTO {
 
     public void setTester_id(Long tester_id) {
         this.tester_id = tester_id;
+    }
+
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusEnum status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    public void setCreatedDateTime(LocalDateTime createdDateTime) {
+        this.createdDateTime = createdDateTime;
     }
 }

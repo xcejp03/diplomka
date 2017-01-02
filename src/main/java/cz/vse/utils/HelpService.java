@@ -6,12 +6,14 @@ package cz.vse.utils;
 
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
+import cz.vse.entity.TCInstance;
 import cz.vse.entity.UserRole;
 import cz.vse.repository.PersonRepository;
 import cz.vse.repository.ProjectRepository;
 import cz.vse.repository.UserRoleRepository;
 import cz.vse.service.PersonService;
 import cz.vse.service.RoleService;
+import cz.vse.service.TCInstanceService;
 import cz.vse.service.UserDetailService;
 import cz.vse.service.impl.PersonServiceImpl;
 import org.apache.log4j.Logger;
@@ -45,13 +47,21 @@ public class HelpService {
     @Autowired
     private UserRoleRepository userRoleRepository;
 
-//    @Autowired
-//    private UserDetailService manager;
-
+    @Autowired
+    private TCInstanceService tcInstanceService;
     @Autowired
     private PersonService personService;
 
 // use in your method
+
+    public void najdiPosledniTCInstanci(long id) {
+        TCInstance tcInstance;
+        tcInstance = tcInstanceService.findLastTCInstanceByTCMusterId(id);
+        l.warn(tcInstance);
+        l.error("jméno: "+tcInstance.getName());
+        l.error("id: "+tcInstance.getId());
+
+    }
 
     public void prihlasit() {
         Person user = personService.findPersonByLogin("tester");
@@ -94,7 +104,7 @@ public class HelpService {
             }
         };
 
-        Authentication auth = new UsernamePasswordAuthenticationToken(userDetails, null , authorities);
+        Authentication auth = new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
 
         SecurityContextHolder.getContext().setAuthentication(auth);
         l.warn(auth);

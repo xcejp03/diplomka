@@ -67,7 +67,7 @@
         <tbody th:remove="all-but-first">
         <tr th:each="tc : ${listTCDTO}">
             <td th:text="${tc.id}">00</td>
-            <td sec:authorize="hasAuthority('TESTER')">Stav TC</td>
+            <td th:text="${tc.status}" sec:authorize="hasAuthority('TESTER')">Stav TC</td>
             <td th:text="${tc.name}">Název</td>
             <td><a href="#" class="opener"
                    th:attr="data-name=${tc.name}"

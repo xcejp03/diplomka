@@ -1,6 +1,7 @@
 package cz.vse.service.impl;
 
 import cz.vse.dto.TSInstanceRunDTO;
+import cz.vse.entity.StatusEnum;
 import cz.vse.entity.TCInstance;
 import cz.vse.entity.TSInstance;
 import cz.vse.repository.TCInstanceRepository;
@@ -35,6 +36,7 @@ public class TSInstanceServiceImpl implements TSInstanceService {
     public void createTestStepInstance(TSInstance tsInstance) {
         l.debug("creating TSInstance - service");
         tsInstance.setCreatedDateTime(LocalDateTime.now());
+        tsInstance.setStatus(StatusEnum.NORUN);
         tsInstanceRepository.save(tsInstance);
         l.info("created TSInstance - service: " + tsInstance);
     }
@@ -53,8 +55,6 @@ public class TSInstanceServiceImpl implements TSInstanceService {
         mapper.map(tsInstanceRunDTO, tsInstance);
         tsInstance.setUpdatedDateTime(LocalDateTime.now());
         l.info(tsInstance);
-
-//        tsInstance = mapper.map(tsInstanceRunDTO, TSInstance.class);
         tsInstanceRepository.save(tsInstance);
         l.info("updated TSInstance - service: " + tsInstance);
     }

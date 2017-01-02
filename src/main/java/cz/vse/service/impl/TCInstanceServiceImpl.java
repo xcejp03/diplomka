@@ -1,5 +1,6 @@
 package cz.vse.service.impl;
 
+import cz.vse.dto.TCInstanceDTO;
 import cz.vse.dto.TCInstanceRunDTO;
 import cz.vse.entity.TCInstance;
 import cz.vse.entity.TCMuster;
@@ -22,12 +23,11 @@ import java.util.List;
 public class TCInstanceServiceImpl implements TCInstanceService {
     private final Logger l = Logger.getLogger(this.getClass());
 
-    @Autowired TCMusterService tcMusterService;
-
-    @Autowired TCInstanceRepository tcInstanceRepository;
+    @Autowired
+    TCMusterService tcMusterService;
 
     @Autowired
-    TCMusterRepository tcMusterRepository;
+    TCInstanceRepository tcInstanceRepository;
 
     @Autowired
     private MapperFacade mapper;
@@ -77,17 +77,37 @@ public class TCInstanceServiceImpl implements TCInstanceService {
 
     public List<TCInstance> findAllTCInstancesByTCMusterId(long id) {
         List<TCInstance> tcInstanceList;
-        TCMuster tcMuster = tcMusterRepository.findOne(id);
+        TCMuster tcMuster = tcMusterService.findTestCaseMusterById(id);
         tcInstanceList = tcInstanceRepository.findByTCMusterOrderById(tcMuster);
         return tcInstanceList;
+    }
+
+    @Override
+    public List<TCInstanceDTO> findAllTCInstancesDTOByTCMusterId(long id) {
+        List<TCInstance> tcInstanceList;
+        List<TCInstanceDTO> tcInstanceDTOList;
+
+        TCMuster tcMuster = tcMusterService.findTestCaseMusterById(id);
+        tcInstanceList = tcInstanceRepository.findByTCMusterOrderById(tcMuster);
+        tcInstanceDTOList = mapper.mapAsList(tcInstanceList, TCInstanceDTO.class);
+        return tcInstanceDTOList;
     }
 
     public TCInstanceRunDTO findTCInstanceRunDTOById(long id) {
         TCInstance tcInstance = findTestCaseInstanceById(id);
         TCInstanceRunDTO tcInstanceRunDTO = mapper.map(tcInstance, TCInstanceRunDTO.class);
-
         return tcInstanceRunDTO;
     }
 
+    public TCInstance findLastTCInstanceByTCMuster(TCMuster tcMuster) {
+        TCInstance tcInstance;
+        tcInstance = tcInstanceRepository.findTop1ByTCMusterOrderByIdDesc(tcMuster);
+        return tcInstance;
+    }
 
+    public TCInstance findLastTCInstanceByTCMusterId(long id) {
+        TCMuster tcMuster = tcMusterService.findTestCaseMusterById(id);
+        TCInstance tcInstance = findLastTCInstanceByTCMuster(tcMuster);
+        return tcInstance;
+    }
 }

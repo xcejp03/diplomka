@@ -134,7 +134,8 @@ public class TCController {
     public String showTCHistory(@PathVariable("id") long id, Model model) {
         l.info("/history/{id}" + id);
         model.addAttribute("tc", tcMusterService.findTestCaseMusterDTOById(id));
-        model.addAttribute("listTCInstances", tcInstanceService.findAllTCInstancesByTCMusterId(id));
+//        model.addAttribute("listTCInstances", tcInstanceService.findAllTCInstancesByTCMusterId(id));
+        model.addAttribute("listTCInstances", tcInstanceService.findAllTCInstancesDTOByTCMusterId(id));
         return "tcHistory";
     }
 

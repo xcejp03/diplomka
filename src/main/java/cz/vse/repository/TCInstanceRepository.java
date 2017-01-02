@@ -11,4 +11,5 @@ import java.util.List;
  */
 public interface TCInstanceRepository extends BaseRepository<TCInstance> {
     List<TCInstance> findByTCMusterOrderById(TCMuster tcMuster);
+    TCInstance findTop1ByTCMusterOrderByIdDesc(TCMuster tcMuster);
 }

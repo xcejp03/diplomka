@@ -54,8 +54,9 @@
         <thead>
         <tr>
             <th>TC ID</th>
+            <th>Status</th>
             <th>Název</th>
-            <th>TC created</th>
+            <th>TC spuštěno</th>
             <th>Delete</th>
             <th>Suštění</th>
         </tr>
@@ -63,6 +64,7 @@
         <tbody th:remove="all-but-first">
         <tr th:each="tc : ${listTCInstances}">
             <td th:text="${tc.id}">00</td>
+            <td th:text="${tc.status}">Status</td>
             <td th:text="${tc.name}">Projekt</td>
             <td th:text="${tc.createdDateTime}">datum a čas vytvoření</td>
             <td><a th:href="@{'/tc/instance/remove/' +${tc.id}}">delete</a></td>
