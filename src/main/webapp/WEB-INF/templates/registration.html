@@ -95,56 +95,6 @@
                         </div>
                         </span>
 
-
-                            <!--<div class="control-group form-group">-->
-                            <!--<div class="controls">-->
-                            <!--<label for="tcMusters_id">TC vzory</label>:-->
-                            <!--<select id="tcMusters_id" name="tcMusters_id" class="multipleSelection2"-->
-                            <!--multiple="multiple" size="10">-->
-                            <!--<option th:each="tcmuster : ${listTcMustersDTO}"-->
-                            <!--th:selected="${ListTcmusterdto != null} ? ${#lists.contains(ListTcmusterdto, tcmuster)}"-->
-                            <!--th:value="${tcmuster.id}"-->
-                            <!--th:text="${tcmuster.name}">tc vzory-->
-                            <!--</option>-->
-                            <!--</select>-->
-                            <!--<script>-->
-                            <!--var multipleSelection2 = $('.multipleSelection2').bootstrapDualListbox({-->
-                            <!--nonSelectedListLabel: 'Non-selected',-->
-                            <!--selectedListLabel: 'Selected',-->
-                            <!--preserveSelectionOnMove: 'moved',-->
-                            <!--moveOnSelect: true,-->
-                            <!--});-->
-                            <!--</script>-->
-                            <!--</div>-->
-                            <!--</div>-->
-
-                            <!--<span th:if="${personDTO.id != null}" th:remove="tag">-->
-                            <!--<div class="control-group form-group">-->
-                                <!--<div class="controls">-->
-                                    <!--<label for="userRolesEnum">Nastavení rolí</label>:-->
-                                    <!--<select id="userRolesEnum" name="userRolesEnum" class="multipleSelection3"-->
-                                            <!--multiple="multiple" size="10">-->
-                                         <!--<option th:each="role : ${enumRoles}"-->
-                                                 <!--th:selected="${listUserRoles != null} ? ${#sets.contains(userEnumRoleList, role)}"-->
-                                                 <!--th:value="${role}"-->
-                                                 <!--th:text="${role}">tc vzory-->
-                                        <!--</option>-->
-
-
-                                    <!--</select>-->
-                                    <!--<script>-->
-                                        <!--var multipleSelection3 = $('.multipleSelection3').bootstrapDualListbox({-->
-                                            <!--nonSelectedListLabel: 'Non-selected',-->
-                                            <!--selectedListLabel: 'Selected',-->
-                                            <!--preserveSelectionOnMove: 'moved',-->
-                                            <!--moveOnSelect: true,-->
-                                        <!--});-->
-                                    <!--</script>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--</span>-->
-
-
                             <span th:if="${personDTO.id != null}" th:remove="tag">
                         <div class="control-group form-group">
                             <div class="controls">
@@ -170,6 +120,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div th:if="${not #lists.isEmpty(personDTOList)}" th:remove="tag">
+                    <a href="create" class="btn btn-primary">Registrace</a>
+
                     <h1>Seznam uživatelů</h1>
                     <table class="table table-striped">
                         <thead>
@@ -193,6 +145,7 @@
                         </tr>
                         </tbody>
                     </table>
+                    <a href="create" class="btn btn-primary">Registrace</a>
                 </div>
             </div>
         </div>

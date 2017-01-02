@@ -43,7 +43,7 @@ public class PersonController {
         } else {
             personService.updatePerson(personDTO);
         }
-        return "redirect:create";
+        return "redirect:edit";
     }
 
 
@@ -51,7 +51,7 @@ public class PersonController {
     public String editPerson(@PathVariable("id") int id, Model model) {
         l.info("/edit/" + id);
         model.addAttribute("personDTO", personService.findPersonById(id));
-        model.addAttribute("personDTOList", personService.findAllPersonsDTO());
+//        model.addAttribute("personDTOList", personService.findAllPersonsDTO());
         model.addAttribute("enumRoles", RoleEnum.values());
         model.addAttribute("userEnumRoleList", roleService.findUsersRoleEnum(id));
         model.addAttribute("listUserRoles", personService.findPersonById(id).getUserRole());
@@ -61,7 +61,7 @@ public class PersonController {
     @RequestMapping("/edit")
     public String editAllPerson(Model model) {
         model.addAttribute("personDTOList", personService.findAllPersonsDTO());
-        model.addAttribute("personDTO", new PersonDTO());
+//        model.addAttribute("personDTO", new PersonDTO());
         model.addAttribute("listPersons", personService.findAllPersons());
         return "registration";
     }
