@@ -4,6 +4,7 @@ import cz.vse.dto.PersonDTO;
 import cz.vse.entity.RoleEnum;
 import cz.vse.service.PersonService;
 import cz.vse.service.RoleService;
+import cz.vse.utils.HelpService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,9 @@ public class PersonController {
 
     @Autowired
     RoleService roleService;
+
+    @Autowired
+    HelpService helpService;
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createProjectForm(Model model) {
@@ -100,6 +104,13 @@ public class PersonController {
         return "redirect:role";
     }
 
+    @RequestMapping(value = "/prihlasit", method = RequestMethod.GET)
+    public String prihlasitSe() {
+        l.info("prihlasovani");
+
+        helpService.prihlasit();
+        return "redirect:/index";
+    }
 
 }
 

@@ -41,6 +41,7 @@ public class StartupHousekeeper {
 //        l.fatal("Výpis projektu: " + projectRepository.findOne(10L));
 //        helpService.userRoleTesty();
 //        userRoleTesty();
+        helpService.prihlasit();
         playSoundAfterStart();
 
         System.out.println("PPPPPPP");

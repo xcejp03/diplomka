@@ -93,6 +93,7 @@ public class ProjectController {
     public String projectsByLoggedUser(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         l.info("User Authentication: " + auth);
+        l.warn("Credentials - "+auth.getCredentials());
         Person person = personService.findPersonByAuthentication(auth);
         Long personId = person.getId();
         l.info("Person is " + person.getId() + " - " + person.getName());
@@ -103,4 +104,6 @@ public class ProjectController {
 
         return "projects";
     }
+
+
 }
