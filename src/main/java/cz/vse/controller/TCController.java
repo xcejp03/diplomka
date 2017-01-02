@@ -59,10 +59,14 @@ public class TCController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createTC(Model model) {
         l.info("request mapping tc/create");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Person person = personService.findPersonByAuthentication(auth);
+        Long personId = person.getId();
         model.addAttribute("tcDTO", new TCMusterDTO());
         model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMustersDTO());
         model.addAttribute("listTSMusters", tsMusterService.findAllTestStepMustersDTO());
         model.addAttribute("listProjects", projectService.findAllTestProjects());
+        model.addAttribute("listUsersProjectsDTO", projectService.findAllTestProjectsByUserIdDTO(personId));
         return "tcCreate";
     }
 
@@ -79,9 +83,13 @@ public class TCController {
     @RequestMapping("/edit/{id}")
     public String editTCMuster(@PathVariable("id") long id, Model model) {
         l.info("/edit/{id}" + id);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Person person = personService.findPersonByAuthentication(auth);
+        Long personId = person.getId();
         model.addAttribute("tcDTO", tcMusterService.findTestCaseMusterDTOById(id));
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listProjects", projectService.findAllTestProjects());
+        model.addAttribute("listUsersProjectsDTO", projectService.findAllTestProjectsByUserIdDTO(personId));
         return "tcCreate";
     }
 

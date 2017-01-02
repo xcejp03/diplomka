@@ -74,6 +74,7 @@
                             </div>
                         </div>
 
+                        <span sec:authorize="hasAuthority('ANALYTIC')" th:remove="tag">
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="projectOwner_id">Vlastník</label>:
@@ -88,6 +89,7 @@
 
                             </div>
                         </div>
+                        </span>
 
                         <div class="control-group form-group">
                             <div class="controls">

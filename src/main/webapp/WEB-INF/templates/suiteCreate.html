@@ -35,7 +35,7 @@
     <div class="row">
         <div class="col-md-12">
             <h1 class="page-header">
-                <small>WEB-INF/templates/suite.html</small>
+                <small>WEB-INF/templates/suiteCreate.html</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/index">Home</a>
@@ -77,7 +77,7 @@
                                 <label for="project_id">Projekt</label>:
 
                                 <select class="form-control" id="project_id" name="project_id">
-                                    <option th:each="project : ${listProjects}"
+                                    <option th:each="project : ${listUsersProjectsDTO}"
                                             th:value="${project.id}"
                                             th:selected="${suiteDTO.project_id != null} ? ${#strings.contains(project.id, suiteDTO.project_id)}"
                                             th:text="${project.name}">jméno projektu
@@ -86,6 +86,7 @@
                             </div>
                         </div>
 
+                        <span th:if="${suiteDTO.id != null}" th:remove="tag">
                         <div class="control-group form-group">
                             <div class="controls">
                                 <label for="tcMusters_id">TC vzory</label>:
@@ -107,6 +108,7 @@
                                 </script>
                             </div>
                         </div>
+                        </span>
 
                         <span th:if="${suiteDTO.id != null}" th:remove="tag">
                              <input type="submit" value="Upravit" class="btn btn-primary"/>
