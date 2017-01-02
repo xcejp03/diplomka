@@ -23,7 +23,7 @@
                 </button>
                 <a class="navbar-brand" href="/index">Start Bootstrap</a>
                 <span sec:authorize="!hasAuthority('ROLE_ANONYMOUS')">
-                    <span sec:authentication="principal.username" class="navbar-brand"></span>
+                    <a href="/login" sec:authentication="principal.username" class="navbar-brand"></a>
                 </span>
             </div>
 
