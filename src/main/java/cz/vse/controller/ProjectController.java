@@ -7,6 +7,7 @@ import cz.vse.entity.Person;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
 import cz.vse.service.SuiteService;
+import cz.vse.utils.SecurityUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -35,6 +36,9 @@ public class ProjectController {
 
     @Autowired
     SuiteService suiteService;
+
+    @Autowired
+    SecurityUtils securityUtils;
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createProjectForm(Model model) {
@@ -81,27 +85,15 @@ public class ProjectController {
         List<ProjectsNamesDTO> listProjectsNameDTO = projectService.findAllTestProjectsByUserIdDTO(id);
         model.addAttribute("listProjects", listProjectsNameDTO);
         model.addAttribute("person", personService.findPersonById(id));
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        l.error(auth);
-        String name = auth.getName();
-        l.error("XXX: " + name);
         return "project";
     }
 
     @RequestMapping(value = "/projects", method = RequestMethod.GET)
     public String projectsByLoggedUser(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        l.info("User Authentication: " + auth);
-        l.warn("Credentials - "+auth.getCredentials());
-        Person person = personService.findPersonByAuthentication(auth);
-        Long personId = person.getId();
-        l.info("Person is " + person.getId() + " - " + person.getName());
-
+Long personId = securityUtils.getLoggedPersonId();
         List<ProjectsNamesDTO> listProjectsNameDTO = projectService.findAllTestProjectsByUserIdDTO(personId);
         model.addAttribute("listProjects", listProjectsNameDTO);
         model.addAttribute("person", personService.findPersonById(personId));
-
         return "projects";
     }
 

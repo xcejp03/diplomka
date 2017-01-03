@@ -68,9 +68,7 @@ public class TCController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createTC(Model model) {
         l.info("request mapping tc/create");
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Person person = personService.findPersonByAuthentication(auth);
-        Long personId = person.getId();
+        Long personId = securityUtils.getLoggedPersonId();
         model.addAttribute("tcDTO", new TCMusterDTO());
         model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMustersDTO());
         model.addAttribute("listTSMusters", tsMusterService.findAllTestStepMustersDTO());
@@ -92,9 +90,7 @@ public class TCController {
     @RequestMapping("/edit/{id}")
     public String editTCMuster(@PathVariable("id") long id, Model model) {
         l.info("/edit/{id}" + id);
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Person person = personService.findPersonByAuthentication(auth);
-        Long personId = person.getId();
+        Long personId = securityUtils.getLoggedPersonId();
         model.addAttribute("tcDTO", tcMusterService.findTestCaseMusterDTOById(id));
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listProjects", projectService.findAllTestProjects());
@@ -118,9 +114,7 @@ public class TCController {
     @RequestMapping("/run/{id}")
     public String runTCMuster(Model model, @PathVariable("id") long id) {
         TCInstanceRunDTO tcInstanceRunDTO;
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Person person = personService.findPersonByAuthentication(auth);
-        Long personId = person.getId();
+        Person person = securityUtils.getLoggedPerson();
         tcInstanceRunDTO = tcService.runNewTC(id, person);
         model.addAttribute("tcInstance", tcInstanceRunDTO);
         model.addAttribute("listTSInstances", tsInstanceService.findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));

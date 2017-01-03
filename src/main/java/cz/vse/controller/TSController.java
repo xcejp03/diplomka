@@ -4,6 +4,7 @@ import cz.vse.dto.TSInstanceRunDTO;
 import cz.vse.dto.TSMusterDTO;
 import cz.vse.entity.Person;
 import cz.vse.service.*;
+import cz.vse.utils.SecurityUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -40,6 +41,9 @@ public class TSController {
     @Autowired
     TCInstanceService tcInstanceService;
 
+    @Autowired
+    SecurityUtils securityUtils;
+
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createTS(Model model) {
         l.info("request mapping ts/create");
@@ -74,9 +78,8 @@ public class TSController {
     public String runTSInstance(@ModelAttribute("ts") TSInstanceRunDTO tsInstanceRunDTO) {
         Long tcInstanceId = tsInstanceRunDTO.getTcInstance_id();
         l.info("/run/ - post");
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Person person = personService.findPersonByAuthentication(auth);
-        tsInstanceRunDTO.setTester_id(person.getId());
+        Long personId = securityUtils.getLoggedPersonId();
+        tsInstanceRunDTO.setTester_id(personId);
         tsInstanceService.updateTestStepInstance(tsInstanceRunDTO);
 
         return "redirect:/tc/show/" + tcInstanceId;

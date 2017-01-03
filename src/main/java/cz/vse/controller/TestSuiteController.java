@@ -43,9 +43,7 @@ public class TestSuiteController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createTestSuite(Model model) {
         l.info("request mapping suite/create");
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Person person = personService.findPersonByAuthentication(auth);
-        Long personId = person.getId();
+        Long personId = securityUtils.getLoggedPersonId();
 
         model.addAttribute("suiteDTO", new TestSuiteDTO());
         model.addAttribute("listSuites", suiteService.findAllTestSuites());
@@ -73,9 +71,7 @@ public class TestSuiteController {
     @RequestMapping("/edit/{id}")
     public String editTestSuite(@PathVariable("id") int id, Model model) {
         l.info("/edit/{id}" + id);
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Person person = personService.findPersonByAuthentication(auth);
-        Long personId = person.getId();
+        Long personId = securityUtils.getLoggedPersonId();
         model.addAttribute("suiteDTO", suiteService.findTestSuiteDTOById(id));
         model.addAttribute("suiteE", suiteService.findTestSuiteById(id));
         model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
@@ -107,9 +103,6 @@ public class TestSuiteController {
     @RequestMapping(value = "/suites", method = RequestMethod.GET)
     public String suitesAllShow(Model model) {
         l.info("/suite/suites}");
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        Person person = personService.findPersonByAuthentication(auth);
-
         model.addAttribute("listSuitesDTO", suiteService.findAllTestSuitesDTOByUser(securityUtils.getLoggedPerson()));
 //        model.addAttribute("project", projectService.findTestProjectById(id));
         return "suites";
