@@ -44,8 +44,11 @@
                     <li>
                         <a href="/test/about">Šablony</a>
                     </li>
-                    <li>
-                        <a href="/logout">| Logout</a>
+                    <li sec:authorize="!hasAuthority('ROLE_ANONYMOUS')">
+                        <a href="/logout">| Odhlásit se</a>
+                    </li>
+                    <li sec:authorize="hasAuthority('ROLE_ANONYMOUS')">
+                        <a href="/login">| Přihlásit se</a>
                     </li>
 
                 </ul>
