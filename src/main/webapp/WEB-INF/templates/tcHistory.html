@@ -11,6 +11,7 @@
     <!--importované přes fragment-->
     <div th:replace="/fragment/thymeFragment :: headImports"/>
     <!--importované přes fragment - konec-->
+
 </head>
 
 <body>
@@ -64,7 +65,8 @@
         <tbody th:remove="all-but-first">
         <tr th:each="tc : ${listTCInstances}">
             <td th:text="${tc.id}">00</td>
-            <td th:text="${tc.status}">Status</td>
+            <td><span th:text="${tc.status}"
+                      th:class="${tc.status}">Status</span></td>
             <td th:text="${tc.name}">Projekt</td>
             <td th:text="${tc.createdDateTime}">datum a čas vytvoření</td>
             <td><a th:href="@{'/tc/instance/remove/' +${tc.id}}">delete</a></td>

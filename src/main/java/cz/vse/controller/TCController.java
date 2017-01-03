@@ -3,6 +3,7 @@ package cz.vse.controller;
 import cz.vse.dto.TCInstanceRunDTO;
 import cz.vse.dto.TCMusterDTO;
 import cz.vse.entity.Person;
+import cz.vse.entity.StatusEnum;
 import cz.vse.service.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by pcejka on 09.10.2016.
@@ -139,13 +144,28 @@ public class TCController {
         return "tcHistory";
     }
 
-    @RequestMapping(value = "/tc-by-suite/{id}",  method = RequestMethod.GET)
+    @RequestMapping(value = "/tc-by-suite/{id}", method = RequestMethod.GET)
     public String tcBySuite(@PathVariable("id") long id, Model model) {
         l.info("/tc-by-suite/{id} - " + id);
 
-        model.addAttribute("listTCDTO",tcService.findAllTCMustersDTOBySuiteId(id));
+        model.addAttribute("listTCDTO", tcService.findAllTCMustersDTOBySuiteId(id));
         model.addAttribute("suite", suiteService.findTestSuiteById(id));
+        model.addAttribute("statusenum", Arrays.asList(StatusEnum.values()));
+        model.addAttribute("strings", naplnTamHTML());
         return "tcs";
+    }
+
+    private List<String> naplnTamHTML() {
+        String prvni = "první";
+        String druhy = "druhý";
+        String treti = "třetííí";
+
+        List<String> strings = new ArrayList<>();
+        strings.add(prvni);
+        strings.add(druhy);
+        strings.add(treti);
+
+        return strings;
     }
 
 }

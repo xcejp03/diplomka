@@ -10,8 +10,15 @@
 
     <title>Test Cases</title>
     <!--importované přes fragment-->
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <div th:replace="/fragment/thymeFragment :: headImports"/>
     <!--importované přes fragment - konec-->
+
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.css"/>
+
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
+
+
 </head>
 
 <body>
@@ -67,7 +74,8 @@
         <tbody th:remove="all-but-first">
         <tr th:each="tc : ${listTCDTO}">
             <td th:text="${tc.id}">00</td>
-            <td th:text="${tc.status}" sec:authorize="hasAuthority('TESTER')">Stav TC</td>
+            <td sec:authorize="hasAuthority('TESTER')"><span th:text="${tc.status}"
+                                                             th:class="${tc.status}">Stav TC</span></td>
             <td th:text="${tc.name}">Název</td>
             <td><a href="#" class="opener"
                    th:attr="data-name=${tc.name}"
@@ -76,8 +84,9 @@
             <td th:text="${tc.createdDateTime}" sec:authorize="hasAuthority('ANALYTIC')">datum a čas vytvoření</td>
             <td sec:authorize="hasAuthority('ANALYTIC')"><a th:href="@{'/tc/edit/'+${tc.id}}">editace</a></td>
             <td sec:authorize="hasAuthority('TESTER')"><a th:href="@{'/tc/history/'+${tc.id}}">historie</a></td>
-            <td sec:authorize="hasAuthority('TESTER')"><a th:href="@{'/tc/run/'+${tc.id}}" >run</a></td>
-            <td sec:authorize="hasAuthority('ANALYTIC')"><a th:href="@{'/ts/ts-by-tcmuster/'+${tc.id}}">Test Stepy</a></td>
+            <td sec:authorize="hasAuthority('TESTER')"><a th:href="@{'/tc/run/'+${tc.id}}">run</a></td>
+            <td sec:authorize="hasAuthority('ANALYTIC')"><a th:href="@{'/ts/ts-by-tcmuster/'+${tc.id}}">Test Stepy</a>
+            </td>
             <td><a href="#" class="opener"
                    th:attr="data-objectid=${tc.id}" data-id="#moreDialog">Více</a>
             </td>
