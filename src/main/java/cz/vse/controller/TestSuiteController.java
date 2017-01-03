@@ -6,6 +6,7 @@ import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
 import cz.vse.service.SuiteService;
 import cz.vse.service.TCMusterService;
+import cz.vse.utils.SecurityUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -35,6 +36,9 @@ public class TestSuiteController {
 
     @Autowired
     SuiteService suiteService;
+
+    @Autowired
+    SecurityUtils securityUtils;
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createTestSuite(Model model) {
@@ -97,6 +101,17 @@ public class TestSuiteController {
 
         model.addAttribute("listSuitesDTO", suiteService.findAllTestSuitesDTOByProjectId(id));
         model.addAttribute("project", projectService.findTestProjectById(id));
+        return "suites";
+    }
+
+    @RequestMapping(value = "/suites", method = RequestMethod.GET)
+    public String suitesAllShow(Model model) {
+        l.info("/suite/suites}");
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        Person person = personService.findPersonByAuthentication(auth);
+
+        model.addAttribute("listSuitesDTO", suiteService.findAllTestSuitesDTOByUser(securityUtils.getLoggedPerson()));
+//        model.addAttribute("project", projectService.findTestProjectById(id));
         return "suites";
     }
 

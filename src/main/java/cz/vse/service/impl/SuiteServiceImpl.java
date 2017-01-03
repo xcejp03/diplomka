@@ -1,6 +1,7 @@
 package cz.vse.service.impl;
 
 import cz.vse.dto.TestSuiteDTO;
+import cz.vse.entity.Person;
 import cz.vse.entity.Project;
 import cz.vse.entity.TCMuster;
 import cz.vse.entity.TestSuite;
@@ -159,5 +160,19 @@ public class SuiteServiceImpl implements SuiteService {
         return testSuiteDTOList;
     }
 
+    @Override
+    public List<TestSuiteDTO> findAllTestSuitesDTOByUser(Person person) {
+        List<Project> projectList = person.getProjectsMember();
+        List<TestSuite> testSuiteList = suiteRepository.findAllTestSuitesByProjectIn(projectList);
+        List<TestSuiteDTO> testSuiteDTOList;
+        testSuiteDTOList = mapper.mapAsList(testSuiteList, TestSuiteDTO.class);
+        return  testSuiteDTOList;
+    }
 
+    @Override
+    public List<TestSuiteDTO> findAllTestSuitesDTOByUser(Long personId) {
+        Person person = personService.findPersonById(personId);
+        List<TestSuiteDTO> testSuiteDTOList = findAllTestSuitesDTOByUser(person);
+        return testSuiteDTOList;
+    }
 }

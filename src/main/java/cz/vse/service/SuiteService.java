@@ -1,6 +1,7 @@
 package cz.vse.service;
 
 import cz.vse.dto.TestSuiteDTO;
+import cz.vse.entity.Person;
 import cz.vse.entity.TestSuite;
 
 import java.util.List;
@@ -31,5 +32,9 @@ public interface SuiteService {
     List<TestSuite> findAllTestSuitesByProjectId(Long projectId);
 
     List<TestSuiteDTO> findAllTestSuitesDTOByProjectId(Long projectId);
+
+    List<TestSuiteDTO> findAllTestSuitesDTOByUser(Person person);
+
+    List<TestSuiteDTO> findAllTestSuitesDTOByUser(Long projectId);
 
 }

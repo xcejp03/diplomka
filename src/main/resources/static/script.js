@@ -4,12 +4,6 @@ $(function () {
     $("#datepicker").datepicker();
 });
 
-function myFunction() {
-    document.getElementById("#tcMusters_id").options[1].selected = true;
-    alert();
-
-}
-
 function addIdToURL(element) {
     var dataAttr = $(this).data();
     $(element).attr('href', function () {
@@ -59,7 +53,7 @@ $(function () {
 })
 
 $(document).ready( function () {
-    $('#table_id, #usersAdmin, #projectsAdmin, #suitesAdmin, #tcsAdmin ').DataTable();
+    $('.datatable').DataTable();
 } );
 
 

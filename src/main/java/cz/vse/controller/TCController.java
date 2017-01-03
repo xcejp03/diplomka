@@ -5,6 +5,7 @@ import cz.vse.dto.TCMusterDTO;
 import cz.vse.entity.Person;
 import cz.vse.entity.StatusEnum;
 import cz.vse.service.*;
+import cz.vse.utils.SecurityUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -50,6 +51,9 @@ public class TCController {
 
     @Autowired
     SuiteService suiteService;
+
+    @Autowired
+    SecurityUtils securityUtils;
 
     @RequestMapping(method = RequestMethod.GET)
     public String tcDefault(Model model) {
@@ -151,21 +155,16 @@ public class TCController {
         model.addAttribute("listTCDTO", tcService.findAllTCMustersDTOBySuiteId(id));
         model.addAttribute("suite", suiteService.findTestSuiteById(id));
         model.addAttribute("statusenum", Arrays.asList(StatusEnum.values()));
-        model.addAttribute("strings", naplnTamHTML());
         return "tcs";
     }
 
-    private List<String> naplnTamHTML() {
-        String prvni = "první";
-        String druhy = "druhý";
-        String treti = "třetííí";
-
-        List<String> strings = new ArrayList<>();
-        strings.add(prvni);
-        strings.add(druhy);
-        strings.add(treti);
-
-        return strings;
+    @RequestMapping(value = "/tcs", method = RequestMethod.GET)
+    public String tcsAllShow(Model model) {
+        l.info("/tc/tcs");
+        model.addAttribute("listTCDTO", tcMusterService.findAllTCDTOByUser(securityUtils.getLoggedPerson()));
+//        model.addAttribute("suite", suiteService.findTestSuiteById(id));
+        model.addAttribute("statusenum", Arrays.asList(StatusEnum.values()));
+        return "tcs";
     }
 
 }

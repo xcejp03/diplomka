@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface SuiteRepository extends BaseRepository<TestSuite> {
     List<TestSuite> findAllTestSuitesByProjectOrderById(Project project);
-
+    List<TestSuite> findAllTestSuitesByProjectIn(List<Project> projectList);
 
 
 }

@@ -1,10 +1,10 @@
 package cz.vse.service.impl;
 
 import cz.vse.dto.TCMusterDTO;
-import cz.vse.entity.TCInstance;
-import cz.vse.entity.TCMuster;
-import cz.vse.entity.TestSuite;
+import cz.vse.dto.TestSuiteDTO;
+import cz.vse.entity.*;
 import cz.vse.repository.TCMusterRepository;
+import cz.vse.service.PersonService;
 import cz.vse.service.SuiteService;
 import cz.vse.service.TCInstanceService;
 import cz.vse.service.TCMusterService;
@@ -33,6 +33,9 @@ public class TCMusterServiceImpl implements TCMusterService {
 
     @Autowired
     private TCInstanceService tcInstanceService;
+
+    @Autowired
+    private PersonService personService;
 
     public void createTestCaseMuster(TCMuster tcMuster) {
         l.debug("creating TCMuster - service");
@@ -137,6 +140,23 @@ public class TCMusterServiceImpl implements TCMusterService {
         testSuite = suiteService.findTestSuiteById(id);
         tcMusterList = findAllTestCaseMustersByTestSuite(testSuite);
         tcMusterDTOList = mapper.mapAsList(tcMusterList, TCMusterDTO.class);
+        return tcMusterDTOList;
+    }
+
+    @Override
+    public List<TCMusterDTO> findAllTCDTOByUser(Person person) {
+        List<Project> projectList = person.getProjectsMember();
+        List<TCMuster> tcMusterList = tcMusterRepository.findAllTCByProjectIn(projectList);
+        List<TCMusterDTO> tcMusterDTOList;
+        tcMusterDTOList = mapper.mapAsList(tcMusterList, TCMusterDTO.class);
+        return tcMusterDTOList;
+    }
+
+    @Override
+    public List<TCMusterDTO> findAllTCDTOByUser(Long personId) {
+        Person person = personService.findPersonById(personId);
+        List<TCMusterDTO> tcMusterDTOList;
+        tcMusterDTOList = findAllTCDTOByUser(person);
         return tcMusterDTOList;
     }
 }

@@ -1,6 +1,7 @@
 package cz.vse.repository;
 
 import cz.vse.dto.TCMusterDTO;
+import cz.vse.entity.Project;
 import cz.vse.entity.TCMuster;
 import cz.vse.entity.TestSuite;
 import cz.vse.repository.base.BaseRepository;
@@ -12,5 +13,6 @@ import java.util.List;
  */
 public interface TCMusterRepository extends BaseRepository<TCMuster> {
     List<TCMuster> findAllTCMustersDTOByTestSuitesOrderById(TestSuite testSuite);
+    List<TCMuster> findAllTCByProjectIn(List<Project> projectList);
 
 }
