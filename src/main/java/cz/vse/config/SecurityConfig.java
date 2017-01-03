@@ -1,5 +1,6 @@
 package cz.vse.config;
 
+import cz.vse.security.CustomAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -29,6 +30,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     UserDetailsService userDetailsService;
 
     @Autowired
+    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+
+    @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
@@ -38,13 +42,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
 //                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/login", "/home", "/", "/thyme", "/person/prihlasit", "/script.js").permitAll()
+                .antMatchers("/login", "/home", "/", "/thyme", "/person/prihlasit", "/script.js", "/style.css").permitAll()
                 .antMatchers("/test/thym", "/font-awesome/**" ).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")
                 .defaultSuccessUrl("/")
                 .failureUrl("/login-error")
+                .successHandler(customAuthenticationSuccessHandler)
                 .usernameParameter("username").passwordParameter("password")
                 .and()
                 .logout().logoutSuccessUrl("/login?logout")
