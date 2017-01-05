@@ -79,7 +79,7 @@ public class TSController {
         Long tcInstanceId = tsInstanceRunDTO.getTcInstance_id();
         l.info("/run/ - post");
         Long personId = securityUtils.getLoggedPersonId();
-        tsInstanceRunDTO.setTester_id(personId);
+        tsInstanceRunDTO.setTesterUpdate_id(personId);
         tsInstanceService.updateTestStepInstance(tsInstanceRunDTO);
 
         return "redirect:/tc/show/" + tcInstanceId;

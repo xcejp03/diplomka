@@ -26,6 +26,9 @@ public class Project extends BaseEntity {
     @OneToMany(mappedBy = "project")
     private List<TCMuster> tcMusters;
 
+    @OneToMany (mappedBy = "projectSource")
+    private List<Defect> defectList;
+
     public String getName() {
         return name;
     }
@@ -64,6 +67,14 @@ public class Project extends BaseEntity {
 
     public void setTcMusters(List<TCMuster> TCMusters) {
         this.tcMusters = TCMusters;
+    }
+
+    public List<Defect> getDefectList() {
+        return defectList;
+    }
+
+    public void setDefectList(List<Defect> defectList) {
+        this.defectList = defectList;
     }
 
     @Override

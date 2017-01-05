@@ -13,7 +13,7 @@ public interface DefectService {
 
     void createDefect(DefectDTO defectDTO);
 
-    void createDefect(String description, PriorityEnum priority, Person assignee,
+    void createDefect(String description, PriorityDefectEnum priority, Person assignee,
                       Person reporter, DefectStatusEnum defectStatus, String affectVersion,
                       List<TCInstance> TCInstance, List<TSInstance> TSInstance);
 
@@ -30,4 +30,8 @@ public interface DefectService {
     List<Defect> findAllDefects();
 
     List<DefectDTO> findAllDefectDTO();
+
+    List<DefectDTO> findAllDefectDTOByReporter(Person person);
+
+    List<DefectDTO> findAllDefectDTOByAssignee(Person person);
 }

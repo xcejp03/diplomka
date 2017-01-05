@@ -28,13 +28,13 @@
     <!-- Page Heading/Breadcrumbs -->
     <div class="row">
         <div class="col-md-12">
-            <!--<h1 class="page-header">404-->          <!--vypadá hezky-->
-            <!--<small>Page Not Found</small>-->
-            <!--</h1>-->
+            <h1 class="page-header">
+                <small>WEB-INF/templates/tcsAdmin.html</small>
+            </h1>
             <ol class="breadcrumb">
                 <li><a href="index">Home</a>
                 </li>
-                <li class="active">TCs</li>
+                <li class="active">Test Casy</li>
             </ol>
         </div>
     </div>
@@ -57,6 +57,7 @@
                 <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Priorita</th>
                     <th>Název</th>
                     <th>Detail</th>
                     <th>Edit</th>
@@ -66,6 +67,7 @@
                 <tbody th:remove="all-but-first">
                 <tr th:each="tc : ${tcsDTOList}">
                     <td th:text="${tc.id}">00</td>
+                    <td th:text="${tc.priority}">priorita</td>
                     <td th:text="${tc.name}">Jméno</td>
                     <td><a href="#" class="opener"
                            th:attr="data-objectid=${tc.id}" data-id="#detailDialog">Detail</a>

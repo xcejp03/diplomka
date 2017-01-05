@@ -84,6 +84,8 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
         factory.classMap(Defect.class, DefectDTO.class)
                 .mapNullsInReverse(false)
                 .mapNulls(false)
+                .field("assignee", "assignee_id")
+                .field("reporter", "reporter_id")
                 .byDefault()
                 .register();
         factory.classMap(Person.class, PersonDTO.class)
@@ -139,7 +141,7 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .mapNullsInReverse(false)
                 .mapNulls(false)
                 .field("tCInstance", "tcInstance_id")
-                .field("tester", "tester_id")
+                .field("testerUpdate", "testerUpdate_id")
                 .byDefault()
                 .register();
         factory.classMap(TCInstance.class, TCInstanceDTO.class)

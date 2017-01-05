@@ -41,6 +41,7 @@ public class Person extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "DEFECT_ID", referencedColumnName = "ID"))
     private List<Defect> defectReporters;
 
+
     public String getName() {
         return name;
     }
@@ -89,38 +90,29 @@ public class Person extends BaseEntity {
         this.projectsMember = projectsMember;
     }
 
-    public void addTestProjectMember(Project project) {
-        this.projectsMember.add(project);
-    }
-
-    public void removeTestProjectMember (Project project)   {
-        this.projectsMember.remove(project);
-    }
-
     public List<Project> getProjectOwners() {
         return projectOwners;
     }
 
-    public void setProjectOwners(List<Project> projectsOwner) {
-        this.projectOwners = projectsOwner;
+    public void setProjectOwners(List<Project> projectOwners) {
+        this.projectOwners = projectOwners;
     }
 
     public List<Defect> getDefectAssignees() {
         return defectAssignees;
     }
 
-    public void setDefectAssignees(List<Defect> defectsAssignee) {
-        this.defectAssignees = defectsAssignee;
+    public void setDefectAssignees(List<Defect> defectAssignees) {
+        this.defectAssignees = defectAssignees;
     }
 
     public List<Defect> getDefectReporters() {
         return defectReporters;
     }
 
-    public void setDefectReporters(List<Defect> defectsReporter) {
-        this.defectReporters = defectsReporter;
+    public void setDefectReporters(List<Defect> defectReporters) {
+        this.defectReporters = defectReporters;
     }
-
 
     public Person() {
     }

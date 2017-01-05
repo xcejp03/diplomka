@@ -4,10 +4,8 @@ package cz.vse.entity;
  * Created by pcejka on 21.09.2016.
  */
 
-public enum PriorityEnum {
-    blocker,
+public enum PriorityTCEnum {
     high,
     medium,
     low,
-
 }

@@ -86,6 +86,7 @@
                                 <select class="form-control" id="status" name="status" th:with="statuses=${T(cz.vse.entity.StatusEnum).values()}">
                                     <option th:each="status : ${statuses}"
                                             th:value="${status}"
+                                            th:class="${status}"
                                             th:selected="${tsDTO.status != null} ? ${#arrays.contains(tsDTO.status, status)}"
                                             th:text="${status}">jméno projektu
                                     </option>

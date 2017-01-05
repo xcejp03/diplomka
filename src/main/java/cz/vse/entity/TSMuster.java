@@ -9,8 +9,6 @@ import java.util.List;
  */
 @Entity
 public class TSMuster extends BaseEntity {
-    private LocalDateTime createdDateTime;
-    private LocalDateTime updatedDateTime;
     private String action;
     private String expected;
 
@@ -27,6 +25,9 @@ public class TSMuster extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "tcMuster_id")
     private TCMuster tCMuster;
+
+    private LocalDateTime createdDateTime;
+    private LocalDateTime updatedDateTime;
 
     public LocalDateTime getCreatedDateTime() {
         return createdDateTime;

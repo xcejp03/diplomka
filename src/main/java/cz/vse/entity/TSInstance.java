@@ -1,9 +1,6 @@
 package cz.vse.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,8 +9,6 @@ import java.util.List;
  */
 @Entity
 public class TSInstance extends BaseEntity {
-    private LocalDateTime createdDateTime;
-    private LocalDateTime updatedDateTime;
     private String action;
     private String expected;
     private String result;
@@ -31,8 +26,14 @@ public class TSInstance extends BaseEntity {
     private TCInstance tCInstance;
 
     @ManyToOne
-    @JoinColumn(name = "tester_id")
-    private Person tester;
+    @JoinColumn (name = "testerUpdate_id")
+    private Person testerUpdate;
+
+    @OneToMany (mappedBy = "tsInstanceSource")
+    private List<Defect> defectList;
+
+    private LocalDateTime createdDateTime;
+    private LocalDateTime updatedDateTime;
 
     public LocalDateTime getCreatedDateTime() {
         return createdDateTime;
@@ -98,13 +99,6 @@ public class TSInstance extends BaseEntity {
         this.tCInstance = tCInstance;
     }
 
-    public Person getTester() {
-        return tester;
-    }
-
-    public void setTester(Person tester) {
-        this.tester = tester;
-    }
 
     public StatusEnum getStatus() {
         return status;
@@ -112,6 +106,22 @@ public class TSInstance extends BaseEntity {
 
     public void setStatus(StatusEnum status) {
         this.status = status;
+    }
+
+    public List<Defect> getDefectList() {
+        return defectList;
+    }
+
+    public void setDefectList(List<Defect> defectList) {
+        this.defectList = defectList;
+    }
+
+    public Person getTesterUpdate() {
+        return testerUpdate;
+    }
+
+    public void setTesterUpdate(Person testerUpdate) {
+        this.testerUpdate = testerUpdate;
     }
 
     @Override

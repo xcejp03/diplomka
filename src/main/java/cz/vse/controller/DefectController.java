@@ -4,6 +4,7 @@ import cz.vse.dto.DefectDTO;
 import cz.vse.service.impl.DefectServiceImpl;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
+import cz.vse.utils.SecurityUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,9 @@ public class DefectController {
 
     @Autowired
     DefectServiceImpl defectService;
+
+    @Autowired
+    private SecurityUtils securityUtils;
 
     @RequestMapping( method = RequestMethod.GET)
     public String defectDefault(Model model) {
@@ -54,6 +58,7 @@ public class DefectController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createDefectPost(@ModelAttribute("person") DefectDTO defectDTO) {
         if (defectDTO.getId() == null) {
+            defectDTO.setReporter_id(securityUtils.getLoggedPersonId());
             defectService.createDefect(defectDTO);
         } else {
             defectService.updateDefect(defectDTO);
@@ -78,5 +83,16 @@ public class DefectController {
 
     }
 
-}
+    @RequestMapping(value = "/defects", method = RequestMethod.GET)
+    public String defectShowByUser(Model model) {
+        l.info("request mapping defect/defects");
+        model.addAttribute("defect", new DefectDTO());
+        model.addAttribute("listDefectByReporterDTO", defectService.findAllDefectDTOByReporter(securityUtils.getLoggedPerson()));
+        model.addAttribute("listDefectByAssigneeDTO", defectService.findAllDefectDTOByAssignee(securityUtils.getLoggedPerson()));
+        model.addAttribute("listPersons", personService.findAllPersons());
+        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
 
+        return "defects";
+    }
+
+}

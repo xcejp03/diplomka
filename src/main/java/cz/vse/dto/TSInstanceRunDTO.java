@@ -1,6 +1,10 @@
 package cz.vse.dto;
 
+import cz.vse.entity.Person;
 import cz.vse.entity.StatusEnum;
+
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * Created by pcejka on 10.10.2016.
@@ -12,8 +16,9 @@ public class TSInstanceRunDTO extends BaseDTO {
     private String expected;
     private String result;
     private Long tcInstance_id;
-    private Long tester_id;
+    private Long testerUpdate_id;
     private StatusEnum status;
+
 
     public String getAction() {
         return action;
@@ -47,12 +52,12 @@ public class TSInstanceRunDTO extends BaseDTO {
         this.tcInstance_id = tcInstance_id;
     }
 
-    public Long getTester_id() {
-        return tester_id;
+    public Long getTesterUpdate_id() {
+        return testerUpdate_id;
     }
 
-    public void setTester_id(Long tester_id) {
-        this.tester_id = tester_id;
+    public void setTesterUpdate_id(Long testerUpdate_id) {
+        this.testerUpdate_id = testerUpdate_id;
     }
 
     public StatusEnum getStatus() {

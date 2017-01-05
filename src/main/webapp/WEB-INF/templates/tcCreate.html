@@ -78,6 +78,20 @@
                             </div>
                         </div>
 
+                        <div class=" control-group form-group">
+                            <div class="controls">
+                                <label for="priority">Priorita</label>:
+
+                                <select class="form-control" id="priority" name="priority" th:with="priorities=${T(cz.vse.entity.PriorityTCEnum).values()}">
+                                    <option th:each="priority : ${priorities}"
+                                            th:value="${priority}"
+                                            th:selected="${tcDTO.status != null} ? ${#arrays.contains(tsDTO.priority, priority)}"
+                                            th:text="${priority}">jméno projektu
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
                         <span th:if="${tcDTO.id != null}" th:remove="tag">
                              <input type="submit" value="Upravit" class="btn btn-primary"/>
                         </span>

@@ -13,15 +13,15 @@ import java.util.List;
 @Entity
 public class TCMuster extends BaseEntity {
     private String name;
-    private LocalDateTime createdDateTime;
-    private LocalDateTime updatedDateTime;
 
-    @OneToMany(mappedBy = "tCMuster", fetch = FetchType.EAGER)
-    private List<TCInstance> tcInstances;
+    private PriorityTCEnum priority;
 
     @ManyToOne
     @JoinColumn(name = "project_id")
     private Project project;
+
+    @OneToMany(mappedBy = "tCMuster", fetch = FetchType.EAGER)
+    private List<TCInstance> tcInstances;
 
     @ManyToMany
     @JoinTable(name = "TCMUSTER_TESTSUITE", joinColumns = @JoinColumn(name = "TCMUSTER_ID", referencedColumnName = "ID"),
@@ -30,6 +30,9 @@ public class TCMuster extends BaseEntity {
 
     @OneToMany(mappedBy = "tCMuster", fetch = FetchType.EAGER)
     private List<TSMuster> tsMusters;
+
+    private LocalDateTime createdDateTime;
+    private LocalDateTime updatedDateTime;
 
     public String getName() {
         return name;
@@ -81,6 +84,14 @@ public class TCMuster extends BaseEntity {
 
     public void setTsMusters(List<TSMuster> tsMusters) {
         this.tsMusters = tsMusters;
+    }
+
+    public PriorityTCEnum getPriority() {
+        return priority;
+    }
+
+    public void setPriority(PriorityTCEnum priority) {
+        this.priority = priority;
     }
 
     @Override

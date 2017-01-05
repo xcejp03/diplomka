@@ -46,9 +46,7 @@ public class TCServiceImpl implements TCService {
     public TCInstanceRunDTO runNewTC(long tcMusterId, Person person) {
         TCInstance tcInstance;
         TCInstanceRunDTO tcInstanceRunDTO;
-
         tcInstance = createAndSaveTCInstanceFromTCMusterId(tcMusterId, person);
-
         tcInstanceRunDTO = mapper.map(tcInstance, TCInstanceRunDTO.class);
         l.info(tcInstanceRunDTO);
         return tcInstanceRunDTO;
@@ -85,7 +83,6 @@ public class TCServiceImpl implements TCService {
         TCMuster tcMuster;
         TCInstance tcInstance = new TCInstance();
         List<TSInstance> tsInstanceList = new ArrayList<>();
-
         tcMuster = tcMusterService.findTestCaseMusterById(tcMusterId);
 
         tcInstance = mapTCMusterToTCInstance(tcMuster);
@@ -96,7 +93,6 @@ public class TCServiceImpl implements TCService {
         tcInstanceService.createTestCaseInstance(tcInstance);
 
         tsInstanceList = createAndSaveTSInstanceFromTCMusterId(tcMuster.getId(), tcInstance);
-
         return tcInstance;
     }
 

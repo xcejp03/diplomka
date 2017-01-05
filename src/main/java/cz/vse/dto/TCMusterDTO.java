@@ -1,5 +1,6 @@
 package cz.vse.dto;
 
+import cz.vse.entity.PriorityTCEnum;
 import cz.vse.entity.StatusEnum;
 
 import java.time.LocalDateTime;
@@ -11,13 +12,14 @@ import java.util.List;
 
 public class TCMusterDTO extends BaseDTO {
 
-    private LocalDateTime createdDateTime;
     private String name;
     private Long project_id;
     private List<Long> tsMusters_id;
     private List<Long> tcInstances_id;
     private List<Long> testSuite_id;
     private StatusEnum status;
+    private PriorityTCEnum priority;
+    private LocalDateTime createdDateTime;
 
     public LocalDateTime getCreatedDateTime() {
         return createdDateTime;
@@ -65,6 +67,14 @@ public class TCMusterDTO extends BaseDTO {
 
     public void setStatus(StatusEnum status) {
         this.status = status;
+    }
+
+    public PriorityTCEnum getPriority() {
+        return priority;
+    }
+
+    public void setPriority(PriorityTCEnum priority) {
+        this.priority = priority;
     }
 
     @Override

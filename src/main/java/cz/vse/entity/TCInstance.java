@@ -30,6 +30,9 @@ public class TCInstance extends BaseEntity {
     @JoinColumn(name = "tester_id")
     private Person tester;
 
+    @OneToMany (mappedBy = "tsInstanceSource")
+    private List<Defect> defectList;
+
     public String getName() {
         return name;
     }
@@ -84,6 +87,14 @@ public class TCInstance extends BaseEntity {
 
     public void setTester(Person tester) {
         this.tester = tester;
+    }
+
+    public List<Defect> getDefectList() {
+        return defectList;
+    }
+
+    public void setDefectList(List<Defect> defectList) {
+        this.defectList = defectList;
     }
 
     @Override
