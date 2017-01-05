@@ -25,7 +25,7 @@
 
     <!-- Page Heading/Breadcrumbs -->
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <h1 class="page-header">
                 <small>WEB-INF/templates/login.html</small>
             </h1>
@@ -40,7 +40,7 @@
 
     <div class="row">
 
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <div class="jumbotron">
                 <h1>Login page</h1>
             </div>
@@ -48,7 +48,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-sm-4">
             <div class="well">
                 <p th:if="${loginError}" class="error">Wrong user or pass</p>
                 <form th:action="@{/login}" method="post" default-target-url="/index">
@@ -82,7 +82,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <!-- Footer -->
             <div th:replace="/fragment/thymeFragment :: footer"></div>
         </div>

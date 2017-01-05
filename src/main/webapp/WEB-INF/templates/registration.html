@@ -35,7 +35,7 @@
 
     <!-- Page Heading/Breadcrumbs -->
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <h1 class="page-header">
                 <small>WEB-INF/templates/registration.html</small>
             </h1>
@@ -55,7 +55,7 @@
     <div class="container">
         <div th:if="${personDTO != null}" th:remove="tag">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-sm-4">
                     <div class="well">
                         <form th:action="@{/person/create}" method="post" default-target-url="/index">
                         <span th:if="${personDTO.id != null}" th:remove="tag">
@@ -118,7 +118,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-sm-12">
                 <div th:if="${not #lists.isEmpty(personDTOList)}" th:remove="tag">
                     <a href="create" class="btn btn-primary">Registrace</a>
 
