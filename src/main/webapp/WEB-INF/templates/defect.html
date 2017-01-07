@@ -59,7 +59,7 @@
 
 
     <div class="row">
-        <div class="col-sm-5" style="border:1px solid black">
+        <div class="col-sm-5">
             <div class="well">
                 <div class=" control-group form-group">
                     <div class="controls">
@@ -72,8 +72,7 @@
                 <div class=" control-group form-group">
                     <div class="controls">
                         <label for="description">Popis</label>:
-                        <input type="text" id="description" name="description" th:value="${defectDTO.description}"
-                               class="form-control"/>
+                        <textarea type="text" id="description" name="description" th:text="${defectDTO.description}" class="form-control"/>
                     </div>
                 </div>
 
@@ -88,8 +87,8 @@
 
                 <div class=" control-group form-group">
                     <div class="controls">
-                        <label for="description">priority</label>:
-                        <input type="text" id="priority" name="priority" th:value="${defectDTO.priority}"
+                        <label for="description">priority</label>:<br/>
+                        <input type="text" id="priority" name="priority" th:class="${defectDTO.priority}" th:value="${defectDTO.priority}"
                                class="form-control"/>
                     </div>
                 </div>
@@ -137,7 +136,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-7" style="border:1px solid black">
+        <div class="col-sm-7" >
             <div class="well">
                 <h3>Komentáře defektu <span th:text="${defectDTO.id}"></span></h3>
                 <table class="table table-striped">

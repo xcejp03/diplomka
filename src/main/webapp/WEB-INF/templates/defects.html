@@ -82,7 +82,7 @@
                 <tbody th:remove="all-but-first">
                 <tr th:each="defect : ${listDefectByAssigneeDTO}">
                     <td th:text="${defect.id}">00</td>
-                    <td th:text="${defect.priority}">Priorita</td>
+                    <td><span th:class="${defect.priority}" th:text="${defect.priority}">Priorita</span> </td>
                     <td th:text="${defect.name}">Název</td>
                     <td th:text="${defect.affectsVersion}">Affected version</td>
                     <td th:text="${defect.status}">Status</td>
@@ -125,7 +125,7 @@
                 <tbody th:remove="all-but-first">
                 <tr th:each="defect : ${listDefectByReporterDTO}">
                     <td th:text="${defect.id}">00</td>
-                    <td th:text="${defect.priority}">Priorita</td>
+                    <td><span th:class="${defect.priority}" th:text="${defect.priority}">Priorita</span> </td>
                     <td th:text="${defect.name}">Název</td>
                     <td th:text="${defect.affectsVersion}">Affected version</td>
                     <td th:text="${defect.status}">Status</td>
