@@ -33,7 +33,7 @@
     <div class="row">
         <div class="col-sm-12">
             <h1 class="page-header">
-                <small>WEB-INF/templates/defects.html</small>
+                <small>WEB-INF/templates/defect.html</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="index">Home</a>
@@ -65,6 +65,7 @@
                     <div class="controls">
                         <label for="name">Název</label>:
                         <input type="text" id="name" name="name" th:value="${defectDTO.name}"
+                               readonly="readonly"
                                class="form-control"/>
                     </div>
                 </div>
@@ -72,7 +73,8 @@
                 <div class=" control-group form-group">
                     <div class="controls">
                         <label for="description">Popis</label>:
-                        <textarea type="text" id="description" name="description" th:text="${defectDTO.description}" class="form-control"/>
+                        <textarea type="text" id="description" name="description" th:text="${defectDTO.description}"
+                                  readonly="readonly" class="form-control"/>
                     </div>
                 </div>
 
@@ -80,6 +82,7 @@
                     <div class="controls">
                         <label for="name">Affects version</label>:
                         <input type="text" id="affectsVersion" name="affectsVersion"
+                               readonly="readonly"
                                th:value="${defectDTO.affectsVersion}"
                                class="form-control"/>
                     </div>
@@ -88,7 +91,9 @@
                 <div class=" control-group form-group">
                     <div class="controls">
                         <label for="description">priority</label>:<br/>
-                        <input type="text" id="priority" name="priority" th:class="${defectDTO.priority}" th:value="${defectDTO.priority}"
+                        <input type="text" id="priority" name="priority" th:class="${defectDTO.priority}"
+                               th:value="${defectDTO.priority}"
+                               readonly="readonly"
                                class="form-control"/>
                     </div>
                 </div>
@@ -97,6 +102,7 @@
                     <div class="controls">
                         <label for="name">status</label>:
                         <input type="text" id="status" name="status" th:value="${defectDTO.status}"
+                               readonly="readonly"
                                class="form-control"/>
                     </div>
                 </div>
@@ -105,6 +111,7 @@
                     <div class="controls">
                         <label for="description">createdDateTime</label>:
                         <input type="text" id="createdDateTime" name="createdDateTime"
+                               readonly="readonly"
                                th:value="${defectDTO.createdDateTime}"
                                class="form-control"/>
                     </div>
@@ -114,6 +121,7 @@
                     <div class="controls">
                         <label for="description">updatedDateTime</label>:
                         <input type="text" id="updatedDateTime" name="updatedDateTime"
+                               readonly="readonly"
                                th:value="${defectDTO.updatedDateTime}"
                                class="form-control"/>
                     </div>
@@ -122,6 +130,7 @@
                     <div class="controls">
                         <label for="description">assignee_id</label>:
                         <input type="text" id="assignee_id" name="assignee_id"
+                               readonly="readonly"
                                th:value="${defectDTO.assignee_id}"
                                class="form-control"/>
                     </div>
@@ -130,37 +139,78 @@
                     <div class="controls">
                         <label for="description">createdDateTime</label>:
                         <input type="text" id="reporter_id" name="reporter_id"
+                               readonly="readonly"
                                th:value="${defectDTO.reporter_id}"
                                class="form-control"/>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-7" >
+        <div class="col-sm-7">
+
+            <div class="well">
+                <h3>Reassignuj defekt "<span th:text="${defectDTO.name}"></span>" na někoho jiného </h3>
+
+                <form th:action="@{/defect/create}" method="post" default-target-url="/index">
+                    <div class=" control-group form-group">
+                        <div class="controls">
+                             <span th:if="${defectDTO.id != null}" th:remove="tag">
+                            <div class=" control-group form-group">
+                            <div class="controls">
+                                <input type="text" id="id2" th:value="${defectDTO.id}" name="id" hidden="hidden"/>
+                            </div>
+                        </div>
+                        </span>
+
+                            <label for="assignee_id">Assignee</label>:
+
+                            <select class="form-control" id="assignee_id" name="assignee_id">
+                                <option th:each="person : ${listPersons}"
+                                        th:value="${person.id}"
+                                        th:selected="${defectDTO.assignee_id != null} ? ${#strings.contains(person.id, defectDTO.assignee_id)}"
+                                        th:text="${person.name}">Assignee
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class=" control-group form-group">
+                        <div class="controls">
+                            <input type="submit" value="Assignuj" class="btn btn-primary"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
             <div class="well">
                 <h3>Komentáře defektu <span th:text="${defectDTO.id}"></span></h3>
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>Koment ID</th>
-                        <th>Komentář</th>
-                        <th>Autor</th>
-                        <th>Datum</th>
-                        <th>Více</th>
-                    </tr>
-                    </thead>
-                    <tbody th:remove="all-but-first">
-                    <tr th:each="comment : ${ listDefectCommentByDefectDTO}">
-                        <td th:text="${comment.id}">00</td>
-                        <td th:text="${comment.commentText}">Text</td>
-                        <td th:text="${comment.author_id}">Název</td>
-                        <td th:text="${comment.createdDateTime}">Datum</td>
-                        <td><a href="#" class="opener"
-                               th:attr="data-objectid=${comment.id}" data-id="#moreDialog">Více</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div style="overflow: auto; max-height: 600px">
+                    <!--th:if="${not #lists.isEmpty(tblUserList)}"-->
+                     <span th:if="${not #lists.isEmpty(listDefectCommentByDefectDTO)}" th:remove="tag">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Komentář</th>
+                            <th>Autor</th>
+                            <th>Datum</th>
+                            <th>Více</th>
+                        </tr>
+                        </thead>
+                        <tbody th:remove="all-but-first">
+                        <tr th:each="comment : ${ listDefectCommentByDefectDTO}">
+                            <td th:text="${comment.id}">00</td>
+                            <td th:text="${comment.commentText}">Text</td>
+                            <td th:text="${comment.author_id}">Název</td>
+                            <td th:text="${comment.createdDateTime}">Datum</td>
+                            <td><a href="#" class="opener"
+                                   th:attr="data-objectid=${comment.id}" data-id="#moreDialog">Více</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                     </span>
+                </div>
 
                 <form th:action="@{/comment/create}" method="post" default-target-url="/index">
 
@@ -176,33 +226,23 @@
 
                     <div class=" control-group form-group">
                         <div class="controls">
-                            <label for="commentText">commentText</label>:
-                            <input type="text" id="commentText" name="commentText" th:value="${commentDTO.commentText}"
-                                   class="form-control"/>
+                            <label for="commentText">Komentář</label>:
+                            <textarea type="text" id="commentText" name="commentText"
+                                      th:value="${commentDTO.commentText}"
+                                      class="form-control"/>
                         </div>
                     </div>
 
                     <input type="text" id="defect_id" name="defect_id" th:value="${defectDTO.id}" hidden="hidden"/>
 
-
                     <input type="text" id="author_id" name="author_id" th:value="${loggedPersonDTO.id}"
                            hidden="hidden"/>
 
-                    <span th:if="${commentDTO.id != null}" th:remove="tag">
-                             <input type="submit" value="Upravit" class="btn btn-primary"/>
-                        </span>
-                    <span th:if="${commentDTO.id == null}" th:remove="tag">
-                             <input type="submit" value="Vytvořit" class="btn btn-primary"/>
-                        </span>
-
+                    <input type="submit" value="Vytvořit" class="btn btn-primary"/>
                 </form>
-
-
             </div>
         </div>
-
     </div>
-
 
 
     <!-- Footer -->

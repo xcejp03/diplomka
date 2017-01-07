@@ -63,13 +63,15 @@ public class DefectController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createDefectPost(@ModelAttribute("person") DefectDTO defectDTO) {
+        String  redirectSite;
         if (defectDTO.getId() == null) {
             defectDTO.setReporter_id(securityUtils.getLoggedPersonId());
             defectService.createDefect(defectDTO);
         } else {
             defectService.updateDefect(defectDTO);
         }
-        return "redirect:create";
+        redirectSite = "redirect:/defect/"+defectDTO.getId();
+        return redirectSite;
     }
 
     @RequestMapping("/edit/{id}")

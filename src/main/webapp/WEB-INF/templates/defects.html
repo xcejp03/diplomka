@@ -137,6 +137,8 @@
                            th:attr="data-name=${defect.description}"
                            data-id="#detailDialog">Detail</a>
                     </td>
+                    <td><a href="#" th:href="@{'/defect/edit/'+${defect.id}}">Edit</a>
+                    </td>
                     <td><a href="#" class="opener"
                            th:attr="data-objectid=${defect.id}" data-id="#moreDialog">Více</a>
                     </td>
