@@ -3,6 +3,7 @@ package cz.vse.service.impl;
 import cz.vse.dto.DefectDTO;
 import cz.vse.entity.*;
 import cz.vse.repository.DefectRepository;
+import cz.vse.service.DefectCommentService;
 import cz.vse.service.DefectService;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
@@ -24,6 +25,9 @@ public class DefectServiceImpl implements DefectService {
 
     @Autowired
     private MapperFacade mapper;
+
+    @Autowired
+    private DefectCommentService defectCommentService;
 
     public void createDefect(Defect defect) {
         l.debug("creating defect - service");
@@ -135,5 +139,17 @@ public class DefectServiceImpl implements DefectService {
         defectList = defectRepository.findAllDefectDTOByAssignee(person);
         defectDTOList = mapper.mapAsList(defectList, DefectDTO.class);
         return defectDTOList;
+    }
+
+
+    public void changeDefectStatus(DefectDTO defectDTO, Person author)    {
+        updateDefect(defectDTO);
+        defectCommentService.writeDefectStatusChange(defectDTO, author);
+
+    }
+
+    public void changeDefectAssignee (DefectDTO defectDTO, Person author)    {
+        updateDefect(defectDTO);
+        defectCommentService.writeDefectAssigneeChange(defectDTO, author);
     }
 }

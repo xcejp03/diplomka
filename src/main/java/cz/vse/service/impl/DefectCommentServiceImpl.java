@@ -1,16 +1,20 @@
 package cz.vse.service.impl;
 
 import cz.vse.dto.DefectCommentDTO;
+import cz.vse.dto.DefectDTO;
 import cz.vse.entity.Defect;
 import cz.vse.entity.DefectComment;
+import cz.vse.entity.DefectStatusEnum;
 import cz.vse.entity.Person;
 import cz.vse.repository.DefectCommentRepository;
 import cz.vse.service.DefectCommentService;
 import cz.vse.service.DefectService;
+import cz.vse.service.PersonService;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,6 +32,9 @@ public class DefectCommentServiceImpl implements DefectCommentService {
 
     @Autowired
     private DefectService defectService;
+
+    @Autowired
+    private PersonService personService;
 
     public void createComment(Defect defect, Person commentAuthor, String commentText) {
         l.debug("creating comment - service: " + commentText);
@@ -119,7 +126,7 @@ public class DefectCommentServiceImpl implements DefectCommentService {
         return defectCommentDTOList;
     }
 
-    public List<DefectCommentDTO> findAllDefectCommentDTOByDefect(Defect defect)    {
+    public List<DefectCommentDTO> findAllDefectCommentDTOByDefect(Defect defect) {
         List<DefectComment> defectCommentList;
         List<DefectCommentDTO> defectCommentDTOList;
         defectCommentList = defectCommentRepository.findAllDefectCommentsByDefectOrderById(defect);
@@ -127,7 +134,7 @@ public class DefectCommentServiceImpl implements DefectCommentService {
         return defectCommentDTOList;
     }
 
-    public List<DefectCommentDTO> findAllDefectCommentDTOByDefectId(long id)    {
+    public List<DefectCommentDTO> findAllDefectCommentDTOByDefectId(long id) {
         List<DefectComment> defectCommentList;
         List<DefectCommentDTO> defectCommentDTOList;
         Defect defect = defectService.findDefectById(id);
@@ -135,6 +142,37 @@ public class DefectCommentServiceImpl implements DefectCommentService {
         defectCommentList = defectCommentRepository.findAllDefectCommentsByDefectOrderById(defect);
         defectCommentDTOList = mapper.mapAsList(defectCommentList, DefectCommentDTO.class);
         return defectCommentDTOList;
+    }
+
+//    public void writeDefectStatusChange(long defectId, long authorId, DefectStatusEnum oldStatus, DefectStatusEnum newStatus)   {
+//        Defect defect = defectService.findDefectById(defectId);
+//        Person author = personService.findPersonById(authorId);
+//        String text = "Status change: "+ oldStatus + " -> " + newStatus;
+//        createComment(defect, author, text);
+//    }
+//
+//    public void writeDefectAssigneeChange(long defectId, long authorId, long oldAssigneeId, long newAssigneeId) {
+//        Defect defect = defectService.findDefectById(defectId);
+//        Person author = personService.findPersonById(authorId);
+//        Person oldAssignee = personService.findPersonById(oldAssigneeId);
+//        Person newAssignee = personService.findPersonById(newAssigneeId);
+//        String text = "Assignee change: "+ oldAssignee + " -> " + newAssignee;
+//        createComment(defect, author, text);
+//
+//    }
+
+    public void writeDefectStatusChange(DefectDTO defectDTO, Person author) {
+        Defect defect = defectService.findDefectById(defectDTO.getId());
+        String newStatus = defectDTO.getStatus().name();
+        String text = "Status change -> " + newStatus;
+        createComment(defect, author, text);
+    }
+
+    public void writeDefectAssigneeChange(DefectDTO defectDTO, Person author) {
+        Defect defect = defectService.findDefectById(defectDTO.getId());
+        String newAssigneeUsername = personService.findPersonById(defectDTO.getAssignee_id()).getUsername();
+        String text = "Assignee change -> " + newAssigneeUsername;
+        createComment(defect, author, text);
     }
 
 }

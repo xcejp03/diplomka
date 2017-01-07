@@ -3,6 +3,7 @@ package cz.vse.controller;
 import cz.vse.dto.DefectCommentDTO;
 import cz.vse.dto.DefectDTO;
 import cz.vse.entity.DefectComment;
+import cz.vse.entity.Person;
 import cz.vse.service.DefectCommentService;
 import cz.vse.service.impl.DefectServiceImpl;
 import cz.vse.service.PersonService;
@@ -118,6 +119,26 @@ public class DefectController {
         model.addAttribute("commentDTO", new DefectCommentDTO());
         model.addAttribute("loggedPersonDTO", securityUtils.getLoggedPersonDTO());
         return "defect";
+    }
+
+    @RequestMapping(value = "/writeAssigneChange", method = RequestMethod.POST)
+    public String writeAssigneChange(DefectDTO defectDTO) {
+        String redirectSite;
+        defectService.changeDefectAssignee(defectDTO,  securityUtils.getLoggedPerson());
+//        defectCommentService.writeDefectAssigneeChange(defectDTO,  securityUtils.getLoggedPerson());
+        redirectSite = "redirect:/defect/"+defectDTO.getId();
+
+        return redirectSite;
+    }
+
+    @RequestMapping(value = "/writeStatusChange", method = RequestMethod.POST)
+    public String writeStatusChange(DefectDTO defectDTO) {
+        String redirectSite;
+        defectService.changeDefectStatus(defectDTO,  securityUtils.getLoggedPerson());
+//        defectCommentService.writeDefectStatusChange(defectDTO,  securityUtils.getLoggedPerson());
+        redirectSite = "redirect:/defect/"+defectDTO.getId();
+
+        return redirectSite;
     }
 
 

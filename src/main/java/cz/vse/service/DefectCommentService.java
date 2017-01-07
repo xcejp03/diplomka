@@ -1,6 +1,7 @@
 package cz.vse.service;
 
 import cz.vse.dto.DefectCommentDTO;
+import cz.vse.dto.DefectDTO;
 import cz.vse.entity.Defect;
 import cz.vse.entity.DefectComment;
 import cz.vse.entity.Person;
@@ -34,4 +35,8 @@ public interface DefectCommentService {
     List<DefectCommentDTO> findAllDefectCommentDTOByDefect(Defect defect);
 
     List<DefectCommentDTO> findAllDefectCommentDTOByDefectId(long id);
+
+    void writeDefectStatusChange(DefectDTO defectDTO, Person author);
+
+    void writeDefectAssigneeChange(DefectDTO defectDTO, Person author);
 }

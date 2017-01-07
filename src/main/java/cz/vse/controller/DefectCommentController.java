@@ -1,10 +1,13 @@
 package cz.vse.controller;
 
 import cz.vse.dto.DefectCommentDTO;
+import cz.vse.dto.DefectDTO;
+import cz.vse.entity.Person;
 import cz.vse.service.DefectCommentService;
 import cz.vse.service.impl.DefectServiceImpl;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
+import cz.vse.utils.SecurityUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +36,9 @@ public class DefectCommentController {
     @Autowired
     DefectCommentService defectCommentService;
 
+    @Autowired
+    SecurityUtils securityUtils;
+
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createDefect(Model model) {
         l.info("request mapping comment/create");
@@ -60,6 +66,7 @@ public class DefectCommentController {
 
         return redirectSite;
     }
+
 
     @RequestMapping("/edit/{id}")
     public String editComment(@PathVariable("id") long id, Model model) {

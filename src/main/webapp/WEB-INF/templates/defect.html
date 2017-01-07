@@ -146,12 +146,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-7">
+        <div class="col-sm-4">
 
             <div class="well">
                 <h3>Reassignuj defekt "<span th:text="${defectDTO.name}"></span>" na někoho jiného </h3>
 
-                <form th:action="@{/defect/create}" method="post" default-target-url="/index">
+                <form th:action="@{/defect/writeAssigneChange}" method="post" default-target-url="/index">
                     <div class=" control-group form-group">
                         <div class="controls">
                              <span th:if="${defectDTO.id != null}" th:remove="tag">
@@ -181,7 +181,47 @@
                     </div>
                 </form>
             </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="well">
+                <h3>Změna stavu defektu.</h3>
+                <form th:action="@{/defect/writeStatusChange}" method="post" default-target-url="/index">
+                    <div class=" control-group form-group">
+                        <div class="controls">
+                             <span th:if="${defectDTO.id != null}" th:remove="tag">
+                            <div class=" control-group form-group">
+                            <div class="controls">
+                                <input type="text" id="id3" th:value="${defectDTO.id}" name="id" hidden="hidden"/>
+                            </div>
+                        </div>
+                        </span>
 
+                            <label for="status">Stav</label>:
+
+                            <select class="form-control" id="status" name="status">
+                                <option th:each="status : ${T(cz.vse.entity.DefectStatusEnum).values()}"
+                                        th:value="${status}"
+                                        th:selected="${defectDTO.status != null} ? ${#strings.contains(status, defectDTO.status)}"
+                                        th:text="${status}">status
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class=" control-group form-group">
+                        <div class="controls">
+                            <input type="submit" value="Změna stavu" class="btn btn-primary"/>
+                        </div>
+                    </div>
+
+                    <input type="text" id="author_id" name="author_id" th:value="${loggedPersonDTO.id}"
+                           hidden="hidden"/>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="col-sm-7">
             <div class="well">
                 <h3>Komentáře defektu <span th:text="${defectDTO.id}"></span></h3>
                 <div style="overflow: auto; max-height: 600px">
@@ -223,7 +263,10 @@
                             </div>
                         </div>
                         </span>
+                    <input type="text" id="defect_id" name="defect_id" th:value="${defectDTO.id}" hidden="hidden"/>
 
+                    <input type="text" id="author_id" name="author_id" th:value="${loggedPersonDTO.id}"
+                           hidden="hidden"/>
                     <div class=" control-group form-group">
                         <div class="controls">
                             <label for="commentText">Komentář</label>:
