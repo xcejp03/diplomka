@@ -1,7 +1,9 @@
 package cz.vse.utils;
 
+import cz.vse.dto.PersonDTO;
 import cz.vse.entity.Person;
 import cz.vse.service.PersonService;
+import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +17,9 @@ public class SecurityUtils {
     @Autowired
     private PersonService personService;
 
+    @Autowired
+    private MapperFacade mapper;
+
     public Person getLoggedPerson() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Person person = personService.findPersonByAuthentication(auth);
@@ -26,5 +31,13 @@ public class SecurityUtils {
         Person person = personService.findPersonByAuthentication(auth);
         Long personId = person.getId();
         return personId;
+    }
+
+    public PersonDTO getLoggedPersonDTO() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Person person = personService.findPersonByAuthentication(auth);
+        PersonDTO personDTO;
+        personDTO = mapper.map(person, PersonDTO.class);
+        return personDTO;
     }
 }

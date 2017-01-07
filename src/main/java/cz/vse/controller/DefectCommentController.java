@@ -47,6 +47,7 @@ public class DefectCommentController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createProject(@ModelAttribute("person") DefectCommentDTO defectCommentDTO) {
+        String redirectSite;
         if (defectCommentDTO.getId() == null) {
             //new person, add it
             defectCommentService.createComment(defectCommentDTO);
@@ -55,7 +56,9 @@ public class DefectCommentController {
             defectCommentService.updateComment(defectCommentDTO);
 
         }
-        return "redirect:create";
+        redirectSite = "redirect:/defect/"+defectCommentDTO.getDefect_id();
+
+        return redirectSite;
     }
 
     @RequestMapping("/edit/{id}")

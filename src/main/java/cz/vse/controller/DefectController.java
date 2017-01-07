@@ -1,6 +1,9 @@
 package cz.vse.controller;
 
+import cz.vse.dto.DefectCommentDTO;
 import cz.vse.dto.DefectDTO;
+import cz.vse.entity.DefectComment;
+import cz.vse.service.DefectCommentService;
 import cz.vse.service.impl.DefectServiceImpl;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
@@ -32,6 +35,9 @@ public class DefectController {
 
     @Autowired
     private SecurityUtils securityUtils;
+
+    @Autowired
+    private DefectCommentService defectCommentService;
 
     @RequestMapping( method = RequestMethod.GET)
     public String defectDefault(Model model) {
@@ -90,9 +96,26 @@ public class DefectController {
         model.addAttribute("listDefectByReporterDTO", defectService.findAllDefectDTOByReporter(securityUtils.getLoggedPerson()));
         model.addAttribute("listDefectByAssigneeDTO", defectService.findAllDefectDTOByAssignee(securityUtils.getLoggedPerson()));
         model.addAttribute("listPersons", personService.findAllPersons());
-        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
+        model.addAttribute("listProjectsDTO", projectService.findAllTestProjectsDTO());
 
         return "defects";
     }
+
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String defectShowById(@PathVariable("id") long id, Model model) {
+        l.info("request mapping defect/"+id);
+        model.addAttribute("defectDTO", defectService.findDefectDTOById(id));
+
+        model.addAttribute("listDefectByReporterDTO", defectService.findAllDefectDTOByReporter(securityUtils.getLoggedPerson()));
+        model.addAttribute("listDefectByAssigneeDTO", defectService.findAllDefectDTOByAssignee(securityUtils.getLoggedPerson()));
+        model.addAttribute("listPersons", personService.findAllPersons());
+        model.addAttribute("listProjectsDTO", projectService.findAllTestProjectsDTO());
+        model.addAttribute("listDefectCommentByDefectDTO", defectCommentService.findAllDefectCommentDTOByDefectId(id));
+        model.addAttribute("commentDTO", new DefectCommentDTO());
+        model.addAttribute("loggedPersonDTO", securityUtils.getLoggedPersonDTO());
+        return "defect";
+    }
+
 
 }

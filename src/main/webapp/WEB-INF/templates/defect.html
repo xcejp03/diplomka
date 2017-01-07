@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="cs" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title th:text="'Defect ID '+ ${defectDTO.id}"></title>
+    <!--importované přes fragment-->
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <div th:replace="/fragment/thymeFragment :: headImports"/>
+    <!--importované přes fragment - konec-->
+
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.css"/>
+
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
+
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<div th:replace="/fragment/thymeFragment :: menu"></div>
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="page-header">
+                <small>WEB-INF/templates/defects.html</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="index">Home</a>
+                </li>
+                <li class="active">Defekty</li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            <div class="jumbotron">
+                <h1 class="error-404">Detail defektu <span th:text="${defectDTO.id}"></span>
+                    <small>"</small>
+                    <small th:text="${defectDTO.name}"></small>
+                    <small>"</small>
+                </h1>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-5" style="border:1px solid black">
+            <div class="well">
+                <div class=" control-group form-group">
+                    <div class="controls">
+                        <label for="name">Název</label>:
+                        <input type="text" id="name" name="name" th:value="${defectDTO.name}"
+                               class="form-control"/>
+                    </div>
+                </div>
+
+                <div class=" control-group form-group">
+                    <div class="controls">
+                        <label for="description">Popis</label>:
+                        <input type="text" id="description" name="description" th:value="${defectDTO.description}"
+                               class="form-control"/>
+                    </div>
+                </div>
+
+                <div class=" control-group form-group">
+                    <div class="controls">
+                        <label for="name">Affects version</label>:
+                        <input type="text" id="affectsVersion" name="affectsVersion"
+                               th:value="${defectDTO.affectsVersion}"
+                               class="form-control"/>
+                    </div>
+                </div>
+
+                <div class=" control-group form-group">
+                    <div class="controls">
+                        <label for="description">priority</label>:
+                        <input type="text" id="priority" name="priority" th:value="${defectDTO.priority}"
+                               class="form-control"/>
+                    </div>
+                </div>
+
+                <div class=" control-group form-group">
+                    <div class="controls">
+                        <label for="name">status</label>:
+                        <input type="text" id="status" name="status" th:value="${defectDTO.status}"
+                               class="form-control"/>
+                    </div>
+                </div>
+
+                <div class=" control-group form-group">
+                    <div class="controls">
+                        <label for="description">createdDateTime</label>:
+                        <input type="text" id="createdDateTime" name="createdDateTime"
+                               th:value="${defectDTO.createdDateTime}"
+                               class="form-control"/>
+                    </div>
+                </div>
+
+                <div class=" control-group form-group">
+                    <div class="controls">
+                        <label for="description">updatedDateTime</label>:
+                        <input type="text" id="updatedDateTime" name="updatedDateTime"
+                               th:value="${defectDTO.updatedDateTime}"
+                               class="form-control"/>
+                    </div>
+                </div>
+                <div class=" control-group form-group">
+                    <div class="controls">
+                        <label for="description">assignee_id</label>:
+                        <input type="text" id="assignee_id" name="assignee_id"
+                               th:value="${defectDTO.assignee_id}"
+                               class="form-control"/>
+                    </div>
+                </div>
+                <div class=" control-group form-group">
+                    <div class="controls">
+                        <label for="description">createdDateTime</label>:
+                        <input type="text" id="reporter_id" name="reporter_id"
+                               th:value="${defectDTO.reporter_id}"
+                               class="form-control"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-7" style="border:1px solid black">
+            <div class="well">
+                <h3>Komentáře defektu <span th:text="${defectDTO.id}"></span></h3>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Koment ID</th>
+                        <th>Komentář</th>
+                        <th>Autor</th>
+                        <th>Datum</th>
+                        <th>Více</th>
+                    </tr>
+                    </thead>
+                    <tbody th:remove="all-but-first">
+                    <tr th:each="comment : ${ listDefectCommentByDefectDTO}">
+                        <td th:text="${comment.id}">00</td>
+                        <td th:text="${comment.commentText}">Text</td>
+                        <td th:text="${comment.author_id}">Název</td>
+                        <td th:text="${comment.createdDateTime}">Datum</td>
+                        <td><a href="#" class="opener"
+                               th:attr="data-objectid=${comment.id}" data-id="#moreDialog">Více</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <form th:action="@{/comment/create}" method="post" default-target-url="/index">
+
+                        <span th:if="${commentDTO.id != null}" th:remove="tag">
+                            <div class=" control-group form-group">
+                            <div class="controls">
+                                <label for="id">ID</label>:
+                                <input type="text" id="id" th:value="${commentDTO.id}" readonly="true" name="id"
+                                       class="form-control"/>
+                            </div>
+                        </div>
+                        </span>
+
+                    <div class=" control-group form-group">
+                        <div class="controls">
+                            <label for="commentText">commentText</label>:
+                            <input type="text" id="commentText" name="commentText" th:value="${commentDTO.commentText}"
+                                   class="form-control"/>
+                        </div>
+                    </div>
+
+                    <input type="text" id="defect_id" name="defect_id" th:value="${defectDTO.id}" hidden="hidden"/>
+
+
+                    <input type="text" id="author_id" name="author_id" th:value="${loggedPersonDTO.id}"
+                           hidden="hidden"/>
+
+                    <span th:if="${commentDTO.id != null}" th:remove="tag">
+                             <input type="submit" value="Upravit" class="btn btn-primary"/>
+                        </span>
+                    <span th:if="${commentDTO.id == null}" th:remove="tag">
+                             <input type="submit" value="Vytvořit" class="btn btn-primary"/>
+                        </span>
+
+                </form>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- Footer -->
+    <div th:replace="/fragment/thymeFragment :: footer"></div>
+
+</div>
+<!-- /.container -->
+
+
+</body>
+
+</html>

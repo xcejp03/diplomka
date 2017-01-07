@@ -30,4 +30,8 @@ public interface DefectCommentService {
     List<DefectComment> findAllDefectsComments(Defect defect);
 
     List<DefectCommentDTO> findAllDefectsCommentsDTOAllTest();
+
+    List<DefectCommentDTO> findAllDefectCommentDTOByDefect(Defect defect);
+
+    List<DefectCommentDTO> findAllDefectCommentDTOByDefectId(long id);
 }

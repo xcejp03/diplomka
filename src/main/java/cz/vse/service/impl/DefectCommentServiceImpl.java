@@ -118,4 +118,23 @@ public class DefectCommentServiceImpl implements DefectCommentService {
         l.info("all defect's comments found");
         return defectCommentDTOList;
     }
+
+    public List<DefectCommentDTO> findAllDefectCommentDTOByDefect(Defect defect)    {
+        List<DefectComment> defectCommentList;
+        List<DefectCommentDTO> defectCommentDTOList;
+        defectCommentList = defectCommentRepository.findAllDefectCommentsByDefectOrderById(defect);
+        defectCommentDTOList = mapper.mapAsList(defectCommentList, DefectCommentDTO.class);
+        return defectCommentDTOList;
+    }
+
+    public List<DefectCommentDTO> findAllDefectCommentDTOByDefectId(long id)    {
+        List<DefectComment> defectCommentList;
+        List<DefectCommentDTO> defectCommentDTOList;
+        Defect defect = defectService.findDefectById(id);
+
+        defectCommentList = defectCommentRepository.findAllDefectCommentsByDefectOrderById(defect);
+        defectCommentDTOList = mapper.mapAsList(defectCommentList, DefectCommentDTO.class);
+        return defectCommentDTOList;
+    }
+
 }

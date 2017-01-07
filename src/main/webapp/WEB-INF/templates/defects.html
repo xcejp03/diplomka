@@ -54,88 +54,103 @@
         </div>
     </div>
 
-    <p><a href="/defect/create" class="btn btn-default">Založit Defect</a></p>
+    <div class="row">
+        <div class="col-sm-12">
+            <p><a href="/defect/create" class="btn btn-default">Založit Defect</a></p>
+        </div>
+    </div>
 
-    <h1> Test Cases list - by reporter</h1>
-    <table class="table table-striped datatable">
-        <thead>
-        <tr>
-            <th>TC ID</th>
-            <th>Priorita</th>
-            <th>Název</th>
-            <th>Affected Version</th>
-            <th>Status</th>
-            <th>created</th>
-            <th>updated</th>
-            <th>Assignee</th>
-            <th>Reporter</th>
-            <th>Detail</th>
-            <th>Více</th>
-        </tr>
-        </thead>
-        <tbody th:remove="all-but-first">
-        <tr th:each="defect : ${listDefectByReporterDTO}">
-            <td th:text="${defect.id}">00</td>
-            <td th:text="${defect.priority}">Priorita</td>
-            <td th:text="${defect.name}">Název</td>
-            <td th:text="${defect.affectsVersion}">Affected version</td>
-            <td th:text="${defect.status}">Status</td>
-            <td th:text="${defect.createdDateTime}">Vytvořeno</td>
-            <td th:text="${defect.updatedDateTime}">updated</td>
-            <td th:text="${defect.assignee_id}">Assignee</td>
-            <td th:text="${defect.reporter_id}">reporter</td>
-            <td><a href="#" class="opener"
-                   th:attr="data-name=${defect.description}"
-                   data-id="#detailDialog">Detail</a>
-            </td>
-            <td><a href="#" class="opener"
-                   th:attr="data-objectid=${defect.id}" data-id="#moreDialog">Více</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-sm-12">
+            <h1> Test Cases list - by assignee</h1>
+            <table class="table table-striped datatable">
+                <thead>
+                <tr>
+                    <th>TC ID</th>
+                    <th>Priorita</th>
+                    <th>Název</th>
+                    <th>Affected Version</th>
+                    <th>Status</th>
+                    <th>created</th>
+                    <th>updated</th>
+                    <th>Assignee</th>
+                    <th>Reporter</th>
+                    <th>Detail</th>
+                    <th>Více</th>
+                </tr>
+                </thead>
+                <tbody th:remove="all-but-first">
+                <tr th:each="defect : ${listDefectByAssigneeDTO}">
+                    <td th:text="${defect.id}">00</td>
+                    <td th:text="${defect.priority}">Priorita</td>
+                    <td th:text="${defect.name}">Název</td>
+                    <td th:text="${defect.affectsVersion}">Affected version</td>
+                    <td th:text="${defect.status}">Status</td>
+                    <td th:text="${defect.createdDateTime}">Vytvořeno</td>
+                    <td th:text="${defect.updatedDateTime}">updated</td>
+                    <td th:text="${defect.assignee_id}">Assignee</td>
+                    <td th:text="${defect.reporter_id}">reporter</td>
+                    <td><a href="#" th:href="@{'/defect/'+${defect.id}}"
+                           th:attr="data-name=${defect.description}"
+                           data-id="#detailDialog">Detail</a>
+                    </td>
+                    <td><a href="#" class="opener"
+                           th:attr="data-objectid=${defect.id}" data-id="#moreDialog">Více</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    <h1> Test Cases list - by assignee</h1>
-    <table class="table table-striped datatable">
-        <thead>
-        <tr>
-            <th>TC ID</th>
-            <th>Priorita</th>
-            <th>Název</th>
-            <th>Affected Version</th>
-            <th>Status</th>
-            <th>created</th>
-            <th>updated</th>
-            <th>Assignee</th>
-            <th>Reporter</th>
-            <th>Detail</th>
-            <th>Více</th>
-        </tr>
-        </thead>
-        <tbody th:remove="all-but-first">
-        <tr th:each="defect : ${listDefectByAssigneeDTO}">
-            <td th:text="${defect.id}">00</td>
-            <td th:text="${defect.priority}">Priorita</td>
-            <td th:text="${defect.name}">Název</td>
-            <td th:text="${defect.affectsVersion}">Affected version</td>
-            <td th:text="${defect.status}">Status</td>
-            <td th:text="${defect.createdDateTime}">Vytvořeno</td>
-            <td th:text="${defect.updatedDateTime}">updated</td>
-            <td th:text="${defect.assignee_id}">Assignee</td>
-            <td th:text="${defect.reporter_id}">reporter</td>
-            <td><a href="#" class="opener"
-                   th:attr="data-name=${defect.description}"
-                   data-id="#detailDialog">Detail</a>
-            </td>
-            <td><a href="#" class="opener"
-                   th:attr="data-objectid=${defect.id}" data-id="#moreDialog">Více</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-sm-12">
+            <h1> Test Cases list - by reporter</h1>
+            <table class="table table-striped datatable">
+                <thead>
+                <tr>
+                    <th>TC ID</th>
+                    <th>Priorita</th>
+                    <th>Název</th>
+                    <th>Affected Version</th>
+                    <th>Status</th>
+                    <th>created</th>
+                    <th>updated</th>
+                    <th>Assignee</th>
+                    <th>Reporter</th>
+                    <th>Detail</th>
+                    <th>Více</th>
+                </tr>
+                </thead>
+                <tbody th:remove="all-but-first">
+                <tr th:each="defect : ${listDefectByReporterDTO}">
+                    <td th:text="${defect.id}">00</td>
+                    <td th:text="${defect.priority}">Priorita</td>
+                    <td th:text="${defect.name}">Název</td>
+                    <td th:text="${defect.affectsVersion}">Affected version</td>
+                    <td th:text="${defect.status}">Status</td>
+                    <td th:text="${defect.createdDateTime}">Vytvořeno</td>
+                    <td th:text="${defect.updatedDateTime}">updated</td>
+                    <td th:text="${defect.assignee_id}">Assignee</td>
+                    <td th:text="${defect.reporter_id}">reporter</td>
+                    <td><a href="#" th:href="@{'/defect/'+${defect.id}}"
+                           th:attr="data-name=${defect.description}"
+                           data-id="#detailDialog">Detail</a>
+                    </td>
+                    <td><a href="#" class="opener"
+                           th:attr="data-objectid=${defect.id}" data-id="#moreDialog">Více</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
 
-
-    <p><a href="/defect/create" class="btn btn-default">Založit Defect</a></p>
+            <p><a href="/defect/create" class="btn btn-default">Založit Defect</a></p>
+        </div>
+    </div>
 
     <!--dialogová okna-->
     <div id="moreDialog" title="Více">
