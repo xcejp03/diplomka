@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by pcejka on 09.10.2016.
  */
@@ -39,7 +41,7 @@ public class DefectController {
     @Autowired
     private DefectCommentService defectCommentService;
 
-    @RequestMapping( method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public String defectDefault(Model model) {
         l.info("request mapping defect/create");
         model.addAttribute("defect", new DefectDTO());
@@ -62,16 +64,15 @@ public class DefectController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createDefectPost(@ModelAttribute("person") DefectDTO defectDTO) {
-        String  redirectSite;
+    public String createDefectPost(@ModelAttribute("person") DefectDTO defectDTO, HttpServletRequest request) {
         if (defectDTO.getId() == null) {
             defectDTO.setReporter_id(securityUtils.getLoggedPersonId());
             defectService.createDefect(defectDTO);
         } else {
             defectService.updateDefect(defectDTO);
         }
-        redirectSite = "redirect:/defect/"+defectDTO.getId();
-        return redirectSite;
+        String referer = request.getHeader("Referer");
+        return "redirect:" + referer;
     }
 
     @RequestMapping("/edit/{id}")
@@ -106,7 +107,7 @@ public class DefectController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String defectShowById(@PathVariable("id") long id, Model model) {
-        l.info("request mapping defect/"+id);
+        l.info("request mapping defect/" + id);
         model.addAttribute("defectDTO", defectService.findDefectDTOById(id));
 
         model.addAttribute("listDefectByReporterDTO", defectService.findAllDefectDTOByReporter(securityUtils.getLoggedPerson()));

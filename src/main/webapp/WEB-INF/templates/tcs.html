@@ -89,7 +89,7 @@
             <td sec:authorize="hasAuthority('ANALYTIC')"><a th:href="@{'/ts/ts-by-tcmuster/'+${tc.id}}">Test Stepy</a>
             </td>
             <td><a href="#" class="opener"
-                   th:attr="data-objectid=${tc.id}" data-id="#moreDialog">Více</a>
+                   th:attr="data-sourceid=${tc.id}, data-objectid=${tc.id}" data-id="#moreDialog">Více</a>
             </td>
         </tr>
         </tbody>
@@ -100,7 +100,7 @@
     <!--dialogová okna-->
     <div id="moreDialog" title="Více">
         <h3>TC ID: <span id="spanDataObjectId"></span></h3>
-        <a href="/defect/create" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Založit defekt</a>
+        <a th:href="@{'/defect/create'(source='tcInstanceSource_id')}" onclick="addSourceIdToURL(this)" target="_blank" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Založit defekt</a>
         <a th:href="@{'/tc/delete/'}" class="btn btn-default" sec:authorize="hasAuthority('ANALYTIC')">Smazat</a>
         <a href="/defect/defects" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Seznam Defektů</a>
     </div>

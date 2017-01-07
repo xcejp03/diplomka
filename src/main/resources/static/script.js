@@ -1,4 +1,5 @@
-var editId = 'nenačetlose';
+var editId = 'nenačetloseEditId';
+var sourceId = 'nenačetloseSourceId';
 
 $(function () {
     $("#datepicker").datepicker();
@@ -10,6 +11,14 @@ function addIdToURL(element) {
         return this.href + editId;
     });
 }
+
+function addSourceIdToURL(element) {
+    var dataAttr = $(this).data();
+    $(element).attr('href', function () {
+        return this.href + '&sourceid=' + sourceId;
+    });
+}
+
 
 $(function () {
     $("#detailDialog, #statisticsDialog, #moreDialog,#membersDialog, #dialog3").dialog({
@@ -52,9 +61,9 @@ $(function () {
     })
 })
 
-$(document).ready( function () {
+$(document).ready(function () {
     $('.datatable').DataTable();
-} );
+});
 
 
 

@@ -84,7 +84,7 @@
     <!--dialogová okna-->
     <div id="moreDialog" title="Více">
         <h3>TC ID: <span id="spanDataObjectId"></span></h3>
-        <a href="/defect/create" class="btn btn-default" >Založit defekt</a>
+        <a th:href="@{'/defect/create'(source='tsInstanceSource_id')}" onclick="addSourceIdToURL(this)" class="btn btn-default" >Založit defekt</a>
         <a href="/ts/remove/" onclick="addIdToURL(this)" class="btn btn-default">Smazat</a>
         <a href="/defect/defects" class="btn btn-default">Seznam Defektů</a>
 

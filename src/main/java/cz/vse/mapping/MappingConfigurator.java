@@ -86,6 +86,9 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .mapNulls(false)
                 .field("assignee", "assignee_id")
                 .field("reporter", "reporter_id")
+                .field("projectSource", "projectSource_id")
+                .field("tcInstanceSource", "tcInstanceSource_id")
+                .field("tsInstanceSource", "tsInstanceSource_id")
                 .byDefault()
                 .register();
         factory.classMap(Person.class, PersonDTO.class)

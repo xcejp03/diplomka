@@ -40,6 +40,9 @@
 
     <!-- Page Content -->
     <div class="container">
+        <!--private Project projectSource;-->
+        <!--private TCInstance tcInstanceSource;-->
+        <!--private TSInstance tsInstanceSource;-->
 
         <div class="row">
             <div class="col-sm-4">
@@ -56,6 +59,19 @@
                         </div>
                         </span>
 
+
+                        <div th:if="${param.source} != null" th:switch="${param.source[0]}"  >
+                            <input th:case="projectSource_id" id="projectSource_id" type="hidden"
+                                   th:value="${param.sourceid[0]}" name="projectSource_id"
+                                   class="form-control"/>
+                            <input th:case="tcInstanceSource_id" id="tcInstanceSource_id" type="hidden"
+                                   th:value="${param.sourceid[0]}" name="tcInstanceSource_id"
+                                   class="form-control"/>
+                            <input th:case="tsInstanceSource_id" id="tsInstanceSource_id" type="hidden"
+                                   th:value="${param.sourceid[0]}" name="tsInstanceSource_id"
+                                   class="form-control"/>
+                        </div>
+
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="name">Název</label>:
@@ -67,7 +83,8 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="description">Popis</label>:
-                                <input type="text" id="description" name="description" th:value="${defectDTO.description}"
+                                <input type="text" id="description" name="description"
+                                       th:value="${defectDTO.description}"
                                        class="form-control"/>
                             </div>
                         </div>
@@ -75,7 +92,8 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="affectsVersion">affectsVersion</label>:
-                                <input type="text" id="affectsVersion" name="affectsVersion" th:value="${defectDTO.affectsVersion}"
+                                <input type="text" id="affectsVersion" name="affectsVersion"
+                                       th:value="${defectDTO.affectsVersion}"
                                        class="form-control"/>
                             </div>
                         </div>
@@ -102,19 +120,16 @@
                             <div class="controls">
                                 <label for="priority">Priorita</label>:
 
-                                <select class="form-control" id="priority" name="priority" th:with="priorities=${T(cz.vse.entity.PriorityDefectEnum).values()}">
+                                <select class="form-control" id="priority" name="priority"
+                                        th:with="priorities=${T(cz.vse.entity.PriorityDefectEnum).values()}">
                                     <option th:each="priority : ${priorities}"
                                             th:value="${priority}"
-                                            th:class="${priority}"
                                             th:selected="${defectDTO.priority != null} ? ${#arrays.contains(defectDTO.priority, priority)}"
                                             th:text="${priority}">jméno projektu
                                     </option>
                                 </select>
                             </div>
                         </div>
-
-
-
 
 
                         <span th:if="${defectDTO.id != null}" th:remove="tag">
@@ -126,6 +141,11 @@
 
                     </form>
                 </div>
+            </div>
+            <div class="col-sm-8">
+                <button type="button" class="btn btn-primary"
+                        onclick="window.open('', '_self', ''); window.close();">Close tab
+                </button>
             </div>
         </div>
 

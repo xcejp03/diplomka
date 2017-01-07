@@ -1,8 +1,9 @@
 package cz.vse.dto;
 
-import cz.vse.entity.DefectStatusEnum;
-import cz.vse.entity.PriorityDefectEnum;
+import cz.vse.entity.*;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 /**
@@ -18,6 +19,11 @@ public class DefectDTO extends BaseDTO {
     private LocalDateTime updatedDateTime;
     private Long assignee_id;
     private Long reporter_id;
+
+    private Long projectSource_id;
+    private Long tcInstanceSource_id;
+    private Long tsInstanceSource_id;
+
 
     public String getDescription() {
         return description;
@@ -89,6 +95,31 @@ public class DefectDTO extends BaseDTO {
 
     public void setUpdatedDateTime(LocalDateTime updatedDateTime) {
         this.updatedDateTime = updatedDateTime;
+    }
+
+
+    public Long getProjectSource_id() {
+        return projectSource_id;
+    }
+
+    public void setProjectSource_id(Long projectSource_id) {
+        this.projectSource_id = projectSource_id;
+    }
+
+    public Long getTcInstanceSource_id() {
+        return tcInstanceSource_id;
+    }
+
+    public void setTcInstanceSource_id(Long tcInstanceSource_id) {
+        this.tcInstanceSource_id = tcInstanceSource_id;
+    }
+
+    public Long getTsInstanceSource_id() {
+        return tsInstanceSource_id;
+    }
+
+    public void setTsInstanceSource_id(Long tsInstanceSource_id) {
+        this.tsInstanceSource_id = tsInstanceSource_id;
     }
 
     @Override

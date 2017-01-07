@@ -59,23 +59,26 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="action">Akce</label>:
-                                <input type="text" id="action" readonly="true" name="action" th:value="${tsDTO.action}" class="form-control"
-                                      />
+                                <input type="text" id="action" readonly="true" name="action" th:value="${tsDTO.action}"
+                                       class="form-control"
+                                />
                             </div>
                         </div>
 
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="expected">Očekávané chování</label>:
-                                <input type="text" id="expected" readonly="true" name="expected" th:value="${tsDTO.expected}" class="form-control"
-                                      />
+                                <input type="text" id="expected" readonly="true" name="expected"
+                                       th:value="${tsDTO.expected}" class="form-control"
+                                />
                             </div>
                         </div>
 
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="result">Výsledek</label>:
-                                <input type="text" id="result" name="result" th:value="${tsDTO.result}" autofocus="autofocus" class="form-control"/>
+                                <input type="text" id="result" name="result" th:value="${tsDTO.result}"
+                                       autofocus="autofocus" class="form-control"/>
                             </div>
                         </div>
 
@@ -83,7 +86,8 @@
                             <div class="controls">
                                 <label for="status">Status</label>:
 
-                                <select class="form-control" id="status" name="status" th:with="statuses=${T(cz.vse.entity.StatusEnum).values()}">
+                                <select class="form-control" id="status" name="status"
+                                        th:with="statuses=${T(cz.vse.entity.StatusEnum).values()}">
                                     <option th:each="status : ${statuses}"
                                             th:value="${status}"
                                             th:class="${status}"
@@ -96,11 +100,12 @@
 
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <input type="hidden" id="tcInstance_id" name="tcInstance_id" th:value="${tsDTO.tcInstance_id}" class="form-control"/>
+                                <input type="hidden" id="tcInstance_id" name="tcInstance_id"
+                                       th:value="${tsDTO.tcInstance_id}" class="form-control"/>
                             </div>
                         </div>
 
-                            <!--<div hidden th:value="tcInstance_id"/>-->
+                        <!--<div hidden th:value="tcInstance_id"/>-->
 
                         <span th:if="${tsDTO.id != null}" th:remove="tag">
                              <input type="submit" value="Upravit" class="btn btn-primary"/>
@@ -111,6 +116,17 @@
 
                     </form>
                 </div>
+            </div>
+            <div class="col-sm-8">
+
+
+                <p><a th:href="@{'/defect/create'(source='tsInstanceSource_id', sourceid=${tsDTO.id})}"
+                      class="btn btn-default" target="_blank">Založit Defekt pro step</a></p>
+            </div>
+            <div class="col-sm-8">
+                <p><a th:href="@{'/tc/show/'+${tsDTO.tcInstance_id}}"
+                      class="btn btn-default">Zpět</a>
+                </p>
             </div>
         </div>
 
