@@ -92,6 +92,13 @@ public class TSController {
         return "tsRun";
     }
 
+    @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
+    public String showTSInstancePost(@PathVariable("id") long id, Model model) {
+        l.info("/run/{id}" + id);
+        model.addAttribute("tsDTO", tsInstanceService.findTestStepInstanceRunDTOById(id));
+        return "tsShow";
+    }
+
     @RequestMapping("/remove/{id}")
     public String removeTSMuster(@PathVariable("id") long id) {
         tsMusterService.deleteTestStepMuster(id);

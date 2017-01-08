@@ -144,9 +144,40 @@
                                class="form-control"/>
                     </div>
                 </div>
+                <div class=" control-group form-group">
+                    <div class="controls">
+
+                        <div th:if="${defectDTO.projectSource_id} != null">
+                            <a  th:href="@{'/project/'+${defectDTO.projectSource_id}}" class="btn btn-primary">Zdroj (projekt)</a>
+                        </div>
+                        <div th:if="${defectDTO.tcInstanceSource_id} != null">
+                            <a  th:href="@{'/tc/show/'+${defectDTO.tcInstanceSource_id}}" class="btn btn-primary">Zdroj (TC)</a>
+                        </div>
+                        <div th:if="${defectDTO.tsInstanceSource_id} != null">
+                            <a  th:href="@{'/ts/show/'+${defectDTO.tsInstanceSource_id}}" class="btn btn-primary">Zdroj (TS)</a>
+                        </div>
+                    </div>
+
+
+                    <!--<div th:if="${param.source} != null" th:switch="${param.source[0]}">-->
+                    <!--<input th:case="projectSource_id" id="projectSource_id" type="hidden"-->
+                    <!--th:value="${param.sourceid[0]}" name="projectSource_id"-->
+                    <!--class="form-control"/>-->
+                    <!--<input th:case="tcInstanceSource_id" id="tcInstanceSource_id" type="hidden"-->
+                    <!--th:value="${param.sourceid[0]}" name="tcInstanceSource_id"-->
+                    <!--class="form-control"/>-->
+                    <!--<input th:case="tsInstanceSource_id" id="tsInstanceSource_id" type="hidden"-->
+                    <!--th:value="${param.sourceid[0]}" name="tsInstanceSource_id"-->
+                    <!--class="form-control"/>-->
+                    <!--</div>-->
+
+
+                    <!--<a href="" class="btn btn-primary">Zdroj</a>-->
+                </div>
             </div>
         </div>
         <div class="col-sm-4">
+
 
             <div class="well">
                 <h3>Reassignuj defekt "<span th:text="${defectDTO.name}"></span>" na někoho jiného </h3>
@@ -226,7 +257,7 @@
                 <h3>Komentáře defektu <span th:text="${defectDTO.id}"></span></h3>
                 <div style="overflow: auto; max-height: 600px">
                     <!--th:if="${not #lists.isEmpty(tblUserList)}"-->
-                     <span th:if="${not #lists.isEmpty(listDefectCommentByDefectDTO)}" th:remove="tag">
+                    <span th:if="${not #lists.isEmpty(listDefectCommentByDefectDTO)}" th:remove="tag">
                     <table class="table table-striped">
                         <thead>
                         <tr>

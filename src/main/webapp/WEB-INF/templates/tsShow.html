@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Show Test Step</title>
+
+    <!--importované přes fragment-->
+    <div th:replace="/fragment/thymeFragment :: headImports"/>
+    <!--importované přes fragment - konec-->
+
+</head>
+
+<body>
+<!-- Navigation -->
+<div th:replace="/fragment/thymeFragment :: menu"></div>
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="page-header">
+                <small>WEB-INF/templates/tsShow.html</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="/index">Home</a>
+                </li>
+                <li class="active">Test step Run</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="well">
+                    <form th:action="@{/ts/run}" method="post" default-target-url="/index">
+
+                        <span th:if="${tsDTO.id != null}" th:remove="tag">
+                            <div class=" control-group form-group">
+                            <div class="controls">
+                                <label for="id">ID</label>:
+                                <input type="text" id="id" th:value="${tsDTO.id}" readonly="true" name="id"
+                                       class="form-control"/>
+                            </div>
+                        </div>
+                        </span>
+
+                        <div class=" control-group form-group">
+                            <div class="controls">
+                                <label for="action">Akce</label>:
+                                <input type="text" id="action" readonly="true" name="action" th:value="${tsDTO.action}"
+                                       class="form-control"
+                                />
+                            </div>
+                        </div>
+
+                        <div class=" control-group form-group">
+                            <div class="controls">
+                                <label for="expected">Očekávané chování</label>:
+                                <input type="text" id="expected" readonly="true" name="expected"
+                                       th:value="${tsDTO.expected}" class="form-control"
+                                />
+                            </div>
+                        </div>
+
+                        <div class=" control-group form-group">
+                            <div class="controls">
+                                <label for="result">Výsledek</label>:
+                                <input type="text" id="result" name="result" th:value="${tsDTO.result}" readonly="true"
+                                       class="form-control"/>
+                            </div>
+                        </div>
+
+                        <div class=" control-group form-group">
+                            <div class="controls">
+                                <label for="status">Status</label>:
+
+                                <select class="form-control" id="status" name="status" readonly="true"
+                                        th:with="statuses=${T(cz.vse.entity.StatusEnum).values()}">
+                                    <option th:each="status : ${statuses}"
+                                            th:value="${status}"
+                                            th:class="${status}"
+                                            th:selected="${tsDTO.status != null} ? ${#arrays.contains(tsDTO.status, status)}"
+                                            th:text="${status}"
+                                            readonly="true">jméno projektu
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class=" control-group form-group">
+                            <div class="controls">
+                                <input type="hidden" id="tcInstance_id" name="tcInstance_id" readonly="true"
+                                       th:value="${tsDTO.tcInstance_id}" class="form-control"/>
+                            </div>
+                        </div>
+
+                        <span th:if="${tsDTO.id != null}" th:remove="tag">
+                             <input type="submit" value="Upravit" class="btn btn-primary"/>
+                        </span>
+                        <span th:if="${tsDTO.id == null}" th:remove="tag">
+                             <input type="submit" value="Vytvořit" class="btn btn-primary"/>
+                        </span>
+
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-8">
+
+
+                <p><a th:href="@{'/defect/create'(source='tsInstanceSource_id', sourceid=${tsDTO.id})}"
+                      class="btn btn-default" target="_blank">Založit Defekt pro step</a></p>
+            </div>
+            <div class="col-sm-8">
+                <p><a th:href="@{'/tc/show/'+${tsDTO.tcInstance_id}}"
+                      class="btn btn-default">Zpět</a>
+                </p>
+            </div>
+        </div>
+
+        <!--Page Content - End-->
+        <!-- Footer -->
+        <div th:replace="/fragment/thymeFragment :: footer"></div>
+
+    </div>
+</div>
+<!-- /.container -->
+
+<!-- jQuery -->
+<script src="/js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<div th:replace="/fragment/thymeFragment :: script"></div>
+</body>
+
+</html>
