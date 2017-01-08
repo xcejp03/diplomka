@@ -124,19 +124,19 @@ public class DefectServiceImpl implements DefectService {
     }
 
     @Override
-    public List<DefectDTO> findAllDefectDTOByReporter(Person person) {
+    public List<DefectDTO> findAllDefectDTOByReporterAndStatus(Person person, DefectStatusEnum statusEnum) {
         List<Defect> defectList;
         List<DefectDTO> defectDTOList;
-        defectList = defectRepository.findAllDefectDTOByReporter(person);
+        defectList = defectRepository.findAllDefectDTOByReporterAndStatus(person, statusEnum);
         defectDTOList = mapper.mapAsList(defectList, DefectDTO.class);
         return defectDTOList;
     }
 
     @Override
-    public List<DefectDTO> findAllDefectDTOByAssignee(Person person) {
+    public List<DefectDTO> findAllDefectDTOByAssigneeAndStatus(Person person, DefectStatusEnum statusEnum) {
         List<Defect> defectList;
         List<DefectDTO> defectDTOList;
-        defectList = defectRepository.findAllDefectDTOByAssignee(person);
+        defectList = defectRepository.findAllDefectDTOByAssigneeAndStatus(person, statusEnum);
         defectDTOList = mapper.mapAsList(defectList, DefectDTO.class);
         return defectDTOList;
     }
@@ -153,3 +153,5 @@ public class DefectServiceImpl implements DefectService {
         defectCommentService.writeDefectAssigneeChange(defectDTO, author);
     }
 }
+
+//customerRepository.findAll(customerHasBirthday.and(isLongTermCustomer));

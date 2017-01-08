@@ -1,5 +1,7 @@
 package cz.vse.entity;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -8,6 +10,10 @@ import java.util.List;
  * Created by pcejka on 21.09.2016.
  */
 @Entity
+//@Table(name = "Defect")
+
+
+//@EntityListeners(AuditingEntityListener.class)
 public class Defect extends BaseEntity {
     private String name;
     private String description;
@@ -49,6 +55,9 @@ public class Defect extends BaseEntity {
 
     @OneToMany(mappedBy = "defect")
     private List<DefectComment> defectCommentList;
+
+    public Defect() {
+    }
 
     public String getDescription() {
         return description;

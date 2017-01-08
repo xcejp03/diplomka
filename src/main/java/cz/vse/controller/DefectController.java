@@ -3,6 +3,7 @@ package cz.vse.controller;
 import cz.vse.dto.DefectCommentDTO;
 import cz.vse.dto.DefectDTO;
 import cz.vse.entity.DefectComment;
+import cz.vse.entity.DefectStatusEnum;
 import cz.vse.entity.Person;
 import cz.vse.service.DefectCommentService;
 import cz.vse.service.impl.DefectServiceImpl;
@@ -97,8 +98,8 @@ public class DefectController {
     public String defectShowByUser(Model model) {
         l.info("request mapping defect/defects");
         model.addAttribute("defect", new DefectDTO());
-        model.addAttribute("listDefectByReporterDTO", defectService.findAllDefectDTOByReporter(securityUtils.getLoggedPerson()));
-        model.addAttribute("listDefectByAssigneeDTO", defectService.findAllDefectDTOByAssignee(securityUtils.getLoggedPerson()));
+        model.addAttribute("listOpenDefectByReporterDTO", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
+        model.addAttribute("listOpenDefectByAssigneeDTO", defectService.findAllDefectDTOByAssigneeAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listProjectsDTO", projectService.findAllTestProjectsDTO());
 
@@ -111,8 +112,8 @@ public class DefectController {
         l.info("request mapping defect/" + id);
         model.addAttribute("defectDTO", defectService.findDefectDTOById(id));
 
-        model.addAttribute("listDefectByReporterDTO", defectService.findAllDefectDTOByReporter(securityUtils.getLoggedPerson()));
-        model.addAttribute("listDefectByAssigneeDTO", defectService.findAllDefectDTOByAssignee(securityUtils.getLoggedPerson()));
+        model.addAttribute("listDefectByReporterDTO", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
+        model.addAttribute("listDefectByAssigneeDTO", defectService.findAllDefectDTOByAssigneeAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listProjectsDTO", projectService.findAllTestProjectsDTO());
         model.addAttribute("listDefectCommentByDefectDTO", defectCommentService.findAllDefectCommentDTOByDefectId(id));

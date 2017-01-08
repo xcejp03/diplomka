@@ -31,9 +31,9 @@ public interface DefectService {
 
     List<DefectDTO> findAllDefectDTO();
 
-    List<DefectDTO> findAllDefectDTOByReporter(Person person);
+    List<DefectDTO> findAllDefectDTOByReporterAndStatus(Person person, DefectStatusEnum statusEnum);
 
-    List<DefectDTO> findAllDefectDTOByAssignee(Person person);
+    List<DefectDTO> findAllDefectDTOByAssigneeAndStatus(Person person, DefectStatusEnum statusEnum);
 
     void changeDefectStatus(DefectDTO defectDTO, Person author);
 

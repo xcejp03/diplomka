@@ -80,7 +80,7 @@
                 </tr>
                 </thead>
                 <tbody th:remove="all-but-first">
-                <tr th:each="defect : ${listDefectByAssigneeDTO}">
+                <tr th:each="defect : ${listOpenDefectByAssigneeDTO}">
                     <td th:text="${defect.id}">00</td>
                     <td><span th:class="${defect.priority}" th:text="${defect.priority}">Priorita</span> </td>
                     <td th:text="${defect.name}">Název</td>
@@ -123,7 +123,7 @@
                 </tr>
                 </thead>
                 <tbody th:remove="all-but-first">
-                <tr th:each="defect : ${listDefectByReporterDTO}">
+                <tr th:each="defect : ${listOpenDefectByReporterDTO}">
                     <td th:text="${defect.id}">00</td>
                     <td><span th:class="${defect.priority}" th:text="${defect.priority}">Priorita</span> </td>
                     <td th:text="${defect.name}">Název</td>
