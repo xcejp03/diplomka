@@ -58,8 +58,8 @@
         <div class="col-sm-4">
             <div class="well" align="center">
                 <h3>Filtr defektů</h3>
-                <a href="/defect/defects?filter=open" class="btn btn-default">Open</a>
-                <a href="/defect/defects?filter=closed" class="btn btn-default">Closed</a>
+                <a href="/defect/defects?filter=open" class="btn btn-default" th:classappend="(${param.filter} == null or ${param.filter[0]} == 'open') ? PASSED : FAILED">Open</a>
+                <a href="/defect/defects?filter=closed" class="btn btn-default" th:classappend="(${param.filter} != null and ${param.filter[0]} == 'closed') ? PASSED : FAILED">Closed</a>
             </div>
 
         </div>
