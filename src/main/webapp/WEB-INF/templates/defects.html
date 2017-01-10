@@ -29,6 +29,7 @@
 <!-- Page Content -->
 <div class="container">
 
+
     <!-- Page Heading/Breadcrumbs -->
     <div class="row">
         <div class="col-sm-12">
@@ -42,10 +43,8 @@
             </ol>
         </div>
     </div>
-    <!-- /.row -->
 
     <div class="row">
-
         <div class="col-sm-12">
             <div class="jumbotron">
                 <h1 class="error-404">Seznam Defektů, které "jsem založil/mám na sebe assignované"
@@ -54,11 +53,23 @@
         </div>
     </div>
 
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="well" align="center">
+                <h3>Filtr defektů</h3>
+                <a href="/defect/defects?filter=open" class="btn btn-default">Open</a>
+                <a href="/defect/defects?filter=closed" class="btn btn-default">Closed</a>
+            </div>
+
+        </div>
+    </div>
     <div class="row">
         <div class="col-sm-12">
             <p><a href="/defect/create" class="btn btn-default" target="_blank">Založit Defect</a></p>
         </div>
     </div>
+
 
     <div class="row">
         <div class="col-sm-12">
@@ -80,9 +91,10 @@
                 </tr>
                 </thead>
                 <tbody th:remove="all-but-first">
-                <tr th:each="defect : ${listOpenDefectByAssigneeDTO}">
+                <tr th:each="defect : ${listDefectByAssigneeDTO}">
                     <td th:text="${defect.id}">00</td>
-                    <td><span th:class="${defect.priority}" th:text="${defect.priority}">Priorita</span> </td>
+                    <td><span th:class="${defect.priority}" th:text="${defect.priority}">Priorita</span>
+                    </td>
                     <td th:text="${defect.name}">Název</td>
                     <td th:text="${defect.affectsVersion}">Affected version</td>
                     <td th:text="${defect.status}">Status</td>
@@ -123,9 +135,10 @@
                 </tr>
                 </thead>
                 <tbody th:remove="all-but-first">
-                <tr th:each="defect : ${listOpenDefectByReporterDTO}">
+                <tr th:each="defect : ${listDefectByReporterDTO}">
                     <td th:text="${defect.id}">00</td>
-                    <td><span th:class="${defect.priority}" th:text="${defect.priority}">Priorita</span> </td>
+                    <td><span th:class="${defect.priority}" th:text="${defect.priority}">Priorita</span>
+                    </td>
                     <td th:text="${defect.name}">Název</td>
                     <td th:text="${defect.affectsVersion}">Affected version</td>
                     <td th:text="${defect.status}">Status</td>
@@ -145,11 +158,12 @@
                 </tr>
                 </tbody>
             </table>
+
         </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
-
+            <a href="#" class="btn btn-default zapni">otevři</a>
             <p><a href="/defect/create" class="btn btn-default" target="_blank">Založit Defect</a></p>
         </div>
     </div>
@@ -157,9 +171,11 @@
     <!--dialogová okna-->
     <div id="moreDialog" title="Více">
         <h3>TC ID: <span id="spanDataObjectId"></span></h3>
-        <a href="/defect/create" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Založit defekt</a>
+        <a href="/defect/create" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Založit
+            defekt</a>
         <a th:href="@{'/tc/delete/'}" class="btn btn-default" sec:authorize="hasAuthority('ANALYTIC')">Smazat</a>
-        <a href="/defect/defects" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Seznam Defektů</a>
+        <a href="/defect/defects" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Seznam
+            Defektů</a>
     </div>
 
     <div id="detailDialog" title="Detail projektu">

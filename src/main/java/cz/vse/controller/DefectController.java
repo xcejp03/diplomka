@@ -14,10 +14,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -95,11 +92,13 @@ public class DefectController {
     }
 
     @RequestMapping(value = "/defects", method = RequestMethod.GET)
-    public String defectShowByUser(Model model) {
+    public String defectShowByUser(Model model, @RequestParam(required = false, defaultValue = "open", value = "filter") String filter) {
         l.info("request mapping defect/defects");
+        DefectStatusEnum filterStatus = DefectStatusEnum.valueOf(filter);
+
         model.addAttribute("defect", new DefectDTO());
-        model.addAttribute("listOpenDefectByReporterDTO", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
-        model.addAttribute("listOpenDefectByAssigneeDTO", defectService.findAllDefectDTOByAssigneeAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
+        model.addAttribute("listDefectByReporterDTO", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), filterStatus));
+        model.addAttribute("listDefectByAssigneeDTO", defectService.findAllDefectDTOByAssigneeAndStatus(securityUtils.getLoggedPerson(), filterStatus));
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listProjectsDTO", projectService.findAllTestProjectsDTO());
 
@@ -125,9 +124,9 @@ public class DefectController {
     @RequestMapping(value = "/writeAssigneChange", method = RequestMethod.POST)
     public String writeAssigneChange(DefectDTO defectDTO) {
         String redirectSite;
-        defectService.changeDefectAssignee(defectDTO,  securityUtils.getLoggedPerson());
+        defectService.changeDefectAssignee(defectDTO, securityUtils.getLoggedPerson());
 //        defectCommentService.writeDefectAssigneeChange(defectDTO,  securityUtils.getLoggedPerson());
-        redirectSite = "redirect:/defect/"+defectDTO.getId();
+        redirectSite = "redirect:/defect/" + defectDTO.getId();
 
         return redirectSite;
     }
@@ -135,11 +134,18 @@ public class DefectController {
     @RequestMapping(value = "/writeStatusChange", method = RequestMethod.POST)
     public String writeStatusChange(DefectDTO defectDTO) {
         String redirectSite;
-        defectService.changeDefectStatus(defectDTO,  securityUtils.getLoggedPerson());
+        defectService.changeDefectStatus(defectDTO, securityUtils.getLoggedPerson());
 //        defectCommentService.writeDefectStatusChange(defectDTO,  securityUtils.getLoggedPerson());
-        redirectSite = "redirect:/defect/"+defectDTO.getId();
+        redirectSite = "redirect:/defect/" + defectDTO.getId();
 
         return redirectSite;
+    }
+
+    @RequestMapping(value = "/param", method = RequestMethod.GET)
+    public String createDedfect(@RequestParam(required = false, defaultValue = "open", value = "filter") String foo) {
+        l.info("request mapping defect/create");
+        l.info("foo: " + foo);
+        return "login";
     }
 
 
