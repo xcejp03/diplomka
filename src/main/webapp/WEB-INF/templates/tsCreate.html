@@ -42,7 +42,7 @@
     <div class="container">
 
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-7">
                 <div class="well">
                     <form th:action="@{/ts/create}" method="post" default-target-url="/index">
 
@@ -59,7 +59,8 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="action">Akce</label>:
-                                <input type="text" id="action" name="action" th:value="${tsDTO.action}"
+                                <textarea type="text" id="action" name="action"
+                                       th:text="${tsDTO.action}"
                                        class="form-control"
                                        autofocus="autofocus"/>
                             </div>
@@ -68,7 +69,8 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="expected">Očekávané chování</label>:
-                                <input type="text" id="expected" name="expected" th:value="${tsDTO.expected}"
+                                <textarea type="text" id="expected" name="expected"
+                                          th:text="${tsDTO.expected}"
                                        class="form-control"
                                 />
                             </div>

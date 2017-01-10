@@ -45,7 +45,7 @@
         <!--private TSInstance tsInstanceSource;-->
 
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-7">
                 <div class="well">
                     <form th:action="@{/defect/create}" method="post" default-target-url="/index">
 
@@ -83,8 +83,8 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="description">Popis</label>:
-                                <input type="text" id="description" name="description"
-                                       th:value="${defectDTO.description}"
+                                <textarea type="text" id="description" name="description"
+                                       th:text="${defectDTO.description}"
                                        class="form-control"/>
                             </div>
                         </div>
@@ -142,13 +142,13 @@
                     </form>
                 </div>
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-5">
                 <p th:if="${defectDTO.id == null}">
                     <button type="button" class="btn btn-primary"
                             onclick="window.open('', '_self', ''); window.close();">Close tab
                     </button>
                 </p>
-                <p><a href="/defect/defects" class="btn btn-default">Zpět na Defekty</a></p>
+                <p><a href="/defect/defects" class="btn btn-default">Seznam Defektů</a></p>
             </div>
         </div>
 

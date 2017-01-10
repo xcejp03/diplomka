@@ -59,8 +59,10 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="action">Akce</label>:
-                                <input type="text" id="action" readonly="true" name="action" th:value="${tsDTO.action}"
-                                       class="form-control"
+                                <textarea type="text" id="action"
+                                          readonly="true" name="action"
+                                          th:text="${tsDTO.action}"
+                                          class="form-control"
                                 />
                             </div>
                         </div>
@@ -68,8 +70,10 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="expected">Očekávané chování</label>:
-                                <input type="text" id="expected" readonly="true" name="expected"
-                                       th:value="${tsDTO.expected}" class="form-control"
+                                <textarea type="text" id="expected"
+                                       readonly="true" name="expected"
+                                       th:text="${tsDTO.expected}"
+                                       class="form-control"
                                 />
                             </div>
                         </div>
@@ -77,7 +81,8 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="result">Výsledek</label>:
-                                <input type="text" id="result" name="result" th:value="${tsDTO.result}"
+                                <textarea type="text" id="result" name="result"
+                                       th:text="${tsDTO.result}"
                                        autofocus="autofocus" class="form-control"/>
                             </div>
                         </div>

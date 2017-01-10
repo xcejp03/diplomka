@@ -42,7 +42,7 @@
     <div class="container">
 
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-7">
                 <div class="well">
                     <form th:action="@{/tc/create}" method="post" default-target-url="/index">
 
@@ -95,7 +95,9 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="prerequisite">Prerekvizity</label>:
-                                <input type="text" id="prerequisite" name="prerequisite" th:value="${tcDTO.prerequisite}" class="form-control"/>
+                                <textarea type="text" id="prerequisite"
+                                          name="prerequisite"
+                                          th:text="${tcDTO.prerequisite}" class="form-control"/>
                             </div>
                         </div>
 
@@ -103,7 +105,8 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="note">Poznámka</label>:
-                                <input type="text" id="note" name="note" th:value="${tcDTO.note}" class="form-control"/>
+                                <textarea type="text" id="note" name="note"
+                                          th:text="${tcDTO.note}" class="form-control"/>
                             </div>
                         </div>
 
