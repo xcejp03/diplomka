@@ -143,10 +143,12 @@
                 </div>
             </div>
             <div class="col-sm-8">
-                  <p><button type="button" class="btn btn-primary"
-                                onclick="window.open('', '_self', ''); window.close();">Close tab
-                        </button> </p>
-                  <p><a href="/defect/defects" class="btn btn-default">Zpět na Defekty</a></p>
+                <p th:if="${defectDTO.id == null}">
+                    <button type="button" class="btn btn-primary"
+                            onclick="window.open('', '_self', ''); window.close();">Close tab
+                    </button>
+                </p>
+                <p><a href="/defect/defects" class="btn btn-default">Zpět na Defekty</a></p>
             </div>
         </div>
 
