@@ -55,17 +55,19 @@
 
 
     <div class="row">
-        <div class="col-sm-4">
-            <div class="well" align="center">
-                <h3>Filtr defektů</h3>
-                <a href="/defect/defects?filter=open" class="btn btn-default" th:classappend="(${param.filter} == null or ${param.filter[0]} == 'open') ? PASSED : FAILED">Open</a>
-                <a href="/defect/defects?filter=closed" class="btn btn-default" th:classappend="(${param.filter} != null and ${param.filter[0]} == 'closed') ? PASSED : FAILED">Closed</a>
+        <div class="col-sm-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4><i class="fa fa-fw fa-gift"></i>Filtr defektů</h4>
+                </div>
+                <div class="panel-body">
+                  <p><a href="/defect/defects?filter=open" class="btn btn-mg btn-block " th:classappend="(${param.filter} == null or ${param.filter[0]} == 'open') ? btn-primary : btn-default">Open</a></p>
+                    <p><a href="/defect/defects?filter=closed" class="btn btn-mg btn-block " th:classappend="(${param.filter} != null and ${param.filter[0]} == 'closed') ? btn-primary : btn-default">Closed</a></p>
+                </div>
             </div>
 
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-10">
             <p><a href="/defect/create" class="btn btn-default" target="_blank">Založit Defect</a></p>
         </div>
     </div>
@@ -87,6 +89,7 @@
                     <th>Assignee</th>
                     <th>Reporter</th>
                     <th>Detail</th>
+                    <th>Edit</th>
                     <th>Více</th>
                 </tr>
                 </thead>
@@ -105,6 +108,8 @@
                     <td><a href="#" th:href="@{'/defect/'+${defect.id}}"
                            th:attr="data-name=${defect.description}"
                            data-id="#detailDialog">Detail</a>
+                    </td>
+                    <td><a href="#" th:href="@{'/defect/edit/'+${defect.id}}">Edit</a>
                     </td>
                     <td><a href="#" class="opener"
                            th:attr="data-objectid=${defect.id}" data-id="#moreDialog">Více</a>
@@ -131,6 +136,7 @@
                     <th>Assignee</th>
                     <th>Reporter</th>
                     <th>Detail</th>
+                    <th>Edit</th>
                     <th>Více</th>
                 </tr>
                 </thead>
@@ -163,7 +169,6 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <a href="#" class="btn btn-default zapni">otevři</a>
             <p><a href="/defect/create" class="btn btn-default" target="_blank">Založit Defect</a></p>
         </div>
     </div>

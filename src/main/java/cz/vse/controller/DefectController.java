@@ -79,7 +79,7 @@ public class DefectController {
         l.info("/edit/{id}" + id);
         model.addAttribute("defectDTO", defectService.findDefectDTOById(id));
         model.addAttribute("person", personService.findPersonById(id));
-
+        model.addAttribute("listPersons", personService.findAllPersons());
         return "defectCreate";
     }
 
