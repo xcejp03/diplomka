@@ -53,7 +53,10 @@ $(function () {
         $('#spanDataName').html(dataAttr.name);
         $('#spanDataOwnerName').html(dataAttr.owner);
         $('#spanDataObjectId').html(dataAttr.objectid);
-        $('#spanDataUpdated').html('sss' + dataAttr.updated);
+        $('#spanDataUpdated').html(dataAttr.updated);
+        $('#divDataPrerequisite').html(dataAttr.prerequisite);
+        $('#divDataNote').html(dataAttr.note);
+
         editId = dataAttr.objectid;
         $(dataAttr.id).dialog("open");
     });

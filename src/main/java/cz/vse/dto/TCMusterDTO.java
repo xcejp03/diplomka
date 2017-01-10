@@ -20,6 +20,8 @@ public class TCMusterDTO extends BaseDTO {
     private StatusEnum status;
     private PriorityTCEnum priority;
     private LocalDateTime createdDateTime;
+    private String prerequisite;
+    private String note;
 
     public LocalDateTime getCreatedDateTime() {
         return createdDateTime;
@@ -75,6 +77,22 @@ public class TCMusterDTO extends BaseDTO {
 
     public void setPriority(PriorityTCEnum priority) {
         this.priority = priority;
+    }
+
+    public String getPrerequisite() {
+        return prerequisite;
+    }
+
+    public void setPrerequisite(String prerequisite) {
+        this.prerequisite = prerequisite;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     @Override

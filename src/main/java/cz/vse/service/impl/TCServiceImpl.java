@@ -89,6 +89,8 @@ public class TCServiceImpl implements TCService {
         tcInstance.setCreatedDateTime(LocalDateTime.now());
         tcInstance.setTsInstances(tsInstanceList);
         tcInstance.setTester(tester);
+        tcInstance.setPrerequisite(tcMuster.getPrerequisite());
+        tcInstance.setNote(tcMuster.getNote());
 
         tcInstanceService.createTestCaseInstance(tcInstance);
 

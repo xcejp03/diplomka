@@ -85,10 +85,25 @@
                                 <select class="form-control" id="priority" name="priority" th:with="priorities=${T(cz.vse.entity.PriorityTCEnum).values()}">
                                     <option th:each="priority : ${priorities}"
                                             th:value="${priority}"
-                                            th:selected="${tcDTO.status != null} ? ${#arrays.contains(tsDTO.priority, priority)}"
+                                            th:selected="${tcDTO.priority != null} ? ${#arrays.contains(tcDTO.priority, priority)}"
                                             th:text="${priority}">jméno projektu
                                     </option>
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class=" control-group form-group">
+                            <div class="controls">
+                                <label for="prerequisite">Prerekvizity</label>:
+                                <input type="text" id="prerequisite" name="prerequisite" th:value="${tcDTO.prerequisite}" class="form-control"/>
+                            </div>
+                        </div>
+
+
+                        <div class=" control-group form-group">
+                            <div class="controls">
+                                <label for="note">Poznámka</label>:
+                                <input type="text" id="note" name="note" th:value="${tcDTO.note}" class="form-control"/>
                             </div>
                         </div>
 

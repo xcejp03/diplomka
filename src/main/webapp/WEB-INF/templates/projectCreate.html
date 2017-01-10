@@ -123,9 +123,20 @@
                                 <h3> Test suity se nepřidávají v projektu, ale v test suitu se přidá projekt</h3>
                             </div>
                         </div>
-                        <input type="submit" value="Vytvořit" class="btn btn-primary"/>
+
+                        <span th:if="${projectDTO.id != null}" th:remove="tag">
+
+                              <input type="submit" value="Upravit" class="btn btn-primary"/>
                         <input type="hidden" name="${_csrf.parameterName}"
                                value="${_csrf.token}"/>
+                        </span>
+                        <span th:if="${projectDTO.id == null}" th:remove="tag">
+
+                              <input type="submit" value="Vytvořit" class="btn btn-primary"/>
+                        <input type="hidden" name="${_csrf.parameterName}"
+                               value="${_csrf.token}"/>
+                        </span>
+
 
                     </form>
                 </div>

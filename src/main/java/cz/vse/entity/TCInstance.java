@@ -15,6 +15,8 @@ public class TCInstance extends BaseEntity {
     private String name;
     private LocalDateTime createdDateTime;
     private LocalDateTime updatedDateTime;
+    private String prerequisite;
+    private String note;
 
     @ManyToOne
     @JoinColumn(name = "tcMuster_id")
@@ -95,6 +97,22 @@ public class TCInstance extends BaseEntity {
 
     public void setDefectList(List<Defect> defectList) {
         this.defectList = defectList;
+    }
+
+    public String getPrerequisite() {
+        return prerequisite;
+    }
+
+    public void setPrerequisite(String prerequisite) {
+        this.prerequisite = prerequisite;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     @Override

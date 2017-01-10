@@ -16,6 +16,10 @@ public class TCMuster extends BaseEntity {
 
     private PriorityTCEnum priority;
 
+    private String prerequisite;
+
+    private String note;
+
     @ManyToOne
     @JoinColumn(name = "project_id")
     private Project project;
@@ -92,6 +96,22 @@ public class TCMuster extends BaseEntity {
 
     public void setPriority(PriorityTCEnum priority) {
         this.priority = priority;
+    }
+
+    public String getPrerequisite() {
+        return prerequisite;
+    }
+
+    public void setPrerequisite(String prerequisite) {
+        this.prerequisite = prerequisite;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     @Override

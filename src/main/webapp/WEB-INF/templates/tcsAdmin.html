@@ -70,7 +70,8 @@
                     <td th:text="${tc.priority}">priorita</td>
                     <td th:text="${tc.name}">Jméno</td>
                     <td><a href="#" class="opener"
-                           th:attr="data-objectid=${tc.id}" data-id="#detailDialog">Detail</a>
+                           th:attr="data-objectid=${tc.id},  data-prerequisite=${tc.prerequisite},
+                    data-note=${tc.note}" data-id="#detailDialog">Detail</a>
                     </td>
                     <td><a th:href="@{'/tc/edit/'+${tc.id}}">Editace</a></td>
                     <td><a href="#" class="opener"
@@ -102,6 +103,13 @@
         <h3>Detail projektu: <span id="spanDataName"></span></h3>
         <h3>Vlastník projektu: <span id="spanDataOwnerName"> </span></h3>
         <h3>Počet Test Suitů: //dodělat</h3>
+        <hr/>
+        <h3>Prerekvizity</h3>
+        <div id="divDataPrerequisite"></div>
+        <hr/>
+
+        <h3>Poznámka</h3>
+        <div id="divDataNote"></div>
     </div>
 
     <!-- Footer -->

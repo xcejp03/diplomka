@@ -134,11 +134,11 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .mapNullsInReverse(false)
                 .mapNulls(false)
                 .field("id", "id")
-                .field("name", "name")
                 .field("tCMuster", "tcMusters_id")
                 .field("tsInstances", "tsInstances_id")
                 .field("id", "tcInstance_id")
                 .field("tester", "tester_id")
+                .byDefault()
                 .register();
         factory.classMap(TSInstance.class, TSInstanceRunDTO.class)
                 .mapNullsInReverse(false)

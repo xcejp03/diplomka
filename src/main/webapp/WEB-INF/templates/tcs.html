@@ -74,12 +74,14 @@
         <tbody th:remove="all-but-first">
         <tr th:each="tc : ${listTCDTO}">
             <td th:text="${tc.id}">00</td>
-            <td th:text="${tc.priority}">Priorita</td>
+            <td><span th:class="${tc.priority}" th:text="${tc.priority}">Priorita</span></td>
             <td sec:authorize="hasAuthority('TESTER')"><span th:text="${tc.status}"
                                                              th:class="${tc.status}">Stav TC</span></td>
             <td th:text="${tc.name}">Název</td>
             <td><a href="#" class="opener"
-                   th:attr="data-name=${tc.name}"
+                   th:attr="data-name=${tc.name},
+                    data-prerequisite=${tc.prerequisite},
+                    data-note=${tc.note}"
                    data-id="#detailDialog">Detail</a>
             </td>
             <td th:text="${tc.createdDateTime}" sec:authorize="hasAuthority('ANALYTIC')">datum a čas vytvoření</td>
@@ -100,7 +102,8 @@
     <!--dialogová okna-->
     <div id="moreDialog" title="Více">
         <h3>TC ID: <span id="spanDataObjectId"></span></h3>
-        <a th:href="@{'/defect/create'(source='tcInstanceSource_id')}" onclick="addSourceIdToURL(this)" target="_blank" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Založit defekt</a>
+        <a th:href="@{'/defect/create'(source='tcInstanceSource_id')}" onclick="addSourceIdToURL(this)" target="_blank"
+           class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Založit defekt</a>
         <a th:href="@{'/tc/delete/'}" class="btn btn-default" sec:authorize="hasAuthority('ANALYTIC')">Smazat</a>
         <a href="/defect/defects" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Seznam Defektů</a>
     </div>
@@ -111,6 +114,13 @@
         <h3>Počet Test Stepů: //dodělat</h3>
         <h4>Datum poslední úpravy: </h4>
         <h4>Autor poslední úpravy: </h4>
+        <hr/>
+        <h3>Prerekvizity</h3>
+        <div id="divDataPrerequisite"></div>
+        <hr/>
+
+        <h3>Poznámka</h3>
+        <div id="divDataNote"></div>
     </div>
 
     <!-- Footer -->

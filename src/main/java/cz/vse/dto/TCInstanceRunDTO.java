@@ -13,6 +13,8 @@ public class TCInstanceRunDTO extends BaseDTO {
     private Long tcInstance_id;
     private List<Long> tsInstances_id;
     private Long tester_id;
+    private String prerequisite;
+    private String note;
 
     public String getName() {
         return name;
@@ -52,5 +54,21 @@ public class TCInstanceRunDTO extends BaseDTO {
 
     public void setTcInstance_id(Long tcInstance_id) {
         this.tcInstance_id = tcInstance_id;
+    }
+
+    public String getPrerequisite() {
+        return prerequisite;
+    }
+
+    public void setPrerequisite(String prerequisite) {
+        this.prerequisite = prerequisite;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }
