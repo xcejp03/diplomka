@@ -171,9 +171,11 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .customize((Mapper<WorkList, WorkListDTO>) customMappers.get(WorkList.class, WorkListDTO.class))
                 .byDefault()
                 .register();
-        factory.classMap(WorkTCDTO.class, WorkTCDTO.class)
+        factory.classMap(WorkTC.class, WorkTCDTO.class)
                 .mapNullsInReverse(false)
                 .mapNulls(false)
+                .field("assignee", "assignee_id")
+                .customize((Mapper<WorkTC, WorkTCDTO>) customMappers.get(WorkTC.class, WorkTCDTO.class))
                 .byDefault()
                 .register();
     }

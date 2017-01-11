@@ -32,6 +32,7 @@ public class WorkListToWorkListDTO extends CustomMapper<WorkList, WorkListDTO> {
     public void mapAtoB(WorkList workList, WorkListDTO workListDTO, MappingContext context) {
         l.info("A -> B");
         super.mapAtoB(workList, workListDTO, context);
+        workListDTO.setTcMuster_id(getTCMusterIdFromWorkTCDTO(workList));
     }
 
     @Override
@@ -41,6 +42,14 @@ public class WorkListToWorkListDTO extends CustomMapper<WorkList, WorkListDTO> {
         workList.setWorkTCList(workTCList);
     }
 
+    private List<Long> getTCMusterIdFromWorkTCDTO(WorkList workList) {
+        List<WorkTC> workTCList = workList.getWorkTCList();
+        List<Long> tcMusters_id = new ArrayList<>();
+        for (WorkTC workTC : workTCList) {
+            tcMusters_id.add(workTC.getTcMuster().getId());
+        }
+        return tcMusters_id;
+    }
 
     private List<WorkTC> createWorkTCForWorkList(WorkList workList, List<Long> workTCListLong) {
         List<WorkTC> workTCList = new ArrayList<>();
@@ -48,7 +57,7 @@ public class WorkListToWorkListDTO extends CustomMapper<WorkList, WorkListDTO> {
             WorkTC workTC = new WorkTC();
             TCMuster tcMuster = tcMusterService.findTestCaseMusterById(tcMusterId);
             workTC.setCreatedDateTime(LocalDateTime.now());
-            workTC.setPriorityTCEnum(tcMuster.getPriority());
+            workTC.setPriority(tcMuster.getPriority());
             workTC.setTcMuster(tcMuster);
             workTC.setWorkList(workList);
             workTCList.add(workTC);

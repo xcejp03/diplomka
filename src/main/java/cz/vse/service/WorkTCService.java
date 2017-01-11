@@ -1,7 +1,5 @@
 package cz.vse.service;
 
-import cz.vse.dto.TCInstanceRunDTO;
-import cz.vse.dto.TCMusterDTO;
 import cz.vse.dto.WorkTCDTO;
 import cz.vse.entity.*;
 
@@ -19,6 +17,8 @@ public interface WorkTCService {
 
     void updateWorkTC(WorkTCDTO workTCDTO);
 
+    void updateWorkTC(List<WorkTCDTO> workTCDTOList);
+
     List<WorkTC> findAllWorkTC();
 
     List<WorkTCDTO> findAllWorkTCDTO();
@@ -26,5 +26,10 @@ public interface WorkTCService {
     WorkTC findWorkTCById(long id);
 
     WorkTCDTO findWorkTCDTOById(long id);
+
+    List<WorkTCDTO> findWorkTCDTOByWorkListId(long id);
+
+    List<WorkTCDTO> findWorkTCDTOByWorkList(WorkList workList);
+
 
 }

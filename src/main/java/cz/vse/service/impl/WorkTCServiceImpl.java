@@ -2,15 +2,14 @@ package cz.vse.service.impl;
 
 import cz.vse.dto.ProjectDTO;
 import cz.vse.dto.ProjectsNamesDTO;
+import cz.vse.dto.WorkListDTO;
 import cz.vse.dto.WorkTCDTO;
 import cz.vse.entity.Project;
+import cz.vse.entity.WorkList;
 import cz.vse.entity.WorkTC;
 import cz.vse.repository.ProjectRepository;
 import cz.vse.repository.WorkTCRepository;
-import cz.vse.service.PersonService;
-import cz.vse.service.ProjectService;
-import cz.vse.service.SuiteService;
-import cz.vse.service.WorkTCService;
+import cz.vse.service.*;
 import cz.vse.utils.HelpService;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
@@ -32,6 +31,9 @@ public class WorkTCServiceImpl implements WorkTCService {
 
     @Autowired
     private MapperFacade mapper;
+
+    @Autowired
+    private WorkListService workListService;
 
 
     @Override
@@ -63,6 +65,13 @@ public class WorkTCServiceImpl implements WorkTCService {
     }
 
     @Override
+    public void updateWorkTC(List<WorkTCDTO> workTCDTOList) {
+        List<WorkTC> workTCList;
+        workTCList = mapper.mapAsList(workTCDTOList, WorkTC.class);
+        workTCRepository.save(workTCList);
+    }
+
+    @Override
     public List<WorkTC> findAllWorkTC() {
         return workTCRepository.findAll();
     }
@@ -88,5 +97,19 @@ public class WorkTCServiceImpl implements WorkTCService {
         workTC = workTCRepository.findOne(id);
         workTCDTO = mapper.map(workTC, WorkTCDTO.class);
         return workTCDTO;
+    }
+
+    @Override
+    public List<WorkTCDTO> findWorkTCDTOByWorkListId(long id) {
+        WorkList workList = workListService.findWorkListById(id);
+        List<WorkTCDTO> workTCDTOList = findWorkTCDTOByWorkList(workList);
+        return workTCDTOList;
+    }
+
+    @Override
+    public List<WorkTCDTO> findWorkTCDTOByWorkList(WorkList workList) {
+        List<WorkTC> workTCList = workTCRepository.findWorkTCDTOByWorkList(workList);
+        List<WorkTCDTO> workTCDTOList = mapper.mapAsList(workTCList, WorkTCDTO.class);
+        return workTCDTOList;
     }
 }

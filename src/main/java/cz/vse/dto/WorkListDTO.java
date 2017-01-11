@@ -25,6 +25,8 @@ public class WorkListDTO extends BaseDTO {
 
     private List<Long> workTCList;
 
+    private List<Long> tcMuster_id;
+
     private LocalDateTime createdDateTime;
 
     private LocalDateTime updatedDateTime;
@@ -115,6 +117,14 @@ public class WorkListDTO extends BaseDTO {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public List<Long> getTcMuster_id() {
+        return tcMuster_id;
+    }
+
+    public void setTcMuster_id(List<Long> tcMuster_id) {
+        this.tcMuster_id = tcMuster_id;
     }
 }
 

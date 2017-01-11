@@ -27,7 +27,7 @@ public class WorkTC extends BaseEntity {
     @OneToMany (mappedBy = "workTC")
     private List<TCInstance> tcRunHistory;
 
-    private PriorityTCEnum priorityTCEnum;
+    private PriorityTCEnum priority;
 
     public TCMuster getTcMuster() {
         return tcMuster;
@@ -61,12 +61,11 @@ public class WorkTC extends BaseEntity {
         this.tcRunHistory = tcRunHistory;
     }
 
-    public PriorityTCEnum getPriorityTCEnum() {
-        return priorityTCEnum;
+    public PriorityTCEnum getPriority() {
+        return priority;
     }
 
-    public void setPriorityTCEnum(PriorityTCEnum priorityTCEnum) {
-        this.priorityTCEnum = priorityTCEnum;
+    public void setPriority(PriorityTCEnum priority) {
+        this.priority = priority;
     }
-
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by pcejka on 09.10.2016.
@@ -59,6 +60,12 @@ public class RootController {
 //        model.addAttribute("listPersons", personService.findAllPersons());
 
         return "index";
+    }
+
+    @RequestMapping(value = "/xxx")
+    public String YourActionName(@RequestParam("memberId") String id, @RequestParam("memberPw") String pw ){
+        l.error("Jóóóooooo");
+        return "ExpectedReturnView";
     }
 
 //    @RequestMapping(value = "/bs", method = RequestMethod.GET)
