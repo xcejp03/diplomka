@@ -86,7 +86,7 @@ public class SuiteServiceImpl implements SuiteService {
             }
             testSuite.setTcMusters(tcMusterList);
         }
-        testSuite.setUpdateDateTime(LocalDateTime.now());
+        testSuite.setUpdatedDateTime(LocalDateTime.now());
         suiteRepository.save(testSuite);
         l.info("updated test suite - service: " + testSuiteDTO);
     }

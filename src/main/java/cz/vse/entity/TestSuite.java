@@ -13,8 +13,6 @@ import java.util.List;
 @Entity (name = "testsuite")
 public class TestSuite extends BaseEntity {
     private String name;        //testsuit je možné si pojmenovat
-    private LocalDateTime createdDateTime;          // datum vytvoření testsuitu;
-    private LocalDateTime updateDateTime;
 
     @ManyToOne
     @JoinColumn(name = "project_id")
@@ -29,22 +27,6 @@ public class TestSuite extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public LocalDateTime getCreatedDateTime() {
-        return createdDateTime;
-    }
-
-    public void setCreatedDateTime(LocalDateTime createdDateTime) {
-        this.createdDateTime = createdDateTime;
-    }
-
-    public LocalDateTime getUpdateDateTime() {
-        return updateDateTime;
-    }
-
-    public void setUpdateDateTime(LocalDateTime updateDateTime) {
-        this.updateDateTime = updateDateTime;
     }
 
     public Project getProject() {

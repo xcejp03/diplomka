@@ -52,7 +52,7 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
         l.debug("creating person - service");
         Person person;
         person = mapper.map(personDTO, Person.class);
-        person.setCreatedDate(LocalDateTime.now());
+        person.setCreatedDateTime(LocalDateTime.now());
         person.setPassword(hashPasswordForUser(personDTO.getPassword()));
         person.setEnabled(true);
 

@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
  */
 @Entity
 public class DefectComment extends BaseEntity {
-    private LocalDateTime createdDateTime;
     private String commentText;
 
     @ManyToOne
@@ -20,14 +19,6 @@ public class DefectComment extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "author_id")
     private Person author;
-
-    public LocalDateTime getCreatedDateTime() {
-        return createdDateTime;
-    }
-
-    public void setCreatedDateTime(LocalDateTime createdDateTime) {
-        this.createdDateTime = createdDateTime;
-    }
 
     public String getCommentText() {
         return commentText;

@@ -2,6 +2,9 @@ var editId = 'nenačetloseEditId';
 var sourceId = 'nenačetloseSourceId';
 
 $(function () {
+    $(".datepicker").datepicker();
+});
+$(function () {
     $("#datepicker").datepicker();
 });
 
@@ -18,17 +21,6 @@ function addSourceIdToURL(element) {
         return this.href + '&sourceid=' + sourceId;
     });
 }
-
-$(function () {
-    $(".zapni").click(function () {
-        console.log("jednička");
-        $("#seznam").attr('class', function () {
-            console.log("dvojjka");
-            return 'th:each="defect : ${listClosedDefectByReporterDTO}"';
-        })
-        console.log("dvojj 3");
-    });
-});
 
 $(function () {
     $("#detailDialog, #statisticsDialog, #moreDialog,#membersDialog, #dialog3").dialog({
@@ -76,11 +68,6 @@ $(function () {
 
 $(document).ready(function () {
     $('.datatable').DataTable();
-    console.log("trojka a půl");
-    $("#seznam").attr('th:each', function () {
-        console.log("čtyřka");
-        return 'th:each="defect : ${listClosedDefectByReporterDTO}"';
-    })
 });
 
 

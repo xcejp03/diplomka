@@ -1,6 +1,11 @@
-package cz.vse.entity;
+package cz.vse.dto;
 
-import javax.persistence.*;
+import cz.vse.entity.*;
+
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,20 +16,18 @@ import java.util.List;
  * Při exekuci se natáhnou stepy vyplěněny jak je napsán bez výsledků testů. Stepy se budou po spuštněí
  * ukládat jako nové instance. V db pak bude - NE! bude to jinak.
  */
-@Entity
-public class WorkList extends BaseEntity {
+public class WorkListDTO extends BaseDTO {
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "author_id")
-    private Person author;
+    private Long author_id;
 
-    @ManyToOne
-    @JoinColumn(name = "project_id")
-    private Project project;
+    private Long project_id;
 
-    @OneToMany(mappedBy = "workList")
     private List<WorkTC> workTCList;
+
+    private LocalDateTime createdDateTime;
+
+    private LocalDateTime updatedDateTime;
 
     private LocalDate plannedExecution;
 
@@ -34,7 +37,6 @@ public class WorkList extends BaseEntity {
 
     private String note;
 
-
     public String getName() {
         return name;
     }
@@ -43,20 +45,20 @@ public class WorkList extends BaseEntity {
         this.name = name;
     }
 
-    public Person getAuthor() {
-        return author;
+    public Long getAuthor_id() {
+        return author_id;
     }
 
-    public void setAuthor(Person author) {
-        this.author = author;
+    public void setAuthor_id(Long author_id) {
+        this.author_id = author_id;
     }
 
-    public Project getProject() {
-        return project;
+    public Long getProject_id() {
+        return project_id;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setProject_id(Long project_id) {
+        this.project_id = project_id;
     }
 
     public List<WorkTC> getWorkTCList() {
@@ -65,6 +67,22 @@ public class WorkList extends BaseEntity {
 
     public void setWorkTCList(List<WorkTC> workTCList) {
         this.workTCList = workTCList;
+    }
+
+    public LocalDateTime getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    public void setCreatedDateTime(LocalDateTime createdDateTime) {
+        this.createdDateTime = createdDateTime;
+    }
+
+    public LocalDateTime getUpdatedDateTime() {
+        return updatedDateTime;
+    }
+
+    public void setUpdatedDateTime(LocalDateTime updatedDateTime) {
+        this.updatedDateTime = updatedDateTime;
     }
 
     public LocalDate getPlannedExecution() {

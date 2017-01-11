@@ -26,25 +26,6 @@ public class TSMuster extends BaseEntity {
     @JoinColumn(name = "tcMuster_id")
     private TCMuster tCMuster;
 
-    private LocalDateTime createdDateTime;
-    private LocalDateTime updatedDateTime;
-
-    public LocalDateTime getCreatedDateTime() {
-        return createdDateTime;
-    }
-
-    public void setCreatedDateTime(LocalDateTime createdDateTime) {
-        this.createdDateTime = createdDateTime;
-    }
-
-    public LocalDateTime getUpdatedDateTime() {
-        return updatedDateTime;
-    }
-
-    public void setUpdatedDateTime(LocalDateTime updatedDateTime) {
-        this.updatedDateTime = updatedDateTime;
-    }
-
     public String getAction() {
         return action;
     }

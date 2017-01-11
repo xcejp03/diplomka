@@ -24,6 +24,10 @@ public class TCMuster extends BaseEntity {
     @JoinColumn(name = "project_id")
     private Project project;
 
+    @ManyToOne
+    @JoinColumn(name = "workTC_id")
+    private WorkTC workTC;
+
     @OneToMany(mappedBy = "tCMuster", fetch = FetchType.EAGER)
     private List<TCInstance> tcInstances;
 
@@ -35,8 +39,6 @@ public class TCMuster extends BaseEntity {
     @OneToMany(mappedBy = "tCMuster", fetch = FetchType.EAGER)
     private List<TSMuster> tsMusters;
 
-    private LocalDateTime createdDateTime;
-    private LocalDateTime updatedDateTime;
 
     public String getName() {
         return name;
@@ -44,50 +46,6 @@ public class TCMuster extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public LocalDateTime getCreatedDateTime() {
-        return createdDateTime;
-    }
-
-    public void setCreatedDateTime(LocalDateTime createdDateTime) {
-        this.createdDateTime = createdDateTime;
-    }
-
-    public LocalDateTime getUpdatedDateTime() {
-        return updatedDateTime;
-    }
-
-    public void setUpdatedDateTime(LocalDateTime updatedDateTime) {
-        this.updatedDateTime = updatedDateTime;
-    }
-
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
-
-    public List<TestSuite> getTestSuites() {
-        return testSuites;
-    }
-
-    public void setTestSuites(List<TestSuite> testSuites) {
-        this.testSuites = testSuites;
-    }
-
-    public void addTestSuites(TestSuite testSuite) {
-        this.testSuites.add(testSuite);
-    }
-
-    public List<TSMuster> getTsMusters() {
-        return tsMusters;
-    }
-
-    public void setTsMusters(List<TSMuster> tsMusters) {
-        this.tsMusters = tsMusters;
     }
 
     public PriorityTCEnum getPriority() {
@@ -112,6 +70,42 @@ public class TCMuster extends BaseEntity {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public WorkTC getWorkTC() {
+        return workTC;
+    }
+
+    public void setWorkTC(WorkTC workTC) {
+        this.workTC = workTC;
+    }
+
+    public List<TestSuite> getTestSuites() {
+        return testSuites;
+    }
+
+    public void setTestSuites(List<TestSuite> testSuites) {
+        this.testSuites = testSuites;
+    }
+
+    public void addTestSuites(TestSuite testSuite) {
+        this.testSuites.add(testSuite);
+    }
+
+    public List<TSMuster> getTsMusters() {
+        return tsMusters;
+    }
+
+    public void setTsMusters(List<TSMuster> tsMusters) {
+        this.tsMusters = tsMusters;
     }
 
     @Override

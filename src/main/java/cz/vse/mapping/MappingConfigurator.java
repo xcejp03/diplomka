@@ -162,5 +162,18 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .field("testSuites", "suiteIdList")
                 .byDefault()
                 .register();
+        factory.classMap(WorkList.class, WorkListDTO.class)
+                .mapNullsInReverse(false)
+                .mapNulls(false)
+                .field("author", "author_id")
+                .field("project", "project_id")
+                .field("plannedExecution", "plannedExecution")
+                .byDefault()
+                .register();
+        factory.classMap(WorkTCDTO.class, WorkTCDTO.class)
+                .mapNullsInReverse(false)
+                .mapNulls(false)
+                .byDefault()
+                .register();
     }
 }

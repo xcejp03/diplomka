@@ -20,9 +20,6 @@ public class Defect extends BaseEntity {
     private PriorityDefectEnum priority;
     private DefectStatusEnum status;
     private String AffectsVersion;
-    private LocalDateTime createdDateTime;
-    private LocalDateTime updatedDateTime;
-
 
     @ManyToMany  // (fetch = FetchType.EAGER)
     @JoinTable(name = "DEFECT_TCI", joinColumns = @JoinColumn(name = "DEFECT_ID", referencedColumnName = "ID"),
@@ -161,22 +158,6 @@ public class Defect extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public LocalDateTime getCreatedDateTime() {
-        return createdDateTime;
-    }
-
-    public void setCreatedDateTime(LocalDateTime createdDateTime) {
-        this.createdDateTime = createdDateTime;
-    }
-
-    public LocalDateTime getUpdatedDateTime() {
-        return updatedDateTime;
-    }
-
-    public void setUpdatedDateTime(LocalDateTime updatedDateTime) {
-        this.updatedDateTime = updatedDateTime;
     }
 
     @Override

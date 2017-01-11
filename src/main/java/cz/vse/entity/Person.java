@@ -14,7 +14,6 @@ public class Person extends BaseEntity {
     private String name;
     private String username;
     private String password;
-    private LocalDateTime createdDate;
     private LocalDateTime lastLogged;
     private boolean enabled;
 
@@ -23,7 +22,7 @@ public class Person extends BaseEntity {
     private Set<UserRole> userRole = new HashSet<>(0);
 
 
-    @ManyToMany(mappedBy = "personMembers", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @ManyToMany(mappedBy = "personMembers", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Project> projectsMember;
 
     @OneToMany(mappedBy = "projectOwner")
@@ -41,6 +40,12 @@ public class Person extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "DEFECT_ID", referencedColumnName = "ID"))
     private List<Defect> defectReporters;
 
+
+    @OneToMany(mappedBy = "assignee")
+    private List<WorkTC> workTCAssignee;
+
+    @OneToMany(mappedBy = "author")
+    private List<WorkList> workListAuthor;
 
     public String getName() {
         return name;
@@ -64,14 +69,6 @@ public class Person extends BaseEntity {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(LocalDateTime createdDate) {
-        this.createdDate = createdDate;
     }
 
     public LocalDateTime getLastLogged() {
@@ -112,6 +109,22 @@ public class Person extends BaseEntity {
 
     public void setDefectReporters(List<Defect> defectReporters) {
         this.defectReporters = defectReporters;
+    }
+
+    public List<WorkTC> getWorkTCAssignee() {
+        return workTCAssignee;
+    }
+
+    public void setWorkTCAssignee(List<WorkTC> workTCAssignee) {
+        this.workTCAssignee = workTCAssignee;
+    }
+
+    public List<WorkList> getWorkListAuthor() {
+        return workListAuthor;
+    }
+
+    public void setWorkListAuthor(List<WorkList> workListAuthor) {
+        this.workListAuthor = workListAuthor;
     }
 
     public Person() {

@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * Created by pcejka on 21.09.2016.
@@ -18,6 +19,10 @@ public abstract class BaseEntity implements Serializable,Persistable<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     protected Long id;
+
+    protected LocalDateTime createdDateTime;
+    protected LocalDateTime updatedDateTime;
+
 
     @Override
     public Long getId() {
@@ -31,6 +36,22 @@ public abstract class BaseEntity implements Serializable,Persistable<Long> {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public LocalDateTime getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    public void setCreatedDateTime(LocalDateTime createdDateTime) {
+        this.createdDateTime = createdDateTime;
+    }
+
+    public LocalDateTime getUpdatedDateTime() {
+        return updatedDateTime;
+    }
+
+    public void setUpdatedDateTime(LocalDateTime updatedDateTime) {
+        this.updatedDateTime = updatedDateTime;
     }
 
     @Override

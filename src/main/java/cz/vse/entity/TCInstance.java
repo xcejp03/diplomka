@@ -13,8 +13,6 @@ import java.util.List;
 @Entity
 public class TCInstance extends BaseEntity {
     private String name;
-    private LocalDateTime createdDateTime;
-    private LocalDateTime updatedDateTime;
     private String prerequisite;
     private String note;
 
@@ -32,8 +30,12 @@ public class TCInstance extends BaseEntity {
     @JoinColumn(name = "tester_id")
     private Person tester;
 
-    @OneToMany (mappedBy = "tsInstanceSource")
+    @OneToMany(mappedBy = "tsInstanceSource")
     private List<Defect> defectList;
+
+    @ManyToOne
+    @JoinColumn(name = "workTCId")
+    private WorkTC workTC;
 
     public String getName() {
         return name;
@@ -41,22 +43,6 @@ public class TCInstance extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public LocalDateTime getCreatedDateTime() {
-        return createdDateTime;
-    }
-
-    public void setCreatedDateTime(LocalDateTime createdDateTime) {
-        this.createdDateTime = createdDateTime;
-    }
-
-    public LocalDateTime getUpdatedDateTime() {
-        return updatedDateTime;
-    }
-
-    public void setUpdatedDateTime(LocalDateTime updatedDateTime) {
-        this.updatedDateTime = updatedDateTime;
     }
 
     public TCMuster gettCMuster() {
@@ -113,6 +99,14 @@ public class TCInstance extends BaseEntity {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public WorkTC getWorkTC() {
+        return workTC;
+    }
+
+    public void setWorkTC(WorkTC workTC) {
+        this.workTC = workTC;
     }
 
     @Override
