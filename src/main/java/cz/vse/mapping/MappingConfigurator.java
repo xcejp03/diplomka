@@ -167,7 +167,8 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .mapNulls(false)
                 .field("author", "author_id")
                 .field("project", "project_id")
-                .field("plannedExecution", "plannedExecution")
+//                .field("plannedExecution", "plannedExecution")
+                .customize((Mapper<WorkList, WorkListDTO>) customMappers.get(WorkList.class, WorkListDTO.class))
                 .byDefault()
                 .register();
         factory.classMap(WorkTCDTO.class, WorkTCDTO.class)

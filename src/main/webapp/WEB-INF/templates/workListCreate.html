@@ -126,29 +126,29 @@
                             <!--</div>-->
                         <!--</div>-->
 
-                        <!--<div class="control-group form-group">-->
-                            <!--<div class="controls">-->
-                                <!--<label for="workTCList">Přidej TC</label>:-->
-                                <!--<select id="workTCList" name="workTCList" class="multipleSelection4"-->
-                                        <!--multiple="multiple" size="10">-->
-                                    <!--<option th:each="tc : ${listTCByProject}"-->
-                                            <!--th:selected="${workListDTO.workTCList != null} ? ${#lists.contains(workListDTO.workTCList, tc)}"-->
-                                            <!--th:value="${tc}"-->
-                                            <!--th:text="${tc}">tc vzory-->
-                                    <!--</option>-->
+                        <div class="control-group form-group">
+                            <div class="controls">
+                                <label for="workTCList">Přidej TC</label>:
+                                <select id="workTCList" name="workTCList" class="multipleSelection4"
+                                        multiple="multiple" size="10">
+                                    <option th:each="tc : ${listTCByProject}"
+                                            th:selected="${workListDTO.workTCList != null} ? ${#lists.contains(workListDTO.workTCList, tc)}"
+                                            th:value="${tc.id}"
+                                            th:text="${tc}">tc vzory
+                                    </option>
 
 
-                                <!--</select>-->
-                                <!--<script>-->
-                                    <!--var multipleSelection4 = $('.multipleSelection4').bootstrapDualListbox({-->
-                                        <!--nonSelectedListLabel: 'Non-selected',-->
-                                        <!--selectedListLabel: 'Selected',-->
-                                        <!--preserveSelectionOnMove: 'moved',-->
-                                        <!--moveOnSelect: true,-->
-                                    <!--});-->
-                                <!--</script>-->
-                            <!--</div>-->
-                        <!--</div>-->
+                                </select>
+                                <script>
+                                    var multipleSelection4 = $('.multipleSelection4').bootstrapDualListbox({
+                                        nonSelectedListLabel: 'Non-selected',
+                                        selectedListLabel: 'Selected',
+                                        preserveSelectionOnMove: 'moved',
+                                        moveOnSelect: true,
+                                    });
+                                </script>
+                            </div>
+                        </div>
 
                         <!--<div class=" control-group form-group">-->
                         <!--<div class="controls">-->

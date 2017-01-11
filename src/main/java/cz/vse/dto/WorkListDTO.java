@@ -23,7 +23,7 @@ public class WorkListDTO extends BaseDTO {
 
     private Long project_id;
 
-    private List<WorkTC> workTCList;
+    private List<Long> workTCList;
 
     private LocalDateTime createdDateTime;
 
@@ -61,11 +61,11 @@ public class WorkListDTO extends BaseDTO {
         this.project_id = project_id;
     }
 
-    public List<WorkTC> getWorkTCList() {
+    public List<Long> getWorkTCList() {
         return workTCList;
     }
 
-    public void setWorkTCList(List<WorkTC> workTCList) {
+    public void setWorkTCList(List<Long> workTCList) {
         this.workTCList = workTCList;
     }
 
