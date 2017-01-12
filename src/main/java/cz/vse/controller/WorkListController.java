@@ -101,16 +101,16 @@ public class WorkListController {
 
 
     @RequestMapping(value = "/xxx", method = RequestMethod.POST)
-    public String YourActionName( ){
-//    public String YourActionName(@RequestParam("memberId") String id, @RequestParam("memberPw") String pw ){
+//    public String YourActionName( ){
+    public String YourActionName(@RequestParam("memberId") String id, @RequestParam("memberPw") String pw ){
         l.error("Jooooooo");
         return "ExpectedReturnView";
     }
     @RequestMapping(value = "/xx2")
-    public String YourActionNamde( ){
-//    public String YourActionName(@RequestParam("memberId") String id, @RequestParam("memberPw") String pw ){
+//    public String YourActionNamde( ){
+    public String YourAcfstionName(@RequestParam("memberId") String id, @RequestParam("memberPw") String pw ){
         l.error("Joooooooo - 2");
-        return "ExpectedReturnView";
+        return "workListCreate";
     }
 
 

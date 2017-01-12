@@ -47,10 +47,10 @@
     </div>
     <button id="exampleDiv">dfdsffd</button>
     <script>
-//        var loginData = {
-//            memberId: "test1",
-//            memberPw: "test2"
-//        }
+        var loginData = {
+            memberId: "test1",
+            memberPw: "test2"
+        }
 
 
         $('#exampleDiv').click(function (e) {
@@ -58,8 +58,8 @@
             console.log("exampleDiv")
             $.ajax({
                 type: "POST",
-                url: "/worklist/xx2",
-//                data: loginData,
+                url: "/vote2",
+                data: loginData,
                 success: function (result) {
                     console.log("ajax vyšel")
                     // do something.
