@@ -9,6 +9,7 @@ import cz.vse.service.*;
 import cz.vse.utils.SecurityUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -102,18 +103,26 @@ public class WorkListController {
 
     @RequestMapping(value = "/xxx", method = RequestMethod.POST)
 //    public String YourActionName( ){
+    @ResponseStatus(value= HttpStatus.OK)
     public String YourActionName(@RequestParam("memberId") String id, @RequestParam("memberPw") String pw ){
         l.error("Jooooooo");
         return "ExpectedReturnView";
     }
     @RequestMapping(value = "/xx2")
 //    public String YourActionNamde( ){
+    @ResponseStatus(value= HttpStatus.OK)
     public String YourAcfstionName(@RequestParam("memberId") String id, @RequestParam("memberPw") String pw ){
         l.error("Joooooooo - 2");
         return "workListCreate";
     }
 
-
+    @RequestMapping(value = "/empty")
+//    public String YourActionName( ){
+    @ResponseStatus(value= HttpStatus.OK)
+    public String YourActionNadme(){
+        l.error("Jooooooo je to empty");
+        return "ExpectedReturnView";
+    }
 
     @RequestMapping("/edit/{id}")
     public String editTCMuster(@PathVariable("id") long id, Model model) {
