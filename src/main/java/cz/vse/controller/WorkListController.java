@@ -84,12 +84,7 @@ public class WorkListController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createTSPost(@ModelAttribute("project") WorkListDTO workListDTO) {
-        if (workListDTO.getId() == null) {
             workListDTO.setAuthor_id(securityUtils.getLoggedPersonId());
-            workListService.createWorkList(workListDTO);
-        } else {
-            workListService.createWorkList(workListDTO);
-        }
         return "redirect:/worklist";
     }
 
