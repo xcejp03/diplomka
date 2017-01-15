@@ -13,9 +13,6 @@ import java.util.List;
 @Entity
 public class WorkTC extends BaseEntity {
 
-    @ManyToOne
-    @JoinColumn (name = "workTCWrapper_id")
-    WorkTCWrapper workTCWrapper;
 
     @ManyToOne
     @JoinColumn(name = "tcMuster_id")
@@ -35,13 +32,6 @@ public class WorkTC extends BaseEntity {
     private PriorityTCEnum priority;
 
 
-    public WorkTCWrapper getWorkTCWrapper() {
-        return workTCWrapper;
-    }
-
-    public void setWorkTCWrapper(WorkTCWrapper workTCWrapper) {
-        this.workTCWrapper = workTCWrapper;
-    }
 
     public TCMuster getTcMuster() {
         return tcMuster;
@@ -81,5 +71,25 @@ public class WorkTC extends BaseEntity {
 
     public void setPriority(PriorityTCEnum priority) {
         this.priority = priority;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        WorkTC workTC = (WorkTC) o;
+
+        if (assignee != null ? !assignee.equals(workTC.assignee) : workTC.assignee != null) return false;
+        return priority == workTC.priority;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (assignee != null ? assignee.hashCode() : 0);
+        result = 31 * result + (priority != null ? priority.hashCode() : 0);
+        return result;
     }
 }

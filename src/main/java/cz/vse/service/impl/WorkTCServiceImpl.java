@@ -70,8 +70,10 @@ public class WorkTCServiceImpl implements WorkTCService {
         List<WorkTC> workTCListUtil = new ArrayList<>();
         for (WorkTC workTC : workTCList) {
             WorkTC workTCEntity = findWorkTCById(workTC.getId());
-            mapper.map(workTC, workTCEntity);
-            workTCEntity.setUpdatedDateTime(LocalDateTime.now());
+            if (!workTC.equals(workTCEntity)) {
+                mapper.map(workTC, workTCEntity);
+                workTCEntity.setUpdatedDateTime(LocalDateTime.now());
+            }
             workTCListUtil.add(workTCEntity);
         }
         workTCRepository.save(workTCListUtil);

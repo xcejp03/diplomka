@@ -1,8 +1,5 @@
 package cz.vse.controller;
 
-import cz.vse.entity.ClientWithSelection;
-import cz.vse.entity.ClientWithSelectionListWrapper;
-import cz.vse.entity.WorkTCWrapper;
 import cz.vse.repository.TCInstanceRepository;
 import cz.vse.repository.TSInstanceRepository;
 import cz.vse.service.PersonService;
@@ -49,55 +46,6 @@ public class RootController {
     @Autowired
     private WorkTCService workTCService;
 
-    private ArrayList<ClientWithSelection> allClientsWithSelection = new ArrayList<ClientWithSelection>();
-
-    public RootController() {
-      /* Dummy data */
-        allClientsWithSelection.add(new ClientWithSelection(false, "1", "192.168.0.10", "Client A"));
-        allClientsWithSelection.add(new ClientWithSelection(false, "2", "192.168.0.11", "Client B"));
-        allClientsWithSelection.add(new ClientWithSelection(false, "3", "192.168.0.12", "Client C"));
-        allClientsWithSelection.add(new ClientWithSelection(false, "4", "192.168.0.13", "Client D"));
-    }
-
-
-    @RequestMapping("/test")
-    String indsaex(Model model) {
-
-        ClientWithSelectionListWrapper wrapper = new ClientWithSelectionListWrapper();
-        WorkTCWrapper workTCWrapper = new WorkTCWrapper();
-        workTCWrapper.setWorkTCList(workTCService.findWorkTCByWorkListId(1700));
-
-        wrapper.setClientList(allClientsWithSelection);
-        model.addAttribute("wrapper", wrapper);
-        model.addAttribute("vrepr", workTCWrapper);
-        model.addAttribute("listPerson", personService.findAllPersons());
-
-        model.addAttribute("listWorkTC", workTCService.findWorkTCDTOByWorkListId(1700));
-        return "test";
-    }
-
-
-    @RequestMapping(value = "/query/submitQuery", method = RequestMethod.POST)
-    public String processQuery(@ModelAttribute ClientWithSelectionListWrapper wrapper, Model model) {
-
-        System.out.println(wrapper.getClientList() != null ? wrapper.getClientList().size() : "null list");
-        System.out.println("--");
-
-        model.addAttribute("wrapper", wrapper);
-
-        return "test";
-    }
-
-    @RequestMapping(value = "/query/submitQuery2", method = RequestMethod.POST)
-    public String processQuery2(@ModelAttribute WorkTCWrapper wrapper, Model model) {
-        l.info("vrepr: " + wrapper);
-//        System.out.println(wrapper.getClientList() != null ? wrapper.getClientList().size() : "null list");
-        System.out.println("--");
-
-        model.addAttribute("wrapper", wrapper);
-
-        return "test";
-    }
 
 
     @RequestMapping(value = "/thyme", method = RequestMethod.GET)

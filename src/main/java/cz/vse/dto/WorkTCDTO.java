@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -23,6 +24,8 @@ public class WorkTCDTO extends BaseDTO {
     private List<Long> tcRunHistoryList_id;
 
     private PriorityTCEnum priority;
+
+    private LocalDateTime updatedDateTime;
 
 
     public String getName() {
@@ -71,5 +74,13 @@ public class WorkTCDTO extends BaseDTO {
 
     public void setPriority(PriorityTCEnum priority) {
         this.priority = priority;
+    }
+
+    public LocalDateTime getUpdatedDateTime() {
+        return updatedDateTime;
+    }
+
+    public void setUpdatedDateTime(LocalDateTime updatedDateTime) {
+        this.updatedDateTime = updatedDateTime;
     }
 }

@@ -153,10 +153,10 @@
                                         </option>
                                     </select>
                                 </td>
+                                <td th:text="${tc.updatedDateTime}">změna</td>
                             </tr>
                             </tbody>
                         </table>
-
                         <span th:if="${workListDTO.id != null}" th:remove="tag">
                              <input type="submit" value="Upravit" class="btn btn-primary"/>
                         </span>
