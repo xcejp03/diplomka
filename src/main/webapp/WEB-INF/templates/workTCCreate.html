@@ -111,8 +111,7 @@
 
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="plannedExecution">Datum plánovaného spuštění</label>:
-                                <input type="text" id="plannedExecution" class="datepicker" name="plannedExecution"
+                                <input type="text" id="plannedExecution" readonly="true" class="form-control" th:value="${workListDTO.plannedExecution}" name="plannedExecution"
                                        size="30"/>
                             </div>
                         </div>

@@ -166,6 +166,7 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .mapNulls(false).mapNullsInReverse(false)
                 .field("project", "project_id")
                 .field("author", "author_id")
+//                .field("tcMuster", "tcMuster_id")
 //                .exclude("createdDateTime")
 //                .field("plannedExecution", "plannedExecution")
                 .customize((Mapper<WorkList, WorkListDTO>) customMappers.get(WorkList.class, WorkListDTO.class))

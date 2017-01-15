@@ -139,4 +139,13 @@ public class WorkTCServiceImpl implements WorkTCService {
         List<WorkTC> workTCList = workTCRepository.findWorkTCDTOByWorkList(workList);
         return workTCList;
     }
+
+    @Override
+    public List<WorkTCDTO> findAllWorkTCDTOByWorkListId(long id) {
+        WorkList workList = workListService.findWorkListById(id);
+        List<WorkTC> workTCList = workTCRepository.findWorkTCDTOByWorkList(workList);
+        List<WorkTCDTO> workTCDTOList = mapper.mapAsList(workTCList, WorkTCDTO.class);
+        return workTCDTOList;
+    }
+
 }

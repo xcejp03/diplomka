@@ -31,7 +31,7 @@ public class WorkListDTO extends BaseDTO {
 
     private LocalDateTime updatedDateTime;
 
-    private LocalDate plannedExecution;
+    private String plannedExecution;
 
     private PriorityTCEnum priority;
 
@@ -87,11 +87,11 @@ public class WorkListDTO extends BaseDTO {
         this.updatedDateTime = updatedDateTime;
     }
 
-    public LocalDate getPlannedExecution() {
+    public String getPlannedExecution() {
         return plannedExecution;
     }
 
-    public void setPlannedExecution(LocalDate plannedExecution) {
+    public void setPlannedExecution(String plannedExecution) {
         this.plannedExecution = plannedExecution;
     }
 

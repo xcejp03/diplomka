@@ -2,10 +2,7 @@ var editId = 'nenačetloseEditId';
 var sourceId = 'nenačetloseSourceId';
 
 $(function () {
-    $(".datepicker").datepicker();
-});
-$(function () {
-    $("#datepicker").datepicker();
+    $(".datepicker").datepicker({dateFormat: 'yy-mm-dd'});
 });
 
 function addIdToURL(element) {

@@ -33,6 +33,7 @@ public interface WorkTCService {
 
     List<WorkTCDTO> findWorkTCDTOByWorkList(WorkList workList);
 
+    List<WorkTC> findWorkTCByWorkListId(long id);
 
-    List<WorkTC> findWorkTCByWorkListId(long i);
+    List<WorkTCDTO> findAllWorkTCDTOByWorkListId(long id);
 }
