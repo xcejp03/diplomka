@@ -17,6 +17,8 @@ public interface WorkTCService {
 
     void updateWorkTC(WorkTCDTO workTCDTO);
 
+    void updateWorkTCEntity(List<WorkTC> workTCList);
+
     void updateWorkTC(List<WorkTCDTO> workTCDTOList);
 
     List<WorkTC> findAllWorkTC();
@@ -32,4 +34,5 @@ public interface WorkTCService {
     List<WorkTCDTO> findWorkTCDTOByWorkList(WorkList workList);
 
 
+    List<WorkTC> findWorkTCByWorkListId(long i);
 }

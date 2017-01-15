@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class WorkTCDTO extends BaseDTO {
     private String name;
+
     private Long tcMuster_id;
 
     private Long assignee_id;
@@ -22,6 +23,7 @@ public class WorkTCDTO extends BaseDTO {
     private List<Long> tcRunHistoryList_id;
 
     private PriorityTCEnum priority;
+
 
     public String getName() {
         return name;

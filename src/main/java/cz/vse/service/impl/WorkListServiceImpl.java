@@ -28,6 +28,9 @@ public class WorkListServiceImpl implements WorkListService {
     @Autowired
     private WorkListRepository workListRepository;
 
+    @Autowired
+    private WorkTCService workTCService;
+
     @Override
     public void createWorkList(WorkList workList) {
         workList.setCreatedDateTime(LocalDateTime.now());
@@ -50,9 +53,13 @@ public class WorkListServiceImpl implements WorkListService {
 
     @Override
     public void updateWorkList(WorkListDTO workListDTO) {
-        WorkList workList = mapper.map(workListDTO, WorkList.class);
+        WorkList workList = findWorkListById(workListDTO.getId());
+        mapper.map(workListDTO, workList);
         workList.setUpdatedDateTime(LocalDateTime.now());
+        workTCService.updateWorkTCEntity(workList.getWorkTCList());
         workListRepository.save(workList);
+
+//        workTCService.updateWorkTCEntity();
     }
 
     @Override

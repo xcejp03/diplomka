@@ -26,13 +26,15 @@ public class WorkTCToWorkTCDTO extends CustomMapper<WorkTC, WorkTCDTO> {
 
     @Override
     public void mapAtoB(WorkTC workTC, WorkTCDTO workTCDTO, MappingContext context) {
-        super.mapAtoB(workTC, workTCDTO, context);
+        l.info("A -> B");
+//        super.mapAtoB(workTC, workTCDTO, context);
         workTCDTO.setName(workTC.getTcMuster().getName());
     }
 
     @Override
     public void mapBtoA(WorkTCDTO workTCDTO, WorkTC workTC, MappingContext context) {
-        super.mapBtoA(workTCDTO, workTC, context);
+        l.info("B -> A");
+//        super.mapBtoA(workTCDTO, workTC, context);
     }
 
 

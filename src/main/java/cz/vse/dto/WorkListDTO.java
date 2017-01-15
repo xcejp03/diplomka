@@ -20,10 +20,10 @@ public class WorkListDTO extends BaseDTO {
     private String name;
 
     private Long author_id;
-
+//
     private Long project_id;
 
-    private List<Long> workTCList;
+    private List<WorkTCDTO> workTCList;
 
     private List<Long> tcMuster_id;
 
@@ -63,11 +63,11 @@ public class WorkListDTO extends BaseDTO {
         this.project_id = project_id;
     }
 
-    public List<Long> getWorkTCList() {
+    public List<WorkTCDTO> getWorkTCList() {
         return workTCList;
     }
 
-    public void setWorkTCList(List<Long> workTCList) {
+    public void setWorkTCList(List<WorkTCDTO> workTCList) {
         this.workTCList = workTCList;
     }
 

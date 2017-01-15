@@ -83,16 +83,21 @@ public class WorkListController {
     }
 
     @RequestMapping(value = "/worktc/edit", method = RequestMethod.POST)
-    public String createTSPosyyxt(@ModelAttribute("project") List<WorkTCDTO> workTCDTOList) {
-            workTCService.updateWorkTC(workTCDTOList);
-        return "redirect:/worklist";
+    public String createTSPodsyyxt(@ModelAttribute("workListDTO") WorkListDTO workListDTO) {
+        l.info("/worktc/edit");
+        workListService.updateWorkList(workListDTO);
+        l.info("/worktc/edit PROBĚHL");
+        return "redirect:/worklist/worktc/"+workListDTO.getId();
     }
+
+
+
     @RequestMapping(value = "/worktc/{id}",method = RequestMethod.GET)
     public String showWorkTC(@PathVariable("id") int id, Model model) {
         l.info("request mapping /worktc");
         Long personId = securityUtils.getLoggedPersonId();
         model.addAttribute("workListDTO", workListService.findWorkListDTOById(id));
-        model.addAttribute("listWorkTC", workTCService.findWorkTCDTOByWorkListId(id));
+//        model.addAttribute("listWorkTC", workTCService.findWorkTCDTOByWorkListId(id));
         model.addAttribute("listTCByProject", tcMusterService.findAllTestCaseMusters());
         model.addAttribute("listUsersProjectsDTO", projectService.findAllTestProjectsByUserIdDTO(personId));
         model.addAttribute("listPerson", personService.findAllPersons());

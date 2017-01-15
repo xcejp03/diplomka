@@ -128,8 +128,8 @@
 
                         <div class="control-group form-group">
                             <div class="controls">
-                                <label for="workTCList">Přidej TC</label>:
-                                <select id="workTCList" name="workTCList" class="multipleSelection4"
+                                <label for="tcMuster_id">Přidej TC</label>:
+                                <select id="tcMuster_id" name="tcMuster_id" class="multipleSelection4"
                                         multiple="multiple" size="10">
                                     <option th:each="tc : ${listTCByProject}"
                                             th:selected="${workListDTO.workTCList != null} ? ${#lists.contains(workListDTO.workTCList, tc)}"

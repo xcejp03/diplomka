@@ -47,6 +47,7 @@ public class Person extends BaseEntity {
     @OneToMany(mappedBy = "author")
     private List<WorkList> workListAuthor;
 
+
     public String getName() {
         return name;
     }

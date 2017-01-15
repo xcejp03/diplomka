@@ -12,6 +12,11 @@ import java.util.List;
  */
 @Entity
 public class WorkTC extends BaseEntity {
+
+    @ManyToOne
+    @JoinColumn (name = "workTCWrapper_id")
+    WorkTCWrapper workTCWrapper;
+
     @ManyToOne
     @JoinColumn(name = "tcMuster_id")
     private TCMuster tcMuster;
@@ -28,6 +33,15 @@ public class WorkTC extends BaseEntity {
     private List<TCInstance> tcRunHistory;
 
     private PriorityTCEnum priority;
+
+
+    public WorkTCWrapper getWorkTCWrapper() {
+        return workTCWrapper;
+    }
+
+    public void setWorkTCWrapper(WorkTCWrapper workTCWrapper) {
+        this.workTCWrapper = workTCWrapper;
+    }
 
     public TCMuster getTcMuster() {
         return tcMuster;

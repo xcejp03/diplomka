@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -58,16 +59,33 @@ public class WorkTCServiceImpl implements WorkTCService {
 
     @Override
     public void updateWorkTC(WorkTCDTO workTCDTO) {
-        WorkTC workTC;
-        workTC = mapper.map(workTCDTO, WorkTC.class);
+        WorkTC workTC = findWorkTCById(workTCDTO.getId());
+        mapper.map(workTCDTO, workTC);
         workTC.setUpdatedDateTime(LocalDateTime.now());
         workTCRepository.save(workTC);
     }
 
     @Override
+    public void updateWorkTCEntity(List<WorkTC> workTCList) {
+        List<WorkTC> workTCListUtil = new ArrayList<>();
+        for (WorkTC workTC : workTCList) {
+            WorkTC workTCEntity = findWorkTCById(workTC.getId());
+            mapper.map(workTC, workTCEntity);
+            workTCEntity.setUpdatedDateTime(LocalDateTime.now());
+            workTCListUtil.add(workTCEntity);
+        }
+        workTCRepository.save(workTCListUtil);
+    }
+
+    @Override
     public void updateWorkTC(List<WorkTCDTO> workTCDTOList) {
-        List<WorkTC> workTCList;
-        workTCList = mapper.mapAsList(workTCDTOList, WorkTC.class);
+        List<WorkTC> workTCList = new ArrayList<>();
+        for (WorkTCDTO workTCDTO : workTCDTOList) {
+            WorkTC workTC = findWorkTCById(workTCDTO.getId());
+            mapper.map(workTCDTO, workTC);
+            workTC.setUpdatedDateTime(LocalDateTime.now());
+            workTCList.add(workTC);
+        }
         workTCRepository.save(workTCList);
     }
 
@@ -111,5 +129,12 @@ public class WorkTCServiceImpl implements WorkTCService {
         List<WorkTC> workTCList = workTCRepository.findWorkTCDTOByWorkList(workList);
         List<WorkTCDTO> workTCDTOList = mapper.mapAsList(workTCList, WorkTCDTO.class);
         return workTCDTOList;
+    }
+
+    @Override
+    public List<WorkTC> findWorkTCByWorkListId(long id) {
+        WorkList workList = workListService.findWorkListById(id);
+        List<WorkTC> workTCList = workTCRepository.findWorkTCDTOByWorkList(workList);
+        return workTCList;
     }
 }
