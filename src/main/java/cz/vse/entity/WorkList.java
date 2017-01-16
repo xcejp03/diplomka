@@ -98,6 +98,18 @@ public class WorkList extends BaseEntity {
     public void setNote(String note) {
         this.note = note;
     }
+
+    @Override
+    public String toString() {
+        return "WorkList{" +
+                "name='" + name + '\'' +
+                ", author=" + author +
+                ", project=" + project +
+                ", plannedExecution=" + plannedExecution +
+                ", priority=" + priority +
+                ", prerequisite='" + prerequisite + '\'' +
+                '}';
+    }
 }
 
 

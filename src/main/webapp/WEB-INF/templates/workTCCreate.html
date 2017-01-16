@@ -54,7 +54,7 @@
                 <div class="well">
                     <form th:action="@{/worklist/worktc/edit}" th:object="${workListDTO}" method="post"
                           default-target-url="/index">
-
+                        <input type="text" id="tcMuster_id" th:value="${workListDTO.tcMuster_id}" name="tcMuster_id" hidden="hidden"/>
 
                         <span th:if="${workListDTO.id != null}" th:remove="tag">
                         <div class=" control-group form-group">
@@ -131,6 +131,7 @@
                             <tbody>
                             <tr th:each="tc, stat : ${workListDTO.workTCList}">
                                 <input type="hidden" th:field="*{workTCList[__${stat.index}__].id}"/>
+                                <input type="hidden" th:field="*{workTCList[__${stat.index}__].tcMuster_id}"/>
                                 <td th:text="${tc.id}">00</td>
                                 <td th:text="${tc.name}">Název</td>
                                 <td>

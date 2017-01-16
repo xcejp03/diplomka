@@ -74,7 +74,8 @@ public class WorkListToWorkListDTO extends CustomMapper<WorkList, WorkListDTO> {
         workTCList.addAll(workList.getWorkTCList());
 
         for (WorkTC workTC : workList.getWorkTCList()) {
-            tcMusterIdListOld.add(workTC.getTcMuster().getId());
+            tcMusterIdListOld.add(workTCService.findWorkTCById(workTC.getId()).getTcMuster().getId());
+//            tcMusterIdListOld.add(workTC.getTcMuster().getId());
         }
 
         for (Long tcMusterId : tcMusterIdList) {

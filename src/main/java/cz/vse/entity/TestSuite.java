@@ -45,12 +45,11 @@ public class TestSuite extends BaseEntity {
         this.tcMusters = tcMusters;
     }
 
-
     @Override
     public String toString() {
         return "TestSuite{" +
                 "name='" + name + '\'' +
-//                ", createdDateTime=" + createdDateTime +
+                ", project=" + project +
                 '}';
     }
 

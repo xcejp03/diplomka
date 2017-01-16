@@ -74,6 +74,16 @@ public class WorkTC extends BaseEntity {
     }
 
     @Override
+    public String toString() {
+        return "WorkTC{" +
+                "tcMuster=" + tcMuster +
+                ", assignee=" + assignee +
+                ", workList=" + workList +
+                ", priority=" + priority +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

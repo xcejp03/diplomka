@@ -116,10 +116,9 @@ public class TSMuster extends BaseEntity {
     @Override
     public String toString() {
         return "TSMuster{" +
-
-                ", action='" + action + '\'' +
+                "action='" + action + '\'' +
                 ", expected='" + expected + '\'' +
-
+                ", author=" + author +
                 '}';
     }
 }

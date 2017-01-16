@@ -141,13 +141,11 @@ public class TCInstance extends BaseEntity {
 
     @Override
     public String toString() {
-        return "tcInstance{" +
+        return "TCInstance{" +
                 "name='" + name + '\'' +
-//                ", createdDateTime=" + createdDateTime +
-//                ", updatedDateTime=" + updatedDateTime +
-//                ", tCMuster=" + tCMuster +
-//                ", defects=" + defects +
-//                ", tsInstances=" + tsInstances +
+                ", prerequisite='" + prerequisite + '\'' +
+                ", note='" + note + '\'' +
+                ", tCMuster=" + tCMuster +
                 '}';
     }
 }

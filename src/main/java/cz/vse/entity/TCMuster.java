@@ -112,6 +112,9 @@ public class TCMuster extends BaseEntity {
     public String toString() {
         return "TCMuster{" +
                 "name='" + name + '\'' +
+                ", priority=" + priority +
+                ", prerequisite='" + prerequisite + '\'' +
+                ", project=" + project +
                 '}';
     }
 

@@ -11,6 +11,7 @@ import cz.vse.service.PersonService;
 import cz.vse.service.WorkListService;
 import cz.vse.service.WorkTCService;
 import ma.glasnost.orika.MapperFacade;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +27,7 @@ import java.util.List;
 @Service
 @Transactional
 public class WorkListServiceImpl implements WorkListService {
+    private final Logger l = Logger.getLogger(this.getClass());
     @Autowired
     private MapperFacade mapper;
 
@@ -60,8 +62,10 @@ public class WorkListServiceImpl implements WorkListService {
 
     @Override
     public void updateWorkList(WorkListDTO workListDTO) {
+        l.warn("updateWorkList(WorkListDTO): "+workListDTO);
         WorkList workList = findWorkListById(workListDTO.getId());
         mapper.map(workListDTO, workList);
+        l.warn("updateWorkList po mapování: "+workList);
         workList.setUpdatedDateTime(LocalDateTime.now());
         workTCService.updateWorkTCEntity(workList.getWorkTCList());
         workListRepository.save(workList);
