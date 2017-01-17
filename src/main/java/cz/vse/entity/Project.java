@@ -10,7 +10,7 @@ import java.util.List;
 public class Project extends BaseEntity {
     private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     @JoinColumn(name = "projectOwner_id")
     private Person projectOwner;
 

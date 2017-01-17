@@ -66,11 +66,13 @@ public class WorkTCServiceImpl implements WorkTCService {
     }
 
     @Override
+    @Transactional
     public void updateWorkTCEntity(List<WorkTC> workTCList) {
         List<WorkTC> workTCListUtil = new ArrayList<>();
         for (WorkTC workTC : workTCList) {
             WorkTC workTCEntity = findWorkTCById(workTC.getId());
             if (!workTC.equals(workTCEntity)) {
+
                 mapper.map(workTC, workTCEntity);
                 workTCEntity.setUpdatedDateTime(LocalDateTime.now());
             }

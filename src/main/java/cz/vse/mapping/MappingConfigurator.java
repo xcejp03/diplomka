@@ -186,5 +186,9 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .customize((Mapper<WorkTC, WorkTC>) customMappers.get(WorkTC.class, WorkTC.class))
                 .byDefault()
                 .register();
+        factory.classMap(Person.class, Person.class)
+                .mapNulls(false).mapNullsInReverse(false)
+                .customize((Mapper<Person, Person>) customMappers.get(Person.class, Person.class))
+                .register();
     }
 }
