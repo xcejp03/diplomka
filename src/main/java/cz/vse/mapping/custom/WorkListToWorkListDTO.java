@@ -69,14 +69,16 @@ public class WorkListToWorkListDTO extends CustomMapper<WorkList, WorkListDTO> {
         if (workList.getWorkTCList() == null) {
             l.info("(workList.getWorkTCList() je NULL");
         } else {
-            l.info("(workList.getWorkTCList()");
-        }
-        workTCList.addAll(workList.getWorkTCList());
-
-        for (WorkTC workTC : workList.getWorkTCList()) {
-            tcMusterIdListOld.add(workTCService.findWorkTCById(workTC.getId()).getTcMuster().getId());
+            l.info("(workList.getWorkTCList() není null");
+            workTCList.addAll(workList.getWorkTCList());
+            for (WorkTC workTC : workList.getWorkTCList()) {
+                tcMusterIdListOld.add(workTCService.findWorkTCById(workTC.getId()).getTcMuster().getId());
 //            tcMusterIdListOld.add(workTC.getTcMuster().getId());
+            }
         }
+
+
+
 
         for (Long tcMusterId : tcMusterIdList) {
             if (!tcMusterIdListOld.contains(tcMusterId)) {
