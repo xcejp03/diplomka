@@ -126,6 +126,20 @@ public class WorkListDTO extends BaseDTO {
     public void setTcMuster_id(List<Long> tcMuster_id) {
         this.tcMuster_id = tcMuster_id;
     }
+
+    @Override
+    public String toString() {
+        return "WorkListDTO{" +
+                "name='" + name + '\'' +
+                ", author_id=" + author_id +
+                ", project_id=" + project_id +
+                ", createdDateTime=" + createdDateTime +
+                ", plannedExecution='" + plannedExecution + '\'' +
+                ", priority=" + priority +
+                ", prerequisite='" + prerequisite + '\'' +
+                ", note='" + note + '\'' +
+                '}';
+    }
 }
 
 
