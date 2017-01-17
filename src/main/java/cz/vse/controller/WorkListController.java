@@ -74,6 +74,21 @@ public class WorkListController {
         return "workLists";
     }
 
+    @RequestMapping(value = "/worktc", method = RequestMethod.GET)
+//    public String showWorkList(Model model) {
+    public String showWorkListWorkTC(Model model) {
+        l.info("request mapping /worktc");
+        Long personId = securityUtils.getLoggedPersonId();
+        model.addAttribute("listWorkListDTOMember", workListService.findAllWorkListDTOByMember(personId));
+        model.addAttribute("listWorkListDTOAuthor", workListService.findAllWorkListDTOByAuthorId(personId));
+
+//        model.addAttribute("listWorkTC", workTCService.findWorkTCDTOByWorkListId(id));
+//        model.addAttribute("listTCByProject", tcMusterService.findAllTestCaseMusters());
+//        model.addAttribute("listUsersProjectsDTO", projectService.findAllTestProjectsByUserIdDTO(personId));
+//        model.addAttribute("listPerson", personService.findAllPersons());
+//        model.addAttribute("listPriority", PriorityTCEnum.values());
+        return "workTCs";
+    }
 
     @RequestMapping(value = "/member", method = RequestMethod.GET)
     public String showWorkListByMember(Model model) {

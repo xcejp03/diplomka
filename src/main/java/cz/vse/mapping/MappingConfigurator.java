@@ -133,7 +133,6 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
         factory.classMap(TCInstance.class, TCInstanceRunDTO.class)
                 .mapNullsInReverse(false)
                 .mapNulls(false)
-                .field("id", "id")
                 .field("tCMuster", "tcMusters_id")
                 .field("tsInstances", "tsInstances_id")
                 .field("id", "tcInstance_id")

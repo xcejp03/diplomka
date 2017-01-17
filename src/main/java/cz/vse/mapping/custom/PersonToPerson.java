@@ -16,20 +16,13 @@ public class PersonToPerson extends CustomMapper<Person, Person> {
 
     @Override
     public void mapAtoB(Person person, Person person2, MappingContext context) {
-        l.warn("Mapování Person A -> B");
         l.info(person + " -> " + person2);
         person2 = person;
-//        super.mapAtoB(person, person2, context);
     }
 
     @Override
     public void mapBtoA(Person person, Person person2, MappingContext context) {
-        l.warn("Mapování Person B -> A");
         l.info(person2 + " -> " + person);
         person = person2;
-
-//        super.mapBtoA(person, person2, context);
     }
-
-
 }

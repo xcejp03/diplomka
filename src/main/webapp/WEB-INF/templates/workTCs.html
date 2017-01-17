@@ -37,12 +37,12 @@
     <div class="row">
         <div class="col-sm-12">
             <h1 class="page-header">
-                <small>WEB-INF/templates/workLists.html</small>
+                <small>WEB-INF/templates/wotkTCs.html</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/index">Home</a>
                 </li>
-                <li class="active">WorkList seznam</li>
+                <li class="active">Work TC seznam z workListu</li>
             </ol>
         </div>
     </div>
@@ -67,7 +67,7 @@
                         <th>Naplánováno</th>
                         <th>Priorita</th>
                         <th>Autor</th>
-                        <th>Edit</th>
+                        <th>WorkTC</th>
                     </tr>
                     </thead>
                     <tbody th:remove="all-but-first">
@@ -79,7 +79,7 @@
                         </td>
                         <td><span th:class="${workList.priority}" th:text="${workList.priority}"> Priorita</span></td>
                         <td th:text="${workList.author_id}">Autor</td>
-                        <td><a th:href="@{'/worklist/edit/'+${workList.id}}">Editace</a></td>
+                        <td><a th:href="@{'/worklist/worktc/'+${workList.id}}">WorkTC</a></td>
                     </tr>
                     </tbody>
                 </table>
@@ -103,7 +103,7 @@
                         <th>Naplánováno</th>
                         <th>Priorita</th>
                         <th>Autor</th>
-                        <th>Edit</th>
+                        <th>WorkTC</th>
                     </tr>
                     </thead>
                     <tbody th:remove="all-but-first">
@@ -114,7 +114,7 @@
                         <td th:text="${workList.plannedExecution}">Naplánováno</td>
                         <td><span th:class="${workList.priority}" th:text="${workList.priority}"> Priorita</span></td>
                         <td th:text="${workList.author_id}">Autor</td>
-                        <td><a th:href="@{'/worklist/edit/'+${workList.id}}">Editace</a></td>
+                        <td><a th:href="@{'/worklist/worktc/'+${workList.id}}">WorkTC</a></td>
 
 
                     </tr>
