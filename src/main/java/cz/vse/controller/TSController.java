@@ -50,6 +50,7 @@ public class TSController {
         model.addAttribute("tsDTO", new TSMusterDTO());
         model.addAttribute("listTSMusters", tsMusterService.findAllTestStepMustersDTO());
         model.addAttribute("listPersons", personService.findAllPersons());
+        model.addAttribute("loggedPerson", securityUtils.getLoggedPerson());
         model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMusters());
         return "tsCreate";
     }

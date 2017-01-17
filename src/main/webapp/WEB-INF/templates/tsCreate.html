@@ -82,7 +82,8 @@
 
                                 <select class="form-control" id="author_id" name="author_id">
                                     <option th:each="author_id : ${listPersons}"
-                                            th:selected="${tsDTO.author_id != null} ? ${#strings.contains(author_id.id, tsDTO.author_id)}"
+                                            th:selected="${tsDTO.author_id != null} ? ${#strings.contains(author_id.id, tsDTO.author_id)} :
+                                            ${#strings.contains(author_id.id, loggedPerson.id)}"
                                             th:value="${author_id.id}"
                                             th:text="${author_id.name}">jméno autora
                                     </option>
