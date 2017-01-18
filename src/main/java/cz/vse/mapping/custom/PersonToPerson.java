@@ -17,12 +17,14 @@ public class PersonToPerson extends CustomMapper<Person, Person> {
     @Override
     public void mapAtoB(Person person, Person person2, MappingContext context) {
         l.info(person + " -> " + person2);
+
+        l.info("hloubka: "+context.getDepth());
         person2 = person;
     }
 
-    @Override
-    public void mapBtoA(Person person, Person person2, MappingContext context) {
-        l.info(person2 + " -> " + person);
-        person = person2;
-    }
+//    @Override
+//    public void mapBtoA(Person person, Person person2, MappingContext context) {
+//        l.info(person2 + " -> " + person);
+//        person = person2;
+//    }
 }

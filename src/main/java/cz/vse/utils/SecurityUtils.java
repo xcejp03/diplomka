@@ -6,8 +6,11 @@ import cz.vse.service.PersonService;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+
+import java.util.Collection;
 
 /**
  * Created by pcejk on 03.01.2017.
@@ -39,5 +42,10 @@ public class SecurityUtils {
         PersonDTO personDTO;
         personDTO = mapper.map(person, PersonDTO.class);
         return personDTO;
+    }
+
+    public Collection<? extends GrantedAuthority> getLoggedPersonAuthorities() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return  auth.getAuthorities();
     }
 }

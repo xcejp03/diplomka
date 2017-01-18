@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="cs" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Dashboard</title>
+
+    <!--importované přes fragment-->
+    <div th:replace="/fragment/thymeFragment :: headImports"/>
+    <!--importované přes fragment - konec-->
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.css"/>
+
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.js"/>
+</head>
+<body>
+
+<!-- Navigation -->
+<div th:replace="/fragment/thymeFragment :: menu"/>
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="page-header">
+                <small>WEB-INF/templates/dashboard.html</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="index">Home</a>
+                </li>
+                <li class="active">Projekty</li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            <div class="jumbotron">
+                <h1 class="error-404">Dashboard
+                </h1>
+            </div>
+        </div>
+    </div>
+
+    <!--
+
+if (loggedPersonAuthorities.contains(RoleEnum.TESTER))  {
+model.addAttribute("workListsToday", workListService.findAllWorkListDTOByMemberToday(securityUtils.getLoggedPersonId()));
+model.addAttribute("myAssignedOpenTC", defectService.findAllDefectDTOByAssigneeAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
+model.addAttribute("myOpenDefects", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
+}
+
+
+if (loggedPersonAuthorities.contains(RoleEnum.ANALYTIC))  {
+model.addAttribute("myProjectsStatistics", projectService.getMyProjectsWithStatistics(securityUtils.getLoggedPerson()));
+model.addAttribute("myOpenDefects",   model.addAttribute("myOpenDefects", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open)));
+}
+
+
+if (loggedPersonAuthorities.contains(RoleEnum.MANAGER))  {
+model.addAttribute("myOpenDefects", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
+model.addAttribute("myProjectsStatistics", projectService.getMyProjectsWithStatistics(securityUtils.getLoggedPerson()));
+model.addAttribute("workListsToday", workListService.findAllWorkListDTOByMemberToday(securityUtils.getLoggedPersonId()));
+model.addAttribute("workListsLastThreeDays",workListService.findAllWorkListDTOByMemberLastThreeDays(securityUtils.getLoggedPersonId()));
+}
+-->
+    <span th:if="${workListsToday != null}" th:remove="tag">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="well">
+							<H1>Worklisty</H1>
+						</div>
+
+                bla bla
+					</div>
+				</div>
+			</span>
+
+
+    <span th:if="${myAssignedOpenTC != null}" th:remove="tag">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="well">
+							<H1>Defekty</H1>
+						</div>
+						<h2>myAssignedOpenTC</h2>
+						<table class="table table-striped datatable">
+							<thead>
+								<tr>
+									<th>TC ID</th>
+									<th>Priorita</th>
+									<th>Název</th>
+									<th>Affected Version</th>
+									<th>Status</th>
+									<th>created</th>
+									<th>updated</th>
+									<th>Assignee</th>
+									<th>Reporter</th>
+									<th>Detail</th>
+									<th>Edit</th>
+									<th>Více</th>
+								</tr>
+							</thead>
+							<tbody th:remove="all-but-first">
+								<tr th:each="defect : ${myAssignedOpenTC}">
+									<td th:text="${defect.id}">00</td>
+									<td>
+										<span th:class="${defect.priority}" th:text="${defect.priority}">Priorita</span>
+									</td>
+									<td th:text="${defect.name}">Název</td>
+									<td th:text="${defect.affectsVersion}">Affected version</td>
+									<td th:text="${defect.status}">Status</td>
+									<td th:text="${defect.createdDateTime}">Vytvořeno</td>
+									<td th:text="${defect.updatedDateTime}">updated</td>
+									<td th:text="${defect.assignee_id}">Assignee</td>
+									<td th:text="${defect.reporter_id}">reporter</td>
+									<td>
+										<a href="#" th:href="@{'/defect/'+${defect.id}}"
+                                           th:attr="data-name=${defect.description}"
+                                           data-id="#detailDialog">Detail</a>
+									</td>
+									<td>
+										<a href="#" th:href="@{'/defect/edit/'+${defect.id}}">Edit</a>
+									</td>
+									<td>
+										<a href="#" class="opener"
+                                           th:attr="data-objectid=${defect.id}" data-id="#moreDialog">Více</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</span>
+
+
+    <span th:if="${myOpenDefects != null}" th:remove="tag">
+				<div class="row">
+					<div class="col-sm-12">
+						<h2>myOpenDefects</h2>
+						<table class="table table-striped datatable">
+							<thead>
+								<tr>
+									<th>TC ID</th>
+									<th>Priorita</th>
+									<th>Název</th>
+									<th>Affected Version</th>
+									<th>Status</th>
+									<th>created</th>
+									<th>updated</th>
+									<th>Assignee</th>
+									<th>Reporter</th>
+									<th>Detail</th>
+									<th>Edit</th>
+									<th>Více</th>
+								</tr>
+							</thead>
+							<tbody th:remove="all-but-first">
+								<tr th:each="defect : ${myOpenDefects}">
+									<td th:text="${defect.id}">00</td>
+									<td>
+										<span th:class="${defect.priority}" th:text="${defect.priority}">Priorita</span>
+									</td>
+									<td th:text="${defect.name}">Název</td>
+									<td th:text="${defect.affectsVersion}">Affected version</td>
+									<td th:text="${defect.status}">Status</td>
+									<td th:text="${defect.createdDateTime}">Vytvořeno</td>
+									<td th:text="${defect.updatedDateTime}">updated</td>
+									<td th:text="${defect.assignee_id}">Assignee</td>
+									<td th:text="${defect.reporter_id}">reporter</td>
+									<td>
+										<a href="#" th:href="@{'/defect/'+${defect.id}}"
+                                           th:attr="data-name=${defect.description}"
+                                           data-id="#detailDialog">Detail</a>
+									</td>
+									<td>
+										<a href="#" th:href="@{'/defect/edit/'+${defect.id}}">Edit</a>
+									</td>
+									<td>
+										<a href="#" class="opener"
+                                           th:attr="data-objectid=${defect.id}" data-id="#moreDialog">Více</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</span>
+
+
+    <span th:if="${myProjectsStatistics != null}" th:remove="tag">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="well">
+							<H1>Projekty se statistikou</H1>
+						</div>
+            blah blah
+					</div>
+				</div>
+			</span>
+
+    <span th:if="${workListsLastThreeDays != null}" th:remove="tag">
+				<div class="well">
+					<H1>Worklisty za tři dny</H1>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+            bluh bleh
+					</div>
+				</div>
+			</span>
+
+    <!--dialogová okna-->
+    <div id="moreDialog" title="Více">
+        <h3>Project ID: <span id="spanDataObjectId"/>
+        </h3>
+        <a th:href="@{'/defect/create'(source='projectSource')}" onclick="addSourceIdToURL(this)"
+           class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Založit defekt</a>
+        <a href="#" class="btn btn-default" sec:authorize="hasAuthority('ANALYTIC')">Žádost o smazání</a>
+        <a href="/defect/defects" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Seznam
+            Defektů</a>
+    </div>
+
+    <div id="detailDialog" title="Detail projektu">
+        <h3>Detail projektu: <span id="spanDataName"/>
+        </h3>
+        <h3>Vlastník projektu: <span id="spanDataOwnerName"> </span>
+        </h3>
+        <h3>Počet Test Suitů: //dodělat</h3>
+    </div>
+
+    <div id="membersDialog" title="Členové projektu" sec:authorize="hasAuthority('ANALYTIC')">
+        <div class="well">
+            <h3>členové projektu</h3>
+        </div>
+        <h3>analytici</h3>
+        <h3>testeři</h3>
+        <h3>všichni</h3>
+        <p>//chybí dodělat</p>
+    </div>
+
+
+    <!-- Footer -->
+    <div th:replace="/fragment/thymeFragment :: footer"/>
+
+</div>
+<!-- /.container -->
+</body>
+</html>

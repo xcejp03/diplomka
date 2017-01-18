@@ -23,7 +23,7 @@
                 </button>
                 <a class="navbar-brand" href="/index">[--]</a>
                 <span sec:authorize="!hasAuthority('ROLE_ANONYMOUS')">
-                    <a href="/login" sec:authentication="principal.username" class="navbar-brand"></a>
+                    <a href="/dashboard" sec:authentication="principal.username" class="navbar-brand"></a>
                 </span>
                 <a href="/person/prihlasit" class="btn btn-default">prih</a>
             </div>

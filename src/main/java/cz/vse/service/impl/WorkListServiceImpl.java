@@ -62,10 +62,10 @@ public class WorkListServiceImpl implements WorkListService {
 
     @Override
     public void updateWorkList(WorkListDTO workListDTO) {
-        l.warn("updateWorkList(WorkListDTO): "+workListDTO);
+        l.warn("updateWorkList(WorkListDTO): " + workListDTO);
         WorkList workList = findWorkListById(workListDTO.getId());
         mapper.map(workListDTO, workList);
-        l.warn("updateWorkList po mapování: "+workList);
+        l.warn("updateWorkList po mapování: " + workList);
         workList.setUpdatedDateTime(LocalDateTime.now());
         workTCService.updateWorkTCEntity(workList.getWorkTCList());
         workListRepository.save(workList);
@@ -125,5 +125,18 @@ public class WorkListServiceImpl implements WorkListService {
             listTCMusterIdByWorklistInWorkTCDTO.add(tcMuster_id);
         }
         return listTCMusterIdByWorklistInWorkTCDTO;
+    }
+
+    public List<WorkListDTO> findAllWorkListDTOByMemberToday(long id) {
+//        List<WorkListDTO> workListDTOList = workListRepository.
+//                findWorkListByMemberToday
+
+
+        return null;
+    }
+
+    @Override
+    public List<WorkListDTO> findAllWorkListDTOByMemberLastThreeDays(Long loggedPersonId) {
+        return null;
     }
 }

@@ -2,6 +2,7 @@ package cz.vse.service.impl;
 
 import cz.vse.dto.ProjectDTO;
 import cz.vse.dto.ProjectsNamesDTO;
+import cz.vse.entity.Person;
 import cz.vse.entity.Project;
 import cz.vse.repository.ProjectRepository;
 import cz.vse.service.PersonService;
@@ -121,5 +122,8 @@ public class ProjectServiceImpl implements ProjectService {
         return projectsNamesDTOList;
     }
 
-
+    @Override
+    public List<Project> getMyProjectsWithStatistics(Person loggedPerson) {
+        return null;
+    }
 }

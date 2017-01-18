@@ -12,6 +12,19 @@ import java.util.List;
  * ukládat jako nové instance. V db pak bude - NE! bude to jinak.
  */
 @Entity
+/*
+
+@NamedQuery(name = "WorkList.findTestXXX",
+        query = "select u from WorkList u where u.name = 'sdf'")
+
+  @Query("select u from User u where u.firstname = :firstname or u.lastname = :lastname")
+  User findByLastnameOrFirstname(@Param("lastname") String lastname,
+                                 @Param("firstname") String firstname);
+}
+*/
+
+//workListsToday
+//@NamedQuery(name = "WorkList.findWorkListsToday", query = "select w from WorkList w where w.")
 public class WorkList extends BaseEntity {
     private String name;
 

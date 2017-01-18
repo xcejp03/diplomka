@@ -32,5 +32,8 @@ public interface WorkListService {
 
     List<Long> getListTCMusterIdByWorklistInWorkTCDTO(long id);
 
+    List<WorkListDTO> findAllWorkListDTOByMemberToday(long id);
 
+
+    List<WorkListDTO> findAllWorkListDTOByMemberLastThreeDays(Long loggedPersonId);
 }
