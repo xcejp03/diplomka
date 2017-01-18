@@ -13,7 +13,7 @@ public interface WorkListRepository extends BaseRepository<WorkList> {
     List<WorkList> findAllWorkListDTOByAuthor(Person person);
     List<WorkList> findAllWorkListDTOByProjectIn(List<Project> projects);
 
-//    @Query("select w from WorkList t where t.name = 'sda'")
-//    public Iterable<WorkList> findTestXXX();
+    @Query("select w from WorkList w where w.name = 'sda'")
+    public WorkList findTestXXX();
 
 }

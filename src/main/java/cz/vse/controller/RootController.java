@@ -3,6 +3,7 @@ package cz.vse.controller;
 import cz.vse.entity.Defect;
 import cz.vse.entity.DefectStatusEnum;
 import cz.vse.entity.RoleEnum;
+import cz.vse.entity.WorkList;
 import cz.vse.repository.PersonRepository;
 import cz.vse.repository.TCInstanceRepository;
 import cz.vse.repository.TSInstanceRepository;
@@ -67,6 +68,9 @@ public class RootController {
     @Autowired
     private PersonRepository personRepository;
 
+    @Autowired
+    private WorkListRepository workListRepository;
+
 
     @RequestMapping(value = "/thyme", method = RequestMethod.GET)
     public String thymeInclude(Model model) {
@@ -94,6 +98,7 @@ public class RootController {
         if (loggedPersonAuthorities.contains(new SimpleGrantedAuthority("TESTER"))) {
             l.warn("role je tester");
             l.warn("findTestXXX()"+ personRepository.findXXX());
+            l.warn("WorkList repository find XXx() "+workListRepository.findTestXXX());
             model.addAttribute("workListsToday", workListService.findAllWorkListDTOByMemberToday(securityUtils.getLoggedPersonId()));
             model.addAttribute("myAssignedOpenTC", defectService.findAllDefectDTOByAssigneeAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
             model.addAttribute("myOpenDefects", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
