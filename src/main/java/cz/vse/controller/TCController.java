@@ -80,6 +80,7 @@ public class TCController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createTSPost(@ModelAttribute("project") TCMusterDTO tcMusterDTO) {
         if (tcMusterDTO.getId() == null) {
+            tcMusterDTO.setAuthor_id(securityUtils.getLoggedPersonId());
             tcMusterService.createTestCaseMuster(tcMusterDTO);
         } else {
             tcMusterService.updateTestCaseMuster(tcMusterDTO);
@@ -119,7 +120,7 @@ public class TCController {
         model.addAttribute("tcInstance", tcInstanceRunDTO);
         model.addAttribute("listTSInstances", tsInstanceService.findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
 
-        return "redirect:/tc/show/"+tcInstanceRunDTO.getId();
+        return "redirect:/tc/show/"+tcInstanceRunDTO.getTcInstance_id();
     }
 
     @RequestMapping("/show/{id}")
