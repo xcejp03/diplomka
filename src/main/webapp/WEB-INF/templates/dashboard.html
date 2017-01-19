@@ -79,7 +79,7 @@ model.addAttribute("workListsLastThreeDays",workListService.findAllWorkListDTOBy
 						<div class="well">
 							<H1>Worklisty</H1>
 						</div>
-
+<div th:text="${workListsToday}"></div>
                 bla bla
 					</div>
 				</div>
@@ -215,6 +215,7 @@ model.addAttribute("workListsLastThreeDays",workListService.findAllWorkListDTOBy
 				<div class="row">
 					<div class="col-sm-12">
             bluh bleh
+						<div th:text="${workListsLastThreeDays}"></div>
 					</div>
 				</div>
 			</span>

@@ -127,16 +127,23 @@ public class WorkListServiceImpl implements WorkListService {
         return listTCMusterIdByWorklistInWorkTCDTO;
     }
 
-    public List<WorkListDTO> findAllWorkListDTOByMemberToday(long id) {
-//        List<WorkListDTO> workListDTOList = workListRepository.
-//                findWorkListByMemberToday
+    public List<WorkListDTO> findAllWorkListDTOByMemberToday(Person person) {
+        LocalDate plannedExecution = LocalDate.now();
+        List<WorkList> workListList = workListRepository.findAllWorkListDTOByMemberToday(person, plannedExecution);
 
+        List<WorkListDTO> workListDTOList = mapper.mapAsList(workListList, WorkListDTO.class);
 
-        return null;
+        return workListDTOList;
     }
 
     @Override
-    public List<WorkListDTO> findAllWorkListDTOByMemberLastThreeDays(Long loggedPersonId) {
-        return null;
+    public List<WorkListDTO> findAllWorkListDTOByMemberLastThreeDays(Person person) {
+        l.info("findAllWorkListDTOByMemberBetweenDays");
+        LocalDate dayStart = LocalDate.of(2017, 1, 15);
+        LocalDate dayEnd = LocalDate.of(2017, 1, 25);
+        List<WorkList> workListList = workListRepository.findAllWorkListDTOByMemberBetweenDays(person, dayStart, dayEnd);
+        List<WorkListDTO> workListDTOList = mapper.mapAsList(workListList, WorkListDTO.class);
+        l.info("findAllWorkListDTOByMemberBetweenDays -"+workListDTOList);
+        return workListDTOList;
     }
 }
