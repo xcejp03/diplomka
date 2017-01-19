@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -139,8 +140,9 @@ public class WorkListServiceImpl implements WorkListService {
     @Override
     public List<WorkListDTO> findAllWorkListDTOByMemberLastThreeDays(Person person) {
         l.info("findAllWorkListDTOByMemberBetweenDays");
-        LocalDate dayStart = LocalDate.of(2017, 1, 15);
-        LocalDate dayEnd = LocalDate.of(2017, 1, 25);
+        LocalDate dayStart = LocalDate.now().minus(3, ChronoUnit.DAYS);
+        LocalDate dayEnd = LocalDate.now();
+
         List<WorkList> workListList = workListRepository.findAllWorkListDTOByMemberBetweenDays(person, dayStart, dayEnd);
         List<WorkListDTO> workListDTOList = mapper.mapAsList(workListList, WorkListDTO.class);
         l.info("findAllWorkListDTOByMemberBetweenDays -"+workListDTOList);
