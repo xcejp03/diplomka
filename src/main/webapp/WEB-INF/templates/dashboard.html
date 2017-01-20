@@ -51,75 +51,96 @@
         </div>
     </div>
 
-    <!--
-
-if (loggedPersonAuthorities.contains(RoleEnum.TESTER))  {
-model.addAttribute("workListsToday", workListService.findAllWorkListDTOByMemberToday(securityUtils.getLoggedPersonId()));
-model.addAttribute("myAssignedOpenTC", defectService.findAllDefectDTOByAssigneeAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
-model.addAttribute("myOpenDefects", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
-}
-
-
-if (loggedPersonAuthorities.contains(RoleEnum.ANALYTIC))  {
-model.addAttribute("myProjectsStatistics", projectService.getMyProjectsWithStatistics(securityUtils.getLoggedPerson()));
-model.addAttribute("myOpenDefects",   model.addAttribute("myOpenDefects", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open)));
-}
-
-
-if (loggedPersonAuthorities.contains(RoleEnum.MANAGER))  {
-model.addAttribute("myOpenDefects", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
-model.addAttribute("myProjectsStatistics", projectService.getMyProjectsWithStatistics(securityUtils.getLoggedPerson()));
-model.addAttribute("workListsToday", workListService.findAllWorkListDTOByMemberToday(securityUtils.getLoggedPersonId()));
-model.addAttribute("workListsLastThreeDays",workListService.findAllWorkListDTOByMemberLastThreeDays(securityUtils.getLoggedPersonId()));
-}
--->
     <span th:if="${workListsToday != null}" th:remove="tag">
 				<div class="row">
 					<div class="col-sm-12">
-						<div class="well">
 							<H1>Worklisty</H1>
-						</div>
-<div th:text="${workListsToday}"></div>
-                bla bla
+                        <div class="well">
+                        <h2>Worklisty plánované na dnes</h2>
+                        <table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Název</th>
+									<th>Priorita</th>
+									<th>Plánováno</th>
+									<th>Vlastník</th>
+									<th>Projekt</th>
+                                    <th>Detail</th>
+								</tr>
+							</thead>
+							<tbody th:remove="all-but-first">
+								<tr th:each="worklist : ${workListsToday}">
+									<td th:text="${worklist.name}">Název</td>
+									<td th:text="${worklist.priority}">vlastník</td>
+									<td th:text="${worklist.plannedExecution}">passed</td>
+									<td th:text="${worklist.author_id}">failed</td>
+									<td th:text="${worklist.author_id}">passed</td>
+                                    <td>
+                                        <a href="#" th:href="@{'/worklist/'+${worklist.project_id}}">detail projektu</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+                            </div>
 					</div>
 				</div>
 			</span>
+
 
     <span th:if="${myOpenTC != null}" th:remove="tag">
 				<div class="row">
 					<div class="col-sm-12">
-						<div class="well">
-							<H1>Moje nespuštěné TC</H1> <small><span
+                        <div class="well">
+							<H2>Moje nespuštěné TC</H2> <small>Celkem <span
                                 th:text="${#lists.size(myOpenTC)}"></span> ks</small>
-						</div>
-<div th:text="${myOpenTC}"></div>
-                bla bla
-					</div>
-				</div>
-			</span>
-
-    <span th:if="${myAssignedOpenTC != null}" th:remove="tag">
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="well">
-							<H1>Defekty</H1>
-						</div>
-						<h2>myAssignedOpenTC</h2>
-						<table class="table table-striped datatable">
+                            <table class="table table-striped">
 							<thead>
 								<tr>
-									<th>TC ID</th>
+									<th>Název</th>
+									<th>Priorita</th>
+									<th>Worklist</th>
+                                    <th>Detail</th>
+								</tr>
+							</thead>
+							<tbody th:remove="all-but-first">
+								<tr th:each="worktc : ${myOpenTC}">
+									<td th:text="${worktc.name}">Název</td>
+									<td th:text="${worktc.priority}">priorita</td>
+									<td th:text="${worktc.workList_id}">worklist</td>
+                                    <td>
+                                        <a href="#" th:href="@{'/worklist/show/'+${worktc.workList_id}}">detail</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+                            </div>
+                    </div>
+                </div>
+    </span>
+
+    <hr/>
+    <div class="row">
+        <div class="col-sm-12">
+            <H1>Defekty</H1>
+        </div>
+    </div>
+    <div class="row">
+
+             <span th:if="${myAssignedOpenTC != null}" th:remove="tag">
+
+					<div class="col-sm-6">
+                         <div class="well">
+						<h2>Assignované na mě</h2>
+                       <hr/>
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>ID</th>
 									<th>Priorita</th>
 									<th>Název</th>
-									<th>Affected Version</th>
-									<th>Status</th>
-									<th>created</th>
 									<th>updated</th>
-									<th>Assignee</th>
 									<th>Reporter</th>
 									<th>Detail</th>
-									<th>Edit</th>
-									<th>Více</th>
 								</tr>
 							</thead>
 							<tbody th:remove="all-but-first">
@@ -129,51 +150,35 @@ model.addAttribute("workListsLastThreeDays",workListService.findAllWorkListDTOBy
 										<span th:class="${defect.priority}" th:text="${defect.priority}">Priorita</span>
 									</td>
 									<td th:text="${defect.name}">Název</td>
-									<td th:text="${defect.affectsVersion}">Affected version</td>
-									<td th:text="${defect.status}">Status</td>
-									<td th:text="${defect.createdDateTime}">Vytvořeno</td>
 									<td th:text="${defect.updatedDateTime}">updated</td>
-									<td th:text="${defect.assignee_id}">Assignee</td>
 									<td th:text="${defect.reporter_id}">reporter</td>
 									<td>
 										<a href="#" th:href="@{'/defect/'+${defect.id}}"
                                            th:attr="data-name=${defect.description}"
                                            data-id="#detailDialog">Detail</a>
 									</td>
-									<td>
-										<a href="#" th:href="@{'/defect/edit/'+${defect.id}}">Edit</a>
-									</td>
-									<td>
-										<a href="#" class="opener"
-                                           th:attr="data-objectid=${defect.id}" data-id="#moreDialog">Více</a>
-									</td>
 								</tr>
 							</tbody>
 						</table>
-					</div>
-				</div>
-			</span>
+                            </div>
+                    </div>
+             </span>
 
 
-    <span th:if="${myOpenDefects != null}" th:remove="tag">
-				<div class="row">
-					<div class="col-sm-12">
-						<h2>myOpenDefects</h2>
-						<table class="table table-striped datatable">
+        <span th:if="${myOpenDefects != null}" th:remove="tag">
+					<div class="col-sm-6">
+                        <div class="well">
+						<h2>Mnou založené</h2>
+                            <hr/>
+						<table class="table table-striped">
 							<thead>
 								<tr>
-									<th>TC ID</th>
+									<th>ID</th>
 									<th>Priorita</th>
 									<th>Název</th>
-									<th>Affected Version</th>
-									<th>Status</th>
-									<th>created</th>
 									<th>updated</th>
 									<th>Assignee</th>
-									<th>Reporter</th>
 									<th>Detail</th>
-									<th>Edit</th>
-									<th>Více</th>
 								</tr>
 							</thead>
 							<tbody th:remove="all-but-first">
@@ -183,43 +188,55 @@ model.addAttribute("workListsLastThreeDays",workListService.findAllWorkListDTOBy
 										<span th:class="${defect.priority}" th:text="${defect.priority}">Priorita</span>
 									</td>
 									<td th:text="${defect.name}">Název</td>
-									<td th:text="${defect.affectsVersion}">Affected version</td>
-									<td th:text="${defect.status}">Status</td>
-									<td th:text="${defect.createdDateTime}">Vytvořeno</td>
 									<td th:text="${defect.updatedDateTime}">updated</td>
 									<td th:text="${defect.assignee_id}">Assignee</td>
-									<td th:text="${defect.reporter_id}">reporter</td>
 									<td>
 										<a href="#" th:href="@{'/defect/'+${defect.id}}"
                                            th:attr="data-name=${defect.description}"
                                            data-id="#detailDialog">Detail</a>
 									</td>
-									<td>
-										<a href="#" th:href="@{'/defect/edit/'+${defect.id}}">Edit</a>
-									</td>
-									<td>
-										<a href="#" class="opener"
-                                           th:attr="data-objectid=${defect.id}" data-id="#moreDialog">Více</a>
-									</td>
 								</tr>
 							</tbody>
 						</table>
+                            </div>
 					</div>
-				</div>
 			</span>
 
+    </div>
+    <hr/>
 
     <span th:if="${MyProjectsStat != null}" th:remove="tag">
 				<div class="row">
 					<div class="col-sm-12">
-						<div class="well">
-							<H1>Projekty se statistikou</H1>
-						</div>
-						<div th:text="${MyProjectsStat}"></div>
-            blah blah
-
+							<H1>Moje Projekty se statistikou</H1>
+                        <div class="well">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Název</th>
+									<th>Vlastník</th>
+									<th>Passed</th>
+									<th>Failed</th>
+									<th>Počet TC</th>
+                                    <th>Detail</th>
+								</tr>
+							</thead>
+							<tbody th:remove="all-but-first">
+								<tr th:each="project : ${MyProjectsStat}">
+									<td th:text="${project.name}">Název</td>
+									<td th:text="${project.projectOwner_name}">vlastník</td>
+									<td th:text="${project.numberOfPassedTCs}">passed</td>
+									<td th:text="${project.numberOfFailedTCs}">failed</td>
+									<td th:text="${project.numberOfTCs}">passed</td>
+                                    <td>
+                                        <a href="#" th:href="@{'/project/'+${project.project_id}}">detail projektu</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+                            </div>
 					</div>
-				</div>
+                </div>
 			</span>
 
     <span th:if="${workListsLastThreeDays != null}" th:remove="tag">
@@ -228,6 +245,30 @@ model.addAttribute("workListsLastThreeDays",workListService.findAllWorkListDTOBy
 				</div>
 				<div class="row">
 					<div class="col-sm-12">
+                        <table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Název</th>
+									<th>Vlastník</th>
+									<th>Passed</th>
+									<th>Failed</th>
+									<th>Počet TC</th>
+                                    <th>Detail</th>
+								</tr>
+							</thead>
+							<tbody th:remove="all-but-first">
+								<tr th:each="project : ${workListsLastThreeDays}">
+									<td th:text="${project.name}">Název</td>
+									<td th:text="${project.projectOwner_name}">vlastník</td>
+									<td th:text="${project.numberOfPassedTCs}">passed</td>
+									<td th:text="${project.numberOfFailedTCs}">failed</td>
+									<td th:text="${project.numberOfTCs}">passed</td>
+                                    <td>
+                                        <a href="#" th:href="@{'/project/'+${project.project_id}}">detail projektu</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
             bluh bleh
 						<div th:text="${workListsLastThreeDays}"></div>
 					</div>

@@ -12,6 +12,7 @@ public class ProjectStatsDTO extends BaseDTO {
     private int numberOfTCs;
     private int numberOfPassedTCs;
     private int numberOfFailedTCs;
+    private long project_id;
 
     public String getName() {
         return name;
@@ -51,6 +52,14 @@ public class ProjectStatsDTO extends BaseDTO {
 
     public void setNumberOfFailedTCs(int numberOfFailedTCs) {
         this.numberOfFailedTCs = numberOfFailedTCs;
+    }
+
+    public long getProject_id() {
+        return project_id;
+    }
+
+    public void setProject_id(long project_id) {
+        this.project_id = project_id;
     }
 
     @Override

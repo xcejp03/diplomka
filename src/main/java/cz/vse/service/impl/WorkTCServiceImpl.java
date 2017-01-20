@@ -167,6 +167,14 @@ public class WorkTCServiceImpl implements WorkTCService {
     }
 
     @Override
+    public List<WorkTCDTO> getMyOpenWorkTCDTO(Person person) {
+        List<WorkTCDTO> workTCDTOs;
+        List<WorkTC> workTCs = workTCRepository.getMyOpenWorkTC(person);
+        workTCDTOs = mapper.mapAsList(workTCs, WorkTCDTO.class);
+        return workTCDTOs;
+    }
+
+    @Override
     public List<WorkTC> getMyOpenWorkTC(long personId) {
         Person person = personService.findPersonById(personId);
         return workTCRepository.getMyOpenWorkTC(person);

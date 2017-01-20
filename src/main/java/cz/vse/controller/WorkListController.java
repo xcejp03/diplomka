@@ -150,6 +150,17 @@ public class WorkListController {
         return "workTCCreate";
     }
 
+    @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
+    public String showWorkList(@PathVariable("id") int id, Model model) {
+        l.info("request mapping /worklist/show/");
+        Long personId = securityUtils.getLoggedPersonId();
+        model.addAttribute("workListDTO", workListService.findWorkListDTOById(id));
+//        model.addAttribute("listTCByProject", tcMusterService.findAllTestCaseMusters());
+        model.addAttribute("listUsersProjectsDTO", projectService.findAllTestProjectsByUserIdDTO(personId));
+        return "workTCShow";
+    }
+
+
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String editWorkList(@PathVariable("id") int id,Model model) {
         l.info("request mapping /worklist/edit/"+id);

@@ -43,6 +43,8 @@ public interface WorkTCService {
 
     List<WorkTC> getMyOpenWorkTC(Person person);
 
+    List<WorkTCDTO> getMyOpenWorkTCDTO(Person person);
+
     List<WorkTC> getMyOpenWorkTC(long personId);
 
     int getMyOpenWorkTCCount(Person person);

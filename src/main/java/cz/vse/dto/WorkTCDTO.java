@@ -25,7 +25,7 @@ public class WorkTCDTO extends BaseDTO {
 
     private PriorityTCEnum priority;
 
-    private LocalDateTime updatedDateTime;
+    private String updatedDateTime;
 
 
     public String getName() {
@@ -76,11 +76,11 @@ public class WorkTCDTO extends BaseDTO {
         this.priority = priority;
     }
 
-    public LocalDateTime getUpdatedDateTime() {
+    public String getUpdatedDateTime() {
         return updatedDateTime;
     }
 
-    public void setUpdatedDateTime(LocalDateTime updatedDateTime) {
+    public void setUpdatedDateTime(String updatedDateTime) {
         this.updatedDateTime = updatedDateTime;
     }
 }

@@ -6,11 +6,12 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 @Component
-public class LocalDateToStringConverter extends BidirectionalConverter<LocalDate, String> {
+public class LocalDateTimeToStringConverter extends BidirectionalConverter<LocalDateTime, String> {
     private final Logger l = Logger.getLogger(this.getClass());
 //    @Override
 //    public LocalDate convertTo(LocalDate source, Type<LocalDate> destinationType) {
@@ -23,22 +24,22 @@ public class LocalDateToStringConverter extends BidirectionalConverter<LocalDate
 //    }
 
     @Override
-    public String convertTo(LocalDate localDate, Type<String> type) {
+    public String convertTo(LocalDateTime localDateTime, Type<String> type) {
         l.info("convertTo");
-        l.info("data: " + localDate + "->" + type);
+        l.info("data: " + localDateTime + "->" + type);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd. MM. yyyy");
-        String formattedLocalDate = localDate.format(formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd. MM. yyyy HH:mm");
+        String formattedLocalDate = localDateTime.format(formatter);
         return formattedLocalDate;
     }
 
     @Override
-    public LocalDate convertFrom(String s, Type<LocalDate> type) {
+    public LocalDateTime convertFrom(String s, Type<LocalDateTime> type) {
         l.info("convertFrom");
         l.info("data: " + s + "->" + type);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd. MM. yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         formatter = formatter.withLocale(Locale.UK);  // Locale specifies human language for translating, and cultural norms for lowercase/uppercase and abbreviations and such. Example: Locale.US or Locale.CANADA_FRENCH
-        LocalDate date = LocalDate.parse(s, formatter);
+        LocalDateTime date = LocalDateTime.parse(s, formatter);
         l.info(date);
 
 
