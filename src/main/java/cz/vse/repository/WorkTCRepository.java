@@ -15,7 +15,9 @@ public interface WorkTCRepository extends BaseRepository<WorkTC> {
     List<WorkTC> findWorkTCDTOByWorkList(WorkList workList);
 
 
-//    @Query("select w from WorkTC w where ")
-//    List<WorkTC> getMyOpenWorkTC (Person person);
+    @Query("select w from WorkTC w full join w.tcRunHistory h where w.assignee = '16' and h.workTC is null ")
+    List<WorkTC> getMyOpenWorkTC();
 
+    @Query("select count(w.id) from WorkTC w full join w.tcRunHistory h where w.assignee = '16' and h.workTC is null ")
+    int getMyOpenWorkTCCount();
 }

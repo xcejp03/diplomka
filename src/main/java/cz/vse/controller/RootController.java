@@ -72,6 +72,9 @@ public class RootController {
     @Autowired
     private TCMusterRepository tcMusterRepository;
 
+    @Autowired
+    private WorkTCRepository workTCRepository;
+
 
     @RequestMapping(value = "/thyme", method = RequestMethod.GET)
     public String thymeInclude(Model model) {
@@ -97,17 +100,18 @@ public class RootController {
         Collection<? extends GrantedAuthority> loggedPersonAuthorities = securityUtils.getLoggedPersonAuthorities();
         l.warn("Moje role: " + loggedPersonAuthorities);
 //        l.warn("getNumberOfMyTCsInProject :"+projectService.getNumberOfMyTCsInProject(securityUtils.getLoggedPerson()) );
-        l.warn("getNumberOfMyTCsInProject: "+tcMusterRepository.getNumberOfMyTCsInProject(securityUtils.getLoggedPerson(), projectService.findTestProjectById(20L)));
-        l.warn("getNumberOfTCsInProjectByStatus: "+tcInstanceRepository.getNumberOfTCsInProjectByStatus());
-        l.warn("getProjectMembersNumber: "+projectService.getProjectMembersNumber(22L));
-
+        l.warn("getNumberOfMyTCsInProject: " + tcMusterRepository.getNumberOfMyTCsInProject(securityUtils.getLoggedPerson(), projectService.findTestProjectById(20L)));
+        l.warn("getNumberOfTCsInProjectByStatus: " + tcInstanceRepository.getNumberOfTCsInProjectByStatus());
+        l.warn("getProjectMembersNumber: " + projectService.getProjectMembersNumber(22L));
+        l.warn("getMyOpenWorkTC: " +workTCRepository.getMyOpenWorkTC());
+        l.warn("getMyOpenWorkTCCount: " +workTCRepository.getMyOpenWorkTCCount());
         l.warn("---");
 
         if (loggedPersonAuthorities.contains(new SimpleGrantedAuthority("TESTER"))) {
             l.warn("role je tester");
-            l.warn("findTestXXX()"+ personRepository.findXXX());
+            l.warn("findTestXXX()" + personRepository.findXXX());
             model.addAttribute("workListsToday", workListService.findAllWorkListDTOByMemberToday(securityUtils.getLoggedPerson()));
-//            model.addAttribute("myOpenTC", )      dodělat
+//            model.addAttribute("myOpenTC", )
             model.addAttribute("myAssignedOpenTC", defectService.findAllDefectDTOByAssigneeAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
             model.addAttribute("myOpenDefects", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
         }
