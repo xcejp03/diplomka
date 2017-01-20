@@ -35,6 +35,7 @@ public interface WorkListService {
 
     List<WorkListDTO> findAllWorkListDTOByMemberToday(Person person);
 
+    List<WorkListDTO> findAllWorkListDTOByMemberTomorrow(Person person);
 
     List<WorkListDTO> findAllWorkListDTOByMemberLastThreeDays(Person person);
 }

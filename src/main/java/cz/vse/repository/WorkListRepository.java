@@ -19,7 +19,8 @@ public interface WorkListRepository extends BaseRepository<WorkList> {
     @Query("select w from WorkList w where w.author = :person and w.plannedExecution = :plannedExecution")
     List<WorkList> findAllWorkListDTOByMemberToday(@Param("person") Person person, @Param("plannedExecution") LocalDate plannedExecution);
 
-    @Query("select w from WorkList w where w.author = :person and w.plannedExecution >= :dayStart and w.plannedExecution <= :dayEnd")
+//    @Query("select w from WorkList w where w.author = :person and w.plannedExecution <= :dayStart and w.plannedExecution >= :dayEnd")
+@Query("select w from WorkList w where w.author = :person and w.plannedExecution between :dayStart and :dayEnd")
     List<WorkList> findAllWorkListDTOByMemberBetweenDays(@Param("person") Person person,
                                                          @Param("dayStart") LocalDate dayStart,
                                                          @Param("dayEnd") LocalDate dayEnd);

@@ -82,9 +82,13 @@
 							</tbody>
 						</table>
                             </div>
+
+                        <div class="well">přidat statistiku postupu práce na worklistu: <br/>
+                        počet TC, počet passed, failed, zbývá (norun)
+                        </div>
 					</div>
 				</div>
-			</span>
+    </span>
 
 
     <span th:if="${myOpenTC != null}" th:remove="tag">
@@ -126,7 +130,7 @@
     </div>
     <div class="row">
 
-             <span th:if="${myAssignedOpenTC != null}" th:remove="tag">
+             <span th:if="${myAssignedOpenDefects != null}" th:remove="tag">
 
 					<div class="col-sm-6">
                          <div class="well">
@@ -144,7 +148,7 @@
 								</tr>
 							</thead>
 							<tbody th:remove="all-but-first">
-								<tr th:each="defect : ${myAssignedOpenTC}">
+								<tr th:each="defect : ${myAssignedOpenDefects}">
 									<td th:text="${defect.id}">00</td>
 									<td>
 										<span th:class="${defect.priority}" th:text="${defect.priority}">Priorita</span>
@@ -166,7 +170,7 @@
 
 
         <!--<span th:if="${myOpenDefects.size}" th:remove="tag">-->
-            <span th:if="${#lists.size(myOpenDefects) > 1}" th:remove="tag">
+        <span th:if="${#lists.size(myOpenDefects) > 1}" th:remove="tag">
 					<div class="col-sm-6">
                         <div class="well">
 						<h2>Mnou založené</h2>
@@ -246,7 +250,8 @@
 					<div class="col-sm-12">
 							<H1>Moje Projekty se statistikou</H1>
                         <div class="well">
-                            analytik chce vidět přehled jeho projektú s jejich vlastníkem. všechny TC v projektu/ počet mích. moje/všechny. a počet test suitů.
+                            <p>analytik chce vidět přehled jeho projektú s jejich vlastníkem. všechny TC v projektu/ počet mích. moje/všechny. a počet test suitů.</p>
+                            <p>manažer chce vidět všechno - z pohledu počtu TC i z pohledu výsledků testů</p>
                         </div>
                         <div class="well">
 						<table class="table table-striped">
@@ -278,45 +283,75 @@
                 </div>
     </span>
 
-    myProjectsStatistics
-
-
-
     <span th:if="${workListsLastThreeDays != null}" th:remove="tag">
-				<div class="well">
-					<H1>Worklisty za tři dny</H1>
-				</div>
 				<div class="row">
 					<div class="col-sm-12">
+							<H1>Worklisty</H1>
+                        <div class="well">
+                        <h2>Worklisty za tři dny</h2>
                         <table class="table table-striped">
 							<thead>
 								<tr>
 									<th>Název</th>
+									<th>Priorita</th>
+									<th>Plánováno</th>
 									<th>Vlastník</th>
-									<th>Passed</th>
-									<th>Failed</th>
-									<th>Počet TC</th>
+									<th>Projekt</th>
                                     <th>Detail</th>
 								</tr>
 							</thead>
 							<tbody th:remove="all-but-first">
-								<tr th:each="project : ${workListsLastThreeDays}">
-									<td th:text="${project.name}">Název</td>
-									<td th:text="${project.projectOwner_name}">vlastník</td>
-									<td th:text="${project.numberOfPassedTCs}">passed</td>
-									<td th:text="${project.numberOfFailedTCs}">failed</td>
-									<td th:text="${project.numberOfTCs}">passed</td>
+								<tr th:each="worklist : ${workListsLastThreeDays}">
+									<td th:text="${worklist.name}">Název</td>
+									<td th:text="${worklist.priority}">vlastník</td>
+									<td th:text="${worklist.plannedExecution}">passed</td>
+									<td th:text="${worklist.author_id}">failed</td>
+									<td th:text="${worklist.author_id}">passed</td>
                                     <td>
-                                        <a href="#" th:href="@{'/project/'+${project.project_id}}">detail projektu</a>
+                                        <a href="#" th:href="@{'/worklist/'+${worklist.project_id}}">detail projektu</a>
 									</td>
 								</tr>
 							</tbody>
 						</table>
-            bluh bleh
-						<div th:text="${workListsLastThreeDays}"></div>
+                            </div>
 					</div>
 				</div>
-			</span>
+    </span>
+
+    <span th:if="${workListsTomorrow != null}" th:remove="tag">
+				<div class="row">
+                    <div class="col-sm-12">
+                     <div class="well">
+                        <h2>Worklisty na zítra</h2>
+                        <table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Název</th>
+									<th>Priorita</th>
+									<th>Plánováno</th>
+									<th>Vlastník</th>
+									<th>Projekt</th>
+                                    <th>Detail</th>
+								</tr>
+							</thead>
+							<tbody th:remove="all-but-first">
+								<tr th:each="worklist : ${workListsToday}">
+									<td th:text="${worklist.name}">Název</td>
+									<td th:text="${worklist.priority}">vlastník</td>
+									<td th:text="${worklist.plannedExecution}">passed</td>
+									<td th:text="${worklist.author_id}">failed</td>
+									<td th:text="${worklist.author_id}">passed</td>
+                                    <td>
+                                        <a href="#" th:href="@{'/worklist/'+${worklist.project_id}}">detail projektu</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+                     </div>
+                    </div>
+                </div>
+    </span>
+
 
     <!--dialogová okna-->
     <div id="moreDialog" title="Více">

@@ -137,6 +137,15 @@ public class WorkListServiceImpl implements WorkListService {
         return workListDTOList;
     }
 
+    public List<WorkListDTO> findAllWorkListDTOByMemberTomorrow(Person person) {
+        LocalDate plannedExecution = LocalDate.now().plus(1, ChronoUnit.DAYS);
+        List<WorkList> workListList = workListRepository.findAllWorkListDTOByMemberToday(person, plannedExecution);
+
+        List<WorkListDTO> workListDTOList = mapper.mapAsList(workListList, WorkListDTO.class);
+
+        return workListDTOList;
+    }
+
     @Override
     public List<WorkListDTO> findAllWorkListDTOByMemberLastThreeDays(Person person) {
         l.info("findAllWorkListDTOByMemberBetweenDays");

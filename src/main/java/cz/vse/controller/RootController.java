@@ -99,25 +99,17 @@ public class RootController {
     public String dashboard(Model model) {
         Collection<? extends GrantedAuthority> loggedPersonAuthorities = securityUtils.getLoggedPersonAuthorities();
         l.warn("Moje role: " + loggedPersonAuthorities);
-//        l.warn("getNumberOfMyTCsInProject :"+projectService.getNumberOfMyTCsInProject(securityUtils.getLoggedPerson()) );
-        l.warn("getNumberOfMyTCsInProject: " + tcMusterRepository.getNumberOfMyTCsInProject(securityUtils.getLoggedPerson(), projectService.findTestProjectById(20L)));
-        l.warn("getNumberOfTCsInProjectByStatus: " + tcInstanceRepository.getNumberOfTCsInProjectByStatus());
-        l.warn("getProjectMembersNumber: " + projectService.getProjectMembersNumber(22L));
-        l.warn("getMyOpenWorkTC: " +workTCService.getMyOpenWorkTC(securityUtils.getLoggedPerson()));
-        l.warn("getMyOpenWorkTCCount: " +workTCService.getMyOpenWorkTCCount(securityUtils.getLoggedPerson()));
-        l.warn("getMyProjectsWithStatistics: "+projectService.getMyProjectsWithStatistics(securityUtils.getLoggedPerson()));
-        l.warn("---");
 
         if (loggedPersonAuthorities.contains(new SimpleGrantedAuthority("TESTER"))) {
             l.warn("role je tester");
             l.warn("findTestXXX()" + personRepository.findXXX());
             model.addAttribute("workListsToday", workListService.findAllWorkListDTOByMemberToday(securityUtils.getLoggedPerson()));
+            model.addAttribute("workListsTomorrow", workListService.findAllWorkListDTOByMemberTomorrow(securityUtils.getLoggedPerson()));
             model.addAttribute("myOpenTC", workTCService.getMyOpenWorkTCDTO(securityUtils.getLoggedPerson()));
-            model.addAttribute("myAssignedOpenTC", defectService.findAllDefectDTOByAssigneeAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
+            model.addAttribute("myAssignedOpenDefects", defectService.findAllDefectDTOByAssigneeAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
             model.addAttribute("myOpenDefects", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
             model.addAttribute("MyProjectsStat", projectService.getMyProjectsWithStatistics(securityUtils.getLoggedPerson()));
         }
-
 
         if (loggedPersonAuthorities.contains(new SimpleGrantedAuthority("ANALYTIC"))) {
             l.warn("role je analytik");
@@ -129,9 +121,11 @@ public class RootController {
 
         if (loggedPersonAuthorities.contains(new SimpleGrantedAuthority("MANAGER"))) {
             l.warn("role je manager");
+            model.addAttribute("myAssignedOpenDefects", defectService.findAllDefectDTOByAssigneeAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
             model.addAttribute("myOpenDefects", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
             model.addAttribute("myProjectsStatistics", projectService.getMyProjectsWithStatistics(securityUtils.getLoggedPerson()));
             model.addAttribute("workListsToday", workListService.findAllWorkListDTOByMemberToday(securityUtils.getLoggedPerson()));
+            model.addAttribute("workListsTomorrow", workListService.findAllWorkListDTOByMemberTomorrow(securityUtils.getLoggedPerson()));
             model.addAttribute("workListsLastThreeDays", workListService.findAllWorkListDTOByMemberLastThreeDays(securityUtils.getLoggedPerson()));
         }
 
