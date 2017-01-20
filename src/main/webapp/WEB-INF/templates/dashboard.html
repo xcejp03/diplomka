@@ -165,7 +165,8 @@
              </span>
 
 
-        <span th:if="${myOpenDefects != null}" th:remove="tag">
+        <!--<span th:if="${myOpenDefects.size}" th:remove="tag">-->
+            <span th:if="${#lists.size(myOpenDefects) > 1}" th:remove="tag">
 					<div class="col-sm-6">
                         <div class="well">
 						<h2>Mnou založené</h2>
@@ -237,7 +238,49 @@
                             </div>
 					</div>
                 </div>
-			</span>
+    </span>
+
+
+    <span th:if="${myProjectsStatistics != null}" th:remove="tag">
+				<div class="row">
+					<div class="col-sm-12">
+							<H1>Moje Projekty se statistikou</H1>
+                        <div class="well">
+                            analytik chce vidět přehled jeho projektú s jejich vlastníkem. všechny TC v projektu/ počet mích. moje/všechny. a počet test suitů.
+                        </div>
+                        <div class="well">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Název</th>
+									<th>Vlastník</th>
+									<th>Passed</th>
+									<th>Failed</th>
+									<th>Počet TC</th>
+                                    <th>Detail</th>
+								</tr>
+							</thead>
+							<tbody th:remove="all-but-first">
+								<tr th:each="project : ${myProjectsStatistics}">
+									<td th:text="${project.name}">Název</td>
+									<td th:text="${project.projectOwner_name}">vlastník</td>
+									<td th:text="${project.numberOfPassedTCs}">passed</td>
+									<td th:text="${project.numberOfFailedTCs}">failed</td>
+									<td th:text="${project.numberOfTCs}">passed</td>
+                                    <td>
+                                        <a href="#" th:href="@{'/project/'+${project.project_id}}">detail projektu</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+                            </div>
+					</div>
+                </div>
+    </span>
+
+    myProjectsStatistics
+
+
 
     <span th:if="${workListsLastThreeDays != null}" th:remove="tag">
 				<div class="well">

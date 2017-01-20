@@ -122,7 +122,8 @@ public class RootController {
         if (loggedPersonAuthorities.contains(new SimpleGrantedAuthority("ANALYTIC"))) {
             l.warn("role je analytik");
             model.addAttribute("myProjectsStatistics", projectService.getMyProjectsWithStatistics(securityUtils.getLoggedPerson()));
-            model.addAttribute("myOpenDefects", model.addAttribute("myOpenDefects", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open)));
+            model.addAttribute("myAssignedOpenTC", defectService.findAllDefectDTOByAssigneeAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
+            model.addAttribute("myOpenDefects", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
         }
 
 
