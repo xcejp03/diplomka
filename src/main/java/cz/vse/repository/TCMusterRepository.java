@@ -20,4 +20,6 @@ public interface TCMusterRepository extends BaseRepository<TCMuster> {
     @Query("select count(tc.id) from TCMuster tc where tc.Author = :loggedPerson and tc.project = :project")
     int getNumberOfMyTCsInProject(@Param("loggedPerson") Person loggedPerson, @Param("project") Project project);
 
+    @Query("select count(tc.id) from TCMuster tc where tc.project = :project")
+    int getNumberOfTCsInProject(@Param("project") Project project);
 }

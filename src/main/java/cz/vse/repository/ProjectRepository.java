@@ -23,4 +23,6 @@ public interface ProjectRepository extends BaseRepository<Project> {
 
     @Query("select count(p.id) from Project p join p.personMembers pm where p.id = :projectId")
     int getProjectMembersNumber(@Param("projectId") long projectId);
+
+//    List<Project> MyProjectsWithStats()
 }

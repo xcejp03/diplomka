@@ -85,6 +85,18 @@ model.addAttribute("workListsLastThreeDays",workListService.findAllWorkListDTOBy
 				</div>
 			</span>
 
+    <span th:if="${myOpenTC != null}" th:remove="tag">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="well">
+							<H1>Moje nespuštěné TC</H1> <small><span
+                                th:text="${#lists.size(myOpenTC)}"></span> ks</small>
+						</div>
+<div th:text="${myOpenTC}"></div>
+                bla bla
+					</div>
+				</div>
+			</span>
 
     <span th:if="${myAssignedOpenTC != null}" th:remove="tag">
 				<div class="row">
@@ -197,13 +209,15 @@ model.addAttribute("workListsLastThreeDays",workListService.findAllWorkListDTOBy
 			</span>
 
 
-    <span th:if="${myProjectsStatistics != null}" th:remove="tag">
+    <span th:if="${MyProjectsStat != null}" th:remove="tag">
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="well">
 							<H1>Projekty se statistikou</H1>
 						</div>
+						<div th:text="${MyProjectsStat}"></div>
             blah blah
+
 					</div>
 				</div>
 			</span>

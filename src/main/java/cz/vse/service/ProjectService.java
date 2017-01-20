@@ -1,6 +1,7 @@
 package cz.vse.service;
 
 import cz.vse.dto.ProjectDTO;
+import cz.vse.dto.ProjectStatsDTO;
 import cz.vse.dto.ProjectsNamesDTO;
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
@@ -33,7 +34,7 @@ public interface ProjectService {
 
     List<ProjectsNamesDTO> findAllTestProjectsByUserIdDTO(long id);
 
-    List<Project> getMyProjectsWithStatistics(Person loggedPerson);
+    List<ProjectStatsDTO> getMyProjectsWithStatistics(Person loggedPerson);
 
     int getNumberOfTCsInProject(long id);
 

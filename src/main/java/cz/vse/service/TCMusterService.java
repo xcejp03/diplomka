@@ -46,6 +46,7 @@ public interface TCMusterService {
 
     int getNumberOfMyTCsInProject(Person person, Project project);
 
+    int getNumberOfTCsInProject(Project project);
 
 
 }

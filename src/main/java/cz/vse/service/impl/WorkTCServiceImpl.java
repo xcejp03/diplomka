@@ -1,10 +1,7 @@
 package cz.vse.service.impl;
 
 import cz.vse.dto.*;
-import cz.vse.entity.Project;
-import cz.vse.entity.TCInstance;
-import cz.vse.entity.WorkList;
-import cz.vse.entity.WorkTC;
+import cz.vse.entity.*;
 import cz.vse.repository.ProjectRepository;
 import cz.vse.repository.WorkTCRepository;
 import cz.vse.service.*;
@@ -37,6 +34,9 @@ public class WorkTCServiceImpl implements WorkTCService {
 
     @Autowired
     private TCInstanceService tcInstanceService;
+
+    @Autowired
+    private PersonService personService;
 
 
     @Override
@@ -161,4 +161,25 @@ public class WorkTCServiceImpl implements WorkTCService {
         updateWorkTC(workTC);
     }
 
+    @Override
+    public List<WorkTC> getMyOpenWorkTC(Person person) {
+        return workTCRepository.getMyOpenWorkTC(person);
+    }
+
+    @Override
+    public List<WorkTC> getMyOpenWorkTC(long personId) {
+        Person person = personService.findPersonById(personId);
+        return workTCRepository.getMyOpenWorkTC(person);
+    }
+
+    @Override
+    public int getMyOpenWorkTCCount(Person person) {
+        return workTCRepository.getMyOpenWorkTCCount(person);
+    }
+
+    @Override
+    public int getMyOpenWorkTCCount(long personId) {
+        Person person = personService.findPersonById(personId);
+        return workTCRepository.getMyOpenWorkTCCount(person);
+    }
 }

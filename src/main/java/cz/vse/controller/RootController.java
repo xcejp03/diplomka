@@ -103,17 +103,19 @@ public class RootController {
         l.warn("getNumberOfMyTCsInProject: " + tcMusterRepository.getNumberOfMyTCsInProject(securityUtils.getLoggedPerson(), projectService.findTestProjectById(20L)));
         l.warn("getNumberOfTCsInProjectByStatus: " + tcInstanceRepository.getNumberOfTCsInProjectByStatus());
         l.warn("getProjectMembersNumber: " + projectService.getProjectMembersNumber(22L));
-        l.warn("getMyOpenWorkTC: " +workTCRepository.getMyOpenWorkTC());
-        l.warn("getMyOpenWorkTCCount: " +workTCRepository.getMyOpenWorkTCCount());
+        l.warn("getMyOpenWorkTC: " +workTCService.getMyOpenWorkTC(securityUtils.getLoggedPerson()));
+        l.warn("getMyOpenWorkTCCount: " +workTCService.getMyOpenWorkTCCount(securityUtils.getLoggedPerson()));
+        l.warn("getMyProjectsWithStatistics: "+projectService.getMyProjectsWithStatistics(securityUtils.getLoggedPerson()));
         l.warn("---");
 
         if (loggedPersonAuthorities.contains(new SimpleGrantedAuthority("TESTER"))) {
             l.warn("role je tester");
             l.warn("findTestXXX()" + personRepository.findXXX());
             model.addAttribute("workListsToday", workListService.findAllWorkListDTOByMemberToday(securityUtils.getLoggedPerson()));
-//            model.addAttribute("myOpenTC", )
+            model.addAttribute("myOpenTC", workTCService.getMyOpenWorkTC(securityUtils.getLoggedPerson()));
             model.addAttribute("myAssignedOpenTC", defectService.findAllDefectDTOByAssigneeAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
             model.addAttribute("myOpenDefects", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
+            model.addAttribute("MyProjectsStat", projectService.getMyProjectsWithStatistics(securityUtils.getLoggedPerson()));
         }
 
 

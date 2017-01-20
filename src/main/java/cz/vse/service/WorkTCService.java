@@ -40,4 +40,12 @@ public interface WorkTCService {
     List<WorkTCDTO> findAllWorkTCDTOByWorkListId(long id);
 
     void addWorkTCHistory(long worktcId, TCInstance tcInstance);
+
+    List<WorkTC> getMyOpenWorkTC(Person person);
+
+    List<WorkTC> getMyOpenWorkTC(long personId);
+
+    int getMyOpenWorkTCCount(Person person);
+
+    int getMyOpenWorkTCCount(long personId);
 }

@@ -164,4 +164,9 @@ public class TCMusterServiceImpl implements TCMusterService {
     public int getNumberOfMyTCsInProject(Person person, Project project) {
         return tcMusterRepository.getNumberOfMyTCsInProject(person, project);
     }
+
+    @Override
+    public int getNumberOfTCsInProject(Project project) {
+        return tcMusterRepository.getNumberOfTCsInProject(project);
+    }
 }

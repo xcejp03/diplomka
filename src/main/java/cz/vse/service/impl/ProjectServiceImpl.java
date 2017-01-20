@@ -1,6 +1,7 @@
 package cz.vse.service.impl;
 
 import cz.vse.dto.ProjectDTO;
+import cz.vse.dto.ProjectStatsDTO;
 import cz.vse.dto.ProjectsNamesDTO;
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
@@ -127,8 +128,12 @@ public class ProjectServiceImpl implements ProjectService {
 
 
     @Override
-    public List<Project> getMyProjectsWithStatistics(Person loggedPerson) {
-        return null;
+    public List<ProjectStatsDTO> getMyProjectsWithStatistics(Person loggedPerson) {
+        List<Project> projects = projectRepository.findAllProjectsByPersonMembersIdOrderById(loggedPerson.getId());
+        List<ProjectStatsDTO> projectStatsDTOs;
+        projectStatsDTOs = mapper.mapAsList(projects, ProjectStatsDTO.class);
+        l.warn("projectStatsDTO: "+ projectStatsDTOs);
+        return projectStatsDTOs;
     }
 
     @Override
