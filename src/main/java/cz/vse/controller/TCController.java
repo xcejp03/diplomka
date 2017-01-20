@@ -4,6 +4,8 @@ import cz.vse.dto.TCInstanceRunDTO;
 import cz.vse.dto.TCMusterDTO;
 import cz.vse.entity.Person;
 import cz.vse.entity.StatusEnum;
+import cz.vse.entity.TCInstance;
+import cz.vse.entity.WorkTC;
 import cz.vse.service.*;
 import cz.vse.utils.SecurityUtils;
 import org.apache.log4j.Logger;
@@ -12,10 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,6 +53,9 @@ public class TCController {
 
     @Autowired
     SecurityUtils securityUtils;
+
+    @Autowired
+    WorkTCService workTCService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String tcDefault(Model model) {
@@ -113,14 +115,25 @@ public class TCController {
     }
 
     @RequestMapping("/run/{id}")
-    public String runTCMuster(Model model, @PathVariable("id") long id) {
+    public String runTCMuster(Model model, @PathVariable("id") long id,
+                              @RequestParam(required = false, value = "worktc") Long worktcId) {
         TCInstanceRunDTO tcInstanceRunDTO;
+        TCInstance tcInstance;
         Person person = securityUtils.getLoggedPerson();
-        tcInstanceRunDTO = tcService.runNewTC(id, person);
-        model.addAttribute("tcInstance", tcInstanceRunDTO);
+//        tcInstanceRunDTO = tcService.runNewTC(id, person);
+        tcInstance = tcService.runNewTC(id, person);
+        l.warn("tcService.runNewTC(id, person): "+tcInstance);
+
+        if (worktcId != null) {
+            workTCService.addWorkTCHistory(worktcId, tcInstance);
+        }
+
+        tcInstanceRunDTO = tcInstanceService.findTCInstanceRunDTOById(tcInstance.getId());
+
+        model.addAttribute("tcInstance", tcInstance);
         model.addAttribute("listTSInstances", tsInstanceService.findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
 
-        return "redirect:/tc/show/"+tcInstanceRunDTO.getTcInstance_id();
+        return "redirect:/tc/show/" + tcInstanceRunDTO.getTcInstance_id();
     }
 
     @RequestMapping("/show/{id}")

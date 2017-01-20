@@ -180,8 +180,10 @@ public class WorkListController {
     @RequestMapping("/run/{id}")
     public String runTCMuster(Model model, @PathVariable("id") long id) {
         TCInstanceRunDTO tcInstanceRunDTO;
+        TCInstance tcInstance;
         Person person = securityUtils.getLoggedPerson();
-        tcInstanceRunDTO = tcService.runNewTC(id, person);
+        tcInstance = tcService.runNewTC(id, person);
+        tcInstanceRunDTO = tcInstanceService.findTCInstanceRunDTOById(tcInstance.getId());
         model.addAttribute("tcInstance", tcInstanceRunDTO);
         model.addAttribute("listTSInstances", tsInstanceService.findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
 

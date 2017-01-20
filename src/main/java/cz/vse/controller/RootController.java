@@ -107,6 +107,7 @@ public class RootController {
             l.warn("role je tester");
             l.warn("findTestXXX()"+ personRepository.findXXX());
             model.addAttribute("workListsToday", workListService.findAllWorkListDTOByMemberToday(securityUtils.getLoggedPerson()));
+//            model.addAttribute("myOpenTC", )      dodělat
             model.addAttribute("myAssignedOpenTC", defectService.findAllDefectDTOByAssigneeAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
             model.addAttribute("myOpenDefects", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
         }
@@ -132,5 +133,6 @@ public class RootController {
 
 
 }
+
 
 

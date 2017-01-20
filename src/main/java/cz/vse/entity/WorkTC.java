@@ -65,6 +65,10 @@ public class WorkTC extends BaseEntity {
         this.tcRunHistory = tcRunHistory;
     }
 
+    public void addTcRunHistory(TCInstance tcInstance)  {
+        this.tcRunHistory.add(tcInstance);
+    }
+
     public PriorityTCEnum getPriority() {
         return priority;
     }

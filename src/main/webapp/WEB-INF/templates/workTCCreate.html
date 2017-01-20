@@ -127,6 +127,7 @@
                                 <th>Priority</th>
                                 <th>Assignee</th>
                                 <th>Updated</th>
+                                <th>Run</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -155,6 +156,7 @@
                                     </select>
                                 </td>
                                 <td th:text="${tc.updatedDateTime}">změna</td>
+                                <td sec:authorize="hasAuthority('TESTER')"><a th:href="@{'/tc/run/'+${tc.tcMuster_id}+'?worktc='+${tc.id}}">run</a></td>
                             </tr>
                             </tbody>
                         </table>

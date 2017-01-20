@@ -1,10 +1,8 @@
 package cz.vse.service.impl;
 
-import cz.vse.dto.ProjectDTO;
-import cz.vse.dto.ProjectsNamesDTO;
-import cz.vse.dto.WorkListDTO;
-import cz.vse.dto.WorkTCDTO;
+import cz.vse.dto.*;
 import cz.vse.entity.Project;
+import cz.vse.entity.TCInstance;
 import cz.vse.entity.WorkList;
 import cz.vse.entity.WorkTC;
 import cz.vse.repository.ProjectRepository;
@@ -27,6 +25,7 @@ import java.util.List;
 @Service
 @Transactional
 public class WorkTCServiceImpl implements WorkTCService {
+    private final Logger l = Logger.getLogger(this.getClass());
     @Autowired
     private WorkTCRepository workTCRepository;
 
@@ -35,6 +34,9 @@ public class WorkTCServiceImpl implements WorkTCService {
 
     @Autowired
     private WorkListService workListService;
+
+    @Autowired
+    private TCInstanceService tcInstanceService;
 
 
     @Override
@@ -54,7 +56,7 @@ public class WorkTCServiceImpl implements WorkTCService {
     @Override
     public void updateWorkTC(WorkTC workTC) {
         workTC.setUpdatedDateTime(LocalDateTime.now());
-        workTCRepository.save(workTC);
+        l.warn("updateWorkTC: "+workTCRepository.save(workTC));
     }
 
     @Override
@@ -148,6 +150,15 @@ public class WorkTCServiceImpl implements WorkTCService {
         List<WorkTC> workTCList = workTCRepository.findWorkTCDTOByWorkList(workList);
         List<WorkTCDTO> workTCDTOList = mapper.mapAsList(workTCList, WorkTCDTO.class);
         return workTCDTOList;
+    }
+
+    public void addWorkTCHistory(long worktcId, TCInstance tcInstance) {
+        WorkTC workTC = new WorkTC();
+        workTC = findWorkTCById(worktcId);
+        tcInstance.setWorkTC(workTC);
+        tcInstanceService.updateTestCaseInstance(tcInstance);       //přidáno nové
+        workTC.addTcRunHistory(tcInstance);
+        updateWorkTC(workTC);
     }
 
 }
