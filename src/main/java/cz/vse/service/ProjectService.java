@@ -4,6 +4,7 @@ import cz.vse.dto.ProjectDTO;
 import cz.vse.dto.ProjectsNamesDTO;
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
+import cz.vse.entity.TCStatusEnum;
 
 import java.util.List;
 
@@ -33,4 +34,12 @@ public interface ProjectService {
     List<ProjectsNamesDTO> findAllTestProjectsByUserIdDTO(long id);
 
     List<Project> getMyProjectsWithStatistics(Person loggedPerson);
+
+    int getNumberOfTCsInProject(long id);
+
+    int getNumberOfTCsInProject(Project project);
+
+    int getProjectMembersNumber(Project project);
+
+    int getProjectMembersNumber(long projectId);
 }

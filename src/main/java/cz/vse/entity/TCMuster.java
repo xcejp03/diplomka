@@ -14,6 +14,10 @@ import java.util.List;
 public class TCMuster extends BaseEntity {
     private String name;
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinColumn(name = "author_id")
+    private Person Author;
+
     private PriorityTCEnum priority;
 
     private String prerequisite;
@@ -46,6 +50,14 @@ public class TCMuster extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Person getAuthor() {
+        return Author;
+    }
+
+    public void setAuthor(Person author) {
+        Author = author;
     }
 
     public PriorityTCEnum getPriority() {

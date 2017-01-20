@@ -4,6 +4,7 @@ import cz.vse.entity.Person;
 import cz.vse.entity.Project;
 import cz.vse.repository.base.BaseRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -19,4 +20,9 @@ public interface PersonRepository extends BaseRepository<Person> {
 
     @Query("select p from Person p where p.name = 'nic'")
     Person findXXX();
+
+
+    @Query("select p from Person p join p.projectsMember pm where p.projectsMember in :projects")
+//    int getProjectMembersNumber(Project project);
+    Person getProjectMembersNumber(@Param("projects") List<Project> projects);
 }

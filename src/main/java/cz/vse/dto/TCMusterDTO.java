@@ -14,6 +14,7 @@ public class TCMusterDTO extends BaseDTO {
 
     private String name;
     private Long project_id;
+    private Long author_id;
     private List<Long> tsMusters_id;
     private List<Long> tcInstances_id;
     private List<Long> testSuite_id;
@@ -23,13 +24,6 @@ public class TCMusterDTO extends BaseDTO {
     private String prerequisite;
     private String note;
 
-    public LocalDateTime getCreatedDateTime() {
-        return createdDateTime;
-    }
-
-    public void setCreatedDateTime(LocalDateTime createdDateTime) {
-        this.createdDateTime = createdDateTime;
-    }
 
     public String getName() {
         return name;
@@ -37,6 +31,14 @@ public class TCMusterDTO extends BaseDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getAuthor_id() {
+        return author_id;
+    }
+
+    public void setAuthor_id(Long author_id) {
+        this.author_id = author_id;
     }
 
     public List<Long> getTsMusters_id() {
@@ -77,6 +79,14 @@ public class TCMusterDTO extends BaseDTO {
 
     public void setPriority(PriorityTCEnum priority) {
         this.priority = priority;
+    }
+
+    public LocalDateTime getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    public void setCreatedDateTime(LocalDateTime createdDateTime) {
+        this.createdDateTime = createdDateTime;
     }
 
     public String getPrerequisite() {

@@ -1,13 +1,7 @@
 package cz.vse.controller;
 
-import cz.vse.entity.Defect;
-import cz.vse.entity.DefectStatusEnum;
-import cz.vse.entity.RoleEnum;
-import cz.vse.entity.WorkList;
-import cz.vse.repository.PersonRepository;
-import cz.vse.repository.TCInstanceRepository;
-import cz.vse.repository.TSInstanceRepository;
-import cz.vse.repository.WorkListRepository;
+import cz.vse.entity.*;
+import cz.vse.repository.*;
 import cz.vse.service.*;
 import cz.vse.utils.SecurityUtils;
 import ma.glasnost.orika.MapperFacade;
@@ -27,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.management.relation.Role;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by pcejka on 09.10.2016.
@@ -71,6 +66,12 @@ public class RootController {
     @Autowired
     private WorkListRepository workListRepository;
 
+    @Autowired
+    private ProjectRepository projectRepository;
+
+    @Autowired
+    private TCMusterRepository tcMusterRepository;
+
 
     @RequestMapping(value = "/thyme", method = RequestMethod.GET)
     public String thymeInclude(Model model) {
@@ -95,6 +96,13 @@ public class RootController {
     public String dashboard(Model model) {
         Collection<? extends GrantedAuthority> loggedPersonAuthorities = securityUtils.getLoggedPersonAuthorities();
         l.warn("Moje role: " + loggedPersonAuthorities);
+//        l.warn("getNumberOfMyTCsInProject :"+projectService.getNumberOfMyTCsInProject(securityUtils.getLoggedPerson()) );
+        l.warn("getNumberOfMyTCsInProject: "+tcMusterRepository.getNumberOfMyTCsInProject(securityUtils.getLoggedPerson(), projectService.findTestProjectById(20L)));
+        l.warn("getNumberOfTCsInProjectByStatus: "+tcInstanceRepository.getNumberOfTCsInProjectByStatus());
+        l.warn("getProjectMembersNumber: "+projectService.getProjectMembersNumber(22L));
+
+        l.warn("---");
+
         if (loggedPersonAuthorities.contains(new SimpleGrantedAuthority("TESTER"))) {
             l.warn("role je tester");
             l.warn("findTestXXX()"+ personRepository.findXXX());
@@ -124,6 +132,5 @@ public class RootController {
 
 
 }
-
 
 

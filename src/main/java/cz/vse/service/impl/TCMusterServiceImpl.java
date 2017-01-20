@@ -159,4 +159,9 @@ public class TCMusterServiceImpl implements TCMusterService {
         tcMusterDTOList = findAllTCDTOByUser(person);
         return tcMusterDTOList;
     }
+
+    @Override
+    public int getNumberOfMyTCsInProject(Person person, Project project) {
+        return tcMusterRepository.getNumberOfMyTCsInProject(person, project);
+    }
 }

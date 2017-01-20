@@ -2,8 +2,7 @@ package cz.vse.service.impl;
 
 import cz.vse.dto.TCInstanceDTO;
 import cz.vse.dto.TCInstanceRunDTO;
-import cz.vse.entity.TCInstance;
-import cz.vse.entity.TCMuster;
+import cz.vse.entity.*;
 import cz.vse.repository.TCInstanceRepository;
 import cz.vse.repository.TCMusterRepository;
 import cz.vse.service.TCInstanceService;
@@ -14,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,7 +34,7 @@ public class TCInstanceServiceImpl implements TCInstanceService {
 
     public void createTestCaseInstance(TCInstance tcInstance) {
         l.debug("creating TCInstance - service");
-
+        tcInstance.setStatus(StatusEnum.NORUN);
         tcInstanceRepository.save(tcInstance);
         l.info("created TCInstance - service: " + tcInstance);
     }
@@ -42,6 +42,8 @@ public class TCInstanceServiceImpl implements TCInstanceService {
     public void updateTestCaseInstance(TCInstance tcInstance) {
         l.debug("updating TCInstance - service");
         tcInstance.setUpdatedDateTime(LocalDateTime.now());
+        StatusEnum statusEnum = tcInstance != null ? getTCInstanceStatusFromTSInstancesStatuses(tcInstance) : StatusEnum.NORUN;
+        tcInstance.setStatus(statusEnum);
         tcInstanceRepository.save(tcInstance);
         l.info("updated TCInstance - service: " + tcInstance);
     }
@@ -101,7 +103,7 @@ public class TCInstanceServiceImpl implements TCInstanceService {
 
     public TCInstance findLastTCInstanceByTCMuster(TCMuster tcMuster) {
         TCInstance tcInstance;
-        tcInstance = tcInstanceRepository.findTop1ByTCMusterOrderByIdDesc(tcMuster);
+        tcInstance = tcInstanceRepository.findTop1ByTCMusterOrderByCreatedDateTimeDesc(tcMuster);
         return tcInstance;
     }
 
@@ -110,4 +112,65 @@ public class TCInstanceServiceImpl implements TCInstanceService {
         TCInstance tcInstance = findLastTCInstanceByTCMuster(tcMuster);
         return tcInstance;
     }
+
+    @Override
+    public int getNumberOfTCsInProjectByStatus(Project project, StatusEnum status) {
+        int cislo = tcInstanceRepository.getNumberOfTCsInProjectByStatus();
+//        int cislo = tcInstanceRepository.getNumberOfTCsInProjectByStatus(project.getId(), status.getPriorityOrder());
+
+        return cislo;
+    }
+
+
+    public void refreshTCInstanceStatus(long id) {
+        TCInstance tcInstance = findTestCaseInstanceById(id);
+        StatusEnum refreshedStatus = getTCInstanceStatusFromTSInstancesStatuses(tcInstance);
+        tcInstance.setStatus(refreshedStatus);
+        l.info("refreshed tcInstance: " + tcInstance);
+        tcInstanceRepository.save(tcInstance);
+    }
+
+    private StatusEnum getTCInstanceStatusFromTSInstancesStatuses(TCInstance tcInstance) {
+        List<TSInstance> tsInstanceList = tcInstance.getTsInstances();
+        List<StatusEnum> statusEnumList = new ArrayList<>();
+
+        for (TSInstance tsInstance : tsInstanceList) {
+            statusEnumList.add(tsInstance.getStatus());
+        }
+
+        if (statusEnumList.contains(StatusEnum.FAILED)) {
+            return StatusEnum.FAILED;
+        }
+        if (statusEnumList.contains(StatusEnum.BLOCKED)) {
+            return StatusEnum.BLOCKED;
+        }
+
+        if (isItAllNorun(statusEnumList)) {
+            return StatusEnum.NORUN;
+        }
+        if (isItAllPassed(statusEnumList)) {
+            return StatusEnum.PASSED;
+        }
+
+        return StatusEnum.NOTCOMPLETED;
+    }
+
+    private boolean isItAllPassed(List<StatusEnum> tsInstanceList) {
+        for (StatusEnum statusEnum : tsInstanceList) {
+            if (statusEnum != StatusEnum.PASSED) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean isItAllNorun(List<StatusEnum> tsInstanceList) {
+        for (StatusEnum statusEnum : tsInstanceList) {
+            if (statusEnum != StatusEnum.NORUN) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

@@ -15,6 +15,7 @@ public class TCInstance extends BaseEntity {
     private String name;
     private String prerequisite;
     private String note;
+    private StatusEnum status;
 
     @ManyToOne
     @JoinColumn(name = "tcMuster_id")
@@ -107,6 +108,14 @@ public class TCInstance extends BaseEntity {
 
     public void setWorkTC(WorkTC workTC) {
         this.workTC = workTC;
+    }
+
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusEnum status) {
+        this.status = status;
     }
 
     @Override

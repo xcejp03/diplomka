@@ -3,6 +3,7 @@ package cz.vse.service;
 import cz.vse.dto.TCMusterDTO;
 import cz.vse.dto.TestSuiteDTO;
 import cz.vse.entity.Person;
+import cz.vse.entity.Project;
 import cz.vse.entity.TCMuster;
 import cz.vse.entity.TestSuite;
 
@@ -42,5 +43,9 @@ public interface TCMusterService {
     List<TCMusterDTO> findAllTCDTOByUser(Person person);
 
     List<TCMusterDTO> findAllTCDTOByUser(Long projectId);
+
+    int getNumberOfMyTCsInProject(Person person, Project project);
+
+
 
 }
