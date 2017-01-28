@@ -119,11 +119,9 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
 
     public List<Person> findAllPersonByProjectOrderById(Project project) {
         List<Person> personList;
-//        personList = personRepository.findAllPersonByProjectsMemberOrderById(project);
-//        personList = personRepository.findAllPersonByProjectsMemberOrderById(Arrays.asList(project));   //asi blbě, předělat
-//        personList = personRepository.findAllPersonsByProjectsMemberIn(Arrays.asList(project));   //asi blbě, předělat
+        personList = personRepository.getProjectMembers(Arrays.asList(project));   //asi blbě, předělat
         l.fatal("NENÍ IMPLEMENTOVÁNO - NEFUNGUJE");
-        return null;
+        return personList;
     }
 
     public List<PersonDTO> findAllPersonDTOByProjectId(long id) {
