@@ -150,7 +150,7 @@ public class TCInstance extends BaseEntity {
 
     @Override
     public String toString() {
-        return "TCInstance{" +
+        return "TCInstance - "+id+" {" +
                 "name='" + name + '\'' +
                 ", prerequisite='" + prerequisite + '\'' +
                 ", note='" + note + '\'' +

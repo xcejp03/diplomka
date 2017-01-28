@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by pcejka on 21.09.2016.
  */
-@Entity (name = "testsuite")
+@Entity
 public class TestSuite extends BaseEntity {
     private String name;        //testsuit je možné si pojmenovat
 
@@ -43,6 +43,28 @@ public class TestSuite extends BaseEntity {
 
     public void setTcMusters(List<TCMuster> tcMusters) {
         this.tcMusters = tcMusters;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        TestSuite testSuite = (TestSuite) o;
+
+        if (name != null ? !name.equals(testSuite.name) : testSuite.name != null) return false;
+        if (project != null ? !project.equals(testSuite.project) : testSuite.project != null) return false;
+        return tcMusters != null ? tcMusters.equals(testSuite.tcMusters) : testSuite.tcMusters == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (project != null ? project.hashCode() : 0);
+        result = 31 * result + (tcMusters != null ? tcMusters.hashCode() : 0);
+        return result;
     }
 
     @Override

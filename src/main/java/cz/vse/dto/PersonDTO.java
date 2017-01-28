@@ -13,8 +13,8 @@ public class PersonDTO extends BaseDTO {
     private String name;
     private String username;
     private String password;
-    private LocalDateTime createdDate;
-    private LocalDateTime lastLogged;
+    private String createdDate;
+    private String lastLogged;
     private Boolean enabled;
     private List<RoleEnum> userRolesEnum;
 
@@ -43,19 +43,19 @@ public class PersonDTO extends BaseDTO {
         this.password = password;
     }
 
-    public LocalDateTime getCreatedDate() {
+    public String getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(LocalDateTime createdDate) {
+    public void setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
     }
 
-    public LocalDateTime getLastLogged() {
+    public String getLastLogged() {
         return lastLogged;
     }
 
-    public void setLastLogged(LocalDateTime lastLogged) {
+    public void setLastLogged(String lastLogged) {
         this.lastLogged = lastLogged;
     }
 

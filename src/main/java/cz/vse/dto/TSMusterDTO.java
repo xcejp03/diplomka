@@ -9,8 +9,8 @@ import java.util.List;
 
 public class TSMusterDTO extends BaseDTO {
 
-    private LocalDateTime createdDateTime;
-    private LocalDateTime updatedDateTime;
+    private String createdDateTime;
+    private String updatedDateTime;
     private String action;
     private String expected;
     private Long author_id;
@@ -21,19 +21,19 @@ public class TSMusterDTO extends BaseDTO {
 
     private Long tcMuster_id;
 
-    public LocalDateTime getCreatedDateTime() {
+    public String getCreatedDateTime() {
         return createdDateTime;
     }
 
-    public void setCreatedDateTime(LocalDateTime createdDateTime) {
+    public void setCreatedDateTime(String createdDateTime) {
         this.createdDateTime = createdDateTime;
     }
 
-    public LocalDateTime getUpdatedDateTime() {
+    public String getUpdatedDateTime() {
         return updatedDateTime;
     }
 
-    public void setUpdatedDateTime(LocalDateTime updatedDateTime) {
+    public void setUpdatedDateTime(String updatedDateTime) {
         this.updatedDateTime = updatedDateTime;
     }
 

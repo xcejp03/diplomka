@@ -11,9 +11,9 @@
     <!--importované přes fragment-->
     <div th:replace="/fragment/thymeFragment :: headImports"/>
     <!--importované přes fragment - konec-->
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.css"/>
+    <!--<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.css"/>-->
 
-    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
+    <!--<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>-->
 </head>
 
 <body>
@@ -43,7 +43,7 @@
 
         <div class="col-sm-12">
             <div class="jumbotron">
-                <h1 class="error-404">Seznam všech Test Suitů z projektů, kde jsi členem.</h1>
+                <h1 class="error-404">Seznam Test Suitů</h1>
             </div>
         </div>
     </div>
@@ -53,7 +53,7 @@
         <thead>
         <tr>
             <th>Suite ID</th>
-            <th sec:authorize="hasAuthority('ANALYTIC')">Stav</th>
+            <th sec:authorize="hasAuthority('TESTER')">Stav</th>
             <th>Název</th>
             <th>Detail</th>
             <th sec:authorize="hasAuthority('ANALYTIC')">Vytvořeno</th>
@@ -66,7 +66,7 @@
         <tbody th:remove="all-but-first">
         <tr th:each="suite : ${listSuitesDTO}">
             <td th:text="${suite.id}">00</td>
-            <td sec:authorize="hasAuthority('ANALYTIC')">Výsledek Suitu</td>
+            <td sec:authorize="hasAuthority('TESTER')">Výsledek Suitu</td>
             <td th:text="${suite.name}">Projekt</td>
             <td><a href="#" class="opener"
                    th:attr="data-name=${suite.name}" data-id="#detailDialog">Detail</a>
@@ -86,7 +86,10 @@
 
     <div class="row" sec:authorize="hasAuthority('ANALYTIC')">
         <div class="col-sm-4">
-            <a href="/suite/create" class="btn btn-default">Založit Test Suite</a>
+            <div th:if="${project != null}" th:remove="tag">
+                <a th:href="@{'/suite/create/'+'?project='+ ${project.id}}" class="btn btn-default">Založit Test
+                    Suite</a>
+            </div>
         </div>
         <div class="col-sm-8"></div>
     </div>
@@ -94,7 +97,7 @@
     <!--dialogová okna-->
     <div id="moreDialog" title="Více">
         <h3>Project ID: <span id="spanDataObjectId"></span></h3>
-        <a th:href="@{'/suite/delete/'}" class="btn btn-default" sec:authorize="hasAuthority('ANALYTIC')">Smazat</a>
+        <a href="/suite/remove/" onclick="addIdToURL(this)" class="btn btn-default">Smazat</a>
         <a href="#" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Nahlásit chybu</a>
     </div>
 

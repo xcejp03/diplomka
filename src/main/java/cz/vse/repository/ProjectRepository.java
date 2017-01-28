@@ -17,6 +17,14 @@ public interface ProjectRepository extends BaseRepository<Project> {
     List<Project> findAllProjectsByPersonMembersIdOrderById(Long id);
 
 
+    List<Person> findAllPersonsByPersonMembers(List<Project> projects);
+    List<Person> findAllPersonByPersonMembers(List<Project> projects);
+
+    List<Person> findAllPersonsByPersonMembers(Project project);
+    List<Person> findAllPersonByPersonMembers(Project project);
+
+//    List<Person> getProjectMembersByProject(Project project);
+
     @Query("select count (p.id) from Project p join p.tcMusters t where t.Author in :loggedPerson")
         //UKÁZKA JOIN
     int getNumberOfMyTCsInProject(@Param("loggedPerson") List<Person> loggedPerson);
@@ -25,4 +33,6 @@ public interface ProjectRepository extends BaseRepository<Project> {
     int getProjectMembersNumber(@Param("projectId") long projectId);
 
 //    List<Project> MyProjectsWithStats()
+
+
 }

@@ -27,9 +27,9 @@ public class WorkListDTO extends BaseDTO {
 
     private List<Long> tcMuster_id;
 
-    private LocalDateTime createdDateTime;
+    private String createdDateTime;
 
-    private LocalDateTime updatedDateTime;
+    private String updatedDateTime;
 
     private String plannedExecution;
 
@@ -71,19 +71,19 @@ public class WorkListDTO extends BaseDTO {
         this.workTCList = workTCList;
     }
 
-    public LocalDateTime getCreatedDateTime() {
+    public String getCreatedDateTime() {
         return createdDateTime;
     }
 
-    public void setCreatedDateTime(LocalDateTime createdDateTime) {
+    public void setCreatedDateTime(String createdDateTime) {
         this.createdDateTime = createdDateTime;
     }
 
-    public LocalDateTime getUpdatedDateTime() {
+    public String getUpdatedDateTime() {
         return updatedDateTime;
     }
 
-    public void setUpdatedDateTime(LocalDateTime updatedDateTime) {
+    public void setUpdatedDateTime(String updatedDateTime) {
         this.updatedDateTime = updatedDateTime;
     }
 

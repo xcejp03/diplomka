@@ -1,5 +1,6 @@
 package cz.vse.mapping.converter;
 
+import cz.vse.entity.Person;
 import cz.vse.entity.TestSuite;
 import org.springframework.stereotype.Component;
 

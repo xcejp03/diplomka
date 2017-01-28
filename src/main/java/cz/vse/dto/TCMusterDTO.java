@@ -20,7 +20,7 @@ public class TCMusterDTO extends BaseDTO {
     private List<Long> testSuite_id;
     private StatusEnum status;
     private PriorityTCEnum priority;
-    private LocalDateTime createdDateTime;
+    private String createdDateTime;
     private String prerequisite;
     private String note;
 
@@ -81,11 +81,11 @@ public class TCMusterDTO extends BaseDTO {
         this.priority = priority;
     }
 
-    public LocalDateTime getCreatedDateTime() {
+    public String getCreatedDateTime() {
         return createdDateTime;
     }
 
-    public void setCreatedDateTime(LocalDateTime createdDateTime) {
+    public void setCreatedDateTime(String createdDateTime) {
         this.createdDateTime = createdDateTime;
     }
 

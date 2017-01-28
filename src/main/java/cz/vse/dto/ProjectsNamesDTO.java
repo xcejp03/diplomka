@@ -8,12 +8,13 @@ import java.util.List;
  * Created by pcejka on 10.10.2016.
  */
 public class ProjectsNamesDTO extends BaseDTO {
-    private final Logger l = Logger.getLogger(this.getClass());
     private String name;
 
     private String projectOwnerName;
 
     private List<String> suiteIdList;
+
+    private int numberOfTestSuites;
 
     public String getName() {
         return name;
@@ -24,7 +25,6 @@ public class ProjectsNamesDTO extends BaseDTO {
     }
 
     public String getProjectOwnerName() {
-        l.info("Getting projectOwnerName: " + projectOwnerName);
         return projectOwnerName;
     }
 
@@ -34,6 +34,15 @@ public class ProjectsNamesDTO extends BaseDTO {
 
     public List<String> getSuiteIdList() {
         return suiteIdList;
+    }
+
+
+    public int getNumberOfTestSuites() {
+        return numberOfTestSuites;
+    }
+
+    public void setNumberOfTestSuites(int numberOfTestSuites) {
+        this.numberOfTestSuites = numberOfTestSuites;
     }
 
     public void setSuiteIdList(List<String> suiteIdList) {

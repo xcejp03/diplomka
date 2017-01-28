@@ -157,8 +157,8 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .register();
         factory.classMap(Project.class, ProjectsNamesDTO.class)
                 .field("projectOwner.name", "projectOwnerName")
-//                .field("testSuites{id}", "suiteIdList{}")
                 .field("testSuites", "suiteIdList")
+                .customize((Mapper<Project, ProjectsNamesDTO>) customMappers.get(Project.class, ProjectsNamesDTO.class))
                 .byDefault()
                 .register();
         factory.classMap(WorkList.class, WorkListDTO.class)

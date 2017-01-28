@@ -1,10 +1,12 @@
 package cz.vse.service.impl;
 
+import cz.vse.dto.PersonDTO;
 import cz.vse.dto.ProjectDTO;
 import cz.vse.dto.ProjectStatsDTO;
 import cz.vse.dto.ProjectsNamesDTO;
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
+import cz.vse.entity.RoleEnum;
 import cz.vse.entity.TCStatusEnum;
 import cz.vse.repository.ProjectRepository;
 import cz.vse.service.PersonService;
@@ -171,4 +173,5 @@ public class ProjectServiceImpl implements ProjectService {
     public int getProjectMembersNumber(long projectId) {
         return projectRepository.getProjectMembersNumber(projectId);
     }
+
 }

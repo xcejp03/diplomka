@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -68,10 +69,13 @@ public class TCController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String createTC(Model model) {
+    public String createTC(Model model, @RequestParam(required = false, value = "project") Long projectId) {
         l.info("request mapping tc/create");
         Long personId = securityUtils.getLoggedPersonId();
-        model.addAttribute("tcDTO", new TCMusterDTO());
+        TCMusterDTO tcDTO = new TCMusterDTO();
+        tcDTO.setProject_id(projectId);
+
+        model.addAttribute("tcDTO", tcDTO);
         model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMustersDTO());
         model.addAttribute("listTSMusters", tsMusterService.findAllTestStepMustersDTO());
         model.addAttribute("listProjects", projectService.findAllTestProjects());
@@ -80,14 +84,15 @@ public class TCController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createTSPost(@ModelAttribute("project") TCMusterDTO tcMusterDTO) {
+    public String createTSPost(@ModelAttribute("project") TCMusterDTO tcMusterDTO, HttpServletRequest request) {
         if (tcMusterDTO.getId() == null) {
             tcMusterDTO.setAuthor_id(securityUtils.getLoggedPersonId());
             tcMusterService.createTestCaseMuster(tcMusterDTO);
         } else {
             tcMusterService.updateTestCaseMuster(tcMusterDTO);
         }
-        return "redirect:create";
+        String referer = request.getHeader("Referer");
+        return "redirect:" + referer;
     }
 
     @RequestMapping("/edit/{id}")

@@ -16,11 +16,11 @@
     <!--importované přes fragment - konec-->
 
     <!--duallistbox3-->
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <!--<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>-->
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css"/>
     <link rel="stylesheet" type="text/css" href="/src/bootstrap-duallistbox.css"/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
     <script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
     <script src="/src/jquery.bootstrap-duallistbox.js"></script>
 </head>
@@ -156,6 +156,7 @@
                                     </select>
                                 </td>
                                 <td th:text="${tc.updatedDateTime}">změna</td>
+                                <td sec:authorize="hasAuthority('TESTER')"><a th:href="@{'/tc/run/'+${tc.tcMuster_id}+'?worktc='+${tc.id}}">run</a></td>
                                 <td sec:authorize="hasAuthority('TESTER')"><a th:href="@{'/tc/run/'+${tc.tcMuster_id}+'?worktc='+${tc.id}}">run</a></td>
                             </tr>
                             </tbody>

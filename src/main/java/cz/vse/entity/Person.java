@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * Created by pcejka on 21.09.2016.
  */
-@Entity(name = "Person")
+@Entity
 public class Person extends BaseEntity {
     private String name;
     private String username;

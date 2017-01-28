@@ -1,10 +1,12 @@
 package cz.vse.service;
 
+import cz.vse.dto.PersonDTO;
 import cz.vse.dto.ProjectDTO;
 import cz.vse.dto.ProjectStatsDTO;
 import cz.vse.dto.ProjectsNamesDTO;
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
+import cz.vse.entity.RoleEnum;
 import cz.vse.entity.TCStatusEnum;
 
 import java.util.List;
@@ -43,4 +45,5 @@ public interface ProjectService {
     int getProjectMembersNumber(Project project);
 
     int getProjectMembersNumber(long projectId);
+
 }

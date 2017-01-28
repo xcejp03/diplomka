@@ -3,8 +3,10 @@ package cz.vse.service.impl;
 import cz.vse.dto.PersonDTO;
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
+import cz.vse.entity.RoleEnum;
 import cz.vse.entity.UserRole;
 import cz.vse.repository.PersonRepository;
+import cz.vse.repository.ProjectRepository;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
 import cz.vse.service.RoleService;
@@ -24,10 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by pcejka on 03.10.2016.
@@ -47,6 +46,9 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    ProjectRepository projectRepository;
 
     public void createPerson(PersonDTO personDTO) {
         l.debug("creating person - service");
@@ -117,8 +119,11 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
 
     public List<Person> findAllPersonByProjectOrderById(Project project) {
         List<Person> personList;
-        personList = personRepository.findAllPersonByProjectsMemberOrderById(project);
-        return personList;
+//        personList = personRepository.findAllPersonByProjectsMemberOrderById(project);
+//        personList = personRepository.findAllPersonByProjectsMemberOrderById(Arrays.asList(project));   //asi blbě, předělat
+//        personList = personRepository.findAllPersonsByProjectsMemberIn(Arrays.asList(project));   //asi blbě, předělat
+        l.fatal("NENÍ IMPLEMENTOVÁNO - NEFUNGUJE");
+        return null;
     }
 
     public List<PersonDTO> findAllPersonDTOByProjectId(long id) {
@@ -197,4 +202,25 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
         return passwordHashed;
     }
 
+    @Override
+    public List<PersonDTO> getProjectMembers(long id) {
+        Project project = projectService.findTestProjectById(id);
+        List<Project> projects = new ArrayList<>();
+        projects.add(project);
+        List<Person> people = personRepository.getProjectMembers(projects);
+        List<PersonDTO> peopleDTO;
+        peopleDTO = mapper.mapAsList(people, PersonDTO.class);
+        return peopleDTO;
+    }
+
+    @Override
+    public List<PersonDTO> getProjectMembers(long projectId, RoleEnum roleEnum) {
+        Project project = projectService.findTestProjectById(projectId);
+        List<Project> projects = new ArrayList<>();
+        projects.add(project);
+        List<Person> people = personRepository.getProjectMembers(projects, roleEnum);
+        List<PersonDTO> peopleDTO;
+        peopleDTO = mapper.mapAsList(people, PersonDTO.class);
+        return peopleDTO;
+    }
 }
