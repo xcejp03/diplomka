@@ -54,6 +54,33 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4><i class="fa fa-fw fa-gift"></i>Filtr Test Casů</h4>
+                </div>
+
+
+                <div class="panel-body">
+                    <p><a th:text="Všechny" th:href="@{tcs(filter='all')}" class="btn btn-mg btn-block btn-default"
+                          th:classappend="(${param.filter} == null or ${param.filter[0]} == 'all') ? btn-primary : btn-default"></a>
+                    </p>
+                    <hr/>
+                    <div th:each="project : ${usersProjects}">
+                        <p><a th:text="${project.name}" th:href="@{tcs(filter=${project.id})}"
+                              class="btn btn-mg btn-block btn-default"
+                              th:classappend="(${param.filter} != null and ${param.filter[0]} == ${project.id}) ? btn-primary : btn-default"
+                        ></a></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9">
+        </div>
+    </div>
+
     <h1> Test Cases list</h1>
     <table class="table table-striped datatable">
         <thead>
@@ -72,7 +99,7 @@
         </tr>
         </thead>
         <tbody th:remove="all-but-first">
-        <tr th:each="tc : ${listTCDTO}">
+        <tr th:each="tc : ${tcMusters}">
             <td th:text="${tc.id}">00</td>
             <td><span th:class="${tc.priority}" th:text="${tc.priority}">Priorita</span></td>
             <td sec:authorize="hasAuthority('TESTER')"><span th:text="${tc.status}"
@@ -98,7 +125,8 @@
     </table>
 
     <div th:if="${suite != null}" th:remove="tag">
-        <a th:href="@{'/tc/create/'(project=${suite.project.id},suite=${suite.id})}" class="btn btn-default">Založit Test
+        <a th:href="@{'/tc/create/'(project=${suite.project.id},suite=${suite.id})}" class="btn btn-default">Založit
+            Test
             Case</a>
     </div>
 

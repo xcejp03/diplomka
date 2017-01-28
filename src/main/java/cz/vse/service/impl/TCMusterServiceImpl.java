@@ -180,6 +180,13 @@ public class TCMusterServiceImpl implements TCMusterService {
     }
 
     @Override
+    public List<TCMusterDTO> findTCMustersDTOByProject(List<Project> projects) {
+        List<TCMuster> tcMusters = tcMusterRepository.findAllTCByProjectIn(projects);
+        List<TCMusterDTO> tcMustersDTO = mapper.mapAsList(tcMusters, TCMusterDTO.class);
+        return tcMustersDTO;
+    }
+
+    @Override
     public List<TCMusterDTO> findTCMustersDTOByProjectId(long projectId) {
         Project project = projectService.findTestProjectById(projectId) ;
         List<TCMuster> tcMusters = tcMusterRepository.findAllTCByProjectIn(Arrays.asList(project));

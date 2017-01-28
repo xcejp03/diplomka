@@ -45,6 +45,7 @@ public interface TCMusterService {
     List<TCMusterDTO> findAllTCDTOByUser(Long projectId);
 
     List<TCMusterDTO> findTCMustersDTOByProject(Project project);
+    List<TCMusterDTO> findTCMustersDTOByProject(List<Project> projects);
     List<TCMusterDTO> findTCMustersDTOByProjectId(long projectId);
 
     int getNumberOfMyTCsInProject(Person person, Project project);

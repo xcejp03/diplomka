@@ -38,9 +38,9 @@
                     <!--<li>-->
                         <!--<a href="/suite/suites">Suity</a>-->
                     <!--</li>-->
-                    <!--<li>-->
-                        <!--<a href="/tc/tcs">Test Casy</a>-->
-                    <!--</li>-->
+                    <li sec:authorize="!hasAuthority('ROLE_ANALYTIC')">
+                        <a href="/tc/tcs">Test Casy</a>
+                    </li>
                     <li>
                         <a href="/defect/defects">Defekty</a>
                     </li>

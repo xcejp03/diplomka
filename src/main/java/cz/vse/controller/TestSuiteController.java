@@ -1,7 +1,6 @@
 package cz.vse.controller;
 
 import cz.vse.dto.TestSuiteDTO;
-import cz.vse.entity.Person;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
 import cz.vse.service.SuiteService;
@@ -9,8 +8,6 @@ import cz.vse.service.TCMusterService;
 import cz.vse.utils.SecurityUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -60,7 +57,7 @@ public class TestSuiteController {
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listTcMusters", tcMusterService.findAllTestCaseMusters());
 
-        model.addAttribute("listUsersProjectsDTO", projectService.findAllTestProjectsByUserIdDTO(personId));
+        model.addAttribute("listUsersProjectsDTO", projectService.findAllTestProjectNameDTOByUserId(personId));
 
         return "suiteCreate";
     }
@@ -91,7 +88,7 @@ public class TestSuiteController {
 
         model.addAttribute("ListTcmusterdto", tcMusterService.findAllTestCaseMustersDTOByTestSuiteId(suiteService.findTestSuiteDTOById(id).getId()));
         model.addAttribute("tcmusterdto", tcMusterService.findTestCaseMusterDTOById(suiteService.findTestSuiteDTOById(id).getId()));
-        model.addAttribute("listUsersProjectsDTO", projectService.findAllTestProjectsByUserIdDTO(personId));
+        model.addAttribute("listUsersProjectsDTO", projectService.findAllTestProjectNameDTOByUserId(personId));
 
         return "suiteCreate";
     }

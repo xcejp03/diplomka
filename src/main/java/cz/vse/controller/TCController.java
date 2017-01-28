@@ -1,17 +1,13 @@
 package cz.vse.controller;
 
+import cz.vse.dto.ProjectsNamesDTO;
 import cz.vse.dto.TCInstanceRunDTO;
 import cz.vse.dto.TCMusterDTO;
-import cz.vse.entity.Person;
-import cz.vse.entity.StatusEnum;
-import cz.vse.entity.TCInstance;
-import cz.vse.entity.WorkTC;
+import cz.vse.entity.*;
 import cz.vse.service.*;
 import cz.vse.utils.SecurityUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -79,7 +75,7 @@ public class TCController {
         model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMustersDTO());
         model.addAttribute("listTSMusters", tsMusterService.findAllTestStepMustersDTO());
         model.addAttribute("listProjects", projectService.findAllTestProjects());
-        model.addAttribute("listUsersProjectsDTO", projectService.findAllTestProjectsByUserIdDTO(personId));
+        model.addAttribute("listUsersProjectsDTO", projectService.findAllTestProjectNameDTOByUserId(personId));
         return "tcCreate";
     }
 
@@ -102,7 +98,7 @@ public class TCController {
         model.addAttribute("tcDTO", tcMusterService.findTestCaseMusterDTOById(id));
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listProjects", projectService.findAllTestProjects());
-        model.addAttribute("listUsersProjectsDTO", projectService.findAllTestProjectsByUserIdDTO(personId));
+        model.addAttribute("listUsersProjectsDTO", projectService.findAllTestProjectNameDTOByUserId(personId));
         return "tcCreate";
     }
 
@@ -127,7 +123,7 @@ public class TCController {
         Person person = securityUtils.getLoggedPerson();
 //        tcInstanceRunDTO = tcService.runNewTC(id, person);
         tcInstance = tcService.runNewTC(id, person);
-        l.warn("tcService.runNewTC(id, person): "+tcInstance);
+        l.warn("tcService.runNewTC(id, person): " + tcInstance);
 
         if (worktcId != null) {
             workTCService.addWorkTCHistory(worktcId, tcInstance);
@@ -171,13 +167,26 @@ public class TCController {
         return "tcs";
     }
 
-//    @RequestMapping(value = "/tcs", method = RequestMethod.GET)
-//    public String tcsAllShow(Model model) {
-//        l.info("/tc/tcs");
-//        model.addAttribute("listTCDTO", tcMusterService.findAllTCDTOByUser(securityUtils.getLoggedPerson()));
-//        model.addAttribute("suite", suiteService.findTestSuiteById(id));
-//        model.addAttribute("statusenum", Arrays.asList(StatusEnum.values()));
-//        return "tcs";
-//    }
+    @RequestMapping(value = "/tcs", method = RequestMethod.GET)
+    public String tcsAllShow(Model model, @RequestParam(required = false, defaultValue = "all", value = "filter") String filter) {
+        l.info("/tc/tcs?filter="+filter);
+        Long loggedUserId = securityUtils.getLoggedPersonId();
+        List<Project> projects = projectService.findAllTestProjectByUserId(loggedUserId);
+        List<TCMusterDTO> tcMusters = new ArrayList<>();
+        if (filter.equals("all")){
+            l.warn("filtr je all - "+filter);
+            tcMusters = tcMusterService.findTCMustersDTOByProject(projects);
+        } else {
+            l.warn("filtr není all, je to: "+filter);
+            tcMusters = tcMusterService.findTCMustersDTOByProject(projectService.findTestProjectById(Long.parseLong(filter)));
+        }
+
+//        List<TCMusterDTO> tcMusters = filter == "all" ? tcMusterService.findTCMustersDTOByProject(projects) :
+//                tcMusterService.findTCMustersDTOByProject(projectService.findTestProjectById(Long.parseLong(filter)));
+        model.addAttribute("tcMusters", tcMusters);
+        model.addAttribute("usersProjects", projectService.findAllTestProjectNameDTOByUserId(loggedUserId));
+        model.addAttribute("statusenum", Arrays.asList(StatusEnum.values()));
+        return "tcsAll";
+    }
 
 }

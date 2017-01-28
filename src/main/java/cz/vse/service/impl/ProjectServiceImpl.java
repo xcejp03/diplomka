@@ -120,12 +120,17 @@ public class ProjectServiceImpl implements ProjectService {
         return projectList;
     }
 
-    public List<ProjectsNamesDTO> findAllTestProjectsByUserIdDTO(long id) {
+    public List<ProjectsNamesDTO> findAllTestProjectNameDTOByUserId(long id) {
         List<ProjectsNamesDTO> projectsNamesDTOList;
         List<Project> projectList;
         projectList = projectRepository.findAllProjectsByPersonMembersIdOrderById(id);
         projectsNamesDTOList = mapper.mapAsList(projectList, ProjectsNamesDTO.class);
         return projectsNamesDTOList;
+    }
+
+    public List<Project> findAllTestProjectByUserId(long id) {
+        List<Project> projects = projectRepository.findAllProjectsByPersonMembersIdOrderById(id);
+        return projects;
     }
 
 
@@ -134,7 +139,7 @@ public class ProjectServiceImpl implements ProjectService {
         List<Project> projects = projectRepository.findAllProjectsByPersonMembersIdOrderById(loggedPerson.getId());
         List<ProjectStatsDTO> projectStatsDTOs;
         projectStatsDTOs = mapper.mapAsList(projects, ProjectStatsDTO.class);
-        l.warn("projectStatsDTO: "+ projectStatsDTOs);
+        l.warn("projectStatsDTO: " + projectStatsDTOs);
         return projectStatsDTOs;
     }
 

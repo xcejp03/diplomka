@@ -3,7 +3,6 @@ package cz.vse.controller;
 import cz.vse.dto.PersonDTO;
 import cz.vse.dto.ProjectDTO;
 import cz.vse.dto.ProjectsNamesDTO;
-import cz.vse.entity.Person;
 import cz.vse.entity.RoleEnum;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
@@ -11,8 +10,6 @@ import cz.vse.service.SuiteService;
 import cz.vse.utils.SecurityUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -94,7 +91,7 @@ public class ProjectController {
     @RequestMapping(value = "/projects", method = RequestMethod.GET)
     public String projectsByLoggedUser(Model model) {
         Long personId = securityUtils.getLoggedPersonId();
-        List<ProjectsNamesDTO> listProjectsNameDTO = projectService.findAllTestProjectsByUserIdDTO(personId);
+        List<ProjectsNamesDTO> listProjectsNameDTO = projectService.findAllTestProjectNameDTOByUserId(personId);
         model.addAttribute("listProjects", listProjectsNameDTO);
         model.addAttribute("person", personService.findPersonById(personId));
 

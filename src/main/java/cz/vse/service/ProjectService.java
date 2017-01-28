@@ -20,11 +20,11 @@ public interface ProjectService {
 
     void createTestProject(Project project);
 
-     void updateTestProject(ProjectDTO projectDTO);
+    void updateTestProject(ProjectDTO projectDTO);
 
-     void deleteTestProject(Project projectToDelete);
+    void deleteTestProject(Project projectToDelete);
 
-     void deleteTestProjectById(long testProjectToDeleteById);
+    void deleteTestProjectById(long testProjectToDeleteById);
 
     Project findTestProjectById(long id);
 
@@ -34,7 +34,9 @@ public interface ProjectService {
 
     List<Project> findAllTestProjects();
 
-    List<ProjectsNamesDTO> findAllTestProjectsByUserIdDTO(long id);
+    List<ProjectsNamesDTO> findAllTestProjectNameDTOByUserId(long id);
+
+    List<Project> findAllTestProjectByUserId(long id);
 
     List<ProjectStatsDTO> getMyProjectsWithStatistics(Person loggedPerson);
 
