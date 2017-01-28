@@ -171,13 +171,13 @@ public class TCController {
         return "tcs";
     }
 
-    @RequestMapping(value = "/tcs", method = RequestMethod.GET)
-    public String tcsAllShow(Model model) {
-        l.info("/tc/tcs");
-        model.addAttribute("listTCDTO", tcMusterService.findAllTCDTOByUser(securityUtils.getLoggedPerson()));
+//    @RequestMapping(value = "/tcs", method = RequestMethod.GET)
+//    public String tcsAllShow(Model model) {
+//        l.info("/tc/tcs");
+//        model.addAttribute("listTCDTO", tcMusterService.findAllTCDTOByUser(securityUtils.getLoggedPerson()));
 //        model.addAttribute("suite", suiteService.findTestSuiteById(id));
-        model.addAttribute("statusenum", Arrays.asList(StatusEnum.values()));
-        return "tcs";
-    }
+//        model.addAttribute("statusenum", Arrays.asList(StatusEnum.values()));
+//        return "tcs";
+//    }
 
 }

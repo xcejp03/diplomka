@@ -60,7 +60,7 @@ public class ProjectController {
         } else {
             projectService.updateTestProject(projectDTO);
         }
-        return "redirect:create";
+        return "redirect:/project/projects";
     }
 
     @RequestMapping("/edit/{id}")

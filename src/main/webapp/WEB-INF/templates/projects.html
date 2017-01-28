@@ -98,18 +98,15 @@
         </div>
     </div>
 
-    <!--<div class="row" sec:authorize="hasAuthority('ANALYTIC')">-->
-    <!--<div class="col-sm-4">-->
-    <!--<a href="/suite/create" class="btn btn-default">Založit Test Suite</a>-->
-    <!--</div>-->
-    <!--<div class="col-sm-8"></div>-->
-    <!--</div>-->
     <br/>
-    <div class="row" sec:authorize="hasAuthority('ADMIN')">
+    <div class="row">
         <div class="col-sm-4">
-            <a href="/project/create" class="btn btn-default">Založit Projekt</a>
+            <a href="/project/create" class="btn btn-default" sec:authorize="hasAuthority('ADMIN')">Založit Projekt</a>
+            <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default">Zpět</a>
         </div>
-        <div class="col-sm-8"></div>
+        <div class="col-sm-8">
+
+        </div>
     </div>
 
     <!--dialogová okna-->
