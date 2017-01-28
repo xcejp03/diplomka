@@ -4,21 +4,18 @@ import cz.vse.entity.*;
 import cz.vse.repository.*;
 import cz.vse.service.*;
 import cz.vse.utils.SecurityUtils;
+import cz.vse.utils.excelexport.ExcelBuilderDefects;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.management.relation.Role;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -74,6 +71,25 @@ public class RootController {
 
     @Autowired
     private WorkTCRepository workTCRepository;
+
+
+    /**
+     * Handle request to download an Excel document
+     */
+    @RequestMapping(value = "/downloadExcel", method = RequestMethod.GET)
+    public ModelAndView downloadExcel() {
+        l.warn("stahování excelu");
+        // create some sample data
+        List<Defect> defects = new ArrayList<>();
+
+        defects.add(defectService.findDefectById(110L));
+        defects.add(defectService.findDefectById(112L));
+        defects.add(defectService.findDefectById(114L));
+
+
+        // return a view which will be resolved by an excel view resolver
+        return new ModelAndView(new ExcelBuilderDefects(), "defects", defects);
+    }
 
 
     @RequestMapping(value = "/thyme", method = RequestMethod.GET)
