@@ -4,6 +4,7 @@ import cz.vse.dto.PersonDTO;
 import cz.vse.dto.ProjectDTO;
 import cz.vse.dto.ProjectsNamesDTO;
 import cz.vse.entity.Person;
+import cz.vse.entity.RoleEnum;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
 import cz.vse.service.SuiteService;
@@ -81,19 +82,22 @@ public class ProjectController {
 
     @RequestMapping("{id}")
     public String projects(@PathVariable("id") int id, Model model) {
-        l.info("{id}/list" + id);
-        List<ProjectsNamesDTO> listProjectsNameDTO = projectService.findAllTestProjectsByUserIdDTO(id);
-        model.addAttribute("listProjects", listProjectsNameDTO);
-        model.addAttribute("person", personService.findPersonById(id));
+        l.info("project/{id}" + id);
+        ProjectDTO projectDTO = projectService.findTestProjectDTOById(id);
+        model.addAttribute("projectDTO", projectDTO);
+        model.addAttribute("membersAll", personService.getProjectMembers(id));
+        model.addAttribute("membersTesters", personService.getProjectMembers(id, RoleEnum.TESTER));
+        model.addAttribute("membersAnalytics", personService.getProjectMembers(id, RoleEnum.ANALYTIC));
         return "project";
     }
 
     @RequestMapping(value = "/projects", method = RequestMethod.GET)
     public String projectsByLoggedUser(Model model) {
-Long personId = securityUtils.getLoggedPersonId();
+        Long personId = securityUtils.getLoggedPersonId();
         List<ProjectsNamesDTO> listProjectsNameDTO = projectService.findAllTestProjectsByUserIdDTO(personId);
         model.addAttribute("listProjects", listProjectsNameDTO);
         model.addAttribute("person", personService.findPersonById(personId));
+
         return "projects";
     }
 

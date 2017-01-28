@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface TCService {
 
-    TCInstanceRunDTO runNewTC(long tcMusterId, Person person);
+    TCInstance runNewTC(long tcMusterId, Person person);
     TCInstance mapTCMusterToTCInstance(TCMuster tcMuster);
     List<TSInstance> mapTSMusterToTSInstance(List<TSMuster> tsMusterList);
 //    TCInstance createAndSaveTCInstanceFromTCMusterId(long tcMusterId, Person person);

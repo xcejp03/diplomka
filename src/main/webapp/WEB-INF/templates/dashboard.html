@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="cs" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Dashboard</title>
+
+    <!--importované přes fragment-->
+    <div th:replace="/fragment/thymeFragment :: headImports"/>
+    <!--importované přes fragment - konec-->
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.css"/>
+
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.js"/>
+</head>
+<body>
+
+<!-- Navigation -->
+<div th:replace="/fragment/thymeFragment :: menu"/>
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="page-header">
+                <small>WEB-INF/templates/dashboard.html</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="index">Home</a>
+                </li>
+                <li class="active">Projekty</li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            <div class="jumbotron">
+                <h1 class="error-404">Dashboard
+                </h1>
+            </div>
+        </div>
+    </div>
+
+    <span th:if="${workListsToday != null}" th:remove="tag">
+				<div class="row">
+					<div class="col-sm-12">
+							<H1>Worklisty</H1>
+                        <div class="well">
+                        <h2>Worklisty plánované na dnes</h2>
+                        <table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Název</th>
+									<th>Priorita</th>
+									<th>Plánováno</th>
+									<th>Vlastník</th>
+									<th>Projekt</th>
+                                    <th>Detail</th>
+								</tr>
+							</thead>
+							<tbody th:remove="all-but-first">
+								<tr th:each="worklist : ${workListsToday}">
+									<td th:text="${worklist.name}">Název</td>
+									<td th:text="${worklist.priority}">vlastník</td>
+									<td th:text="${worklist.plannedExecution}">passed</td>
+									<td th:text="${worklist.author_id}">failed</td>
+									<td th:text="${worklist.author_id}">passed</td>
+                                    <td>
+                                        <a href="#" th:href="@{'/worklist/'+${worklist.project_id}}">detail projektu</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+                            </div>
+
+                        <div class="well">přidat statistiku postupu práce na worklistu: <br/>
+                        počet TC, počet passed, failed, zbývá (norun)
+                        </div>
+					</div>
+				</div>
+    </span>
+
+
+    <span th:if="${myOpenTC != null}" th:remove="tag">
+				<div class="row">
+					<div class="col-sm-12">
+                        <div class="well">
+							<H2>Moje nespuštěné TC</H2> <small>Celkem <span
+                                th:text="${#lists.size(myOpenTC)}"></span> ks</small>
+                            <table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Název</th>
+									<th>Priorita</th>
+									<th>Worklist</th>
+                                    <th>Detail</th>
+								</tr>
+							</thead>
+							<tbody th:remove="all-but-first">
+								<tr th:each="worktc : ${myOpenTC}">
+									<td th:text="${worktc.name}">Název</td>
+									<td th:text="${worktc.priority}">priorita</td>
+									<td th:text="${worktc.workList_id}">worklist</td>
+                                    <td>
+                                        <a href="#" th:href="@{'/worklist/show/'+${worktc.workList_id}}">detail</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+                            </div>
+                    </div>
+                </div>
+    </span>
+
+    <hr/>
+    <div class="row">
+        <div class="col-sm-12">
+            <H1>Defekty</H1>
+        </div>
+    </div>
+    <div class="row">
+
+             <span th:if="${myAssignedOpenDefects != null}" th:remove="tag">
+
+					<div class="col-sm-6">
+                         <div class="well">
+						<h2>Assignované na mě</h2>
+                       <hr/>
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Priorita</th>
+									<th>Název</th>
+									<th>updated</th>
+									<th>Reporter</th>
+									<th>Detail</th>
+								</tr>
+							</thead>
+							<tbody th:remove="all-but-first">
+								<tr th:each="defect : ${myAssignedOpenDefects}">
+									<td th:text="${defect.id}">00</td>
+									<td>
+										<span th:class="${defect.priority}" th:text="${defect.priority}">Priorita</span>
+									</td>
+									<td th:text="${defect.name}">Název</td>
+									<td th:text="${defect.updatedDateTime}">updated</td>
+									<td th:text="${defect.reporter_id}">reporter</td>
+									<td>
+										<a href="#" th:href="@{'/defect/'+${defect.id}}"
+                                           th:attr="data-name=${defect.description}"
+                                           data-id="#detailDialog">Detail</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+                            </div>
+                    </div>
+             </span>
+
+
+        <!--<span th:if="${myOpenDefects.size}" th:remove="tag">-->
+        <span th:if="${#lists.size(myOpenDefects) > 1}" th:remove="tag">
+					<div class="col-sm-6">
+                        <div class="well">
+						<h2>Mnou založené</h2>
+                            <hr/>
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Priorita</th>
+									<th>Název</th>
+									<th>updated</th>
+									<th>Assignee</th>
+									<th>Detail</th>
+								</tr>
+							</thead>
+							<tbody th:remove="all-but-first">
+								<tr th:each="defect : ${myOpenDefects}">
+									<td th:text="${defect.id}">00</td>
+									<td>
+										<span th:class="${defect.priority}" th:text="${defect.priority}">Priorita</span>
+									</td>
+									<td th:text="${defect.name}">Název</td>
+									<td th:text="${defect.updatedDateTime}">updated</td>
+									<td th:text="${defect.assignee_id}">Assignee</td>
+									<td>
+										<a href="#" th:href="@{'/defect/'+${defect.id}}"
+                                           th:attr="data-name=${defect.description}"
+                                           data-id="#detailDialog">Detail</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+                            </div>
+					</div>
+			</span>
+
+    </div>
+    <hr/>
+
+    <span th:if="${MyProjectsStat != null}" th:remove="tag">
+				<div class="row">
+					<div class="col-sm-12">
+							<H1>Moje Projekty se statistikou</H1>
+                        <div class="well">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Název</th>
+									<th>Vlastník</th>
+									<th>Passed</th>
+									<th>Failed</th>
+									<th>Počet TC</th>
+                                    <th>Detail</th>
+								</tr>
+							</thead>
+							<tbody th:remove="all-but-first">
+								<tr th:each="project : ${MyProjectsStat}">
+									<td th:text="${project.name}">Název</td>
+									<td th:text="${project.projectOwner_name}">vlastník</td>
+									<td th:text="${project.numberOfPassedTCs}">passed</td>
+									<td th:text="${project.numberOfFailedTCs}">failed</td>
+									<td th:text="${project.numberOfTCs}">passed</td>
+                                    <td>
+                                        <a href="#" th:href="@{'/project/'+${project.project_id}}">detail projektu</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+                            </div>
+					</div>
+                </div>
+    </span>
+
+
+    <span th:if="${myProjectsStatistics != null}" th:remove="tag">
+				<div class="row">
+					<div class="col-sm-12">
+							<H1>Moje Projekty se statistikou</H1>
+                        <div class="well">
+                            <p>analytik chce vidět přehled jeho projektú s jejich vlastníkem. všechny TC v projektu/ počet mích. moje/všechny. a počet test suitů.</p>
+                            <p>manažer chce vidět všechno - z pohledu počtu TC i z pohledu výsledků testů</p>
+                        </div>
+                        <div class="well">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Název</th>
+									<th>Vlastník</th>
+									<th>Passed</th>
+									<th>Failed</th>
+									<th>Počet TC</th>
+                                    <th>Detail</th>
+								</tr>
+							</thead>
+							<tbody th:remove="all-but-first">
+								<tr th:each="project : ${myProjectsStatistics}">
+									<td th:text="${project.name}">Název</td>
+									<td th:text="${project.projectOwner_name}">vlastník</td>
+									<td th:text="${project.numberOfPassedTCs}">passed</td>
+									<td th:text="${project.numberOfFailedTCs}">failed</td>
+									<td th:text="${project.numberOfTCs}">passed</td>
+                                    <td>
+                                        <a href="#" th:href="@{'/project/'+${project.project_id}}">detail projektu</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+                            </div>
+					</div>
+                </div>
+    </span>
+
+    <span th:if="${workListsLastThreeDays != null}" th:remove="tag">
+				<div class="row">
+					<div class="col-sm-12">
+							<H1>Worklisty</H1>
+                        <div class="well">
+                        <h2>Worklisty za tři dny</h2>
+                        <table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Název</th>
+									<th>Priorita</th>
+									<th>Plánováno</th>
+									<th>Vlastník</th>
+									<th>Projekt</th>
+                                    <th>Detail</th>
+								</tr>
+							</thead>
+							<tbody th:remove="all-but-first">
+								<tr th:each="worklist : ${workListsLastThreeDays}">
+									<td th:text="${worklist.name}">Název</td>
+									<td th:text="${worklist.priority}">vlastník</td>
+									<td th:text="${worklist.plannedExecution}">passed</td>
+									<td th:text="${worklist.author_id}">failed</td>
+									<td th:text="${worklist.author_id}">passed</td>
+                                    <td>
+                                        <a href="#" th:href="@{'/worklist/'+${worklist.project_id}}">detail projektu</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+                            </div>
+					</div>
+				</div>
+    </span>
+
+    <span th:if="${workListsTomorrow != null}" th:remove="tag">
+				<div class="row">
+                    <div class="col-sm-12">
+                     <div class="well">
+                        <h2>Worklisty na zítra</h2>
+                        <table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Název</th>
+									<th>Priorita</th>
+									<th>Plánováno</th>
+									<th>Vlastník</th>
+									<th>Projekt</th>
+                                    <th>Detail</th>
+								</tr>
+							</thead>
+							<tbody th:remove="all-but-first">
+								<tr th:each="worklist : ${workListsToday}">
+									<td th:text="${worklist.name}">Název</td>
+									<td th:text="${worklist.priority}">vlastník</td>
+									<td th:text="${worklist.plannedExecution}">passed</td>
+									<td th:text="${worklist.author_id}">failed</td>
+									<td th:text="${worklist.author_id}">passed</td>
+                                    <td>
+                                        <a href="#" th:href="@{'/worklist/'+${worklist.project_id}}">detail projektu</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+                     </div>
+                    </div>
+                </div>
+    </span>
+
+
+    <!--dialogová okna-->
+    <div id="moreDialog" title="Více">
+        <h3>Project ID: <span id="spanDataObjectId"/>
+        </h3>
+        <a th:href="@{'/defect/create'(source='projectSource')}" onclick="addSourceIdToURL(this)"
+           class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Založit defekt</a>
+        <a href="#" class="btn btn-default" sec:authorize="hasAuthority('ANALYTIC')">Žádost o smazání</a>
+        <a href="/defect/defects" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Seznam
+            Defektů</a>
+    </div>
+
+    <div id="detailDialog" title="Detail projektu">
+        <h3>Detail projektu: <span id="spanDataName"/>
+        </h3>
+        <h3>Vlastník projektu: <span id="spanDataOwnerName"> </span>
+        </h3>
+        <h3>Počet Test Suitů: //dodělat</h3>
+    </div>
+
+    <div id="membersDialog" title="Členové projektu" sec:authorize="hasAuthority('ANALYTIC')">
+        <div class="well">
+            <h3>členové projektu</h3>
+        </div>
+        <h3>analytici</h3>
+        <h3>testeři</h3>
+        <h3>všichni</h3>
+        <p>//chybí dodělat</p>
+    </div>
+
+
+    <!-- Footer -->
+    <div th:replace="/fragment/thymeFragment :: footer"/>
+
+</div>
+<!-- /.container -->
+</body>
+</html>

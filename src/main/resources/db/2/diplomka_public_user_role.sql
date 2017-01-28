@@ -1,0 +1,13 @@
+INSERT INTO public.user_role (id, created_date_time, updated_date_time, role, login) VALUES (2, null, null, 0, 1);
+INSERT INTO public.user_role (id, created_date_time, updated_date_time, role, login) VALUES (11, null, null, 1, 10);
+INSERT INTO public.user_role (id, created_date_time, updated_date_time, role, login) VALUES (12, null, null, 2, 10);
+INSERT INTO public.user_role (id, created_date_time, updated_date_time, role, login) VALUES (13, null, null, 1, 19);
+INSERT INTO public.user_role (id, created_date_time, updated_date_time, role, login) VALUES (14, null, null, 2, 18);
+INSERT INTO public.user_role (id, created_date_time, updated_date_time, role, login) VALUES (15, null, null, 0, 11);
+INSERT INTO public.user_role (id, created_date_time, updated_date_time, role, login) VALUES (16, null, null, 1, 11);
+INSERT INTO public.user_role (id, created_date_time, updated_date_time, role, login) VALUES (17, null, null, 2, 11);
+INSERT INTO public.user_role (id, created_date_time, updated_date_time, role, login) VALUES (18, null, null, 1, 14);
+INSERT INTO public.user_role (id, created_date_time, updated_date_time, role, login) VALUES (780, null, null, 0, 16);
+INSERT INTO public.user_role (id, created_date_time, updated_date_time, role, login) VALUES (781, null, null, 1, 16);
+INSERT INTO public.user_role (id, created_date_time, updated_date_time, role, login) VALUES (782, null, null, 2, 16);
+INSERT INTO public.user_role (id, created_date_time, updated_date_time, role, login) VALUES (783, null, null, 3, 16);

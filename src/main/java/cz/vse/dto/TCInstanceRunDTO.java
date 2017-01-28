@@ -71,4 +71,16 @@ public class TCInstanceRunDTO extends BaseDTO {
     public void setNote(String note) {
         this.note = note;
     }
+
+    @Override
+    public String toString() {
+        return "TCInstanceRunDTO{" +
+                "name='" + name + '\'' +
+                ", tcMusters_id=" + tcMusters_id +
+                ", tcInstance_id=" + tcInstance_id +
+                ", tester_id=" + tester_id +
+                ", prerequisite='" + prerequisite + '\'' +
+                ", note='" + note + '\'' +
+                '}';
+    }
 }

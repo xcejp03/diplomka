@@ -23,7 +23,7 @@
                 </button>
                 <a class="navbar-brand" href="/index">[--]</a>
                 <span sec:authorize="!hasAuthority('ROLE_ANONYMOUS')">
-                    <a href="/login" sec:authentication="principal.username" class="navbar-brand"></a>
+                    <a href="/dashboard" sec:authentication="principal.username" class="navbar-brand"></a>
                 </span>
                 <a href="/person/prihlasit" class="btn btn-default">prih</a>
             </div>
@@ -46,6 +46,9 @@
                     </li>
                     <li>
                         <a href="/worklist">Worklist</a>
+                    </li>
+                    <li>
+                        <a href="/worklist/worktc">Worktc</a>
                     </li>
                     <li>
                         <a href="/test/about">Šablony</a>
@@ -175,8 +178,12 @@
 </div>
 
 <div th:fragment="headImports" th:remove="tag">
+    <!--Data table-->
+    <link rel="stylesheet" type="text/css" href="/datatable/css/jquery.dataTables.css"/>
+    <script type="text/javascript" charset="utf8" src="/datatable/js/jquery.dataTables.js"></script>
+
     <!--Bootstrap Core CSS-->
-    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/bootstrap2.min.css" rel="stylesheet"/>e
 
     <!--Custom CSS-->
     <link href="/css/modern-business.css" rel="stylesheet"/>
@@ -201,8 +208,10 @@
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
 
-    <link href="http://t4t5.github.io/sweetalert/dist/sweetalert.css" rel="stylesheet"/>
-    <script src="http://t4t5.github.io/sweetalert/dist/sweetalert.min.js"></script>
+    <!--<link href="http://t4t5.github.io/sweetalert/dist/sweetalert.css" rel="stylesheet"/>-->
+    <!--<script src="http://t4t5.github.io/sweetalert/dist/sweetalert.min.js"></script>-->
+    <link href="/sweetalert/dist/sweetalert.css" rel="stylesheet"/>
+    <script src="/sweetalert/dist/sweetalert.min.js"></script>
 
 
     <!--Moje jQuery-->

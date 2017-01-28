@@ -1,16 +1,13 @@
 package cz.vse.entity;
 
-import javax.persistence.Entity;
-
 /**
  * Created by pcejka on 21.09.2016.
  */
-//@Entity
 public enum RoleEnum {
-    ADMIN ("ADMIN"),
-    TESTER ("TESTER"),
-    ANALYTIC ("ANALYTIC"),
-    ZKOUSKA("ZKOUSKA");
+    ADMIN("ADMIN"),
+    TESTER("TESTER"),
+    ANALYTIC("ANALYTIC"),
+    MANAGER("MANAGER");
 
     private String roleString;
 
@@ -28,7 +25,3 @@ public enum RoleEnum {
     }
 
 }
-
-/*
-    Role udělat děděním z Person
- */

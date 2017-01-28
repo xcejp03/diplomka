@@ -160,17 +160,14 @@ public class Defect extends BaseEntity {
         this.name = name;
     }
 
+
     @Override
     public String toString() {
         return "Defect{" +
-                "description='" + description + '\'' +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
                 ", priority=" + priority +
                 ", status=" + status +
-                ", AffectsVersion='" + AffectsVersion + '\'' +
-//                ", TCInstances=" + tcInstances +
-//                ", TSInstances=" + tsInstances +
-//                ", assignee=" + assignee +
-//                ", reporter=" + reporter +
                 '}';
     }
 }

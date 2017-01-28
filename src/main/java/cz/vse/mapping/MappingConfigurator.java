@@ -133,7 +133,6 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
         factory.classMap(TCInstance.class, TCInstanceRunDTO.class)
                 .mapNullsInReverse(false)
                 .mapNulls(false)
-                .field("id", "id")
                 .field("tCMuster", "tcMusters_id")
                 .field("tsInstances", "tsInstances_id")
                 .field("id", "tcInstance_id")
@@ -158,23 +157,41 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .register();
         factory.classMap(Project.class, ProjectsNamesDTO.class)
                 .field("projectOwner.name", "projectOwnerName")
-//                .field("testSuites{id}", "suiteIdList{}")
                 .field("testSuites", "suiteIdList")
+                .customize((Mapper<Project, ProjectsNamesDTO>) customMappers.get(Project.class, ProjectsNamesDTO.class))
                 .byDefault()
                 .register();
         factory.classMap(WorkList.class, WorkListDTO.class)
-                .mapNullsInReverse(false)
-                .mapNulls(false)
-                .field("author", "author_id")
+                .mapNulls(false).mapNullsInReverse(false)
                 .field("project", "project_id")
+                .field("author", "author_id")
+//                .field("tcMuster", "tcMuster_id")
+//                .exclude("createdDateTime")
 //                .field("plannedExecution", "plannedExecution")
                 .customize((Mapper<WorkList, WorkListDTO>) customMappers.get(WorkList.class, WorkListDTO.class))
                 .byDefault()
                 .register();
-        factory.classMap(WorkTCDTO.class, WorkTCDTO.class)
-                .mapNullsInReverse(false)
-                .mapNulls(false)
+        factory.classMap(WorkTC.class, WorkTCDTO.class)
+                .mapNulls(false).mapNullsInReverse(false)
+                .field("assignee", "assignee_id")
+                .field("tcMuster", "tcMuster_id")
+                .field("workList", "workList_id")
+                .customize((Mapper<WorkTC, WorkTCDTO>) customMappers.get(WorkTC.class, WorkTCDTO.class))
                 .byDefault()
+                .register();
+        factory.classMap(WorkTC.class, WorkTC.class)
+                .mapNulls(false).mapNullsInReverse(false)
+                .exclude("assignee")
+                .customize((Mapper<WorkTC, WorkTC>) customMappers.get(WorkTC.class, WorkTC.class))
+                .byDefault()
+                .register();
+        factory.classMap(Person.class, Person.class)
+                .mapNulls(false).mapNullsInReverse(false)
+                .customize((Mapper<Person, Person>) customMappers.get(Person.class, Person.class))
+                .register();
+        factory.classMap(Project.class, ProjectStatsDTO.class)
+                .mapNulls(false).mapNullsInReverse(false)
+                .customize((Mapper<Project, ProjectStatsDTO>) customMappers.get(Project.class, ProjectStatsDTO.class))
                 .register();
     }
 }

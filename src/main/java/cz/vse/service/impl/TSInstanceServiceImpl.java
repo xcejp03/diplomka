@@ -6,6 +6,7 @@ import cz.vse.entity.TCInstance;
 import cz.vse.entity.TSInstance;
 import cz.vse.repository.TCInstanceRepository;
 import cz.vse.repository.TSInstanceRepository;
+import cz.vse.service.TCInstanceService;
 import cz.vse.service.TSInstanceService;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
@@ -29,6 +30,9 @@ public class TSInstanceServiceImpl implements TSInstanceService {
     @Autowired
     private TCInstanceRepository tcInstanceRepository;
 
+    @Autowired
+    private TCInstanceService tcInstanceService;
+
 
     @Autowired
     private MapperFacade mapper;
@@ -45,6 +49,7 @@ public class TSInstanceServiceImpl implements TSInstanceService {
         l.debug("updating TSInstance - service");
         tsInstance.setUpdatedDateTime(LocalDateTime.now());
         tsInstanceRepository.save(tsInstance);
+        tcInstanceService.refreshTCInstanceStatus(tsInstance.gettCInstance().getId());
         l.info("updated TSInstance - service: " + tsInstance);
     }
 
@@ -56,6 +61,7 @@ public class TSInstanceServiceImpl implements TSInstanceService {
         tsInstance.setUpdatedDateTime(LocalDateTime.now());
         l.info(tsInstance);
         tsInstanceRepository.save(tsInstance);
+        tcInstanceService.refreshTCInstanceStatus(tsInstance.gettCInstance().getId());
         l.info("updated TSInstance - service: " + tsInstance);
     }
 

@@ -15,8 +15,8 @@ public class DefectDTO extends BaseDTO {
     private String affectsVersion;
     private PriorityDefectEnum priority;
     private DefectStatusEnum status;
-    private LocalDateTime createdDateTime;
-    private LocalDateTime updatedDateTime;
+    private String createdDateTime;
+    private String updatedDateTime;
     private Long assignee_id;
     private Long reporter_id;
 
@@ -81,22 +81,21 @@ public class DefectDTO extends BaseDTO {
         this.status = status;
     }
 
-    public LocalDateTime getCreatedDateTime() {
+    public String getCreatedDateTime() {
         return createdDateTime;
     }
 
-    public void setCreatedDateTime(LocalDateTime createdDateTime) {
+    public void setCreatedDateTime(String createdDateTime) {
         this.createdDateTime = createdDateTime;
     }
 
-    public LocalDateTime getUpdatedDateTime() {
+    public String getUpdatedDateTime() {
         return updatedDateTime;
     }
 
-    public void setUpdatedDateTime(LocalDateTime updatedDateTime) {
+    public void setUpdatedDateTime(String updatedDateTime) {
         this.updatedDateTime = updatedDateTime;
     }
-
 
     public Long getProjectSource_id() {
         return projectSource_id;

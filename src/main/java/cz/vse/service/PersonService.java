@@ -3,6 +3,8 @@ package cz.vse.service;
 import cz.vse.dto.PersonDTO;
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
+import cz.vse.entity.RoleEnum;
+import cz.vse.entity.UserRole;
 import org.springframework.security.core.Authentication;
 
 import java.util.List;
@@ -41,5 +43,11 @@ public interface PersonService {
     Person findPersonByName(String name);
 
     Person findPersonByAuthentication(Authentication auth);
+
+    List<PersonDTO> getProjectMembers(long projectId);
+
+    List<PersonDTO> getProjectMembers(long projectId, RoleEnum roleEnum);
+
+//    List<PersonDTO> getProjectMembersByProjectIdAndRole(long id, UserRole role);
 
 }

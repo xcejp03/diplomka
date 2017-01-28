@@ -17,7 +17,7 @@ public class TCInstanceDTO extends BaseDTO {
     private List<Long> tsInstances_id;
     private Long tester_id;
     private StatusEnum status;
-    private LocalDateTime createdDateTime;
+    private String createdDateTime;
     private String prerequisite;
     private String note;
 
@@ -61,11 +61,11 @@ public class TCInstanceDTO extends BaseDTO {
         this.status = status;
     }
 
-    public LocalDateTime getCreatedDateTime() {
+    public String getCreatedDateTime() {
         return createdDateTime;
     }
 
-    public void setCreatedDateTime(LocalDateTime createdDateTime) {
+    public void setCreatedDateTime(String createdDateTime) {
         this.createdDateTime = createdDateTime;
     }
 

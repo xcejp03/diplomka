@@ -4,16 +4,15 @@ import cz.vse.dto.TCMusterDTO;
 import cz.vse.dto.TestSuiteDTO;
 import cz.vse.entity.*;
 import cz.vse.repository.TCMusterRepository;
-import cz.vse.service.PersonService;
-import cz.vse.service.SuiteService;
-import cz.vse.service.TCInstanceService;
-import cz.vse.service.TCMusterService;
+import cz.vse.service.*;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -36,6 +35,9 @@ public class TCMusterServiceImpl implements TCMusterService {
 
     @Autowired
     private PersonService personService;
+
+    @Autowired
+    private ProjectService projectService;
 
     public void createTestCaseMuster(TCMuster tcMuster) {
         l.debug("creating TCMuster - service");
@@ -158,5 +160,30 @@ public class TCMusterServiceImpl implements TCMusterService {
         List<TCMusterDTO> tcMusterDTOList;
         tcMusterDTOList = findAllTCDTOByUser(person);
         return tcMusterDTOList;
+    }
+
+    @Override
+    public int getNumberOfMyTCsInProject(Person person, Project project) {
+        return tcMusterRepository.getNumberOfMyTCsInProject(person, project);
+    }
+
+    @Override
+    public int getNumberOfTCsInProject(Project project) {
+        return tcMusterRepository.getNumberOfTCsInProject(project);
+    }
+
+    @Override
+    public List<TCMusterDTO> findTCMustersDTOByProject(Project project) {
+        List<TCMuster> tcMusters = tcMusterRepository.findAllTCByProjectIn(Arrays.asList(project));
+        List<TCMusterDTO> tcMustersDTO = mapper.mapAsList(tcMusters, TCMusterDTO.class);
+        return tcMustersDTO;
+    }
+
+    @Override
+    public List<TCMusterDTO> findTCMustersDTOByProjectId(long projectId) {
+        Project project = projectService.findTestProjectById(projectId) ;
+        List<TCMuster> tcMusters = tcMusterRepository.findAllTCByProjectIn(Arrays.asList(project));
+        List<TCMusterDTO> tcMustersDTO = mapper.mapAsList(tcMusters, TCMusterDTO.class);
+        return tcMustersDTO;
     }
 }

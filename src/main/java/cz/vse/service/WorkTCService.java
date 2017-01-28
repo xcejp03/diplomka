@@ -1,7 +1,7 @@
 package cz.vse.service;
 
+import cz.vse.dto.TCInstanceDTO;
 import cz.vse.dto.TCInstanceRunDTO;
-import cz.vse.dto.TCMusterDTO;
 import cz.vse.dto.WorkTCDTO;
 import cz.vse.entity.*;
 
@@ -19,6 +19,10 @@ public interface WorkTCService {
 
     void updateWorkTC(WorkTCDTO workTCDTO);
 
+    void updateWorkTCEntity(List<WorkTC> workTCList);
+
+    void updateWorkTC(List<WorkTCDTO> workTCDTOList);
+
     List<WorkTC> findAllWorkTC();
 
     List<WorkTCDTO> findAllWorkTCDTO();
@@ -27,4 +31,23 @@ public interface WorkTCService {
 
     WorkTCDTO findWorkTCDTOById(long id);
 
+    List<WorkTCDTO> findWorkTCDTOByWorkListId(long id);
+
+    List<WorkTCDTO> findWorkTCDTOByWorkList(WorkList workList);
+
+    List<WorkTC> findWorkTCByWorkListId(long id);
+
+    List<WorkTCDTO> findAllWorkTCDTOByWorkListId(long id);
+
+    void addWorkTCHistory(long worktcId, TCInstance tcInstance);
+
+    List<WorkTC> getMyOpenWorkTC(Person person);
+
+    List<WorkTCDTO> getMyOpenWorkTCDTO(Person person);
+
+    List<WorkTC> getMyOpenWorkTC(long personId);
+
+    int getMyOpenWorkTCCount(Person person);
+
+    int getMyOpenWorkTCCount(long personId);
 }

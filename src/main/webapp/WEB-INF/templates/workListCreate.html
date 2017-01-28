@@ -16,12 +16,13 @@
     <!--importované přes fragment - konec-->
 
     <!--duallistbox3-->
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <!--<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>-->
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css"/>
     <link rel="stylesheet" type="text/css" href="/src/bootstrap-duallistbox.css"/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
     <script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
+
     <script src="/src/jquery.bootstrap-duallistbox.js"></script>
 </head>
 
@@ -96,7 +97,7 @@
                                 <select class="form-control" id="priority" name="priority">
                                     <option th:each="priority : ${listPriority}"
                                             th:value="${priority}"
-                                            th:selected="${workListDTO.priority != null} ? ${#arrays.contains(tcDTO.priority, priority)}"
+                                            th:selected="${workListDTO.priority != null} ? ${#arrays.contains(workListDTO.priority, priority)}"
                                             th:text="${priority}">jméno projektu
                                     </option>
                                 </select>
@@ -119,20 +120,28 @@
                             </div>
                         </div>
 
+                        <div class=" control-group form-group">
+                            <div class="controls">
+                                <label for="plannedExecution">Datum plánovaného spuštění</label>:
+                                <input type="text" id="plannedExecution" class="datepicker" name="plannedExecution" th:value="${workListDTO.plannedExecution}"
+                                       size="30"/>
+                            </div>
+                        </div>
+
                         <!--<div class=" control-group form-group">-->
                             <!--<div class="controls">-->
                                 <!--<label for="plannedExecution">Datum plánovaného spuštění</label>:-->
                                 <!--<input type="text" id="plannedExecution" class="datepicker" name="plannedExecution" size="30"/>-->
                             <!--</div>-->
-                        <!--</div>-->
+                        <!--</div>-->tcMuster_id
 
                         <div class="control-group form-group">
                             <div class="controls">
-                                <label for="workTCList">Přidej TC</label>:
-                                <select id="workTCList" name="workTCList" class="multipleSelection4"
+                                <label for="tcMuster_id">Přidej TC</label>:
+                                <select id="tcMuster_id" name="tcMuster_id" class="multipleSelection4"
                                         multiple="multiple" size="10">
                                     <option th:each="tc : ${listTCByProject}"
-                                            th:selected="${workListDTO.workTCList != null} ? ${#lists.contains(workListDTO.workTCList, tc)}"
+                                            th:selected="${workListDTO.workTCList != null} ? ${#lists.contains(listTCMusterIdByWorklistInWorkTCDTO, tc.id)}"
                                             th:value="${tc.id}"
                                             th:text="${tc}">tc vzory
                                     </option>

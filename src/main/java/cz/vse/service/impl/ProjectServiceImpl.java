@@ -1,8 +1,13 @@
 package cz.vse.service.impl;
 
+import cz.vse.dto.PersonDTO;
 import cz.vse.dto.ProjectDTO;
+import cz.vse.dto.ProjectStatsDTO;
 import cz.vse.dto.ProjectsNamesDTO;
+import cz.vse.entity.Person;
 import cz.vse.entity.Project;
+import cz.vse.entity.RoleEnum;
+import cz.vse.entity.TCStatusEnum;
 import cz.vse.repository.ProjectRepository;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
@@ -11,9 +16,11 @@ import cz.vse.utils.HelpService;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -121,5 +128,50 @@ public class ProjectServiceImpl implements ProjectService {
         return projectsNamesDTOList;
     }
 
+
+    @Override
+    public List<ProjectStatsDTO> getMyProjectsWithStatistics(Person loggedPerson) {
+        List<Project> projects = projectRepository.findAllProjectsByPersonMembersIdOrderById(loggedPerson.getId());
+        List<ProjectStatsDTO> projectStatsDTOs;
+        projectStatsDTOs = mapper.mapAsList(projects, ProjectStatsDTO.class);
+        l.warn("projectStatsDTO: "+ projectStatsDTOs);
+        return projectStatsDTOs;
+    }
+
+    @Override
+    public int getNumberOfTCsInProject(long id) {
+        Project project = findTestProjectById(id);
+        return project.getTcMusters().size();
+    }
+
+    @Override
+    public int getNumberOfTCsInProject(Project project) {
+        return project.getTcMusters().size();
+    }
+
+
+//    @Override
+//    public int getNumberOfTCsInProjectByStatus(Project project, TCStatusEnum status) {
+//        return 0;
+//    }
+//select count
+//groupByTCStatusEnum
+//    findTop1ByTCMusterOrderByCreatedDateTimeDesc
+
+//    @Override
+//    public int getNumberOfTCsInProjectByStatus(long projectId, TCStatusEnum status) {
+//        return 0;
+//    }
+
+    @Override
+    public int getProjectMembersNumber(Project project) {
+        return projectRepository.getProjectMembersNumber(project.getId());
+
+    }
+
+    @Override
+    public int getProjectMembersNumber(long projectId) {
+        return projectRepository.getProjectMembersNumber(projectId);
+    }
 
 }

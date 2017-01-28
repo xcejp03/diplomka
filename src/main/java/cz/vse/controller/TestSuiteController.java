@@ -13,10 +13,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by pcejka on 09.10.2016.
@@ -41,11 +40,19 @@ public class TestSuiteController {
     SecurityUtils securityUtils;
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String createTestSuite(Model model) {
+//    public String defectShowByUser(Model model, @RequestParam(required = false, defaultValue = "open", value = "filter") String filter) {
+    public String createTestSuite(Model model, @RequestParam(required = false, value = "project") Long projectId) {
         l.info("request mapping suite/create");
         Long personId = securityUtils.getLoggedPersonId();
 
-        model.addAttribute("suiteDTO", new TestSuiteDTO());
+        TestSuiteDTO suiteDTO = new TestSuiteDTO();
+        if (projectId != null) {
+            suiteDTO.setProject_id(projectId);
+        }
+
+        model.addAttribute("suiteDTO", suiteDTO);
+
+
         model.addAttribute("listSuites", suiteService.findAllTestSuites());
         model.addAttribute("listSuitesDTO", suiteService.findAllTestSuitesDTO());
         model.addAttribute("listProjects", projectService.findAllTestProjects());
@@ -65,19 +72,23 @@ public class TestSuiteController {
         } else {
             suiteService.updateTestSuite(testSuiteDTO);
         }
-        return "redirect:create";
+        return "redirect:/suite/suites-by-project/" + testSuiteDTO.getProject_id();
     }
 
     @RequestMapping("/edit/{id}")
     public String editTestSuite(@PathVariable("id") int id, Model model) {
         l.info("/edit/{id}" + id);
         Long personId = securityUtils.getLoggedPersonId();
-        model.addAttribute("suiteDTO", suiteService.findTestSuiteDTOById(id));
+        TestSuiteDTO suiteDTO = suiteService.findTestSuiteDTOById(id);
+
+        model.addAttribute("suiteDTO", suiteDTO);
         model.addAttribute("suiteE", suiteService.findTestSuiteById(id));
         model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listTcMusters", tcMusterService.findAllTestCaseMusters());
-        model.addAttribute("listTcMustersDTO", tcMusterService.findAllTestCaseMustersDTO());
+//        model.addAttribute("listTcMustersDTO", tcMusterService.findAllTestCaseMustersDTO());
+        model.addAttribute("listTcMustersDTOByProject", tcMusterService.findTCMustersDTOByProjectId(suiteDTO.getProject_id()));
+
         model.addAttribute("ListTcmusterdto", tcMusterService.findAllTestCaseMustersDTOByTestSuiteId(suiteService.findTestSuiteDTOById(id).getId()));
         model.addAttribute("tcmusterdto", tcMusterService.findTestCaseMusterDTOById(suiteService.findTestSuiteDTOById(id).getId()));
         model.addAttribute("listUsersProjectsDTO", projectService.findAllTestProjectsByUserIdDTO(personId));
@@ -86,14 +97,15 @@ public class TestSuiteController {
     }
 
     @RequestMapping("/remove/{id}")
-    public String removeSuite(@PathVariable("id") int id) {
+    public String removeSuite(@PathVariable("id") int id, HttpServletRequest request) {
         suiteService.deleteTestSuiteById(id);
-        return "redirect:/suite/create";
+        String referer = request.getHeader("Referer");
+        return "redirect:" + referer;
     }
 
     @RequestMapping("/suites-by-project/{id}")
     public String suitesByProject(@PathVariable("id") long id, Model model) {
-        l.info("/suites-by-project/{id} - "+id);
+        l.info("/suites-by-project/{id} - " + id);
 
         model.addAttribute("listSuitesDTO", suiteService.findAllTestSuitesDTOByProjectId(id));
         model.addAttribute("project", projectService.findTestProjectById(id));

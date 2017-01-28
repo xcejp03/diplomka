@@ -5,7 +5,7 @@ import cz.vse.entity.Person;
 import cz.vse.entity.Project;
 import cz.vse.entity.TCMuster;
 import cz.vse.entity.TestSuite;
-import cz.vse.repository.SuiteRepository;
+import cz.vse.repository.TestSuiteRepository;
 import cz.vse.repository.TCMusterRepository;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
@@ -30,7 +30,7 @@ public class SuiteServiceImpl implements SuiteService {
     private final Logger l = Logger.getLogger(this.getClass());
 
     @Autowired
-    SuiteRepository suiteRepository;
+    TestSuiteRepository testSuiteRepository;
 
     @Autowired
     private MapperFacade mapper;
@@ -52,7 +52,7 @@ public class SuiteServiceImpl implements SuiteService {
         TestSuite testSuite = new TestSuite();
         mapper.map(testSuiteDTO, testSuite);
         testSuite.setCreatedDateTime(LocalDateTime.now());
-        suiteRepository.save(testSuite);
+        testSuiteRepository.save(testSuite);
         List<TCMuster> tcMusterList = new ArrayList<>();
         if (testSuite.getTcMusters() != null) {
             for (TCMuster tcMusterForId : testSuite.getTcMusters()) {
@@ -62,19 +62,19 @@ public class SuiteServiceImpl implements SuiteService {
             }
             testSuite.setTcMusters(tcMusterList);
         }
-        suiteRepository.save(testSuite);
+        testSuiteRepository.save(testSuite);
         l.info("created test suite - service: " + testSuiteDTO);
     }
 
     public void createTestSuite(TestSuite testSuite) {
         l.debug("creating test suite - service");
-        suiteRepository.save(testSuite);
+        testSuiteRepository.save(testSuite);
         l.info("created test suite - service: " + testSuite);
     }
 
     public void updateTestSuite(TestSuiteDTO testSuiteDTO) {
         l.debug("updating test suite - service");
-        TestSuite testSuite = suiteRepository.findOne(testSuiteDTO.getId());
+        TestSuite testSuite = testSuiteRepository.findOne(testSuiteDTO.getId());
         mapper.map(testSuiteDTO, testSuite);
         List<TCMuster> tcMusterList = new ArrayList<>();
         if (testSuite.getTcMusters() != null) {
@@ -87,27 +87,27 @@ public class SuiteServiceImpl implements SuiteService {
             testSuite.setTcMusters(tcMusterList);
         }
         testSuite.setUpdatedDateTime(LocalDateTime.now());
-        suiteRepository.save(testSuite);
+        testSuiteRepository.save(testSuite);
         l.info("updated test suite - service: " + testSuiteDTO);
     }
 
     public void deleteTestSuite(TestSuite testSuite) {
         l.debug("deleting test suite - service");
         Long testSuiteId = testSuite.getId();
-        suiteRepository.delete(testSuiteId);
+        testSuiteRepository.delete(testSuiteId);
         l.info("test suite deleted - service: " + testSuite);
     }
 
     public void deleteTestSuiteById(long id) {
         l.debug("deleting test suite - service");
-        suiteRepository.delete(id);
+        testSuiteRepository.delete(id);
         l.info("test suite deleted - service: " + id);
     }
 
     public TestSuite findTestSuiteById(long id) {
         l.debug("finding test suite - service");
         TestSuite testSuite;
-        testSuite = suiteRepository.findOne(id);
+        testSuite = testSuiteRepository.findOne(id);
         l.info("test suit found - service: " + id + " - " + testSuite);
         return testSuite;
     }
@@ -116,7 +116,7 @@ public class SuiteServiceImpl implements SuiteService {
         l.debug("finding test suite - service");
         TestSuite testSuite;
         TestSuiteDTO testSuiteDTO;
-        testSuite = suiteRepository.findOne(id);
+        testSuite = testSuiteRepository.findOne(id);
         testSuiteDTO = mapper.map(testSuite, TestSuiteDTO.class);
 
         l.info("projectDTO found - service: " + id + " - " + testSuiteDTO.toString());
@@ -128,7 +128,7 @@ public class SuiteServiceImpl implements SuiteService {
         List<TestSuite> testSuiteList;
         List<TestSuiteDTO> testSuiteDTOList;
 
-        testSuiteList = suiteRepository.findAll();
+        testSuiteList = testSuiteRepository.findAll();
         l.warn("mezikrok");
         testSuiteDTOList = mapper.mapAsList(testSuiteList, TestSuiteDTO.class);
 
@@ -139,7 +139,7 @@ public class SuiteServiceImpl implements SuiteService {
     public List<TestSuite> findAllTestSuites() {
         l.debug("finding all testSuites - service");
         List<TestSuite> testSuites;
-        testSuites = suiteRepository.findAll();
+        testSuites = testSuiteRepository.findAll();
         l.info("found all testSuites - service: " + testSuites.toString());
         return testSuites;
     }
@@ -147,7 +147,7 @@ public class SuiteServiceImpl implements SuiteService {
     public List<TestSuite> findAllTestSuitesByProjectId(Long projectId) {
         List<TestSuite> testSuiteList;
         Project project = projectService.findTestProjectById(projectId);
-        testSuiteList = suiteRepository.findAllTestSuitesByProjectOrderById(project);
+        testSuiteList = testSuiteRepository.findAllTestSuitesByProjectOrderById(project);
         return testSuiteList;
     }
 
@@ -155,7 +155,7 @@ public class SuiteServiceImpl implements SuiteService {
         List<TestSuiteDTO> testSuiteDTOList;
         List<TestSuite> testSuiteList;
         Project project = projectService.findTestProjectById(projectId);
-        testSuiteList = suiteRepository.findAllTestSuitesByProjectOrderById(project);
+        testSuiteList = testSuiteRepository.findAllTestSuitesByProjectOrderById(project);
         testSuiteDTOList = mapper.mapAsList(testSuiteList, TestSuiteDTO.class);
         return testSuiteDTOList;
     }
@@ -163,7 +163,7 @@ public class SuiteServiceImpl implements SuiteService {
     @Override
     public List<TestSuiteDTO> findAllTestSuitesDTOByUser(Person person) {
         List<Project> projectList = person.getProjectsMember();
-        List<TestSuite> testSuiteList = suiteRepository.findAllTestSuitesByProjectIn(projectList);
+        List<TestSuite> testSuiteList = testSuiteRepository.findAllTestSuitesByProjectIn(projectList);
         List<TestSuiteDTO> testSuiteDTOList;
         testSuiteDTOList = mapper.mapAsList(testSuiteList, TestSuiteDTO.class);
         return  testSuiteDTOList;
@@ -175,4 +175,18 @@ public class SuiteServiceImpl implements SuiteService {
         List<TestSuiteDTO> testSuiteDTOList = findAllTestSuitesDTOByUser(person);
         return testSuiteDTOList;
     }
+
+    @Override
+    public int getNumberOfSuitesInProject(Project project) {
+        return testSuiteRepository.getNumberOfSuitesInProject(project);
+    }
+
+    @Override
+    public int getNumberOfSuitesInProject(long id) {
+        Project project = projectService.findTestProjectById(id);
+        return testSuiteRepository.getNumberOfSuitesInProject(project);
+    }
+
+
 }
+

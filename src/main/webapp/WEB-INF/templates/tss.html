@@ -71,7 +71,7 @@
             <td th:text="${ts.action}">Akce</td>
             <td th:text="${ts.expected}">Expected</td>
             <td th:text="${ts.createdDateTime}">Vytvořeno</td>
-            <td><a th:href="@{'/ts/edit/'+${ts.id}}">Editace</a></td>
+            <td><a th:href="@{'/ts/edit/'+${ts.id}+'?tcmuster='+ ${tc.id}}">Editace</a></td>
             <td><a href="#" class="opener"
                    th:attr="data-objectid=${ts.id}" data-id="#moreDialog">Více</a>
             </td>
@@ -79,12 +79,17 @@
         </tbody>
     </table>
 
-    <p><a href="/ts/create" class="btn btn-default">Nový Test Step</a></p>
+    <div th:if="${tc != null}" th:remove="tag">
+        <a th:href="@{'/ts/create/'+'?tcmuster='+ ${tc.id}}" class="btn btn-default">Založit Test
+            Step</a>
+    </div>
+    <!--<p><a href="/ts/create" class="btn btn-default">Nový Test Step</a></p>-->
 
     <!--dialogová okna-->
     <div id="moreDialog" title="Více">
         <h3>TC ID: <span id="spanDataObjectId"></span></h3>
-        <a th:href="@{'/defect/create'(source='tsInstanceSource_id')}" onclick="addSourceIdToURL(this)" class="btn btn-default" >Založit defekt</a>
+        <a th:href="@{'/defect/create'(source='tsInstanceSource_id')}" onclick="addSourceIdToURL(this)"
+           class="btn btn-default">Založit defekt</a>
         <a href="/ts/remove/" onclick="addIdToURL(this)" class="btn btn-default">Smazat</a>
         <a href="/defect/defects" class="btn btn-default">Seznam Defektů</a>
 

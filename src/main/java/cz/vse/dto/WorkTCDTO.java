@@ -6,12 +6,15 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
  * Created by pcejka on 11.01.2017.
  */
 public class WorkTCDTO extends BaseDTO {
+    private String name;
+
     private Long tcMuster_id;
 
     private Long assignee_id;
@@ -20,7 +23,18 @@ public class WorkTCDTO extends BaseDTO {
 
     private List<Long> tcRunHistoryList_id;
 
-    private PriorityTCEnum priorityTCEnum;
+    private PriorityTCEnum priority;
+
+    private String updatedDateTime;
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Long getTcMuster_id() {
         return tcMuster_id;
@@ -54,11 +68,19 @@ public class WorkTCDTO extends BaseDTO {
         this.tcRunHistoryList_id = tcRunHistoryList_id;
     }
 
-    public PriorityTCEnum getPriorityTCEnum() {
-        return priorityTCEnum;
+    public PriorityTCEnum getPriority() {
+        return priority;
     }
 
-    public void setPriorityTCEnum(PriorityTCEnum priorityTCEnum) {
-        this.priorityTCEnum = priorityTCEnum;
+    public void setPriority(PriorityTCEnum priority) {
+        this.priority = priority;
+    }
+
+    public String getUpdatedDateTime() {
+        return updatedDateTime;
+    }
+
+    public void setUpdatedDateTime(String updatedDateTime) {
+        this.updatedDateTime = updatedDateTime;
     }
 }

@@ -43,13 +43,21 @@ public class TCServiceImpl implements TCService {
     @Autowired
     private SuiteService suiteService;
 
-    public TCInstanceRunDTO runNewTC(long tcMusterId, Person person) {
+//    public TCInstanceRunDTO runNewTC(long tcMusterId, Person person) {
+//        TCInstance tcInstance;
+//        TCInstanceRunDTO tcInstanceRunDTO;
+//        tcInstance = createAndSaveTCInstanceFromTCMusterId(tcMusterId, person);
+//        tcInstanceRunDTO = mapper.map(tcInstance, TCInstanceRunDTO.class);
+//        l.info(tcInstanceRunDTO);
+//        return tcInstanceRunDTO;
+//    }
+
+    public TCInstance runNewTC(long tcMusterId, Person person) {
         TCInstance tcInstance;
         TCInstanceRunDTO tcInstanceRunDTO;
         tcInstance = createAndSaveTCInstanceFromTCMusterId(tcMusterId, person);
-        tcInstanceRunDTO = mapper.map(tcInstance, TCInstanceRunDTO.class);
-        l.info(tcInstanceRunDTO);
-        return tcInstanceRunDTO;
+        l.info(tcInstance);
+        return tcInstance;
     }
 
     /**

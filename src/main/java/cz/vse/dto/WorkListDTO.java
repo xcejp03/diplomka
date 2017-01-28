@@ -20,16 +20,18 @@ public class WorkListDTO extends BaseDTO {
     private String name;
 
     private Long author_id;
-
+//
     private Long project_id;
 
-    private List<Long> workTCList;
+    private List<WorkTCDTO> workTCList;
 
-    private LocalDateTime createdDateTime;
+    private List<Long> tcMuster_id;
 
-    private LocalDateTime updatedDateTime;
+    private String createdDateTime;
 
-    private LocalDate plannedExecution;
+    private String updatedDateTime;
+
+    private String plannedExecution;
 
     private PriorityTCEnum priority;
 
@@ -61,35 +63,35 @@ public class WorkListDTO extends BaseDTO {
         this.project_id = project_id;
     }
 
-    public List<Long> getWorkTCList() {
+    public List<WorkTCDTO> getWorkTCList() {
         return workTCList;
     }
 
-    public void setWorkTCList(List<Long> workTCList) {
+    public void setWorkTCList(List<WorkTCDTO> workTCList) {
         this.workTCList = workTCList;
     }
 
-    public LocalDateTime getCreatedDateTime() {
+    public String getCreatedDateTime() {
         return createdDateTime;
     }
 
-    public void setCreatedDateTime(LocalDateTime createdDateTime) {
+    public void setCreatedDateTime(String createdDateTime) {
         this.createdDateTime = createdDateTime;
     }
 
-    public LocalDateTime getUpdatedDateTime() {
+    public String getUpdatedDateTime() {
         return updatedDateTime;
     }
 
-    public void setUpdatedDateTime(LocalDateTime updatedDateTime) {
+    public void setUpdatedDateTime(String updatedDateTime) {
         this.updatedDateTime = updatedDateTime;
     }
 
-    public LocalDate getPlannedExecution() {
+    public String getPlannedExecution() {
         return plannedExecution;
     }
 
-    public void setPlannedExecution(LocalDate plannedExecution) {
+    public void setPlannedExecution(String plannedExecution) {
         this.plannedExecution = plannedExecution;
     }
 
@@ -115,6 +117,28 @@ public class WorkListDTO extends BaseDTO {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public List<Long> getTcMuster_id() {
+        return tcMuster_id;
+    }
+
+    public void setTcMuster_id(List<Long> tcMuster_id) {
+        this.tcMuster_id = tcMuster_id;
+    }
+
+    @Override
+    public String toString() {
+        return "WorkListDTO{" +
+                "name='" + name + '\'' +
+                ", author_id=" + author_id +
+                ", project_id=" + project_id +
+                ", createdDateTime=" + createdDateTime +
+                ", plannedExecution='" + plannedExecution + '\'' +
+                ", priority=" + priority +
+                ", prerequisite='" + prerequisite + '\'' +
+                ", note='" + note + '\'' +
+                '}';
     }
 }
 

@@ -1,0 +1,10 @@
+INSERT INTO public.project (id, created_date_time, updated_date_time, name, project_owner_id) VALUES (23, null, null, 'Vyhrnout sníh', 11);
+INSERT INTO public.project (id, created_date_time, updated_date_time, name, project_owner_id) VALUES (24, null, null, 'Otevřít okno', 1);
+INSERT INTO public.project (id, created_date_time, updated_date_time, name, project_owner_id) VALUES (25, null, null, 'Vyměnit olej v autě', 18);
+INSERT INTO public.project (id, created_date_time, updated_date_time, name, project_owner_id) VALUES (26, null, null, 'Přezout na zimu', 13);
+INSERT INTO public.project (id, created_date_time, updated_date_time, name, project_owner_id) VALUES (27, null, null, 'Umýt nádobí', 12);
+INSERT INTO public.project (id, created_date_time, updated_date_time, name, project_owner_id) VALUES (28, null, null, 'Securita II', 11);
+INSERT INTO public.project (id, created_date_time, updated_date_time, name, project_owner_id) VALUES (29, null, null, 'Napsat diplomku', 10);
+INSERT INTO public.project (id, created_date_time, updated_date_time, name, project_owner_id) VALUES (21, null, null, 'NASA', 16);
+INSERT INTO public.project (id, created_date_time, updated_date_time, name, project_owner_id) VALUES (22, null, null, 'GTB', 17);
+INSERT INTO public.project (id, created_date_time, updated_date_time, name, project_owner_id) VALUES (20, null, null, 'Inbox', 17);

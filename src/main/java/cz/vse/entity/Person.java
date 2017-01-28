@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * Created by pcejka on 21.09.2016.
  */
-@Entity(name = "Person")
+@Entity
 public class Person extends BaseEntity {
     private String name;
     private String username;
@@ -46,6 +46,7 @@ public class Person extends BaseEntity {
 
     @OneToMany(mappedBy = "author")
     private List<WorkList> workListAuthor;
+
 
     public String getName() {
         return name;
@@ -160,17 +161,32 @@ public class Person extends BaseEntity {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Person person = (Person) o;
+
+        if (name != null ? !name.equals(person.name) : person.name != null) return false;
+        if (username != null ? !username.equals(person.username) : person.username != null) return false;
+        return password != null ? password.equals(person.password) : person.password == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "Person{" +
                 "name='" + name + '\'' +
                 ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-//                ", createdDate=" + createdDate +
-//                ", lastLogged=" + lastLogged +
-//                ", projectsMember=" + projectsMember +
-//                ", projectsOwner=" + projectOwners +
-//                ", defectsAssignee=" + defectAssignees +
-//                ", defectsReporter=" + defectReporters +
                 '}';
     }
 }

@@ -12,6 +12,8 @@ import java.util.List;
  */
 @Entity
 public class WorkTC extends BaseEntity {
+
+
     @ManyToOne
     @JoinColumn(name = "tcMuster_id")
     private TCMuster tcMuster;
@@ -27,7 +29,9 @@ public class WorkTC extends BaseEntity {
     @OneToMany (mappedBy = "workTC")
     private List<TCInstance> tcRunHistory;
 
-    private PriorityTCEnum priorityTCEnum;
+    private PriorityTCEnum priority;
+
+
 
     public TCMuster getTcMuster() {
         return tcMuster;
@@ -61,12 +65,45 @@ public class WorkTC extends BaseEntity {
         this.tcRunHistory = tcRunHistory;
     }
 
-    public PriorityTCEnum getPriorityTCEnum() {
-        return priorityTCEnum;
+    public void addTcRunHistory(TCInstance tcInstance)  {
+        this.tcRunHistory.add(tcInstance);
     }
 
-    public void setPriorityTCEnum(PriorityTCEnum priorityTCEnum) {
-        this.priorityTCEnum = priorityTCEnum;
+    public PriorityTCEnum getPriority() {
+        return priority;
     }
 
+    public void setPriority(PriorityTCEnum priority) {
+        this.priority = priority;
+    }
+
+    @Override
+    public String toString() {
+        return "WorkTC{" +
+                "tcMuster=" + tcMuster +
+                ", assignee=" + assignee +
+                ", workList=" + workList +
+                ", priority=" + priority +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        WorkTC workTC = (WorkTC) o;
+
+        if (assignee != null ? !assignee.equals(workTC.assignee) : workTC.assignee != null) return false;
+        return priority == workTC.priority;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (assignee != null ? assignee.hashCode() : 0);
+        result = 31 * result + (priority != null ? priority.hashCode() : 0);
+        return result;
+    }
 }

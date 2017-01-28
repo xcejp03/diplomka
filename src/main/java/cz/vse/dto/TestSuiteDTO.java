@@ -8,8 +8,8 @@ import java.util.List;
  */
 public class TestSuiteDTO extends BaseDTO{
     private String name;
-    private LocalDateTime createdDateTime;
-    private LocalDateTime updateDateTime;
+    private String createdDateTime;
+    private String updateDateTime;
     private Long project_id;
     private List<Long> tcMusters_id;
 
@@ -21,19 +21,19 @@ public class TestSuiteDTO extends BaseDTO{
         this.name = name;
     }
 
-    public LocalDateTime getCreatedDateTime() {
+    public String getCreatedDateTime() {
         return createdDateTime;
     }
 
-    public void setCreatedDateTime(LocalDateTime createdDateTime) {
+    public void setCreatedDateTime(String createdDateTime) {
         this.createdDateTime = createdDateTime;
     }
 
-    public LocalDateTime getUpdateDateTime() {
+    public String getUpdateDateTime() {
         return updateDateTime;
     }
 
-    public void setUpdateDateTime(LocalDateTime updateDateTime) {
+    public void setUpdateDateTime(String updateDateTime) {
         this.updateDateTime = updateDateTime;
     }
 

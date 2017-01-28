@@ -11,10 +11,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by pcejka on 09.10.2016.
@@ -45,27 +44,32 @@ public class TSController {
     SecurityUtils securityUtils;
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String createTS(Model model) {
+    public String createTS(Model model, @RequestParam(required = false, value = "tcmuster") Long tcmusterId) {
         l.info("request mapping ts/create");
-        model.addAttribute("tsDTO", new TSMusterDTO());
+        TSMusterDTO tsDTO = new TSMusterDTO();
+        tsDTO.setTcMuster_id(tcmusterId);
+
+        model.addAttribute("tsDTO", tsDTO);
         model.addAttribute("listTSMusters", tsMusterService.findAllTestStepMustersDTO());
         model.addAttribute("listPersons", personService.findAllPersons());
+        model.addAttribute("loggedPerson", securityUtils.getLoggedPerson());
         model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMusters());
         return "tsCreate";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createTSPost(@ModelAttribute("ts") TSMusterDTO tsMusterDTO) {
+    public String createTSPost(@ModelAttribute("ts") TSMusterDTO tsMusterDTO, HttpServletRequest request) {
         if (tsMusterDTO.getId() == null) {
             tsMusterService.createTestStepMuster(tsMusterDTO);
         } else {
             tsMusterService.updateTestStepMuster(tsMusterDTO);
         }
-        return "redirect:create";
+        String referer = request.getHeader("Referer");
+        return "redirect:" + referer;
     }
 
     @RequestMapping("/edit/{id}")
-    public String editTSMuster(@PathVariable("id") long id, Model model) {
+    public String editTSMuster(@PathVariable("id") long id, Model model, @RequestParam(required = false, value = "tcmuster") Long tcmusterId) {
         l.info("/edit/{id}" + id);
 
         model.addAttribute("tsDTO", tsMusterService.findTestStepMusterDTOById(id));

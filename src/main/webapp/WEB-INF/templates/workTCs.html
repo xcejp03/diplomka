@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/security/tags">
+
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Create WorkList</title>
+
+    <!--importované přes fragment-->
+    <div th:replace="/fragment/thymeFragment :: headImports"/>
+    <!--importované přes fragment - konec-->
+
+    <!--duallistbox3-->
+    <!--<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>-->
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/src/bootstrap-duallistbox.css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
+    <script src="/src/jquery.bootstrap-duallistbox.js"></script>
+</head>
+
+<body>
+<!-- Navigation -->
+<div th:replace="/fragment/thymeFragment :: menu"></div>
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="page-header">
+                <small>WEB-INF/templates/wotkTCs.html</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="/index">Home</a>
+                </li>
+                <li class="active">Work TC seznam z workListu</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <!--
+        listWorkListDTOMember
+        listWorkListDTOAuthor
+    -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9">
+
+                <h1>Project list - Member</h1>
+                <table class="table table-striped datatable">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Název</th>
+                        <th>Projekt</th>
+                        <th>Naplánováno</th>
+                        <th>Priorita</th>
+                        <th>Autor</th>
+                        <th>WorkTC</th>
+                    </tr>
+                    </thead>
+                    <tbody th:remove="all-but-first">
+                    <tr th:each="workList : ${listWorkListDTOMember}">
+                        <td th:text="${workList.id}">00</td>
+                        <td th:text="${workList.name}">Název</td>
+                        <td th:text="${workList.project_id}">Projekt</td>
+                        <td th:text="${workList.plannedExecution}">Naplánováno
+                        </td>
+                        <td><span th:class="${workList.priority}" th:text="${workList.priority}"> Priorita</span></td>
+                        <td th:text="${workList.author_id}">Autor</td>
+                        <td><a th:href="@{'/worklist/worktc/'+${workList.id}}">WorkTC</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-sm-3">
+                <p><a href="/worklist/create" class="btn btn-default">Vytvořit nový</a></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-9">
+
+                <h1>Project list - Author</h1>
+                <table class="table table-striped datatable">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Název</th>
+                        <th>Projekt</th>
+                        <th>Naplánováno</th>
+                        <th>Priorita</th>
+                        <th>Autor</th>
+                        <th>WorkTC</th>
+                    </tr>
+                    </thead>
+                    <tbody th:remove="all-but-first">
+                    <tr th:each="workList : ${listWorkListDTOAuthor}">
+                        <td th:text="${workList.id}">00</td>
+                        <td th:text="${workList.name}">Název</td>
+                        <td th:text="${workList.project_id}">Projekt</td>
+                        <td th:text="${workList.plannedExecution}">Naplánováno</td>
+                        <td><span th:class="${workList.priority}" th:text="${workList.priority}"> Priorita</span></td>
+                        <td th:text="${workList.author_id}">Autor</td>
+                        <td><a th:href="@{'/worklist/worktc/'+${workList.id}}">WorkTC</a></td>
+
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-3">
+            </div>
+
+        </div>
+
+        <!--Page Content - End-->
+
+        <!-- Footer -->
+        <div th:replace="/fragment/thymeFragment :: footer"></div>
+
+    </div>
+</div>
+<!-- /.container -->
+
+<div th:replace="/fragment/thymeFragment :: script"></div>
+</body>
+
+</html>

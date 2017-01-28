@@ -15,6 +15,7 @@ public class TCInstance extends BaseEntity {
     private String name;
     private String prerequisite;
     private String note;
+    private StatusEnum status;
 
     @ManyToOne
     @JoinColumn(name = "tcMuster_id")
@@ -109,6 +110,14 @@ public class TCInstance extends BaseEntity {
         this.workTC = workTC;
     }
 
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusEnum status) {
+        this.status = status;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -141,13 +150,11 @@ public class TCInstance extends BaseEntity {
 
     @Override
     public String toString() {
-        return "tcInstance{" +
+        return "TCInstance - "+id+" {" +
                 "name='" + name + '\'' +
-//                ", createdDateTime=" + createdDateTime +
-//                ", updatedDateTime=" + updatedDateTime +
-//                ", tCMuster=" + tCMuster +
-//                ", defects=" + defects +
-//                ", tsInstances=" + tsInstances +
+                ", prerequisite='" + prerequisite + '\'' +
+                ", note='" + note + '\'' +
+                ", tCMuster=" + tCMuster +
                 '}';
     }
 }

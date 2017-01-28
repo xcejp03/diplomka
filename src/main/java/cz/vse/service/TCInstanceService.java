@@ -2,8 +2,7 @@ package cz.vse.service;
 
 import cz.vse.dto.TCInstanceDTO;
 import cz.vse.dto.TCInstanceRunDTO;
-import cz.vse.entity.TCInstance;
-import cz.vse.entity.TCMuster;
+import cz.vse.entity.*;
 
 import java.util.List;
 
@@ -33,5 +32,9 @@ public interface TCInstanceService {
     TCInstance findLastTCInstanceByTCMuster(TCMuster tcMuster);
 
     TCInstance findLastTCInstanceByTCMusterId(long id);
+
+    void refreshTCInstanceStatus(long id);
+
+    int getNumberOfTCsInProjectByStatus(Project project, StatusEnum status);
 
 }

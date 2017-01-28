@@ -1,16 +1,27 @@
 package cz.vse.repository;
 
-import cz.vse.entity.Project;
-import cz.vse.entity.TCMuster;
-import cz.vse.entity.TestSuite;
-import cz.vse.entity.WorkList;
+import cz.vse.entity.*;
 import cz.vse.repository.base.BaseRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
  * Created by pcejka on 28.11.2016.
  */
 public interface WorkListRepository extends BaseRepository<WorkList> {
+    List<WorkList> findAllWorkListDTOByAuthor(Person person);
 
+    List<WorkList> findAllWorkListDTOByProjectIn(List<Project> projects);
+
+    @Query("select w from WorkList w where w.author = :person and w.plannedExecution = :plannedExecution")
+    List<WorkList> findAllWorkListDTOByMemberToday(@Param("person") Person person, @Param("plannedExecution") LocalDate plannedExecution);
+
+//    @Query("select w from WorkList w where w.author = :person and w.plannedExecution <= :dayStart and w.plannedExecution >= :dayEnd")
+@Query("select w from WorkList w where w.author = :person and w.plannedExecution between :dayStart and :dayEnd")
+    List<WorkList> findAllWorkListDTOByMemberBetweenDays(@Param("person") Person person,
+                                                         @Param("dayStart") LocalDate dayStart,
+                                                         @Param("dayEnd") LocalDate dayEnd);
 }

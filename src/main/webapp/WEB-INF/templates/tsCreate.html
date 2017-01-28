@@ -82,7 +82,8 @@
 
                                 <select class="form-control" id="author_id" name="author_id">
                                     <option th:each="author_id : ${listPersons}"
-                                            th:selected="${tsDTO.author_id != null} ? ${#strings.contains(author_id.id, tsDTO.author_id)}"
+                                            th:selected="${tsDTO.author_id != null} ? ${#strings.contains(author_id.id, tsDTO.author_id)} :
+                                            ${#strings.contains(author_id.id, loggedPerson.id)}"
                                             th:value="${author_id.id}"
                                             th:text="${author_id.name}">jméno autora
                                     </option>
@@ -113,6 +114,9 @@
 
                     </form>
                 </div>
+            </div>
+            <div class="col-sm-5">
+                <p><a th:href="@{'/ts/ts-by-tcmuster/'+ ${param.tcmuster[0]}}" class="btn btn-primary">Zpět</a></p>
             </div>
         </div>
 

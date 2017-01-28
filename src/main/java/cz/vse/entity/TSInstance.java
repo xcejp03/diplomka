@@ -108,14 +108,10 @@ public class TSInstance extends BaseEntity {
     @Override
     public String toString() {
         return "TSInstance{" +
-//                "createdDateTime=" + createdDateTime +
-//                ", updatedDateTime=" + updatedDateTime +
-                ", action='" + action + '\'' +
+                "action='" + action + '\'' +
                 ", expected='" + expected + '\'' +
-                ", actual='" + result + '\'' +
-//                ", tsMuster=" + tsMuster +
-//                ", defects=" + defects +
-//                ", tCInstance=" + tCInstance +
+                ", result='" + result + '\'' +
+                ", status=" + status +
                 '}';
     }
 }
