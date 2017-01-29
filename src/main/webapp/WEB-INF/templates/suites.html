@@ -11,9 +11,6 @@
     <!--importované přes fragment-->
     <div th:replace="/fragment/thymeFragment :: headImports"/>
     <!--importované přes fragment - konec-->
-    <!--<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.css"/>-->
-
-    <!--<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>-->
 </head>
 
 <body>
@@ -34,6 +31,7 @@
                 <li><a href="index">Home</a>
                 </li>
                 <li class="active">Suity</li>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right">Zpět</a>
             </ol>
         </div>
     </div>

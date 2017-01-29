@@ -40,6 +40,8 @@ public interface ProjectService {
 
     List<ProjectStatsDTO> getMyProjectsWithStatistics(Person loggedPerson);
 
+    ProjectStatsDTO getProjectWithStatistics(Long projectId);
+
     int getNumberOfTCsInProject(long id);
 
     int getNumberOfTCsInProject(Project project);

@@ -30,13 +30,15 @@
     <div class="row">
         <div class="col-sm-12">
             <h1 class="page-header">
-                <small>WEB-INF/templates/projects.html</small>
+                <small>WEB-INF/templates/project.html</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="index">Home</a>
                 </li>
                 <li class="active">Projekty</li>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right">Zpět</a>
             </ol>
+
         </div>
     </div>
     <!-- /.row -->
@@ -47,51 +49,127 @@
             <div class="jumbotron">
                 <h1 class="error-404">Detail projektu <span style="font-style: italic"
                                                             th:text="${projectDTO.name}">přihlášeného uživatele</span>
+                    <br/>
+                    <small>Id <span th:text="${projectDTO.id}"></span></small>
+                    <br/>
+                    <small>
+                        Vlastník - <span th:text="${projectDTO.projectOwner_id}"></span>
+                    </small>
                 </h1>
             </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-3">
 
-            <div sec:authorize="hasRole('ROLE_ADMIN')">
-                This content is only shown to administrators.
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4><i class="fa fa-fw fa-gift"></i>Členové</h4>
+                </div>
+                <div class="panel-body">
+                    <h3>Analytici</h3>
+                    <ul th:each="member : ${membersAnalytics}">
+                        <li th:text="${member.name}"></li>
+                    </ul>
+                    <h3>Testeři</h3>
+                    <ul th:each="member : ${membersTesters}">
+                        <li th:text="${member.name}"></li>
+                    </ul>
+                    <h3>Všichni</h3>
+                    <ul th:each="member : ${membersAll}">
+                        <li th:text="${member.name}"></li>
+                    </ul>
+                </div>
             </div>
+        </div>
 
+        <div class="col-sm-9">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4><i class="fa fa-fw fa-gift"></i>Statistika</h4>
+                </div>
+                <div class="panel-body">
 
-            <h1>Project detail</h1>
-
-            <div class="well"><h3>členové projektu</h3>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Název</th>
+                            <th>Passed</th>
+                            <th>Failed</th>
+                            <th>Počet TC</th>
+                            <th>TC</th>
+                        </tr>
+                        </thead>
+                        <tbody th:remove="all-but-first">
+                        <tr>
+                            <td th:text="${projectsStat.name}">Název</td>
+                            <td th:text="${projectsStat.numberOfPassedTCs}">passed</td>
+                            <td th:text="${projectsStat.numberOfFailedTCs}">failed</td>
+                            <td th:text="${projectsStat.numberOfTCs}">passed</td>
+                            <td>
+                                <a href="#" th:href="@{/tc/tcs/(filter=${projectsStat.project_id})}">detail projektu</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <h3>analytici</h3>
-            <ul th:each="member : ${membersAnalytics}">
-                <li th:text="${member.name}"></li>
-            </ul>
-            <h3>testeři</h3>
-            <ul th:each="member : ${membersTesters}">
-                <li th:text="${member.name}"></li>
-            </ul>
-            <h3>všichni</h3>
-            <ul th:each="member : ${membersAll}">
-                <li th:text="${member.name}"></li>
-            </ul>
+        </div>
+
+
+        <div class="col-sm-9">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4><i class="fa fa-fw fa-gift"></i>Seznam Test Suitů</h4>
+                </div>
+                <div class="panel-body">
+
+                    <table class="table table-striped datatable">
+                        <thead>
+                        <tr>
+                            <th>Suite ID</th>
+                            <th sec:authorize="hasAuthority('TESTER')">Stav</th>
+                            <th>Název</th>
+                            <th>Detail</th>
+                            <th sec:authorize="hasAuthority('ANALYTIC')">Vytvořeno</th>
+                            <th>Test Cases</th>
+                            <th sec:authorize="hasAuthority('ANALYTIC')">Editace</th>
+                            <th>Více</th>
+                            <th>Projekt ID</th>
+                        </tr>
+                        </thead>
+                        <tbody th:remove="all-but-first">
+                        <tr th:each="suite : ${listSuitesDTO}">
+                            <td th:text="${suite.id}">00</td>
+                            <td sec:authorize="hasAuthority('TESTER')">Výsledek Suitu</td>
+                            <td th:text="${suite.name}">Projekt</td>
+                            <td><a href="#" class="opener"
+                                   th:attr="data-name=${suite.name}" data-id="#detailDialog">Detail</a>
+                            </td>
+                            <td th:text="${suite.createdDateTime}" sec:authorize="hasAuthority('ANALYTIC')">Projekt</td>
+                            <td><a th:href="@{'/tc/tc-by-suite/'+${suite.id}}">Test Cases</a></td>
+                            <td sec:authorize="hasAuthority('ANALYTIC')"><a
+                                    th:href="@{'/suite/edit/'+${suite.id}}">editace</a></td>
+                            <td><a href="#" class="opener" data-id="#moreDialog"
+                                   th:attr="data-objectid=${suite.id},data-updated=${suite.updateDateTime}"
+                            >Více</a>
+                            </td>
+                            <td th:text="${suite.project_id}">00</td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 
-
-    <!--<div class="row" sec:authorize="hasAuthority('ANALYTIC')">-->
-    <!--<div class="col-sm-4">-->
-    <!--<a href="/suite/create" class="btn btn-default">Založit Test Suite</a>-->
-    <!--</div>-->
-    <!--<div class="col-sm-8"></div>-->
-    <!--</div>-->
     <br/>
-    <div class="row" sec:authorize="hasAuthority('ADMIN')">
-        <div class="col-sm-4">
-            <a href="/project/create" class="btn btn-default">Založit Projekt</a>
+    <div class="row">
+        <div class="col-sm-12">
+            <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default">Zpět</a>
         </div>
-        <div class="col-sm-8"></div>
     </div>
 
     <!--dialogová okna-->

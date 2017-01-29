@@ -144,6 +144,15 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public ProjectStatsDTO getProjectWithStatistics(Long projectId) {
+        Project project = projectRepository.findById(projectId);
+        ProjectStatsDTO projectStatsDTO;
+        projectStatsDTO = mapper.map(project, ProjectStatsDTO.class);
+        l.warn("projectStatsDTO: " + projectStatsDTO);
+        return projectStatsDTO;
+    }
+
+    @Override
     public int getNumberOfTCsInProject(long id) {
         Project project = findTestProjectById(id);
         return project.getTcMusters().size();

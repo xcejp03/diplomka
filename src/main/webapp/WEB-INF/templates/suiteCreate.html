@@ -118,7 +118,7 @@
             </div>
 
             <div class="col-sm-4">
-                <p><a th:href="@{'/suite/suites-by-project/'+ ${suiteDTO.project_id}}" class="btn btn-primary">Zpět</a>
+                <p>  <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-primary">Zpět</a>
                 </p>
             </div>
 

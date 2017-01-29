@@ -61,7 +61,7 @@ public class ProjectController {
     }
 
     @RequestMapping("/edit/{id}")
-    public String editProject(@PathVariable("id") int id, Model model) {
+    public String editProject(@PathVariable("id") long id, Model model) {
         l.info("/edit/{id}" + id);
         model.addAttribute("projectDTO", projectService.findTestProjectDTOById(id));
         model.addAttribute("listPersons", personService.findAllPersons());
@@ -72,19 +72,21 @@ public class ProjectController {
     }
 
     @RequestMapping("/remove/{id}")
-    public String removePerson(@PathVariable("id") int id) {
+    public String removePerson(@PathVariable("id") long id) {
         projectService.deleteTestProjectById(id);
         return "redirect:/project/create";
     }
 
     @RequestMapping("{id}")
-    public String projects(@PathVariable("id") int id, Model model) {
+    public String projects(@PathVariable("id") long id, Model model) {
         l.info("project/{id}" + id);
         ProjectDTO projectDTO = projectService.findTestProjectDTOById(id);
         model.addAttribute("projectDTO", projectDTO);
+        model.addAttribute("projectsStat", projectService.getProjectWithStatistics(id));
         model.addAttribute("membersAll", personService.getProjectMembers(id));
         model.addAttribute("membersTesters", personService.getProjectMembers(id, RoleEnum.TESTER));
         model.addAttribute("membersAnalytics", personService.getProjectMembers(id, RoleEnum.ANALYTIC));
+        model.addAttribute("listSuitesDTO", suiteService.findAllTestSuitesDTOByProjectId(id));
         return "project";
     }
 
