@@ -7,6 +7,7 @@ import cz.vse.repository.TCInstanceRepository;
 import cz.vse.repository.TCMusterRepository;
 import cz.vse.service.TCInstanceService;
 import cz.vse.service.TCMusterService;
+import cz.vse.service.WorkTCService;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,8 @@ public class TCInstanceServiceImpl implements TCInstanceService {
 
     @Autowired
     private MapperFacade mapper;
+    @Autowired
+    private WorkTCService workTCService;
 
     public void createTestCaseInstance(TCInstance tcInstance) {
         l.debug("creating TCInstance - service");
@@ -91,6 +94,17 @@ public class TCInstanceServiceImpl implements TCInstanceService {
 
         TCMuster tcMuster = tcMusterService.findTestCaseMusterById(id);
         tcInstanceList = tcInstanceRepository.findByTCMusterOrderById(tcMuster);
+        tcInstanceDTOList = mapper.mapAsList(tcInstanceList, TCInstanceDTO.class);
+        return tcInstanceDTOList;
+    }
+
+    @Override
+    public List<TCInstanceDTO> findTCInstancesDTOByWorkTCId(long id) {
+        List<TCInstance> tcInstanceList;
+        List<TCInstanceDTO> tcInstanceDTOList;
+
+        WorkTC workTC = workTCService.findWorkTCById(id);
+        tcInstanceList = tcInstanceRepository.findByWorkTCOrderById(workTC);
         tcInstanceDTOList = mapper.mapAsList(tcInstanceList, TCInstanceDTO.class);
         return tcInstanceDTOList;
     }

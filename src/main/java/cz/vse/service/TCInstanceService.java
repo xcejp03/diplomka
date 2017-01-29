@@ -27,6 +27,8 @@ public interface TCInstanceService {
 
     List<TCInstanceDTO> findAllTCInstancesDTOByTCMusterId(long id);
 
+    List<TCInstanceDTO> findTCInstancesDTOByWorkTCId(long id);
+
     TCInstanceRunDTO findTCInstanceRunDTOById(long id);
 
     TCInstance findLastTCInstanceByTCMuster(TCMuster tcMuster);

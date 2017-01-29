@@ -37,6 +37,7 @@
                 <li><a href="/index">Home</a>
                 </li>
                 <li class="active">WorkList create</li>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right">Zpět</a>
             </ol>
         </div>
     </div>
@@ -116,12 +117,12 @@
                         <table class="table table-striped datatable">
                             <thead>
                             <tr>
-                                <!--sec:authorize="hasAuthority('ANALYTIC')"-->
                                 <th>ID</th>
                                 <th>Název</th>
                                 <th>Priority</th>
                                 <th>Assignee</th>
                                 <th>Updated</th>
+                                <th>Historie</th>
                                 <th sec:authorize="hasAuthority('TESTER')">Run</th>
                             </tr>
                             </thead>
@@ -140,7 +141,6 @@
                                         </option>
                                     </select>
                                 </td>
-                                <!--<label for="assignee_id">Assignee</label>:-->
                                 <td>
                                     <select class="form-control" th:name="|workTCList[${stat.index}].assignee_id|">
                                         <option th:each="person : ${listPerson}"
@@ -151,6 +151,8 @@
                                     </select>
                                 </td>
                                 <td th:text="${tc.updatedDateTime}">změna</td>
+                                <!--<td><a th:href="@{'/worklist/worktc/history/'+${tc.tcMuster_id}+'?worktc='+${tc.id}}">Historie</a></td>-->
+                                <td><a th:href="@{'/worklist/history/'+${tc.id}}">Historie</a></td>
                                 <td sec:authorize="hasAuthority('TESTER')"><a th:href="@{'/tc/run/'+${tc.tcMuster_id}+'?worktc='+${tc.id}}">run</a></td>
                             </tr>
                             </tbody>

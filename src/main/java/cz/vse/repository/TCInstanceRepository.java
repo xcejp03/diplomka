@@ -12,6 +12,7 @@ import java.util.List;
  */
 public interface TCInstanceRepository extends BaseRepository<TCInstance> {
     List<TCInstance> findByTCMusterOrderById(TCMuster tcMuster);
+    List<TCInstance> findByWorkTCOrderById(WorkTC workTC);
 
     TCInstance findTop1ByTCMusterOrderByCreatedDateTimeDesc(TCMuster tcMuster);
 
@@ -25,4 +26,6 @@ public interface TCInstanceRepository extends BaseRepository<TCInstance> {
     @Query("select count(tci.id) from TCInstance tci WHERE tci.id in (select max(tci.id) from TCInstance tci join tci.tCMuster tcm WHERE tcm.project ='20'" +
             "GROUP BY tci.tCMuster) and tci.status = '1'")
     int getNumberOfTCsInProjectByStatus();
+
+
 }

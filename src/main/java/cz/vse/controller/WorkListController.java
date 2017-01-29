@@ -1,5 +1,6 @@
 package cz.vse.controller;
 
+import cz.vse.dto.TCInstanceDTO;
 import cz.vse.dto.TCInstanceRunDTO;
 import cz.vse.dto.WorkListDTO;
 import cz.vse.entity.*;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by pcejka on 09.10.2016.
@@ -137,11 +139,11 @@ public class WorkListController {
         l.info("request mapping /worktc");
         Long personId = securityUtils.getLoggedPersonId();
         model.addAttribute("workListDTO", workListService.findWorkListDTOById(id));
-//        model.addAttribute("listWorkTC", workTCService.findWorkTCDTOByWorkListId(id));
         model.addAttribute("listTCByProject", tcMusterService.findAllTestCaseMusters());
         model.addAttribute("listUsersProjectsDTO", projectService.findAllTestProjectNameDTOByUserId(personId));
         model.addAttribute("listPerson", personService.findAllPersons());
         model.addAttribute("listPriority", PriorityTCEnum.values());
+
         return "workTCCreate";
     }
 
@@ -150,7 +152,6 @@ public class WorkListController {
         l.info("request mapping /worklist/show/");
         Long personId = securityUtils.getLoggedPersonId();
         model.addAttribute("workListDTO", workListService.findWorkListDTOById(id));
-//        model.addAttribute("listTCByProject", tcMusterService.findAllTestCaseMusters());
         model.addAttribute("listUsersProjectsDTO", projectService.findAllTestProjectNameDTOByUserId(personId));
         return "workTCShow";
     }
@@ -183,6 +184,16 @@ public class WorkListController {
         return "redirect:/tc/history/" + tcInstanceMusterId;
     }
 
+    @RequestMapping("/history/{id}")
+    public String showWorkTCHistory(@PathVariable("id") long id, Model model) {
+        l.info("/history/{id}" + id);
+        List<TCInstanceDTO> workTCInstances =  tcInstanceService.findTCInstancesDTOByWorkTCId(id);
+        model.addAttribute("workListId", workTCService.findWorkTCById(id).getWorkList().getId());
+        model.addAttribute("workTCInstances", workTCInstances);
+        return "workTCHistory";
+    }
+
+
     @RequestMapping("/run/{id}")
     public String runTCMuster(Model model, @PathVariable("id") long id) {
         TCInstanceRunDTO tcInstanceRunDTO;
@@ -205,15 +216,6 @@ public class WorkListController {
                 findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
 
         return "tcRun";
-    }
-
-    @RequestMapping("/history/{id}")
-    public String showTCHistory(@PathVariable("id") long id, Model model) {
-        l.info("/history/{id}" + id);
-        model.addAttribute("tc", tcMusterService.findTestCaseMusterDTOById(id));
-//        model.addAttribute("listTCInstances", tcInstanceService.findAllTCInstancesByTCMusterId(id));
-        model.addAttribute("listTCInstances", tcInstanceService.findAllTCInstancesDTOByTCMusterId(id));
-        return "tcHistory";
     }
 
     @RequestMapping(value = "/tc-by-suite/{id}", method = RequestMethod.GET)

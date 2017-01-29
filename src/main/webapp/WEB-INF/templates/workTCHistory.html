@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Create WorkList</title>
+
+    <!--importované přes fragment-->
+    <div th:replace="/fragment/thymeFragment :: headImports"/>
+    <!--importované přes fragment - konec-->
+
+    <!--duallistbox3-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="/src/jquery.bootstrap-duallistbox.js"></script>
+</head>
+
+<body>
+<!-- Navigation -->
+<div th:replace="/fragment/thymeFragment :: menu"></div>
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="page-header">
+                <small>WEB-INF/templates/workTCHistory.html</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="/index">Home</a>
+                </li>
+                <li class="active">WorkList create</li>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right">Zpět</a>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9">
+                <h1> Test Cases list</h1>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>TC ID</th>
+                        <th>Status</th>
+                        <th>Název</th>
+                        <th>TC spuštěno</th>
+                        <th>Delete</th>
+                        <th>Spuštění</th>
+                    </tr>
+                    </thead>
+                    <tbody th:remove="all-but-first">
+                    <tr th:each="tc : ${workTCInstances}">
+                        <td th:text="${tc.id}">00</td>
+                        <td><span th:text="${tc.status}"
+                                  th:class="${tc.status}">Status</span></td>
+                        <td th:text="${tc.name}">Projekt</td>
+                        <td th:text="${tc.createdDateTime}">datum a čas vytvoření</td>
+                        <td><a th:href="@{'/tc/instance/remove/' +${tc.id}}">delete</a></td>
+                        <td><a th:href="@{'/tc/show/'+${tc.id}}">Ukaž</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="col-sm-3">
+                <a th:href="@{'/worklist/worktc/'+${workListId}}" class="btn btn-default">Zpět na WorkTC <span th:text="${workListId}"></span> </a>
+            </div>
+        </div>
+
+        <!--Page Content - End-->
+
+        <!-- Footer -->
+        <div th:replace="/fragment/thymeFragment :: footer"></div>
+
+    </div>
+</div>
+<!-- /.container -->
+
+<div th:replace="/fragment/thymeFragment :: script"></div>
+</body>
+
+</html>

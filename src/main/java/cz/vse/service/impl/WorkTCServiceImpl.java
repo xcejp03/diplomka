@@ -190,4 +190,5 @@ public class WorkTCServiceImpl implements WorkTCService {
         Person person = personService.findPersonById(personId);
         return workTCRepository.getMyOpenWorkTCCount(person);
     }
+
 }

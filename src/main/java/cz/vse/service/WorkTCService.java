@@ -50,4 +50,5 @@ public interface WorkTCService {
     int getMyOpenWorkTCCount(Person person);
 
     int getMyOpenWorkTCCount(long personId);
+
 }
