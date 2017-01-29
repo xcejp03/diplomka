@@ -36,7 +36,7 @@
                         <a href="/project/projects">My Proj.</a>
                     </li>
                     <!--<li>-->
-                        <!--<a href="/suite/suites">Suity</a>-->
+                    <!--<a href="/suite/suites">Suity</a>-->
                     <!--</li>-->
                     <li sec:authorize="!hasAuthority('ROLE_ANALYTIC')">
                         <a href="/tc/tcs">Test Casy</a>
@@ -178,10 +178,6 @@
 </div>
 
 <div th:fragment="headImports" th:remove="tag">
-    <!--Data table-->
-    <link rel="stylesheet" type="text/css" href="/datatable/css/jquery.dataTables.css"/>
-    <script type="text/javascript" charset="utf8" src="/datatable/js/jquery.dataTables.js"></script>
-
     <!--Bootstrap Core CSS-->
     <link href="/css/bootstrap2.min.css" rel="stylesheet"/>
 
@@ -198,21 +194,27 @@
     <script src="/js/bootstrap.min.js"></script>
 
 
+    <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>-->
+    <link rel="stylesheet" href="/jquery/jquery-ui.css"/>
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
 
     <link href="/sweetalert/dist/sweetalert.css" rel="stylesheet"/>
     <script src="/sweetalert/dist/sweetalert.min.js"></script>
 
 
     <!--Moje jQuery-->
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/jquery/jquery-3.1.1.js"></script>
+    <script src="/jquery/jquery-ui.js"></script>
 
 
     <!--Můj java script-->
     <script type='text/javascript' src='/script.js'></script>
     <link rel="stylesheet" type="text/css" href="/style.css"/>
+
+
+    <!--Data table-->
+    <link rel="stylesheet" type="text/css" href="/datatable/css/jquery.dataTables.css"/>
+    <script type="text/javascript" charset="utf8" src="/datatable/js/jquery.dataTables.js"></script>
 
 
 </div>
