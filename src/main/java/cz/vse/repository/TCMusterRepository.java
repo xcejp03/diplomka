@@ -15,6 +15,7 @@ import java.util.List;
 public interface TCMusterRepository extends BaseRepository<TCMuster> {
     List<TCMuster> findAllTCMustersDTOByTestSuitesOrderById(TestSuite testSuite);
     List<TCMuster> findAllTCByProjectIn(List<Project> projectList);
+    
 
     @Query("select count(tc.id) from TCMuster tc where tc.Author = :loggedPerson and tc.project = :project")
     int getNumberOfMyTCsInProject(@Param("loggedPerson") Person loggedPerson, @Param("project") Project project);

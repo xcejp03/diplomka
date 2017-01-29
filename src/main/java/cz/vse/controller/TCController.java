@@ -1,9 +1,8 @@
 package cz.vse.controller;
 
-import cz.vse.dto.ProjectsNamesDTO;
-import cz.vse.dto.TCInstanceRunDTO;
-import cz.vse.dto.TCMusterDTO;
+import cz.vse.dto.*;
 import cz.vse.entity.*;
+import cz.vse.logic.TCMusterLogic;
 import cz.vse.service.*;
 import cz.vse.utils.SecurityUtils;
 import org.apache.log4j.Logger;
@@ -53,6 +52,9 @@ public class TCController {
 
     @Autowired
     WorkTCService workTCService;
+
+    @Autowired
+    TCMusterLogic tcMusterLogic;
 
     @RequestMapping(method = RequestMethod.GET)
     public String tcDefault(Model model) {
@@ -169,24 +171,37 @@ public class TCController {
 
     @RequestMapping(value = "/tcs", method = RequestMethod.GET)
     public String tcsAllShow(Model model, @RequestParam(required = false, defaultValue = "all", value = "filter") String filter) {
-        l.info("/tc/tcs?filter="+filter);
+        l.info("/tc/tcs?filter=" + filter);
         Long loggedUserId = securityUtils.getLoggedPersonId();
         List<Project> projects = projectService.findAllTestProjectByUserId(loggedUserId);
         List<TCMusterDTO> tcMusters = new ArrayList<>();
-        if (filter.equals("all")){
-            l.warn("filtr je all - "+filter);
+        if (filter.equals("all")) {
+            l.warn("filtr je all - " + filter);
             tcMusters = tcMusterService.findTCMustersDTOByProject(projects);
         } else {
-            l.warn("filtr není all, je to: "+filter);
+            l.warn("filtr není all, je to: " + filter);
             tcMusters = tcMusterService.findTCMustersDTOByProject(projectService.findTestProjectById(Long.parseLong(filter)));
         }
+        List<Long> longs = new ArrayList<>();
+        List<String> stringy = new ArrayList<>();
+        String haha = "hoho";
 
-//        List<TCMusterDTO> tcMusters = filter == "all" ? tcMusterService.findTCMustersDTOByProject(projects) :
-//                tcMusterService.findTCMustersDTOByProject(projectService.findTestProjectById(Long.parseLong(filter)));
         model.addAttribute("tcMusters", tcMusters);
+        model.addAttribute("tcMustersCopyDTO", new TCMusterCopyDTO());
         model.addAttribute("usersProjects", projectService.findAllTestProjectNameDTOByUserId(loggedUserId));
         model.addAttribute("statusenum", Arrays.asList(StatusEnum.values()));
         return "tcsAll";
+    }
+
+    @RequestMapping(value = "/copy")
+    public String manualTest(@ModelAttribute("project") TCMusterCopyDTO tcMusterCopyDTO, Model model, HttpServletRequest request) {
+        l.warn("manualTest: " + model);
+        l.warn("manualTest2: " + tcMusterCopyDTO);
+
+        tcMusterLogic.copyTCMuster(tcMusterCopyDTO);
+        l.warn("kopírování hotovo");
+        String referer = request.getHeader("Referer");
+        return "redirect:" + referer;
     }
 
 }

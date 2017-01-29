@@ -1,5 +1,8 @@
 package cz.vse.controller;
 
+import cz.vse.dto.ProjectDTO;
+import cz.vse.dto.TCMusterCopyDTO;
+import cz.vse.dto.TCMusterDTO;
 import cz.vse.entity.*;
 import cz.vse.repository.*;
 import cz.vse.service.*;
@@ -12,8 +15,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -24,7 +29,6 @@ import java.util.List;
  * Created by pcejka on 09.10.2016.
  */
 @Controller
-//@RequestMapping("/")
 public class RootController {
     private final Logger l = Logger.getLogger(this.getClass());
     @Autowired
@@ -89,6 +93,14 @@ public class RootController {
 
         // return a view which will be resolved by an excel view resolver
         return new ModelAndView(new ExcelBuilderDefects(), "defects", defects);
+    }
+
+    @RequestMapping(value = "/manualTest")
+    public String manualTest(@ModelAttribute("project") TCMusterCopyDTO tcMusterCopyDTO, Model model) {
+        l.warn("manualTest: " + model);
+        l.warn("manualTest2: " + tcMusterCopyDTO);
+
+        return "redirect:/tc/tcs?filter=25";
     }
 
 

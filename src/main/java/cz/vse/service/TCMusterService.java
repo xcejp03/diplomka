@@ -16,6 +16,8 @@ public interface TCMusterService {
 
     void createTestCaseMuster(TCMuster tcMuster);
 
+    void createTestCaseMuster(List<TCMuster> tcMusters);
+
     void createTestCaseMuster(TCMusterDTO tcMusterDTO);
 
     void updateTestCaseMuster(TCMuster tcMuster);

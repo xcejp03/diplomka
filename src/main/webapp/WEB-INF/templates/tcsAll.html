@@ -18,7 +18,6 @@
 
     <!--<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>-->
 
-
 </head>
 
 <body>
@@ -33,7 +32,7 @@
     <div class="row">
         <div class="col-sm-12">
             <h1 class="page-header">
-                <small>WEB-INF/templates/tcs.html</small>
+                <small>WEB-INF/templates/tcsAll.html</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="index">Home</a>
@@ -61,7 +60,6 @@
                     <h4><i class="fa fa-fw fa-gift"></i>Filtr Test Casů</h4>
                 </div>
 
-
                 <div class="panel-body">
                     <p><a th:text="Všechny" th:href="@{tcs(filter='all')}" class="btn btn-mg btn-block btn-default"
                           th:classappend="(${param.filter} == null or ${param.filter[0]} == 'all') ? btn-primary : btn-default"></a>
@@ -78,59 +76,68 @@
             </div>
         </div>
         <div class="col-sm-9">
+
+            <form action="#" th:action="@{/tc/copy}" th:object="${tcMustersCopyDTO}" method="post">
+                <table class="table table-striped datatable">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>TC ID</th>
+                        <th>Priorita</th>
+                        <th>Název</th>
+                        <th>Detail</th>
+                        <th>Vytvořeno</th>
+                        <th>Test Stepy</th>
+                        <th>Více</th>
+                    </tr>
+                    </thead>
+                    <tbody th:remove="all-but-first">
+                    <tr th:each="tc : ${tcMusters}">
+                        <td><input type="checkbox" th:field="*{tcMusters_id}" th:value="${tc.id}"/></td>
+                        <td th:text="${tc.id}">00</td>
+                        <td><span th:class="${tc.priority}" th:text="${tc.priority}">Priorita</span></td>
+                        <td sec:authorize="hasAuthority('TESTER')"><span th:text="${tc.status}"
+                                                                         th:class="${tc.status}">Stav TC</span></td>
+                        <td th:text="${tc.name}">Název</td>
+                        <td><a href="#" class="opener"
+                               th:attr="data-name=${tc.name},
+                    data-prerequisite=${tc.prerequisite},
+                    data-note=${tc.note}"
+                               data-id="#detailDialog">Detail</a>
+                        </td>
+                        <td th:text="${tc.createdDateTime}" sec:authorize="hasAuthority('ANALYTIC')">datum a čas vytvoření</td>
+                        <td sec:authorize="hasAuthority('ANALYTIC')"><a th:href="@{'/ts/ts-by-tcmuster/'+${tc.id}}">Test
+                            Stepy</a>
+                        </td>
+                        <td><a href="#" class="opener"
+                               th:attr="data-sourceid=${tc.id}, data-objectid=${tc.id}" data-id="#moreDialog">Více</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <label for="project_id">Projekt</label>:
+                    <select class="form-control" id="project_id" name="project_id">
+                        <option th:each="project : ${usersProjects}"
+                                th:value="${project.id}"
+                                th:text="${project.name}">jméno projektu
+                        </option>
+                    </select>
+                    <input type="hidden"  value="trrd" th:value="dasdas"/>
+
+                </table>
+                <p><input type="submit" class="btn" value="Zkopíruj"/> <input type="reset" class="btn" value="Reset"/></p>
+            </form>
+
+
         </div>
     </div>
 
-    <h1> Test Cases list</h1>
-    <table class="table table-striped datatable">
-        <thead>
-        <tr>
-            <th>TC ID</th>
-            <th>Priorita</th>
-            <th sec:authorize="hasAuthority('TESTER')">Stav</th>
-            <th>Název</th>
-            <th>Detail</th>
-            <th sec:authorize="hasAuthority('ANALYTIC')">Vytvořeno</th>
-            <th sec:authorize="hasAuthority('ANALYTIC')">Editace</th>
-            <th sec:authorize="hasAuthority('TESTER')">Historie</th>
-            <th sec:authorize="hasAuthority('TESTER')">Spustit</th>
-            <th sec:authorize="hasAuthority('ANALYTIC')">Test Stepy</th>
-            <th>Více</th>
-        </tr>
-        </thead>
-        <tbody th:remove="all-but-first">
-        <tr th:each="tc : ${tcMusters}">
-            <td th:text="${tc.id}">00</td>
-            <td><span th:class="${tc.priority}" th:text="${tc.priority}">Priorita</span></td>
-            <td sec:authorize="hasAuthority('TESTER')"><span th:text="${tc.status}"
-                                                             th:class="${tc.status}">Stav TC</span></td>
-            <td th:text="${tc.name}">Název</td>
-            <td><a href="#" class="opener"
-                   th:attr="data-name=${tc.name},
-                    data-prerequisite=${tc.prerequisite},
-                    data-note=${tc.note}"
-                   data-id="#detailDialog">Detail</a>
-            </td>
-            <td th:text="${tc.createdDateTime}" sec:authorize="hasAuthority('ANALYTIC')">datum a čas vytvoření</td>
-            <td sec:authorize="hasAuthority('ANALYTIC')"><a th:href="@{'/tc/edit/'+${tc.id}(project=${project_id},suite=${suite} != null ? ${suite.id} : null )}">editace</a></td>
-            <td sec:authorize="hasAuthority('TESTER')"><a th:href="@{'/tc/history/'+${tc.id}}">historie</a></td>
-            <td sec:authorize="hasAuthority('TESTER')"><a th:href="@{'/tc/run/'+${tc.id}}">run</a></td>
-            <td sec:authorize="hasAuthority('ANALYTIC')"><a th:href="@{'/ts/ts-by-tcmuster/'+${tc.id}}">Test Stepy</a>
-            </td>
-            <td><a href="#" class="opener"
-                   th:attr="data-sourceid=${tc.id}, data-objectid=${tc.id}" data-id="#moreDialog">Více</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+
 
     <div th:if="${suite != null}" th:remove="tag">
         <a th:href="@{'/tc/create/'(project=${suite.project.id},suite=${suite.id})}" class="btn btn-default">Založit
             Test
             Case</a>
     </div>
-
-    <!--<p><a href="/tc/create" class="btn btn-default" sec:authorize="hasAuthority('ANALYTIC')">Založit Test Case</a></p>-->
 
     <!--dialogová okna-->
     <div id="moreDialog" title="Více">

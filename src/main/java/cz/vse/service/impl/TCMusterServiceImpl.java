@@ -41,9 +41,20 @@ public class TCMusterServiceImpl implements TCMusterService {
 
     public void createTestCaseMuster(TCMuster tcMuster) {
         l.debug("creating TCMuster - service");
+        tcMuster.setCreatedDateTime(LocalDateTime.now());
         tcMusterRepository.save(tcMuster);
         l.info("created TCMuster - service: " + tcMuster);
     }
+
+    public void createTestCaseMuster(List<TCMuster> tcMusters) {
+        l.debug("creating TCMuster - service");
+        for (TCMuster tcMuster: tcMusters) {
+            tcMuster.setCreatedDateTime(LocalDateTime.now());
+        }
+        tcMusterRepository.save(tcMusters);
+        l.info("created TCMuster - service: " + tcMusters);
+    }
+
 
     public void createTestCaseMuster(TCMusterDTO tcMusterDTO) {
         l.debug("creating TCMuster - service");

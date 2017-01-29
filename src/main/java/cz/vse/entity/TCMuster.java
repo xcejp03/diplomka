@@ -43,6 +43,19 @@ public class TCMuster extends BaseEntity {
     @OneToMany(mappedBy = "tCMuster", fetch = FetchType.EAGER)
     private List<TSMuster> tsMusters;
 
+//    public TCMuster() {
+//    }
+//
+//    public TCMuster(final TCMuster tcMuster) {
+//
+//    }
+//
+//    public class C {
+//        public C(final C c) {
+//            // initialize this with c
+//        }
+//    }
+
 
     public String getName() {
         return name;
@@ -138,34 +151,5 @@ public class TCMuster extends BaseEntity {
         this.tcInstances = tcInstances;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof TCMuster)) return false;
 
-        TCMuster tcMuster = (TCMuster) o;
-
-        if (getName() != null ? !getName().equals(tcMuster.getName()) : tcMuster.getName() != null) return false;
-        if (getCreatedDateTime() != null ? !getCreatedDateTime().equals(tcMuster.getCreatedDateTime()) : tcMuster.getCreatedDateTime() != null)
-            return false;
-        if (getUpdatedDateTime() != null ? !getUpdatedDateTime().equals(tcMuster.getUpdatedDateTime()) : tcMuster.getUpdatedDateTime() != null)
-            return false;
-        if (getProject() != null ? !getProject().equals(tcMuster.getProject()) : tcMuster.getProject() != null)
-            return false;
-        if (getTestSuites() != null ? !getTestSuites().equals(tcMuster.getTestSuites()) : tcMuster.getTestSuites() != null)
-            return false;
-        return getTsMusters() != null ? getTsMusters().equals(tcMuster.getTsMusters()) : tcMuster.getTsMusters() == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getName() != null ? getName().hashCode() : 0;
-        result = 31 * result + (getCreatedDateTime() != null ? getCreatedDateTime().hashCode() : 0);
-        result = 31 * result + (getUpdatedDateTime() != null ? getUpdatedDateTime().hashCode() : 0);
-        result = 31 * result + (getProject() != null ? getProject().hashCode() : 0);
-        result = 31 * result + (getTestSuites() != null ? getTestSuites().hashCode() : 0);
-        result = 31 * result + (getTsMusters() != null ? getTsMusters().hashCode() : 0);
-        return result;
-    }
 }
