@@ -42,6 +42,9 @@ public class TCMusterLogic {
 //            TCMuster tcMuster = tcMusterService.findTestCaseMusterById(tcMusterId);
             TCMusterDTO tcMusterDTO = tcMusterService.findTestCaseMusterDTOById(tcMusterId);
             tcMusterDTO.setId(null);
+            tcMusterDTO.setTcInstances_id(null);
+            tcMusterDTO.setTestSuite_id(null);
+            tcMusterDTO.setTsMusters_id(null);
 
             TCMuster tcMuster = mapper.map(tcMusterDTO, TCMuster.class);
 
