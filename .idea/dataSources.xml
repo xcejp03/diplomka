@@ -7,5 +7,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/diplomka</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="diplomka@37.157.192.116" uuid="2f7adf62-755c-40b5-97c6-d833c7364dcf">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://37.157.192.116:5432/diplomka</jdbc-url>
+    </data-source>
   </component>
 </project>
