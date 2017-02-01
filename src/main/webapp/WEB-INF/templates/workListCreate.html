@@ -15,6 +15,12 @@
     <div th:replace="/fragment/thymeFragment :: headImports"/>
     <!--importované přes fragment - konec-->
 
+    <!--lokální importy-->
+    <link rel="stylesheet" type="text/css" href="/src/bootstrap-duallistbox.css"/>
+    <script src="/src/jquery.bootstrap-duallistbox.js"></script>
+    <!--lokální importy - konec-->
+
+
 </head>
 
 <body>
@@ -114,16 +120,17 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="plannedExecution">Datum plánovaného spuštění</label>:
-                                <input type="text" id="plannedExecution" class="datepicker" name="plannedExecution" th:value="${workListDTO.plannedExecution}"
+                                <input type="text" id="plannedExecution" class="datepicker" name="plannedExecution"
+                                       th:value="${workListDTO.plannedExecution}"
                                        size="30"/>
                             </div>
                         </div>
 
                         <!--<div class=" control-group form-group">-->
-                            <!--<div class="controls">-->
-                                <!--<label for="plannedExecution">Datum plánovaného spuštění</label>:-->
-                                <!--<input type="text" id="plannedExecution" class="datepicker" name="plannedExecution" size="30"/>-->
-                            <!--</div>-->
+                        <!--<div class="controls">-->
+                        <!--<label for="plannedExecution">Datum plánovaného spuštění</label>:-->
+                        <!--<input type="text" id="plannedExecution" class="datepicker" name="plannedExecution" size="30"/>-->
+                        <!--</div>-->
                         <!--</div>-->tcMuster_id
 
                         <div class="control-group form-group">
@@ -134,7 +141,7 @@
                                     <option th:each="tc : ${listTCByProject}"
                                             th:selected="${workListDTO.workTCList != null} ? ${#lists.contains(listTCMusterIdByWorklistInWorkTCDTO, tc.id)}"
                                             th:value="${tc.id}"
-                                            th:text="${tc}">tc vzory
+                                            th:text="${tc.name}">tc vzory
                                     </option>
 
 

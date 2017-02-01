@@ -36,6 +36,12 @@ public class AdminController {
     @Autowired
     RoleService roleService;
 
+    @RequestMapping(method = RequestMethod.GET)
+    public String showAdmin(Model model) {
+        l.info("/admin - rozcestník");
+        return "admin";
+    }
+
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String showAllUsers(Model model) {
         l.info("person/role");

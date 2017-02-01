@@ -21,7 +21,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/index">[--]</a>
+                <a class="navbar-brand" href="/admin">[--]</a>
                 <span sec:authorize="!hasAuthority('ROLE_ANONYMOUS')">
                     <a href="/dashboard" sec:authentication="principal.username" class="navbar-brand"></a>
                 </span>
@@ -179,7 +179,7 @@
 
 <div th:fragment="headImports" th:remove="tag">
     <!--Bootstrap Core CSS-->
-    <link href="/css/bootstrap2.min.css" rel="stylesheet"/>
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
 
     <!--Custom CSS-->
     <link href="/css/modern-business.css" rel="stylesheet"/>
@@ -198,8 +198,8 @@
     <link rel="stylesheet" href="/jquery/jquery-ui.css"/>
 
 
-    <link href="/sweetalert/dist/sweetalert.css" rel="stylesheet"/>
-    <script src="/sweetalert/dist/sweetalert.min.js"></script>
+    <link href="/sweetalert/sweetalert.css" rel="stylesheet"/>
+    <script src="/sweetalert/sweetalert.min.js"></script>
 
 
     <!--Moje jQuery-->
@@ -212,9 +212,9 @@
     <link rel="stylesheet" type="text/css" href="/style.css"/>
 
 
-    <!--Data table-->
-    <link rel="stylesheet" type="text/css" href="/datatable/css/jquery.dataTables.css"/>
-    <script type="text/javascript" charset="utf8" src="/datatable/js/jquery.dataTables.js"></script>
+    <!--&lt;!&ndash;Data table&ndash;&gt;-->
+    <!--<link rel="stylesheet" type="text/css" href="/datatable/css/jquery.dataTables.css"/>-->
+    <!--<script type="text/javascript" charset="utf8" src="/datatable/js/jquery.dataTables.js"></script>-->
 
 
 </div>

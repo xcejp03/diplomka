@@ -104,22 +104,11 @@ public class RootController {
     }
 
 
-    @RequestMapping(value = "/thyme", method = RequestMethod.GET)
-    public String thymeInclude(Model model) {
-        l.info("request mapping project/create");
-//        model.addAttribute("project", new ProjectDTO());
-//        model.addAttribute("person", new PersonDTO());
-//        model.addAttribute("listPersons", personService.findAllPersons());
-        model.addAttribute("vlozit");
-
-        return "thyme";
-    }
-
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(Model model) {
         l.info("request mapping root/index");
-        return "index";
+        return "redirect:dashboard";
     }
 
 

@@ -103,6 +103,7 @@
         <div class="col-sm-4">
             <a href="/project/create" class="btn btn-default" sec:authorize="hasAuthority('ADMIN')">Založit Projekt</a>
             <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default">Zpět</a>
+            <button onclick="swal('sdfds')" class="btn btn-default">sweet alert</button>
         </div>
         <div class="col-sm-8">
 
