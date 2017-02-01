@@ -51,7 +51,7 @@
     <div class="container">
         <div th:if="${personDTO != null}" th:remove="tag">
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <div class="well">
                         <form th:action="@{/person/role}" method="post" default-target-url="/index">
                         <span th:if="${personDTO.id != null}" th:remove="tag">

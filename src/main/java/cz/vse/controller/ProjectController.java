@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -50,13 +51,14 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createProject(@ModelAttribute("project") ProjectDTO projectDTO) {
+    public String createProject(@ModelAttribute("project") ProjectDTO projectDTO, HttpServletRequest request) {
         if (projectDTO.getId() == null) {
             projectService.createTestProject(projectDTO);
         } else {
             projectService.updateTestProject(projectDTO);
         }
-        return "redirect:/project/projects";
+        String referer = request.getHeader("Referer");
+        return "redirect:" + referer;
     }
 
     @RequestMapping("/edit/{id}")
