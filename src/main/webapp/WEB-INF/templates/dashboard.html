@@ -170,7 +170,8 @@
 
 
         <!--<span th:if="${myOpenDefects.size}" th:remove="tag">-->
-        <span th:if="${#lists.size(myOpenDefects) > 1}" th:remove="tag">
+        <!--<span th:if="${${myOpenDefects != null} || #lists.size(myOpenDefects) > 1}" th:remove="tag">-->
+			<span th:if="${${myOpenDefects!= null} ? (#lists.size(myOpenDefects) > 1)}" th:remove="tag">
 					<div class="col-sm-6">
                         <div class="well">
 						<h2>Mnou založené</h2>
