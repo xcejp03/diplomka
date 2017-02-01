@@ -56,15 +56,15 @@ public class TCController {
     @Autowired
     TCMusterLogic tcMusterLogic;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String tcDefault(Model model) {
-        l.info("request mapping /tc");
-        model.addAttribute("tc", new TCMusterDTO());
-        model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMustersDTO());
-        model.addAttribute("listTSMusters", tsMusterService.findAllTestStepMustersDTO());
-        model.addAttribute("listProjects", projectService.findAllTestProjects());
-        return "tcDashboard";
-    }
+//    @RequestMapping(method = RequestMethod.GET)
+//    public String tcDefault(Model model) {
+//        l.info("request mapping /tc");
+//        model.addAttribute("tc", new TCMusterDTO());
+//        model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMustersDTO());
+//        model.addAttribute("listTSMusters", tsMusterService.findAllTestStepMustersDTO());
+//        model.addAttribute("listProjects", projectService.findAllTestProjects());
+//        return "tcDashboard";
+//    }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createTC(Model model, @RequestParam(required = false, value = "project") Long projectId) {
@@ -74,9 +74,9 @@ public class TCController {
         tcDTO.setProject_id(projectId);
 
         model.addAttribute("tcDTO", tcDTO);
-        model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMustersDTO());
-        model.addAttribute("listTSMusters", tsMusterService.findAllTestStepMustersDTO());
-        model.addAttribute("listProjects", projectService.findAllTestProjects());
+//        model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMustersDTO());
+//        model.addAttribute("listTSMusters", tsMusterService.findAllTestStepMustersDTO());
+//        model.addAttribute("listProjects", projectService.findAllTestProjects());
         model.addAttribute("listUsersProjectsDTO", projectService.findAllTestProjectNameDTOByUserId(personId));
         return "tcCreate";
     }
@@ -98,8 +98,8 @@ public class TCController {
         l.info("/edit/{id}" + id);
         Long personId = securityUtils.getLoggedPersonId();
         model.addAttribute("tcDTO", tcMusterService.findTestCaseMusterDTOById(id));
-        model.addAttribute("listPersons", personService.findAllPersons());
-        model.addAttribute("listProjects", projectService.findAllTestProjects());
+//        model.addAttribute("listPersons", personService.findAllPersons());
+//        model.addAttribute("listProjects", projectService.findAllTestProjects());
         model.addAttribute("listUsersProjectsDTO", projectService.findAllTestProjectNameDTOByUserId(personId));
         return "tcCreate";
     }
@@ -165,7 +165,7 @@ public class TCController {
 
         model.addAttribute("listTCDTO", tcService.findAllTCMustersDTOBySuiteId(id));
         model.addAttribute("suite", suiteService.findTestSuiteById(id));
-        model.addAttribute("statusenum", Arrays.asList(StatusEnum.values()));
+//        model.addAttribute("statusenum", Arrays.asList(StatusEnum.values()));
         return "tcs";
     }
 
@@ -182,14 +182,10 @@ public class TCController {
             l.warn("filtr není all, je to: " + filter);
             tcMusters = tcMusterService.findTCMustersDTOByProject(projectService.findTestProjectById(Long.parseLong(filter)));
         }
-        List<Long> longs = new ArrayList<>();
-        List<String> stringy = new ArrayList<>();
-        String haha = "hoho";
-
         model.addAttribute("tcMusters", tcMusters);
         model.addAttribute("tcMustersCopyDTO", new TCMusterCopyDTO());
         model.addAttribute("usersProjects", projectService.findAllTestProjectNameDTOByUserId(loggedUserId));
-        model.addAttribute("statusenum", Arrays.asList(StatusEnum.values()));
+//        model.addAttribute("statusenum", Arrays.asList(StatusEnum.values()));
         return "tcsAll";
     }
 

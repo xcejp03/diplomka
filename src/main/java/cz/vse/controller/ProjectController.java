@@ -43,10 +43,9 @@ public class ProjectController {
         l.info("request mapping project/create");
         model.addAttribute("projectDTO", new ProjectDTO());
         model.addAttribute("person", new PersonDTO());
-        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
+//        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
         model.addAttribute("listPersons", personService.findAllPersons());
-        model.addAttribute("listSuites", suiteService.findAllTestSuites());
-
+//        model.addAttribute("listSuites", suiteService.findAllTestSuites());
         return "projectCreate";
     }
 
@@ -65,9 +64,9 @@ public class ProjectController {
         l.info("/edit/{id}" + id);
         model.addAttribute("projectDTO", projectService.findTestProjectDTOById(id));
         model.addAttribute("listPersons", personService.findAllPersons());
-        model.addAttribute("listMembersDTO", personService.findAllPersonDTOByProjectId(id));
+//        model.addAttribute("listMembersDTO", personService.findAllPersonDTOByProjectId(id));
         model.addAttribute("listMembers", personService.findAllPersonByProjectIdOrderById(id));
-        model.addAttribute("listSuites", suiteService.findAllTestSuites());
+//        model.addAttribute("listSuites", suiteService.findAllTestSuites());
         return "projectCreate";
     }
 

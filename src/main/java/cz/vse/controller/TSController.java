@@ -50,7 +50,7 @@ public class TSController {
         tsDTO.setTcMuster_id(tcmusterId);
 
         model.addAttribute("tsDTO", tsDTO);
-        model.addAttribute("listTSMusters", tsMusterService.findAllTestStepMustersDTO());
+//        model.addAttribute("listTSMusters", tsMusterService.findAllTestStepMustersDTO());
         model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("loggedPerson", securityUtils.getLoggedPerson());
         model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMusters());

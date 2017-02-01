@@ -35,8 +35,7 @@ public class PersonController {
     public String createProjectForm(Model model) {
         l.info("request mapping person/create");
         model.addAttribute("personDTO", new PersonDTO());
-        model.addAttribute("listPersons", personService.findAllPersons());
-
+//        model.addAttribute("listPersons", personService.findAllPersons());
         return "registration";
     }
 
@@ -56,9 +55,9 @@ public class PersonController {
         l.info("/edit/" + id);
         model.addAttribute("personDTO", personService.findPersonById(id));
 //        model.addAttribute("personDTOList", personService.findAllPersonsDTO());
-        model.addAttribute("enumRoles", RoleEnum.values());
-        model.addAttribute("userEnumRoleList", roleService.findUsersRoleEnum(id));
-        model.addAttribute("listUserRoles", personService.findPersonById(id).getUserRole());
+//        model.addAttribute("enumRoles", RoleEnum.values());
+//        model.addAttribute("userEnumRoleList", roleService.findUsersRoleEnum(id));
+//        model.addAttribute("listUserRoles", personService.findPersonById(id).getUserRole());
         return "registration";
     }
 
@@ -66,7 +65,7 @@ public class PersonController {
     public String editAllPerson(Model model) {
         model.addAttribute("personDTOList", personService.findAllPersonsDTO());
 //        model.addAttribute("personDTO", new PersonDTO());
-        model.addAttribute("listPersons", personService.findAllPersons());
+//        model.addAttribute("listPersons", personService.findAllPersons());
         return "registration";
     }
 
@@ -99,7 +98,7 @@ public class PersonController {
         l.info("person/role saving");
 //        model.addAttribute("personDTO", new PersonDTO());
 //        model.addAttribute("personDTOList", personService.findAllPersonsDTO());
-        model.addAttribute("enumRoles", RoleEnum.values());
+//        model.addAttribute("enumRoles", RoleEnum.values());
         roleService.updateRoleForUser(personDTO);
         return "redirect:role";
     }

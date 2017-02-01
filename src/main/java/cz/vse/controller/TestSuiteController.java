@@ -48,13 +48,11 @@ public class TestSuiteController {
         }
 
         model.addAttribute("suiteDTO", suiteDTO);
-
-
-        model.addAttribute("listSuites", suiteService.findAllTestSuites());
-        model.addAttribute("listSuitesDTO", suiteService.findAllTestSuitesDTO());
-        model.addAttribute("listProjects", projectService.findAllTestProjects());
-        model.addAttribute("listProjectsDTO", projectService.findAllTestProjectsDTO());
-        model.addAttribute("listPersons", personService.findAllPersons());
+//        model.addAttribute("listSuites", suiteService.findAllTestSuites());
+//        model.addAttribute("listSuitesDTO", suiteService.findAllTestSuitesDTO());
+//        model.addAttribute("listProjects", projectService.findAllTestProjects());
+//        model.addAttribute("listProjectsDTO", projectService.findAllTestProjectsDTO());
+//        model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listTcMusters", tcMusterService.findAllTestCaseMusters());
 
         model.addAttribute("listUsersProjectsDTO", projectService.findAllTestProjectNameDTOByUserId(personId));
@@ -79,9 +77,9 @@ public class TestSuiteController {
         TestSuiteDTO suiteDTO = suiteService.findTestSuiteDTOById(id);
 
         model.addAttribute("suiteDTO", suiteDTO);
-        model.addAttribute("suiteE", suiteService.findTestSuiteById(id));
-        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
-        model.addAttribute("listPersons", personService.findAllPersons());
+//        model.addAttribute("suiteE", suiteService.findTestSuiteById(id));
+//        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
+//        model.addAttribute("listPersons", personService.findAllPersons());
         model.addAttribute("listTcMusters", tcMusterService.findAllTestCaseMusters());
 //        model.addAttribute("listTcMustersDTO", tcMusterService.findAllTestCaseMustersDTO());
         model.addAttribute("listTcMustersDTOByProject", tcMusterService.findTCMustersDTOByProjectId(suiteDTO.getProject_id()));

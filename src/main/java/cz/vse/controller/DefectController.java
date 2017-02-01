@@ -40,24 +40,24 @@ public class DefectController {
     @Autowired
     private DefectCommentService defectCommentService;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String defectDefault(Model model) {
-        l.info("request mapping defect/create");
-        model.addAttribute("defect", new DefectDTO());
-        model.addAttribute("defectList", defectService.findAllDefects());
-        model.addAttribute("listPersons", personService.findAllPersons());
-        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
-
-        return "tabulkaDefaultVypis";
-    }
+//    @RequestMapping(method = RequestMethod.GET)
+//    public String defectDefault(Model model) {
+//        l.info("request mapping defect/create");
+//        model.addAttribute("defect", new DefectDTO());
+//        model.addAttribute("defectList", defectService.findAllDefects());
+//        model.addAttribute("listPersons", personService.findAllPersons());
+//        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
+//
+//        return "tabulkaDefaultVypis";
+//    }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createDefect(Model model) {
         l.info("request mapping defect/create");
         model.addAttribute("defectDTO", new DefectDTO());
-        model.addAttribute("defectList", defectService.findAllDefects());
+//        model.addAttribute("defectList", defectService.findAllDefects());
         model.addAttribute("listPersons", personService.findAllPersons());
-        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
+//        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
 
         return "defectCreate";
     }
@@ -78,7 +78,7 @@ public class DefectController {
     public String editDefect(@PathVariable("id") long id, Model model) {
         l.info("/edit/{id}" + id);
         model.addAttribute("defectDTO", defectService.findDefectDTOById(id));
-        model.addAttribute("person", personService.findPersonById(id));
+//        model.addAttribute("person", personService.findPersonById(id));
         model.addAttribute("listPersons", personService.findAllPersons());
         return "defectCreate";
     }
@@ -111,10 +111,10 @@ public class DefectController {
         l.info("request mapping defect/" + id);
         model.addAttribute("defectDTO", defectService.findDefectDTOById(id));
 
-        model.addAttribute("listDefectByReporterDTO", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
-        model.addAttribute("listDefectByAssigneeDTO", defectService.findAllDefectDTOByAssigneeAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
+//        model.addAttribute("listDefectByReporterDTO", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
+//        model.addAttribute("listDefectByAssigneeDTO", defectService.findAllDefectDTOByAssigneeAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
         model.addAttribute("listPersons", personService.findAllPersons());
-        model.addAttribute("listProjectsDTO", projectService.findAllTestProjectsDTO());
+//        model.addAttribute("listProjectsDTO", projectService.findAllTestProjectsDTO());
         model.addAttribute("listDefectCommentByDefectDTO", defectCommentService.findAllDefectCommentDTOByDefectId(id));
         model.addAttribute("commentDTO", new DefectCommentDTO());
         model.addAttribute("loggedPersonDTO", securityUtils.getLoggedPersonDTO());
@@ -141,12 +141,12 @@ public class DefectController {
         return redirectSite;
     }
 
-    @RequestMapping(value = "/param", method = RequestMethod.GET)
-    public String createDedfect(@RequestParam(required = false, defaultValue = "open", value = "filter") String foo) {
-        l.info("request mapping defect/create");
-        l.info("foo: " + foo);
-        return "login";
-    }
+//    @RequestMapping(value = "/param", method = RequestMethod.GET)
+//    public String createDedfect(@RequestParam(required = false, defaultValue = "open", value = "filter") String foo) {
+//        l.info("request mapping defect/create");
+//        l.info("foo: " + foo);
+//        return "login";
+//    }
 
 
 }
