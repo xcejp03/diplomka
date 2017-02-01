@@ -46,11 +46,11 @@
             </div>
         </div>
     </div>
+<p th:if="${loginError}" class="alert alert-danger">Wrong user or pass</p>
 
     <div class="row">
         <div class="col-sm-4">
             <div class="well">
-                <p th:if="${loginError}" class="error">Wrong user or pass</p>
                 <form th:action="@{/login}" method="post" default-target-url="/index">
                     <div class="control-group form-group">
                         <div class="controls">
