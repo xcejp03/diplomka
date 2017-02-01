@@ -20,6 +20,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +49,7 @@ public class ProjectServiceImpl implements ProjectService {
         l.debug("creating project - service");
         Project project;
         project = mapper.map(projectDTO, Project.class);
+        project.setCreatedDateTime(LocalDateTime.now());
         l.info("po mapování");
         projectRepository.save(project);
 
@@ -57,15 +59,15 @@ public class ProjectServiceImpl implements ProjectService {
     public void createTestProject(Project project) {
         l.debug("creating project - service");
         projectRepository.save(project);
+        project.setCreatedDateTime(LocalDateTime.now());
         l.info("created project - service: " + project);
     }
 
     public void updateTestProject(ProjectDTO projectDTO) {
         l.debug("updating project - service");
         Project project = projectRepository.findOne(projectDTO.getId());
+        project.setUpdatedDateTime(LocalDateTime.now());
         mapper.map(projectDTO, project);
-
-
         projectRepository.save(project);
         l.info("updated project - service: " + project);
     }
