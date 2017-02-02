@@ -56,7 +56,7 @@ public class DefectController {
         l.info("request mapping defect/create");
         model.addAttribute("defectDTO", new DefectDTO());
 //        model.addAttribute("defectList", defectService.findAllDefects());
-        model.addAttribute("listPersons", personService.findAllPersons());
+        model.addAttribute("persons", personService.findAllPersons());
 //        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
 
         return "defectCreate";

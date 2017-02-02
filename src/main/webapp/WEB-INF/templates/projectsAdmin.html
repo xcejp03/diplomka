@@ -61,7 +61,7 @@
                 </tr>
                 </thead>
                 <tbody th:remove="all-but-first">
-                <tr th:each="project : ${projectsDTOList}">
+                <tr th:each="project : ${projects}">
                     <td th:text="${project.id}">00</td>
                     <td th:text="${project.name}">Jméno</td>
                     <td><a href="#" class="opener"

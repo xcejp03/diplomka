@@ -62,7 +62,7 @@
                 </tr>
                 </thead>
                 <tbody th:remove="all-but-first">
-                <tr th:each="tc : ${tcsDTOList}">
+                <tr th:each="tc : ${tcs}">
                     <td th:text="${tc.id}">00</td>
                     <td th:text="${tc.priority}">priorita</td>
                     <td th:text="${tc.name}">Jméno</td>

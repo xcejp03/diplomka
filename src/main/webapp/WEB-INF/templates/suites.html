@@ -62,7 +62,7 @@
         </tr>
         </thead>
         <tbody th:remove="all-but-first">
-        <tr th:each="suite : ${listSuitesDTO}">
+        <tr th:each="suite : ${suites}">
             <td th:text="${suite.id}">00</td>
             <td sec:authorize="hasAuthority('TESTER')">Výsledek Suitu</td>
             <td th:text="${suite.name}">Projekt</td>

@@ -89,7 +89,7 @@
                                     <select id="userRolesEnum" name="userRolesEnum" class="multipleSelection3"
                                             multiple="multiple" size="10">
                                          <option th:each="role : ${enumRoles}"
-                                                 th:selected="${listUserRoles != null} ? ${#sets.contains(userEnumRoleList, role)}"
+                                                 th:selected="${userRoles != null} ? ${#sets.contains(userEnumRoles, role)}"
                                                  th:value="${role}"
                                                  th:text="${role}">tc vzory
                                         </option>
@@ -132,21 +132,20 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <div th:if="${not #lists.isEmpty(personDTOList)}" th:remove="tag">
+                <div th:if="${not #lists.isEmpty(persons)}" th:remove="tag">
                     <h1>Seznam uživatelů</h1>
                     <table class="table table-striped">
                         <thead>
                         <tr>
                             <th>ID uživatele</th>
                             <th>Jméno</th>
-                            <th>Login</th>
-                            <th>Vytvořen</th>
+                            enumRoles     <th>Vytvořen</th>
                             <th>Poslední přihlášení</th>
                             <th>Editovat</th>
                         </tr>
                         </thead>
                         <tbody th:remove="all-but-first">
-                        <tr th:each="user : ${personDTOList}">
+                        <tr th:each="user : ${persons}">
                             <td th:text="${user.id}">00</td>
                             <td th:text="${user.name}">Projekt</td>
                             <td th:text="${user.username}">Projekt</td>

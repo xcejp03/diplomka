@@ -77,7 +77,8 @@ public class TCController {
 //        model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMustersDTO());
 //        model.addAttribute("listTSMusters", tsMusterService.findAllTestStepMustersDTO());
 //        model.addAttribute("listProjects", projectService.findAllTestProjects());
-        model.addAttribute("listUsersProjectsDTO", projectService.findAllTestProjectNameDTOByUserId(personId));
+        model.addAttribute("usersProjects", projectService.findAllTestProjectNameDTOByUserId(personId));
+        model.addAttribute("projectsSuites", suiteService.findAllTestSuitesByProjectId(projectId));    // xxx
         return "tcCreate";
     }
 
@@ -100,7 +101,7 @@ public class TCController {
         model.addAttribute("tcDTO", tcMusterService.findTestCaseMusterDTOById(id));
 //        model.addAttribute("listPersons", personService.findAllPersons());
 //        model.addAttribute("listProjects", projectService.findAllTestProjects());
-        model.addAttribute("listUsersProjectsDTO", projectService.findAllTestProjectNameDTOByUserId(personId));
+        model.addAttribute("listUsersProjects", projectService.findAllTestProjectNameDTOByUserId(personId));
         return "tcCreate";
     }
 
@@ -134,7 +135,7 @@ public class TCController {
         tcInstanceRunDTO = tcInstanceService.findTCInstanceRunDTOById(tcInstance.getId());
 
         model.addAttribute("tcInstance", tcInstance);
-        model.addAttribute("listTSInstances", tsInstanceService.findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
+        model.addAttribute("tsInstances", tsInstanceService.findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
 
         return "redirect:/tc/show/" + tcInstanceRunDTO.getTcInstance_id();
     }
@@ -144,7 +145,7 @@ public class TCController {
         TCInstanceRunDTO tcInstanceRunDTO;
         tcInstanceRunDTO = tcInstanceService.findTCInstanceRunDTOById(id);
         model.addAttribute("tcInstance", tcInstanceRunDTO);
-        model.addAttribute("listTSInstances", tsInstanceService.
+        model.addAttribute("tsInstances", tsInstanceService.
                 findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
 
         return "tcRun";
@@ -155,7 +156,7 @@ public class TCController {
         l.info("/history/{id}" + id);
         model.addAttribute("tc", tcMusterService.findTestCaseMusterDTOById(id));
 //        model.addAttribute("listTCInstances", tcInstanceService.findAllTCInstancesByTCMusterId(id));
-        model.addAttribute("listTCInstances", tcInstanceService.findAllTCInstancesDTOByTCMusterId(id));
+        model.addAttribute("tcInstances", tcInstanceService.findAllTCInstancesDTOByTCMusterId(id));
         return "tcHistory";
     }
 
@@ -163,7 +164,7 @@ public class TCController {
     public String tcBySuite(@PathVariable("id") long id, Model model) {
         l.info("/tc-by-suite/{id} - " + id);
 
-        model.addAttribute("listTCDTO", tcService.findAllTCMustersDTOBySuiteId(id));
+        model.addAttribute("tcs", tcService.findAllTCMustersDTOBySuiteId(id));
         model.addAttribute("suite", suiteService.findTestSuiteById(id));
 //        model.addAttribute("statusenum", Arrays.asList(StatusEnum.values()));
         return "tcs";
@@ -183,7 +184,7 @@ public class TCController {
             tcMusters = tcMusterService.findTCMustersDTOByProject(projectService.findTestProjectById(Long.parseLong(filter)));
         }
         model.addAttribute("tcMusters", tcMusters);
-        model.addAttribute("tcMustersCopyDTO", new TCMusterCopyDTO());
+        model.addAttribute("tcMustersCopy", new TCMusterCopyDTO());
         model.addAttribute("usersProjects", projectService.findAllTestProjectNameDTOByUserId(loggedUserId));
 //        model.addAttribute("statusenum", Arrays.asList(StatusEnum.values()));
         return "tcsAll";

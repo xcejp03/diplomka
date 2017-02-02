@@ -51,9 +51,9 @@ public class TSController {
 
         model.addAttribute("tsDTO", tsDTO);
 //        model.addAttribute("listTSMusters", tsMusterService.findAllTestStepMustersDTO());
-        model.addAttribute("listPersons", personService.findAllPersons());
+        model.addAttribute("persons", personService.findAllPersons());
         model.addAttribute("loggedPerson", securityUtils.getLoggedPerson());
-        model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMusters());
+        model.addAttribute("tcMusters", tcMusterService.findAllTestCaseMusters());
         return "tsCreate";
     }
 
@@ -73,8 +73,8 @@ public class TSController {
         l.info("/edit/{id}" + id);
 
         model.addAttribute("tsDTO", tsMusterService.findTestStepMusterDTOById(id));
-        model.addAttribute("listPersons", personService.findAllPersons());
-        model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMusters());
+        model.addAttribute("persons", personService.findAllPersons());
+        model.addAttribute("tcMusters", tcMusterService.findAllTestCaseMusters());
         return "tsCreate";
     }
 
@@ -119,7 +119,7 @@ public class TSController {
     @RequestMapping("/ts-by-tcmuster/{id}")
     public String tsByTC(@PathVariable("id") long id, Model model) {
         l.info("/ts-by-tc/{id} - " + id);
-        model.addAttribute("listTSDTO", tsMusterService.findAllTSMustersDTOByTCMusterId(id));
+        model.addAttribute("tss", tsMusterService.findAllTSMustersDTOByTCMusterId(id));
         model.addAttribute("tc", tcMusterService.findTestCaseMusterById(id));
         return "tss";
     }

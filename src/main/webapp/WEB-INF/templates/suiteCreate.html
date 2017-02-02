@@ -15,6 +15,11 @@
     <div th:replace="/fragment/thymeFragment :: headImports"/>
     <!--importované přes fragment - konec-->
 
+    <!--lokální importy-->
+    <link rel="stylesheet" type="text/css" href="/src/bootstrap-duallistbox.css"/>
+    <script src="/src/jquery.bootstrap-duallistbox.js"></script>
+    <!--lokální importy - konec-->
+
 </head>
 
 <body>
@@ -70,7 +75,7 @@
                                 <label for="project_id">Projekt</label>:
 
                                 <select class="form-control" id="project_id" name="project_id">
-                                    <option th:each="project : ${listUsersProjectsDTO}"
+                                    <option th:each="project : ${usersProjects}"
                                             th:value="${project.id}"
                                             th:selected="${suiteDTO.project_id != null} ? ${#strings.contains(project.id, suiteDTO.project_id)}"
                                             th:text="${project.name}">jméno projektu
@@ -85,8 +90,8 @@
                                 <label for="tcMusters_id">TC vzory</label>:
                                 <select id="tcMusters_id" name="tcMusters_id" class="multipleSelection2"
                                         multiple="multiple" size="10">
-                                    <option th:each="tcmuster : ${listTcMustersDTOByProject}"
-                                            th:selected="${ListTcmusterdto != null} ? ${#lists.contains(ListTcmusterdto, tcmuster)}"
+                                    <option th:each="tcmuster : ${tcMustersByProject}"
+                                            th:selected="${tcMusters != null} ? ${#lists.contains(tcMustersDTO, tcmuster)}"
                                             th:value="${tcmuster.id}"
                                             th:text="${tcmuster.name}">tc vzory
                                     </option>

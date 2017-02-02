@@ -70,13 +70,12 @@
                             </div>
                         </div>
 
-                        <span sec:authorize="hasAuthority('ANALYTIC')" th:remove="tag">
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="projectOwner_id">Vlastník</label>:
 
                                 <select class="form-control" id="projectOwner_id" name="projectOwner_id">
-                                    <option th:each="person : ${listPersons}"
+                                    <option th:each="person : ${persons}"
                                             th:value="${person.id}"
                                             th:selected="${projectDTO.projectOwner_id != null} ? ${#strings.contains(person.id, projectDTO.projectOwner_id)}"
                                             th:text="${person.name}">jméno vlastníka
@@ -85,16 +84,15 @@
 
                             </div>
                         </div>
-                        </span>
 
                         <div class="control-group form-group">
                             <div class="controls">
                                 <label for="projectMembers_id">Členové</label>:
                                 <select id="projectMembers_id" name="projectMembers_id" class="multipleSelection"
                                         multiple="multiple" size="10">
-                                    <option th:each="person : ${listPersons}"
+                                    <option th:each="person : ${persons}"
                                             th:value="${person.id}"
-                                            th:selected="${listMembers != null} ? ${#lists.contains(listMembers, person)}"
+                                            th:selected="${members != null} ? ${#lists.contains(members, person)}"
                                             th:text="${person.name}">jména person
                                     <option value="Test">Test</option>
                                     <option value="Prof">Prof</option>

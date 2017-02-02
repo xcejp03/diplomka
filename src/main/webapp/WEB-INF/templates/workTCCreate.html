@@ -91,7 +91,7 @@
                                 <label for="project_id">Projekt</label>:
 
                                 <select class="form-control" id="project_id" name="project_id" readonly="true">
-                                    <option th:each="project : ${listUsersProjectsDTO}"
+                                    <option th:each="project : ${usersProjects}"
                                             th:value="${project.id}"
                                             th:selected="${workListDTO.project_id != null} ? ${#lists.contains(project.id, workListDTO.project_id)}"
                                             th:text="${project.name}">Assignee
@@ -131,7 +131,7 @@
                                 <td th:text="${tc.name}">Název</td>
                                 <td>
                                     <select class="form-control" th:name="|workTCList[${stat.index}].priority|">
-                                        <option th:each="priority : ${listPriority}"
+                                        <option th:each="priority : ${priorityList}"
                                                 th:value="${priority}"
                                                 th:selected="${tc.priority != null} ? ${#arrays.contains(tc.priority, priority)}"
                                                 th:text="${priority}">jméno projektu
@@ -140,7 +140,7 @@
                                 </td>
                                 <td>
                                     <select class="form-control" th:name="|workTCList[${stat.index}].assignee_id|">
-                                        <option th:each="person : ${listPerson}"
+                                        <option th:each="person : ${persons}"
                                                 th:value="${person.id}"
                                                 th:selected="${tc.assignee_id != null} ? ${#strings.contains(person.id, tc.assignee_id)}"
                                                 th:text="${person.name}">Assignee

@@ -67,7 +67,7 @@
                                 <label for="author_id">defect_id</label>:
 
                                 <select class="form-control" id="defect_id" name="defect_id">
-                                    <option th:each="defect : ${listDefects}"
+                                    <option th:each="defect : ${defects}"
                                             th:value="${defect.id}"
                                             th:text="${defect.description}">id defektu
                                     </option>
@@ -81,7 +81,7 @@
                                 <label for="author_id">author_id</label>:
 
                                 <select class="form-control" id="author_id" name="author_id">
-                                    <option th:each="person : ${listPersons}"
+                                    <option th:each="person : ${persons}"
                                             th:value="${person.id}"
                                             th:text="${person.name}">jméno autora
                                     </option>

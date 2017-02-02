@@ -81,7 +81,7 @@
                                 <label for="author_id">Autor kroku</label>:
 
                                 <select class="form-control" id="author_id" name="author_id">
-                                    <option th:each="author_id : ${listPersons}"
+                                    <option th:each="author_id : ${persons}"
                                             th:selected="${tsDTO.author_id != null} ? ${#strings.contains(author_id.id, tsDTO.author_id)} :
                                             ${#strings.contains(author_id.id, loggedPerson.id)}"
                                             th:value="${author_id.id}"
@@ -96,7 +96,7 @@
                                 <label for="tcMuster_id">tcMuster_id</label>:
 
                                 <select class="form-control" id="tcMuster_id" name="tcMuster_id">
-                                    <option th:each="tcMuster_id : ${listTCMusters}"
+                                    <option th:each="tcMuster_id : ${tcMusters}"
                                             th:selected="${tsDTO.tcMuster_id != null} ? ${#strings.contains(tcMuster_id.id, tsDTO.tcMuster_id)}"
                                             th:value="${tcMuster_id.id}"
                                             th:text="${tcMuster_id.name}">jméno tcMuster

@@ -110,7 +110,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <div th:if="${not #lists.isEmpty(personDTOList)}" th:remove="tag">
+                <div th:if="${not #lists.isEmpty(persons)}" th:remove="tag">
                     <a href="create" class="btn btn-primary">Registrace</a>
 
                     <h1>Seznam uživatelů</h1>
@@ -126,7 +126,7 @@
                         </tr>
                         </thead>
                         <tbody th:remove="all-but-first">
-                        <tr th:each="user : ${personDTOList}">
+                        <tr th:each="user : ${persons}">
                             <td th:text="${user.id}">00</td>
                             <td th:text="${user.name}">Projekt</td>
                             <td th:text="${user.username}">Projekt</td>

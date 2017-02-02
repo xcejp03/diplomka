@@ -43,9 +43,9 @@ public class ProjectController {
     public String createProjectForm(Model model) {
         l.info("request mapping project/create");
         model.addAttribute("projectDTO", new ProjectDTO());
-        model.addAttribute("person", new PersonDTO());
+//        model.addAttribute("person", new PersonDTO());
 //        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
-        model.addAttribute("listPersons", personService.findAllPersons());
+        model.addAttribute("persons", personService.findAllPersons());
 //        model.addAttribute("listSuites", suiteService.findAllTestSuites());
         return "projectCreate";
     }
@@ -65,9 +65,9 @@ public class ProjectController {
     public String editProject(@PathVariable("id") long id, Model model) {
         l.info("/edit/{id}" + id);
         model.addAttribute("projectDTO", projectService.findTestProjectDTOById(id));
-        model.addAttribute("listPersons", personService.findAllPersons());
+        model.addAttribute("persons", personService.findAllPersons());
 //        model.addAttribute("listMembersDTO", personService.findAllPersonDTOByProjectId(id));
-        model.addAttribute("listMembers", personService.findAllPersonByProjectIdOrderById(id));
+        model.addAttribute("members", personService.findAllPersonByProjectIdOrderById(id));
 //        model.addAttribute("listSuites", suiteService.findAllTestSuites());
         return "projectCreate";
     }
@@ -87,7 +87,7 @@ public class ProjectController {
         model.addAttribute("membersAll", personService.getProjectMembers(id));
         model.addAttribute("membersTesters", personService.getProjectMembers(id, RoleEnum.TESTER));
         model.addAttribute("membersAnalytics", personService.getProjectMembers(id, RoleEnum.ANALYTIC));
-        model.addAttribute("listSuitesDTO", suiteService.findAllTestSuitesDTOByProjectId(id));
+        model.addAttribute("suites", suiteService.findAllTestSuitesDTOByProjectId(id));
         return "project";
     }
 
@@ -95,7 +95,7 @@ public class ProjectController {
     public String projectsByLoggedUser(Model model) {
         Long personId = securityUtils.getLoggedPersonId();
         List<ProjectsNamesDTO> listProjectsNameDTO = projectService.findAllTestProjectNameDTOByUserId(personId);
-        model.addAttribute("listProjects", listProjectsNameDTO);
+        model.addAttribute("projects", listProjectsNameDTO);
         model.addAttribute("person", personService.findPersonById(personId));
 
         return "projects";

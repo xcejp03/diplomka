@@ -92,7 +92,7 @@
                                 <label for="priority">Priorita</label>:
 
                                 <select class="form-control" id="priority" name="priority">
-                                    <option th:each="priority : ${listPriority}"
+                                    <option th:each="priority : ${priorityList}"
                                             th:value="${priority}"
                                             th:selected="${workListDTO.priority != null} ? ${#arrays.contains(workListDTO.priority, priority)}"
                                             th:text="${priority}">jméno projektu
@@ -107,7 +107,7 @@
                                 <label for="project_id">Projekt</label>:
 
                                 <select class="form-control" id="project_id" name="project_id">
-                                    <option th:each="project : ${listUsersProjectsDTO}"
+                                    <option th:each="project : ${usersProjects}"
                                             th:value="${project.id}"
                                             th:selected="${workListDTO.project_id != null} ? ${#strings.contains(project.id, workListDTO.project_id)}"
                                             th:text="${project.name}">Assignee
@@ -138,8 +138,8 @@
                                 <label for="tcMuster_id">Přidej TC</label>:
                                 <select id="tcMuster_id" name="tcMuster_id" class="multipleSelection4"
                                         multiple="multiple" size="10">
-                                    <option th:each="tc : ${listTCByProject}"
-                                            th:selected="${workListDTO.workTCList != null} ? ${#lists.contains(listTCMusterIdByWorklistInWorkTCDTO, tc.id)}"
+                                    <option th:each="tc : ${tcsByProject}"
+                                            th:selected="${workListDTO.workTCList != null} ? ${#lists.contains(tcMusterIdByWorklistInWorkTC, tc.id)}"
                                             th:value="${tc.id}"
                                             th:text="${tc.name}">tc vzory
                                     </option>

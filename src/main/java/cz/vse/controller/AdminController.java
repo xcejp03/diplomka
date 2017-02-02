@@ -45,28 +45,28 @@ public class AdminController {
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String showAllUsers(Model model) {
         l.info("person/role");
-        model.addAttribute("usersDTOList", personService.findAllPersonsDTO());
+        model.addAttribute("users", personService.findAllPersonsDTO());
         return "usersAdmin";
     }
 
     @RequestMapping(value = "/projects", method = RequestMethod.GET)
     public String showAllProjects(Model model) {
         l.info("person/role");
-        model.addAttribute("projectsDTOList", projectService.findAllTestProjectsDTO());
+        model.addAttribute("projects", projectService.findAllTestProjectsDTO());
         return "projectsAdmin";
     }
 
     @RequestMapping(value = "/suites", method = RequestMethod.GET)
     public String showAllSuites(Model model) {
         l.info("person/role");
-        model.addAttribute("suitesDTOList", suiteService.findAllTestSuitesDTO());
+        model.addAttribute("suites", suiteService.findAllTestSuitesDTO());
         return "suitesAdmin";
     }
 
     @RequestMapping(value = "/tcs", method = RequestMethod.GET)
     public String showAllTCs(Model model) {
         l.info("person/role");
-        model.addAttribute("tcsDTOList", tcMusterService.findAllTestCaseMustersDTO());
+        model.addAttribute("tcs", tcMusterService.findAllTestCaseMustersDTO());
         return "tcsAdmin";
     }
 

@@ -104,7 +104,7 @@
                                 <label for="assignee_id">Assignee</label>:
 
                                 <select class="form-control" id="assignee_id" name="assignee_id">
-                                    <option th:each="person : ${listPersons}"
+                                    <option th:each="person : ${persons}"
                                             th:value="${person.id}"
                                             th:selected="${defectDTO.assignee_id != null} ? ${#strings.contains(person.id, defectDTO.assignee_id)}"
                                             th:text="${person.name}">Assignee

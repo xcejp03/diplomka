@@ -61,7 +61,7 @@
                 </tr>
                 </thead>
                 <tbody th:remove="all-but-first">
-                <tr th:each="suite : ${suitesDTOList}">
+                <tr th:each="suite : ${suites}">
                     <td th:text="${suite.id}">00</td>
                     <td th:text="${suite.name}">Jméno</td>
                     <td><a href="#" class="opener"

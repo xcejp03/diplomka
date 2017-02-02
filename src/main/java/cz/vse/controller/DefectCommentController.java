@@ -43,10 +43,10 @@ public class DefectCommentController {
     public String createDefect(Model model) {
         l.info("request mapping comment/create");
         model.addAttribute("commentDTO", new DefectCommentDTO());
-        model.addAttribute("listComments", defectCommentService.findAllDefectsCommentsDTOAllTest());
-        model.addAttribute("listDefects", defectService.findAllDefects());
-        model.addAttribute("listPersons", personService.findAllPersons());
-        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
+//        model.addAttribute("listComments", defectCommentService.findAllDefectsCommentsDTOAllTest());
+        model.addAttribute("defects", defectService.findAllDefects());
+        model.addAttribute("persons", personService.findAllPersons());
+//        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
 
         return "commentCreate";
     }
@@ -73,10 +73,10 @@ public class DefectCommentController {
         l.info("/edit/{id}" + id);
         DefectCommentDTO commentDTO = defectCommentService.findCommentDTOById(id);
         model.addAttribute("commentDTO",commentDTO);
-        model.addAttribute("listDefects", defectService.findAllDefects());
-        model.addAttribute("listPersons", personService.findAllPersons());
+        model.addAttribute("defects", defectService.findAllDefects());
+        model.addAttribute("persons", personService.findAllPersons());
         model.addAttribute("defect", defectService.findDefectDTOById(commentDTO.getDefect_id()));
-        model.addAttribute("person", personService.findPersonById(commentDTO.getAuthor_id()));
+//        model.addAttribute("person", personService.findPersonById(commentDTO.getAuthor_id()));
 
         return "commentCreate";
     }

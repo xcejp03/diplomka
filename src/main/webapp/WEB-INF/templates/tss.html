@@ -62,7 +62,7 @@
         </tr>
         </thead>
         <tbody th:remove="all-but-first">
-        <tr th:each="ts : ${listTSDTO}">
+        <tr th:each="ts : ${tss}">
             <td th:text="${ts.id}">00</td>
             <td><a href="#" class="opener"
                    th:attr="data-name=${tc.name}, data-updated=${ts.updatedDateTime}, data-owner=${ts.author_id}"

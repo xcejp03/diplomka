@@ -59,30 +59,64 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="name">Název</label>:
+
                                 <input type="text" id="name" name="name" th:value="${tcDTO.name}" class="form-control"
                                        autofocus="autofocus"/>
+                            </div>
+                        </div>
+
+                        <!--<div class=" control-group form-group">-->
+                        <!--<div class="controls">-->
+                        <!--<label for="project_id">Projekt</label>:-->
+
+                        <!--<select class="form-control" id="project_id" name="project_id" readonly="readonly">-->
+                        <!--<option th:each="project : ${usersProjects"-->
+                        <!--th:value="${project.id}"-->
+                        <!--th:selected="${tcDTO.project_id != null} ? ${#strings.contains(project.id, tcDTO.project_id)}"-->
+                        <!--th:text="${project.name}"-->
+                        <!--disabled="disabled">-->
+                        <!--jméno projektu-->
+                        <!--</option>-->
+                        <!--</select>-->
+                        <!--</div>-->
+                        <!--</div>-->
+
+                        <div class=" control-group form-group">
+                            <div class="controls">
+                                <label for="suite_id">Test Suite</label>:
+                                <input type="text" id="suite_id" name="suite_id" th:value="${param.suite[0]}"
+                                       readonly="readonly" class="form-control"/>
                             </div>
                         </div>
 
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="project_id">Projekt</label>:
-
-                                <select class="form-control" id="project_id" name="project_id">
-                                    <option th:each="project : ${listUsersProjectsDTO}"
-                                            th:value="${project.id}"
-                                            th:selected="${tcDTO.project_id != null} ? ${#strings.contains(project.id, tcDTO.project_id)}"
-                                            th:text="${project.name}">jméno projektu
-                                    </option>
-                                </select>
+                                <input type="text" id="project_id" name="project_id" th:value="${tcDTO.project_id}" readonly="readonly" class="form-control"/>
                             </div>
                         </div>
+                        <!--TEST SUITE SE TED NEUKLÁDÁ - POTŘEBA UPRAVIT SERVICE PRO SAVE-->
+
+                        <!--<div class=" control-group form-group" th:with="suiteFilterId=${param.suite[0]}">-->
+                        <!--<div class="controls">-->
+                        <!--<label for="suite_id">Test Suite</label>:-->
+
+                        <!--<select class="form-control" id="suite_id" name="suite_id">-->
+                        <!--<option th:each="suite : ${projectsSuites}"-->
+                        <!--th:value="${suite.id}"-->
+                        <!--th:selected="${suite != null} ? ${#strings.contains(suite.id, suiteFilterId)}"-->
+                        <!--th:text="${suite.name}">jméno projektu-->
+                        <!--</option>-->
+                        <!--</select>-->
+                        <!--</div>-->
+                        <!--</div>-->
 
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="priority">Priorita</label>:
 
-                                <select class="form-control" id="priority" name="priority" th:with="priorities=${T(cz.vse.entity.PriorityTCEnum).values()}">
+                                <select class="form-control" id="priority" name="priority"
+                                        th:with="priorities=${T(cz.vse.entity.PriorityTCEnum).values()}">
                                     <option th:each="priority : ${priorities}"
                                             th:value="${priority}"
                                             th:selected="${tcDTO.priority != null} ? ${#arrays.contains(tcDTO.priority, priority)}"

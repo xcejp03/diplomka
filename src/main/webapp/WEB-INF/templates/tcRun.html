@@ -80,7 +80,7 @@
         </tr>
         </thead>
         <tbody th:remove="all-but-first">
-        <tr th:each="ts : ${listTSInstances}">
+        <tr th:each="ts : ${tsInstances}">
             <td th:text="${ts.id}">00</td>
             <td><span th:text="${ts.status}"
                       th:class="${ts.status}">Status</span></td>

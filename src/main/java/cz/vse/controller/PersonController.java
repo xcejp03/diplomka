@@ -63,7 +63,7 @@ public class PersonController {
 
     @RequestMapping("/edit")
     public String editAllPerson(Model model) {
-        model.addAttribute("personDTOList", personService.findAllPersonsDTO());
+        model.addAttribute("persons", personService.findAllPersonsDTO());
 //        model.addAttribute("personDTO", new PersonDTO());
 //        model.addAttribute("listPersons", personService.findAllPersons());
         return "registration";
@@ -78,7 +78,7 @@ public class PersonController {
     @RequestMapping(value = "/role", method = RequestMethod.GET)
     public String editPersonRoleGET(Model model) {
         l.info("person/role");
-        model.addAttribute("personDTOList", personService.findAllPersonsDTO());
+        model.addAttribute("persons", personService.findAllPersonsDTO());
         model.addAttribute("enumRoles", RoleEnum.values());
         return "userRole";
     }
@@ -88,8 +88,8 @@ public class PersonController {
         model.addAttribute("personDTO", personService.findPersonById(id));
 //        model.addAttribute("personDTOList", personService.findAllPersonsDTO());
         model.addAttribute("enumRoles", RoleEnum.values());
-        model.addAttribute("userEnumRoleList", roleService.findUsersRoleEnum(id));
-        model.addAttribute("listUserRoles", personService.findPersonById(id).getUserRole());
+        model.addAttribute("userEnumRoles", roleService.findUsersRoleEnum(id));
+        model.addAttribute("userRoles", personService.findPersonById(id).getUserRole());
         return "userRole";
     }
 

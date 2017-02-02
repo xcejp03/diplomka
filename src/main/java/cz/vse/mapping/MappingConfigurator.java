@@ -105,6 +105,7 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .field("tsMusters", "tsMusters_id")
                 .field("tcInstances", "tcInstances_id")
                 .field("testSuites", "testSuite_id")
+                .field("author", "author_id")
                 .customize((Mapper<TCMuster, TCMusterDTO>) customMappers.get(TCMuster.class, TCMusterDTO.class))
                 .byDefault()
                 .register();

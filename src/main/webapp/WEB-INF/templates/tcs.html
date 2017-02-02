@@ -67,7 +67,7 @@
         </tr>
         </thead>
         <tbody th:remove="all-but-first">
-        <tr th:each="tc : ${listTCDTO}">
+        <tr th:each="tc : ${tcs}">
             <td th:text="${tc.id}">00</td>
             <td><span th:class="${tc.priority}" th:text="${tc.priority}">Priorita</span></td>
             <td sec:authorize="hasAuthority('TESTER')"><span th:text="${tc.status}"
