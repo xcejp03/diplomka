@@ -179,42 +179,49 @@
 
 <div th:fragment="headImports" th:remove="tag">
     <!--Bootstrap Core CSS-->
-    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../../resources/static/css/bootstrap.min.css" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
 
     <!--Custom CSS-->
-    <link href="/css/modern-business.css" rel="stylesheet"/>
+    <link href="../../../resources/static/css/modern-business.css" rel="stylesheet"/>
+    <link th:href="@{/css/modern-business.css}" rel="stylesheet"/>
 
     <!-- Custom Fonts -->
-    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-
+    <link href="../../../resources/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
 
     <!-- jQuery -->
-    <script src="/js/jquery.js"></script>
+    <script src="../../../resources/static/js/jquery.js"></script>
+    <script th:src="@{/js/jquery.js}"></script>
+
     <!-- Bootstrap Core JavaScript -->
-    <script src="/js/bootstrap.min.js"></script>
+    <script src="../../../resources/static/js/bootstrap.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+
+    <link rel="stylesheet" href="../../../resources/static/jquery/jquery-ui.css"/>
+    <link rel="stylesheet" th:href="@{jquery/jquery-ui.css}"/>
 
 
-    <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>-->
-    <link rel="stylesheet" href="/jquery/jquery-ui.css"/>
-
-
-    <link href="/sweetalert/sweetalert.css" rel="stylesheet"/>
-    <script src="/sweetalert/sweetalert.min.js"></script>
+    <link href="../../../resources/static/sweetalert/sweetalert.css" rel="stylesheet"/>
+    <link th:href="@{/sweetalert/sweetalert.css}" rel="stylesheet"/>
+    <script src="../../../resources/static/sweetalert/sweetalert.min.js"></script>
+    <script th:src="@{/sweetalert/sweetalert.min.js}"></script>
 
 
     <!--Moje jQuery-->
-    <script src="/jquery/jquery-3.1.1.js"></script>
-    <script src="/jquery/jquery-ui.js"></script>
+    <script src="../../../resources/static/jquery/jquery-3.1.1.js"></script>
+    <script th:src="@{/jquery/jquery-3.1.1.js}"></script>
 
+    <script src="../../../resources/static/jquery/jquery-ui.js"></script>
+    <script th:src="@{/jquery/jquery-ui.js}"></script>
 
     <!--Můj java script-->
-    <script type='text/javascript' src='/script.js'></script>
-    <link rel="stylesheet" type="text/css" href="/style.css"/>
+    <script type='text/javascript' src="../../../resources/static/script.js"></script>
+    <script type='text/javascript' th:src="@{/script.js}"></script>
 
+    <link rel="stylesheet" type="text/css" href="../../../resources/static/style.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
 
-    <!--&lt;!&ndash;Data table&ndash;&gt;-->
-    <!--<link rel="stylesheet" type="text/css" href="/datatable/css/jquery.dataTables.css"/>-->
-    <!--<script type="text/javascript" charset="utf8" src="/datatable/js/jquery.dataTables.js"></script>-->
 
 
 </div>
