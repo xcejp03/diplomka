@@ -166,19 +166,6 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
 
-//    @Override
-//    public int getNumberOfTCsInProjectByStatus(Project project, TCStatusEnum status) {
-//        return 0;
-//    }
-//select count
-//groupByTCStatusEnum
-//    findTop1ByTCMusterOrderByCreatedDateTimeDesc
-
-//    @Override
-//    public int getNumberOfTCsInProjectByStatus(long projectId, TCStatusEnum status) {
-//        return 0;
-//    }
-
     @Override
     public int getProjectMembersNumber(Project project) {
         return projectRepository.getProjectMembersNumber(project.getId());

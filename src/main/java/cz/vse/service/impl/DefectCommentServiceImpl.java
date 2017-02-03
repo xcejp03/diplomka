@@ -37,131 +37,111 @@ public class DefectCommentServiceImpl implements DefectCommentService {
     private PersonService personService;
 
     public void createComment(Defect defect, Person commentAuthor, String commentText) {
-        l.debug("creating comment - service: " + commentText);
+        l.info("creating comment: " + commentText);
         DefectComment defectComment = new DefectComment();
         defectComment.setDefect(defect);
         defectComment.setAuthor(commentAuthor);
         defectComment.setCreatedDateTime(LocalDateTime.now());
         defectComment.setCommentText(commentText);
-
         defectCommentRepository.save(defectComment);
-        l.info("comment created - service");
     }
 
     public void createComment(DefectCommentDTO defectCommentDTO) {
-        l.debug("creating comment - service: ");
+        l.info("creating comment: ");
         DefectComment defectComment;
         defectComment = mapper.map(defectCommentDTO, DefectComment.class);
         defectComment.setCreatedDateTime(LocalDateTime.now());
         defectCommentRepository.save(defectComment);
-        l.info("comment created - service");
     }
 
     public void updateComment(DefectComment commentToUpdate) {
-        l.debug("updating comment - service: " + commentToUpdate);
+        l.info("updating comment: " + commentToUpdate);
         defectCommentRepository.save(commentToUpdate);
-        l.info("comment updated");
     }
 
     public void updateComment(DefectCommentDTO defectCommentDTO) {
-        l.debug("updating comment - service: " + defectCommentDTO);
+        l.info("updating comment: " + defectCommentDTO);
         DefectComment defectComment = findCommentById(defectCommentDTO.getId());
         mapper.map(defectCommentDTO, defectComment);
         defectCommentRepository.save(defectComment);
-        l.info("comment updated");
     }
 
     public void deleteComment(DefectComment commentToDelete) {
-        l.debug("deleting comment - service: " + commentToDelete);
+        l.info("deleting comment: " + commentToDelete);
         defectCommentRepository.delete(commentToDelete);
-        l.info("comment deleted");
     }
 
     public void deleteComment(long id) {
-        l.debug("deleting comment - service: " + id);
+        l.info("deleting comment: " + id);
         defectCommentRepository.delete(id);
-        l.info("comment deleted");
     }
 
     public DefectComment findCommentById(long id) {
-        l.debug("finding comment - service: " + id);
+        l.info("finding comment: " + id);
         DefectComment defectComment;
         defectComment = defectCommentRepository.findOne(id);
-        l.info("comment found");
+        l.info("comment found: "+defectComment);
         return defectComment;
     }
 
     public DefectCommentDTO findCommentDTOById(long id) {
-        l.debug("finding comment - service: " + id);
+        l.info("finding comment: " + id);
         DefectComment defectComment = defectCommentRepository.findOne(id);
         DefectCommentDTO defectCommentDTO = mapper.map(defectComment, DefectCommentDTO.class);
-        l.info("comment found");
+        l.info("comment found: "+defectCommentDTO);
         return defectCommentDTO;
     }
 
     public List<DefectComment> findAllDefectsComments(Defect defect) {
-        l.debug("finding all defect's comments - service: " + defect);
+        l.info("finding all defect's comments: " + defect);
         List<DefectComment> defectCommentList;
         defectCommentList = defectCommentRepository.findAllDefectCommentsByDefectOrderById(defect);
-        l.info("all defect's comments found");
+        l.info("all defect's comments found:" +defectCommentList);
         return defectCommentList;
     }
 
     public List<DefectComment> findAllDefectsCommentsByDefectId(Long defectId) {
-        l.debug("finding all defect's comments - service: " + defectId);
+        l.info("finding all defect's comments - service: " + defectId);
         List<DefectComment> defectCommentList;
         Defect defect = defectService.findDefectById(defectId);
         defectCommentList = defectCommentRepository.findAllDefectCommentsByDefectOrderById(defect);
-        l.info("all defect's comments found");
+        l.info("all defect's comments found: "+defectCommentList);
         return defectCommentList;
     }
 
     public List<DefectCommentDTO> findAllDefectsCommentsDTOAllTest() {
-        l.debug("finding all defect's comments - service: ");
+        l.info("finding all defect's comments - service: ");
         List<DefectComment> defectCommentList;
         defectCommentList = defectCommentRepository.findAll();
         List<DefectCommentDTO> defectCommentDTOList;
         defectCommentDTOList = mapper.mapAsList(defectCommentList, DefectCommentDTO.class);
-        l.info("all defect's comments found");
+        l.info("found: "+defectCommentDTOList);
         return defectCommentDTOList;
     }
 
     public List<DefectCommentDTO> findAllDefectCommentDTOByDefect(Defect defect) {
+        l.info("with defect: "+defect);
         List<DefectComment> defectCommentList;
         List<DefectCommentDTO> defectCommentDTOList;
         defectCommentList = defectCommentRepository.findAllDefectCommentsByDefectOrderById(defect);
         defectCommentDTOList = mapper.mapAsList(defectCommentList, DefectCommentDTO.class);
+        l.info("found: "+defectCommentDTOList);
         return defectCommentDTOList;
     }
 
     public List<DefectCommentDTO> findAllDefectCommentDTOByDefectId(long id) {
+        l.info("with id:"+id);
         List<DefectComment> defectCommentList;
         List<DefectCommentDTO> defectCommentDTOList;
         Defect defect = defectService.findDefectById(id);
-
         defectCommentList = defectCommentRepository.findAllDefectCommentsByDefectOrderById(defect);
         defectCommentDTOList = mapper.mapAsList(defectCommentList, DefectCommentDTO.class);
+        l.info("found: "+defectCommentDTOList);
         return defectCommentDTOList;
     }
 
-//    public void writeDefectStatusChange(long defectId, long authorId, DefectStatusEnum oldStatus, DefectStatusEnum newStatus)   {
-//        Defect defect = defectService.findDefectById(defectId);
-//        Person author = personService.findPersonById(authorId);
-//        String text = "Status change: "+ oldStatus + " -> " + newStatus;
-//        createComment(defect, author, text);
-//    }
-//
-//    public void writeDefectAssigneeChange(long defectId, long authorId, long oldAssigneeId, long newAssigneeId) {
-//        Defect defect = defectService.findDefectById(defectId);
-//        Person author = personService.findPersonById(authorId);
-//        Person oldAssignee = personService.findPersonById(oldAssigneeId);
-//        Person newAssignee = personService.findPersonById(newAssigneeId);
-//        String text = "Assignee change: "+ oldAssignee + " -> " + newAssignee;
-//        createComment(defect, author, text);
-//
-//    }
-
     public void writeDefectStatusChange(DefectDTO defectDTO, Person author) {
+        l.info("with: "+defectDTO +" and "+author);
         Defect defect = defectService.findDefectById(defectDTO.getId());
         String newStatus = defectDTO.getStatus().name();
         String text = "Status change -> " + newStatus;
@@ -169,6 +149,7 @@ public class DefectCommentServiceImpl implements DefectCommentService {
     }
 
     public void writeDefectAssigneeChange(DefectDTO defectDTO, Person author) {
+        l.info("with: "+defectDTO +" and "+author);
         Defect defect = defectService.findDefectById(defectDTO.getId());
         String newAssigneeUsername = personService.findPersonById(defectDTO.getAssignee_id()).getUsername();
         String text = "Assignee change -> " + newAssigneeUsername;
