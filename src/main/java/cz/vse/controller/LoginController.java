@@ -1,6 +1,8 @@
 package cz.vse.controller;
 
+import cz.vse.service.NotificationService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,7 +21,8 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class LoginController {
     private final Logger l = Logger.getLogger(this.getClass());
-
+    @Autowired
+    private NotificationService notificationService;
 
     // Login form
     @RequestMapping("/login")
@@ -33,14 +36,15 @@ public class LoginController {
     public String loginError(Model model) {
         l.error("login error");
         model.addAttribute("loginError", true);
+        notificationService.addErrorMessage("Zkouška notifikační service");
         return "login";
     }
 
-    @RequestMapping(value="/logout", method = RequestMethod.GET)
-    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         l.info("logout");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){
+        if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         return "redirect:/login";

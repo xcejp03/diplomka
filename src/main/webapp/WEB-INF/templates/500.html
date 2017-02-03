@@ -9,7 +9,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
-    <title>Chyba page</title>
+    <title>Chyba ${status}</title>
 
 
     <!--importované přes fragment-->
@@ -23,9 +23,11 @@
 <!-- Page Content -->
 <div class="container">
 
+    <div class="jumbotron">
+        <h1>500</h1>
+    </div>
 
-
-    <h1>Obecná chybová stránka</h1>
+    <h1> chybová stránka</h1>
 
     <div th:text="${status}"></div>
     <hr/>
@@ -35,6 +37,7 @@
     <div class="well">
         <div th:text="${msg}"></div>
     </div>
+
     <div class="row">
         <div class="col-sm-12">
             <!-- Footer -->
