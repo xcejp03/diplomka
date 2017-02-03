@@ -2,6 +2,7 @@ package cz.vse.security;
 
 import cz.vse.entity.Person;
 import cz.vse.service.PersonService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +20,7 @@ import java.time.LocalDateTime;
  */
 @Component
 public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+    private final Logger l = Logger.getLogger(this.getClass());
     @Autowired
     private PersonService personService;
 
@@ -27,6 +29,7 @@ public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthent
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
         logger.debug("Logování přihlášení uživatele");
+        l.info("Přihlášení bylo úspěšné v "+LocalDateTime.now());
         super.onAuthenticationSuccess(request, response, authentication);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Person person = personService.findPersonByAuthentication(auth);

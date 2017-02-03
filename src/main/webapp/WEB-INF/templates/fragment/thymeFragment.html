@@ -64,7 +64,7 @@
                         <li class="divider"></li>
                         <li><a href="?lang=">Výchozí</a></li>
                     </ul>
-                </span>
+                    </span>
                     <li sec:authorize="!hasAuthority('ROLE_ANONYMOUS')">
                         <a href="/logout">| Odhlásit se</a>
                     </li>
@@ -72,21 +72,6 @@
                     <li sec:authorize="hasAuthority('ROLE_ANONYMOUS')">
                         <a href="/login">| Přihlásit se</a>
                     </li>
-
-                    <!--<li>-->
-                        <!--<div class="dropdown">-->
-                            <!--<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Jazyk-->
-                                <!--<span class="caret"></span></button>-->
-                            <!--<ul class="dropdown-menu">-->
-                                <!--<li class="dropdown-header">Výběr jazyka</li>-->
-                                <!--<li><a href="#">Česky</a></li>-->
-                                <!--<li><a href="#">Anglicky</a></li>-->
-                                <!--<li><a href="#">Španělsky</a></li>-->
-                                <!--<li class="divider"></li>-->
-                                <!--<li><a href="#">Výchozí</a></li>-->
-                            <!--</ul>-->
-                        <!--</div>-->
-                    <!--</li>-->
 
                 </ul>
             </div>
