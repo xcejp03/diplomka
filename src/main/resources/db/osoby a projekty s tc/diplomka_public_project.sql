@@ -1,0 +1,7 @@
+INSERT INTO public.project (id, created_date_time, updated_date_time, name, project_owner_id) VALUES (53, null, null, 'Předváděčka', 1);
+INSERT INTO public.project (id, created_date_time, updated_date_time, name, project_owner_id) VALUES (55, null, null, 'GTB', 1);
+INSERT INTO public.project (id, created_date_time, updated_date_time, name, project_owner_id) VALUES (40, null, E'\\xACED00057372000D6A6176612E74696D652E536572955D84BA1B2248B20C00007870770E05000007E10201111A133B4E7EC078', 'Inbox', 1);
+INSERT INTO public.project (id, created_date_time, updated_date_time, name, project_owner_id) VALUES (51, null, E'\\xACED00057372000D6A6176612E74696D652E536572955D84BA1B2248B20C00007870770E05000007E10202101F083361138078', 'Vyměnit olej v autě', 13);
+INSERT INTO public.project (id, created_date_time, updated_date_time, name, project_owner_id) VALUES (52, null, E'\\xACED00057372000D6A6176612E74696D652E536572955D84BA1B2248B20C00007870770E05000007E10202101F2C1547634078', 'Přezout na zimu', 14);
+INSERT INTO public.project (id, created_date_time, updated_date_time, name, project_owner_id) VALUES (54, null, E'\\xACED00057372000D6A6176612E74696D652E536572955D84BA1B2248B20C00007870770E05000007E1020210200521CBBBC078', 'Napsat diplomku', 10);
+INSERT INTO public.project (id, created_date_time, updated_date_time, name, project_owner_id) VALUES (50, null, E'\\xACED00057372000D6A6176612E74696D652E536572955D84BA1B2248B20C00007870770E05000007E1020210200D3919EB8078', 'Otevřít okno', 11);
