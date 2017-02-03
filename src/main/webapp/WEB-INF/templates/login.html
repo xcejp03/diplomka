@@ -16,6 +16,8 @@
     <div th:replace="/fragment/thymeFragment :: headImports"/>
     <!--importované přes fragment - konec-->
 
+
+
 </head>
 <body>
 <!-- Navigation -->
@@ -29,6 +31,15 @@
             <h1 class="page-header">
                 <small>WEB-INF/templates/login.html</small>
             </h1>
+
+            <div class="well">
+                <p><div th:text="#{home.welcome}"></div></p>
+                <p th:text="#{welcome}"></p>
+                <hr/>
+                <p><div th:text="#{login.welcome}"></div></p>
+                <p th:text="#{home_cs.jmeno}"></p>
+            </div>
+
             <ol class="breadcrumb">
                 <li><a href="index">Home</a>
                 </li>

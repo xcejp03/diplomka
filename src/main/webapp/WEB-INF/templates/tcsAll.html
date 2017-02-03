@@ -23,7 +23,17 @@
 
 <!-- Page Content -->
 <div class="container">
-
+    <div class="well">
+        <p>
+        <div th:text="#{home.welcome}"></div>
+        </p>
+        <p th:text="#{welcome}"></p>
+        <hr/>
+        <p>
+        <div th:text="#{login.welcome}"></div>
+        </p>
+        <p th:text="#{home_cs.jmeno}"></p>
+    </div>
     <!-- Page Heading/Breadcrumbs -->
     <div class="row">
         <div class="col-sm-12">
@@ -101,7 +111,9 @@
                     data-note=${tc.note}"
                                data-id="#detailDialog">Detail</a>
                         </td>
-                        <td th:text="${tc.createdDateTime}" sec:authorize="hasAuthority('ANALYTIC')">datum a čas vytvoření</td>
+                        <td th:text="${tc.createdDateTime}" sec:authorize="hasAuthority('ANALYTIC')">datum a čas
+                            vytvoření
+                        </td>
                         <td sec:authorize="hasAuthority('ANALYTIC')"><a th:href="@{'/ts/ts-by-tcmuster/'+${tc.id}}">Test
                             Stepy</a>
                         </td>
@@ -117,16 +129,16 @@
                                 th:text="${project.name}">jméno projektu
                         </option>
                     </select>
-                    <input type="hidden"  value="trrd" th:value="dasdas"/>
+                    <input type="hidden" value="trrd" th:value="dasdas"/>
 
                 </table>
-                <p><input type="submit" class="btn" value="Zkopíruj"/> <input type="reset" class="btn" value="Reset"/></p>
+                <p><input type="submit" class="btn" value="Zkopíruj"/> <input type="reset" class="btn" value="Reset"/>
+                </p>
             </form>
 
 
         </div>
     </div>
-
 
 
     <div th:if="${suite != null}" th:remove="tag">

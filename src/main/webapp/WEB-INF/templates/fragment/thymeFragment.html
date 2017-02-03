@@ -25,7 +25,7 @@
                 <span sec:authorize="!hasAuthority('ROLE_ANONYMOUS')">
                     <a href="/dashboard" sec:authentication="principal.username" class="navbar-brand"></a>
                 </span>
-                <a href="/person/prihlasit" class="btn btn-default">prih</a>
+                <!--<a href="/person/prihlasit" class="btn btn-default">prih</a>-->
             </div>
 
 
@@ -53,12 +53,40 @@
                     <li>
                         <a href="/test/about">Šablony</a>
                     </li>
+                    <span class="dropdown navbar-brand">
+                    <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">Jazyk
+                        <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">Výběr jazyka</li>
+                        <li><a href="?lang=cs">Česky</a></li>
+                        <li><a href="?lang=en">Anglicky</a></li>
+                        <li><a href="?lang=es">Španělsky</a></li>
+                        <li class="divider"></li>
+                        <li><a href="?lang=">Výchozí</a></li>
+                    </ul>
+                </span>
                     <li sec:authorize="!hasAuthority('ROLE_ANONYMOUS')">
                         <a href="/logout">| Odhlásit se</a>
                     </li>
+
                     <li sec:authorize="hasAuthority('ROLE_ANONYMOUS')">
                         <a href="/login">| Přihlásit se</a>
                     </li>
+
+                    <!--<li>-->
+                        <!--<div class="dropdown">-->
+                            <!--<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Jazyk-->
+                                <!--<span class="caret"></span></button>-->
+                            <!--<ul class="dropdown-menu">-->
+                                <!--<li class="dropdown-header">Výběr jazyka</li>-->
+                                <!--<li><a href="#">Česky</a></li>-->
+                                <!--<li><a href="#">Anglicky</a></li>-->
+                                <!--<li><a href="#">Španělsky</a></li>-->
+                                <!--<li class="divider"></li>-->
+                                <!--<li><a href="#">Výchozí</a></li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                    <!--</li>-->
 
                 </ul>
             </div>
