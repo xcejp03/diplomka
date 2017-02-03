@@ -54,10 +54,10 @@
                         <a href="/test/about">Šablony</a>
                     </li>
                     <span class="dropdown navbar-brand">
-                    <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">Jazyk
+                    <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" th:text="#{language}">Jazyk
                         <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-header">Výběr jazyka</li>
+                        <li class="dropdown-header" th:text="#{language}">Výběr jazyka</li>
                         <li><a href="?lang=cs">Česky</a></li>
                         <li><a href="?lang=en">Anglicky</a></li>
                         <li><a href="?lang=es">Španělsky</a></li>
