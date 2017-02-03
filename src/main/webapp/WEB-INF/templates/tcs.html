@@ -10,7 +10,6 @@
 
     <title>Test Cases</title>
     <!--importované přes fragment-->
-    <!--<script src="https://code.jquery.com/jquery-1.10.2.js"></script>-->
     <div th:replace="/fragment/thymeFragment :: headImports"/>
     <!--importované přes fragment - konec-->
 
@@ -31,9 +30,15 @@
                 <small>WEB-INF/templates/tcs.html</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="index">Home</a>
-                </li>
-                <li class="active">Test Casy</li>
+                <li><a href="/dashboard">Home</a></li>
+                <!--<li><a href="/project/projects">Projekty</a></li>-->
+                <!--&lt;!&ndash;<li class="active" th:text="${projectDTO.name}"></li>&ndash;&gt;-->
+                <!--<li><a th:href="@{'/project/'+${projectDTO.id}}">Projekt</a> </li>-->
+                <!--<li><a th:href="@{'/suite/suites-by-project/'+${projectDTO.id}}">Test Suity</a> </li>-->
+                <!--&lt;!&ndash;<li><a th:href="@{'/tc/tc-by-suite/'+${suite.id}}">Test casy</a> </li>&ndash;&gt;-->
+                <!--<li class="active">Test Casy</li>-->
+
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right">Zpět</a>
             </ol>
         </div>
     </div>

@@ -31,9 +31,15 @@
                 <small>WEB-INF/templates/tsCreate.html</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="/index">Home</a>
-                </li>
-                <li class="active">Test step create</li>
+                <li><a href="/dashboard">Home</a></li>
+                <!--</li>-->
+                <!--<li><a href="/project/projects">Projekty</a></li>-->
+                <!--<li><a th:href="@{'/project/'+${projectId}}">Projekt</a> </li>-->
+                <!--<li><a th:href="@{'/suite/suites-by-project/'+${projectId}}">Test Suity</a> </li>-->
+                <!--<li><a th:href="@{'/tc/tc-by-suite/'+${suiteId}}">Test Casy</a> </li>-->
+
+                <!--<li class="active">Test Stepy</li>-->
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right">Zpět</a>
             </ol>
         </div>
     </div>

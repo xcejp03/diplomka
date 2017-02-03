@@ -166,7 +166,6 @@ public class TCController {
 
         model.addAttribute("tcs", tcService.findAllTCMustersDTOBySuiteId(id));
         model.addAttribute("suite", suiteService.findTestSuiteById(id));
-//        model.addAttribute("statusenum", Arrays.asList(StatusEnum.values()));
         return "tcs";
     }
 

@@ -50,4 +50,5 @@ public interface ProjectService {
 
     int getProjectMembersNumber(long projectId);
 
+    ProjectDTO findProjectBySuiteId(long id);
 }

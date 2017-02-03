@@ -2,6 +2,7 @@ package cz.vse.repository;
 
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
+import cz.vse.entity.TestSuite;
 import cz.vse.repository.base.BaseRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,6 +14,7 @@ import java.util.List;
  */
 public interface ProjectRepository extends BaseRepository<Project> {
     Project findById(long id);
+    Project findByTestSuitesIn(List<TestSuite> suites);
 
     List<Project> findAllProjectsByPersonMembersIdOrderById(Long id);
 
@@ -23,7 +25,6 @@ public interface ProjectRepository extends BaseRepository<Project> {
     List<Person> findAllPersonsByPersonMembers(Project project);
     List<Person> findAllPersonByPersonMembers(Project project);
 
-//    List<Person> getProjectMembersByProject(Project project);
 
     @Query("select count (p.id) from Project p join p.tcMusters t where t.Author in :loggedPerson")
         //UKÁZKA JOIN
@@ -32,7 +33,6 @@ public interface ProjectRepository extends BaseRepository<Project> {
     @Query("select count(p.id) from Project p join p.personMembers pm where p.id = :projectId")
     int getProjectMembersNumber(@Param("projectId") long projectId);
 
-//    List<Project> MyProjectsWithStats()
 
 
 }

@@ -4,10 +4,7 @@ import cz.vse.dto.PersonDTO;
 import cz.vse.dto.ProjectDTO;
 import cz.vse.dto.ProjectStatsDTO;
 import cz.vse.dto.ProjectsNamesDTO;
-import cz.vse.entity.Person;
-import cz.vse.entity.Project;
-import cz.vse.entity.RoleEnum;
-import cz.vse.entity.TCStatusEnum;
+import cz.vse.entity.*;
 import cz.vse.repository.ProjectRepository;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
@@ -22,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -177,4 +175,14 @@ public class ProjectServiceImpl implements ProjectService {
         return projectRepository.getProjectMembersNumber(projectId);
     }
 
+    @Override
+    public ProjectDTO findProjectBySuiteId(long id) {
+        l.info("with: " + id);
+        ProjectDTO projectDTO;
+        TestSuite suite = suiteService.findTestSuiteById(id);
+        Project project = projectRepository.findByTestSuitesIn(Arrays.asList(suite));
+        projectDTO = mapper.map(project, ProjectDTO.class);
+        l.info("found: " + projectDTO);
+        return projectDTO;
+    }
 }

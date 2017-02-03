@@ -23,17 +23,7 @@
 
 <!-- Page Content -->
 <div class="container">
-    <div class="well">
-        <p>
-        <div th:text="#{home.welcome}"></div>
-        </p>
-        <p th:text="#{welcome}"></p>
-        <hr/>
-        <p>
-        <div th:text="#{login.welcome}"></div>
-        </p>
-        <p th:text="#{home_cs.jmeno}"></p>
-    </div>
+
     <!-- Page Heading/Breadcrumbs -->
     <div class="row">
         <div class="col-sm-12">
@@ -41,9 +31,8 @@
                 <small>WEB-INF/templates/tcsAll.html</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="index">Home</a>
-                </li>
-                <li class="active">Test Casy</li>
+                <li><a href="/dashboard">Home</a></li>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right">Zpět</a>
             </ol>
         </div>
     </div>

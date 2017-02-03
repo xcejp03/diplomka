@@ -29,9 +29,8 @@
                 <small>WEB-INF/templates/usersAdmin.html</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="index">Home</a>
-                </li>
-                <li class="active">Uživatelé</li>
+                <li><a href="/dashboard">Home</a></li>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right">Zpět</a>
             </ol>
         </div>
     </div>

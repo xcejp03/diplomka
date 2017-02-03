@@ -29,9 +29,7 @@
                 <small>WEB-INF/templates/project.html</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="index">Home</a>
-                </li>
-                <li class="active">Projekty</li>
+                <li><a href="/dashboard">Home</a></li>
                 <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right">Zpět</a>
             </ol>
 
@@ -94,7 +92,6 @@
                             <th>Passed</th>
                             <th>Failed</th>
                             <th>Počet TC</th>
-                            <th>TC</th>
                         </tr>
                         </thead>
                         <tbody th:remove="all-but-first">
@@ -103,9 +100,6 @@
                             <td th:text="${projectsStat.numberOfPassedTCs}">passed</td>
                             <td th:text="${projectsStat.numberOfFailedTCs}">failed</td>
                             <td th:text="${projectsStat.numberOfTCs}">passed</td>
-                            <td>
-                                <a href="#" th:href="@{/tc/tcs/(filter=${projectsStat.project_id})}">detail projektu</a>
-                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -139,7 +133,9 @@
                         <tr th:each="suite : ${suites}">
                             <td th:text="${suite.id}">00</td>
                             <td sec:authorize="hasAuthority('TESTER')">Výsledek Suitu</td>
-                            <td th:text="${suite.name}">Projekt</td>
+                            <td><a th:href="@{'/tc/tc-by-suite/'+${suite.id}}" th:text="${suite.name}">Project
+                                name</a>
+                            </td>
                             <td><a href="#" class="opener"
                                    th:attr="data-name=${suite.name}" data-id="#detailDialog">Detail</a>
                             </td>
