@@ -1,8 +1,8 @@
 package cz.vse.service;
 
+import cz.vse.dto.TestSuiteDTO;
 import cz.vse.dto.TestSuiteForm;
 import cz.vse.dto.TestSuiteList;
-import cz.vse.dto.old.TestSuiteDTO;
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
 import cz.vse.entity.TestSuite;

@@ -1,7 +1,7 @@
 package cz.vse.controller;
 
+import cz.vse.dto.TSInstanceRunDTO;
 import cz.vse.dto.TSMusterForm;
-import cz.vse.dto.old.TSInstanceRunDTO;
 import cz.vse.service.*;
 import cz.vse.utils.SecurityUtils;
 import org.apache.log4j.Logger;

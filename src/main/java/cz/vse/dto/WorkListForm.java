@@ -1,6 +1,5 @@
 package cz.vse.dto;
 
-import cz.vse.dto.old.WorkTCDTO;
 import cz.vse.entity.PriorityTCEnum;
 
 import java.util.List;

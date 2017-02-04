@@ -1,6 +1,6 @@
 package cz.vse.mapping.custom;
 
-import cz.vse.dto.old.WorkTCDTO;
+import cz.vse.dto.WorkTCDTO;
 import cz.vse.entity.WorkTC;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MappingContext;
@@ -16,14 +16,14 @@ public class WorkTCToWorkTCDTO extends CustomMapper<WorkTC, WorkTCDTO> {
 
     @Override
     public void mapAtoB(WorkTC workTC, WorkTCDTO workTCDTO, MappingContext context) {
-        l.info("A -> B");
+        l.info("WorkTCToWorkTCDTO: A -> B");
 //        super.mapAtoB(workTC, workTCDTO, context);
         workTCDTO.setName(workTC.getTcMuster().getName());
     }
 
     @Override
     public void mapBtoA(WorkTCDTO workTCDTO, WorkTC workTC, MappingContext context) {
-        l.info("B -> A");
+        l.info("WorkTCToWorkTCDTO: B -> A");
 //        super.mapBtoA(workTCDTO, workTC, context);
     }
 

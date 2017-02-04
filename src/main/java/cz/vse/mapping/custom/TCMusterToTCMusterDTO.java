@@ -1,6 +1,6 @@
 package cz.vse.mapping.custom;
 
-import cz.vse.dto.old.TCMusterDTO;
+import cz.vse.dto.TCMusterDTO;
 import cz.vse.entity.TCInstance;
 import cz.vse.entity.TCMuster;
 import cz.vse.service.TCInstanceService;

@@ -1,7 +1,6 @@
 package cz.vse.controller;
 
 import cz.vse.dto.PersonForm;
-import cz.vse.dto.old.PersonDTO;
 import cz.vse.entity.RoleEnum;
 import cz.vse.service.PersonService;
 import cz.vse.service.RoleService;

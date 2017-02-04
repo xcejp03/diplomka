@@ -1,8 +1,8 @@
 package cz.vse.service.impl;
 
+import cz.vse.dto.TCInstanceRunDTO;
+import cz.vse.dto.TCMusterDTO;
 import cz.vse.dto.TCMusterList;
-import cz.vse.dto.old.TCInstanceRunDTO;
-import cz.vse.dto.old.TCMusterDTO;
 import cz.vse.entity.*;
 import cz.vse.repository.TCMusterRepository;
 import cz.vse.service.*;

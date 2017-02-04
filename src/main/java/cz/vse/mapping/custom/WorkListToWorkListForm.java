@@ -1,7 +1,6 @@
 package cz.vse.mapping.custom;
 
 import cz.vse.dto.WorkListForm;
-import cz.vse.dto.old.WorkListDTO;
 import cz.vse.entity.TCMuster;
 import cz.vse.entity.WorkList;
 import cz.vse.entity.WorkTC;

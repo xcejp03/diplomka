@@ -1,7 +1,6 @@
 package cz.vse.service;
 
 import cz.vse.dto.PersonForm;
-import cz.vse.dto.old.PersonDTO;
 import cz.vse.entity.Person;
 import cz.vse.entity.RoleEnum;
 import cz.vse.entity.UserRole;
@@ -21,9 +20,7 @@ public interface RoleService {
 
     List<UserRole> findAllUserRolesByUserId(long id);
 
-    void createRoleForUser(PersonDTO personDTO);
-
-    void updateRoleForUser(PersonDTO personDTO);
+    void createRoleForUser(PersonForm personForm);
 
     void updateRoleForUser(PersonForm personForm);
 

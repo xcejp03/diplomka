@@ -1,8 +1,8 @@
 package cz.vse.service;
 
+import cz.vse.dto.TSMusterDTO;
 import cz.vse.dto.TSMusterForm;
 import cz.vse.dto.TSMusterList;
-import cz.vse.dto.old.TSMusterDTO;
 import cz.vse.entity.TCMuster;
 import cz.vse.entity.TSMuster;
 

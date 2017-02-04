@@ -1,7 +1,6 @@
 package cz.vse.utils;
 
 import cz.vse.dto.PersonName;
-import cz.vse.dto.old.PersonDTO;
 import cz.vse.entity.Person;
 import cz.vse.service.PersonService;
 import ma.glasnost.orika.MapperFacade;
@@ -37,13 +36,13 @@ public class SecurityUtils {
         return personId;
     }
 
-    public PersonDTO getLoggedPersonDTO() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Person person = personService.findPersonByAuthentication(auth);
-        PersonDTO personDTO;
-        personDTO = mapper.map(person, PersonDTO.class);
-        return personDTO;
-    }
+//    public PersonDTO getLoggedPersonDTO() {
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        Person person = personService.findPersonByAuthentication(auth);
+//        PersonDTO personDTO;
+//        personDTO = mapper.map(person, PersonDTO.class);
+//        return personDTO;
+//    }
 
     public PersonName getLoggedPersonName() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

@@ -1,6 +1,6 @@
 package cz.vse.controller;
 
-import cz.vse.dto.old.TCMusterCopyDTO;
+import cz.vse.dto.TCMusterCopyDTO;
 import cz.vse.entity.Defect;
 import cz.vse.entity.DefectStatusEnum;
 import cz.vse.repository.*;

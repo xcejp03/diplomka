@@ -1,7 +1,6 @@
 package cz.vse.mapping.custom;
 
 import cz.vse.dto.ProjectName;
-import cz.vse.dto.old.ProjectsNamesDTO;
 import cz.vse.entity.Project;
 import cz.vse.service.SuiteService;
 import cz.vse.service.TCInstanceService;

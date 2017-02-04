@@ -1,6 +1,6 @@
 package cz.vse.mapping.custom;
 
-import cz.vse.dto.old.WorkListDTO;
+import cz.vse.dto.WorkListDTO;
 import cz.vse.entity.TCMuster;
 import cz.vse.entity.WorkList;
 import cz.vse.entity.WorkTC;
@@ -38,7 +38,9 @@ public class WorkListToWorkListDTO extends CustomMapper<WorkList, WorkListDTO> {
 
     @Override
     public void mapAtoB(WorkList workList, WorkListDTO workListDTO, MappingContext context) {
-
+        l.warn("A -> B");
+        workListDTO.setName(workList.getName());
+        workListDTO.setProject_id(workList.getProject().getId());
 
     }
 
@@ -75,8 +77,6 @@ public class WorkListToWorkListDTO extends CustomMapper<WorkList, WorkListDTO> {
 //            tcMusterIdListOld.add(workTC.getTcMuster().getId());
             }
         }
-
-
 
 
         for (Long tcMusterId : tcMusterIdList) {

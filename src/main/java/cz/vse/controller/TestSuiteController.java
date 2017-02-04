@@ -1,7 +1,6 @@
 package cz.vse.controller;
 
 import cz.vse.dto.TestSuiteForm;
-import cz.vse.dto.old.TestSuiteDTO;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
 import cz.vse.service.SuiteService;

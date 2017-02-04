@@ -1,7 +1,7 @@
 package cz.vse.service;
 
+import cz.vse.dto.TCMusterDTO;
 import cz.vse.dto.TCMusterList;
-import cz.vse.dto.old.TCMusterDTO;
 import cz.vse.entity.*;
 
 import java.util.List;

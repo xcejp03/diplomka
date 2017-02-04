@@ -1,7 +1,7 @@
 package cz.vse.service.impl;
 
 import cz.vse.dto.TSInstanceList;
-import cz.vse.dto.old.TSInstanceRunDTO;
+import cz.vse.dto.TSInstanceRunDTO;
 import cz.vse.entity.StatusEnum;
 import cz.vse.entity.TCInstance;
 import cz.vse.entity.TSInstance;
