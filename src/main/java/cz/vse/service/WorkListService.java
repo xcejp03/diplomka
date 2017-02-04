@@ -1,8 +1,9 @@
 package cz.vse.service;
 
 import cz.vse.dto.WorkListDTO;
+import cz.vse.dto.WorkListForm;
+import cz.vse.dto.WorkListList;
 import cz.vse.entity.Person;
-import cz.vse.entity.TCMuster;
 import cz.vse.entity.WorkList;
 
 import java.util.List;
@@ -15,21 +16,27 @@ public interface WorkListService {
 
     void createWorkList(WorkListDTO workListDTO);
 
+    void createWorkList(WorkListForm workListForm);
+
     void updateWorkList(WorkList workList);
 
     void updateWorkList(WorkListDTO workListDTO);
+
+    void updateWorkList(WorkListForm workListForm);
 
     List<WorkList> findAllWorkList();
 
     List<WorkListDTO> findAllWorkListDTO();
 
-    List<WorkListDTO> findAllWorkListDTOByAuthorId(long id);
+    List<WorkListList> findAllWorkListListByAuthorId(long id);
 
-    List<WorkListDTO> findAllWorkListDTOByMember(long id);
+    List<WorkListList> findAllWorkListListByMember(long id);
 
     WorkList findWorkListById(long id);
 
     WorkListDTO findWorkListDTOById(long id);
+
+    WorkListForm findWorkListFormById(long id);
 
     List<Long> getListTCMusterIdByWorklistInWorkTCDTO(long id);
 

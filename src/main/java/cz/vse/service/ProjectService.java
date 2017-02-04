@@ -1,13 +1,11 @@
 package cz.vse.service;
 
-import cz.vse.dto.PersonDTO;
+import cz.vse.dto.ProjectForm;
+import cz.vse.dto.ProjectName;
 import cz.vse.dto.ProjectDTO;
 import cz.vse.dto.ProjectStatsDTO;
-import cz.vse.dto.ProjectsNamesDTO;
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
-import cz.vse.entity.RoleEnum;
-import cz.vse.entity.TCStatusEnum;
 
 import java.util.List;
 
@@ -20,7 +18,11 @@ public interface ProjectService {
 
     void createTestProject(Project project);
 
+    void createTestProject(ProjectForm projectForm);
+
     void updateTestProject(ProjectDTO projectDTO);
+
+    void updateTestProject(ProjectForm projectForm);
 
     void deleteTestProject(Project projectToDelete);
 
@@ -30,11 +32,16 @@ public interface ProjectService {
 
     ProjectDTO findTestProjectDTOById(long id);
 
+    ProjectForm findTestProjectFormById(long id);
+
+    ProjectName findTestProjectNameById(long id);
+
     List<ProjectDTO> findAllTestProjectsDTO();
 
     List<Project> findAllTestProjects();
 
-    List<ProjectsNamesDTO> findAllTestProjectNameDTOByUserId(long id);
+
+    List<ProjectName> findAllTestProjectNamesByUserId(long id);
 
     List<Project> findAllTestProjectByUserId(long id);
 

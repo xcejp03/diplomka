@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -56,39 +55,30 @@ public class TCController {
     @Autowired
     TCMusterLogic tcMusterLogic;
 
-//    @RequestMapping(method = RequestMethod.GET)
-//    public String tcDefault(Model model) {
-//        l.info("request mapping /tc");
-//        model.addAttribute("tc", new TCMusterDTO());
-//        model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMustersDTO());
-//        model.addAttribute("listTSMusters", tsMusterService.findAllTestStepMustersDTO());
-//        model.addAttribute("listProjects", projectService.findAllTestProjects());
-//        return "tcDashboard";
-//    }
-
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createTC(Model model, @RequestParam(required = false, value = "project") Long projectId) {
-        l.info("request mapping tc/create");
+        l.info("/tc/create");
         Long personId = securityUtils.getLoggedPersonId();
-        TCMusterDTO tcDTO = new TCMusterDTO();
-        tcDTO.setProject_id(projectId);
+        TCMusterForm tcForm = new TCMusterForm();
+        tcForm.setProject_id(projectId);
 
-        model.addAttribute("tcDTO", tcDTO);
+        model.addAttribute("tcForm", tcForm);
 //        model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMustersDTO());
 //        model.addAttribute("listTSMusters", tsMusterService.findAllTestStepMustersDTO());
 //        model.addAttribute("listProjects", projectService.findAllTestProjects());
-        model.addAttribute("usersProjects", projectService.findAllTestProjectNameDTOByUserId(personId));
-        model.addAttribute("projectsSuites", suiteService.findAllTestSuitesByProjectId(projectId));    // xxx
+        model.addAttribute("usersProjects", projectService.findAllTestProjectNamesByUserId(personId));
+        model.addAttribute("projectsSuites", suiteService.findAllTestSuiteListsByProjectId(projectId));    // xxx
         return "tcCreate";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createTSPost(@ModelAttribute("project") TCMusterDTO tcMusterDTO, HttpServletRequest request) {
-        if (tcMusterDTO.getId() == null) {
-            tcMusterDTO.setAuthor_id(securityUtils.getLoggedPersonId());
-            tcMusterService.createTestCaseMuster(tcMusterDTO);
+    public String createTSPost(@ModelAttribute("project") TCMusterForm tcMusterForm, HttpServletRequest request) {
+        l.info("/tc/create saving");
+        if (tcMusterForm.getId() == null) {
+            tcMusterForm.setAuthor_id(securityUtils.getLoggedPersonId());
+            tcMusterService.createTestCaseMuster(tcMusterForm);
         } else {
-            tcMusterService.updateTestCaseMuster(tcMusterDTO);
+            tcMusterService.updateTestCaseMuster(tcMusterForm);
         }
         String referer = request.getHeader("Referer");
         return "redirect:" + referer;
@@ -96,23 +86,25 @@ public class TCController {
 
     @RequestMapping("/edit/{id}")
     public String editTCMuster(@PathVariable("id") long id, Model model) {
-        l.info("/edit/{id}" + id);
+        l.info("/tc/edit/{id}" + id);
         Long personId = securityUtils.getLoggedPersonId();
-        model.addAttribute("tcDTO", tcMusterService.findTestCaseMusterDTOById(id));
+        model.addAttribute("tcForm", tcMusterService.findTestCaseMusterFormById(id));
 //        model.addAttribute("listPersons", personService.findAllPersons());
 //        model.addAttribute("listProjects", projectService.findAllTestProjects());
-        model.addAttribute("listUsersProjects", projectService.findAllTestProjectNameDTOByUserId(personId));
+        model.addAttribute("listUsersProjects", projectService.findAllTestProjectNamesByUserId(personId));
         return "tcCreate";
     }
 
     @RequestMapping("/remove/{id}")
     public String removeTCMuster(@PathVariable("id") long id) {
+        l.info("/tc/remove/" + id);
         tcMusterService.deleteTestCaseMusterById(id);
         return "redirect:/tc/create";
     }
 
     @RequestMapping("/instance/remove/{id}")
     public String removeTInstance(@PathVariable("id") long id) {
+        l.info("/tc/instance/remove/" + id);
         Long tcInstanceMusterId = tcInstanceService.findTestCaseInstanceById(id).gettCMuster().getId();
         tcInstanceService.deleteTestCaseInstanceById(id);
         return "redirect:/tc/history/" + tcInstanceMusterId;
@@ -121,51 +113,52 @@ public class TCController {
     @RequestMapping("/run/{id}")
     public String runTCMuster(Model model, @PathVariable("id") long id,
                               @RequestParam(required = false, value = "worktc") Long worktcId) {
+        l.info("/tc/run/" + id);
         TCInstanceRunDTO tcInstanceRunDTO;
         TCInstance tcInstance;
         Person person = securityUtils.getLoggedPerson();
 //        tcInstanceRunDTO = tcService.runNewTC(id, person);
         tcInstance = tcService.runNewTC(id, person);
-        l.warn("tcService.runNewTC(id, person): " + tcInstance);
+        l.info("tcService.runNewTC(id, person): " + tcInstance);
 
         if (worktcId != null) {
+            l.info("worktcId != null");
             workTCService.addWorkTCHistory(worktcId, tcInstance);
         }
-
         tcInstanceRunDTO = tcInstanceService.findTCInstanceRunDTOById(tcInstance.getId());
-
-        model.addAttribute("tcInstance", tcInstance);
-        model.addAttribute("tsInstances", tsInstanceService.findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
+//        model.addAttribute("tcInstanceRunDTO", tcInstanceRunDTO);
+//        model.addAttribute("tsInstances", tsInstanceService.
+//                findAllTSInstanceListsByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
 
         return "redirect:/tc/show/" + tcInstanceRunDTO.getTcInstance_id();
     }
 
     @RequestMapping("/show/{id}")
     public String showTCMuster(Model model, @PathVariable("id") long id) {
+        l.info("/tc/show/"+id);
         TCInstanceRunDTO tcInstanceRunDTO;
         tcInstanceRunDTO = tcInstanceService.findTCInstanceRunDTOById(id);
-        model.addAttribute("tcInstance", tcInstanceRunDTO);
+        model.addAttribute("tcInstanceRunDTO", tcInstanceRunDTO);
         model.addAttribute("tsInstances", tsInstanceService.
-                findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
-
+                findAllTSInstanceListsByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
         return "tcRun";
     }
 
     @RequestMapping("/history/{id}")
     public String showTCHistory(@PathVariable("id") long id, Model model) {
-        l.info("/history/{id}" + id);
-        model.addAttribute("tc", tcMusterService.findTestCaseMusterDTOById(id));
+        l.info("/tc/history/{id}" + id);
+        model.addAttribute("tc", tcMusterService.findTCMusterListById(id));
 //        model.addAttribute("listTCInstances", tcInstanceService.findAllTCInstancesByTCMusterId(id));
-        model.addAttribute("tcInstances", tcInstanceService.findAllTCInstancesDTOByTCMusterId(id));
+        model.addAttribute("tcInstances", tcInstanceService.findAllTCInstanceListsByTCMusterId(id));
         return "tcHistory";
     }
 
     @RequestMapping(value = "/tc-by-suite/{id}", method = RequestMethod.GET)
     public String tcBySuite(@PathVariable("id") long id, Model model) {
-        l.info("/tc-by-suite/{id} - " + id);
+        l.info("/tc/tc-by-suite/" + id);
 
-        model.addAttribute("tcs", tcService.findAllTCMustersDTOBySuiteId(id));
-        model.addAttribute("suite", suiteService.findTestSuiteById(id));
+        model.addAttribute("tcs", tcService.findAllTCMusterListsBySuiteId(id));
+        model.addAttribute("suite", suiteService.findTestSuiteListById(id));
         return "tcs";
     }
 
@@ -174,17 +167,17 @@ public class TCController {
         l.info("/tc/tcs?filter=" + filter);
         Long loggedUserId = securityUtils.getLoggedPersonId();
         List<Project> projects = projectService.findAllTestProjectByUserId(loggedUserId);
-        List<TCMusterDTO> tcMusters = new ArrayList<>();
+        List<TCMusterList> tcMusters;
         if (filter.equals("all")) {
             l.warn("filtr je all - " + filter);
-            tcMusters = tcMusterService.findTCMustersDTOByProject(projects);
+            tcMusters = tcMusterService.findTCMusterListsByProject(projects);
         } else {
             l.warn("filtr není all, je to: " + filter);
-            tcMusters = tcMusterService.findTCMustersDTOByProject(projectService.findTestProjectById(Long.parseLong(filter)));
+            tcMusters = tcMusterService.findTCMusterListByProject(projectService.findTestProjectById(Long.parseLong(filter)));
         }
         model.addAttribute("tcMusters", tcMusters);
         model.addAttribute("tcMustersCopy", new TCMusterCopyDTO());
-        model.addAttribute("usersProjects", projectService.findAllTestProjectNameDTOByUserId(loggedUserId));
+        model.addAttribute("usersProjects", projectService.findAllTestProjectNamesByUserId(loggedUserId));
 //        model.addAttribute("statusenum", Arrays.asList(StatusEnum.values()));
         return "tcsAll";
     }

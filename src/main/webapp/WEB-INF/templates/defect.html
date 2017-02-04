@@ -163,7 +163,7 @@
             <div class="well">
                 <h3>Reassignuj defekt "<span th:text="${defectDTO.name}"></span>" na někoho jiného </h3>
 
-                <form th:action="@{/defect/writeAssigneChange}" method="post" default-target-url="/index">
+                <form th:action="@{/defect/writeAssigneeChange}" method="post" default-target-url="/index">
                     <div class=" control-group form-group">
                         <div class="controls">
                              <span th:if="${defectDTO.id != null}" th:remove="tag">
@@ -177,7 +177,7 @@
                             <label for="assignee_id">Assignee</label>:
 
                             <select class="form-control" id="assignee_id" name="assignee_id">
-                                <option th:each="person : ${listPersons}"
+                                <option th:each="person : ${personNames}"
                                         th:value="${person.id}"
                                         th:selected="${defectDTO.assignee_id != null} ? ${#strings.contains(person.id, defectDTO.assignee_id)}"
                                         th:text="${person.name}">Assignee
@@ -226,7 +226,7 @@
                         </div>
                     </div>
 
-                    <input type="text" id="author_id" name="author_id" th:value="${loggedPersonDTO.id}"
+                    <input type="text" id="author_id" name="author_id" th:value="${loggedPersonName.id}"
                            hidden="hidden"/>
                 </form>
             </div>
@@ -238,7 +238,7 @@
                 <h3>Komentáře defektu <span th:text="${defectDTO.id}"></span></h3>
                 <div style="overflow: auto; max-height: 600px">
                     <!--th:if="${not #lists.isEmpty(tblUserList)}"-->
-                    <span th:if="${not #lists.isEmpty(listDefectCommentByDefectDTO)}" th:remove="tag">
+                    <span th:if="${not #lists.isEmpty(defectCommentsByDefect)}" th:remove="tag">
                     <table class="table table-striped">
                         <thead>
                         <tr>
@@ -250,7 +250,7 @@
                         </tr>
                         </thead>
                         <tbody th:remove="all-but-first">
-                        <tr th:each="comment : ${ listDefectCommentByDefectDTO}">
+                        <tr th:each="comment : ${ defectCommentsByDefect}">
                             <td th:text="${comment.id}">00</td>
                             <td th:text="${comment.commentText}">Text</td>
                             <td th:text="${comment.author_id}">Název</td>
@@ -277,7 +277,7 @@
                         </span>
                     <input type="text" id="defect_id" name="defect_id" th:value="${defectDTO.id}" hidden="hidden"/>
 
-                    <input type="text" id="author_id" name="author_id" th:value="${loggedPersonDTO.id}"
+                    <input type="text" id="author_id" name="author_id" th:value="${loggedPersonName.id}"
                            hidden="hidden"/>
                     <div class=" control-group form-group">
                         <div class="controls">
@@ -290,7 +290,7 @@
 
                     <input type="text" id="defect_id" name="defect_id" th:value="${defectDTO.id}" hidden="hidden"/>
 
-                    <input type="text" id="author_id" name="author_id" th:value="${loggedPersonDTO.id}"
+                    <input type="text" id="author_id" name="author_id" th:value="${loggedPersonName.id}"
                            hidden="hidden"/>
 
                     <input type="submit" value="Vytvořit" class="btn btn-primary"/>

@@ -1,6 +1,7 @@
 package cz.vse.controller;
 
-import cz.vse.dto.TestSuiteDTO;
+import cz.vse.dto.TestSuiteForm;
+import cz.vse.dto.old.TestSuiteDTO;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
 import cz.vse.service.SuiteService;
@@ -39,15 +40,15 @@ public class TestSuiteController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
 //    public String defectShowByUser(Model model, @RequestParam(required = false, defaultValue = "open", value = "filter") String filter) {
     public String createTestSuite(Model model, @RequestParam(required = false, value = "project") Long projectId) {
-        l.info("request mapping suite/create");
+        l.info("/suite/create");
         Long personId = securityUtils.getLoggedPersonId();
 
-        TestSuiteDTO suiteDTO = new TestSuiteDTO();
+        TestSuiteForm suiteForm = new TestSuiteForm();
         if (projectId != null) {
-            suiteDTO.setProject_id(projectId);
+            suiteForm.setProject_id(projectId);
         }
 
-        model.addAttribute("suiteDTO", suiteDTO);
+        model.addAttribute("suiteDTO", suiteForm);
 //        model.addAttribute("listSuites", suiteService.findAllTestSuites());
 //        model.addAttribute("listSuitesDTO", suiteService.findAllTestSuitesDTO());
 //        model.addAttribute("listProjects", projectService.findAllTestProjects());
@@ -55,44 +56,46 @@ public class TestSuiteController {
 //        model.addAttribute("listPersons", personService.findAllPersons());
 //        model.addAttribute("listTcMusters", tcMusterService.findAllTestCaseMusters());
 
-        model.addAttribute("usersProjects", projectService.findAllTestProjectNameDTOByUserId(personId));
+        model.addAttribute("usersProjects", projectService.findAllTestProjectNamesByUserId(personId));
 
         return "suiteCreate";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createProject(@ModelAttribute("suiteDTO") TestSuiteDTO testSuiteDTO) {
-        if (testSuiteDTO.getId() == null) {
-            suiteService.createTestSuite(testSuiteDTO);
+    public String createProject(@ModelAttribute("suiteDTO") TestSuiteForm suiteForm) {
+        l.info("/suite/create");
+        if (suiteForm.getId() == null) {
+            suiteService.createTestSuite(suiteForm);
         } else {
-            suiteService.updateTestSuite(testSuiteDTO);
+            suiteService.updateTestSuite(suiteForm);
         }
-        return "redirect:/suite/suites-by-project/" + testSuiteDTO.getProject_id();
+        return "redirect:/suite/suites-by-project/" + suiteForm.getProject_id();
     }
 
     @RequestMapping("/edit/{id}")
     public String editTestSuite(@PathVariable("id") int id, Model model) {
-        l.info("/edit/{id}" + id);
+        l.info("/suite/edit/" + id);
         Long personId = securityUtils.getLoggedPersonId();
-        TestSuiteDTO suiteDTO = suiteService.findTestSuiteDTOById(id);
+        TestSuiteForm suiteForm = suiteService.findTestSuiteFormById(id);
 
-        model.addAttribute("suiteDTO", suiteDTO);
+        model.addAttribute("suiteForm", suiteForm);
 //        model.addAttribute("suiteE", suiteService.findTestSuiteById(id));
 //        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
 //        model.addAttribute("listPersons", personService.findAllPersons());
 //        model.addAttribute("listTcMusters", tcMusterService.findAllTestCaseMusters());
 //        model.addAttribute("listTcMustersDTO", tcMusterService.findAllTestCaseMustersDTO());
-        model.addAttribute("tcMustersByProject", tcMusterService.findTCMustersDTOByProjectId(suiteDTO.getProject_id()));
-
-        model.addAttribute("tcMustersDTO", tcMusterService.findAllTestCaseMustersDTOByTestSuiteId(suiteService.findTestSuiteDTOById(id).getId()));
-        model.addAttribute("tcmusterdto", tcMusterService.findTestCaseMusterDTOById(suiteService.findTestSuiteDTOById(id).getId()));
+        model.addAttribute("tcMustersByProject", tcMusterService.findTCMusterNamesByProjectId(suiteForm.getProject_id()));
+        model.addAttribute("usersProjects", projectService.findAllTestProjectNamesByUserId(personId));
+        model.addAttribute("tcMusterNames", tcMusterService.findAllTestCaseMusterNamesByTestSuiteId(suiteService.findTestSuiteDTOById(id).getId()));
+//        model.addAttribute("tcmusterdto", tcMusterService.findTestCaseMusterDTOById(suiteService.findTestSuiteDTOById(id).getId()));
 //        model.addAttribute("listUsersProjectsDTO", projectService.findAllTestProjectNameDTOByUserId(personId));
-
+//        tcMusterNames, tcmuster
         return "suiteCreate";
     }
 
     @RequestMapping("/remove/{id}")
     public String removeSuite(@PathVariable("id") int id, HttpServletRequest request) {
+        l.info("/suite/remove/" + id);
         suiteService.deleteTestSuiteById(id);
         String referer = request.getHeader("Referer");
         return "redirect:" + referer;
@@ -100,10 +103,10 @@ public class TestSuiteController {
 
     @RequestMapping("/suites-by-project/{id}")
     public String suitesByProject(@PathVariable("id") long id, Model model) {
-        l.info("/suites-by-project/{id} - " + id);
+        l.info("/suites/suites-by-project/{id} - " + id);
 
-        model.addAttribute("suites", suiteService.findAllTestSuitesDTOByProjectId(id));
-        model.addAttribute("project", projectService.findTestProjectById(id));
+        model.addAttribute("suites", suiteService.findAllTestSuiteListsByProjectId(id));
+        model.addAttribute("project", projectService.findTestProjectNameById(id));
         return "suites";
     }
 

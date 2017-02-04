@@ -40,7 +40,7 @@
         <div class="col-sm-12">
             <div class="jumbotron">
                 <h1 class="error-404">Spuštěn Test Case Instance<span style="font-style: italic"
-                                                                      th:text="${tcInstance.name}">Test case nezískán</span>
+                                                                      th:text="${tcInstanceRunDTO.name}">Test case nezískán</span>
                 </h1>
             </div>
         </div>
@@ -51,7 +51,7 @@
         <div class=" control-group form-group">
             <div class="controls">
                 <label for="prerequisite">Prerekvizity</label>:
-                <textarea type="text" id="prerequisite" name="prerequisite" th:text="${tcInstance.prerequisite}" readonly="readonly"
+                <textarea type="text" id="prerequisite" name="prerequisite" th:text="${tcInstanceRunDTO.prerequisite}" readonly="readonly"
                           class="form-control"/>
             </div>
         </div>
@@ -59,12 +59,12 @@
         <div class=" control-group form-group">
             <div class="controls">
                 <label for="note">Poznámka</label>:
-                <textarea type="text" id="note" name="note" th:text="${tcInstance.note}" readonly="readonly" class="form-control"/>
+                <textarea type="text" id="note" name="note" th:text="${tcInstanceRunDTO.note}" readonly="readonly" class="form-control"/>
             </div>
         </div>
     </div>
 
-    <a th:href="@{'/tc/history/'+${tcInstance.tcMusters_id}}">Historie TC</a>
+    <a th:href="@{'/tc/history/'+${tcInstanceRunDTO.tcMusters_id}}">Historie TC</a>
 
     <table class="table table-striped">
         <thead>
@@ -95,7 +95,7 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <a th:href="@{'/defect/create'(source='tcInstanceSource_id', sourceid=${tcInstance.id})}"
+            <a th:href="@{'/defect/create'(source='tcInstanceSource_id', sourceid=${tcInstanceRunDTO.id})}"
                class="btn btn-default">Založit Defekt</a>
         </div>
     </div>

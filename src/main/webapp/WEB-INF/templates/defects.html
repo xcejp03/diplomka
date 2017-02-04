@@ -75,29 +75,29 @@
                     <th>TC ID</th>
                     <th>Priorita</th>
                     <th>Název</th>
-                    <th>Affected Version</th>
+                    <!--<th>Affected Version</th>-->
                     <th>Status</th>
-                    <th>created</th>
+                    <!--<th>created</th>-->
                     <th>updated</th>
                     <th>Assignee</th>
-                    <th>Reporter</th>
+                    <!--<th>Reporter</th>-->
                     <th>Detail</th>
                     <th>Edit</th>
                     <th>Více</th>
                 </tr>
                 </thead>
                 <tbody th:remove="all-but-first">
-                <tr th:each="defect : ${listDefectByAssigneeDTO}">
+                <tr th:each="defect : ${defectListByAssignee}">
                     <td th:text="${defect.id}">00</td>
                     <td><span th:class="${defect.priority}" th:text="${defect.priority}">Priorita</span>
                     </td>
                     <td th:text="${defect.name}">Název</td>
-                    <td th:text="${defect.affectsVersion}">Affected version</td>
+                    <!--<td th:text="${defect.affectsVersion}">Affected version</td>-->
                     <td th:text="${defect.status}">Status</td>
-                    <td th:text="${defect.createdDateTime}">Vytvořeno</td>
+                    <!--<td th:text="${defect.createdDateTime}">Vytvořeno</td>-->
                     <td th:text="${defect.updatedDateTime}">updated</td>
                     <td th:text="${defect.assignee_id}">Assignee</td>
-                    <td th:text="${defect.reporter_id}">reporter</td>
+                    <!--<td th:text="${defect.reporter_id}">reporter</td>-->
                     <td><a href="#" th:href="@{'/defect/'+${defect.id}}"
                            th:attr="data-name=${defect.description}"
                            data-id="#detailDialog">Detail</a>
@@ -122,29 +122,29 @@
                     <th>TC ID</th>
                     <th>Priorita</th>
                     <th>Název</th>
-                    <th>Affected Version</th>
+                    <!--<th>Affected Version</th>-->
                     <th>Status</th>
-                    <th>created</th>
+                    <!--<th>created</th>-->
                     <th>updated</th>
                     <th>Assignee</th>
-                    <th>Reporter</th>
+                    <!--<th>Reporter</th>-->
                     <th>Detail</th>
                     <th>Edit</th>
                     <th>Více</th>
                 </tr>
                 </thead>
                 <tbody th:remove="all-but-first">
-                <tr th:each="defect : ${listDefectByReporterDTO}">
+                <tr th:each="defect : ${defectListByReporter}">
                     <td th:text="${defect.id}">00</td>
                     <td><span th:class="${defect.priority}" th:text="${defect.priority}">Priorita</span>
                     </td>
                     <td th:text="${defect.name}">Název</td>
-                    <td th:text="${defect.affectsVersion}">Affected version</td>
+                    <!--<td th:text="${defect.affectsVersion}">Affected version</td>-->
                     <td th:text="${defect.status}">Status</td>
-                    <td th:text="${defect.createdDateTime}">Vytvořeno</td>
+                    <!--<td th:text="${defect.createdDateTime}">Vytvořeno</td>-->
                     <td th:text="${defect.updatedDateTime}">updated</td>
                     <td th:text="${defect.assignee_id}">Assignee</td>
-                    <td th:text="${defect.reporter_id}">reporter</td>
+                    <!--<td th:text="${defect.reporter_id}">reporter</td>-->
                     <td><a href="#" th:href="@{'/defect/'+${defect.id}}"
                            th:attr="data-name=${defect.description}"
                            data-id="#detailDialog">Detail</a>

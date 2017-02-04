@@ -50,11 +50,11 @@
                 <div class="well">
                     <form th:action="@{/suite/create}" method="post" default-target-url="/index">
 
-                        <span th:if="${suiteDTO.id != null}" th:remove="tag">
+                        <span th:if="${suiteForm.id != null}" th:remove="tag">
                             <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="id">ID</label>:
-                                <input type="text" id="id" th:value="${suiteDTO.id}" readonly="true" name="id"
+                                <input type="text" id="id" th:value="${suiteForm.id}" readonly="true" name="id"
                                        class="form-control"/>
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="name">Název</label>:
-                                <input type="text" id="name" name="name" th:value="${suiteDTO.name}"
+                                <input type="text" id="name" name="name" th:value="${suiteForm.name}"
                                        class="form-control"
                                        autofocus="autofocus"/>
                             </div>
@@ -76,21 +76,21 @@
                                 <select class="form-control" id="project_id" name="project_id">
                                     <option th:each="project : ${usersProjects}"
                                             th:value="${project.id}"
-                                            th:selected="${suiteDTO.project_id != null} ? ${#strings.contains(project.id, suiteDTO.project_id)}"
+                                            th:selected="${suiteForm.project_id != null} ? ${#strings.contains(project.id, suiteForm.project_id)}"
                                             th:text="${project.name}">jméno projektu
                                     </option>
                                 </select>
                             </div>
                         </div>
 
-                        <span th:if="${suiteDTO.id != null}" th:remove="tag">
+                        <span th:if="${suiteForm.id != null}" th:remove="tag">
                         <div class="control-group form-group">
                             <div class="controls">
                                 <label for="tcMusters_id">TC vzory</label>:
                                 <select id="tcMusters_id" name="tcMusters_id" class="multipleSelection2"
                                         multiple="multiple" size="10">
                                     <option th:each="tcmuster : ${tcMustersByProject}"
-                                            th:selected="${tcMusters != null} ? ${#lists.contains(tcMustersDTO, tcmuster)}"
+                                            th:selected="${tcMusterNames != null} ? ${#lists.contains(tcMusterNames, tcmuster)}"
                                             th:value="${tcmuster.id}"
                                             th:text="${tcmuster.name}">tc vzory
                                     </option>
@@ -107,10 +107,10 @@
                         </div>
                         </span>
 
-                        <span th:if="${suiteDTO.id != null}" th:remove="tag">
+                        <span th:if="${suiteForm.id != null}" th:remove="tag">
                              <input type="submit" value="Upravit" class="btn btn-primary"/>
                         </span>
-                        <span th:if="${suiteDTO.id == null}" th:remove="tag">
+                        <span th:if="${suiteForm.id == null}" th:remove="tag">
                              <input type="submit" value="Vytvořit" class="btn btn-primary"/>
                         </span>
 
@@ -119,7 +119,7 @@
             </div>
 
             <div class="col-sm-4">
-                <p>  <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-primary">Zpět</a>
+                <p><a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-primary">Zpět</a>
                 </p>
             </div>
 

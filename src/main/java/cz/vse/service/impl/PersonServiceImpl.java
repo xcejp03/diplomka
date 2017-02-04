@@ -1,6 +1,7 @@
 package cz.vse.service.impl;
 
-import cz.vse.dto.PersonDTO;
+import cz.vse.dto.PersonForm;
+import cz.vse.dto.PersonName;
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
 import cz.vse.entity.RoleEnum;
@@ -9,7 +10,6 @@ import cz.vse.repository.PersonRepository;
 import cz.vse.repository.ProjectRepository;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
-import cz.vse.service.RoleService;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,110 +47,159 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
     @Autowired
     ProjectRepository projectRepository;
 
-    public void createPerson(PersonDTO personDTO) {
-        l.info("with: "+ personDTO);
+    public void createPerson(PersonForm personForm) {
+        l.info("with: " + personForm);
         Person person;
-        person = mapper.map(personDTO, Person.class);
+        person = mapper.map(personForm, Person.class);
         person.setCreatedDateTime(LocalDateTime.now());
-        person.setPassword(hashPasswordForUser(personDTO.getPassword()));
+        person.setPassword(hashPasswordForUser(personForm.getPassword()));
         person.setEnabled(true);
         personRepository.save(person);
         l.info("created: " + person);
     }
 
-    public void updatePerson(PersonDTO personDTO) {
-        l.info("with: "+ personDTO);
-        Person person = personRepository.findOne(personDTO.getId());
-        mapper.map(personDTO, person);
-        person.setLastLogged(LocalDateTime.now());
+    public void updatePerson(PersonForm personForm) {
+        l.info("with: " + personForm);
+        Person person = personRepository.findOne(personForm.getId());
+        mapper.map(personForm, person);
         personRepository.save(person);
         l.info("updated: " + person);
     }
 
     public void updatePerson(Person person) {
-        l.info("with: "+ person);
+        l.info("with: " + person);
         personRepository.save(person);
     }
 
     public void updatePerson(List<Person> personList) {
-        l.info("with: "+ personList);
+        l.info("with: " + personList);
         personRepository.save(personList);
     }
 
     public void deletePerson(Person personToDelete) {
-        l.info("with: "+ personToDelete);
+        l.info("with: " + personToDelete);
         personRepository.delete(personToDelete);
         l.info("deleted: " + personToDelete);
     }
 
     public void deletePerson(long personToDeleteById) {
-        l.info("with: "+ personToDeleteById);
+        l.info("with: " + personToDeleteById);
         personRepository.delete(personToDeleteById);
     }
 
     public Person findPersonById(long id) {
-        l.info("with: "+ id);
+        l.info("with: " + id);
         Person person;
         person = personRepository.findOne(id);
         l.info("found: " + person);
         return person;
     }
 
+    @Override
+    public PersonForm findPersonFormById(long id) {
+        l.info("with: " + id);
+        PersonForm personForm;
+        Person person = personRepository.findOne(id);
+        personForm = mapper.map(person, PersonForm.class);
+        l.info("found: " + person);
+        return personForm;
+    }
+
     public List<Person> findAllPersons() {
         List<Person> personList;
         personList = personRepository.findAll();
-        l.info("found: "+ personList.toString());
+        l.info("found: " + personList.toString());
         return personList;
     }
 
-    public List<PersonDTO> findAllPersonsDTO() {
+    public List<PersonForm> findAllPersonForms() {
         List<Person> personList;
-        List<PersonDTO> personDTOList;
+        List<PersonForm> personForms;
         personList = personRepository.findAll();
-        personDTOList = mapper.mapAsList(personList, PersonDTO.class);
+        personForms = mapper.mapAsList(personList, PersonForm.class);
+        personForms.sort(Comparator.comparing(PersonForm::getId));
         l.info("found: " + personList.toString());
-        return personDTOList;
+        return personForms;
     }
 
+    @Override
+    public List<PersonName> findAllPersonNames() {
+        List<Person> people = personRepository.findAll();
+        List<PersonName> personNames = mapper.mapAsList(people, PersonName.class);
+        l.info("found: " + personNames);
+        return personNames;
+    }
+
+    @Override
     public List<Person> findAllPersonByProjectOrderById(Project project) {
-        l.info("with: "+ project);
+        l.info("with: " + project);
         List<Person> personList;
         personList = personRepository.getProjectMembers(Arrays.asList(project));   //asi blbě, předělat
         l.fatal("NENÍ IMPLEMENTOVÁNO - NEFUNGUJE");
-        l.info("found: "+ personList);
+        l.info("found: " + personList);
         return personList;
     }
 
-    public List<PersonDTO> findAllPersonDTOByProjectId(long id) {
-        l.info("with: "+ id);
+    @Override
+    @Deprecated
+    public List<PersonForm> findAllPersonFormsByProjectId(long id) {
+        l.info("with: " + id);
         Project project;
         List<Person> personList;
-        List<PersonDTO> personDTOList;
+        List<PersonForm> personForms;
         project = projectService.findTestProjectById(id);
         personList = findAllPersonByProjectOrderById(project);
-        personDTOList = mapper.mapAsList(personList, PersonDTO.class);
-        l.info("found: "+ personDTOList);
-        return personDTOList;
+        personForms = mapper.mapAsList(personList, PersonForm.class);
+        l.info("found: " + personForms);
+        return personForms;
     }
 
+    @Override
     public List<Person> findAllPersonByProjectIdOrderById(long id) {
-        l.info("with: "+ id);
+        l.info("with: " + id);
         Project project;
         List<Person> personList;
         project = projectService.findTestProjectById(id);
         personList = findAllPersonByProjectOrderById(project);
-        l.info("found: "+ personList);
+        l.info("found: " + personList);
         return personList;
     }
 
+    @Override
+    public List<PersonForm> findAllPersonFormsByProjectIdOrderById(long id) {
+        l.info("with: " + id);
+        Project project;
+        List<Person> people;
+        List<PersonForm> personForms;
+        project = projectService.findTestProjectById(id);
+        people = findAllPersonByProjectOrderById(project);
+        personForms = mapper.mapAsList(people, PersonForm.class);
+        l.info("found: " + personForms);
+        return personForms;
+    }
 
+    @Override
+    public List<PersonName> findAllPersonNamesByProjectIdOrderById(long id) {
+        l.info("with: " + id);
+        Project project;
+        List<Person> people;
+        List<PersonName> personNames;
+        project = projectService.findTestProjectById(id);
+        people = findAllPersonByProjectOrderById(project);
+        personNames = mapper.mapAsList(people, PersonName.class);
+        l.info("found: " + personNames);
+        return personNames;
+    }
+
+    @Override
     public Person findPersonByLogin(String login) {
-        l.info("with: "+ login);
+        l.info("with: " + login);
         return personRepository.findByUsername(login);
     }
 
+    @Override
     public Person findPersonByName(String name) {
-        l.info("with: "+ name);
+        l.info("with: " + name);
         return personRepository.findByName(name);
     }
 
@@ -169,7 +218,7 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
 
     private User buildUserForAuthentication(Person user,
                                             List<GrantedAuthority> authorities) {
-        l.info("build new user with: "+user + "and" + authorities);
+        l.info("build new user with: " + user + "and" + authorities);
         return new User(user.getUsername(), user.getPassword(),
                 user.isEnabled(), true, true, true, authorities);
     }
@@ -189,10 +238,10 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
     }
 
     public Person findPersonByAuthentication(Authentication auth) {
-        l.info("with: "+ auth);
+        l.info("with: " + auth);
         UserDetails userDetail = (UserDetails) auth.getPrincipal();
         Person person = findPersonByLogin(userDetail.getUsername());
-        l.info("found: "+ person);
+        l.info("found: " + person);
         return person;
     }
 
@@ -204,28 +253,28 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
     }
 
     @Override
-    public List<PersonDTO> getProjectMembers(long id) {
-        l.info("with: "+ id);
+    public List<PersonName> getProjectMembers(long id) {
+        l.info("with: " + id);
         Project project = projectService.findTestProjectById(id);
         List<Project> projects = new ArrayList<>();
         projects.add(project);
         List<Person> people = personRepository.getProjectMembers(projects);
-        List<PersonDTO> peopleDTO;
-        peopleDTO = mapper.mapAsList(people, PersonDTO.class);
-        l.info("getted: "+ peopleDTO);
-        return peopleDTO;
+        List<PersonName> personNames;
+        personNames = mapper.mapAsList(people, PersonName.class);
+        l.info("getted: " + personNames);
+        return personNames;
     }
 
     @Override
-    public List<PersonDTO> getProjectMembers(long projectId, RoleEnum roleEnum) {
-        l.info("with: "+ projectId+ " and "+ roleEnum);
+    public List<PersonName> getProjectMembers(long projectId, RoleEnum roleEnum) {
+        l.info("with: " + projectId + " and " + roleEnum);
         Project project = projectService.findTestProjectById(projectId);
         List<Project> projects = new ArrayList<>();
         projects.add(project);
         List<Person> people = personRepository.getProjectMembers(projects, roleEnum);
-        List<PersonDTO> peopleDTO;
-        peopleDTO = mapper.mapAsList(people, PersonDTO.class);
-        l.info("found: "+ peopleDTO);
-        return peopleDTO;
+        List<PersonName> personNames;
+        personNames = mapper.mapAsList(people, PersonName.class);
+        l.info("found: " + personNames);
+        return personNames;
     }
 }

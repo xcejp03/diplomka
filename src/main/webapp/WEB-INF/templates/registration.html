@@ -43,16 +43,16 @@
     </div>
 
     <div class="container">
-        <div th:if="${personDTO != null}" th:remove="tag">
+        <div th:if="${personForm != null}" th:remove="tag">
             <div class="row">
                 <div class="col-sm-4">
                     <div class="well">
                         <form th:action="@{/person/create}" method="post" default-target-url="/index">
-                        <span th:if="${personDTO.id != null}" th:remove="tag">
+                        <span th:if="${personForm.id != null}" th:remove="tag">
                             <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="id">ID</label>:
-                                <input type="text" id="id" name="id" th:value="${personDTO.id}" readonly="true"
+                                <input type="text" id="id" name="id" th:value="${personForm.id}" readonly="true"
                                        class="form-control"/>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                             <div class=" control-group form-group">
                                 <div class="controls">
                                     <label for="name">Jméno</label>:
-                                    <input type="text" id="name" th:value="${personDTO.name}" name="name"
+                                    <input type="text" id="name" th:value="${personForm.name}" name="name"
                                            class="form-control"
                                            autofocus="autofocus"/>
                                 </div>
@@ -70,12 +70,12 @@
                             <div class=" control-group form-group">
                                 <div class="controls">
                                     <label for="username">Uživatelské jméno</label>:
-                                    <input type="text" id="username" th:value="${personDTO.username}" name="username"
+                                    <input type="text" id="username" th:value="${personForm.username}" name="username"
                                            class="form-control"/>
                                 </div>
                             </div>
 
-                            <span th:if="${personDTO.id == null}" th:remove="tag">
+                            <span th:if="${personForm.id == null}" th:remove="tag">
                         <div class="control-group form-group">
                             <div class="controls">
                                 <label for="password">Password</label>:
@@ -85,21 +85,21 @@
                         </div>
                         </span>
 
-                            <span th:if="${personDTO.id != null}" th:remove="tag">
+                            <span th:if="${personForm.id != null}" th:remove="tag">
                         <div class="control-group form-group">
                             <div class="controls">
                                 <label for="enabled">Aktivní</label>:
-                                <input type="checkbox" th:checked="${personDTO.enabled}" name="enabled" id="enabled"
+                                <input type="checkbox" th:checked="${personForm.enabled}" name="enabled" id="enabled"
                                        class="checkbox"/>
                                 <!--<input type="enabled" id="enabled" class="form-control" name="enabled"/> <br/>-->
                             </div>
                         </div>
                         </span>
 
-                            <span th:if="${personDTO.id != null}" th:remove="tag">
+                            <span th:if="${personForm.id != null}" th:remove="tag">
                              <input type="submit" value="Upravit" class="btn btn-primary"/>
                         </span>
-                            <span th:if="${personDTO.id == null}" th:remove="tag">
+                            <span th:if="${personForm.id == null}" th:remove="tag">
                              <input type="submit" value="Založit" class="btn btn-primary"/>
                         </span>
                         </form>
@@ -129,7 +129,7 @@
                             <td th:text="${user.id}">00</td>
                             <td th:text="${user.name}">Projekt</td>
                             <td th:text="${user.username}">Projekt</td>
-                            <td th:text="${user.createdDate}">Projekt</td>
+                            <td th:text="${user.createdDateTime}">Projekt</td>
                             <td th:text="${user.lastLogged}">Projekt</td>
                             <td><a th:href="@{'/person/edit/'+${user.id}}">Editace</a></td>
                         </tr>

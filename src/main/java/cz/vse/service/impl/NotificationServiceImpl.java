@@ -1,24 +1,11 @@
 package cz.vse.service.impl;
 
-import cz.vse.dto.WorkListDTO;
-import cz.vse.dto.WorkTCDTO;
-import cz.vse.entity.Person;
-import cz.vse.entity.WorkList;
-import cz.vse.repository.WorkListRepository;
 import cz.vse.service.NotificationService;
-import cz.vse.service.PersonService;
-import cz.vse.service.WorkListService;
-import cz.vse.service.WorkTCService;
-import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 

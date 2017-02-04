@@ -1,5 +1,6 @@
-package cz.vse.dto;
+package cz.vse.dto.old;
 
+import cz.vse.dto.*;
 import cz.vse.entity.RoleEnum;
 import cz.vse.entity.UserRole;
 
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  * Created by pcejka on 10.10.2016.
  */
-public class PersonDTO extends BaseDTO {
+public class PersonDTO extends cz.vse.dto.BaseDTO {
     private String name;
     private String username;
     private String password;

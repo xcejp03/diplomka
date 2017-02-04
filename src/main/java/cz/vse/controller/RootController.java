@@ -1,6 +1,6 @@
 package cz.vse.controller;
 
-import cz.vse.dto.TCMusterCopyDTO;
+import cz.vse.dto.old.TCMusterCopyDTO;
 import cz.vse.entity.Defect;
 import cz.vse.entity.DefectStatusEnum;
 import cz.vse.repository.*;
@@ -10,7 +10,6 @@ import cz.vse.utils.excelexport.ExcelBuilderDefects;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
@@ -18,7 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -86,9 +84,9 @@ public class RootController {
         // create some sample data
         List<Defect> defects = new ArrayList<>();
 
-        defects.add(defectService.findDefectById(110L));
-        defects.add(defectService.findDefectById(112L));
-        defects.add(defectService.findDefectById(114L));
+        defects.add(defectService.findDefect(110L));
+        defects.add(defectService.findDefect(112L));
+        defects.add(defectService.findDefect(114L));
 
 
         // return a view which will be resolved by an excel view resolver

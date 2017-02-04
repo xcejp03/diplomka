@@ -1,6 +1,6 @@
 package cz.vse.controller;
 
-import cz.vse.dto.PersonDTO;
+import cz.vse.dto.PersonName;
 import cz.vse.dto.ProjectDTO;
 import cz.vse.entity.*;
 import cz.vse.repository.TCInstanceRepository;
@@ -72,27 +72,12 @@ public class TestController {
         return "projectCreate";
     }
 
-    @RequestMapping(value = "/thym", method = RequestMethod.GET)
-    public String thyme(Model model) {
-        l.info("request mapping project/create");
-        model.addAttribute("project", new ProjectDTO());
-        model.addAttribute("person", new PersonDTO());
-//        model.addAttribute("project", new ProjectDTO());
-//        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
-        model.addAttribute("listPersons", personService.findAllPersons());
-//        model.addAttribute("listSuites", suiteService.findAllTestSuites());
-        model.addAttribute("vlozit");
-
-//        projectService.createTestProject(createProjectData());
-
-        return "thyme";
-    }
 
     @RequestMapping(value = "/thym2", method = RequestMethod.GET)
     public String thym2(Model model) {
         l.info("request mapping project/create");
         model.addAttribute("project", new ProjectDTO());
-        model.addAttribute("person", new PersonDTO());
+        model.addAttribute("person", new PersonName());
 //        model.addAttribute("project", new ProjectDTO());
 //        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
         model.addAttribute("listPersons", personService.findAllPersons());

@@ -1,7 +1,6 @@
 package cz.vse.mapping.custom;
 
 import cz.vse.dto.ProjectStatsDTO;
-import cz.vse.dto.WorkListDTO;
 import cz.vse.entity.*;
 import cz.vse.service.TCInstanceService;
 import cz.vse.service.TCMusterService;
@@ -11,10 +10,6 @@ import ma.glasnost.orika.MappingContext;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by pcejka on 26.11.2016.

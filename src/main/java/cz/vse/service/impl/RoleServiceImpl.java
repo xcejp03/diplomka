@@ -1,6 +1,7 @@
 package cz.vse.service.impl;
 
-import cz.vse.dto.PersonDTO;
+import cz.vse.dto.PersonForm;
+import cz.vse.dto.old.PersonDTO;
 import cz.vse.entity.Person;
 import cz.vse.entity.RoleEnum;
 import cz.vse.entity.UserRole;
@@ -75,6 +76,20 @@ public class RoleServiceImpl implements RoleService {
 //
         if (personDTO.getUserRolesEnum() != null) {
             for (RoleEnum role : personDTO.getUserRolesEnum()) {
+                userRoleList.add(new UserRole(personFromDB, role));
+            }
+            userRoleRepository.save(userRoleList);
+        }
+    }
+
+    @Override
+    public void updateRoleForUser(PersonForm personForm) {
+        List<UserRole> userRoleList = new ArrayList<>();
+        Person personFromDB = personService.findPersonById(personForm.getId());
+        userRoleRepository.delete(personFromDB.getUserRole());
+//
+        if (personForm.getUserRolesEnum() != null) {
+            for (RoleEnum role : personForm.getUserRolesEnum()) {
                 userRoleList.add(new UserRole(personFromDB, role));
             }
             userRoleRepository.save(userRoleList);

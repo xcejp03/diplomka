@@ -1,6 +1,7 @@
 package cz.vse.service;
 
-import cz.vse.dto.TSInstanceRunDTO;
+import cz.vse.dto.TSInstanceList;
+import cz.vse.dto.old.TSInstanceRunDTO;
 import cz.vse.entity.TSInstance;
 
 import java.util.List;
@@ -26,4 +27,6 @@ public interface TSInstanceService {
     List<TSInstance> findAllTestStepInstances();
 
     List<TSInstance> findAllTSInstancesByTCInstanceId(Long id);
+
+    List<TSInstanceList> findAllTSInstanceListsByTCInstanceId(Long id);
 }

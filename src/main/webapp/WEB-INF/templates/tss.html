@@ -41,7 +41,7 @@
         <div class="col-sm-12">
             <div class="jumbotron">
                 <h1 class="error-404">Seznam Test Stepů v Test Casu <span style="font-style: italic"
-                                                                          th:text="${tc.name}">Test case nezískán</span>
+                                                                          th:text="${tcName.name}">Test case nezískán</span>
                 </h1>
             </div>
         </div>
@@ -61,16 +61,16 @@
         </tr>
         </thead>
         <tbody th:remove="all-but-first">
-        <tr th:each="ts : ${tss}">
+        <tr th:each="ts : ${tsLists}">
             <td th:text="${ts.id}">00</td>
             <td><a href="#" class="opener"
-                   th:attr="data-name=${tc.name}, data-updated=${ts.updatedDateTime}, data-owner=${ts.author_id}"
+                   th:attr="data-name=${tcName.name}, data-updated=${ts.updatedDateTime}, data-owner=${ts.author_id}"
                    data-id="#detailDialog">Detail</a>
             </td>
             <td th:text="${ts.action}">Akce</td>
             <td th:text="${ts.expected}">Expected</td>
             <td th:text="${ts.createdDateTime}">Vytvořeno</td>
-            <td><a th:href="@{'/ts/edit/'+${ts.id}+'?tcmuster='+ ${tc.id}}">Editace</a></td>
+            <td><a th:href="@{'/ts/edit/'+${ts.id}+'?tcmuster='+ ${tcName.id}}">Editace</a></td>
             <td><a href="#" class="opener"
                    th:attr="data-objectid=${ts.id}" data-id="#moreDialog">Více</a>
             </td>
@@ -78,8 +78,8 @@
         </tbody>
     </table>
 
-    <div th:if="${tc != null}" th:remove="tag">
-        <a th:href="@{'/ts/create/'+'?tcmuster='+ ${tc.id}}" class="btn btn-default">Založit Test
+    <div th:if="${tcName != null}" th:remove="tag">
+        <a th:href="@{'/ts/create/'+'?tcmuster='+ ${tcName.id}}" class="btn btn-default">Založit Test
             Step</a>
     </div>
     <!--<p><a href="/ts/create" class="btn btn-default">Nový Test Step</a></p>-->

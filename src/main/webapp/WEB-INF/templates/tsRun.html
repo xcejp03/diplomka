@@ -45,11 +45,11 @@
                 <div class="well">
                     <form th:action="@{/ts/run}" method="post" default-target-url="/index">
 
-                        <span th:if="${tsDTO.id != null}" th:remove="tag">
+                        <span th:if="${tsInstanceRun.id != null}" th:remove="tag">
                             <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="id">ID</label>:
-                                <input type="text" id="id" th:value="${tsDTO.id}" readonly="true" name="id"
+                                <input type="text" id="id" th:value="${tsInstanceRun.id}" readonly="true" name="id"
                                        class="form-control"/>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                                 <label for="action">Akce</label>:
                                 <textarea type="text" id="action"
                                           readonly="true" name="action"
-                                          th:text="${tsDTO.action}"
+                                          th:text="${tsInstanceRun.action}"
                                           class="form-control"
                                 />
                             </div>
@@ -71,7 +71,7 @@
                                 <label for="expected">Očekávané chování</label>:
                                 <textarea type="text" id="expected"
                                        readonly="true" name="expected"
-                                       th:text="${tsDTO.expected}"
+                                       th:text="${tsInstanceRun.expected}"
                                        class="form-control"
                                 />
                             </div>
@@ -81,7 +81,7 @@
                             <div class="controls">
                                 <label for="result">Výsledek</label>:
                                 <textarea type="text" id="result" name="result"
-                                       th:text="${tsDTO.result}"
+                                       th:text="${tsInstanceRun.result}"
                                        autofocus="autofocus" class="form-control"/>
                             </div>
                         </div>
@@ -95,7 +95,7 @@
                                     <option th:each="status : ${statuses}"
                                             th:value="${status}"
                                             th:class="${status}"
-                                            th:selected="${tsDTO.status != null} ? ${#arrays.contains(tsDTO.status, status)}"
+                                            th:selected="${tsInstanceRun.status != null} ? ${#arrays.contains(tsInstanceRun.status, status)}"
                                             th:text="${status}">jméno projektu
                                     </option>
                                 </select>
@@ -105,16 +105,16 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <input type="hidden" id="tcInstance_id" name="tcInstance_id"
-                                       th:value="${tsDTO.tcInstance_id}" class="form-control"/>
+                                       th:value="${tsInstanceRun.tcInstance_id}" class="form-control"/>
                             </div>
                         </div>
 
                         <!--<div hidden th:value="tcInstance_id"/>-->
 
-                        <span th:if="${tsDTO.id != null}" th:remove="tag">
+                        <span th:if="${tsInstanceRun.id != null}" th:remove="tag">
                              <input type="submit" value="Upravit" class="btn btn-primary"/>
                         </span>
-                        <span th:if="${tsDTO.id == null}" th:remove="tag">
+                        <span th:if="${tsInstanceRun.id == null}" th:remove="tag">
                              <input type="submit" value="Vytvořit" class="btn btn-primary"/>
                         </span>
 
@@ -124,11 +124,11 @@
             <div class="col-sm-8">
 
 
-                <p><a th:href="@{'/defect/create'(source='tsInstanceSource_id', sourceid=${tsDTO.id})}"
+                <p><a th:href="@{'/defect/create'(source='tsInstanceSource_id', sourceid=${tsInstanceRun.id})}"
                       class="btn btn-default" target="_blank">Založit Defekt pro step</a></p>
             </div>
             <div class="col-sm-8">
-                <p><a th:href="@{'/tc/show/'+${tsDTO.tcInstance_id}}"
+                <p><a th:href="@{'/tc/show/'+${tsInstanceRun.tcInstance_id}}"
                       class="btn btn-default">Zpět</a>
                 </p>
             </div>

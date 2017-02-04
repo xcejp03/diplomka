@@ -1,6 +1,7 @@
 package cz.vse.controller;
 
-import cz.vse.dto.PersonDTO;
+import cz.vse.dto.PersonForm;
+import cz.vse.dto.old.PersonDTO;
 import cz.vse.entity.RoleEnum;
 import cz.vse.service.PersonService;
 import cz.vse.service.RoleService;
@@ -34,17 +35,17 @@ public class PersonController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createProjectForm(Model model) {
         l.info("request mapping person/create");
-        model.addAttribute("personDTO", new PersonDTO());
+        model.addAttribute("personForm", new PersonForm());
 //        model.addAttribute("listPersons", personService.findAllPersons());
         return "registration";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createProject(@ModelAttribute("person") PersonDTO personDTO) {
-        if (personDTO.getId() == null) {
-            personService.createPerson(personDTO);
+    public String createProject(@ModelAttribute("person") PersonForm personForm) {
+        if (personForm.getId() == null) {
+            personService.createPerson(personForm);
         } else {
-            personService.updatePerson(personDTO);
+            personService.updatePerson(personForm);
         }
         return "redirect:edit";
     }
@@ -52,8 +53,8 @@ public class PersonController {
 
     @RequestMapping("/edit/{id}")
     public String editPerson(@PathVariable("id") int id, Model model) {
-        l.info("/edit/" + id);
-        model.addAttribute("personDTO", personService.findPersonById(id));
+        l.info("/person/edit/" + id);
+        model.addAttribute("personForm", personService.findPersonFormById(id));
 //        model.addAttribute("personDTOList", personService.findAllPersonsDTO());
 //        model.addAttribute("enumRoles", RoleEnum.values());
 //        model.addAttribute("userEnumRoleList", roleService.findUsersRoleEnum(id));
@@ -63,14 +64,16 @@ public class PersonController {
 
     @RequestMapping("/edit")
     public String editAllPerson(Model model) {
-        model.addAttribute("persons", personService.findAllPersonsDTO());
-//        model.addAttribute("personDTO", new PersonDTO());
+        l.info("/person/edit");
+        model.addAttribute("persons", personService.findAllPersonForms());
+//        model.addAttribute("personForm", new PersonForm());
 //        model.addAttribute("listPersons", personService.findAllPersons());
         return "registration";
     }
 
     @RequestMapping("/remove/{id}")
     public String removePerson(@PathVariable("id") int id) {
+        l.info("/person/remove/"+id);
         personService.deletePerson(id);
         return "redirect:/person/create";
     }
@@ -78,14 +81,14 @@ public class PersonController {
     @RequestMapping(value = "/role", method = RequestMethod.GET)
     public String editPersonRoleGET(Model model) {
         l.info("person/role");
-        model.addAttribute("persons", personService.findAllPersonsDTO());
+        model.addAttribute("persons", personService.findAllPersonNames());
         model.addAttribute("enumRoles", RoleEnum.values());
         return "userRole";
     }
     @RequestMapping(value = "/role/{id}", method = RequestMethod.GET)
     public String editPersonRoleGETWithId(@PathVariable("id") int id, Model model) {
-        l.info("person/role");
-        model.addAttribute("personDTO", personService.findPersonById(id));
+        l.info("person/role/"+id);
+        model.addAttribute("personForm", personService.findPersonFormById(id));
 //        model.addAttribute("personDTOList", personService.findAllPersonsDTO());
         model.addAttribute("enumRoles", RoleEnum.values());
         model.addAttribute("userEnumRoles", roleService.findUsersRoleEnum(id));
@@ -94,12 +97,12 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/role", method = RequestMethod.POST)
-    public String editPersonRolePOST(Model model, PersonDTO personDTO) {
-        l.info("person/role saving");
+    public String editPersonRolePOST(PersonForm personForm) {
+        l.info("person/role saving: "+personForm);
 //        model.addAttribute("personDTO", new PersonDTO());
 //        model.addAttribute("personDTOList", personService.findAllPersonsDTO());
 //        model.addAttribute("enumRoles", RoleEnum.values());
-        roleService.updateRoleForUser(personDTO);
+        roleService.updateRoleForUser(personForm);
         return "redirect:role";
     }
 

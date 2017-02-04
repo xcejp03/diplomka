@@ -13,7 +13,6 @@ import java.util.List;
  * Created by pcejka on 28.11.2016.
  */
 public interface ProjectRepository extends BaseRepository<Project> {
-    Project findById(long id);
     Project findByTestSuitesIn(List<TestSuite> suites);
 
     List<Project> findAllProjectsByPersonMembersIdOrderById(Long id);

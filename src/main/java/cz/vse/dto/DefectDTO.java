@@ -1,10 +1,7 @@
 package cz.vse.dto;
 
-import cz.vse.entity.*;
-
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import java.time.LocalDateTime;
+import cz.vse.entity.DefectStatusEnum;
+import cz.vse.entity.PriorityDefectEnum;
 
 /**
  * Created by pcejka on 10.10.2016.

@@ -1,9 +1,7 @@
 package cz.vse.dto;
 
-import cz.vse.entity.Person;
 import cz.vse.entity.StatusEnum;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**

@@ -14,6 +14,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import java.awt.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +53,7 @@ public class StartupHousekeeper {
 //        helpService.najdiPosledniTCInstanci(40);
         playSoundAfterStart();
 //        delej();
+
     }
 
     private void delej() {
@@ -61,6 +63,8 @@ public class StartupHousekeeper {
 
         l.warn("getNumberOfSuitesInProject: " + testSuiteRepository.getNumberOfSuitesInProject(project));
     }
+
+
 
 
     public void playSoundAfterStart() {
@@ -78,14 +82,14 @@ public class StartupHousekeeper {
     }
 
     private void clearProjectMembers() {
-        Project project10 = projectRepository.findById(10L);
-        Project project11 = projectRepository.findById(11L);
-        Project project12 = projectRepository.findById(12L);
+        Project project10 = projectRepository.findOne(10L);
+        Project project11 = projectRepository.findOne(11L);
+        Project project12 = projectRepository.findOne(12L);
 
 //        Person person0 = project.getPersonMembers().get(0);
 //        Person person1 = project.getPersonMembers().get(1);
 
-        Person person = personRepository.findById(21L);
+        Person person = personRepository.findOne(21L);
         person.getProjectsMember().remove(project10);
         person.getProjectsMember().remove(project11);
 

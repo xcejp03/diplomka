@@ -1,9 +1,8 @@
 package cz.vse.mapping.custom;
 
-import cz.vse.dto.ProjectStatsDTO;
-import cz.vse.dto.ProjectsNamesDTO;
+import cz.vse.dto.ProjectName;
+import cz.vse.dto.old.ProjectsNamesDTO;
 import cz.vse.entity.Project;
-import cz.vse.entity.StatusEnum;
 import cz.vse.service.SuiteService;
 import cz.vse.service.TCInstanceService;
 import cz.vse.service.TCMusterService;
@@ -18,7 +17,7 @@ import org.springframework.stereotype.Component;
  * Created by pcejka on 26.11.2016.
  */
 @Component
-public class ProjectToProjectNamesDTO extends CustomMapper<Project, ProjectsNamesDTO> {
+public class ProjectToProjectName extends CustomMapper<Project, ProjectName> {
     private final Logger l = Logger.getLogger(this.getClass());
 
     @Autowired
@@ -33,10 +32,10 @@ public class ProjectToProjectNamesDTO extends CustomMapper<Project, ProjectsName
     @Autowired
     private SuiteService suiteService;
     @Override
-    public void mapAtoB(Project project, ProjectsNamesDTO projectsNamesDTO, MappingContext context) {
+    public void mapAtoB(Project project, ProjectName projectName, MappingContext context) {
         l.warn("ProjectToProjectNamesDTO A->B");
-        super.mapAtoB(project, projectsNamesDTO, context);
-        projectsNamesDTO.setNumberOfTestSuites(suiteService.getNumberOfSuitesInProject(project));
+        super.mapAtoB(project, projectName, context);
+        projectName.setNumberOfTestSuites(suiteService.getNumberOfSuitesInProject(project));
     }
 
 }

@@ -1,6 +1,7 @@
 package cz.vse.service.impl;
 
-import cz.vse.dto.TSInstanceRunDTO;
+import cz.vse.dto.TSInstanceList;
+import cz.vse.dto.old.TSInstanceRunDTO;
 import cz.vse.entity.StatusEnum;
 import cz.vse.entity.TCInstance;
 import cz.vse.entity.TSInstance;
@@ -38,23 +39,23 @@ public class TSInstanceServiceImpl implements TSInstanceService {
     private MapperFacade mapper;
 
     public void createTestStepInstance(TSInstance tsInstance) {
-        l.debug("creating TSInstance - service");
+        l.info("with: " + tsInstance);
         tsInstance.setCreatedDateTime(LocalDateTime.now());
         tsInstance.setStatus(StatusEnum.NORUN);
         tsInstanceRepository.save(tsInstance);
-        l.info("created TSInstance - service: " + tsInstance);
+        l.info("created: " + tsInstance);
     }
 
     public void updateTestStepInstance(TSInstance tsInstance) {
-        l.debug("updating TSInstance - service");
+        l.info("with: " + tsInstance);
         tsInstance.setUpdatedDateTime(LocalDateTime.now());
         tsInstanceRepository.save(tsInstance);
         tcInstanceService.refreshTCInstanceStatus(tsInstance.gettCInstance().getId());
-        l.info("updated TSInstance - service: " + tsInstance);
+        l.info("updated: "+ tsInstance);
     }
 
     public void updateTestStepInstance(TSInstanceRunDTO tsInstanceRunDTO) {
-        l.debug("updating TSInstance - service");
+        l.info("with: " + tsInstanceRunDTO);
         TSInstance tsInstance = findTestStepInstanceById(tsInstanceRunDTO.getId());
 
         mapper.map(tsInstanceRunDTO, tsInstance);
@@ -62,53 +63,63 @@ public class TSInstanceServiceImpl implements TSInstanceService {
         l.info(tsInstance);
         tsInstanceRepository.save(tsInstance);
         tcInstanceService.refreshTCInstanceStatus(tsInstance.gettCInstance().getId());
-        l.info("updated TSInstance - service: " + tsInstance);
+        l.info("updated: "+ tsInstance);
     }
 
     public void deleteTestStepInstance(TSInstance tsInstanceToDelete) {
-        l.debug("deleting TSInstance - service");
+        l.info("with: " + tsInstanceToDelete);
         tsInstanceRepository.save(tsInstanceToDelete);
-        l.info("TSInstance deleted - service: " + tsInstanceToDelete);
+        l.info("deleted: "+ tsInstanceToDelete);
     }
 
     public void deleteTestStepInstanceById(long testStepInstanceToDeleteById) {
-        l.debug("deleting TSInstance - service");
+        l.info("with: " + testStepInstanceToDeleteById);
         TSInstance TSInstanceToDelete;
         tsInstanceRepository.delete(testStepInstanceToDeleteById);
-        l.info("TSInstance deleted - service: " + testStepInstanceToDeleteById);
+        l.info("deleted: "+ testStepInstanceToDeleteById);
     }
 
     public TSInstance findTestStepInstanceById(long id) {
-        l.debug("finding TSInstance - service");
+        l.info("with: " + id);
         TSInstance tsInstance;
         tsInstance = tsInstanceRepository.findOne(id);
-        l.info("TSInstance founf - service: " + id + " - " + tsInstance);
+        l.info("found: "+ tsInstance);
         return tsInstance;
     }
 
     public List<TSInstance> findAllTSInstancesByTCInstanceId(Long id) {
-        l.info("finding TSInstances by TC id - "+id);
+        l.info("with: " + id);
         List<TSInstance> tsInstanceList;
 
         TCInstance tcInstance = tcInstanceRepository.findOne(id);
         tsInstanceList = tsInstanceRepository.findAllTestStepInstancesByTCInstanceOrderById(tcInstance);
+        l.info("found: "+ tsInstanceList);
         return tsInstanceList;
     }
 
+    @Override
+    public List<TSInstanceList> findAllTSInstanceListsByTCInstanceId(Long id) {
+        l.info("with: " + id);
+        List<TSInstanceList> tsInstanceLists;
+        TCInstance tcInstance = tcInstanceRepository.findOne(id);
+        List<TSInstance> tsInstances = tsInstanceRepository.findAllTestStepInstancesByTCInstanceOrderById(tcInstance);
+        tsInstanceLists = mapper.mapAsList(tsInstances, TSInstanceList.class);
+        l.info("found: " + tsInstanceLists);
+        return tsInstanceLists;
+    }
 
     public TSInstanceRunDTO findTestStepInstanceRunDTOById(long id) {
-        l.debug("finding TSInstance - service");
+        l.info("with: " + id);
         TSInstance tsInstance = tsInstanceRepository.findOne(id);
         TSInstanceRunDTO tsInstanceRunDTO = mapper.map(tsInstance, TSInstanceRunDTO.class);
-        l.info("TSInstance founf - service: " + id + " - " + tsInstanceRunDTO);
+        l.info("found: "+ tsInstanceRunDTO);
         return tsInstanceRunDTO;
     }
 
     public List<TSInstance> findAllTestStepInstances() {
-        l.debug("finding all testStepInstances - service");
         List<TSInstance> tsInstanceList;
         tsInstanceList = tsInstanceRepository.findAll(new Sort(Sort.Direction.ASC, "id"));
-        l.info("found all testStepInstances - service: " + tsInstanceList.toString());
+        l.info("found: "+ tsInstanceList);
         return tsInstanceList;
     }
 }

@@ -2,6 +2,7 @@ package cz.vse.service;
 
 import cz.vse.dto.DefectCommentDTO;
 import cz.vse.dto.DefectDTO;
+import cz.vse.dto.DefectForm;
 import cz.vse.entity.Defect;
 import cz.vse.entity.DefectComment;
 import cz.vse.entity.Person;
@@ -30,13 +31,19 @@ public interface DefectCommentService {
 
     List<DefectComment> findAllDefectsComments(Defect defect);
 
+    List<DefectComment> findAllDefectsCommentsByDefectId(Long defectId);
+
     List<DefectCommentDTO> findAllDefectsCommentsDTOAllTest();
 
     List<DefectCommentDTO> findAllDefectCommentDTOByDefect(Defect defect);
 
     List<DefectCommentDTO> findAllDefectCommentDTOByDefectId(long id);
 
+    void writeDefectStatusChange(DefectForm defectForm, Person author);
+
     void writeDefectStatusChange(DefectDTO defectDTO, Person author);
+
+    void writeDefectAssigneeChange(DefectForm defectForm, Person author);
 
     void writeDefectAssigneeChange(DefectDTO defectDTO, Person author);
 }

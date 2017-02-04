@@ -13,9 +13,9 @@ import java.util.List;
  * Created by pcejka on 28.11.2016.
  */
 public interface DefectRepository extends BaseRepository<Defect> {
-    List<Defect> findAllDefectDTOByReporterAndStatus(Person person, DefectStatusEnum statusEnum);
+    List<Defect> findAllDefectsByReporterAndStatus(Person person, DefectStatusEnum statusEnum);
 
-    List<Defect> findAllDefectDTOByAssigneeAndStatus(Person person, DefectStatusEnum statusEnum);
+    List<Defect> findAllDefectsByAssigneeAndStatus(Person person, DefectStatusEnum statusEnum);
 
 
 }

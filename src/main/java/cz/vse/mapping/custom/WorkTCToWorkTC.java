@@ -1,6 +1,5 @@
 package cz.vse.mapping.custom;
 
-import cz.vse.dto.WorkTCDTO;
 import cz.vse.entity.WorkTC;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MappingContext;

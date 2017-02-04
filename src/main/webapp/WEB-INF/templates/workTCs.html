@@ -62,7 +62,7 @@
                     </tr>
                     </thead>
                     <tbody th:remove="all-but-first">
-                    <tr th:each="workList : ${workListMember}">
+                    <tr th:each="workList : ${membersWorkLists}">
                         <td th:text="${workList.id}">00</td>
                         <td th:text="${workList.name}">Název</td>
                         <td th:text="${workList.project_id}">Projekt</td>
@@ -98,7 +98,7 @@
                     </tr>
                     </thead>
                     <tbody th:remove="all-but-first">
-                    <tr th:each="workList : ${workListAuthor}">
+                    <tr th:each="workList : ${authorsWorkLists}">
                         <td th:text="${workList.id}">00</td>
                         <td th:text="${workList.name}">Název</td>
                         <td th:text="${workList.project_id}">Projekt</td>

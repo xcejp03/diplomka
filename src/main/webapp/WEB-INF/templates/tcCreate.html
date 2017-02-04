@@ -45,11 +45,11 @@
                 <div class="well">
                     <form th:action="@{/tc/create}" method="post" default-target-url="/index">
 
-                        <span th:if="${tcDTO.id != null}" th:remove="tag">
+                        <span th:if="${tcForm.id != null}" th:remove="tag">
                             <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="id">ID</label>:
-                                <input type="text" id="id" th:value="${tcDTO.id}" readonly="true" name="id"
+                                <input type="text" id="id" th:value="${tcForm.id}" readonly="true" name="id"
                                        class="form-control"/>
                             </div>
                         </div>
@@ -59,7 +59,7 @@
                             <div class="controls">
                                 <label for="name">Název</label>:
 
-                                <input type="text" id="name" name="name" th:value="${tcDTO.name}" class="form-control"
+                                <input type="text" id="name" name="name" th:value="${tcForm.name}" class="form-control"
                                        autofocus="autofocus"/>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                         <!--<select class="form-control" id="project_id" name="project_id" readonly="readonly">-->
                         <!--<option th:each="project : ${usersProjects"-->
                         <!--th:value="${project.id}"-->
-                        <!--th:selected="${tcDTO.project_id != null} ? ${#strings.contains(project.id, tcDTO.project_id)}"-->
+                        <!--th:selected="${tcForm.project_id != null} ? ${#strings.contains(project.id, tcForm.project_id)}"-->
                         <!--th:text="${project.name}"-->
                         <!--disabled="disabled">-->
                         <!--jméno projektu-->
@@ -91,7 +91,7 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="project_id">Projekt</label>:
-                                <input type="text" id="project_id" name="project_id" th:value="${tcDTO.project_id}" readonly="readonly" class="form-control"/>
+                                <input type="text" id="project_id" name="project_id" th:value="${tcForm.project_id}" readonly="readonly" class="form-control"/>
                             </div>
                         </div>
                         <!--TEST SUITE SE TED NEUKLÁDÁ - POTŘEBA UPRAVIT SERVICE PRO SAVE-->
@@ -118,7 +118,7 @@
                                         th:with="priorities=${T(cz.vse.entity.PriorityTCEnum).values()}">
                                     <option th:each="priority : ${priorities}"
                                             th:value="${priority}"
-                                            th:selected="${tcDTO.priority != null} ? ${#arrays.contains(tcDTO.priority, priority)}"
+                                            th:selected="${tcForm.priority != null} ? ${#arrays.contains(tcForm.priority, priority)}"
                                             th:text="${priority}">jméno projektu
                                     </option>
                                 </select>
@@ -130,7 +130,7 @@
                                 <label for="prerequisite">Prerekvizity</label>:
                                 <textarea type="text" id="prerequisite"
                                           name="prerequisite"
-                                          th:text="${tcDTO.prerequisite}" class="form-control"/>
+                                          th:text="${tcForm.prerequisite}" class="form-control"/>
                             </div>
                         </div>
 
@@ -139,14 +139,14 @@
                             <div class="controls">
                                 <label for="note">Poznámka</label>:
                                 <textarea type="text" id="note" name="note"
-                                          th:text="${tcDTO.note}" class="form-control"/>
+                                          th:text="${tcForm.note}" class="form-control"/>
                             </div>
                         </div>
 
-                        <span th:if="${tcDTO.id != null}" th:remove="tag">
+                        <span th:if="${tcForm.id != null}" th:remove="tag">
                              <input type="submit" value="Upravit" class="btn btn-primary"/>
                         </span>
-                        <span th:if="${tcDTO.id == null}" th:remove="tag">
+                        <span th:if="${tcForm.id == null}" th:remove="tag">
                              <input type="submit" value="Vytvořit" class="btn btn-primary"/>
                         </span>
 

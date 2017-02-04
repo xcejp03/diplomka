@@ -1,11 +1,9 @@
 package cz.vse.service.impl;
 
-import cz.vse.dto.*;
+import cz.vse.dto.WorkTCDTO;
 import cz.vse.entity.*;
-import cz.vse.repository.ProjectRepository;
 import cz.vse.repository.WorkTCRepository;
 import cz.vse.service.*;
-import cz.vse.utils.HelpService;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

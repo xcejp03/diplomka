@@ -1,15 +1,10 @@
 package cz.vse.controller;
 
-import cz.vse.dto.PersonDTO;
-import cz.vse.entity.RoleEnum;
-import cz.vse.entity.TCMuster;
 import cz.vse.service.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -45,7 +40,7 @@ public class AdminController {
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String showAllUsers(Model model) {
         l.info("person/role");
-        model.addAttribute("users", personService.findAllPersonsDTO());
+        model.addAttribute("users", personService.findAllPersonNames());
         return "usersAdmin";
     }
 

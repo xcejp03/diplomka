@@ -1,10 +1,10 @@
 package cz.vse.service;
 
-import cz.vse.dto.PersonDTO;
+import cz.vse.dto.PersonForm;
+import cz.vse.dto.PersonName;
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
 import cz.vse.entity.RoleEnum;
-import cz.vse.entity.UserRole;
 import org.springframework.security.core.Authentication;
 
 import java.util.List;
@@ -14,9 +14,9 @@ import java.util.List;
  */
 //@Service("userDetailsService")
 public interface PersonService {
-    void createPerson(PersonDTO personDTO);
+    void createPerson(PersonForm personForm);
 
-    void updatePerson(PersonDTO personDTO);
+    void updatePerson(PersonForm personForm);
 
     void updatePerson(Person person);
 
@@ -28,15 +28,23 @@ public interface PersonService {
 
     Person findPersonById(long id);
 
+    PersonForm findPersonFormById(long id);
+
     List<Person> findAllPersons();
 
-    List<PersonDTO> findAllPersonsDTO();
+    List<PersonForm> findAllPersonForms();
+
+    List<PersonName> findAllPersonNames ();
 
     List<Person> findAllPersonByProjectOrderById(Project project);
 
     List<Person> findAllPersonByProjectIdOrderById(long id);
 
-    List<PersonDTO> findAllPersonDTOByProjectId (long id);
+    List<PersonForm> findAllPersonFormsByProjectIdOrderById(long id);
+
+    List<PersonName> findAllPersonNamesByProjectIdOrderById(long id);
+
+    List<PersonForm> findAllPersonFormsByProjectId (long id);
 
     Person findPersonByLogin(String login);
 
@@ -44,9 +52,9 @@ public interface PersonService {
 
     Person findPersonByAuthentication(Authentication auth);
 
-    List<PersonDTO> getProjectMembers(long projectId);
+    List<PersonName> getProjectMembers(long projectId);
 
-    List<PersonDTO> getProjectMembers(long projectId, RoleEnum roleEnum);
+    List<PersonName> getProjectMembers(long projectId, RoleEnum roleEnum);
 
 //    List<PersonDTO> getProjectMembersByProjectIdAndRole(long id, UserRole role);
 

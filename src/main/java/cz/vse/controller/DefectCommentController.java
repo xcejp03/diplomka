@@ -1,8 +1,6 @@
 package cz.vse.controller;
 
 import cz.vse.dto.DefectCommentDTO;
-import cz.vse.dto.DefectDTO;
-import cz.vse.entity.Person;
 import cz.vse.service.DefectCommentService;
 import cz.vse.service.impl.DefectServiceImpl;
 import cz.vse.service.PersonService;
@@ -75,7 +73,7 @@ public class DefectCommentController {
         model.addAttribute("commentDTO",commentDTO);
         model.addAttribute("defects", defectService.findAllDefects());
         model.addAttribute("persons", personService.findAllPersons());
-        model.addAttribute("defect", defectService.findDefectDTOById(commentDTO.getDefect_id()));
+        model.addAttribute("defect", defectService.findDefectDTO(commentDTO.getDefect_id()));
 //        model.addAttribute("person", personService.findPersonById(commentDTO.getAuthor_id()));
 
         return "commentCreate";

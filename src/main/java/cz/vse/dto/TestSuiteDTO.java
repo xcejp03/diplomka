@@ -1,12 +1,11 @@
 package cz.vse.dto;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
  * Created by pcejka on 19.11).2016.
  */
-public class TestSuiteDTO extends BaseDTO{
+public class TestSuiteDTO extends BaseDTO {
     private String name;
     private String createdDateTime;
     private String updateDateTime;

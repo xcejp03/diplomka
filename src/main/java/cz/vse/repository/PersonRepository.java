@@ -17,10 +17,7 @@ import java.util.Set;
  * Created by pcejka on 28.11.2016.
  */
 public interface PersonRepository extends BaseRepository<Person> {
-    Person findById(long id);
-
     Person findByName(String username);
-
 
     List<Person> findAllPersonByProjectsMemberAndUserRoleOrderById(Project project, RoleEnum role);
 

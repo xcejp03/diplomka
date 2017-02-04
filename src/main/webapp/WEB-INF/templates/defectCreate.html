@@ -48,11 +48,11 @@
                 <div class="well">
                     <form th:action="@{/defect/create}" method="post" default-target-url="/index">
 
-                        <span th:if="${defectDTO.id != null}" th:remove="tag">
+                        <span th:if="${defectForm.id != null}" th:remove="tag">
                             <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="id">ID</label>:
-                                <input type="text" id="id" th:value="${defectDTO.id}" readonly="true" name="id"
+                                <input type="text" id="id" th:value="${defectForm.id}" readonly="true" name="id"
                                        class="form-control"/>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="name">Název</label>:
-                                <input type="text" id="name" name="name" th:value="${defectDTO.name}"
+                                <input type="text" id="name" name="name" th:value="${defectForm.name}"
                                        class="form-control"/>
                             </div>
                         </div>
@@ -83,7 +83,7 @@
                             <div class="controls">
                                 <label for="description">Popis</label>:
                                 <textarea type="text" id="description" name="description"
-                                          th:text="${defectDTO.description}"
+                                          th:text="${defectForm.description}"
                                           class="form-control"/>
                             </div>
                         </div>
@@ -92,7 +92,7 @@
                             <div class="controls">
                                 <label for="affectsVersion">affectsVersion</label>:
                                 <input type="text" id="affectsVersion" name="affectsVersion"
-                                       th:value="${defectDTO.affectsVersion}"
+                                       th:value="${defectForm.affectsVersion}"
                                        class="form-control"/>
                             </div>
                         </div>
@@ -105,7 +105,7 @@
                                 <select class="form-control" id="assignee_id" name="assignee_id">
                                     <option th:each="person : ${persons}"
                                             th:value="${person.id}"
-                                            th:selected="${defectDTO.assignee_id != null} ? ${#strings.contains(person.id, defectDTO.assignee_id)}"
+                                            th:selected="${defectForm.assignee_id != null} ? ${#strings.contains(person.id, defectForm.assignee_id)}"
                                             th:text="${person.name}">Assignee
                                     </option>
                                 </select>
@@ -121,7 +121,7 @@
                                         th:with="priorities=${T(cz.vse.entity.PriorityDefectEnum).values()}">
                                     <option th:each="priority : ${priorities}"
                                             th:value="${priority}"
-                                            th:selected="${defectDTO.priority != null} ? ${#arrays.contains(defectDTO.priority, priority)}"
+                                            th:selected="${defectForm.priority != null} ? ${#arrays.contains(defectForm.priority, priority)}"
                                             th:text="${priority}">jméno projektu
                                     </option>
                                 </select>
@@ -129,10 +129,10 @@
                         </div>
 
 
-                        <span th:if="${defectDTO.id != null}" th:remove="tag">
+                        <span th:if="${defectForm.id != null}" th:remove="tag">
                              <input type="submit" value="Upravit" class="btn btn-primary"/>
                         </span>
-                        <span th:if="${defectDTO.id == null}" th:remove="tag">
+                        <span th:if="${defectForm.id == null}" th:remove="tag">
                              <input type="submit" value="Vytvořit" class="btn btn-primary"/>
                         </span>
 
@@ -140,7 +140,7 @@
                 </div>
             </div>
             <div class="col-sm-5">
-                <p th:if="${defectDTO.id == null}">
+                <p th:if="${defectForm.id == null}">
                     <button type="button" class="btn btn-primary"
                             onclick="window.open('', '_self', ''); window.close();">Close tab
                     </button>

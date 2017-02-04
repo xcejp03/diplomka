@@ -1,6 +1,5 @@
 package cz.vse.dto;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**

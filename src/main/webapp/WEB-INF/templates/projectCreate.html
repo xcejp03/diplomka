@@ -50,11 +50,11 @@
                 <div class="well">
                     <form th:action="@{/project/create}" method="post" default-target-url="/index">
 
-                        <span th:if="${projectDTO.id != null}" th:remove="tag">
+                        <span th:if="${projectForm.id != null}" th:remove="tag">
                             <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="id">ID</label>:
-                                <input type="text" id="id" name="id" th:value="${projectDTO.id}" class="form-control"
+                                <input type="text" id="id" name="id" th:value="${projectForm.id}" class="form-control"
                                        readonly="true"/>
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="name">Jméno</label>:
-                                <input type="text" id="name" th:value="${projectDTO.name}" name="name"
+                                <input type="text" id="name" th:value="${projectForm.name}" name="name"
                                        class="form-control"
                                        autofocus="autofocus"/>
                             </div>
@@ -76,7 +76,7 @@
                                 <select class="form-control" id="projectOwner_id" name="projectOwner_id">
                                     <option th:each="person : ${persons}"
                                             th:value="${person.id}"
-                                            th:selected="${projectDTO.projectOwner_id != null} ? ${#strings.contains(person.id, projectDTO.projectOwner_id)}"
+                                            th:selected="${projectForm.projectOwner_id != null} ? ${#strings.contains(person.id, projectForm.projectOwner_id)}"
                                             th:text="${person.name}">jméno vlastníka
                                     </option>
                                 </select>
@@ -93,11 +93,6 @@
                                             th:value="${person.id}"
                                             th:selected="${members != null} ? ${#lists.contains(members, person)}"
                                             th:text="${person.name}">jména person
-                                    <option value="Test">Test</option>
-                                    <option value="Prof">Prof</option>
-                                    <option value="Live">Live</option>
-                                    <option value="Off">Off</option>
-                                    <option value="On">On</option>
                                     </option>
                                 </select>
                                 <script>
@@ -118,13 +113,13 @@
                             </div>
                         </div>
 
-                        <span th:if="${projectDTO.id != null}" th:remove="tag">
+                        <span th:if="${projectForm.id != null}" th:remove="tag">
 
                               <input type="submit" value="Upravit" class="btn btn-primary"/>
                         <input type="hidden" name="${_csrf.parameterName}"
                                value="${_csrf.token}"/>
                         </span>
-                        <span th:if="${projectDTO.id == null}" th:remove="tag">
+                        <span th:if="${projectForm.id == null}" th:remove="tag">
 
                               <input type="submit" value="Vytvořit" class="btn btn-primary"/>
                         <input type="hidden" name="${_csrf.parameterName}"

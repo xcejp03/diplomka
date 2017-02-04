@@ -1,6 +1,17 @@
 package cz.vse.mapping;
 
 import cz.vse.dto.*;
+import cz.vse.dto.DefectCommentDTO;
+import cz.vse.dto.DefectDTO;
+import cz.vse.dto.ProjectDTO;
+import cz.vse.dto.ProjectStatsDTO;
+import cz.vse.dto.TCInstanceDTO;
+import cz.vse.dto.TCInstanceRunDTO;
+import cz.vse.dto.TSInstanceRunDTO;
+import cz.vse.dto.TSMusterDTO;
+import cz.vse.dto.TestSuiteDTO;
+import cz.vse.dto.WorkListDTO;
+import cz.vse.dto.WorkTCDTO;
 import cz.vse.entity.*;
 import cz.vse.mapping.utils.CustomMapperMap;
 import cz.vse.repository.TSMusterRepository;
@@ -74,6 +85,15 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .field("tcMusters", "tcMusters_id")
                 .byDefault()
                 .register();
+        factory.classMap(Project.class, ProjectForm.class)
+                .mapNullsInReverse(false)
+                .mapNulls(false)
+                .field("projectOwner", "projectOwner_id")
+                .field("personMembers", "projectMembers_id")
+                .field("testSuites", "suites_id")
+                .field("tcMusters", "tcMusters_id")
+                .byDefault()
+                .register();
         factory.classMap(DefectCommentDTO.class, DefectComment.class)
                 .mapNullsInReverse(false)
                 .mapNulls(false)
@@ -91,11 +111,34 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .field("tsInstanceSource", "tsInstanceSource_id")
                 .byDefault()
                 .register();
-        factory.classMap(Person.class, PersonDTO.class)
-                .mapNullsInReverse(false)
-                .mapNulls(false)
-                .customize((Mapper<Person, PersonDTO>) customMappers.get(Person.class, PersonDTO.class))
+        factory.classMap(Defect.class, DefectForm.class)
+                .mapNullsInReverse(false).mapNulls(false)
+                .field("assignee", "assignee_id")
+                .field("reporter", "reporter_id")
+                .field("projectSource", "projectSource_id")
+                .field("tcInstanceSource", "tcInstanceSource_id")
+                .field("tsInstanceSource", "tsInstanceSource_id")
+                .byDefault()
+                .register();
+        factory.classMap(Defect.class, DefectList.class)
+                .mapNullsInReverse(false).mapNulls(false)
+                .field("assignee", "assignee_id")
+                .byDefault()
+                .register();
+        factory.classMap(Person.class, PersonForm.class)
+                .mapNullsInReverse(false).mapNulls(false)
+                .customize((Mapper<Person, PersonForm>) customMappers.get(Person.class, PersonForm.class))
 //                .field("userRole", "userRolesEnum")
+                .byDefault()
+                .register();
+        factory.classMap(Person.class, PersonForm.class)
+                .mapNullsInReverse(false).mapNulls(false)
+//                .customize((Mapper<Person, PersonForm>) customMappers.get(Person.class, PersonForm.class))
+//                .field("userRole", "userRolesEnum")
+                .byDefault()
+                .register();
+        factory.classMap(Person.class, PersonName.class)
+                .mapNullsInReverse(false).mapNulls(false)
                 .byDefault()
                 .register();
         factory.classMap(TCMuster.class, TCMusterDTO.class)
@@ -109,7 +152,47 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .customize((Mapper<TCMuster, TCMusterDTO>) customMappers.get(TCMuster.class, TCMusterDTO.class))
                 .byDefault()
                 .register();
+        factory.classMap(TCMuster.class, TCMusterList.class)
+                .mapNullsInReverse(false)
+                .mapNulls(false)
+                .field("project", "project_id")
+                .field("tsMusters", "tsMusters_id")
+                .field("tcInstances", "tcInstances_id")
+                .field("testSuites", "testSuite_id")
+                .field("author", "author_id")
+//                .customize((Mapper<TCMuster, TCMusterDTO>) customMappers.get(TCMuster.class, TCMusterDTO.class))
+                .byDefault()
+                .register();
+        factory.classMap(TCMuster.class, TCMusterName.class)
+                .mapNullsInReverse(false)
+                .mapNulls(false)
+                .byDefault()
+                .register();
+        factory.classMap(TCMuster.class, TCMusterForm.class)
+                .mapNullsInReverse(false)
+                .mapNulls(false)
+                .field("project", "project_id")
+                .field("tsMusters", "tsMusters_id")
+                .field("tcInstances", "tcInstances_id")
+                .field("testSuites", "testSuite_id")
+                .field("author", "author_id")
+                .byDefault()
+                .register();
         factory.classMap(TSMuster.class, TSMusterDTO.class)
+                .mapNullsInReverse(false)
+                .mapNulls(false)
+                .field("author", "author_id")
+                .field("tCMuster", "tcMuster_id")
+                .byDefault()
+                .register();
+        factory.classMap(TSMuster.class, TSMusterForm.class)
+                .mapNullsInReverse(false)
+                .mapNulls(false)
+                .field("author", "author_id")
+                .field("tCMuster", "tcMuster_id")
+                .byDefault()
+                .register();
+        factory.classMap(TSMuster.class, TSMusterList.class)
                 .mapNullsInReverse(false)
                 .mapNulls(false)
                 .field("author", "author_id")
@@ -122,7 +205,22 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .field("tcMusters", "tcMusters_id")
                 .field("project", "project_id")
                 .field("tcMusters", "tcMusters_id")
-//                .field("tcMusters{id}", "tcMusters_id")
+                .byDefault()
+                .register();
+        factory.classMap(TestSuite.class, TestSuiteForm.class)
+                .mapNullsInReverse(false)
+                .mapNulls(false)
+                .field("tcMusters", "tcMusters_id")
+                .field("project", "project_id")
+                .field("tcMusters", "tcMusters_id")
+                .byDefault()
+                .register();
+        factory.classMap(TestSuite.class, TestSuiteList.class)
+                .mapNullsInReverse(false)
+                .mapNulls(false)
+                .field("tcMusters", "tcMusters_id")
+                .field("project", "project_id")
+                .field("tcMusters", "tcMusters_id")
                 .byDefault()
                 .register();
         factory.classMap(TSInstance.class, TSMuster.class)
@@ -147,6 +245,13 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .field("testerUpdate", "testerUpdate_id")
                 .byDefault()
                 .register();
+        factory.classMap(TSInstance.class, TSInstanceList.class)
+                .mapNullsInReverse(false)
+                .mapNulls(false)
+                .field("tCInstance", "tcInstance_id")
+//                .field("testerUpdate", "testerUpdate_id")
+                .byDefault()
+                .register();
         factory.classMap(TCInstance.class, TCInstanceDTO.class)
                 .mapNullsInReverse(false)
                 .mapNulls(false)
@@ -156,20 +261,30 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .customize((Mapper<TCInstance, TCInstanceDTO>) customMappers.get(TCInstance.class, TCInstanceDTO.class))
                 .byDefault()
                 .register();
-        factory.classMap(Project.class, ProjectsNamesDTO.class)
+        factory.classMap(Project.class, ProjectName.class)
                 .field("projectOwner.name", "projectOwnerName")
                 .field("testSuites", "suiteIdList")
-                .customize((Mapper<Project, ProjectsNamesDTO>) customMappers.get(Project.class, ProjectsNamesDTO.class))
+                .customize((Mapper<Project, ProjectName>) customMappers.get(Project.class, ProjectName.class))
                 .byDefault()
                 .register();
         factory.classMap(WorkList.class, WorkListDTO.class)
                 .mapNulls(false).mapNullsInReverse(false)
                 .field("project", "project_id")
                 .field("author", "author_id")
-//                .field("tcMuster", "tcMuster_id")
-//                .exclude("createdDateTime")
-//                .field("plannedExecution", "plannedExecution")
                 .customize((Mapper<WorkList, WorkListDTO>) customMappers.get(WorkList.class, WorkListDTO.class))
+                .byDefault()
+                .register();
+        factory.classMap(WorkList.class, WorkListForm.class)
+                .mapNulls(false).mapNullsInReverse(false)
+                .field("project", "project_id")
+                .field("author", "author_id")
+                .customize((Mapper<WorkList, WorkListForm>) customMappers.get(WorkList.class, WorkListForm.class))
+                .byDefault()
+                .register();
+        factory.classMap(WorkList.class, WorkListList.class)
+                .mapNulls(false).mapNullsInReverse(false)
+                .field("project", "project_id")
+                .field("author", "author_id")
                 .byDefault()
                 .register();
         factory.classMap(WorkTC.class, WorkTCDTO.class)

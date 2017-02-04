@@ -1,6 +1,7 @@
 package cz.vse.service;
 
 import cz.vse.dto.TCInstanceDTO;
+import cz.vse.dto.TCInstanceList;
 import cz.vse.dto.TCInstanceRunDTO;
 import cz.vse.entity.*;
 
@@ -27,7 +28,10 @@ public interface TCInstanceService {
 
     List<TCInstanceDTO> findAllTCInstancesDTOByTCMusterId(long id);
 
+    List<TCInstanceList> findAllTCInstanceListsByTCMusterId(long id);
+
     List<TCInstanceDTO> findTCInstancesDTOByWorkTCId(long id);
+    List<TCInstanceList> findTCInstanceListsByWorkTCId(long id);
 
     TCInstanceRunDTO findTCInstanceRunDTOById(long id);
 

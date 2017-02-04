@@ -1,8 +1,6 @@
 package cz.vse.controller;
 
-import cz.vse.dto.TCInstanceDTO;
-import cz.vse.dto.TCInstanceRunDTO;
-import cz.vse.dto.WorkListDTO;
+import cz.vse.dto.*;
 import cz.vse.entity.*;
 import cz.vse.service.*;
 import cz.vse.utils.SecurityUtils;
@@ -12,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -58,10 +55,11 @@ public class WorkListController {
     @RequestMapping(method = RequestMethod.GET)
 //    public String showWorkList(Model model) {
     public String showWorkList(Model model) {
-        l.info("request mapping /worktc");
+        l.info("/worklist");
         Long personId = securityUtils.getLoggedPersonId();
-        model.addAttribute("workListMember", workListService.findAllWorkListDTOByMember(personId));
-        model.addAttribute("workListAuthor", workListService.findAllWorkListDTOByAuthorId(personId));
+//        model.addAttribute("workListMember", workListService.findAllWorkListListByMember(personId));
+        model.addAttribute("membersWorkLists", workListService.findAllWorkListListByMember(personId));     //duplikát
+        model.addAttribute("authorsWorkLists", workListService.findAllWorkListListByAuthorId(personId));
 
 //        model.addAttribute("listWorkTC", workTCService.findWorkTCDTOByWorkListId(id));
 //        model.addAttribute("listTCByProject", tcMusterService.findAllTestCaseMusters());
@@ -72,12 +70,11 @@ public class WorkListController {
     }
 
     @RequestMapping(value = "/worktc", method = RequestMethod.GET)
-//    public String showWorkList(Model model) {
     public String showWorkListWorkTC(Model model) {
-        l.info("request mapping /worktc");
+        l.info("/worklist/worktc");
         Long personId = securityUtils.getLoggedPersonId();
-        model.addAttribute("workListMember", workListService.findAllWorkListDTOByMember(personId));
-        model.addAttribute("workListAuthor", workListService.findAllWorkListDTOByAuthorId(personId));
+        model.addAttribute("membersWorkLists", workListService.findAllWorkListListByMember(personId));
+        model.addAttribute("authorsWorkLists", workListService.findAllWorkListListByAuthorId(personId));
 
 //        model.addAttribute("listWorkTC", workTCService.findWorkTCDTOByWorkListId(id));
 //        model.addAttribute("listTCByProject", tcMusterService.findAllTestCaseMusters());
@@ -89,10 +86,9 @@ public class WorkListController {
 
     @RequestMapping(value = "/member", method = RequestMethod.GET)
     public String showWorkListByMember(Model model) {
-//    public String showWorkList(Model model,@RequestParam(required = true, value = "filter") String filter) {
-        l.info("request mapping /worktc");
+        l.info("/worklist/member");
         Long personId = securityUtils.getLoggedPersonId();
-        model.addAttribute("membersWorkLists", workListService.findAllWorkListDTOByMember(personId));
+        model.addAttribute("membersWorkLists", workListService.findAllWorkListListByMember(personId));
 //        model.addAttribute("listWorkTC", workTCService.findWorkTCDTOByWorkListId(id));
 //        model.addAttribute("listTCByProject", tcMusterService.findAllTestCaseMusters());
 //        model.addAttribute("listUsersProjectsDTO", projectService.findAllTestProjectNameDTOByUserId(personId));
@@ -103,45 +99,45 @@ public class WorkListController {
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createWorkList(Model model) {
-        l.info("request mapping /worklist");
+        l.info("/worklist/create");
         Long personId = securityUtils.getLoggedPersonId();
-        model.addAttribute("workListDTO", new WorkListDTO());
+        model.addAttribute("workListForm", new WorkListForm());
 //        model.addAttribute("listWorkTC", workTCService.findAllWorkTC());
 //        model.addAttribute("listPerson", personService.findAllPersons());
-        model.addAttribute("usersProjects", projectService.findAllTestProjectNameDTOByUserId(personId));
+        model.addAttribute("usersProjects", projectService.findAllTestProjectNamesByUserId(personId));
         model.addAttribute("priorityList", PriorityTCEnum.values());
-        model.addAttribute("tcsByProject", tcMusterService.findAllTestCaseMusters());
+        model.addAttribute("tcNamesByProject", tcMusterService.findAllTestCaseMustersNames());
         return "workListCreate";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createTSPost(@ModelAttribute("project") WorkListDTO workListDTO) {
-        if (workListDTO.getId() == null) {
-            workListDTO.setAuthor_id(securityUtils.getLoggedPersonId());
-            workListService.createWorkList(workListDTO);
+    public String createTSPost(@ModelAttribute("project") WorkListForm workListForm) {
+        l.info("/worklist/create creating");
+        if (workListForm.getId() == null) {
+            workListForm.setAuthor_id(securityUtils.getLoggedPersonId());
+            workListService.createWorkList(workListForm);
         } else {
-            workListService.updateWorkList(workListDTO);
+            workListService.updateWorkList(workListForm);
         }
         return "redirect:/worklist";
     }
 
     @RequestMapping(value = "/worktc/edit", method = RequestMethod.POST)
-    public String createTSPodsyyxt(@ModelAttribute("workListDTO") WorkListDTO workListDTO) {
-        l.info("/worktc/edit");
-        workListService.updateWorkList(workListDTO);
-        l.info("/worktc/edit PROBĚHL");
-        return "redirect:/worklist/worktc/" + workListDTO.getId();
+    public String editWorkTC(@ModelAttribute("workListDTO") WorkListForm workListForm) {
+        l.info("/worklist/worktc/edit");
+        workListService.updateWorkList(workListForm);
+        return "redirect:/worklist/worktc/" + workListForm.getId();
     }
 
 
     @RequestMapping(value = "/worktc/{id}", method = RequestMethod.GET)
     public String showWorkTC(@PathVariable("id") int id, Model model) {
-        l.info("request mapping /worktc");
+        l.info("/worklist/worktc/"+id);
         Long personId = securityUtils.getLoggedPersonId();
         model.addAttribute("workListDTO", workListService.findWorkListDTOById(id));
 //        model.addAttribute("listTCByProject", tcMusterService.findAllTestCaseMusters());
-        model.addAttribute("usersProjects", projectService.findAllTestProjectNameDTOByUserId(personId));
-        model.addAttribute("persons", personService.findAllPersons());
+        model.addAttribute("usersProjects", projectService.findAllTestProjectNamesByUserId(personId));
+        model.addAttribute("persons", personService.findAllPersonNames());
         model.addAttribute("priorityList", PriorityTCEnum.values());
         return "workTCCreate";
     }
@@ -158,26 +154,30 @@ public class WorkListController {
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String editWorkList(@PathVariable("id") int id,Model model) {
-        l.info("request mapping /worklist/edit/"+id);
+        l.info("/worklist/edit/"+id);
         Long personId = securityUtils.getLoggedPersonId();
-        model.addAttribute("workListDTO", workListService.findWorkListDTOById(id));
+        model.addAttribute("workListForm", workListService.findWorkListFormById(id));
 //        model.addAttribute("listWorkTC", workTCService.findAllWorkTC());
         model.addAttribute("tcMusterIdByWorklistInWorkTC", workListService.getListTCMusterIdByWorklistInWorkTCDTO(id));
 //        model.addAttribute("listPerson", personService.findAllPersons());
-        model.addAttribute("usersProjects", projectService.findAllTestProjectNameDTOByUserId(personId));
+        model.addAttribute("usersProjects", projectService.findAllTestProjectNamesByUserId(personId));
         model.addAttribute("priorityList", PriorityTCEnum.values());
         model.addAttribute("tcsByProject", tcMusterService.findAllTestCaseMusters());
+        model.addAttribute("tcNamesByProject", tcMusterService.findAllTestCaseMustersNames());
+
         return "workListCreate";
     }
 
     @RequestMapping("/remove/{id}")
     public String removeTCMuster(@PathVariable("id") long id) {
+        l.info("/worklist/remove/"+id);
         tcMusterService.deleteTestCaseMusterById(id);
         return "redirect:/tc/create";
     }
 
     @RequestMapping("/instance/remove/{id}")
     public String removeTInstance(@PathVariable("id") long id) {
+        l.info("/worklist/instance/remove/"+id);
         Long tcInstanceMusterId = tcInstanceService.findTestCaseInstanceById(id).gettCMuster().getId();
         tcInstanceService.deleteTestCaseInstanceById(id);
         return "redirect:/tc/history/" + tcInstanceMusterId;
@@ -185,52 +185,49 @@ public class WorkListController {
 
     @RequestMapping("/history/{id}")
     public String showWorkTCHistory(@PathVariable("id") long id, Model model) {
-        l.info("/history/{id}" + id);
-        List<TCInstanceDTO> workTCInstances =  tcInstanceService.findTCInstancesDTOByWorkTCId(id);
+        l.info("/worklist/history/" + id);
         model.addAttribute("workListId", workTCService.findWorkTCById(id).getWorkList().getId());
-        model.addAttribute("workTCInstances", workTCInstances);
+        model.addAttribute("tcInstanceLists", tcInstanceService.findTCInstanceListsByWorkTCId(id));
         return "workTCHistory";
     }
 
-
     @RequestMapping("/run/{id}")
     public String runTCMuster(Model model, @PathVariable("id") long id) {
+        l.info("/worklist/run/" + id);
         TCInstanceRunDTO tcInstanceRunDTO;
         TCInstance tcInstance;
         Person person = securityUtils.getLoggedPerson();
         tcInstance = tcService.runNewTC(id, person);
         tcInstanceRunDTO = tcInstanceService.findTCInstanceRunDTOById(tcInstance.getId());
-        model.addAttribute("tcInstance", tcInstanceRunDTO);
-        model.addAttribute("tsInstances", tsInstanceService.findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
+//        model.addAttribute("tcInstance", tcInstanceRunDTO);
+//        model.addAttribute("tsInstances", tsInstanceService.findAllTSInstanceListsByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
 
         return "redirect:/tc/show/" + tcInstanceRunDTO.getId();
     }
 
     @RequestMapping("/show/{id}")
     public String showTCMuster(Model model, @PathVariable("id") long id) {
+        l.info("/worklist/show/" + id);
         TCInstanceRunDTO tcInstanceRunDTO;
         tcInstanceRunDTO = tcInstanceService.findTCInstanceRunDTOById(id);
         model.addAttribute("tcInstance", tcInstanceRunDTO);
         model.addAttribute("tsInstances", tsInstanceService.
-                findAllTSInstancesByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
-
+                findAllTSInstanceListsByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
         return "tcRun";
     }
 
     @RequestMapping(value = "/tc-by-suite/{id}", method = RequestMethod.GET)
     public String tcBySuite(@PathVariable("id") long id, Model model) {
-        l.info("/tc-by-suite/{id} - " + id);
-
-        model.addAttribute("tcs", tcService.findAllTCMustersDTOBySuiteId(id));
-        model.addAttribute("suite", suiteService.findTestSuiteById(id));
-//        model.addAttribute("statusenum", Arrays.asList(StatusEnum.values()));
+        l.info("/wotklist/tc-by-suite/" + id);
+        model.addAttribute("tcs", tcService.findAllTCMusterListsBySuiteId(id));
+        model.addAttribute("suite", suiteService.findTestSuiteListById(id));
         return "tcs";
     }
 
     @RequestMapping(value = "/tcs", method = RequestMethod.GET)
     public String tcsAllShow(Model model) {
         l.info("/tc/tcs");
-        model.addAttribute("tcs", tcMusterService.findAllTCDTOByUser(securityUtils.getLoggedPerson()));
+        model.addAttribute("tcs", tcMusterService.findAllTCListsByUser(securityUtils.getLoggedPerson()));
 //        model.addAttribute("suite", suiteService.findTestSuiteById(id));
 //        model.addAttribute("statusenum", Arrays.asList(StatusEnum.values()));
         return "tcs";

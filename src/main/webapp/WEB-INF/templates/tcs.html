@@ -98,7 +98,7 @@
     </table>
 
     <div th:if="${suite != null}" th:remove="tag">
-        <a th:href="@{'/tc/create/'(project=${suite.project.id},suite=${suite.id})}" class="btn btn-default">Založit Test
+        <a th:href="@{'/tc/create/'(project=${suite.project_id},suite=${suite.id})}" class="btn btn-default">Založit Test
             Case</a>
     </div>
 

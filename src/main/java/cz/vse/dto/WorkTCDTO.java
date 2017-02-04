@@ -1,12 +1,7 @@
 package cz.vse.dto;
 
-import cz.vse.entity.*;
+import cz.vse.entity.PriorityTCEnum;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**

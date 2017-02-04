@@ -2,9 +2,9 @@ package cz.vse.service.impl;
 
 import cz.vse.dto.DefectCommentDTO;
 import cz.vse.dto.DefectDTO;
+import cz.vse.dto.DefectForm;
 import cz.vse.entity.Defect;
 import cz.vse.entity.DefectComment;
-import cz.vse.entity.DefectStatusEnum;
 import cz.vse.entity.Person;
 import cz.vse.repository.DefectCommentRepository;
 import cz.vse.service.DefectCommentService;
@@ -14,7 +14,6 @@ import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -80,7 +79,7 @@ public class DefectCommentServiceImpl implements DefectCommentService {
         l.info("finding comment: " + id);
         DefectComment defectComment;
         defectComment = defectCommentRepository.findOne(id);
-        l.info("comment found: "+defectComment);
+        l.info("comment found: " + defectComment);
         return defectComment;
     }
 
@@ -88,7 +87,7 @@ public class DefectCommentServiceImpl implements DefectCommentService {
         l.info("finding comment: " + id);
         DefectComment defectComment = defectCommentRepository.findOne(id);
         DefectCommentDTO defectCommentDTO = mapper.map(defectComment, DefectCommentDTO.class);
-        l.info("comment found: "+defectCommentDTO);
+        l.info("comment found: " + defectCommentDTO);
         return defectCommentDTO;
     }
 
@@ -96,16 +95,16 @@ public class DefectCommentServiceImpl implements DefectCommentService {
         l.info("finding all defect's comments: " + defect);
         List<DefectComment> defectCommentList;
         defectCommentList = defectCommentRepository.findAllDefectCommentsByDefectOrderById(defect);
-        l.info("all defect's comments found:" +defectCommentList);
+        l.info("all defect's comments found:" + defectCommentList);
         return defectCommentList;
     }
 
     public List<DefectComment> findAllDefectsCommentsByDefectId(Long defectId) {
         l.info("finding all defect's comments - service: " + defectId);
         List<DefectComment> defectCommentList;
-        Defect defect = defectService.findDefectById(defectId);
+        Defect defect = defectService.findDefect(defectId);
         defectCommentList = defectCommentRepository.findAllDefectCommentsByDefectOrderById(defect);
-        l.info("all defect's comments found: "+defectCommentList);
+        l.info("all defect's comments found: " + defectCommentList);
         return defectCommentList;
     }
 
@@ -115,42 +114,58 @@ public class DefectCommentServiceImpl implements DefectCommentService {
         defectCommentList = defectCommentRepository.findAll();
         List<DefectCommentDTO> defectCommentDTOList;
         defectCommentDTOList = mapper.mapAsList(defectCommentList, DefectCommentDTO.class);
-        l.info("found: "+defectCommentDTOList);
+        l.info("found: " + defectCommentDTOList);
         return defectCommentDTOList;
     }
 
     public List<DefectCommentDTO> findAllDefectCommentDTOByDefect(Defect defect) {
-        l.info("with defect: "+defect);
+        l.info("with defect: " + defect);
         List<DefectComment> defectCommentList;
         List<DefectCommentDTO> defectCommentDTOList;
         defectCommentList = defectCommentRepository.findAllDefectCommentsByDefectOrderById(defect);
         defectCommentDTOList = mapper.mapAsList(defectCommentList, DefectCommentDTO.class);
-        l.info("found: "+defectCommentDTOList);
+        l.info("found: " + defectCommentDTOList);
         return defectCommentDTOList;
     }
 
     public List<DefectCommentDTO> findAllDefectCommentDTOByDefectId(long id) {
-        l.info("with id:"+id);
+        l.info("with id:" + id);
         List<DefectComment> defectCommentList;
         List<DefectCommentDTO> defectCommentDTOList;
-        Defect defect = defectService.findDefectById(id);
+        Defect defect = defectService.findDefect(id);
         defectCommentList = defectCommentRepository.findAllDefectCommentsByDefectOrderById(defect);
         defectCommentDTOList = mapper.mapAsList(defectCommentList, DefectCommentDTO.class);
-        l.info("found: "+defectCommentDTOList);
+        l.info("found: " + defectCommentDTOList);
         return defectCommentDTOList;
     }
 
+    public void writeDefectStatusChange(DefectForm defectForm, Person author) {
+        l.info("with: " + defectForm + " and " + author);
+        Defect defect = defectService.findDefect(defectForm.getId());
+        String newStatus = defectForm.getStatus().name();
+        String text = "Status change -> " + newStatus;
+        createComment(defect, author, text);
+    }
+
     public void writeDefectStatusChange(DefectDTO defectDTO, Person author) {
-        l.info("with: "+defectDTO +" and "+author);
-        Defect defect = defectService.findDefectById(defectDTO.getId());
+        l.info("with: " + defectDTO + " and " + author);
+        Defect defect = defectService.findDefect(defectDTO.getId());
         String newStatus = defectDTO.getStatus().name();
         String text = "Status change -> " + newStatus;
         createComment(defect, author, text);
     }
 
+    public void writeDefectAssigneeChange(DefectForm defectForm, Person author) {
+        l.info("with: " + defectForm + " and " + author);
+        Defect defect = defectService.findDefect(defectForm.getId());
+        String newAssigneeUsername = personService.findPersonById(defectForm.getAssignee_id()).getUsername();
+        String text = "Assignee change -> " + newAssigneeUsername;
+        createComment(defect, author, text);
+    }
+
     public void writeDefectAssigneeChange(DefectDTO defectDTO, Person author) {
-        l.info("with: "+defectDTO +" and "+author);
-        Defect defect = defectService.findDefectById(defectDTO.getId());
+        l.info("with: " + defectDTO + " and " + author);
+        Defect defect = defectService.findDefect(defectDTO.getId());
         String newAssigneeUsername = personService.findPersonById(defectDTO.getAssignee_id()).getUsername();
         String text = "Assignee change -> " + newAssigneeUsername;
         createComment(defect, author, text);

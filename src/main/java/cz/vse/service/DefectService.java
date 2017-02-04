@@ -1,5 +1,7 @@
 package cz.vse.service;
 
+import cz.vse.dto.DefectForm;
+import cz.vse.dto.DefectList;
 import cz.vse.dto.DefectDTO;
 import cz.vse.entity.*;
 
@@ -11,11 +13,13 @@ import java.util.List;
 public interface DefectService {
     public void createDefect(Defect defect);
 
-    void createDefect(DefectDTO defectDTO);
+    void createDefect(DefectForm defectForm);
 
     void createDefect(String description, PriorityDefectEnum priority, Person assignee,
                       Person reporter, DefectStatusEnum defectStatus, String affectVersion,
                       List<TCInstance> TCInstance, List<TSInstance> TSInstance);
+
+    void updateDefect(DefectForm defectForm);
 
     void updateDefect(DefectDTO defectDTO);
 
@@ -23,17 +27,29 @@ public interface DefectService {
 
     void deleteDefect(long defectToDeleteId);
 
-    Defect findDefectById(long id);
+    Defect findDefect(long id);
 
-    DefectDTO findDefectDTOById(long id);
+    DefectDTO findDefectDTO(long id);
+
+    DefectForm findDefectForm(long id);
+
+    DefectList findDefectList (long id);
 
     List<Defect> findAllDefects();
 
     List<DefectDTO> findAllDefectDTO();
 
+    List<DefectList> findAllDefectLists();
+
     List<DefectDTO> findAllDefectDTOByReporterAndStatus(Person person, DefectStatusEnum statusEnum);
 
     List<DefectDTO> findAllDefectDTOByAssigneeAndStatus(Person person, DefectStatusEnum statusEnum);
+
+    List<DefectList> findAllDefectListsByReporterAndStatus(Person person, DefectStatusEnum statusEnum);
+
+    List<DefectList> findAllDefectListsByAssigneeAndStatus(Person person, DefectStatusEnum statusEnum);
+
+    void changeDefectStatus(DefectForm defectForm, Person author);
 
     void changeDefectStatus(DefectDTO defectDTO, Person author);
 

@@ -1,10 +1,10 @@
 package cz.vse.service.impl;
 
 import cz.vse.dto.TCInstanceDTO;
+import cz.vse.dto.TCInstanceList;
 import cz.vse.dto.TCInstanceRunDTO;
 import cz.vse.entity.*;
 import cz.vse.repository.TCInstanceRepository;
-import cz.vse.repository.TCMusterRepository;
 import cz.vse.service.TCInstanceService;
 import cz.vse.service.TCMusterService;
 import cz.vse.service.WorkTCService;
@@ -36,107 +36,144 @@ public class TCInstanceServiceImpl implements TCInstanceService {
     private WorkTCService workTCService;
 
     public void createTestCaseInstance(TCInstance tcInstance) {
-        l.debug("creating TCInstance - service");
+        l.info("with: " + tcInstance);
         tcInstance.setStatus(StatusEnum.NORUN);
         tcInstanceRepository.save(tcInstance);
-        l.info("created TCInstance - service: " + tcInstance);
+        l.info("created: " + tcInstance);
     }
 
     public void updateTestCaseInstance(TCInstance tcInstance) {
-        l.debug("updating TCInstance - service");
+        l.info("with: " + tcInstance);
         tcInstance.setUpdatedDateTime(LocalDateTime.now());
         StatusEnum statusEnum = tcInstance != null ? getTCInstanceStatusFromTSInstancesStatuses(tcInstance) : StatusEnum.NORUN;
         tcInstance.setStatus(statusEnum);
         tcInstanceRepository.save(tcInstance);
-        l.info("updated TCInstance - service: " + tcInstance);
+        l.info("updated: " + tcInstance);
     }
 
     public void deleteTestCaseInstance(TCInstance tcInstanceToDelete) {
-        l.debug("deleting TCInstance - service");
+        l.info("with: " + tcInstanceToDelete);
         tcInstanceRepository.delete(tcInstanceToDelete);
-        l.info("TCInstance deleted - service: " + tcInstanceToDelete);
+        l.info("deleted: " + tcInstanceToDelete);
     }
 
     public void deleteTestCaseInstanceById(long testCaseInstanceToDeleteById) {
-        l.debug("deleting TCInstance - service");
+        l.info("with: " + testCaseInstanceToDeleteById);
         tcInstanceRepository.delete(testCaseInstanceToDeleteById);
-        l.info("TCInstance deleted - service: " + testCaseInstanceToDeleteById);
+        l.info("deleted: " + testCaseInstanceToDeleteById);
     }
 
     public TCInstance findTestCaseInstanceById(long id) {
-        l.debug("finding TCInstance - service");
+        l.info("with: " + id);
         TCInstance tcInstance;
         tcInstance = tcInstanceRepository.findOne(id);
-        l.info("TCInstance founf - service: " + id + " - " + tcInstance);
+        l.info("found: " + tcInstance);
         return tcInstance;
     }
 
     public List<TCInstance> findAllTestCaseInstances() {
-        l.debug("finding all testCaseInstances - service");
         List<TCInstance> TCInstanceList;
         TCInstanceList = tcInstanceRepository.findAll();
-        l.info("found all testCaseInstances - service: " + TCInstanceList.toString());
+        l.info("found: " + TCInstanceList.toString());
         return TCInstanceList;
     }
 
 
     public List<TCInstance> findAllTCInstancesByTCMusterId(long id) {
+        l.info("with: " + id);
         List<TCInstance> tcInstanceList;
         TCMuster tcMuster = tcMusterService.findTestCaseMusterById(id);
         tcInstanceList = tcInstanceRepository.findByTCMusterOrderById(tcMuster);
+        l.info("found: " + tcInstanceList);
         return tcInstanceList;
     }
 
     @Override
     public List<TCInstanceDTO> findAllTCInstancesDTOByTCMusterId(long id) {
+        l.info("with: " + id);
         List<TCInstance> tcInstanceList;
         List<TCInstanceDTO> tcInstanceDTOList;
 
         TCMuster tcMuster = tcMusterService.findTestCaseMusterById(id);
         tcInstanceList = tcInstanceRepository.findByTCMusterOrderById(tcMuster);
         tcInstanceDTOList = mapper.mapAsList(tcInstanceList, TCInstanceDTO.class);
+        l.info("found: " + tcInstanceDTOList);
         return tcInstanceDTOList;
     }
 
     @Override
+    public List<TCInstanceList> findAllTCInstanceListsByTCMusterId(long id) {
+        l.info("with: " + id);
+        List<TCInstance> tcInstanceList;
+        List<TCInstanceList> tcInstanceLists;
+
+        TCMuster tcMuster = tcMusterService.findTestCaseMusterById(id);
+        tcInstanceList = tcInstanceRepository.findByTCMusterOrderById(tcMuster);
+        tcInstanceLists = mapper.mapAsList(tcInstanceList, TCInstanceList.class);
+        l.info("found: " + tcInstanceLists);
+        return tcInstanceLists;
+    }
+
+    @Override
     public List<TCInstanceDTO> findTCInstancesDTOByWorkTCId(long id) {
+        l.info("with: " + id);
         List<TCInstance> tcInstanceList;
         List<TCInstanceDTO> tcInstanceDTOList;
 
         WorkTC workTC = workTCService.findWorkTCById(id);
         tcInstanceList = tcInstanceRepository.findByWorkTCOrderById(workTC);
         tcInstanceDTOList = mapper.mapAsList(tcInstanceList, TCInstanceDTO.class);
+        l.info("found: " + tcInstanceDTOList);
         return tcInstanceDTOList;
     }
 
+    @Override
+    public List<TCInstanceList> findTCInstanceListsByWorkTCId(long id) {
+        l.info("with: " + id);
+        List<TCInstance> tcInstanceList;
+        List<TCInstanceList> tcInstanceLists;
+
+        WorkTC workTC = workTCService.findWorkTCById(id);
+        tcInstanceList = tcInstanceRepository.findByWorkTCOrderById(workTC);
+        tcInstanceLists = mapper.mapAsList(tcInstanceList, TCInstanceList.class);
+        l.info("found: " + tcInstanceLists);
+        return tcInstanceLists;
+    }
+
     public TCInstanceRunDTO findTCInstanceRunDTOById(long id) {
+        l.info("with: " + id);
         TCInstance tcInstance = findTestCaseInstanceById(id);
         TCInstanceRunDTO tcInstanceRunDTO = mapper.map(tcInstance, TCInstanceRunDTO.class);
+        l.info("found: " + tcInstanceRunDTO);
         return tcInstanceRunDTO;
     }
 
     public TCInstance findLastTCInstanceByTCMuster(TCMuster tcMuster) {
+        l.info("with: " + tcMuster);
         TCInstance tcInstance;
         tcInstance = tcInstanceRepository.findTop1ByTCMusterOrderByCreatedDateTimeDesc(tcMuster);
+        l.info("found: " + tcInstance);
         return tcInstance;
     }
 
     public TCInstance findLastTCInstanceByTCMusterId(long id) {
+        l.info("with: " + id);
         TCMuster tcMuster = tcMusterService.findTestCaseMusterById(id);
         TCInstance tcInstance = findLastTCInstanceByTCMuster(tcMuster);
+        l.info("found: " + tcInstance);
         return tcInstance;
     }
 
     @Override
     public int getNumberOfTCsInProjectByStatus(Project project, StatusEnum status) {
-        int cislo = tcInstanceRepository.getNumberOfTCsInProjectByStatus();
-//        int cislo = tcInstanceRepository.getNumberOfTCsInProjectByStatus(project.getId(), status.getPriorityOrder());
-
-        return cislo;
+        l.info("with: " + project + " and " + status);
+        int number = tcInstanceRepository.getNumberOfTCsInProjectByStatus();
+        l.info("getted: "+ number);
+        return number;
     }
 
-
     public void refreshTCInstanceStatus(long id) {
+        l.info("with: "+ id);
         TCInstance tcInstance = findTestCaseInstanceById(id);
         StatusEnum refreshedStatus = getTCInstanceStatusFromTSInstancesStatuses(tcInstance);
         tcInstance.setStatus(refreshedStatus);
@@ -145,6 +182,7 @@ public class TCInstanceServiceImpl implements TCInstanceService {
     }
 
     private StatusEnum getTCInstanceStatusFromTSInstancesStatuses(TCInstance tcInstance) {
+        l.info("with: "+ tcInstance);
         List<TSInstance> tsInstanceList = tcInstance.getTsInstances();
         List<StatusEnum> statusEnumList = new ArrayList<>();
 

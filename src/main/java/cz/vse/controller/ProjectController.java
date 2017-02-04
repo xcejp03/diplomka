@@ -1,8 +1,8 @@
 package cz.vse.controller;
 
-import cz.vse.dto.PersonDTO;
+import cz.vse.dto.ProjectForm;
 import cz.vse.dto.ProjectDTO;
-import cz.vse.dto.ProjectsNamesDTO;
+import cz.vse.dto.ProjectName;
 import cz.vse.entity.RoleEnum;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
@@ -41,21 +41,22 @@ public class ProjectController {
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createProjectForm(Model model) {
-        l.info("request mapping project/create");
-        model.addAttribute("projectDTO", new ProjectDTO());
+        l.info("project/create");
+        model.addAttribute("projectForm", new ProjectForm());
 //        model.addAttribute("person", new PersonDTO());
 //        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
-        model.addAttribute("persons", personService.findAllPersons());
+        model.addAttribute("persons", personService.findAllPersonNames());
 //        model.addAttribute("listSuites", suiteService.findAllTestSuites());
         return "projectCreate";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createProject(@ModelAttribute("project") ProjectDTO projectDTO, HttpServletRequest request) {
-        if (projectDTO.getId() == null) {
-            projectService.createTestProject(projectDTO);
+    public String createProject(@ModelAttribute("project") ProjectForm projectForm, HttpServletRequest request) {
+        l.info("/project/create");
+        if (projectForm.getId() == null) {
+            projectService.createTestProject(projectForm);
         } else {
-            projectService.updateTestProject(projectDTO);
+            projectService.updateTestProject(projectForm);
         }
         String referer = request.getHeader("Referer");
         return "redirect:" + referer;
@@ -63,24 +64,24 @@ public class ProjectController {
 
     @RequestMapping("/edit/{id}")
     public String editProject(@PathVariable("id") long id, Model model) {
-        l.info("/edit/{id}" + id);
-        model.addAttribute("projectDTO", projectService.findTestProjectDTOById(id));
-        model.addAttribute("persons", personService.findAllPersons());
-//        model.addAttribute("listMembersDTO", personService.findAllPersonDTOByProjectId(id));
-        model.addAttribute("members", personService.findAllPersonByProjectIdOrderById(id));
+        l.info("/project/edit/{id}" + id);
+        model.addAttribute("projectForm", projectService.findTestProjectFormById(id));
+        model.addAttribute("persons", personService.findAllPersonNames());
+        model.addAttribute("members", personService.findAllPersonNamesByProjectIdOrderById(id));
 //        model.addAttribute("listSuites", suiteService.findAllTestSuites());
         return "projectCreate";
     }
 
     @RequestMapping("/remove/{id}")
-    public String removePerson(@PathVariable("id") long id) {
+    public String removeProject(@PathVariable("id") long id) {
+        l.info("/project/remove/"+id);
         projectService.deleteTestProjectById(id);
         return "redirect:/project/create";
     }
 
     @RequestMapping("{id}")
-    public String projects(@PathVariable("id") long id, Model model) {
-        l.info("project/{id}" + id);
+    public String projectDetail(@PathVariable("id") long id, Model model) {
+        l.info("/project/{id}" + id);
         ProjectDTO projectDTO = projectService.findTestProjectDTOById(id);
         model.addAttribute("projectDTO", projectDTO);
         model.addAttribute("projectsStat", projectService.getProjectWithStatistics(id));
@@ -94,8 +95,8 @@ public class ProjectController {
     @RequestMapping(value = "/projects", method = RequestMethod.GET)
     public String projectsByLoggedUser(Model model) {
         Long personId = securityUtils.getLoggedPersonId();
-        List<ProjectsNamesDTO> listProjectsNameDTO = projectService.findAllTestProjectNameDTOByUserId(personId);
-        model.addAttribute("projects", listProjectsNameDTO);
+        List<ProjectName> projectNames = projectService.findAllTestProjectNamesByUserId(personId);
+        model.addAttribute("projects", projectNames);
         model.addAttribute("person", personService.findPersonById(personId));
 
         return "projects";

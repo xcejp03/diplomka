@@ -1,20 +1,14 @@
 package cz.vse.mapping.custom;
 
-import cz.vse.dto.TCInstanceDTO;
-import cz.vse.dto.TCMusterDTO;
-import cz.vse.entity.StatusEnum;
+import cz.vse.dto.old.TCMusterDTO;
 import cz.vse.entity.TCInstance;
 import cz.vse.entity.TCMuster;
-import cz.vse.entity.TSInstance;
 import cz.vse.service.TCInstanceService;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MappingContext;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by pcejka on 26.11.2016.

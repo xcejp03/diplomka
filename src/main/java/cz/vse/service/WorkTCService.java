@@ -1,7 +1,5 @@
 package cz.vse.service;
 
-import cz.vse.dto.TCInstanceDTO;
-import cz.vse.dto.TCInstanceRunDTO;
 import cz.vse.dto.WorkTCDTO;
 import cz.vse.entity.*;
 

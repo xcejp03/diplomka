@@ -1,10 +1,6 @@
 package cz.vse.dto;
 
-import cz.vse.entity.Person;
 import cz.vse.entity.StatusEnum;
-
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 /**
  * Created by pcejka on 10.10.2016.

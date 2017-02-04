@@ -1,7 +1,8 @@
 package cz.vse.service.impl;
 
-import cz.vse.dto.TCInstanceRunDTO;
-import cz.vse.dto.TCMusterDTO;
+import cz.vse.dto.TCMusterList;
+import cz.vse.dto.old.TCInstanceRunDTO;
+import cz.vse.dto.old.TCMusterDTO;
 import cz.vse.entity.*;
 import cz.vse.repository.TCMusterRepository;
 import cz.vse.service.*;
@@ -53,10 +54,11 @@ public class TCServiceImpl implements TCService {
 //    }
 
     public TCInstance runNewTC(long tcMusterId, Person person) {
+        l.info("with: "+ tcMusterId+" and "+person);
         TCInstance tcInstance;
         TCInstanceRunDTO tcInstanceRunDTO;
         tcInstance = createAndSaveTCInstanceFromTCMusterId(tcMusterId, person);
-        l.info(tcInstance);
+        l.info("run: "+tcInstance);
         return tcInstance;
     }
 
@@ -68,13 +70,16 @@ public class TCServiceImpl implements TCService {
      * @return
      */
     public TCInstance mapTCMusterToTCInstance(TCMuster tcMuster) {
+        l.info("with: "+ tcMuster);
         TCInstance tcInstanceMapped = new TCInstance();
         tcInstanceMapped.setName(tcMuster.getName());
         tcInstanceMapped.settCMuster(tcMuster);
+        l.info("mapped: "+ tcInstanceMapped);
         return tcInstanceMapped;
     }
 
     public List<TSInstance> mapTSMusterToTSInstance(List<TSMuster> tsMusterList) {
+        l.info("with: "+ tsMusterList);
         List<TSInstance> tsInstanceMappedList = new ArrayList<>();
         TSInstance tsInstance;  // = new TSInstance();
         for (TSMuster tsMuster : tsMusterList) {
@@ -84,10 +89,12 @@ public class TCServiceImpl implements TCService {
             tsInstance.setStatus(StatusEnum.NORUN);
             tsInstanceMappedList.add(tsInstance);
         }
+        l.info("mapped: "+tsInstanceMappedList);
         return tsInstanceMappedList;
     }
 
     private TCInstance createAndSaveTCInstanceFromTCMusterId(long tcMusterId, Person tester) {
+        l.info("with: "+ tcMusterId+" and "+tester);
         TCMuster tcMuster;
         TCInstance tcInstance = new TCInstance();
         List<TSInstance> tsInstanceList = new ArrayList<>();
@@ -103,10 +110,12 @@ public class TCServiceImpl implements TCService {
         tcInstanceService.createTestCaseInstance(tcInstance);
 
         tsInstanceList = createAndSaveTSInstanceFromTCMusterId(tcMuster.getId(), tcInstance);
+        l.info("created: "+tcInstance);
         return tcInstance;
     }
 
     private List<TSInstance> createAndSaveTSInstanceFromTCMusterId(long tcMusterId, TCInstance tcInstance) {
+        l.info("with: "+ tcMusterId+" and "+tcInstance);
         TCMuster tcMuster = tcMusterRepository.findOne(tcMusterId);
         List<TSMuster> tsMusterList;
         List<TSInstance> tsInstanceList;
@@ -131,9 +140,10 @@ public class TCServiceImpl implements TCService {
             tsInstance.settCInstance(tcInstance);
             tsInstanceService.createTestStepInstance(tsInstance);
         }
-
         l.info(tsInstanceList);
+        l.info("created: "+ tsInstanceList);
         return tsInstanceList;
+
     }
 
     @Override
@@ -141,6 +151,7 @@ public class TCServiceImpl implements TCService {
         List<TCMusterDTO> tcMusterDTOList;
         List<TCMuster> tcMusterList = tcMusterRepository.findAll();
         tcMusterDTOList = mapper.mapAsList(tcMusterList, TCMusterDTO.class);
+        l.info("found: "+ tcMusterDTOList);
         return tcMusterDTOList;
     }
 
@@ -148,16 +159,31 @@ public class TCServiceImpl implements TCService {
     public List<TCMuster> findAllTCMusters() {
         List<TCMuster> tcMusterList;
         tcMusterList = tcMusterRepository.findAll();
+        l.info("found: "+tcMusterList);
         return tcMusterList;
     }
 
     @Override
     public List<TCMusterDTO> findAllTCMustersDTOBySuiteId(Long id) {
+        l.info("with: "+ id);
         List<TCMusterDTO> tcMusterDTOList;
         List<TCMuster> tcMusterList;
         TestSuite testSuite = suiteService.findTestSuiteById(id);
-        tcMusterList = tcMusterRepository.findAllTCMustersDTOByTestSuitesOrderById(testSuite);
+        tcMusterList = tcMusterRepository.findAllTCMustersByTestSuitesOrderById(testSuite);
         tcMusterDTOList = mapper.mapAsList(tcMusterList, TCMusterDTO.class);
+        l.info("found: "+ tcMusterDTOList);
         return tcMusterDTOList;
+    }
+
+    @Override
+    public List<TCMusterList> findAllTCMusterListsBySuiteId(Long id) {
+        l.info("with: "+ id);
+        List<TCMusterList> tcMusterLists;
+        List<TCMuster> tcMusterList;
+        TestSuite testSuite = suiteService.findTestSuiteById(id);
+        tcMusterList = tcMusterRepository.findAllTCMustersByTestSuitesOrderById(testSuite);
+        tcMusterLists = mapper.mapAsList(tcMusterList, TCMusterList.class);
+        l.info("found: "+ id);
+        return tcMusterLists;
     }
 }

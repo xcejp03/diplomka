@@ -27,9 +27,9 @@ public class LocalDateTimeToStringConverter extends BidirectionalConverter<Local
     public String convertTo(LocalDateTime localDateTime, Type<String> type) {
         l.info("convertTo");
         l.info("data: " + localDateTime + "->" + type);
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd. MM. yyyy HH:mm");
         String formattedLocalDate = localDateTime.format(formatter);
+        l.info("formattedLocalDate: " + formattedLocalDate);
         return formattedLocalDate;
     }
 
@@ -42,8 +42,7 @@ public class LocalDateTimeToStringConverter extends BidirectionalConverter<Local
         formatter = formatter.withLocale(Locale.UK);  // Locale specifies human language for translating, and cultural norms for lowercase/uppercase and abbreviations and such. Example: Locale.US or Locale.CANADA_FRENCH
         LocalDateTime date = LocalDateTime.parse(s, formatter);
         l.info(date);
-
-
+        l.info("converted date: " + date);
         return date;
     }
 }

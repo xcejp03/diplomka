@@ -1,5 +1,6 @@
-package cz.vse.dto;
+package cz.vse.dto.old;
 
+import cz.vse.dto.*;
 import org.apache.log4j.Logger;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 /**
  * Created by pcejka on 10.10.2016.
  */
-public class ProjectsNamesDTO extends BaseDTO {
+public class ProjectsNamesDTO extends cz.vse.dto.BaseDTO {
     private String name;
 
     private String projectOwnerName;

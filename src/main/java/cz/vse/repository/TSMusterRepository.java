@@ -1,6 +1,5 @@
 package cz.vse.repository;
 
-import cz.vse.dto.TCMusterDTO;
 import cz.vse.entity.TCMuster;
 import cz.vse.entity.TSMuster;
 import cz.vse.repository.base.BaseRepository;

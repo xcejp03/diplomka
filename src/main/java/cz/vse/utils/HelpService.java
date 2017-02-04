@@ -133,7 +133,7 @@ public class HelpService {
     }
 
     public void userRoleTesty() {
-        Person person = personRepository.findById(100);
+        Person person = personRepository.findOne(100L);
         l.info(person);
         person.getUserRole().clear();
         personRepository.save(person);

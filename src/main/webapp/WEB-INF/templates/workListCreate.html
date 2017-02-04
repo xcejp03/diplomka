@@ -50,11 +50,11 @@
                 <div class="well">
                     <form th:action="@{/worklist/create}" method="post" default-target-url="/index">
 
-                        <span th:if="${workListDTO.id != null}" th:remove="tag">
+                        <span th:if="${workListForm.id != null}" th:remove="tag">
                             <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="id">ID</label>:
-                                <input type="text" id="id" th:value="${workListDTO.id}" readonly="true" name="id"
+                                <input type="text" id="id" th:value="${workListForm.id}" readonly="true" name="id"
                                        class="form-control"/>
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="name">Název</label>:
-                                <input type="text" id="name" name="name" th:value="${workListDTO.name}"
+                                <input type="text" id="name" name="name" th:value="${workListForm.name}"
                                        class="form-control"/>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                             <div class="controls">
                                 <label for="prerequisite">Prerekvizity</label>:
                                 <textarea type="text" id="prerequisite" name="prerequisite"
-                                          th:text="${workListDTO.prerequisite}"
+                                          th:text="${workListForm.prerequisite}"
                                           class="form-control"/>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                             <div class="controls">
                                 <label for="prerequisite">Poznámka</label>:
                                 <textarea type="text" id="note" name="note"
-                                          th:text="${workListDTO.note}"
+                                          th:text="${workListForm.note}"
                                           class="form-control"/>
                             </div>
                         </div>
@@ -93,7 +93,7 @@
                                 <select class="form-control" id="priority" name="priority">
                                     <option th:each="priority : ${priorityList}"
                                             th:value="${priority}"
-                                            th:selected="${workListDTO.priority != null} ? ${#arrays.contains(workListDTO.priority, priority)}"
+                                            th:selected="${workListForm.priority != null} ? ${#arrays.contains(workListForm.priority, priority)}"
                                             th:text="${priority}">jméno projektu
                                     </option>
                                 </select>
@@ -108,7 +108,7 @@
                                 <select class="form-control" id="project_id" name="project_id">
                                     <option th:each="project : ${usersProjects}"
                                             th:value="${project.id}"
-                                            th:selected="${workListDTO.project_id != null} ? ${#strings.contains(project.id, workListDTO.project_id)}"
+                                            th:selected="${workListForm.project_id != null} ? ${#strings.contains(project.id, workListForm.project_id)}"
                                             th:text="${project.name}">Assignee
                                     </option>
                                 </select>
@@ -120,7 +120,7 @@
                             <div class="controls">
                                 <label for="plannedExecution">Datum plánovaného spuštění</label>:
                                 <input type="text" id="plannedExecution" class="datepicker" name="plannedExecution"
-                                       th:value="${workListDTO.plannedExecution}"
+                                       th:value="${workListForm.plannedExecution}"
                                        size="30"/>
                             </div>
                         </div>
@@ -137,8 +137,8 @@
                                 <label for="tcMuster_id">Přidej TC</label>:
                                 <select id="tcMuster_id" name="tcMuster_id" class="multipleSelection4"
                                         multiple="multiple" size="10">
-                                    <option th:each="tc : ${tcsByProject}"
-                                            th:selected="${workListDTO.workTCList != null} ? ${#lists.contains(tcMusterIdByWorklistInWorkTC, tc.id)}"
+                                    <option th:each="tc : ${tcNamesByProject}"
+                                            th:selected="${workListForm.workTCList != null} ? ${#lists.contains(tcMusterIdByWorklistInWorkTC, tc.id)}"
                                             th:value="${tc.id}"
                                             th:text="${tc.name}">tc vzory
                                     </option>
@@ -172,10 +172,10 @@
                         <!--</div>-->
 
 
-                        <span th:if="${workListDTO.id != null}" th:remove="tag">
+                        <span th:if="${workListForm.id != null}" th:remove="tag">
                              <input type="submit" value="Upravit" class="btn btn-primary"/>
                         </span>
-                        <span th:if="${workListDTO.id == null}" th:remove="tag">
+                        <span th:if="${workListForm.id == null}" th:remove="tag">
                              <input type="submit" value="Vytvořit" class="btn btn-primary"/>
                         </span>
 
@@ -183,7 +183,7 @@
                 </div>
             </div>
             <div class="col-sm-5">
-                <p th:if="${workListDTO.id == null}">
+                <p th:if="${workListForm.id == null}">
                     <button type="button" class="btn btn-primary"
                             onclick="window.open('', '_self', ''); window.close();">Close tab
                     </button>

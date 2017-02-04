@@ -1,9 +1,7 @@
 package cz.vse.service;
 
-import cz.vse.dto.ProjectDTO;
-import cz.vse.dto.ProjectsNamesDTO;
-import cz.vse.dto.TCInstanceRunDTO;
-import cz.vse.dto.TCMusterDTO;
+import cz.vse.dto.TCMusterList;
+import cz.vse.dto.old.TCMusterDTO;
 import cz.vse.entity.*;
 
 import java.util.List;
@@ -22,4 +20,5 @@ public interface TCService {
     List<TCMusterDTO> findAllTCMustersDTO();
     List<TCMuster> findAllTCMusters();
     List<TCMusterDTO> findAllTCMustersDTOBySuiteId(Long id);
+    List<TCMusterList> findAllTCMusterListsBySuiteId(Long id);
 }
