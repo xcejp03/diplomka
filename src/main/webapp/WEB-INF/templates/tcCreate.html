@@ -64,6 +64,7 @@
                             </div>
                         </div>
 
+                        <span th:if="${tcForm.id != null}" th:remove="tag">
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="suite_id">Test Suite</label>:
@@ -71,13 +72,26 @@
                                        readonly="readonly" class="form-control"/>
                             </div>
                         </div>
+                        </span>
 
+                        <span th:if="${tcForm.id != null}" th:remove="tag">
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="project_id">Projekt</label>:
-                                <input type="text" id="project_id" name="project_id" th:value="${tcForm.project}" readonly="readonly" class="form-control"/>
+                                <input type="text" id="project_id" name="project_id" th:value="${tcForm.project}"
+                                       readonly="readonly" class="form-control"/>
                             </div>
                         </div>
+                        </span>
+                        <span th:if="${tcForm.id == null}" th:remove="tag">
+                        <div class=" control-group form-group">
+                            <div class="controls">
+                                <label for="project_id">Projekt</label>:
+                                <input type="text" id="project_id" name="project_id" th:value="${param.project[0]}"
+                                       readonly="readonly" class="form-control"/>
+                            </div>
+                        </div>
+                        </span>
                         <!--TEST SUITE SE TED NEUKLÁDÁ - POTŘEBA UPRAVIT SERVICE PRO SAVE-->
 
                         <!--<div class=" control-group form-group" th:with="suiteFilterId=${param.suite[0]}">-->

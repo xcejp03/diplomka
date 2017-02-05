@@ -84,7 +84,7 @@
     <div class="row" sec:authorize="hasAuthority('ANALYTIC')">
         <div class="col-sm-4">
             <div th:if="${project != null}" th:remove="tag">
-                <a th:href="@{'/suite/create/'+'?project='+ ${project.id}}" class="btn btn-default">Založit Test
+                <a th:href="@{'/suite/create/'+'?project='+ ${project.id}}" class="btn btn-primary">Založit Test
                     Suite</a>
             </div>
         </div>

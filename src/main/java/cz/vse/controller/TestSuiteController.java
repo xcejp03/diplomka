@@ -47,7 +47,7 @@ public class TestSuiteController {
             suiteForm.setProject_id(projectId);
         }
 
-        model.addAttribute("suiteDTO", suiteForm);
+        model.addAttribute("suiteForm", suiteForm);
 //        model.addAttribute("listSuites", suiteService.findAllTestSuites());
 //        model.addAttribute("listSuitesDTO", suiteService.findAllTestSuitesDTO());
 //        model.addAttribute("listProjects", projectService.findAllTestProjects());

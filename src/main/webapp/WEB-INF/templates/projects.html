@@ -53,49 +53,52 @@
 
     <div class="row">
         <div class="col-sm-12">
-
-            <h1>Project list</h1>
-            <table class="table table-striped datatable">
-                <thead>
-                <tr>
-                    <!--sec:authorize="hasAuthority('ANALYTIC')"-->
-                    <th>ID</th>
-                    <th>Název</th>
-                    <th>Detail</th>
-                    <th sec:authorize="hasAuthority('TESTER')">Založit defekt</th>
-                    <th>Test Suity</th>
-                    <th sec:authorize="hasAuthority('ANALYTIC')">Edit Project</th>
-                    <th>Více</th>
-                </tr>
-                </thead>
-                <tbody th:remove="all-but-first">
-                <tr th:each="project : ${projects}">
-                    <td th:text="${project.id}">00</td>
-                    <td><a th:href="@{'/project/'+${project.id}}" th:text="${project.name}">Project</a>
-                    </td>
-                    <td><a href="#" class="opener"
-                           th:attr="data-name=${project.name}, data-owner=${project.projectOwnerName}"
-                           data-id="#detailDialog">Detail</a>
-                    </td>
-                    <td sec:authorize="hasAuthority('TESTER')"><a
-                            th:href="@{'/defect/create'(source='projectSource_id', sourceid=${project.id})}"
-                            target="_blank">Založit Defekt</a></td>
-                    <td><a th:href="@{'/suite/suites-by-project/'+${project.id}}">Test Suity</a></td>
-                    <td sec:authorize="hasAuthority('ANALYTIC')"><a
-                            th:href="@{'/project/edit/'+${project.id}}">Editace</a></td>
-                    <td><a href="#" class="opener"
-                           th:attr="data-objectid=${project.id}, data-sourceid=${project.id} " data-id="#moreDialog">Více</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3>Project list</h3></div>
+                <div class="panel-body">
+                    <table class="table table-striped datatable">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Název</th>
+                            <th>Detail</th>
+                            <th sec:authorize="hasAuthority('TESTER')">Založit defekt</th>
+                            <th>Test Suity</th>
+                            <th sec:authorize="hasAuthority('ANALYTIC')">Edit Project</th>
+                            <th>Více</th>
+                        </tr>
+                        </thead>
+                        <tbody th:remove="all-but-first">
+                        <tr th:each="project : ${projects}">
+                            <td th:text="${project.id}">00</td>
+                            <td><a th:href="@{'/project/'+${project.id}}" th:text="${project.name}">Project</a>
+                            </td>
+                            <td><a href="#" class="opener"
+                                   th:attr="data-name=${project.name}, data-owner=${project.projectOwnerName}"
+                                   data-id="#detailDialog">Detail</a>
+                            </td>
+                            <td sec:authorize="hasAuthority('TESTER')"><a
+                                    th:href="@{'/defect/create'(source='projectSource_id', sourceid=${project.id})}"
+                                    target="_blank">Založit Defekt</a></td>
+                            <td><a th:href="@{'/suite/suites-by-project/'+${project.id}}">Test Suity</a></td>
+                            <td sec:authorize="hasAuthority('ANALYTIC')"><a
+                                    th:href="@{'/project/edit/'+${project.id}}">Editace</a></td>
+                            <td><a href="#" class="opener"
+                                   th:attr="data-objectid=${project.id}, data-sourceid=${project.id} "
+                                   data-id="#moreDialog">Více</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 
     <br/>
     <div class="row">
         <div class="col-sm-4">
-            <a href="/project/create" class="btn btn-default" sec:authorize="hasAuthority('ADMIN')">Založit Projekt</a>
+            <a href="/project/create" class="btn btn-primary" sec:authorize="hasAuthority('ADMIN')">Založit Projekt</a>
             <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default">Zpět</a>
             <button onclick="swal('sdfds')" class="btn btn-default">sweet alert</button>
         </div>

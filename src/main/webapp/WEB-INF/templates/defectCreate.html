@@ -105,7 +105,7 @@
                                 <select class="form-control" id="assignee_id" name="assignee_id">
                                     <option th:each="person : ${persons}"
                                             th:value="${person.id}"
-                                            th:selected="${defectForm.assignee_id != null} ? ${#strings.contains(person.id, defectForm.assignee_id)}"
+                                            th:selected="${defectForm.assignee_id != null} ? ${person.id == defectForm.assignee_id}"
                                             th:text="${person.name}">Assignee
                                     </option>
                                 </select>

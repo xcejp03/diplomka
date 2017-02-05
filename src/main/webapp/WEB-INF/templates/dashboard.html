@@ -48,132 +48,145 @@
         </div>
     </div>
 
-    <span th:if="${workListsToday != null}" th:remove="tag">
-				<div class="row">
-					<div class="col-sm-12">
-							<H1>Worklisty</H1>
-                        <div class="well">
-                        <h2>Worklisty plánované na dnes</h2>
-                        <table class="table table-striped">
-							<thead>
-								<tr>
-									<th>Název</th>
-									<th>Priorita</th>
-									<th>Plánováno</th>
-									<th>Vlastník</th>
-									<th>Projekt</th>
-                                    <th>Detail</th>
-								</tr>
-							</thead>
-							<tbody th:remove="all-but-first">
-								<tr th:each="worklist : ${workListsToday}">
-									<td th:text="${worklist.name}">Název</td>
-									<td th:text="${worklist.priority}">vlastník</td>
-									<td th:text="${worklist.plannedExecution}">passed</td>
-									<td th:text="${worklist.author_id}">failed</td>
-									<td th:text="${worklist.author_id}">passed</td>
-                                    <td>
-                                        <a href="#" th:href="@{'/worklist/'+${worklist.project_id}}">detail projektu</a>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-                            </div>
-
-                        <div class="well">přidat statistiku postupu práce na worklistu: <br/>
-                        počet TC, počet passed, failed, zbývá (norun)
-                        </div>
-					</div>
-				</div>
-    </span>
-
-
-    <span th:if="${myOpenTC != null}" th:remove="tag">
-				<div class="row">
-					<div class="col-sm-12">
-                        <div class="well">
-							<H2>Moje nespuštěné TC</H2> <small>Celkem <span
-                                th:text="${#lists.size(myOpenTC)}"></span> ks</small>
-                            <table class="table table-striped">
-							<thead>
-								<tr>
-									<th>Název</th>
-									<th>Priorita</th>
-									<th>Worklist</th>
-                                    <th>Detail</th>
-								</tr>
-							</thead>
-							<tbody th:remove="all-but-first">
-								<tr th:each="worktc : ${myOpenTC}">
-									<td th:text="${worktc.name}">Název</td>
-									<td th:text="${worktc.priority}">priorita</td>
-									<td th:text="${worktc.workList_id}">worklist</td>
-                                    <td>
-                                        <a href="#" th:href="@{'/worklist/show/'+${worktc.workList_id}}">detail</a>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-                            </div>
-                    </div>
-                </div>
-    </span>
-
-    <hr/>
     <div class="row">
         <div class="col-sm-12">
-            <H1>Defekty</H1>
+            <div class="panel panel-primary">
+                <div class="panel-heading"><h3>Worklisty</h3></div>
+                <div class="panel-body">
+    				<span th:if="${workListsToday != null}" th:remove="tag">
+                        <div class="panel panel-default">
+							<div class="panel-heading"><h4>Worklisty plánované na dnes</h4></div>
+             				<div class="panel-body">
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>Název</th>
+											<th>Priorita</th>
+											<th>Plánováno</th>
+											<th>Vlastník</th>
+											<th>Projekt</th>
+											<th>Detail</th>
+										</tr>
+									</thead>
+									<tbody th:remove="all-but-first">
+										<tr th:each="worklist : ${workListsToday}">
+											<td th:text="${worklist.name}">Název</td>
+											<td th:text="${worklist.priority}">vlastník</td>
+											<td th:text="${worklist.plannedExecution}">passed</td>
+											<td th:text="${worklist.author_id}">failed</td>
+											<td th:text="${worklist.author_id}">passed</td>
+											<td>
+												<a href="#" th:href="@{'/worklist/'+${worklist.project_id}}">detail projektu</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</span>
+
+                    <div class="well">přidat statistiku postupu práce na worklistu: <br/>
+                        počet TC, počet passed, failed, zbývá (norun)
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading"><h3>Moje nespuštěné TC</h3></div>
+        <div class="panel-body">
+				<span th:if="${myOpenTC != null}" th:remove="tag">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="well">
+								 <small>Celkem <span
+                                         th:text="${#lists.size(myOpenTC)}"></span> ks</small>
+										<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>Název</th>
+												<th>Priorita</th>
+												<th>Worklist</th>
+												<th>Detail</th>
+											</tr>
+										</thead>
+										<tbody th:remove="all-but-first">
+											<tr th:each="worktc : ${myOpenTC}">
+												<td th:text="${worktc.name}">Název</td>
+												<td th:text="${worktc.priority}">priorita</td>
+												<td th:text="${worktc.workList_id}">worklist</td>
+												<td>
+													<a href="#" th:href="@{'/worklist/show/'+${worktc.workList_id}}">detail</a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+										</div>
+								</div>
+							</div>
+				</span>
+        </div>
+    </div>
+
+
     <div class="row">
+        <div class="col-sm-12">
 
+            <div class="panel panel-primary">
+                <div class="panel-heading"><h3>Defekty</h3></div>
+                <div class="panel-body">
              <span th:if="${myAssignedOpenDefects != null}" th:remove="tag">
-
 					<div class="col-sm-6">
-                         <div class="well">
-						<h2>Assignované na mě</h2>
-                       <hr/>
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th>ID</th>
-									<th>Priorita</th>
-									<th>Název</th>
-									<th>updated</th>
-									<th>Reporter</th>
-									<th>Detail</th>
-								</tr>
-							</thead>
-							<tbody th:remove="all-but-first">
-								<tr th:each="defect : ${myAssignedOpenDefects}">
-									<td th:text="${defect.id}">00</td>
-									<td>
-										<span th:class="${defect.priority}" th:text="${defect.priority}">Priorita</span>
-									</td>
-									<td th:text="${defect.name}">Název</td>
-									<td th:text="${defect.updatedDateTime}">updated</td>
-									<td th:text="${defect.reporter_id}">reporter</td>
-									<td>
-										<a href="#" th:href="@{'/defect/'+${defect.id}}"
-                                           th:attr="data-name=${defect.description}"
-                                           data-id="#detailDialog">Detail</a>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+                         <div class="panel panel-default">
+							<div class="panel-heading">	<h4>Assignované na mě</h4></div>
+             				<div class="panel-body">
+
+
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>ID</th>
+											<th>Priorita</th>
+											<th>Název</th>
+											<th>updated</th>
+											<th>Reporter</th>
+											<th>Detail</th>
+										</tr>
+									</thead>
+									<tbody th:remove="all-but-first">
+										<tr th:each="defect : ${myAssignedOpenDefects}">
+											<td th:text="${defect.id}">00</td>
+											<td>
+												<span th:class="${defect.priority}" th:text="${defect.priority}">Priorita</span>
+											</td>
+											<td th:text="${defect.name}">Název</td>
+											<td th:text="${defect.updatedDateTime}">updated</td>
+											<td th:text="${defect.reporter_id}">reporter</td>
+											<td>
+												<a href="#" th:href="@{'/defect/'+${defect.id}}"
+                                                   th:attr="data-name=${defect.description}"
+                                                   data-id="#detailDialog">Detail</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
                             </div>
+						 </div>
                     </div>
              </span>
 
-
-        <!--<span th:if="${myOpenDefects.size}" th:remove="tag">-->
-        <!--<span th:if="${${myOpenDefects != null} || #lists.size(myOpenDefects) > 1}" th:remove="tag">-->
-        <span th:if="${myOpenDefects != null}">
-        <span th:if="${#lists.size(myOpenDefects) > 1}" th:remove="tag">
+                    <!--<span th:if="${myOpenDefects.size}" th:remove="tag">-->
+                    <!--<span th:if="${${myOpenDefects != null} || #lists.size(myOpenDefects) > 1}" th:remove="tag">-->
+                    <span th:if="${myOpenDefects != null}">
+        <span th:if="${#lists.size(myOpenDefects) >= 1}" th:remove="tag">
 					<div class="col-sm-6">
-                        <div class="well">
-						<h2>Mnou založené</h2>
-                            <hr/>
+                       <div class="panel panel-default">
+							<div class="panel-heading">	<h4>Mnou založené</h4></div>
+             				<div class="panel-body">
+
 						<table class="table table-striped">
 							<thead>
 								<tr>
@@ -204,16 +217,21 @@
 						</table>
                             </div>
 					</div>
+					</div>
 			</span>
         </span>
-
+                </div>
+            </div>
+        </div>
     </div>
-    <hr/>
 
+
+    <div class="panel panel-primary">
+        <div class="panel-heading"><h3>Statistika projektů</h3></div>
+        <div class="panel-body">
     <span th:if="${MyProjectsStat != null}" th:remove="tag">
 				<div class="row">
 					<div class="col-sm-12">
-							<H1>Moje Projekty se statistikou</H1>
                         <div class="well">
 						<table class="table table-striped">
 							<thead>
@@ -243,12 +261,16 @@
 					</div>
                 </div>
     </span>
+        </div>
+    </div>
 
 
+    <div class="panel panel-primary">
+        <div class="panel-heading"><h3>Projekty se statistikou</h3></div>
+        <div class="panel-body">
     <span th:if="${myProjectsStatistics != null}" th:remove="tag">
 				<div class="row">
 					<div class="col-sm-12">
-							<H1>Moje Projekty se statistikou</H1>
                         <div class="well">
                             <p>analytik chce vidět přehled jeho projektú s jejich vlastníkem. všechny TC v projektu/ počet mích. moje/všechny. a počet test suitů.</p>
                             <p>manažer chce vidět všechno - z pohledu počtu TC i z pohledu výsledků testů</p>
@@ -282,13 +304,23 @@
 					</div>
                 </div>
     </span>
+        </div>
+    </div>
+
+
+    <div class="panel panel-primary">
+        <div class="panel-heading"><h3>Worklisty</h3></div>
+        <div class="panel-body">
 
     <span th:if="${workListsLastThreeDays != null}" th:remove="tag">
 				<div class="row">
 					<div class="col-sm-12">
-							<H1>Worklisty</H1>
-                        <div class="well">
-                        <h2>Worklisty za tři dny</h2>
+
+						  <div class="panel panel-default">
+							<div class="panel-heading">	<h4>Worklisty za tři dny</h4></div>
+             				<div class="panel-body">
+
+
                         <table class="table table-striped">
 							<thead>
 								<tr>
@@ -315,14 +347,16 @@
 						</table>
                             </div>
 					</div>
+					</div>
 				</div>
     </span>
 
-    <span th:if="${workListsTomorrow != null}" th:remove="tag">
+            <span th:if="${workListsTomorrow != null}" th:remove="tag">
 				<div class="row">
                     <div class="col-sm-12">
-                     <div class="well">
-                        <h2>Worklisty na zítra</h2>
+                     <div class="panel panel-default">
+							<div class="panel-heading">	<h4>Worklisty na zítra</h4></div>
+             				<div class="panel-body">
                         <table class="table table-striped">
 							<thead>
 								<tr>
@@ -348,11 +382,13 @@
 							</tbody>
 						</table>
                      </div>
+					</div>
                     </div>
                 </div>
     </span>
 
-
+        </div>
+    </div>
     <!--dialogová okna-->
     <div id="moreDialog" title="Více">
         <h3>Project ID: <span id="spanDataObjectId"/>
