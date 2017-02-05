@@ -64,22 +64,6 @@
                             </div>
                         </div>
 
-                        <!--<div class=" control-group form-group">-->
-                        <!--<div class="controls">-->
-                        <!--<label for="project_id">Projekt</label>:-->
-
-                        <!--<select class="form-control" id="project_id" name="project_id" readonly="readonly">-->
-                        <!--<option th:each="project : ${usersProjects"-->
-                        <!--th:value="${project.id}"-->
-                        <!--th:selected="${tcForm.project_id != null} ? ${#strings.contains(project.id, tcForm.project_id)}"-->
-                        <!--th:text="${project.name}"-->
-                        <!--disabled="disabled">-->
-                        <!--jméno projektu-->
-                        <!--</option>-->
-                        <!--</select>-->
-                        <!--</div>-->
-                        <!--</div>-->
-
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="suite_id">Test Suite</label>:
@@ -91,7 +75,7 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="project_id">Projekt</label>:
-                                <input type="text" id="project_id" name="project_id" th:value="${tcForm.project_id}" readonly="readonly" class="form-control"/>
+                                <input type="text" id="project_id" name="project_id" th:value="${tcForm.project}" readonly="readonly" class="form-control"/>
                             </div>
                         </div>
                         <!--TEST SUITE SE TED NEUKLÁDÁ - POTŘEBA UPRAVIT SERVICE PRO SAVE-->

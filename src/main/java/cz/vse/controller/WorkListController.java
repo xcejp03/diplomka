@@ -58,7 +58,7 @@ public class WorkListController {
         l.info("/worklist");
         Long personId = securityUtils.getLoggedPersonId();
 //        model.addAttribute("workListMember", workListService.findAllWorkListListByMember(personId));
-        model.addAttribute("membersWorkLists", workListService.findAllWorkListListByMember(personId));     //duplikát
+        model.addAttribute("membersWorkLists", workListService.findAllWorkListListByMember(personId));
         model.addAttribute("authorsWorkLists", workListService.findAllWorkListListByAuthorId(personId));
 
 //        model.addAttribute("listWorkTC", workTCService.findWorkTCDTOByWorkListId(id));

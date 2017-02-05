@@ -13,6 +13,7 @@ public class TCMusterForm extends BaseDTO {
 
     private String name;
     private Long project_id;
+    private String project;
     private Long author_id;
     private List<Long> tsMusters_id;
     private List<Long> tcInstances_id;
@@ -30,6 +31,23 @@ public class TCMusterForm extends BaseDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+
+    public Long getProject_id() {
+        return project_id;
+    }
+
+    public void setProject_id(Long project_id) {
+        this.project_id = project_id;
+    }
+
+    public String getProject() {
+        return project;
+    }
+
+    public void setProject(String project) {
+        this.project = project;
     }
 
     public Long getAuthor_id() {
@@ -104,30 +122,6 @@ public class TCMusterForm extends BaseDTO {
         this.note = note;
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (!(o instanceof TCMusterDTO)) return false;
-//        if (!super.equals(o)) return false;
-//
-//        TCMusterDTO that = (TCMusterDTO) o;
-//
-//        if (getCreatedDateTime() != null ? !getCreatedDateTime().equals(that.getCreatedDateTime()) : that.getCreatedDateTime() != null)
-//            return false;
-//        if (getName() != null ? !getName().equals(that.getName()) : that.getName() != null) return false;
-//        return project_id != null ? project_id.equals(that.project_id) : that.project_id == null;
-//
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        int result = super.hashCode();
-//        result = 31 * result + (getCreatedDateTime() != null ? getCreatedDateTime().hashCode() : 0);
-//        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
-//        result = 31 * result + (project_id != null ? project_id.hashCode() : 0);
-//        return result;
-//    }
-
     @Override
     public String toString() {
         return "TCMusterDTO{" +
@@ -137,11 +131,4 @@ public class TCMusterForm extends BaseDTO {
                 '}';
     }
 
-    public Long getProject_id() {
-        return project_id;
-    }
-
-    public void setProject_id(Long project_id) {
-        this.project_id = project_id;
-    }
 }

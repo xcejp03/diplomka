@@ -64,11 +64,11 @@
                     <tr th:each="workList : ${membersWorkLists}">
                         <td th:text="${workList.id}">00</td>
                         <td th:text="${workList.name}">Název</td>
-                        <td th:text="${workList.project_id}">Projekt</td>
+                        <td th:text="${workList.project}">Projekt</td>
                         <td th:text="${workList.plannedExecution}">Naplánováno
                         </td>
                         <td><span th:class="${workList.priority}" th:text="${workList.priority}"> Priorita</span></td>
-                        <td th:text="${workList.author_id}">Autor</td>
+                        <td th:text="${workList.author}">Autor</td>
                         <td><a th:href="@{'/worklist/edit/'+${workList.id}}">Editace</a></td>
                     </tr>
                     </tbody>
@@ -100,10 +100,10 @@
                     <tr th:each="workList : ${authorsWorkLists}">
                         <td th:text="${workList.id}">00</td>
                         <td th:text="${workList.name}">Název</td>
-                        <td th:text="${workList.project_id}">Projekt</td>
+                        <td th:text="${workList.project}">Projekt</td>
                         <td th:text="${workList.plannedExecution}">Naplánováno</td>
                         <td><span th:class="${workList.priority}" th:text="${workList.priority}"> Priorita</span></td>
-                        <td th:text="${workList.author_id}">Autor</td>
+                        <td th:text="${workList.author}">Autor</td>
                         <td><a th:href="@{'/worklist/edit/'+${workList.id}}">Editace</a></td>
 
 

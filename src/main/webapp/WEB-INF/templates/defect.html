@@ -176,7 +176,7 @@
 
                             <label for="assignee_id">Assignee</label>:
 
-                            <select class="form-control" id="assignee_id" name="assignee_id" multiple="true">
+                            <select class="form-control" id="assignee_id" name="assignee_id">
                                 <option th:each="person : ${personNames}"
                                         th:value="${person.id}"
                                         th:selected="${defectDTO.assignee_id != null} ? ${person.id == defectDTO.assignee_id}"

@@ -126,7 +126,6 @@
                             <th>Test Cases</th>
                             <th sec:authorize="hasAuthority('ANALYTIC')">Editace</th>
                             <th>Více</th>
-                            <th>Projekt ID</th>
                         </tr>
                         </thead>
                         <tbody th:remove="all-but-first">
@@ -147,7 +146,6 @@
                                    th:attr="data-objectid=${suite.id},data-updated=${suite.updateDateTime}"
                             >Více</a>
                             </td>
-                            <td th:text="${suite.project_id}">00</td>
 
                         </tr>
                         </tbody>

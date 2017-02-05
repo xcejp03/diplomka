@@ -13,6 +13,7 @@ public class DefectList extends BaseDTO {
     private PriorityDefectEnum priority;
     private String updatedDateTime;
     private Long assignee_id;
+    private String assignee;
 
 
 //    private Long reporter_id;
@@ -69,6 +70,14 @@ public class DefectList extends BaseDTO {
 
     public void setAssignee_id(Long assignee_id) {
         this.assignee_id = assignee_id;
+    }
+
+    public String getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
     }
 
     @Override

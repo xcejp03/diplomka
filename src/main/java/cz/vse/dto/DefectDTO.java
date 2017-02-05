@@ -15,12 +15,22 @@ public class DefectDTO extends BaseDTO {
     private String createdDateTime;
     private String updatedDateTime;
     private Long assignee_id;
+    private String assignee;
     private Long reporter_id;
+    private String reporter;
 
     private Long projectSource_id;
     private Long tcInstanceSource_id;
     private Long tsInstanceSource_id;
 
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getDescription() {
         return description;
@@ -36,30 +46,6 @@ public class DefectDTO extends BaseDTO {
 
     public void setAffectsVersion(String affectsVersion) {
         this.affectsVersion = affectsVersion;
-    }
-
-    public Long getAssignee_id() {
-        return assignee_id;
-    }
-
-    public void setAssignee_id(Long assignee_id) {
-        this.assignee_id = assignee_id;
-    }
-
-    public Long getReporter_id() {
-        return reporter_id;
-    }
-
-    public void setReporter_id(Long reporter_id) {
-        this.reporter_id = reporter_id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public PriorityDefectEnum getPriority() {
@@ -92,6 +78,38 @@ public class DefectDTO extends BaseDTO {
 
     public void setUpdatedDateTime(String updatedDateTime) {
         this.updatedDateTime = updatedDateTime;
+    }
+
+    public Long getAssignee_id() {
+        return assignee_id;
+    }
+
+    public void setAssignee_id(Long assignee_id) {
+        this.assignee_id = assignee_id;
+    }
+
+    public String getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
+    }
+
+    public Long getReporter_id() {
+        return reporter_id;
+    }
+
+    public void setReporter_id(Long reporter_id) {
+        this.reporter_id = reporter_id;
+    }
+
+    public String getReporter() {
+        return reporter;
+    }
+
+    public void setReporter(String reporter) {
+        this.reporter = reporter;
     }
 
     public Long getProjectSource_id() {

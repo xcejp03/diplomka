@@ -12,26 +12,19 @@ import java.util.List;
  */
 public class WorkListList extends BaseDTO {
     private String name;
-
     private Long author_id;
-//
+    private String author;
     private Long project_id;
-
+    private String project;
     private List<WorkTCDTO> workTCList;
-
     private List<Long> tcMuster_id;
-
     private String createdDateTime;
-
     private String updatedDateTime;
-
     private String plannedExecution;
-
     private PriorityTCEnum priority;
-
     private String prerequisite;
-
     private String note;
+
 
     public String getName() {
         return name;
@@ -49,6 +42,14 @@ public class WorkListList extends BaseDTO {
         this.author_id = author_id;
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
     public Long getProject_id() {
         return project_id;
     }
@@ -57,12 +58,28 @@ public class WorkListList extends BaseDTO {
         this.project_id = project_id;
     }
 
+    public String getProject() {
+        return project;
+    }
+
+    public void setProject(String project) {
+        this.project = project;
+    }
+
     public List<WorkTCDTO> getWorkTCList() {
         return workTCList;
     }
 
     public void setWorkTCList(List<WorkTCDTO> workTCList) {
         this.workTCList = workTCList;
+    }
+
+    public List<Long> getTcMuster_id() {
+        return tcMuster_id;
+    }
+
+    public void setTcMuster_id(List<Long> tcMuster_id) {
+        this.tcMuster_id = tcMuster_id;
     }
 
     public String getCreatedDateTime() {
@@ -113,25 +130,15 @@ public class WorkListList extends BaseDTO {
         this.note = note;
     }
 
-    public List<Long> getTcMuster_id() {
-        return tcMuster_id;
-    }
-
-    public void setTcMuster_id(List<Long> tcMuster_id) {
-        this.tcMuster_id = tcMuster_id;
-    }
-
     @Override
     public String toString() {
-        return "WorkListDTO{" +
+        return "WorkListList{" +
                 "name='" + name + '\'' +
-                ", author_id=" + author_id +
-                ", project_id=" + project_id +
-                ", createdDateTime=" + createdDateTime +
+                ", author='" + author + '\'' +
+                ", project='" + project + '\'' +
+                ", createdDateTime='" + createdDateTime + '\'' +
                 ", plannedExecution='" + plannedExecution + '\'' +
                 ", priority=" + priority +
-                ", prerequisite='" + prerequisite + '\'' +
-                ", note='" + note + '\'' +
                 '}';
     }
 }
