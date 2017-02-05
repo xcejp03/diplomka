@@ -122,19 +122,19 @@
                 </div>
                 <div class=" control-group form-group">
                     <div class="controls">
-                        <label for="description">assignee_id</label>:
-                        <input type="text" id="assignee_id" name="assignee_id"
+                        <label for="description">assignee</label>:
+                        <input type="text" id="assignee" name="assignee"
                                readonly="readonly"
-                               th:value="${defectDTO.assignee_id}"
+                               th:value="${defectDTO.assignee}"
                                class="form-control"/>
                     </div>
                 </div>
                 <div class=" control-group form-group">
                     <div class="controls">
-                        <label for="description">createdDateTime</label>:
-                        <input type="text" id="reporter_id" name="reporter_id"
+                        <label for="description">Reporter</label>:
+                        <input type="text" id="reporter" name="reporter"
                                readonly="readonly"
-                               th:value="${defectDTO.reporter_id}"
+                               th:value="${defectDTO.reporter}"
                                class="form-control"/>
                     </div>
                 </div>
@@ -176,16 +176,15 @@
 
                             <label for="assignee_id">Assignee</label>:
 
-                            <select class="form-control" id="assignee_id" name="assignee_id">
+                            <select class="form-control" id="assignee_id" name="assignee_id" multiple="true">
                                 <option th:each="person : ${personNames}"
                                         th:value="${person.id}"
-                                        th:selected="${defectDTO.assignee_id != null} ? ${#strings.contains(person.id, defectDTO.assignee_id)}"
+                                        th:selected="${defectDTO.assignee_id != null} ? ${person.id == defectDTO.assignee_id}"
                                         th:text="${person.name}">Assignee
                                 </option>
                             </select>
                         </div>
                     </div>
-
                     <div class=" control-group form-group">
                         <div class="controls">
                             <input type="submit" value="Assignuj" class="btn btn-primary"/>
