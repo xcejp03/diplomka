@@ -1,16 +1,44 @@
-<div th:fragment="vkladanyFragment">
-    <p>Vkládaná text</p>
-    <h1>VLOŽENÝ NADPIS</h1>
+<div th:fragment="headImports" th:remove="tag">
+    <!--Bootstrap Core CSS-->
+    <link href="/css/bootstrap4.min.css" rel="stylesheet"/>
+
+    <!--Custom CSS-->
+    <link href="/css/modern-business.css" rel="stylesheet"/>
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+
+    <!-- jQuery -->
+    <script src="/js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+
+
+    <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>-->
+    <link rel="stylesheet" href="/jquery/jquery-ui.css"/>
+
+
+    <link href="/sweetalert/sweetalert.css" rel="stylesheet"/>
+    <script src="/sweetalert/sweetalert.min.js"></script>
+
+
+    <!--Moje jQuery-->
+    <script src="/jquery/jquery-3.1.1.js"></script>
+    <script src="/jquery/jquery-ui.js"></script>
+
+
+    <!--Můj java script-->
+    <script type='text/javascript' src='/script.js'></script>
+    <link rel="stylesheet" type="text/css" href="/style.css"/>
+
+
 </div>
 
-<div th:fragment="vkladanyFragment2">
-    <p>Vkládaná text</p>
-    <h3>th:fragment="vkladanyFragment2</h3>
-    <h1>VLOŽENÝ NADPIS</h1>
-</div>
+
 
 <div th:fragment="menu">
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -190,39 +218,3 @@
     </footer>
 </div>
 
-<div th:fragment="headImports" th:remove="tag">
-    <!--Bootstrap Core CSS-->
-    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
-
-    <!--Custom CSS-->
-    <link href="/css/modern-business.css" rel="stylesheet"/>
-
-    <!-- Custom Fonts -->
-    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-
-
-    <!-- jQuery -->
-    <script src="/js/jquery.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/js/bootstrap.min.js"></script>
-
-
-    <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>-->
-    <link rel="stylesheet" href="/jquery/jquery-ui.css"/>
-
-
-    <link href="/sweetalert/sweetalert.css" rel="stylesheet"/>
-    <script src="/sweetalert/sweetalert.min.js"></script>
-
-
-    <!--Moje jQuery-->
-    <script src="/jquery/jquery-3.1.1.js"></script>
-    <script src="/jquery/jquery-ui.js"></script>
-
-
-    <!--Můj java script-->
-    <script type='text/javascript' src='/script.js'></script>
-    <link rel="stylesheet" type="text/css" href="/style.css"/>
-
-
-</div>
