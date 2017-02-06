@@ -43,31 +43,40 @@ public class StartupHousekeeper {
     @EventListener(ContextRefreshedEvent.class)
     public void contextRefreshedEvent() {
         // do whatever you need here
-        System.out.println("OOOOOOOO");
+        System.out.println("OOOOOOOO po staru");
 //        createPersonAndProject();
-        l.info("QQOOOOOOOOOQQQQQ");
+        l.info("QQOOOOOOOOOQQQQQ - po novu");
+        l.info("-.-.-.- 6.2. 11:45");
 //        clearProjectMembers();
 //        l.fatal("Výpis projektu: " + projectRepository.findOne(10L));
 //        helpService.userRoleTesty();
 //        userRoleTesty();
 //        helpService.najdiPosledniTCInstanci(40);
-        playSoundAfterStart();
-//        delej();
+//        playSoundAfterStart();
+        delej();
 
     }
 
     private void delej() {
-        Project project = projectService.findTestProjectById(21L);
-        List<Project> projects = new ArrayList<>();
-        projects.add(project);
+        l.warn("delej");
+//        Project project = projectService.findTestProjectById(21L);
+//        List<Project> projects = new ArrayList<>();
+//        projects.add(project);
+//
+//        l.warn("getNumberOfSuitesInProject: " + testSuiteRepository.getNumberOfSuitesInProject(project));
 
-        l.warn("getNumberOfSuitesInProject: " + testSuiteRepository.getNumberOfSuitesInProject(project));
+        l.warn("osoba: "+personRepository.findOne(16L));
+        l.warn("projekt: "+projectService.findAllTestProjects());
+        l.warn("projekt: "+projectService.findAllTestProjectsDTO());
+
     }
+
 
 
 
 
     public void playSoundAfterStart() {
+        l.info("prehravam zvuk");
         final Runnable runnable = (Runnable) Toolkit.getDefaultToolkit().getDesktopProperty("win.sound.exclamation");
         if (runnable != null) runnable.run();
     }

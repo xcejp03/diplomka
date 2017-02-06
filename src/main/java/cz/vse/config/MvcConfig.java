@@ -24,7 +24,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName("org.postgresql.Driver");
         driverManagerDataSource.setUrl("jdbc:postgresql://localhost:5432/diplomka");
-        driverManagerDataSource.setUsername("xcejp03");
+        driverManagerDataSource.setUsername("diplomka");
         driverManagerDataSource.setPassword("heslo");
         return driverManagerDataSource;
     }
