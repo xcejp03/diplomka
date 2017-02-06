@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.web.ErrorAttributes;
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -27,7 +28,6 @@ public class CustomErrorController implements ErrorController {
 
     @RequestMapping(value = PATH)
     String error(HttpServletRequest request, HttpServletResponse response, Model model) {
-
         model.addAttribute("status", response.getStatus());
         model.addAttribute("atributy", getErrorAttributes(request, false));
         model.addAttribute("error", getErrorAttributes(request, false).get("error"));

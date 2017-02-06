@@ -48,7 +48,7 @@
         <div class="row">
             <div class="col-sm-10">
                 <div class="well">
-                    <form th:action="@{/project/create}" method="post" default-target-url="/index">
+                    <form th:action="@{/project/create}" action="#" method="post" th:object="${projectForm}">
 
                         <span th:if="${projectForm.id != null}" th:remove="tag">
                             <div class=" control-group form-group">
@@ -63,12 +63,13 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="name">Jméno</label>:
-                                <input type="text" id="name" th:value="${projectForm.name}" name="name"
+
+                                <input type="text" id="name" name="name" th:field="*{name}"
                                        class="form-control"
                                        autofocus="autofocus"/>
+                                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Age Error</div>
                             </div>
                         </div>
-
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="projectOwner_id">Vlastník</label>:
@@ -89,9 +90,19 @@
                                 <label for="projectMembers_id">Členové</label>:
                                 <select id="projectMembers_id" name="projectMembers_id" class="multipleSelection"
                                         multiple="multiple" size="10">
-                                    <option th:each="person : ${persons}"
+                                    <option th:unless="${#fields.hasErrors('*')}"
+
+                                            th:each="person : ${persons}"
                                             th:value="${person.id}"
                                             th:selected="${members != null} ? ${#lists.contains(members, person)}"
+                                            th:text="${person.name}">jména person
+                                    </option>
+
+                                    <option th:if="${#fields.hasErrors('*')}"
+                                            th:each="person : ${persons}"
+                                            th:value="${person.id}"
+                                            th:selected="${projectForm.projectMembers_id != null} ?
+                                            ${#lists.contains(projectForm.projectMembers_id, person.id)}"
                                             th:text="${person.name}">jména person
                                     </option>
                                 </select>

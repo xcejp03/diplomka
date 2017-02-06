@@ -1,5 +1,7 @@
 package cz.vse.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -7,6 +9,8 @@ import java.util.List;
  */
 public class ProjectForm extends BaseDTO {
 
+    @NotNull (message = "procpal se tam null")
+    @Size(min=1, max = 4, message = "name.empty")
     private String name;
     private Long projectOwner_id;
     private List<Long> projectMembers_id;
