@@ -3,17 +3,25 @@ package cz.vse.dto;
 import cz.vse.entity.DefectStatusEnum;
 import cz.vse.entity.PriorityDefectEnum;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  * Created by pcejka on 10.10.2016.
  */
 public class DefectForm extends BaseDTO {
+    @Size(min = 1, max = 50)
     private String name;
+    @Size(min = 1, max = 500)
     private String description;
+    @Size(min = 1, max = 50)
     private String affectsVersion;
+    @NotNull
     private PriorityDefectEnum priority;
     private DefectStatusEnum status;
 //    private String createdDateTime;
 //    private String updatedDateTime;
+    @NotNull
     private Long assignee_id;
     private Long reporter_id;
 

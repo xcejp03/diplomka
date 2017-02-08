@@ -2,24 +2,22 @@ package cz.vse.dto;
 
 import cz.vse.entity.PriorityTCEnum;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
  * Created by pcejka on 11.01.2017.
  */
 public class WorkTCForm extends BaseDTO {
+    @Size(min = 1, max = 50)
     private String name;
-
     private Long tcMuster_id;
-
     private Long assignee_id;
-
     private Long workList_id;
-
     private List<Long> tcRunHistoryList_id;
-
+    @NotNull
     private PriorityTCEnum priority;
-
     private String updatedDateTime;
 
 

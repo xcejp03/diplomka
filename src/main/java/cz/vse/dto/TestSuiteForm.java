@@ -1,11 +1,13 @@
 package cz.vse.dto;
 
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
  * Created by pcejka on 19.11).2016.
  */
 public class TestSuiteForm extends BaseDTO {
+    @Size(min = 1, max = 50)
     private String name;
     private String createdDateTime;
     private String updateDateTime;

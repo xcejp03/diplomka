@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -45,11 +45,13 @@
     <!-- Page Content -->
     <div class="container">
 
+
         <div class="row">
             <div class="col-sm-10">
                 <div class="well">
                     <form th:action="@{/project/create}" action="#" method="post" th:object="${projectForm}">
-
+                        <div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"
+                             class="alert alert-danger"></div>
                         <span th:if="${projectForm.id != null}" th:remove="tag">
                             <div class=" control-group form-group">
                             <div class="controls">
@@ -62,26 +64,34 @@
 
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="name">Jméno</label>:
+                                <label for="name">Název</label>:
 
                                 <input type="text" id="name" name="name" th:field="*{name}"
-                                       class="form-control"
+                                       class="form-control has-error"
                                        autofocus="autofocus"/>
-                                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Age Error</div>
+                                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                                     th:errorclass="alert-danger">Name Error
+                                </div>
                             </div>
                         </div>
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="projectOwner_id">Vlastník</label>:
 
-                                <select class="form-control" id="projectOwner_id" name="projectOwner_id">
+
+                                <select class="form-control" id="projectOwner_id"
+                                        name="projectOwner_id">
+                                    <option th:value="null">---</option>
                                     <option th:each="person : ${persons}"
                                             th:value="${person.id}"
                                             th:selected="${projectForm.projectOwner_id != null} ? ${#strings.contains(person.id, projectForm.projectOwner_id)}"
                                             th:text="${person.name}">jméno vlastníka
                                     </option>
-                                </select>
 
+                                </select>
+                                <div th:if="${#fields.hasErrors('projectOwner_id')}" th:errorclass="alert-danger"
+                                     th:errors="*{projectOwner_id}">form field error
+                                </div>
                             </div>
                         </div>
 
@@ -91,13 +101,14 @@
                                 <select id="projectMembers_id" name="projectMembers_id" class="multipleSelection"
                                         multiple="multiple" size="10">
                                     <option th:unless="${#fields.hasErrors('*')}"
-
                                             th:each="person : ${persons}"
                                             th:value="${person.id}"
                                             th:selected="${members != null} ? ${#lists.contains(members, person)}"
                                             th:text="${person.name}">jména person
                                     </option>
-
+                                    <div th:if="${#fields.hasErrors('projectMembers_id')}"
+                                         th:errors="*{projectMembers_id}">Age Error
+                                    </div>
                                     <option th:if="${#fields.hasErrors('*')}"
                                             th:each="person : ${persons}"
                                             th:value="${person.id}"
@@ -106,6 +117,9 @@
                                             th:text="${person.name}">jména person
                                     </option>
                                 </select>
+                                <div th:if="${#fields.hasErrors('projectOwner_id')}" th:errorclass="alert-danger"
+                                     th:errors="*{projectOwner_id}">form field error
+                                </div>
                                 <script>
                                     var multipleSelection = $('.multipleSelection').bootstrapDualListbox({
                                         nonSelectedListLabel: 'Non-selected',

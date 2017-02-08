@@ -52,12 +52,13 @@ public class StartupHousekeeper {
 //        helpService.userRoleTesty();
 //        userRoleTesty();
 //        helpService.najdiPosledniTCInstanci(40);
-//        playSoundAfterStart();
-        delej();
+        playSoundAfterStart();
+
+//        kontrolniVypisDB();
 
     }
 
-    private void delej() {
+    private void kontrolniVypisDB() {
         l.warn("delej");
 //        Project project = projectService.findTestProjectById(21L);
 //        List<Project> projects = new ArrayList<>();

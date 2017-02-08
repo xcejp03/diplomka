@@ -2,6 +2,9 @@ package cz.vse.dto;
 
 import cz.vse.entity.PriorityTCEnum;
 
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -11,26 +14,23 @@ import java.util.List;
  * ukládat jako nové instance. V db pak bude - NE! bude to jinak.
  */
 public class WorkListForm extends BaseDTO {
+    @Size(min = 1, max = 50)
     private String name;
-
     private Long author_id;
-//
+    @NotNull
     private Long project_id;
-
+    @NotNull
     private List<WorkTCDTO> workTCList;
-
     private List<Long> tcMuster_id;
-
     private String createdDateTime;
-
     private String updatedDateTime;
-
+    @Future
     private String plannedExecution;
-
+    @NotNull
     private PriorityTCEnum priority;
-
+    @Size(min = 1, max = 250)
     private String prerequisite;
-
+    @Size(min = 1, max = 250)
     private String note;
 
     public String getName() {

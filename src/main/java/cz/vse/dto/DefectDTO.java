@@ -3,6 +3,9 @@ package cz.vse.dto;
 import cz.vse.entity.DefectStatusEnum;
 import cz.vse.entity.PriorityDefectEnum;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  * Created by pcejka on 10.10.2016.
  */

@@ -9,10 +9,11 @@ import java.util.List;
  */
 public class ProjectForm extends BaseDTO {
 
-    @NotNull (message = "procpal se tam null")
-    @Size(min=1, max = 4, message = "name.empty")
+    @Size(min = 1, max = 50)
     private String name;
+    @NotNull
     private Long projectOwner_id;
+    @NotNull
     private List<Long> projectMembers_id;
     private List<Long> tcMusters_id;
     private List<Long> suites_id;

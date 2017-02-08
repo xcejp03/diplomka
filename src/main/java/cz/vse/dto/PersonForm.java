@@ -2,14 +2,19 @@ package cz.vse.dto;
 
 import cz.vse.entity.RoleEnum;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
  * Created by pcejka on 10.10.2016.
  */
 public class PersonForm extends BaseDTO {
+    @Size(min = 1, max = 50)
     private String name;
+    @Size(min = 1, max = 50)
     private String username;
+    @NotNull
     private String password;
     private String createdDateTime;
     private String lastLogged;

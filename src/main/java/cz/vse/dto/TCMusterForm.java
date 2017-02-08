@@ -3,6 +3,8 @@ package cz.vse.dto;
 import cz.vse.entity.PriorityTCEnum;
 import cz.vse.entity.StatusEnum;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -10,8 +12,9 @@ import java.util.List;
  */
 
 public class TCMusterForm extends BaseDTO {
-
+    @Size(min = 1, max = 50)
     private String name;
+    @NotNull
     private Long project_id;
     private String project;
     private Long author_id;
@@ -19,9 +22,12 @@ public class TCMusterForm extends BaseDTO {
     private List<Long> tcInstances_id;
     private List<Long> testSuite_id;
     private StatusEnum status;
+    @NotNull
     private PriorityTCEnum priority;
     private String createdDateTime;
+    @Size(max = 500)
     private String prerequisite;
+    @Size(max = 500)
     private String note;
 
 
