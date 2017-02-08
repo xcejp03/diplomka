@@ -1,8 +1,8 @@
 package cz.vse.service.impl;
 
-import cz.vse.dto.TestSuiteDTO;
-import cz.vse.dto.TestSuiteForm;
-import cz.vse.dto.TestSuiteList;
+import cz.vse.dto.SuiteDTO;
+import cz.vse.dto.SuiteForm;
+import cz.vse.dto.SuiteList;
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
 import cz.vse.entity.TCMuster;
@@ -49,10 +49,10 @@ public class SuiteServiceImpl implements SuiteService {
     @Autowired
     TCMusterRepository tcMusterRepository;
 
-    public void createTestSuite(TestSuiteDTO testSuiteDTO) {
-        l.info("with: "+ testSuiteDTO);
+    public void createTestSuite(SuiteDTO suiteDTO) {
+        l.info("with: "+ suiteDTO);
         TestSuite testSuite = new TestSuite();
-        mapper.map(testSuiteDTO, testSuite);
+        mapper.map(suiteDTO, testSuite);
         testSuite.setCreatedDateTime(LocalDateTime.now());
         testSuiteRepository.save(testSuite);
         List<TCMuster> tcMusterList = new ArrayList<>();
@@ -69,7 +69,7 @@ public class SuiteServiceImpl implements SuiteService {
     }
 
     @Override
-    public void createTestSuite(TestSuiteForm suiteForm) {
+    public void createTestSuite(SuiteForm suiteForm) {
         l.info("with: "+ suiteForm);
         TestSuite testSuite = new TestSuite();
         mapper.map(suiteForm, testSuite);
@@ -94,10 +94,10 @@ public class SuiteServiceImpl implements SuiteService {
         l.info("created: " + testSuite);
     }
 
-    public void updateTestSuite(TestSuiteDTO testSuiteDTO) {
-        l.info("with: "+ testSuiteDTO);
-        TestSuite testSuite = testSuiteRepository.findOne(testSuiteDTO.getId());
-        mapper.map(testSuiteDTO, testSuite);
+    public void updateTestSuite(SuiteDTO suiteDTO) {
+        l.info("with: "+ suiteDTO);
+        TestSuite testSuite = testSuiteRepository.findOne(suiteDTO.getId());
+        mapper.map(suiteDTO, testSuite);
         List<TCMuster> tcMusterList = new ArrayList<>();
         if (testSuite.getTcMusters() != null) {
             for (TCMuster tcMusterForId : testSuite.getTcMusters()) {
@@ -114,7 +114,7 @@ public class SuiteServiceImpl implements SuiteService {
     }
 
     @Override
-    public void updateTestSuite(TestSuiteForm suiteForm) {
+    public void updateTestSuite(SuiteForm suiteForm) {
         l.info("with: "+ suiteForm);
         TestSuite testSuite = testSuiteRepository.findOne(suiteForm.getId());
         mapper.map(suiteForm, testSuite);
@@ -153,47 +153,47 @@ public class SuiteServiceImpl implements SuiteService {
         return testSuite;
     }
 
-    public TestSuiteDTO findTestSuiteDTOById(long id) {
+    public SuiteDTO findTestSuiteDTOById(long id) {
         l.info("with: "+ id);
         TestSuite testSuite;
-        TestSuiteDTO testSuiteDTO;
+        SuiteDTO suiteDTO;
         testSuite = testSuiteRepository.findOne(id);
-        testSuiteDTO = mapper.map(testSuite, TestSuiteDTO.class);
-        l.info("found: "+ testSuiteDTO);
-        return testSuiteDTO;
+        suiteDTO = mapper.map(testSuite, SuiteDTO.class);
+        l.info("found: "+ suiteDTO);
+        return suiteDTO;
     }
 
     @Override
-    public TestSuiteForm findTestSuiteFormById(long id) {
+    public SuiteForm findTestSuiteFormById(long id) {
         l.info("with: "+ id);
         TestSuite testSuite;
-        TestSuiteForm suiteForm;
+        SuiteForm suiteForm;
         testSuite = testSuiteRepository.findOne(id);
-        suiteForm = mapper.map(testSuite, TestSuiteForm.class);
+        suiteForm = mapper.map(testSuite, SuiteForm.class);
         l.info("found: "+ suiteForm);
         return suiteForm;
     }
 
     @Override
-    public TestSuiteList findTestSuiteListById(long id) {
+    public SuiteList findTestSuiteListById(long id) {
         l.info("with: "+ id);
         TestSuite testSuite;
-        TestSuiteList testSuiteList;
+        SuiteList suiteList;
         testSuite = testSuiteRepository.findOne(id);
-        testSuiteList = mapper.map(testSuite, TestSuiteList.class);
-        l.info("found: "+ testSuiteList);
-        return testSuiteList;
+        suiteList = mapper.map(testSuite, SuiteList.class);
+        l.info("found: "+ suiteList);
+        return suiteList;
     }
 
-    public List<TestSuiteDTO> findAllTestSuitesDTO() {
+    public List<SuiteDTO> findAllTestSuitesDTO() {
         List<TestSuite> testSuiteList;
-        List<TestSuiteDTO> testSuiteDTOList;
+        List<SuiteDTO> suiteDTOList;
 
         testSuiteList = testSuiteRepository.findAll();
         l.warn("mezikrok");
-        testSuiteDTOList = mapper.mapAsList(testSuiteList, TestSuiteDTO.class);
-        l.info("found: "+ testSuiteDTOList);
-        return testSuiteDTOList;
+        suiteDTOList = mapper.mapAsList(testSuiteList, SuiteDTO.class);
+        l.info("found: "+ suiteDTOList);
+        return suiteDTOList;
     }
 
     public List<TestSuite> findAllTestSuites() {
@@ -213,56 +213,56 @@ public class SuiteServiceImpl implements SuiteService {
     }
 
     @Override
-    public List<TestSuiteList> findAllTestSuiteListsByProjectId(Long projectId) {
+    public List<SuiteList> findAllTestSuiteListsByProjectId(Long projectId) {
         l.info("with: "+projectId);
-        List<TestSuiteList> suiteLists;
+        List<SuiteList> suiteLists;
         Project project = projectService.findTestProjectById(projectId);
         List<TestSuite> testSuites = testSuiteRepository.findAllTestSuitesByProjectOrderById(project);
-        suiteLists = mapper.mapAsList(testSuites, TestSuiteList.class);
+        suiteLists = mapper.mapAsList(testSuites, SuiteList.class);
         l.info("found: "+suiteLists);
         return suiteLists;
     }
 
-    public List<TestSuiteDTO> findAllTestSuitesDTOByProjectId(Long projectId) {
+    public List<SuiteDTO> findAllTestSuitesDTOByProjectId(Long projectId) {
         l.info("with: "+ projectId);
-        List<TestSuiteDTO> testSuiteDTOList;
+        List<SuiteDTO> suiteDTOList;
         List<TestSuite> testSuiteList;
         Project project = projectService.findTestProjectById(projectId);
         testSuiteList = testSuiteRepository.findAllTestSuitesByProjectOrderById(project);
-        testSuiteDTOList = mapper.mapAsList(testSuiteList, TestSuiteDTO.class);
-        l.info("found: "+ testSuiteDTOList);
-        return testSuiteDTOList;
+        suiteDTOList = mapper.mapAsList(testSuiteList, SuiteDTO.class);
+        l.info("found: "+ suiteDTOList);
+        return suiteDTOList;
     }
 
     @Override
-    public List<TestSuiteDTO> findAllTestSuitesDTOByUser(Person person) {
+    public List<SuiteDTO> findAllTestSuitesDTOByUser(Person person) {
         l.info("with: "+ person);
         List<Project> projectList = person.getProjectsMember();
         List<TestSuite> testSuiteList = testSuiteRepository.findAllTestSuitesByProjectIn(projectList);
-        List<TestSuiteDTO> testSuiteDTOList;
-        testSuiteDTOList = mapper.mapAsList(testSuiteList, TestSuiteDTO.class);
-        l.info("found: "+ testSuiteDTOList);
-        return  testSuiteDTOList;
+        List<SuiteDTO> suiteDTOList;
+        suiteDTOList = mapper.mapAsList(testSuiteList, SuiteDTO.class);
+        l.info("found: "+ suiteDTOList);
+        return suiteDTOList;
     }
 
     @Override
-    public List<TestSuiteList> findAllTestSuiteListsByUser(Person person) {
+    public List<SuiteList> findAllTestSuiteListsByUser(Person person) {
         l.info("with: "+ person);
         List<Project> projectList = person.getProjectsMember();
         List<TestSuite> testSuiteList = testSuiteRepository.findAllTestSuitesByProjectIn(projectList);
-        List<TestSuiteList> suiteLists;
-        suiteLists = mapper.mapAsList(testSuiteList, TestSuiteList.class);
+        List<SuiteList> suiteLists;
+        suiteLists = mapper.mapAsList(testSuiteList, SuiteList.class);
         l.info("found: "+ suiteLists);
         return  suiteLists;
     }
 
     @Override
-    public List<TestSuiteDTO> findAllTestSuitesDTOByUser(Long personId) {
+    public List<SuiteDTO> findAllTestSuitesDTOByUser(Long personId) {
         l.info("with: "+ personId);
         Person person = personService.findPersonById(personId);
-        List<TestSuiteDTO> testSuiteDTOList = findAllTestSuitesDTOByUser(person);
-        l.info("found: "+ testSuiteDTOList);
-        return testSuiteDTOList;
+        List<SuiteDTO> suiteDTOList = findAllTestSuitesDTOByUser(person);
+        l.info("found: "+ suiteDTOList);
+        return suiteDTOList;
     }
 
     @Override

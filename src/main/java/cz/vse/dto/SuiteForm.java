@@ -1,17 +1,18 @@
-package cz.vse.dto.old;
+package cz.vse.dto;
 
-import cz.vse.dto.*;
-
-import java.time.LocalDateTime;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
  * Created by pcejka on 19.11).2016.
  */
-public class TestSuiteDTO extends cz.vse.dto.BaseDTO {
+public class SuiteForm extends BaseDTO {
+    @Size(min = 1, max = 50)
     private String name;
     private String createdDateTime;
     private String updateDateTime;
+    @NotNull
     private Long project_id;
     private List<Long> tcMusters_id;
 
@@ -57,7 +58,7 @@ public class TestSuiteDTO extends cz.vse.dto.BaseDTO {
 
     @Override
     public String toString() {
-        return "TestSuiteDTO{" +
+        return "SuiteDTO{" +
                 "name='" + name + '\'' +
                 ", createdDateTime=" + createdDateTime +
                 ", updateDateTime=" + updateDateTime +

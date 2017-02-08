@@ -1,6 +1,6 @@
 package cz.vse.controller;
 
-import cz.vse.dto.TestSuiteForm;
+import cz.vse.dto.SuiteForm;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
 import cz.vse.service.SuiteService;
@@ -10,9 +10,11 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 /**
  * Created by pcejka on 09.10.2016.
@@ -38,16 +40,16 @@ public class TestSuiteController {
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
 //    public String defectShowByUser(Model model, @RequestParam(required = false, defaultValue = "open", value = "filter") String filter) {
-    public String createTestSuite(Model model, @RequestParam(required = false, value = "project") Long projectId) {
-        l.info("/suite/create");
+    public String createTestSuite(Model model, SuiteForm suiteForm, @RequestParam(required = false, value = "project") Long projectId) {
+        l.info("/suite/create get");
         Long personId = securityUtils.getLoggedPersonId();
 
-        TestSuiteForm suiteForm = new TestSuiteForm();
+//        SuiteForm suiteForm = new SuiteForm();
         if (projectId != null) {
             suiteForm.setProject_id(projectId);
         }
 
-        model.addAttribute("suiteForm", suiteForm);
+//        model.addAttribute("suiteForm", suiteForm);
 //        model.addAttribute("listSuites", suiteService.findAllTestSuites());
 //        model.addAttribute("listSuitesDTO", suiteService.findAllTestSuitesDTO());
 //        model.addAttribute("listProjects", projectService.findAllTestProjects());
@@ -61,8 +63,17 @@ public class TestSuiteController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createProject(@ModelAttribute("suiteDTO") TestSuiteForm suiteForm) {
-        l.info("/suite/create");
+    public String createProject(Model model, @Valid SuiteForm suiteForm, BindingResult bindingResult) {
+        l.info("/suite/create post");
+
+        if (bindingResult.hasErrors()) {
+            l.error("form has errors");
+            Long personId = securityUtils.getLoggedPersonId();
+            model.addAttribute("usersProjects", projectService.findAllTestProjectNamesByUserId(personId));
+            return "suiteCreate";
+        }
+
+
         if (suiteForm.getId() == null) {
             suiteService.createTestSuite(suiteForm);
         } else {
@@ -75,7 +86,7 @@ public class TestSuiteController {
     public String editTestSuite(@PathVariable("id") int id, Model model) {
         l.info("/suite/edit/" + id);
         Long personId = securityUtils.getLoggedPersonId();
-        TestSuiteForm suiteForm = suiteService.findTestSuiteFormById(id);
+        SuiteForm suiteForm = suiteService.findTestSuiteFormById(id);
 
         model.addAttribute("suiteForm", suiteForm);
 //        model.addAttribute("suiteE", suiteService.findTestSuiteById(id));

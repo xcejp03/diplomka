@@ -45,6 +45,9 @@
                 <div class="well">
                     <form th:action="@{/worklist/worktc/edit}" th:object="${workListDTO}" method="post"
                           default-target-url="/index">
+                        <div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"
+                             class="alert alert-danger"></div>
+
 
                         <h1>TC work list</h1>
                         <table class="table table-striped datatable">

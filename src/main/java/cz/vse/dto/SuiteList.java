@@ -5,10 +5,10 @@ import java.util.List;
 /**
  * Created by pcejka on 19.11).2016.
  */
-public class TestSuiteDTO extends BaseDTO {
+public class SuiteList extends BaseDTO {
     private String name;
     private String createdDateTime;
-    private String updateDateTime;
+    private String updatedDateTime;
     private Long project_id;
     private List<Long> tcMusters_id;
 
@@ -28,12 +28,12 @@ public class TestSuiteDTO extends BaseDTO {
         this.createdDateTime = createdDateTime;
     }
 
-    public String getUpdateDateTime() {
-        return updateDateTime;
+    public String getUpdatedDateTime() {
+        return updatedDateTime;
     }
 
-    public void setUpdateDateTime(String updateDateTime) {
-        this.updateDateTime = updateDateTime;
+    public void setUpdatedDateTime(String updatedDateTime) {
+        this.updatedDateTime = updatedDateTime;
     }
 
     public Long getProject_id() {
@@ -54,10 +54,9 @@ public class TestSuiteDTO extends BaseDTO {
 
     @Override
     public String toString() {
-        return "TestSuiteDTO{" +
+        return "SuiteDTO{" +
                 "name='" + name + '\'' +
                 ", createdDateTime=" + createdDateTime +
-                ", updateDateTime=" + updateDateTime +
                 ", project_id=" + project_id +
                 ", tcMusters_id=" + tcMusters_id +
                 '}';

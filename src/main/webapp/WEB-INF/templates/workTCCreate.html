@@ -45,6 +45,9 @@
                 <div class="well">
                     <form th:action="@{/worklist/worktc/edit}" th:object="${workListDTO}" method="post"
                           default-target-url="/index">
+                        <div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"
+                             class="alert alert-danger"></div>
+
                         <input type="text" id="tcMuster_id" th:value="${workListDTO.tcMuster_id}" name="tcMuster_id" hidden="hidden"/>
 
                         <span th:if="${workListDTO.id != null}" th:remove="tag">
@@ -138,6 +141,7 @@
                                 </td>
                                 <td>
                                     <select class="form-control" th:name="|workTCList[${stat.index}].assignee_id|">
+                                        <option th:value="null">---</option>
                                         <option th:each="person : ${persons}"
                                                 th:value="${person.id}"
                                                 th:selected="${tc.assignee_id != null} ? ${#strings.contains(person.id, tc.assignee_id)}"

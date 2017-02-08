@@ -48,7 +48,9 @@
         <div class="row">
             <div class="col-sm-8">
                 <div class="well">
-                    <form th:action="@{/suite/create}" method="post" default-target-url="/index">
+                    <form th:action="@{/suite/create}" method="post" th:object="${suiteForm}">
+                        <div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"
+                             class="alert alert-danger"></div>
 
                         <span th:if="${suiteForm.id != null}" th:remove="tag">
                             <div class=" control-group form-group">
@@ -63,9 +65,11 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="name">Název</label>:
-                                <input type="text" id="name" name="name" th:value="${suiteForm.name}"
+                                <input type="text" id="name" name="name" th:field="*{name}"
                                        class="form-control"
                                        autofocus="autofocus"/>
+                                <div th:if="${#fields.hasErrors('name')}" th:errorclass="alert-danger"
+                                     th:errors="*{name}">form field error</div>
                             </div>
                         </div>
 
@@ -74,12 +78,15 @@
                                 <label for="project_id">Projekt</label>:
 
                                 <select class="form-control" id="project_id" name="project_id">
+                                    <option th:value="null">---</option>
                                     <option th:each="project : ${usersProjects}"
                                             th:value="${project.id}"
                                             th:selected="${suiteForm.project_id != null} ? ${#strings.contains(project.id, suiteForm.project_id)}"
                                             th:text="${project.name}">jméno projektu
                                     </option>
                                 </select>
+                                <div th:if="${#fields.hasErrors('project_id')}" th:errorclass="alert-danger"
+                                     th:errors="*{name}">form field error</div>
                             </div>
                         </div>
 

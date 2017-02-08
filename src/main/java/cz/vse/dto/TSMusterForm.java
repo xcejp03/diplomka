@@ -1,5 +1,6 @@
 package cz.vse.dto;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -16,11 +17,9 @@ public class TSMusterForm extends BaseDTO {
     @Size(min = 1, max = 250)
     private String expected;
     private Long author_id;
-
     private List<Long> defects_id;
-
     private List<Long> tsInstances_id;
-
+    @NotNull
     private Long tcMuster_id;
 
     public String getCreatedDateTime() {

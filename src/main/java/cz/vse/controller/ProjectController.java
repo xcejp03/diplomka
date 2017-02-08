@@ -45,11 +45,7 @@ public class ProjectController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createProjectForm(Model model, ProjectForm projectForm) {
         l.info("project/create get");
-//        model.addAttribute("projectForm", new ProjectForm());
-//        model.addAttribute("person", new PersonDTO());
-//        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
         model.addAttribute("persons", personService.findAllPersonNames());
-//        model.addAttribute("listSuites", suiteService.findAllTestSuites());
         return "projectCreate";
     }
 
@@ -57,7 +53,7 @@ public class ProjectController {
     public String createProject(Model model,@Valid ProjectForm projectForm, BindingResult bindingResult,  HttpServletRequest request) {
         l.info("/project/create post");
         if (bindingResult.hasErrors()) {
-            l.error("jsou errory");
+            l.error("form has errors");
             model.addAttribute("persons", personService.findAllPersonNames());
             return "projectCreate";
         }

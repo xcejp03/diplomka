@@ -13,9 +13,11 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 /**
  * Created by pcejka on 09.10.2016.
@@ -51,9 +53,9 @@ public class DefectController {
 //    }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String createDefect(Model model) {
+    public String createDefect(Model model, DefectForm defectForm) {
         l.info("request mapping defect/create");
-        model.addAttribute("defectForm", new DefectForm());
+//        model.addAttribute("defectForm", new DefectForm());
 //        model.addAttribute("defectList", defectService.findAllDefects());
         model.addAttribute("persons", personService.findAllPersonNames());
 //        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
@@ -62,7 +64,14 @@ public class DefectController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createDefect(@ModelAttribute("person") DefectForm defectForm, HttpServletRequest request) {
+    public String createDefect(Model model, @Valid DefectForm defectForm, BindingResult bindingResult, HttpServletRequest request) {
+
+        if (bindingResult.hasErrors()) {
+            l.error("form has errors");
+            model.addAttribute("persons", personService.findAllPersonNames());
+            return "defectCreate";
+        }
+
         if (defectForm.getId() == null) {
             defectForm.setReporter_id(securityUtils.getLoggedPersonId());
             defectService.createDefect(defectForm);

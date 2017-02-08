@@ -33,6 +33,7 @@
             <ol class="breadcrumb">
                 <li><a href="/dashboard">Home</a></li>
                 <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right">Zpět</a>
+                <li th:text="${filterHelper}"></li>
             </ol>
         </div>
     </div>
@@ -72,7 +73,10 @@
         </div>
         <div class="col-sm-9">
 
-            <form action="#" th:action="@{/tc/copy}" th:object="${tcMustersCopy}" method="post">
+            <form action="#" th:action="@{/tc/copy(filter=(${param.filter} == null or ${param.filter[0]} == 'all') ? 'all' : ${param.filter[0]})}" th:object="${TCMusterCopyDTO}"
+                  method="post">
+                <div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"
+                     class="alert alert-danger"></div>
                 <table class="table table-striped datatable">
                     <thead>
                     <tr>
@@ -87,7 +91,7 @@
                         <th>Více</th>
                     </tr>
                     </thead>
-                    <tbody th:remove="all-but-first">
+                    <tbody>
                     <tr th:each="tc : ${tcMusters}">
                         <td><input type="checkbox" th:field="*{tcMusters_id}" th:value="${tc.id}"/></td>
                         <td th:text="${tc.id}">00</td>
@@ -112,18 +116,31 @@
                         </td>
                     </tr>
                     </tbody>
+
                     <label for="project_id">Projekt</label>:
+
                     <select class="form-control" id="project_id" name="project_id">
+                        <option th:value="null">---</option>
                         <option th:each="project : ${usersProjects}"
                                 th:value="${project.id}"
                                 th:text="${project.name}">jméno projektu
                         </option>
                     </select>
-                    <input type="hidden" value="trrd" th:value="dasdas"/>
+                    <div th:if="${#fields.hasErrors('project_id')}" th:errorclass="alert-danger"
+                         th:errors="*{project_id}">form field error
+                    </div>
 
+                    <input type="hidden" value="trrd" th:value="dasdas"/>
                 </table>
-                <p><input type="submit" class="btn btn-primary" value="Zkopíruj"/> <input type="reset" class="btn" value="Reset"/>
+                <div th:if="${#fields.hasErrors('tcMusters_id')}" th:errorclass="alert-danger"
+                     th:errors="*{tcMusters_id}">form field error
+                </div>
+                <p><input type="submit" class="btn btn-primary" value="Zkopíruj"/> <input type="reset" class="btn"
+                                                                                          value="Reset"/>
                 </p>
+
+                <!--<input type="hidden" name="filterHelper" id="filterHelper" value="nic" th:value="(${param.filter} == null or ${param.filter[0]} == 'all') ? 'all' : ${param.filter[0]}"/>-->
+
             </form>
 
 

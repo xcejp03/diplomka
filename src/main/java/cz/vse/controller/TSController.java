@@ -2,15 +2,18 @@ package cz.vse.controller;
 
 import cz.vse.dto.TSInstanceRunDTO;
 import cz.vse.dto.TSMusterForm;
+import cz.vse.entity.Person;
 import cz.vse.service.*;
 import cz.vse.utils.SecurityUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 /**
  * Created by pcejka on 09.10.2016.
@@ -41,12 +44,12 @@ public class TSController {
     SecurityUtils securityUtils;
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String createTS(Model model, @RequestParam(required = false, value = "tcmuster") Long tcmusterId) {
+    public String createTS(Model model, TSMusterForm tsMusterForm, @RequestParam(required = false, value = "tcmuster") Long tcmusterId) {
         l.info("/ts/create");
-        TSMusterForm tsMusterForm = new TSMusterForm();
+//        TSMusterForm tsMusterForm = new TSMusterForm();
         tsMusterForm.setTcMuster_id(tcmusterId);
 
-        model.addAttribute("tsMusterForm", tsMusterForm);
+//        model.addAttribute("tsMusterForm", tsMusterForm);
 //        model.addAttribute("listTSMusters", tsMusterService.findAllTestStepMustersDTO());
         model.addAttribute("persons", personService.findAllPersonNames());
         model.addAttribute("loggedPerson", securityUtils.getLoggedPerson());
@@ -55,9 +58,21 @@ public class TSController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createTSPost(@ModelAttribute("ts") TSMusterForm tsMusterForm, HttpServletRequest request) {
-        l.info("/ts/create");
+    public String createTSPost(Model model, @Valid TSMusterForm tsMusterForm, BindingResult bindingResult, HttpServletRequest request) {
+        l.info("/ts/create post" );
+        Person loggedPerson =  securityUtils.getLoggedPerson();
+
+        if (bindingResult.hasErrors()) {
+            l.error("form has errors");
+            model.addAttribute("persons", personService.findAllPersonNames());
+            model.addAttribute("loggedPerson", loggedPerson);
+            model.addAttribute("tcMusters", tcMusterService.findAllTestCaseMustersNames());
+            return "tsCreate";
+        }
+
+
         if (tsMusterForm.getId() == null) {
+            tsMusterForm.setAuthor_id(loggedPerson.getId());
             tsMusterService.createTestStepMuster(tsMusterForm);
         } else {
             tsMusterService.updateTestStepMuster(tsMusterForm);
@@ -77,27 +92,35 @@ public class TSController {
     }
 
     @RequestMapping(value = "/run", method = RequestMethod.POST)
-    public String runTSInstance(@ModelAttribute("ts") TSInstanceRunDTO tsInstanceRunDTO) {
+    public String runTSInstance(Model model, @Valid TSInstanceRunDTO TSInstanceRunDTO, BindingResult bindingResult) {
         l.info("/ts/run");
-        Long tcInstanceId = tsInstanceRunDTO.getTcInstance_id();
+
+        if (bindingResult.hasErrors()) {
+            l.error("form has errors");
+//            model.addAttribute("tsInstanceRun", tsInstanceService.findTestStepInstanceRunDTOById(id));
+            return "tsRun";
+        }
+
+        Long tcInstanceId = TSInstanceRunDTO.getTcInstance_id();
         Long personId = securityUtils.getLoggedPersonId();
-        tsInstanceRunDTO.setTesterUpdate_id(personId);
-        tsInstanceService.updateTestStepInstance(tsInstanceRunDTO);
+        TSInstanceRunDTO.setTesterUpdate_id(personId);
+        tsInstanceService.updateTestStepInstance(TSInstanceRunDTO);
 
         return "redirect:/tc/show/" + tcInstanceId;
     }
 
     @RequestMapping(value = "/run/{id}", method = RequestMethod.GET)
-    public String runTSInstancePost(@PathVariable("id") long id, Model model) {
+    public String runTSInstancePost(Model model, TSInstanceRunDTO TSInstanceRunDTO, @PathVariable("id") long id) {
         l.info("/ts/run/" + id);
-        model.addAttribute("tsInstanceRun", tsInstanceService.findTestStepInstanceRunDTOById(id));
+
+        model.addAttribute("TSInstanceRunDTO", tsInstanceService.findTestStepInstanceRunDTOById(id));
         return "tsRun";
     }
 
     @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
     public String showTSInstancePost(@PathVariable("id") long id, Model model) {
         l.info("/ts/show/"+id);
-        model.addAttribute("tsInstanceRun", tsInstanceService.findTestStepInstanceRunDTOById(id));
+        model.addAttribute("TSInstanceRunDTO", tsInstanceService.findTestStepInstanceRunDTOById(id));
         return "tsShow";
     }
 

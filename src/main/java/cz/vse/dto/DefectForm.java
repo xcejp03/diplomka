@@ -14,7 +14,7 @@ public class DefectForm extends BaseDTO {
     private String name;
     @Size(min = 1, max = 500)
     private String description;
-    @Size(min = 1, max = 50)
+    @Size(max = 50)
     private String affectsVersion;
     @NotNull
     private PriorityDefectEnum priority;

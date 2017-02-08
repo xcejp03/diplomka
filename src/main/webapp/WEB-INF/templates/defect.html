@@ -164,6 +164,8 @@
                 <h3>Reassignuj defekt "<span th:text="${defectDTO.name}"></span>" na někoho jiného </h3>
 
                 <form th:action="@{/defect/writeAssigneeChange}" method="post" default-target-url="/index">
+                    <div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"
+                         class="alert alert-danger"></div>
                     <div class=" control-group form-group">
                         <div class="controls">
                              <span th:if="${defectDTO.id != null}" th:remove="tag">
@@ -197,6 +199,8 @@
             <div class="well">
                 <h3>Změna stavu defektu.</h3>
                 <form th:action="@{/defect/writeStatusChange}" method="post" default-target-url="/index">
+                    <div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"
+                         class="alert alert-danger"></div>
                     <div class=" control-group form-group">
                         <div class="controls">
                              <span th:if="${defectDTO.id != null}" th:remove="tag">
@@ -264,6 +268,8 @@
                 </div>
 
                 <form th:action="@{/comment/create}" method="post" default-target-url="/index">
+                    <div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"
+                         class="alert alert-danger"></div>
 
                         <span th:if="${commentDTO.id != null}" th:remove="tag">
                             <div class=" control-group form-group">

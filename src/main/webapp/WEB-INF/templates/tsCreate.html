@@ -50,13 +50,15 @@
         <div class="row">
             <div class="col-sm-7">
                 <div class="well">
-                    <form th:action="@{/ts/create}" method="post" default-target-url="/index">
+                    <form th:action="@{/ts/create}" method="post" th:object="${TSMusterForm}">
+                        <div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"
+                             class="alert alert-danger"></div>
 
-                        <span th:if="${tsMusterForm.id != null}" th:remove="tag">
+                        <span th:if="*{id != null}" th:remove="tag">
                             <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="id">ID</label>:
-                                <input type="text" id="id" th:value="${tsMusterForm.id}" readonly="true" name="id"
+                                <input type="text" id="id" th:value="*{id}" readonly="true" name="id"
                                        class="form-control"/>
                             </div>
                         </div>
@@ -66,9 +68,11 @@
                             <div class="controls">
                                 <label for="action">Akce</label>:
                                 <textarea type="text" id="action" name="action"
-                                       th:text="${tsMusterForm.action}"
+                                       th:text="*{action}"
                                        class="form-control"
                                        autofocus="autofocus"/>
+                                <div th:if="${#fields.hasErrors('action')}" th:errorclass="alert-danger"
+                                     th:errors="*{action}">form field error</div>
                             </div>
                         </div>
 
@@ -76,54 +80,59 @@
                             <div class="controls">
                                 <label for="expected">Očekávané chování</label>:
                                 <textarea type="text" id="expected" name="expected"
-                                          th:text="${tsMusterForm.expected}"
-                                       class="form-control"
-                                />
+                                          th:text="*{expected}"
+                                       class="form-control"/>
+                                <div th:if="${#fields.hasErrors('expected')}" th:errorclass="alert-danger"
+                                     th:errors="*{expected}">form field error</div>
                             </div>
                         </div>
 
-                        <div class=" control-group form-group">
-                            <div class="controls">
-                                <label for="author_id">Autor kroku</label>:
+                        <!--<div class=" control-group form-group">-->
+                            <!--<div class="controls">-->
+                                <!--<label for="author_id">Autor kroku</label>:-->
 
-                                <select class="form-control" id="author_id" name="author_id">
-                                    <option th:each="author_id : ${persons}"
-                                            th:selected="${tsMusterForm.author_id != null} ? ${#strings.contains(author_id.id, tsMusterForm.author_id)} :
-                                            ${#strings.contains(author_id.id, loggedPerson.id)}"
-                                            th:value="${author_id.id}"
-                                            th:text="${author_id.name}">jméno autora
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
+                                <!--<select class="form-control" id="author_id" name="author_id">-->
+                                    <!--<option th:each="author_id : ${persons}"-->
+                                            <!--th:selected="${tsMusterForm.author_id != null} ? ${#strings.contains(author_id.id, tsMusterForm.author_id)} :-->
+                                            <!--${#strings.contains(author_id.id, loggedPerson.id)}"-->
+                                            <!--th:value="${author_id.id}"-->
+                                            <!--th:text="${author_id.name}">jméno autora-->
+                                    <!--</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
 
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="tcMuster_id">tcMuster_id</label>:
 
                                 <select class="form-control" id="tcMuster_id" name="tcMuster_id">
+                                    <option th:value="null">---</option>
                                     <option th:each="tcMuster_id : ${tcMusters}"
-                                            th:selected="${tsMusterForm.tcMuster_id != null} ? ${#strings.contains(tcMuster_id.id, tsMusterForm.tcMuster_id)}"
+                                            th:selected="${TSMusterForm.tcMuster_id != null} ? ${#strings.contains(tcMuster_id.id, TSMusterForm.tcMuster_id)}"
                                             th:value="${tcMuster_id.id}"
                                             th:text="${tcMuster_id.name}">jméno tcMuster
                                     </option>
                                 </select>
+                                <div th:if="${#fields.hasErrors('tcMuster_id')}" th:errorclass="alert-danger"
+                                     th:errors="*{tcMuster_id}">form field error</div>
+
                             </div>
                         </div>
 
-                        <span th:if="${tsMusterForm.id != null}" th:remove="tag">
+                        <span th:if="*{id != null}" th:remove="tag">
                              <input type="submit" value="Upravit" class="btn btn-primary"/>
                         </span>
-                        <span th:if="${tsMusterForm.id == null}" th:remove="tag">
+                        <span th:if="*{id == null}" th:remove="tag">
                              <input type="submit" value="Vytvořit" class="btn btn-primary"/>
                         </span>
 
                     </form>
                 </div>
             </div>
-            <div class="col-sm-5">
-                <p><a th:href="@{'/ts/ts-by-tcmuster/'+ ${param.tcmuster[0]}}" class="btn btn-primary">Zpět</a></p>
-            </div>
+            <!--<div class="col-sm-5">-->
+                <!--<p><a th:href="@{'/ts/ts-by-tcmuster/'+ ${param.tcmuster[0]}}" class="btn btn-primary">Zpět</a></p>-->
+            <!--</div>-->
         </div>
 
         <!--Page Content - End-->

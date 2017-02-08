@@ -19,18 +19,19 @@ public class WorkListForm extends BaseDTO {
     private Long author_id;
     @NotNull
     private Long project_id;
-    @NotNull
     private List<WorkTCDTO> workTCList;
+    @NotNull
     private List<Long> tcMuster_id;
     private String createdDateTime;
     private String updatedDateTime;
-    @Future
+//    @Future
+    @Size(min = 1, max = 15)    //hotfix
     private String plannedExecution;
     @NotNull
     private PriorityTCEnum priority;
-    @Size(min = 1, max = 250)
+    @Size(max = 250)
     private String prerequisite;
-    @Size(min = 1, max = 250)
+    @Size(max = 250)
     private String note;
 
     public String getName() {

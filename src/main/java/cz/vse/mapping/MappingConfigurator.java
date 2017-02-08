@@ -9,7 +9,7 @@ import cz.vse.dto.TCInstanceDTO;
 import cz.vse.dto.TCInstanceRunDTO;
 import cz.vse.dto.TSInstanceRunDTO;
 import cz.vse.dto.TSMusterDTO;
-import cz.vse.dto.TestSuiteDTO;
+import cz.vse.dto.SuiteDTO;
 import cz.vse.dto.WorkListDTO;
 import cz.vse.dto.WorkTCDTO;
 import cz.vse.entity.*;
@@ -203,7 +203,7 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .field("tCMuster", "tcMuster_id")
                 .byDefault()
                 .register();
-        factory.classMap(TestSuite.class, TestSuiteDTO.class)
+        factory.classMap(TestSuite.class, SuiteDTO.class)
                 .mapNullsInReverse(false)
                 .mapNulls(false)
                 .field("tcMusters", "tcMusters_id")
@@ -211,7 +211,7 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .field("tcMusters", "tcMusters_id")
                 .byDefault()
                 .register();
-        factory.classMap(TestSuite.class, TestSuiteForm.class)
+        factory.classMap(TestSuite.class, SuiteForm.class)
                 .mapNullsInReverse(false)
                 .mapNulls(false)
                 .field("tcMusters", "tcMusters_id")
@@ -219,7 +219,7 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .field("tcMusters", "tcMusters_id")
                 .byDefault()
                 .register();
-        factory.classMap(TestSuite.class, TestSuiteList.class)
+        factory.classMap(TestSuite.class, SuiteList.class)
                 .mapNullsInReverse(false)
                 .mapNulls(false)
                 .field("tcMusters", "tcMusters_id")

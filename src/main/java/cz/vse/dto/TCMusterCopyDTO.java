@@ -1,5 +1,6 @@
 package cz.vse.dto;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -7,8 +8,9 @@ import java.util.List;
  */
 
 public class TCMusterCopyDTO extends BaseDTO {
-
+    @NotNull
     private Long project_id;
+    @NotNull
     private List<Long> tcMusters_id;
 
 

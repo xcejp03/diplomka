@@ -1,13 +1,11 @@
 package cz.vse.dto;
 
-import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
  * Created by pcejka on 19.11).2016.
  */
-public class TestSuiteForm extends BaseDTO {
-    @Size(min = 1, max = 50)
+public class SuiteDTO extends BaseDTO {
     private String name;
     private String createdDateTime;
     private String updateDateTime;
@@ -56,7 +54,7 @@ public class TestSuiteForm extends BaseDTO {
 
     @Override
     public String toString() {
-        return "TestSuiteDTO{" +
+        return "SuiteDTO{" +
                 "name='" + name + '\'' +
                 ", createdDateTime=" + createdDateTime +
                 ", updateDateTime=" + updateDateTime +

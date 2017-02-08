@@ -44,6 +44,8 @@
             <div class="col-sm-4">
                 <div class="well">
                     <form th:action="@{/ts/run}" method="post" default-target-url="/index">
+                        <div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"
+                             class="alert alert-danger"></div>
 
                         <span th:if="${tsInstanceRun.id != null}" th:remove="tag">
                             <div class=" control-group form-group">

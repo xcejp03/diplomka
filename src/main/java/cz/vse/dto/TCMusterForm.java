@@ -130,11 +130,12 @@ public class TCMusterForm extends BaseDTO {
 
     @Override
     public String toString() {
-        return "TCMusterDTO{" +
-                "createdDateTime=" + createdDateTime +
-                ", name='" + name + '\'' +
+        return "TCMusterForm{" +
+                "name='" + name + '\'' +
+                ", project='" + project + '\'' +
+                ", status=" + status +
+                ", priority=" + priority +
                 ", project_id=" + project_id +
                 '}';
     }
-
 }

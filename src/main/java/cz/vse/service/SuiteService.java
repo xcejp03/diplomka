@@ -1,8 +1,8 @@
 package cz.vse.service;
 
-import cz.vse.dto.TestSuiteDTO;
-import cz.vse.dto.TestSuiteForm;
-import cz.vse.dto.TestSuiteList;
+import cz.vse.dto.SuiteDTO;
+import cz.vse.dto.SuiteForm;
+import cz.vse.dto.SuiteList;
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
 import cz.vse.entity.TestSuite;
@@ -14,15 +14,15 @@ import java.util.List;
  */
 public interface SuiteService {
 
-    void createTestSuite(TestSuiteDTO testSuiteDTO);
+    void createTestSuite(SuiteDTO suiteDTO);
 
-    void createTestSuite(TestSuiteForm suiteForm);
+    void createTestSuite(SuiteForm suiteForm);
 
     void createTestSuite(TestSuite testSuite);
 
-    void updateTestSuite(TestSuiteDTO testSuiteDTO);
+    void updateTestSuite(SuiteDTO suiteDTO);
 
-    void updateTestSuite(TestSuiteForm suiteForm);
+    void updateTestSuite(SuiteForm suiteForm);
 
     void deleteTestSuite(TestSuite testSuite);
 
@@ -30,26 +30,26 @@ public interface SuiteService {
 
     TestSuite findTestSuiteById(long id);
 
-    TestSuiteDTO findTestSuiteDTOById(long id);
+    SuiteDTO findTestSuiteDTOById(long id);
 
-    TestSuiteForm findTestSuiteFormById(long id);
+    SuiteForm findTestSuiteFormById(long id);
 
-    TestSuiteList findTestSuiteListById(long id);
+    SuiteList findTestSuiteListById(long id);
 
-    List<TestSuiteDTO> findAllTestSuitesDTO();
+    List<SuiteDTO> findAllTestSuitesDTO();
 
     List<TestSuite> findAllTestSuites();
 
     List<TestSuite> findAllTestSuitesByProjectId(Long projectId);
 
-    List<TestSuiteList> findAllTestSuiteListsByProjectId(Long projectId);
+    List<SuiteList> findAllTestSuiteListsByProjectId(Long projectId);
 
-    List<TestSuiteDTO> findAllTestSuitesDTOByProjectId(Long projectId);
+    List<SuiteDTO> findAllTestSuitesDTOByProjectId(Long projectId);
 
-    List<TestSuiteDTO> findAllTestSuitesDTOByUser(Person person);
-    List<TestSuiteList> findAllTestSuiteListsByUser(Person person);
+    List<SuiteDTO> findAllTestSuitesDTOByUser(Person person);
+    List<SuiteList> findAllTestSuiteListsByUser(Person person);
 
-    List<TestSuiteDTO> findAllTestSuitesDTOByUser(Long projectId);
+    List<SuiteDTO> findAllTestSuitesDTOByUser(Long projectId);
 
     int getNumberOfSuitesInProject(Project project);
 

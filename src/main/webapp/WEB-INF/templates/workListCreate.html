@@ -48,13 +48,15 @@
         <div class="row">
             <div class="col-sm-7">
                 <div class="well">
-                    <form th:action="@{/worklist/create}" method="post" default-target-url="/index">
+                    <form th:action="@{/worklist/create}" method="post" th:object="${workListForm}">
+                        <div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"
+                             class="alert alert-danger"></div>
 
-                        <span th:if="${workListForm.id != null}" th:remove="tag">
+                        <span th:if="*{id != null}" th:remove="tag">
                             <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="id">ID</label>:
-                                <input type="text" id="id" th:value="${workListForm.id}" readonly="true" name="id"
+                                <input type="text" id="id" th:value="*{id}" readonly="true" name="id"
                                        class="form-control"/>
                             </div>
                         </div>
@@ -63,8 +65,10 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="name">Název</label>:
-                                <input type="text" id="name" name="name" th:value="${workListForm.name}"
+                                <input type="text" id="name" name="name" th:value="*{name}"
                                        class="form-control"/>
+                                <div th:if="${#fields.hasErrors('name')}" th:errorclass="alert-danger"
+                                     th:errors="*{name}">form field error</div>
                             </div>
                         </div>
 
@@ -72,8 +76,10 @@
                             <div class="controls">
                                 <label for="prerequisite">Prerekvizity</label>:
                                 <textarea type="text" id="prerequisite" name="prerequisite"
-                                          th:text="${workListForm.prerequisite}"
+                                          th:text="*{prerequisite}"
                                           class="form-control"/>
+                                <div th:if="${#fields.hasErrors('prerequisite')}" th:errorclass="alert-danger"
+                                     th:errors="*{prerequisite}">form field error</div>
                             </div>
                         </div>
 
@@ -81,8 +87,10 @@
                             <div class="controls">
                                 <label for="prerequisite">Poznámka</label>:
                                 <textarea type="text" id="note" name="note"
-                                          th:text="${workListForm.note}"
+                                          th:text="*{note}"
                                           class="form-control"/>
+                                <div th:if="${#fields.hasErrors('note')}" th:errorclass="alert-danger"
+                                     th:errors="*{note}">form field error</div>
                             </div>
                         </div>
 
@@ -91,12 +99,15 @@
                                 <label for="priority">Priorita</label>:
 
                                 <select class="form-control" id="priority" name="priority">
+                                    <option th:value="null">---</option>
                                     <option th:each="priority : ${priorityList}"
                                             th:value="${priority}"
                                             th:selected="${workListForm.priority != null} ? ${#arrays.contains(workListForm.priority, priority)}"
                                             th:text="${priority}">jméno projektu
                                     </option>
                                 </select>
+                                <div th:if="${#fields.hasErrors('priority')}" th:errorclass="alert-danger"
+                                     th:errors="*{priority}">form field error</div>
                             </div>
                         </div>
 
@@ -106,12 +117,15 @@
                                 <label for="project_id">Projekt</label>:
 
                                 <select class="form-control" id="project_id" name="project_id">
+                                    <option th:value="null">---</option>
                                     <option th:each="project : ${usersProjects}"
                                             th:value="${project.id}"
                                             th:selected="${workListForm.project_id != null} ? ${#strings.contains(project.id, workListForm.project_id)}"
                                             th:text="${project.name}">Assignee
                                     </option>
                                 </select>
+                                <div th:if="${#fields.hasErrors('project_id')}" th:errorclass="alert-danger"
+                                     th:errors="*{project_id}">form field error</div>
 
                             </div>
                         </div>
@@ -122,6 +136,8 @@
                                 <input type="text" id="plannedExecution" class="datepicker" name="plannedExecution"
                                        th:value="${workListForm.plannedExecution}"
                                        size="30"/>
+                                <div th:if="${#fields.hasErrors('plannedExecution')}" th:errorclass="alert-danger"
+                                     th:errors="*{plannedExecution}">form field error</div>
                             </div>
                         </div>
 
@@ -142,9 +158,9 @@
                                             th:value="${tc.id}"
                                             th:text="${tc.name}">tc vzory
                                     </option>
-
-
                                 </select>
+                                <div th:if="${#fields.hasErrors('tcMuster_id')}" th:errorclass="alert-danger"
+                                     th:errors="*{tcMuster_id}">form field error</div>
                                 <script>
                                     var multipleSelection4 = $('.multipleSelection4').bootstrapDualListbox({
                                         nonSelectedListLabel: 'Non-selected',

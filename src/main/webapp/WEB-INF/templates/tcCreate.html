@@ -43,13 +43,18 @@
         <div class="row">
             <div class="col-sm-7">
                 <div class="well">
-                    <form th:action="@{/tc/create}" method="post" default-target-url="/index">
+                    <form th:action="@{/tc/create}" method="post" th:object="${TCMusterForm}"
+                          default-target-url="/index">
+                        <!--<div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"-->
+                             <!--class="alert alert-danger">-->
 
-                        <span th:if="${tcForm.id != null}" th:remove="tag">
+                        <!--</div>-->
+
+                        <span th:if="*{id != null}" th:remove="tag">
                             <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="id">ID</label>:
-                                <input type="text" id="id" th:value="${tcForm.id}" readonly="true" name="id"
+                                <input type="text" id="id" th:value="*{id}" readonly="true" name="id"
                                        class="form-control"/>
                             </div>
                         </div>
@@ -59,12 +64,14 @@
                             <div class="controls">
                                 <label for="name">Název</label>:
 
-                                <input type="text" id="name" name="name" th:value="${tcForm.name}" class="form-control"
+                                <input type="text" id="name" name="name" th:field="*{name}" class="form-control"
                                        autofocus="autofocus"/>
+                                <div th:if="${#fields.hasErrors('name')}" th:errorclass="alert-danger"
+                                     th:errors="*{name}">form field error
+                                </div>
                             </div>
-                        </div>
 
-                        <span th:if="${tcForm.id != null}" th:remove="tag">
+                            <span th:if="*{id != null}" th:remove="tag">
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="suite_id">Test Suite</label>:
@@ -73,25 +80,28 @@
                             </div>
                         </div>
                         </span>
-
-                        <span th:if="${tcForm.id != null}" th:remove="tag">
+                        </div>
+                        <!--<span th:if="${tcForm.id != null}" th:remove="tag">-->
+                        <!--<div class=" control-group form-group">-->
+                        <!--<div class="controls">-->
+                        <!--<label for="project_id">Projekt</label>:-->
+                        <!--<input type="text" id="project_id" name="project_id" th:value="${tcForm.project}"-->
+                        <!--readonly="readonly" class="form-control"/>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--</span>-->
+                        <!--<span th:if="*{id == null}" th:remove="tag">-->
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="project_id">Projekt</label>:
-                                <input type="text" id="project_id" name="project_id" th:value="${tcForm.project}"
+                                <input type="text" id="project_id" name="project_id" th:field="*{project_id}"
                                        readonly="readonly" class="form-control"/>
+                                <div th:if="${#fields.hasErrors('project_id')}" th:errorclass="alert-danger"
+                                     th:errors="*{project_id}">form field error
+                                </div>
                             </div>
                         </div>
-                        </span>
-                        <span th:if="${tcForm.id == null}" th:remove="tag">
-                        <div class=" control-group form-group">
-                            <div class="controls">
-                                <label for="project_id">Projekt</label>:
-                                <input type="text" id="project_id" name="project_id" th:value="${param.project[0]}"
-                                       readonly="readonly" class="form-control"/>
-                            </div>
-                        </div>
-                        </span>
+                        <!--</span>-->
                         <!--TEST SUITE SE TED NEUKLÁDÁ - POTŘEBA UPRAVIT SERVICE PRO SAVE-->
 
                         <!--<div class=" control-group form-group" th:with="suiteFilterId=${param.suite[0]}">-->
@@ -114,12 +124,16 @@
 
                                 <select class="form-control" id="priority" name="priority"
                                         th:with="priorities=${T(cz.vse.entity.PriorityTCEnum).values()}">
+                                    <option th:value="null">---</option>
                                     <option th:each="priority : ${priorities}"
                                             th:value="${priority}"
-                                            th:selected="${tcForm.priority != null} ? ${#arrays.contains(tcForm.priority, priority)}"
+                                            th:selected="*{priority != null} ? *{#arrays.contains(priority, priority)}"
                                             th:text="${priority}">jméno projektu
                                     </option>
                                 </select>
+                                <div th:if="${#fields.hasErrors('priority')}" th:errorclass="alert-danger"
+                                     th:errors="*{priority}">form field error
+                                </div>
                             </div>
                         </div>
 
@@ -128,7 +142,11 @@
                                 <label for="prerequisite">Prerekvizity</label>:
                                 <textarea type="text" id="prerequisite"
                                           name="prerequisite"
-                                          th:text="${tcForm.prerequisite}" class="form-control"/>
+                                          th:text="*{prerequisite}" class="form-control"/>
+                                <div th:if="${#fields.hasErrors('prerequisite')}"
+                                     th:errorclass="alert-danger"
+                                     th:errors="*{prerequisite}">form field error
+                                </div>
                             </div>
                         </div>
 
@@ -137,24 +155,27 @@
                             <div class="controls">
                                 <label for="note">Poznámka</label>:
                                 <textarea type="text" id="note" name="note"
-                                          th:text="${tcForm.note}" class="form-control"/>
+                                          th:text="*{note}" class="form-control"/>
+                                <div th:if="${#fields.hasErrors('note')}" th:errorclass="alert-danger"
+                                     th:errors="*{note}">form field error
+                                </div>
                             </div>
                         </div>
 
-                        <span th:if="${tcForm.id != null}" th:remove="tag">
-                             <input type="submit" value="Upravit" class="btn btn-primary"/>
-                        </span>
-                        <span th:if="${tcForm.id == null}" th:remove="tag">
-                             <input type="submit" value="Vytvořit" class="btn btn-primary"/>
-                        </span>
+                        <span th:if="*{id != null}" th:remove="tag">
+                                     <input type="submit" value="Upravit" class="btn btn-primary"/>
+                                </span>
+                        <span th:if="*{id == null}" th:remove="tag">
+                                    <input type="submit" value="Vytvořit" class="btn btn-primary"/>
+                                </span>
 
                     </form>
                 </div>
             </div>
 
-            <div class="col-sm-5">
-                <p><a th:href="@{'/tc/tc-by-suite/'+ ${param.suite[0]}}" class="btn btn-primary">Zpět</a></p>
-            </div>
+            <!--<div class="col-sm-5">-->
+                <!--<p><a th:href="@{'/tc/tc-by-suite/'+ ${param.suite[0]}}" class="btn btn-primary">Zpět</a></p>-->
+            <!--</div>-->
 
         </div>
 

@@ -1,5 +1,6 @@
 package cz.vse.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import cz.vse.dto.*;
 import cz.vse.entity.*;
 import cz.vse.logic.TCMusterLogic;
@@ -9,9 +10,11 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,29 +59,42 @@ public class TCController {
     TCMusterLogic tcMusterLogic;
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String createTC(Model model, @RequestParam(required = false, value = "project") Long projectId) {
+    public String createTC(Model model, TCMusterForm tcMusterForm, @RequestParam(required = false, value = "project") Long projectId) {
         l.info("/tc/create");
         Long personId = securityUtils.getLoggedPersonId();
-        TCMusterForm tcForm = new TCMusterForm();
-        tcForm.setProject_id(projectId);
+//        TCMusterForm tcMusterForm = new TCMusterForm();
+        if (tcMusterForm.getProject_id() == null) {
+            tcMusterForm.setProject_id(projectId);
+        }
 
-        model.addAttribute("tcForm", tcForm);
 //        model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMustersDTO());
 //        model.addAttribute("listTSMusters", tsMusterService.findAllTestStepMustersDTO());
 //        model.addAttribute("listProjects", projectService.findAllTestProjects());
+//        model.addAttribute("targetProject", projectId);
+//        model.addAttribute("tcMusterForm", tcMusterForm);
         model.addAttribute("usersProjects", projectService.findAllTestProjectNamesByUserId(personId));
         model.addAttribute("projectsSuites", suiteService.findAllTestSuiteListsByProjectId(projectId));    // xxx
         return "tcCreate";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createTSPost(@ModelAttribute("project") TCMusterForm tcMusterForm, HttpServletRequest request) {
+    public String createTSPost(Model model, @Valid TCMusterForm TCMusterForm, BindingResult bindingResult, HttpServletRequest request) {
         l.info("/tc/create saving");
-        if (tcMusterForm.getId() == null) {
-            tcMusterForm.setAuthor_id(securityUtils.getLoggedPersonId());
-            tcMusterService.createTestCaseMuster(tcMusterForm);
+
+        if (bindingResult.hasErrors()) {
+            l.error("form has errors");
+            Long personId = securityUtils.getLoggedPersonId();
+//            model.addAttribute("tcMusterForm", tcMusterForm);
+            model.addAttribute("usersProjects", projectService.findAllTestProjectNamesByUserId(personId));
+            model.addAttribute("projectsSuites", suiteService.findAllTestSuiteListsByProjectId(TCMusterForm.getProject_id()));
+            return "tcCreate";
+        }
+
+        if (TCMusterForm.getId() == null) {
+            TCMusterForm.setAuthor_id(securityUtils.getLoggedPersonId());
+            tcMusterService.createTestCaseMuster(TCMusterForm);
         } else {
-            tcMusterService.updateTestCaseMuster(tcMusterForm);
+            tcMusterService.updateTestCaseMuster(TCMusterForm);
         }
         String referer = request.getHeader("Referer");
         return "redirect:" + referer;
@@ -135,7 +151,7 @@ public class TCController {
 
     @RequestMapping("/show/{id}")
     public String showTCMuster(Model model, @PathVariable("id") long id) {
-        l.info("/tc/show/"+id);
+        l.info("/tc/show/" + id);
         TCInstanceRunDTO tcInstanceRunDTO;
         tcInstanceRunDTO = tcInstanceService.findTCInstanceRunDTOById(id);
         model.addAttribute("tcInstanceRunDTO", tcInstanceRunDTO);
@@ -163,7 +179,7 @@ public class TCController {
     }
 
     @RequestMapping(value = "/tcs", method = RequestMethod.GET)
-    public String tcsAllShow(Model model, @RequestParam(required = false, defaultValue = "all", value = "filter") String filter) {
+    public String tcsAllShow(Model model, TCMusterCopyDTO TCMusterCopyDTO, @RequestParam(required = false, defaultValue = "all", value = "filter") String filter) {
         l.info("/tc/tcs?filter=" + filter);
         Long loggedUserId = securityUtils.getLoggedPersonId();
         List<Project> projects = projectService.findAllTestProjectByUserId(loggedUserId);
@@ -171,26 +187,50 @@ public class TCController {
         if (filter.equals("all")) {
             l.warn("filtr je all - " + filter);
             tcMusters = tcMusterService.findTCMusterListsByProject(projects);
+            model.addAttribute("filterHelper", filter);
         } else {
             l.warn("filtr není all, je to: " + filter);
             tcMusters = tcMusterService.findTCMusterListByProject(projectService.findTestProjectById(Long.parseLong(filter)));
+            model.addAttribute("filterHelper", filter);
         }
         model.addAttribute("tcMusters", tcMusters);
-        model.addAttribute("tcMustersCopy", new TCMusterCopyDTO());
         model.addAttribute("usersProjects", projectService.findAllTestProjectNamesByUserId(loggedUserId));
-//        model.addAttribute("statusenum", Arrays.asList(StatusEnum.values()));
         return "tcsAll";
     }
 
-    @RequestMapping(value = "/copy")
-    public String manualTest(@ModelAttribute("project") TCMusterCopyDTO tcMusterCopyDTO, Model model, HttpServletRequest request) {
+    @RequestMapping(value = "/copy", method = RequestMethod.POST)
+    public String manualTest(Model model, @Valid TCMusterCopyDTO TCMusterCopyDTO, BindingResult bindingResult,
+                             HttpServletRequest request, @RequestParam(required = false, value = "filter") String filter) {
         l.warn("manualTest: " + model);
-        l.warn("manualTest2: " + tcMusterCopyDTO);
-
-        tcMusterLogic.copyTCMuster(tcMusterCopyDTO);
-        l.warn("kopírování hotovo");
+        l.warn("filterHelper: " + filter);
         String referer = request.getHeader("Referer");
-        return "redirect:" + referer;
+
+
+        if (bindingResult.hasErrors()) {
+            l.error("form has errors");
+            Long personId = securityUtils.getLoggedPersonId();
+            Long loggedUserId = securityUtils.getLoggedPersonId();
+            List<Project> projects = projectService.findAllTestProjectByUserId(loggedUserId);
+            List<TCMusterList> tcMusters;
+            if (filter.equals("all")) {
+                l.warn("filtr je all - " + filter);
+                tcMusters = tcMusterService.findTCMusterListsByProject(projects);
+                model.addAttribute("filterHelper", filter);
+            } else {
+                l.warn("filtr není all, je to: " + filter);
+                tcMusters = tcMusterService.findTCMusterListByProject(projectService.findTestProjectById(Long.parseLong(filter)));
+                model.addAttribute("filterHelper", filter);
+            }
+            model.addAttribute("tcMusters", tcMusters);
+            model.addAttribute("usersProjects", projectService.findAllTestProjectNamesByUserId(loggedUserId));
+
+            return "tcsAll";
+        }
+
+        tcMusterLogic.copyTCMuster(TCMusterCopyDTO);
+        l.warn("kopírování hotovo");
+
+        return "redirect:/tc/tcs?filter="+filter;
     }
 
 }

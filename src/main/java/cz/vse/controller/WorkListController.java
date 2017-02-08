@@ -8,8 +8,10 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -98,10 +100,10 @@ public class WorkListController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String createWorkList(Model model) {
+    public String createWorkList(Model model, WorkListForm workListForm) {
         l.info("/worklist/create");
         Long personId = securityUtils.getLoggedPersonId();
-        model.addAttribute("workListForm", new WorkListForm());
+//        model.addAttribute("workListForm", new WorkListForm());
 //        model.addAttribute("listWorkTC", workTCService.findAllWorkTC());
 //        model.addAttribute("listPerson", personService.findAllPersons());
         model.addAttribute("usersProjects", projectService.findAllTestProjectNamesByUserId(personId));
@@ -111,8 +113,20 @@ public class WorkListController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createTSPost(@ModelAttribute("project") WorkListForm workListForm) {
+    public String createTSPost(Model model, @Valid WorkListForm workListForm, BindingResult bindingResult) {
         l.info("/worklist/create creating");
+
+        if (bindingResult.hasErrors()) {
+            l.error("form has errors");
+            Long personId = securityUtils.getLoggedPersonId();
+            model.addAttribute("usersProjects", projectService.findAllTestProjectNamesByUserId(personId));
+            model.addAttribute("priorityList", PriorityTCEnum.values());
+            model.addAttribute("tcNamesByProject", tcMusterService.findAllTestCaseMustersNames());
+            return "workListCreate";
+        }
+
+
+
         if (workListForm.getId() == null) {
             workListForm.setAuthor_id(securityUtils.getLoggedPersonId());
             workListService.createWorkList(workListForm);

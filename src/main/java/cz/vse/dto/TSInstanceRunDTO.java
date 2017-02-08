@@ -2,6 +2,9 @@ package cz.vse.dto;
 
 import cz.vse.entity.StatusEnum;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  * Created by pcejka on 10.10.2016.
  */
@@ -10,9 +13,11 @@ public class TSInstanceRunDTO extends BaseDTO {
 
     private String action;
     private String expected;
+    @Size(max = 500)
     private String result;
     private Long tcInstance_id;
     private Long testerUpdate_id;
+    @NotNull
     private StatusEnum status;
 
 
