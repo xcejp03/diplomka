@@ -32,7 +32,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/dashboard">Home</a></li>
-                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right">Zpět</a>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right" th:text="#{common.backButton}">Zpět</a>
                 <li th:text="${filterHelper}"></li>
             </ol>
         </div>
@@ -43,7 +43,7 @@
 
         <div class="col-sm-12">
             <div class="jumbotron">
-                <h1 class="error-404">Seznam všech Test Casů.
+                <h1 class="error-404" th:text="#{tcsAll.jumbotron}">Seznam všech Test Casů.
                 </h1>
             </div>
         </div>
@@ -53,11 +53,11 @@
         <div class="col-sm-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-gift"></i>Filtr Test Casů</h4>
+                    <h4 th:text="#{tcsAll.filter}"><i class="fa fa-fw fa-gift"></i>Filtr Test Casů</h4>
                 </div>
 
                 <div class="panel-body">
-                    <p><a th:text="Všechny" th:href="@{tcs(filter='all')}" class="btn btn-mg btn-block btn-default"
+                    <p><a th:text="#{tcsAll.filter.all}" th:href="@{tcs(filter='all')}" class="btn btn-mg btn-block btn-default"
                           th:classappend="(${param.filter} == null or ${param.filter[0]} == 'all') ? btn-primary : btn-default"></a>
                     </p>
                     <hr/>
@@ -80,15 +80,14 @@
                 <table class="table table-striped datatable">
                     <thead>
                     <tr>
-                        <th></th>
-                        <th>TC ID</th>
-                        <th>Priorita</th>
-                        <th sec:authorize="hasAuthority('TESTER')">Stav TC</th>
-                        <th>Název</th>
-                        <th>Detail</th>
-                        <th>Vytvořeno</th>
-                        <th>Test Stepy</th>
-                        <th>Více</th>
+                        <th th:text="#{table.id}">TC ID</th>
+                        <th th:text="#{table.priority}">Priorita</th>
+                        <th th:text="#{table.status}" sec:authorize="hasAuthority('TESTER')">Stav TC</th>
+                        <th th:text="#{table.name}">Název</th>
+                        <th th:text="#{table.detail}">Detail</th>
+                        <th th:text="#{table.created}">Vytvořeno</th>
+                        <th th:text="#{tcsAll.testSteps}">Test Stepy</th>
+                        <th th:text="#{table.more}">Více</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -103,22 +102,21 @@
                                th:attr="data-name=${tc.name},
                     data-prerequisite=${tc.prerequisite},
                     data-note=${tc.note}"
-                               data-id="#detailDialog">Detail</a>
+                               data-id="#detailDialog" th:text="#{table.detail}">Detail</a>
                         </td>
                         <td th:text="${tc.createdDateTime}" sec:authorize="hasAuthority('ANALYTIC')">datum a čas
                             vytvoření
                         </td>
-                        <td sec:authorize="hasAuthority('ANALYTIC')"><a th:href="@{'/ts/ts-by-tcmuster/'+${tc.id}}">Test
+                        <td sec:authorize="hasAuthority('ANALYTIC')"><a th:href="@{'/ts/ts-by-tcmuster/'+${tc.id}}" th:text="#{tcsAll.testSteps}">Test
                             Stepy</a>
                         </td>
                         <td><a href="#" class="opener"
-                               th:attr="data-sourceid=${tc.id}, data-objectid=${tc.id}" data-id="#moreDialog">Více</a>
+                               th:attr="data-sourceid=${tc.id}, data-objectid=${tc.id}" data-id="#moreDialog" th:text="#{table.more}">Více</a>
                         </td>
                     </tr>
                     </tbody>
 
-                    <label for="project_id">Projekt</label>:
-
+                    <label for="project_id" th:text="#{form.project}">Projekt</label>:
                     <select class="form-control" id="project_id" name="project_id">
                         <option th:value="null">---</option>
                         <option th:each="project : ${usersProjects}"
@@ -130,13 +128,13 @@
                          th:errors="*{project_id}">form field error
                     </div>
 
-                    <input type="hidden" value="trrd" th:value="dasdas"/>
                 </table>
                 <div th:if="${#fields.hasErrors('tcMusters_id')}" th:errorclass="alert-danger"
                      th:errors="*{tcMusters_id}">form field error
                 </div>
-                <p><input type="submit" class="btn btn-primary" value="Zkopíruj"/> <input type="reset" class="btn"
-                                                                                          value="Reset"/>
+                <p>
+                    <input type="submit" class="btn btn-primary" value="Zkopíruj" th:value="#{common.copyButton}"/>
+                    <input type="reset" class="btn" value="Reset" th:value="#{common.resetButton}"/>
                 </p>
 
                 <!--<input type="hidden" name="filterHelper" id="filterHelper" value="nic" th:value="(${param.filter} == null or ${param.filter[0]} == 'all') ? 'all' : ${param.filter[0]}"/>-->
@@ -149,7 +147,7 @@
 
 
     <div th:if="${suite != null}" th:remove="tag">
-        <a th:href="@{'/tc/create/'(project=${suite.project.id},suite=${suite.id})}" class="btn btn-default">Založit
+        <a th:href="@{'/tc/create/'(project=${suite.project.id},suite=${suite.id})}" class="btn btn-default" th:text="#{tc.create}">Založit
             Test
             Case</a>
     </div>

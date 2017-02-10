@@ -32,7 +32,8 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/dashboard">Home</a></li>
-                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right">Zpět</a>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right"
+                   th:text="#{common.backButton}">Zpět</a>
             </ol>
         </div>
     </div>
@@ -42,7 +43,8 @@
 
         <div class="col-sm-12">
             <div class="jumbotron">
-                <h1 class="error-404">Detail defektu <span th:text="${defectDTO.id}"></span>
+                <h1 class="error-404" th:text="#{defect.jumbotron}">Detail defektu <span
+                        th:text="${defectDTO.id}"></span>
                     <small>"</small>
                     <small th:text="${defectDTO.name}"></small>
                     <small>"</small>
@@ -57,7 +59,7 @@
             <div class="well">
                 <div class=" control-group form-group">
                     <div class="controls">
-                        <label for="name">Název</label>:
+                        <label for="name" th:text="#{table.name}">Název</label>:
                         <input type="text" id="name" name="name" th:value="${defectDTO.name}"
                                readonly="readonly"
                                class="form-control"/>
@@ -66,7 +68,7 @@
 
                 <div class=" control-group form-group">
                     <div class="controls">
-                        <label for="description">Popis</label>:
+                        <label for="description" th:text="#{table.description}">Popis</label>:
                         <textarea type="text" id="description" name="description" th:text="${defectDTO.description}"
                                   readonly="readonly" class="form-control"/>
                     </div>
@@ -74,7 +76,7 @@
 
                 <div class=" control-group form-group">
                     <div class="controls">
-                        <label for="name">Affects version</label>:
+                        <label for="name" th:text="#{table.affectsVersion}">Affects version</label>:
                         <input type="text" id="affectsVersion" name="affectsVersion"
                                readonly="readonly"
                                th:value="${defectDTO.affectsVersion}"
@@ -84,7 +86,7 @@
 
                 <div class=" control-group form-group">
                     <div class="controls">
-                        <label for="description">priority</label>:<br/>
+                        <label for="description" th:text="#{table.priority}">priority</label>:<br/>
                         <input type="text" id="priority" name="priority" th:class="${defectDTO.priority}"
                                th:value="${defectDTO.priority}"
                                readonly="readonly"
@@ -94,7 +96,7 @@
 
                 <div class=" control-group form-group">
                     <div class="controls">
-                        <label for="name">status</label>:
+                        <label for="name" th:text="#{table.status}">status</label>:
                         <input type="text" id="status" name="status" th:value="${defectDTO.status}"
                                readonly="readonly"
                                class="form-control"/>
@@ -103,7 +105,7 @@
 
                 <div class=" control-group form-group">
                     <div class="controls">
-                        <label for="description">createdDateTime</label>:
+                        <label for="createdDateTime" th:text="#{table.created}">createdDateTime</label>:
                         <input type="text" id="createdDateTime" name="createdDateTime"
                                readonly="readonly"
                                th:value="${defectDTO.createdDateTime}"
@@ -113,7 +115,7 @@
 
                 <div class=" control-group form-group">
                     <div class="controls">
-                        <label for="description">updatedDateTime</label>:
+                        <label for="description" th:text="#{table.updated}">updatedDateTime</label>:
                         <input type="text" id="updatedDateTime" name="updatedDateTime"
                                readonly="readonly"
                                th:value="${defectDTO.updatedDateTime}"
@@ -122,7 +124,7 @@
                 </div>
                 <div class=" control-group form-group">
                     <div class="controls">
-                        <label for="description">assignee</label>:
+                        <label for="assignee" th:text="#{table.assignee}">assignee</label>:
                         <input type="text" id="assignee" name="assignee"
                                readonly="readonly"
                                th:value="${defectDTO.assignee}"
@@ -131,7 +133,7 @@
                 </div>
                 <div class=" control-group form-group">
                     <div class="controls">
-                        <label for="description">Reporter</label>:
+                        <label for="reporter" th:text="#{table.author}">Reporter</label>:
                         <input type="text" id="reporter" name="reporter"
                                readonly="readonly"
                                th:value="${defectDTO.reporter}"
@@ -161,9 +163,10 @@
 
 
             <div class="well">
-                <h3>Reassignuj defekt "<span th:text="${defectDTO.name}"></span>" na někoho jiného </h3>
+                <h3 th:text="#{defect.reassign}">Reassignuj defekt "<span th:text="${defectDTO.name}"></span>" na někoho
+                    jiného </h3>
 
-                <form th:action="@{/defect/writeAssigneeChange}" method="post" default-target-url="/index">
+                <form th:action="@{/defect/writeAssigneeChange}" method="post" th:object="${defectDTO}">
                     <div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"
                          class="alert alert-danger"></div>
                     <div class=" control-group form-group">
@@ -176,9 +179,10 @@
                         </div>
                         </span>
 
-                            <label for="assignee_id">Assignee</label>:
+                            <label for="assignee_id" th:text="#{form.assignee}">Assignee</label>:
 
                             <select class="form-control" id="assignee_id" name="assignee_id">
+                                <option th:value="null">---</option>
                                 <option th:each="person : ${personNames}"
                                         th:value="${person.id}"
                                         th:selected="${defectDTO.assignee_id != null} ? ${person.id == defectDTO.assignee_id}"
@@ -189,7 +193,7 @@
                     </div>
                     <div class=" control-group form-group">
                         <div class="controls">
-                            <input type="submit" value="Assignuj" class="btn btn-primary"/>
+                            <input type="submit" value="Assignuj" th:value="#{common.changeButton}" class="btn btn-primary"/>
                         </div>
                     </div>
                 </form>
@@ -197,10 +201,10 @@
         </div>
         <div class="col-sm-3">
             <div class="well">
-                <h3>Změna stavu defektu.</h3>
-                <form th:action="@{/defect/writeStatusChange}" method="post" default-target-url="/index">
-                    <div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"
-                         class="alert alert-danger"></div>
+                <h3 th:text="#{defect.changeStatus}">Změna stavu defektu.</h3>
+                <form th:action="@{/defect/writeStatusChange}" method="post">
+                    <!--<div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"-->
+                    <!--class="alert alert-danger"></div>-->
                     <div class=" control-group form-group">
                         <div class="controls">
                              <span th:if="${defectDTO.id != null}" th:remove="tag">
@@ -211,9 +215,10 @@
                         </div>
                         </span>
 
-                            <label for="status">Stav</label>:
+                            <label for="status" th:text="#{form.status}">Stav</label>:
 
                             <select class="form-control" id="status" name="status">
+                                <option th:value="null">---</option>
                                 <option th:each="status : ${T(cz.vse.entity.DefectStatusEnum).values()}"
                                         th:value="${status}"
                                         th:selected="${defectDTO.status != null} ? ${#strings.contains(status, defectDTO.status)}"
@@ -225,7 +230,8 @@
 
                     <div class=" control-group form-group">
                         <div class="controls">
-                            <input type="submit" value="Změna stavu" class="btn btn-primary"/>
+                            <input type="submit" value="Změna stavu" th:value="#{defect.changeStatus}"
+                                   class="btn btn-primary"/>
                         </div>
                     </div>
 
@@ -238,18 +244,18 @@
 
         <div class="col-sm-7">
             <div class="well">
-                <h3>Komentáře defektu <span th:text="${defectDTO.id}"></span></h3>
+                <h3 th:text="#{defect.defectsComment}">Komentáře defektu <span th:text="${defectDTO.id}"></span></h3>
                 <div style="overflow: auto; max-height: 600px">
                     <!--th:if="${not #lists.isEmpty(tblUserList)}"-->
                     <span th:if="${not #lists.isEmpty(defectCommentsByDefect)}" th:remove="tag">
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Komentář</th>
-                            <th>Autor</th>
-                            <th>Datum</th>
-                            <th>Více</th>
+                            <th th:text="#{table.id}">ID</th>
+                            <th th:text="#{table.comment}">Komentář</th>
+                            <th th:text="#{table.author}">Autor</th>
+                            <th th:text="#{table.created}">Datum</th>
+                            <th th:text="#{table.more}">Více</th>
                         </tr>
                         </thead>
                         <tbody th:remove="all-but-first">
@@ -259,7 +265,7 @@
                             <td th:text="${comment.author_id}">Název</td>
                             <td th:text="${comment.createdDateTime}">Datum</td>
                             <td><a href="#" class="opener"
-                                   th:attr="data-objectid=${comment.id}" data-id="#moreDialog">Více</a>
+                                   th:attr="data-objectid=${comment.id}" th:text="#{table.more}" data-id="#moreDialog">Více</a>
                             </td>
                         </tr>
                         </tbody>
@@ -268,13 +274,13 @@
                 </div>
 
                 <form th:action="@{/comment/create}" method="post" default-target-url="/index">
-                    <div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"
-                         class="alert alert-danger"></div>
+                    <!--<div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"-->
+                    <!--class="alert alert-danger"></div>-->
 
-                        <span th:if="${commentDTO.id != null}" th:remove="tag">
+                    <span th:if="${commentDTO.id != null}" th:remove="tag">
                             <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="id">ID</label>:
+                                <label for="id" th:text="${table.id}">ID</label>:
                                 <input type="text" id="id" th:value="${commentDTO.id}" readonly="true" name="id"
                                        class="form-control"/>
                             </div>
@@ -286,7 +292,7 @@
                            hidden="hidden"/>
                     <div class=" control-group form-group">
                         <div class="controls">
-                            <label for="commentText">Komentář</label>:
+                            <label for="commentText" th:text="#{table.comment}">Komentář</label>:
                             <textarea type="text" id="commentText" name="commentText"
                                       th:value="${commentDTO.commentText}"
                                       class="form-control"/>
@@ -298,7 +304,7 @@
                     <input type="text" id="author_id" name="author_id" th:value="${loggedPersonName.id}"
                            hidden="hidden"/>
 
-                    <input type="submit" value="Vytvořit" class="btn btn-primary"/>
+                    <input type="submit" value="Vytvořit" th:value="#{defect.addComment}" class="btn btn-primary"/>
                 </form>
             </div>
         </div>

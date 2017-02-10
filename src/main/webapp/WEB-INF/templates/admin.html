@@ -33,7 +33,7 @@
                 <li><a href="/dashboard">Home</a></li>
                 <li class="active">Rozcestník</li>
                 <a th:href="@{${#httpServletRequest.getHeader('referer')}}"
-                   class="btn btn-default btn-xs pull-right">Zpět</a>
+                   class="btn btn-default btn-xs pull-right" th:text="#{common.backButton}">Zpět</a>
             </ol>
         </div>
     </div>

@@ -32,7 +32,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/dashboard">Home</a></li>
-                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right">Zpět</a>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right" th:text="#{common.backButton}">Zpět</a>
             </ol>
         </div>
     </div>
@@ -48,12 +48,13 @@
                         <div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"
                              class="alert alert-danger"></div>
 
-                        <input type="text" id="tcMuster_id" th:value="${workListDTO.tcMuster_id}" name="tcMuster_id" hidden="hidden"/>
+                        <input type="text" id="tcMuster_id" th:value="${workListDTO.tcMuster_id}" name="tcMuster_id"
+                               hidden="hidden"/>
 
                         <span th:if="${workListDTO.id != null}" th:remove="tag">
                         <div class=" control-group form-group">
                         <div class="controls">
-                        <label for="id">ID</label>:
+                        <label for="id" th:text="#{form.id}">ID</label>:
                         <input type="text" id="id" th:value="${workListDTO.id}" readonly="true" name="id"
                                class="form-control"/>
                         </div>
@@ -62,7 +63,7 @@
 
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="name">Název</label>:
+                                <label for="name" th:text="#{form.name}">Název</label>:
                                 <input type="text" id="name" name="name" th:value="${workListDTO.name}" readonly="true"
                                        class="form-control"/>
                             </div>
@@ -70,7 +71,7 @@
 
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="prerequisite">Prerekvizity</label>:
+                                <label for="prerequisite" th:text="#{form.prerequisite}">Prerekvizity</label>:
                                 <textarea type="text" id="prerequisite" name="prerequisite" readonly="true"
                                           th:text="${workListDTO.prerequisite}"
                                           class="form-control"/>
@@ -79,17 +80,16 @@
 
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="note">Poznámka</label>:
+                                <label for="note" th:text="#{form.note}">Poznámka</label>:
                                 <textarea type="text" id="note" name="note" readonly="true"
                                           th:text="${workListDTO.note}"
                                           class="form-control"/>
                             </div>
                         </div>
 
-
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="project_id">Projekt</label>:
+                                <label for="project_id" th:text="#{form.project}">Projekt</label>:
 
                                 <select class="form-control" id="project_id" name="project_id" readonly="true">
                                     <option th:each="project : ${usersProjects}"
@@ -105,30 +105,32 @@
 
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <input type="text" id="plannedExecution" readonly="true" class="form-control" th:value="${workListDTO.plannedExecution}" name="plannedExecution"
+                                <label for="plannedExecution" th:text="#{form.planned}">Planned</label>
+                                <input type="text" id="plannedExecution" readonly="true" class="form-control"
+                                       th:value="${workListDTO.plannedExecution}" name="plannedExecution"
                                        size="30"/>
                             </div>
                         </div>
 
 
-                        <h1>TC work list</h1>
+                        <h1 th:text="#{worklist.tcWorkList}">TC work list</h1>
                         <table class="table table-striped datatable">
                             <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Název</th>
-                                <th>Priority</th>
-                                <th>Assignee</th>
-                                <th>Updated</th>
-                                <th>Historie</th>
-                                <th sec:authorize="hasAuthority('TESTER')">Run</th>
+                                <th th:text="#{table.id}">ID</th>
+                                <th th:text="#{table.name}">Název</th>
+                                <th th:text="#{table.priority}">Priority</th>
+                                <th th:text="#{table.assignee}">Assignee</th>
+                                <th th:text="#{table.updated}">Updated</th>
+                                <th th:text="#{table.history}">Historie</th>
+                                <th th:text="#{table.run}" sec:authorize="hasAuthority('TESTER')">Run</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr th:each="tc, stat : ${workListDTO.workTCList}">
                                 <input type="hidden" th:field="*{workTCList[__${stat.index}__].id}"/>
                                 <input type="hidden" th:field="*{workTCList[__${stat.index}__].tcMuster_id}"/>
-                                <td th:text="${tc.id}">00</td>
+                                <td th:text="${tc.id}">id</td>
                                 <td th:text="${tc.name}">Název</td>
                                 <td>
                                     <select class="form-control" th:name="|workTCList[${stat.index}].priority|">
@@ -149,18 +151,25 @@
                                         </option>
                                     </select>
                                 </td>
-                                <td th:text="${tc.updatedDateTime}">změna</td>
-                                <!--<td><a th:href="@{'/worklist/worktc/history/'+${tc.tcMuster_id}+'?worktc='+${tc.id}}">Historie</a></td>-->
-                                <td><a th:href="@{'/worklist/history/'+${tc.id}}">Historie</a></td>
-                                <td sec:authorize="hasAuthority('TESTER')"><a th:href="@{'/tc/run/'+${tc.tcMuster_id}+'?worktc='+${tc.id}}">run</a></td>
+                                <td th:text="${tc.updatedDateTime}">datum změny</td>
+                                <td>
+                                    <a th:href="@{'/worklist/history/'+${tc.id}}"
+                                       th:text="#{table.history}">Historie</a>
+                                </td>
+                                <td sec:authorize="hasAuthority('TESTER')">
+                                    <a th:href="@{'/tc/run/'+${tc.tcMuster_id}+'?worktc='+${tc.id}}"
+                                        th:text="#{table.run}">run</a>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
                         <span th:if="${workListDTO.id != null}" th:remove="tag">
-                             <input type="submit" value="Upravit" class="btn btn-primary"/>
+                             <input type="submit" value="Upravit" th:value="#{common.editButton}"
+                                    class="btn btn-primary"/>
                         </span>
                         <span th:if="${workListDTO.id == null}" th:remove="tag">
-                             <input type="submit" value="Vytvořit" class="btn btn-primary"/>
+                             <input type="submit" value="Vytvořit" class="btn btn-primary"
+                                    th:value="#{common.createButton}"/>
                         </span>
 
                     </form>

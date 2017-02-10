@@ -45,7 +45,7 @@
 
         <div class="col-sm-12">
             <div class="jumbotron">
-                <h1>Login page</h1>
+                <h1 th:text="#{login.jumbotron}">Login page</h1>
             </div>
         </div>
     </div>
@@ -70,25 +70,24 @@
 
                     <div class="control-group form-group">
                         <div class="controls">
-                            <label for="username">Username</label>:
+                            <label for="username" th:text="#{login.username}">Username</label>:
                             <input type="text" id="username" name="username" class="form-control"
                                    autofocus="autofocus"/> <br/>
                         </div>
                     </div>
                     <div class="control-group form-group">
                         <div class="controls">
-                            <label for="password">Password</label>:
+                            <label for="password" th:text="#{login.password}">Password</label>:
                             <input type="password" id="password" class="form-control" name="password"/> <br/>
                         </div>
                     </div>
-                    <input type="submit" value="Log in" class="btn btn-primary"/>
+                    <input type="submit" value="Log in" th:value="#{login.login}" class="btn btn-primary"/>
                     <input type="hidden" name="${_csrf.parameterName}"
                            value="${_csrf.token}"/>
                 </form>
             </div>
         </div>
     </div>
-    <p><a href="#" class="opener" data-id="#statisticsDialog">statistika</a></p>
     <div id="statisticsDialog" title="Statistika projektu">
 
         <h2>Počet TC: </h2>

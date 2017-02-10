@@ -32,7 +32,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/dashboard">Home</a></li>
-                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right">Zpět</a>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right" th:text="#{common.backButton}">Zpět</a>
             </ol>
         </div>
     </div>
@@ -40,7 +40,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="jumbotron">
-                <h1 class="error-404">Seznam Defektů, které "jsem založil/mám na sebe assignované"
+                <h1 class="error-404" th:text="#{defects.jumbotron}">Seznam Defektů, které "jsem založil/mám na sebe assignované"
                 </h1>
             </div>
         </div>
@@ -51,21 +51,21 @@
         <div class="col-sm-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-gift"></i>Filtr defektů</h4>
+                    <h4 th:text="#{defects.filter}"><i class="fa fa-fw fa-gift"></i>Filtr defektů</h4>
                 </div>
                 <div class="panel-body">
                     <p><a href="/defect/defects?filter=open" class="btn btn-mg btn-block "
-                          th:classappend="(${param.filter} == null or ${param.filter[0]} == 'open') ? btn-primary : btn-default">Open</a>
+                          th:classappend="(${param.filter} == null or ${param.filter[0]} == 'open') ? btn-primary : btn-default" th:text="#{defects.openFilter}">Open</a>
                     </p>
                     <p><a href="/defect/defects?filter=closed" class="btn btn-mg btn-block "
-                          th:classappend="(${param.filter} != null and ${param.filter[0]} == 'closed') ? btn-primary : btn-default">Closed</a>
+                          th:classappend="(${param.filter} != null and ${param.filter[0]} == 'closed') ? btn-primary : btn-default" th:text="#{defects.closedFilter}">Closed</a>
                     </p>
                 </div>
             </div>
 
         </div>
         <div class="col-sm-10">
-            <p><a href="/defect/create" class="btn btn-default" target="_blank">Založit Defect</a></p>
+            <p><a href="/defect/create" class="btn btn-default" target="_blank" th:text="#{defects.createDefect}">Založit Defect</a></p>
         </div>
     </div>
 
@@ -74,23 +74,23 @@
         <div class="col-sm-12">
 
             <div class="panel panel-primary">
-                <div class="panel-heading"><h3>by assigneee</h3></div>
+                <div class="panel-heading"><h3 th:text="#{defects.defectsByAssignee}">by assigneee</h3></div>
                 <div class="panel-body">
                     <table class="table table-striped datatable">
                         <thead>
                         <tr>
-                            <th>TC ID</th>
-                            <th>Priorita</th>
-                            <th>Název</th>
+                            <th th:text="#{table.id}">TC ID</th>
+                            <th th:text="#{table.priority}">Priorita</th>
+                            <th th:text="#{table.name}">Název</th>
                             <!--<th>Affected Version</th>-->
-                            <th>Status</th>
+                            <th th:text="#{table.status}">Status</th>
                             <!--<th>created</th>-->
-                            <th>updated</th>
-                            <th>Assignee</th>
+                            <th th:text="#{table.updated}">updated</th>
+                            <th th:text="#{table.assignee}">Assignee</th>
                             <!--<th>Reporter</th>-->
-                            <th>Detail</th>
-                            <th>Edit</th>
-                            <th>Více</th>
+                            <th th:text="#{table.detail}">Detail</th>
+                            <th th:text="#{table.edit}">Edit</th>
+                            <th th:text="#{table.more}">Více</th>
                         </tr>
                         </thead>
                         <tbody th:remove="all-but-first">
@@ -107,12 +107,12 @@
                             <!--<td th:text="${defect.reporter_id}">reporter</td>-->
                             <td><a href="#" th:href="@{'/defect/'+${defect.id}}"
                                    th:attr="data-name=${defect.description}"
-                                   data-id="#detailDialog">Detail</a>
+                                   data-id="#detailDialog" th:text="#{table.detail}">Detail</a>
                             </td>
-                            <td><a href="#" th:href="@{'/defect/edit/'+${defect.id}}">Edit</a>
+                            <td><a href="#" th:href="@{'/defect/edit/'+${defect.id}}" th:text="#{table.edit}">Edit</a>
                             </td>
                             <td><a href="#" class="opener"
-                                   th:attr="data-objectid=${defect.id}" data-id="#moreDialog">Více</a>
+                                   th:attr="data-objectid=${defect.id}" data-id="#moreDialog" th:text="#{table.more}">Více</a>
                             </td>
                         </tr>
                         </tbody>
@@ -127,23 +127,23 @@
         <div class="col-sm-12">
 
             <div class="panel panel-primary">
-                <div class="panel-heading"><h3>by reporter</h3></div>
+                <div class="panel-heading"><h3 th:text="#{defects.defectsByReporter}">by reporter</h3></div>
                 <div class="panel-body">
                     <table class="table table-striped datatable">
                         <thead>
                         <tr>
-                            <th>TC ID</th>
-                            <th>Priorita</th>
-                            <th>Název</th>
+                            <th th:text="#{table.id}">TC ID</th>
+                            <th th:text="#{table.priority}">Priorita</th>
+                            <th th:text="#{table.name}">Název</th>
                             <!--<th>Affected Version</th>-->
-                            <th>Status</th>
+                            <th th:text="#{table.status}">Status</th>
                             <!--<th>created</th>-->
-                            <th>updated</th>
-                            <th>Assignee</th>
+                            <th th:text="#{table.updated}">updated</th>
+                            <th th:text="#{table.assignee}">Assignee</th>
                             <!--<th>Reporter</th>-->
-                            <th>Detail</th>
-                            <th>Edit</th>
-                            <th>Více</th>
+                            <th th:text="#{table.detail}">Detail</th>
+                            <th th:text="#{table.edit}">Edit</th>
+                            <th th:text="#{table.more}">Více</th>
                         </tr>
                         </thead>
                         <tbody th:remove="all-but-first">
@@ -160,12 +160,12 @@
                             <!--<td th:text="${defect.reporter_id}">reporter</td>-->
                             <td><a href="#" th:href="@{'/defect/'+${defect.id}}"
                                    th:attr="data-name=${defect.description}"
-                                   data-id="#detailDialog">Detail</a>
+                                   data-id="#detailDialog" th:text="#{table.detail}">Detail</a>
                             </td>
-                            <td><a href="#" th:href="@{'/defect/edit/'+${defect.id}}">Edit</a>
+                            <td><a href="#" th:href="@{'/defect/edit/'+${defect.id}}" th:text="#{table.edit}">Edit</a>
                             </td>
                             <td><a href="#" class="opener"
-                                   th:attr="data-objectid=${defect.id}" data-id="#moreDialog">Více</a>
+                                   th:attr="data-objectid=${defect.id}" data-id="#moreDialog" th:text="#{table.more}">Více</a>
                             </td>
                         </tr>
                         </tbody>
@@ -177,7 +177,7 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <p><a href="/defect/create" class="btn btn-default" target="_blank">Založit Defect</a></p>
+            <p><a href="/defect/create" class="btn btn-default" target="_blank" th:text="#{defects.createDefect}">Založit Defect</a></p>
         </div>
     </div>
 

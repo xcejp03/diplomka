@@ -37,7 +37,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/dashboard">Home</a></li>
-                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right">Zpět</a>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right" th:text="#{common.backButton}">Zpět</a>
             </ol>
         </div>
     </div>
@@ -55,7 +55,7 @@
                         <span th:if="${suiteForm.id != null}" th:remove="tag">
                             <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="id">ID</label>:
+                                <label for="id" th:text="#{form.id}">ID</label>:
                                 <input type="text" id="id" th:value="${suiteForm.id}" readonly="true" name="id"
                                        class="form-control"/>
                             </div>
@@ -64,7 +64,7 @@
 
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="name">Název</label>:
+                                <label for="name" th:text="#{form.name}">Název</label>:
                                 <input type="text" id="name" name="name" th:field="*{name}"
                                        class="form-control"
                                        autofocus="autofocus"/>
@@ -75,7 +75,7 @@
 
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="project_id">Projekt</label>:
+                                <label for="project_id" th:text="#{form.project}">Projekt</label>:
 
                                 <select class="form-control" id="project_id" name="project_id">
                                     <option th:value="null">---</option>
@@ -93,7 +93,7 @@
                         <span th:if="${suiteForm.id != null}" th:remove="tag">
                         <div class="control-group form-group">
                             <div class="controls">
-                                <label for="tcMusters_id">TC vzory</label>:
+                                <label for="tcMusters_id" th:text="#{form.tcmusters}">TC vzory</label>:
                                 <select id="tcMusters_id" name="tcMusters_id" class="multipleSelection2"
                                         multiple="multiple" size="10">
                                     <option th:each="tcmuster : ${tcMustersByProject}"
@@ -115,10 +115,10 @@
                         </span>
 
                         <span th:if="${suiteForm.id != null}" th:remove="tag">
-                             <input type="submit" value="Upravit" class="btn btn-primary"/>
+                             <input type="submit" value="Upravit" th:value="#{common.editButton}" class="btn btn-primary"/>
                         </span>
                         <span th:if="${suiteForm.id == null}" th:remove="tag">
-                             <input type="submit" value="Vytvořit" class="btn btn-primary"/>
+                             <input type="submit" value="Vytvořit" th:value="#{common.createButton}" class="btn btn-primary"/>
                         </span>
 
                     </form>
@@ -126,7 +126,7 @@
             </div>
 
             <div class="col-sm-4">
-                <p><a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-primary">Zpět</a>
+                <p><a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-primary" th:text="#{common.backButton}">Zpět</a>
                 </p>
             </div>
 

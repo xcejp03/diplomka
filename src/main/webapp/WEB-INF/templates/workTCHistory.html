@@ -32,7 +32,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/dashboard">Home</a></li>
-                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right">Zpět</a>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right" th:text="#{common.backButton}">Zpět</a>
             </ol>
         </div>
     </div>
@@ -42,16 +42,16 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-9">
-                <h1> Test Cases list</h1>
+                <h1 th:text="#{worklist.tcInstanceList}"> Test Cases list</h1>
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>TC ID</th>
-                        <th>Status</th>
-                        <th>Název</th>
-                        <th>TC spuštěno</th>
-                        <th>Delete</th>
-                        <th>Spuštění</th>
+                        <th th:text="#{table.id}">TC ID</th>
+                        <th th:text="#{table.status}">Status</th>
+                        <th th:text="#{table.name}">Název</th>
+                        <th th:text="#{worklist.ranDate}">TC spuštěno</th>
+                        <th th:text="#{common.deleteButton}">Delete</th>
+                        <th th:text="#{common.ShowButton}">Zobrazit</th>
                     </tr>
                     </thead>
                     <tbody th:remove="all-but-first">
@@ -61,15 +61,17 @@
                                   th:class="${tc.status}">Status</span></td>
                         <td th:text="${tc.name}">Projekt</td>
                         <td th:text="${tc.createdDateTime}">datum a čas vytvoření</td>
-                        <td><a th:href="@{'/tc/instance/remove/' +${tc.id}}">delete</a></td>
-                        <td><a th:href="@{'/tc/show/'+${tc.id}}">Ukaž</a></td>
+                        <td><a th:href="@{'/tc/instance/remove/' +${tc.id}}" th:text="#{common.deleteButton}">delete</a>
+                        </td>
+                        <td><a th:href="@{'/tc/show/'+${tc.id}}" th:text="#{common.ShowButton}">Ukaž</a></td>
                     </tr>
                     </tbody>
                 </table>
 
             </div>
             <div class="col-sm-3">
-                <a th:href="@{'/worklist/worktc/'+${workListId}}" class="btn btn-default">Zpět na WorkTC <span th:text="${workListId}"></span> </a>
+                <a th:href="@{'/worklist/worktc/'+${workListId}}" class="btn btn-default"
+                   th:text="#{worklist.backToWorkTC}">Zpět na WorkTC <span th:text="${workListId}"></span> </a>
             </div>
         </div>
 

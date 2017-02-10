@@ -61,28 +61,28 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="/project/projects">My Proj.</a>
+                        <a href="/project/projects" th:text="#{navbar.myprojects}">My Projects</a>
                     </li>
                     <!--<li>-->
                     <!--<a href="/suite/suites">Suity</a>-->
                     <!--</li>-->
                     <li sec:authorize="!hasAuthority('ROLE_ANALYTIC')">
-                        <a href="/tc/tcs">Test Casy</a>
+                        <a href="/tc/tcs" th:text="#{navbar.testcases}">Test Casy</a>
                     </li>
                     <li>
-                        <a href="/defect/defects">Defekty</a>
+                        <a href="/defect/defects" th:text="#{navbar.defects}">Defekty</a>
                     </li>
                     <li>
-                        <a href="/worklist">Worklist</a>
+                        <a href="/worklist" th:text="#{navbar.worklists}">Worklist</a>
                     </li>
                     <li>
-                        <a href="/worklist/worktc">Worktc</a>
+                        <a href="/worklist/worktc" th:text="#{navbar.worktcs}">Worktc</a>
                     </li>
                     <span class="dropdown navbar-brand">
-                    <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" th:text="#{language}">Jazyk
+                    <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" th:text="#{navbar.language}">Jazyk
                         <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-header" th:text="#{language}">Výběr jazyka</li>
+                        <li class="dropdown-header" th:text="#{navbar.chooselanguage}">Výběr jazyka</li>
                         <li><a href="?lang=cs">Česky</a></li>
                         <li><a href="?lang=en">Anglicky</a></li>
                         <li><a href="?lang=es">Španělsky</a></li>
@@ -91,11 +91,11 @@
                     </ul>
                     </span>
                     <li sec:authorize="!hasAuthority('ROLE_ANONYMOUS')">
-                        <a href="/logout">| Odhlásit se</a>
+                        <a href="/logout" th:text="'| '+#{navbar.logout}">| Odhlásit se</a>
                     </li>
 
                     <li sec:authorize="hasAuthority('ROLE_ANONYMOUS')">
-                        <a href="/login">| Přihlásit se</a>
+                        <a href="/login" th:text="'| '+#{navbar.login}">| Přihlásit se</a>
                     </li>
 
                 </ul>

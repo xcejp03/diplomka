@@ -37,7 +37,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/dashboard">Home</a></li>
-                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right">Zpět</a>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right" th:text="#{common.backButton}">Zpět</a>
             </ol>
         </div>
     </div>
@@ -55,7 +55,7 @@
                         <span th:if="${projectForm.id != null}" th:remove="tag">
                             <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="id">ID</label>:
+                                <label for="id" th:text="#{form.id}">ID</label>:
                                 <input type="text" id="id" name="id" th:value="${projectForm.id}" class="form-control"
                                        readonly="true"/>
                             </div>
@@ -64,7 +64,7 @@
 
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="name">Název</label>:
+                                <label for="name" th:text="#{form.name}">Název</label>:
 
                                 <input type="text" id="name" name="name" th:field="*{name}"
                                        class="form-control has-error"
@@ -76,7 +76,7 @@
                         </div>
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="projectOwner_id">Vlastník</label>:
+                                <label for="projectOwner_id" th:text="#{form.owner}">Vlastník</label>:
 
 
                                 <select class="form-control" id="projectOwner_id"
@@ -97,7 +97,7 @@
 
                         <div class="control-group form-group">
                             <div class="controls">
-                                <label for="projectMembers_id">Členové</label>:
+                                <label for="projectMembers_id" th:text="#{form.members}">Členové</label>:
                                 <select id="projectMembers_id" name="projectMembers_id" class="multipleSelection"
                                         multiple="multiple" size="10">
                                     <option th:unless="${#fields.hasErrors('*')}"
@@ -140,13 +140,12 @@
 
                         <span th:if="${projectForm.id != null}" th:remove="tag">
 
-                              <input type="submit" value="Upravit" class="btn btn-primary"/>
+                              <input type="submit" value="Upravit" th:value="#{common.editButton}" class="btn btn-primary"/>
                         <input type="hidden" name="${_csrf.parameterName}"
                                value="${_csrf.token}"/>
                         </span>
                         <span th:if="${projectForm.id == null}" th:remove="tag">
-
-                              <input type="submit" value="Vytvořit" class="btn btn-primary"/>
+                              <input type="submit" value="Vytvořit" th:value="#{common.createButton}" class="btn btn-primary"/>
                         <input type="hidden" name="${_csrf.parameterName}"
                                value="${_csrf.token}"/>
                         </span>
@@ -156,7 +155,7 @@
                 </div>
             </div>
             <div class="col-sm-2">
-                <p><a th:href="@{'/project/projects'}" class="btn btn-primary">Zpět</a></p>
+                <p><a th:href="@{'/project/projects'}" class="btn btn-primary" th:text="#{common.backButton}">Zpět</a></p>
             </div>
         </div>
 

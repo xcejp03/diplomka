@@ -30,7 +30,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/dashboard">Home</a></li>
-                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right">Zpět</a>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right" th:text="#{common.backButton}">Zpět</a>
             </ol>
         </div>
     </div>
@@ -40,25 +40,27 @@
 
         <div class="col-sm-12">
             <div class="jumbotron">
-                <h1 class="error-404">Historie test casu <span style="font-style: italic"
-                                                                           th:text="${tc.name}">Test case nezískán</span>
+                <h1 class="error-404" th:text="#{tcHistory.jumbotron}">Historie test casu <span
+                        style="font-style: italic"
+                        th:text="${tc.name}">Test case nezískán</span>
                 </h1>
             </div>
         </div>
     </div>
 
-    <a th:href="@{'/suite/suites-by-project/'+${tc.project_id}}">Zpět na suity projektu</a>
+    <a th:href="@{'/suite/suites-by-project/'+${tc.project_id}}" th:text="#{tcHistory.backToSuites}">Zpět na suity
+        projektu</a>
 
-    <h1> Test Cases list</h1>
+    <h1 th:text="#{tc.tcList}"> Test Cases list</h1>
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>TC ID</th>
-            <th>Status</th>
-            <th>Název</th>
-            <th>TC spuštěno</th>
-            <th>Delete</th>
-            <th>Spuštění</th>
+            <th th:text="#{table.id}">TC ID</th>
+            <th th:text="#{table.status}">Status</th>
+            <th th:text="#{table.name}">Název</th>
+            <th th:text="#{tcRun.ranDate}">TC spuštěno</th>
+            <th th:text="#{common.deleteButton}">Delete</th>
+            <th th:text="#{table.run}">Spuštění</th>
         </tr>
         </thead>
         <tbody th:remove="all-but-first">
@@ -68,8 +70,8 @@
                       th:class="${tc.status}">Status</span></td>
             <td th:text="${tc.name}">Projekt</td>
             <td th:text="${tc.createdDateTime}">datum a čas vytvoření</td>
-            <td><a th:href="@{'/tc/instance/remove/' +${tc.id}}">delete</a></td>
-            <td><a th:href="@{'/tc/show/'+${tc.id}}">Ukaž</a></td>
+            <td><a th:href="@{'/tc/instance/remove/' +${tc.id}}" th:text="#{common.deleteButton}">delete</a></td>
+            <td><a th:href="@{'/tc/show/'+${tc.id}}" th:text="#{common.ShowButton}">Ukaž</a></td>
         </tr>
         </tbody>
     </table>
@@ -90,17 +92,6 @@
         <h3>Hotové TC:</h3>
 
     </div>
-
-    <!--<button onclick="alert('sdfds')" class="btn btn-default">alerty</button>-->
-
-    <!--<button onclick="swal('sdfds')" class="btn btn-default">alerty swal</button>-->
-
-    <!--<div class="btn btn-default">-->
-        <!--<button class="alertik">alerty klas</button>-->
-    <!--</div>-->
-
-    <!--<button id="alerton">alerty id</button>-->
-
 
     <!-- Footer -->
     <div th:replace="/fragment/thymeFragment :: footer"></div>
