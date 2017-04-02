@@ -60,8 +60,19 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
 
     public void updatePerson(PersonForm personForm) {
         l.info("with: " + personForm);
+        Boolean enabled;
+        if (personForm.getEnabled() != null) {
+            if (personForm.getEnabled()) {
+                enabled = true;
+            } else {
+                enabled = false;
+            }
+        } else {
+            enabled = false;
+        }
         Person person = personRepository.findOne(personForm.getId());
         mapper.map(personForm, person);
+        person.setEnabled(enabled);
         personRepository.save(person);
         l.info("updated: " + person);
     }
