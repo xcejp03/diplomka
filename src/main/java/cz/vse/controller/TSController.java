@@ -82,10 +82,12 @@ public class TSController {
     }
 
     @RequestMapping("/edit/{id}")
-    public String editTSMuster(@PathVariable("id") long id, Model model, @RequestParam(required = false, value = "tcmuster") Long tcmusterId) {
+    public String editTSMuster(@PathVariable("id") long id, Model model, TSMusterForm tsMusterForm, @RequestParam(required = false, value = "tcmuster") Long tcmusterId) {
         l.info("/ts/edit/{id}" + id);
+        tsMusterForm = tsMusterService.findTestStepMusterFormById(id);
 
-        model.addAttribute("tsMusterForm", tsMusterService.findTestStepMusterFormById(id));
+        model.addAttribute("tsMusterForm", tsMusterForm);
+        model.addAttribute("TSMusterForm", tsMusterForm);
         model.addAttribute("persons", personService.findAllPersonNames());
         model.addAttribute("tcMusters", tcMusterService.findAllTestCaseMustersNames());
         return "tsCreate";

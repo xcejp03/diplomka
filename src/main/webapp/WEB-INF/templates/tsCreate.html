@@ -59,7 +59,7 @@
 
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="action" th:text="#{form.action}">Akce</label>:
+                                <label for="action" th:text="#{form.action}">Akce</label> *
                                 <textarea type="text" id="action" name="action"
                                           th:text="*{action}"
                                           class="form-control"
@@ -72,7 +72,7 @@
 
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="expected" th:text="#{form.expected}">Očekávané chování</label>:
+                                <label for="expected" th:text="#{form.expected}">Očekávané chování</label> *
                                 <textarea type="text" id="expected" name="expected"
                                           th:text="*{expected}"
                                           class="form-control"/>
@@ -84,7 +84,7 @@
 
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="tcMuster_id" th:text="#{form.tcmusters}">tcMuster_id</label>:
+                                <label for="tcMuster_id" th:text="#{form.tcmusters}">tcMuster_id</label> *
 
                                 <select class="form-control" id="tcMuster_id" name="tcMuster_id">
                                     <option th:value="null">---</option>

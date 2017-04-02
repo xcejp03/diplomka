@@ -31,6 +31,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/dashboard">Home</a></li>
+                <li>Seznam dostupných projektů pro uživatele</li>
                 <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right" th:text="#{common.backButton}">Zpět</a>
             </ol>
         </div>
@@ -40,11 +41,7 @@
     <div class="row">
 
         <div class="col-sm-12">
-            <div class="jumbotron">
-                <h1 class="error-404" th:text="#{projects.jumbotron}">Seznam dostupných projektů pro <span style="font-style: italic"
-                                                                           th:text="${person.username}">přihlášeného uživatele</span>
-                </h1>
-            </div>
+
             <h1>test excelu</h1>
             <h3><a href="/downloadExcel">Download Excel Document</a></h3>
         </div>

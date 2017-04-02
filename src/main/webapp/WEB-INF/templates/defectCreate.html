@@ -46,7 +46,7 @@
         <div class="row">
             <div class="col-sm-7">
                 <div class="well">
-                    <form th:action="@{/defect/create}" method="post" th:object="${defectForm}">
+                    <form th:action="@{/defect/create}" method="post" |th:object="${defectForm}">
                         <div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"
                              class="alert alert-danger"></div>
 
