@@ -193,7 +193,8 @@
                     </div>
                     <div class=" control-group form-group">
                         <div class="controls">
-                            <input type="submit" value="Assignuj" th:value="#{common.changeButton}" class="btn btn-primary"/>
+                            <input type="submit" value="Assignuj" th:value="#{common.changeButton}"
+                                   class="btn btn-primary"/>
                         </div>
                     </div>
                 </form>
@@ -273,20 +274,7 @@
                      </span>
                 </div>
 
-                <form th:action="@{/comment/create}" method="post" default-target-url="/index">
-                    <!--<div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"-->
-                    <!--class="alert alert-danger"></div>-->
-
-                    <span th:if="${commentDTO.id != null}" th:remove="tag">
-                            <div class=" control-group form-group">
-                            <div class="controls">
-                                <label for="id" th:text="${table.id}">ID</label>:
-                                <input type="text" id="id" th:value="${commentDTO.id}" readonly="true" name="id"
-                                       class="form-control"/>
-                            </div>
-                        </div>
-                        </span>
-                    <input type="text" id="defect_id" name="defect_id" th:value="${defectDTO.id}" hidden="hidden"/>
+                <form th:action="@{/comment/create}" method="post" th:object="${defectCommentDTO}">
 
                     <input type="text" id="author_id" name="author_id" th:value="${loggedPersonName.id}"
                            hidden="hidden"/>
@@ -294,8 +282,11 @@
                         <div class="controls">
                             <label for="commentText" th:text="#{table.comment}">Komentář</label>:
                             <textarea type="text" id="commentText" name="commentText"
-                                      th:value="${commentDTO.commentText}"
+                                      th:value="*{commentText}"
                                       class="form-control"/>
+                        </div>
+                        <div th:if="${#fields.hasErrors('commentText')}" th:errorclass="alert-danger"
+                             th:errors="*{commentText}">form field error
                         </div>
                     </div>
 

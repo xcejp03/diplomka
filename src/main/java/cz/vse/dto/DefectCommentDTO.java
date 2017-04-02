@@ -1,5 +1,6 @@
 package cz.vse.dto;
 
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 /**
@@ -8,6 +9,7 @@ import java.time.LocalDateTime;
 public class DefectCommentDTO extends BaseDTO {
 
     private LocalDateTime createdDateTime;
+    @Size(min = 1, max = 1024)
     private String commentText;
 
     private Long defect_id;

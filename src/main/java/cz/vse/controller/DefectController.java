@@ -125,6 +125,7 @@ public class DefectController {
         model.addAttribute("listDefectCommentByDefectDTO", defectCommentService.findAllDefectCommentDTOByDefectId(id));
         model.addAttribute("defectCommentsByDefect", defectCommentService.findAllDefectCommentDTOByDefectId(id));
         model.addAttribute("commentDTO", new DefectCommentDTO());
+        model.addAttribute("defectCommentDTO", new DefectCommentDTO());
         model.addAttribute("loggedPersonName", securityUtils.getLoggedPersonName());
         return "defect";
     }

@@ -46,7 +46,7 @@
         <div class="row">
             <div class="col-sm-7">
                 <div class="well">
-                    <form th:action="@{/defect/create}" method="post" |th:object="${defectForm}">
+                    <form th:action="@{/defect/create}" method="post" th:object="${defectForm}">
                         <div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"
                              class="alert alert-danger"></div>
 
@@ -75,7 +75,7 @@
 
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="name" th:text="#{table.name}">Název</label>:
+                                <label for="name" th:text="#{table.name}">Název</label> *
                                 <input type="text" id="name" name="name" th:value="*{name}"
                                        class="form-control"/>
                                 <div th:if="${#fields.hasErrors('name')}" th:errorclass="alert-danger"
@@ -85,7 +85,7 @@
 
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="description" th:text="#{table.description}">Popis</label>:
+                                <label for="description" th:text="#{table.description}">Popis</label> *
                                 <textarea type="text" id="description" name="description"
                                           th:text="*{description}"
                                           class="form-control"/>
@@ -108,7 +108,7 @@
                         <!--<span sec:authorize="hasAuthority('ANALYTIC')" th:remove="tag">-->
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="assignee_id" th:text="#{table.assignee}">Assignee</label>:
+                                <label for="assignee_id" th:text="#{table.assignee}">Assignee</label> *
 
                                 <select class="form-control" id="assignee_id" name="assignee_id">
                                     <option th:value="null">---</option>
@@ -125,7 +125,7 @@
 
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="priority" th:text="#{table.priority}">Priorita</label>:
+                                <label for="priority" th:text="#{table.priority}">Priorita</label> *
 
                                 <select class="form-control" id="priority" name="priority"
                                         th:with="priorities=${T(cz.vse.entity.PriorityDefectEnum).values()}">
