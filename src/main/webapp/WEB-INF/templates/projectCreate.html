@@ -97,7 +97,7 @@
 
                         <div class="control-group form-group">
                             <div class="controls">
-                                <label for="projectMembers_id" th:text="#{form.members}">Členové</label>:
+                                <label for="projectMembers_id" th:text="#{form.members}">Členové</label> *
                                 <select id="projectMembers_id" name="projectMembers_id" class="multipleSelection"
                                         multiple="multiple" size="10">
                                     <option th:unless="${#fields.hasErrors('*')}"

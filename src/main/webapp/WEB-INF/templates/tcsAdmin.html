@@ -40,7 +40,7 @@
 
         <div class="col-sm-12">
             <div class="jumbotron">
-                <h1 class="error-404">Seznam Test Casů v systému</h1>
+                <h1 class="error-404"  th:text="#{tcs.testCasesList}">Seznam Test Casů v systému</h1>
             </div>
         </div>
     </div>
@@ -48,16 +48,16 @@
     <div class="row">
         <div class="col-sm-12">
 
-            <h1>TC list</h1>
+            <h1  th:text="#{tc.tcList}">TC list</h1>
             <table class="table table-striped datatable">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Priorita</th>
-                    <th>Název</th>
-                    <th>Detail</th>
-                    <th>Edit</th>
-                    <th>Více</th>
+                    <th th:text="#{table.id}">ID</th>
+                    <th th:text="#{table.priority}">Priorita</th>
+                    <th th:text="#{table.name}">Název</th>
+                    <th th:text="#{table.detail}">Detail</th>
+                    <th th:text="#{table.edit}">Edit</th>
+                    <th th:text="#{table.more}">Více</th>
                 </tr>
                 </thead>
                 <tbody th:remove="all-but-first">
@@ -79,13 +79,13 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-sm-4">
-            <a href="/tc/create" class="btn btn-default">Založit Test Case</a>
-        </div>
-        <div class="col-sm-8"></div>
-    </div>
-    <br/>
+    <!--<div class="row">-->
+        <!--<div class="col-sm-4">-->
+            <!--<a href="/tc/create" class="btn btn-default"  th:text="#{common.createButton}">Založit Test Case</a>-->
+        <!--</div>-->
+        <!--<div class="col-sm-8"></div>-->
+    <!--</div>-->
+    <!--<br/>-->
 
     <!--dialogová okna-->
     <div id="moreDialog" title="Více">

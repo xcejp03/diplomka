@@ -54,7 +54,7 @@
                             <span th:if="*{id != null}" th:remove="tag">
                             <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="id">ID</label>:
+                                <label for="id" th:text="#{form.id}">ID</label>:
                                 <input type="text" id="id" name="id" th:value="*{id}" readonly="true"
                                        class="form-control"/>
                             </div>
@@ -63,7 +63,7 @@
 
                             <div class=" control-group form-group">
                                 <div class="controls">
-                                    <label for="name">Jméno</label>:
+                                    <label for="name" th:text="#{table.name}">Jméno</label> *
                                     <input type="text" id="name" th:value="*{name}" name="name"
                                            class="form-control"
                                            autofocus="autofocus"/>
@@ -75,7 +75,7 @@
 
                             <div class=" control-group form-group">
                                 <div class="controls">
-                                    <label for="username">Uživatelské jméno</label>:
+                                    <label for="username" th:text="#{form.username}">Uživatelské jméno</label> *
                                     <input type="text" id="username" th:value="*{username}" name="username"
                                            class="form-control"/>
                                 </div>
@@ -87,7 +87,7 @@
                             <span th:if="*{id == null}" th:remove="tag">
                         <div class="control-group form-group">
                             <div class="controls">
-                                <label for="password">Password</label>:
+                                <label for="password" th:text="#{form.password}">Password</label> *
                                 <input type="password" id="password" class="form-control" name="password"
                                        autocomplete="false"/>
                             </div>
@@ -100,8 +100,8 @@
                             <span th:if="*{id != null}" th:remove="tag">
                         <div class="control-group form-group">
                             <div class="controls">
-                                <label for="enabled">Aktivní</label>:
-                                <input type="checkbox" th:checked="*{enabled}" name="enabled" id="enabled"
+                                <label for="enabled">Aktivní</label> *
+                                <input type="checkbox" th:checked="*{enabled}" th:text="#{form.enabled}" name="enabled" id="enabled"
                                        class="checkbox"/>
                                 <!--<input type="enabled" id="enabled" class="form-control" name="enabled"/> <br/>-->
                             </div>
@@ -122,32 +122,34 @@
         <div class="row">
             <div class="col-sm-12">
                 <div th:if="${not #lists.isEmpty(persons)}" th:remove="tag">
-                    <a href="create" class="btn btn-primary">Registrace</a>
+                    <a href="create" class="btn btn-primary" th:text="#{common.registerButton}">Registrace</a>
 
-                    <h1>Seznam uživatelů</h1>
+                    <h1 th:text="#{users.usersList}">Seznam uživatelů</h1>
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>ID uživatele</th>
-                            <th>Jméno</th>
-                            <th>Login</th>
-                            <th>Vytvořen</th>
-                            <th>Poslední přihlášení</th>
-                            <th>Editovat</th>
+                            <th th:text="#{table.id}">ID uživatele</th>
+                            <th th:text="#{table.name}">Jméno</th>
+                            <th th:text="#{table.login}">Login</th>
+                            <th th:text="#{table.created}">Vytvořen</th>
+                            <th th:text="#{table.lastLogged}">Poslední přihlášení</th>
+                            <th th:text="#{table.roles}">Role</th>
+                            <th th:text="#{table.edit}">Editovat</th>
                         </tr>
                         </thead>
                         <tbody th:remove="all-but-first">
                         <tr th:each="user : ${persons}">
-                            <td th:text="${user.id}">00</td>
-                            <td th:text="${user.name}">Projekt</td>
-                            <td th:text="${user.username}">Projekt</td>
-                            <td th:text="${user.createdDateTime}">Projekt</td>
-                            <td th:text="${user.lastLogged}">Projekt</td>
-                            <td><a th:href="@{'/person/edit/'+${user.id}}">Editace</a></td>
+                            <td th:text="${user.id}">id</td>
+                            <td th:text="${user.name}">name</td>
+                            <td th:text="${user.username}">username</td>
+                            <td th:text="${user.createdDateTime}">vytvořeno</td>
+                            <td th:text="${user.lastLogged}">poslední přihlášení</td>
+                            <td><a th:href="@{'/person/role/'+${user.id}}" th:text="#{table.roles}">úprava rolí</a> </td>
+                            <td><a th:href="@{'/person/edit/'+${user.id}}" th:text="#{table.edit}">Editace</a></td>
                         </tr>
                         </tbody>
                     </table>
-                    <a href="create" class="btn btn-primary">Registrace</a>
+                    <a href="create" class="btn btn-primary" th:text="#{common.registerButton}">Registrace</a>
                 </div>
             </div>
         </div>

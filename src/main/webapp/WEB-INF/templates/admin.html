@@ -41,7 +41,7 @@
     <!-- Marketing Icons Section -->
     <div class="row">
         <div class="col-sm-12">
-            <h1 class="page-header">
+            <h1 class="page-header" th:text="#{admin.guidePost}">
                 Rozcestník odkazů
             </h1>
         </div>
@@ -50,40 +50,40 @@
         <div class="col-sm-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-check"></i>Registrace</h4>
+                    <h4  th:text="#{admin.registration}"><i class="fa fa-fw fa-check"></i>Registrace</h4>
                 </div>
                 <div class="panel-body">
-                    <p>Zaregistruj uživatele</p>
-                    <p><a href="person/create" class="btn btn-lg btn-default btn-block">Nový uživatel</a></p>
-                    <p><a href="person/role" class="btn btn-lg btn-default btn-block">Nastavení rolí</a></p>
-                    <p><a href="person/edit" class="btn btn-lg btn-default btn-block">Úpravy</a></p>
-                    <p><a href="admin/users" class="btn btn-lg btn-default btn-block">Uživatelé</a></p>
+                    <p  th:text="#{admin.registrationLabel}">Zaregistruj uživatele</p>
+                    <p><a href="person/create" class="btn btn-lg btn-default btn-block"  th:text="#{admin.newUser}">Nový uživatel</a></p>
+                    <!--<p><a href="person/role" class="btn btn-lg btn-default btn-block">Nastavení rolí</a></p>-->
+                    <p><a href="person/edit" class="btn btn-lg btn-default btn-block"  th:text="#{admin.userEdit}">Úpravy</a></p>
+                    <p><a href="admin/users" class="btn btn-lg btn-default btn-block"  th:text="#{admin.users}">Uživatelé</a></p>
                 </div>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-gift"></i>Projekty</h4>
+                    <h4 th:text="#{admin.projects}"><i class="fa fa-fw fa-gift"></i>Projekty</h4>
                 </div>
                 <div class="panel-body">
-                    <p>Administrace projektů</p>
-                    <p><a href="project/create" class="btn btn-lg btn-default btn-block">Založit projekt</a></p>
-                    <p><a href="project/edit" class="btn btn-lg btn-default btn-block">Upravit projekt</a></p>
-                    <p><a href="admin/projects" class="btn btn-lg btn-default btn-block">Projekty</a></p>
+                    <p  th:text="#{admin.projectsLabel}">Administrace projektů</p>
+                    <p><a href="project/create" class="btn btn-lg btn-default btn-block"  th:text="#{admin.projectsLabel}">Založit projekt</a></p>
+                    <!--<p><a href="project/edit" class="btn btn-lg btn-default btn-block">Upravit projekt</a></p>-->
+                    <p><a href="admin/projects" class="btn btn-lg btn-default btn-block"  th:text="#{admin.projectsList}">Projekty</a></p>
                 </div>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-compass"></i>Test Suity</h4>
+                    <h4  th:text="#{admin.testSuites}"><i class="fa fa-fw fa-compass"></i>Test Suity</h4>
                 </div>
                 <div class="panel-body">
-                    <p>Založení a úpravy test suitů, které obsahují TC</p>
-                    <p><a href="suite/create" class="btn btn-lg btn-default btn-block">Vytvořit Test Suite</a></p>
-                    <p><a href="suite/edit" class="btn btn-lg btn-default btn-block">Upravit Test Suite</a></p>
-                    <p><a href="admin/suites" class="btn btn-lg btn-default btn-block">Test Suity</a></p>
+                    <p  th:text="#{admin.tesSuitesLabel}">Založení a úpravy test suitů, které obsahují TC</p>
+                    <p><a href="suite/create" class="btn btn-lg btn-default btn-block"  th:text="#{admin.createTestSuite}">Vytvořit Test Suite</a></p>
+                    <!--<p><a href="suite/edit" class="btn btn-lg btn-default btn-block">Upravit Test Suite</a></p>-->
+                    <p><a href="admin/suites" class="btn btn-lg btn-default btn-block"  th:text="#{admin.tessuitesList}">Test Suity</a></p>
                 </div>
             </div>
         </div>
@@ -92,55 +92,17 @@
         <div class="col-sm-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-gift"></i>TC</h4>
+                    <h4  th:text="#{admin.tc}"><i class="fa fa-fw fa-gift"></i>TC</h4>
                 </div>
                 <div class="panel-body">
-                    <p>Administrace Test Cases</p>
-                    <p><a href="tc/create" class="btn btn-lg btn-default btn-block">Založit TC</a></p>
-                    <p><a href="tc/edit" class="btn btn-lg btn-default btn-block">Upravit TC</a></p>
-                    <p><a href="admin/tcs" class="btn btn-lg btn-default btn-block">Test Casy</a></p>
+                    <p  th:text="#{admin.tcLabel}">Administrace Test Cases</p>
+                    <!--<p><a href="tc/create" class="btn btn-lg btn-default btn-block">Založit TC</a></p>-->
+                    <!--<p><a href="tc/edit" class="btn btn-lg btn-default btn-block">Upravit TC</a></p>-->
+                    <p><a href="admin/tcs" class="btn btn-lg btn-default btn-block"  th:text="#{admin.tcList}">Test Casy</a></p>
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-gift"></i>TS</h4>
-                </div>
-                <div class="panel-body">
-                    <p>Administrace Test Stepů</p>
-                    <p><a href="ts/create" class="btn btn-lg btn-default btn-block">Založit TS</a></p>
-                    <p><a href="ts/edit" class="btn btn-lg btn-default btn-block">Upravit TS</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-gift"></i>Defekty</h4>
-                </div>
-                <div class="panel-body">
-                    <p>Administrace Defektů</p>
-                    <p><a href="defect/create" class="btn btn-default btn-lg btn-block">Založit defekt</a></p>
-                    <p><a href="defect/edit" class="btn btn-lg btn-default btn-block">Upravit defekt</a></p>
-                    <p><a href="defect/defects" class="btn btn-lg btn-default btn-block">Defekty uživatele</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-gift"></i>Komentář</h4>
-                </div>
-                <div class="panel-body">
-                    <p>Administrace Komentářů</p>
-                    <p><a href="comment/create" class="btn btn-lg btn-default btn-block">Založit Komentář</a></p>
-                    <p><a href="comment/edit" class="btn btn-lg btn-default btn-block">Upravit Komentář</a></p>
-                </div>
-            </div>
-        </div>
+
     </div>
 
     <!-- Footer -->

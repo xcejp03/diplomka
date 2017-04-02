@@ -94,7 +94,7 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/role", method = RequestMethod.GET)
-    public String editPersonRoleGET(Model model) {
+    public String editPersonRoleGET(Model model, PersonForm personForm) {
         l.info("person/role");
         model.addAttribute("persons", personService.findAllPersonForms());
         model.addAttribute("enumRoles", RoleEnum.values());

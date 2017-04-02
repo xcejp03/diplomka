@@ -9,7 +9,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
-    <title>Registration</title>
+    <title>Uživatelské role</title>
 
     <!--importované přes fragment-->
     <div th:replace="/fragment/thymeFragment :: headImports"/>
@@ -37,7 +37,8 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/dashboard">Home</a></li>
-                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right" th:text="#{common.backButton}">Zpět</a>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right"
+                   th:text="#{common.backButton}">Zpět</a>
             </ol>
         </div>
     </div>
@@ -52,15 +53,15 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="well">
-                        <form th:action="@{/person/role}" method="post" default-target-url="/index">
+                        <form th:action="@{/person/role}" method="post" th:object="${personForm}">
                             <div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"
                                  class="alert alert-danger"></div>
 
-                            <span th:if="${personForm.id != null}" th:remove="tag">
+                            <span th:if="*{id != null}" th:remove="tag">
                             <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="id">ID</label>:
-                                <input type="text" id="id" name="id" th:value="${personForm.id}" readonly="true"
+                                <label for="id" th:text="#{form.id}">ID</label>:
+                                <input type="text" id="id" name="id" th:value="*{id}" readonly="true"
                                        class="form-control"/>
                             </div>
                         </div>
@@ -68,8 +69,8 @@
 
                             <div class=" control-group form-group">
                                 <div class="controls">
-                                    <label for="name">Jméno</label>:
-                                    <input type="text" id="name" th:value="${personForm.name}" name="name"
+                                    <label for="name" th:text="#{form.name}">Jméno</label>:
+                                    <input type="text" id="name" th:value="*{name}" name="name"
                                            class="form-control"
                                            readonly="true"/>
                                 </div>
@@ -77,8 +78,8 @@
 
                             <div class=" control-group form-group">
                                 <div class="controls">
-                                    <label for="username">Uživatelské jméno</label>:
-                                    <input type="text" id="username" th:value="${personForm.username}" name="username"
+                                    <label for="username" th:text="#{form.username}">Uživatelské jméno</label>:
+                                    <input type="text" id="username" th:value="*{username}" name="username"
                                            readonly="true"
                                            class="form-control"/>
                                 </div>
@@ -87,13 +88,13 @@
 
                             <div class="control-group form-group">
                                 <div class="controls">
-                                    <label for="userRolesEnum">Nastavení rolí</label>:
+                                    <label for="userRolesEnum" th:text="#{users.roleSettings}">Nastavení rolí</label>:
                                     <select id="userRolesEnum" name="userRolesEnum" class="multipleSelection3"
                                             multiple="multiple" size="10">
-                                         <option th:each="role : ${enumRoles}"
-                                                 th:selected="${userRoles != null} ? ${#sets.contains(userEnumRoles, role)}"
-                                                 th:value="${role}"
-                                                 th:text="${role}">tc vzory
+                                        <option th:each="role : ${enumRoles}"
+                                                th:selected="${userRoles != null} ? ${#sets.contains(userEnumRoles, role)}"
+                                                th:value="${role}"
+                                                th:text="${role}">tc vzory
                                         </option>
 
 
@@ -110,57 +111,29 @@
                             </div>
 
 
-                            <span th:if="${personForm.id != null}" th:remove="tag">
-                        <div class="control-group form-group">
-                            <div class="controls">
-                                <label for="enabled">Aktivní</label>:
-                                <input type="checkbox" th:checked="${personForm.enabled}" name="enabled" id="enabled"
-                                       readonly="true"
-                                       class="checkbox"/>
-                            </div>
-                        </div>
-                        </span>
+                            <span th:if="*{id != null}" th:remove="tag">
+                                <div class="control-group form-group">
+                                    <div class="controls">
+                                        <label for="enabled" th:text="#{form.enabled}">Aktivní</label>:
+                                        <input type="checkbox" th:checked="*{enabled}" name="enabled" id="enabled"
+                                               readonly="true" class="checkbox"/>
+                                    </div>
+                                </div>
+                            </span>
 
-                            <span th:if="${personForm.id != null}" th:remove="tag">
-                             <input type="submit" value="Upravit" class="btn btn-primary"/>
-                        </span>
-                            <span th:if="${personForm.id == null}" th:remove="tag">
-                             <input type="submit" value="Založit" class="btn btn-primary"/>
-                        </span>
+                            <span th:if="*{id != null}" th:remove="tag">
+                                <input type="submit" th:value="#{common.editButton}" value="Upravit"
+                                       class="btn btn-primary"/>
+                            </span>
+                            <span th:if="*{id == null}" th:remove="tag">
+                                <input type="submit" th:value="#{common.createButton}" value="Založit"
+                                       class="btn btn-primary"/>
+                            </span>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div th:if="${not #lists.isEmpty(personForm)}" th:remove="tag">
-                    <h1>Seznam uživatelů</h1>
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>ID uživatele</th>
-                            <th>Jméno</th>
-                            enumRoles     <th>Vytvořen</th>
-                            <th>Poslední přihlášení</th>
-                            <th>Editovat</th>
-                        </tr>
-                        </thead>
-                        <tbody th:remove="all-but-first">
-                        <tr th:each="user : ${personForm}">
-                            <td th:text="${user.id}">00</td>
-                            <td th:text="${user.name}">Projekt</td>
-                            <td th:text="${user.username}">Projekt</td>
-                            <td th:text="${user.createdDate}">Projekt</td>
-                            <td th:text="${user.lastLogged}">Projekt</td>
-                            <td><a th:href="@{'/person/role/'+${user.id}}">Editace</a></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
 
         <!--Page Content - End-->
         <!-- Footer -->

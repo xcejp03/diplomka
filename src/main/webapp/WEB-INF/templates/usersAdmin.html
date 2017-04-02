@@ -40,7 +40,7 @@
 
         <div class="col-sm-12">
             <div class="jumbotron">
-                <h1 class="error-404">Seznam uživatelů v systému</h1>
+                <h1 class="error-404" th:text="#{users.usersList}">Seznam uživatelů v systému</h1>
             </div>
         </div>
     </div>
@@ -48,20 +48,15 @@
     <div class="row">
         <div class="col-sm-12">
 
-            <div sec:authorize="hasRole('ROLE_ADMIN')">
-                This content is only shown to administrators. - dát pryč
-            </div>
-
-
-            <h1>Users list</h1>
+                 <h1 th:text="#{users.usersList}">Seznam uživatelů</h1>
             <table class="table table-striped datatable">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Jméno</th>
-                    <th>Detail</th>
-                    <th>Edit</th>
-                    <th>Více</th>
+                    <th th:text="#{table.id}">ID</th>
+                    <th th:text="#{table.name}">Jméno</th>
+                    <th th:text="#{table.detail}">Detail</th>
+                    <th th:text="#{table.edit}">Edit</th>
+                    <th th:text="#{table.more}">Více</th>
                 </tr>
                 </thead>
                 <tbody th:remove="all-but-first">
@@ -85,7 +80,7 @@
 
     <div class="row">
         <div class="col-sm-4">
-            <a href="/person/create" class="btn btn-default">Založit Uživatele</a>
+            <a href="/person/create" class="btn btn-default" th:text="#{common.registerButton}">Založit Uživatele</a>
         </div>
         <div class="col-sm-8"></div>
     </div>
@@ -94,9 +89,9 @@
     <!--dialogová okna-->
     <div id="moreDialog" title="Více">
         <h3>Project ID: <span id="spanDataObjectId"></span></h3>
-        <a href="/defect/create" class="btn btn-default">Založit defekt</a>
+        <a href="/defect/create" class="btn btn-default" th:text="#{defects.createDefect}">Založit defekt</a>
         <a href="#" class="btn btn-default">Žádost o smazání</a>
-        <a href="/defect/defects" class="btn btn-default">Seznam Defektů</a>
+        <a href="/defect/defects" class="btn btn-default" th:text="#{defect.defectList}">Seznam Defektů</a>
     </div>
 
     <div id="detailDialog" title="Detail projektu">
