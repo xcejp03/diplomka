@@ -32,7 +32,8 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/dashboard">Home</a></li>
-                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right" th:text="#{common.backButton}">Zpět</a>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right"
+                   th:text="#{common.backButton}">Zpět</a>
             </ol>
         </div>
     </div>
@@ -47,14 +48,14 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="well">
-                        <form th:action="@{/person/create}" method="post" default-target-url="/index">
+                        <form th:action="@{/person/create}" method="post" th:object="${personForm}">
                             <!--<div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"-->
-                                 <!--class="alert alert-danger"></div>-->
-                        <span th:if="${personForm.id != null}" th:remove="tag">
+                            <!--class="alert alert-danger"></div>-->
+                            <span th:if="*{id != null}" th:remove="tag">
                             <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="id">ID</label>:
-                                <input type="text" id="id" name="id" th:value="${personForm.id}" readonly="true"
+                                <input type="text" id="id" name="id" th:value="*{id}" readonly="true"
                                        class="form-control"/>
                             </div>
                         </div>
@@ -63,45 +64,54 @@
                             <div class=" control-group form-group">
                                 <div class="controls">
                                     <label for="name">Jméno</label>:
-                                    <input type="text" id="name" th:value="${personForm.name}" name="name"
+                                    <input type="text" id="name" th:value="*{name}" name="name"
                                            class="form-control"
                                            autofocus="autofocus"/>
+                                </div>
+                                <div th:if="${#fields.hasErrors('name')}" th:errorclass="alert-danger"
+                                     th:errors="*{name}">form field error
                                 </div>
                             </div>
 
                             <div class=" control-group form-group">
                                 <div class="controls">
                                     <label for="username">Uživatelské jméno</label>:
-                                    <input type="text" id="username" th:value="${personForm.username}" name="username"
+                                    <input type="text" id="username" th:value="*{username}" name="username"
                                            class="form-control"/>
+                                </div>
+                                <div th:if="${#fields.hasErrors('username')}" th:errorclass="alert-danger"
+                                     th:errors="*{username}">form field error
                                 </div>
                             </div>
 
-                            <span th:if="${personForm.id == null}" th:remove="tag">
+                            <span th:if="*{id == null}" th:remove="tag">
                         <div class="control-group form-group">
                             <div class="controls">
                                 <label for="password">Password</label>:
                                 <input type="password" id="password" class="form-control" name="password"
-                                       autocomplete="false"/> <br/>
+                                       autocomplete="false"/>
                             </div>
+                            <div th:if="${#fields.hasErrors('password')}" th:errorclass="alert-danger"
+                                 th:errors="*{password}">form field error
+                                </div>
                         </div>
                         </span>
 
-                            <span th:if="${personForm.id != null}" th:remove="tag">
+                            <span th:if="*{id != null}" th:remove="tag">
                         <div class="control-group form-group">
                             <div class="controls">
                                 <label for="enabled">Aktivní</label>:
-                                <input type="checkbox" th:checked="${personForm.enabled}" name="enabled" id="enabled"
+                                <input type="checkbox" th:checked="*{enabled}" name="enabled" id="enabled"
                                        class="checkbox"/>
                                 <!--<input type="enabled" id="enabled" class="form-control" name="enabled"/> <br/>-->
                             </div>
                         </div>
                         </span>
 
-                            <span th:if="${personForm.id != null}" th:remove="tag">
+                            <span th:if="*{id != null}" th:remove="tag">
                              <input type="submit" value="Upravit" class="btn btn-primary"/>
                         </span>
-                            <span th:if="${personForm.id == null}" th:remove="tag">
+                            <span th:if="*{id == null}" th:remove="tag">
                              <input type="submit" value="Založit" class="btn btn-primary"/>
                         </span>
                         </form>

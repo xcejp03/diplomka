@@ -14,7 +14,7 @@ public class PersonForm extends BaseDTO {
     private String name;
     @Size(min = 1, max = 50)
     private String username;
-    @NotNull
+    @Size(min = 5, max = 50)
     private String password;
     private String createdDateTime;
     private String lastLogged;
