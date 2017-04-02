@@ -21,6 +21,7 @@ public class TCMusterForm extends BaseDTO {
     private List<Long> tsMusters_id;
     private List<Long> tcInstances_id;
     private List<Long> testSuite_id;
+    private Long suiteFrom;
     private StatusEnum status;
     @NotNull
     private PriorityTCEnum priority;
@@ -86,6 +87,14 @@ public class TCMusterForm extends BaseDTO {
 
     public void setTestSuite_id(List<Long> testSuite_id) {
         this.testSuite_id = testSuite_id;
+    }
+
+    public Long getSuiteFrom() {
+        return suiteFrom;
+    }
+
+    public void setSuiteFrom(Long suiteFrom) {
+        this.suiteFrom = suiteFrom;
     }
 
     public StatusEnum getStatus() {

@@ -101,10 +101,15 @@ public class TCController {
     }
 
     @RequestMapping("/edit/{id}")
-    public String editTCMuster(@PathVariable("id") long id, Model model) {
+    public String editTCMuster(@PathVariable("id") long id, Model model, TCMusterForm tcMusterForm) {
         l.info("/tc/edit/{id}" + id);
         Long personId = securityUtils.getLoggedPersonId();
-        model.addAttribute("tcForm", tcMusterService.findTestCaseMusterFormById(id));
+        Long suiteFrom = tcMusterForm.getSuiteFrom();
+        tcMusterForm = tcMusterService.findTestCaseMusterFormById(id);
+        tcMusterForm.setSuiteFrom(suiteFrom);
+        model.addAttribute("tcForm", tcMusterForm);
+        model.addAttribute("TCMusterForm", tcMusterForm);
+
 //        model.addAttribute("listPersons", personService.findAllPersons());
 //        model.addAttribute("listProjects", projectService.findAllTestProjects());
         model.addAttribute("listUsersProjects", projectService.findAllTestProjectNamesByUserId(personId));
