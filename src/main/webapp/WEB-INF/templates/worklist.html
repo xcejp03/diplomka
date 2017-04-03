@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Create WorkList</title>
+
+    <!--importované přes fragment-->
+    <div th:replace="/fragment/thymeFragment :: headImports"/>
+    <!--importované přes fragment - konec-->
+
+</head>
+
+<body>
+<!-- Navigation -->
+<div th:replace="/fragment/thymeFragment :: menu"></div>
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="page-header">
+                <small>WEB-INF/templates/worklist.html</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="/dashboard">Home</a></li>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right"
+                   th:text="#{common.backButton}">Zpět</a>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="well">
+                    <form th:action="@{/worklist/worktc/edit}" th:object="${workListDTO}" method="post"
+                          default-target-url="/index">
+                        <div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"
+                             class="alert alert-danger"></div>
+
+                        <input type="text" id="tcMuster_id" th:value="${workListDTO.tcMuster_id}" name="tcMuster_id"
+                               hidden="hidden"/>
+
+                        <span th:if="${workListDTO.id != null}" th:remove="tag">
+                        <div class=" control-group form-group">
+                        <div class="controls">
+                        <label for="id" th:text="#{form.id}">ID</label>:
+                        <input type="text" id="id" th:value="${workListDTO.id}" readonly="true" name="id"
+                               class="form-control"/>
+                        </div>
+                        </div>
+                        </span>
+
+                        <div class=" control-group form-group">
+                            <div class="controls">
+                                <label for="name" th:text="#{form.name}">Název</label>:
+                                <input type="text" id="name" name="name" th:value="${workListDTO.name}" readonly="true"
+                                       class="form-control"/>
+                            </div>
+                        </div>
+
+                        <div class=" control-group form-group">
+                            <div class="controls">
+                                <label for="prerequisite" th:text="#{form.prerequisite}">Prerekvizity</label>:
+                                <textarea type="text" id="prerequisite" name="prerequisite" readonly="true"
+                                          th:text="${workListDTO.prerequisite}"
+                                          class="form-control"/>
+                            </div>
+                        </div>
+
+                        <div class=" control-group form-group">
+                            <div class="controls">
+                                <label for="note" th:text="#{form.note}">Poznámka</label>:
+                                <textarea type="text" id="note" name="note" readonly="true"
+                                          th:text="${workListDTO.note}"
+                                          class="form-control"/>
+                            </div>
+                        </div>
+
+                        <div class=" control-group form-group">
+                            <div class="controls">
+                                <label for="project_id" th:text="#{form.project}">Projekt</label>
+                                <input type="text" id="project_id" readonly="true" class="form-control"
+                                       th:value="${workListDTO.project_id}" name="project_id"
+                                       size="30"/>
+
+                            </div>
+                        </div>
+
+                        <div class=" control-group form-group">
+                            <div class="controls">
+                                <label for="plannedExecution" th:text="#{form.planned}">Planned</label>
+                                <input type="text" id="plannedExecution" readonly="true" class="form-control"
+                                       th:value="${workListDTO.plannedExecution}" name="plannedExecution"
+                                       size="30"/>
+                            </div>
+                        </div>
+
+
+                        <h1 th:text="#{worklist.tcWorkList}">TC work list</h1>
+                        <table class="table table-striped datatable">
+                            <thead>
+                            <tr>
+                                <th th:text="#{table.id}">ID</th>
+                                <th th:text="#{table.name}">Název</th>
+                                <th th:text="#{table.priority}">Priority</th>
+                                <th th:text="#{table.assignee}">Assignee</th>
+                                <th th:text="#{table.updated}">Updated</th>
+                                <th th:text="#{table.history}">Historie</th>
+                                <th th:text="#{table.run}" sec:authorize="hasAuthority('TESTER')">Run</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="tc, stat : ${workListDTO.workTCList}">
+                                <input type="hidden" th:field="*{workTCList[__${stat.index}__].id}"/>
+                                <input type="hidden" th:field="*{workTCList[__${stat.index}__].tcMuster_id}"/>
+                                <td th:text="${tc.id}">id</td>
+                                <td th:text="${tc.name}">Název</td>
+                                <td th:text="${tc.priority}">priorita</td>
+                                <td th:text="${tc.assignee_id}">řešitel</td>
+                                <td th:text="${tc.updatedDateTime}">upraveno</td>
+                                <td><a th:href="@{'/worklist/history/'+${tc.id}}"
+                                       th:text="#{table.history}">Historie</a></td>
+                                <td sec:authorize="hasAuthority('TESTER')">
+                                    <a th:href="@{'/tc/run/'+${tc.tcMuster_id}+'?worktc='+${tc.id}}"
+                                       th:text="#{table.run}">run</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <p><a th:href="@{/worklist/worktc/}+${workListDTO.id}" class="btn btn-primary" th:text="#{common.workTC}">WorkTC</a></p>
+                <p><a th:href="@{/worklist/edit/}+${workListDTO.id}" class="btn btn-primary"  th:text="#{common.editButton}">Upravit</a></p>
+                <p><a th:href="@{/worklist/create}" class="btn btn-primary" th:text="#{worklist.createNew}">Vytvořit
+                nový</a></p>
+            </div>
+        </div>
+
+        <!--Page Content - End-->
+
+        <!-- Footer -->
+        <div th:replace="/fragment/thymeFragment :: footer"></div>
+
+    </div>
+</div>
+<!-- /.container -->
+
+<div th:replace="/fragment/thymeFragment :: script"></div>
+</body>
+
+</html>

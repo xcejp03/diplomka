@@ -57,6 +57,8 @@
                                 <th th:text="#{table.priority}">Priorita</th>
                                 <th th:text="#{table.author}">Autor</th>
                                 <th th:text="#{table.edit}">Edit</th>
+                                <th th:text="#{table.detail}">Detail</th>
+                                <th th:text="#{table.worktc}">WorkTC</th>
                             </tr>
                             </thead>
                             <tbody th:remove="all-but-first">
@@ -69,8 +71,9 @@
                                 <td><span th:class="${workList.priority}"
                                           th:text="${workList.priority}"> Priorita</span></td>
                                 <td th:text="${workList.author}">Autor</td>
-                                <td><a th:href="@{'/worklist/edit/'+${workList.id}}" th:text="#{table.edit}">Editace</a>
-                                </td>
+                                <td><a th:href="@{'/worklist/edit/'+${workList.id}}" th:text="#{common.editButton}">Editace</a></td>
+                                <td><a th:href="@{'/worklist/'+${workList.id}}" th:text="#{common.detail}">Detail</a></td>
+                                <td><a th:href="@{'/worklist/worktc/'+${workList.id}}" th:text="#{common.workTC}">WorkTC</a></td>
                             </tr>
                             </tbody>
                         </table>

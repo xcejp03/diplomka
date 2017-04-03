@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Create WorkList</title>
+
+    <!--importované přes fragment-->
+    <div th:replace="/fragment/thymeFragment :: headImports"/>
+    <!--importované přes fragment - konec-->
+
+</head>
+
+<body>
+<!-- Navigation -->
+<div th:replace="/fragment/thymeFragment :: menu"></div>
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="page-header">
+                <small>WEB-INF/templates/workTC.html</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="/dashboard">Home</a></li>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right"
+                   th:text="#{common.backButton}">Zpět</a>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="well">
+                    <h1 th:text="#{worklist.tcWorkList}">TC work list</h1>
+                    <table class="table table-striped datatable">
+                        <thead>
+                        <tr>
+                            <th th:text="#{table.id}">ID</th>
+                            <th th:text="#{table.name}">Název</th>
+                            <th th:text="#{table.priority}">Priority</th>
+                            <th th:text="#{table.assignee}">Assignee</th>
+                            <th th:text="#{table.updated}">Updated</th>
+                            <th th:text="#{table.history}">Historie</th>
+                            <th th:text="#{table.run}" sec:authorize="hasAuthority('TESTER')">Run</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="tc, stat : ${workListDTO.workTCList}">
+                            <td th:text="${tc.id}">id</td>
+                            <td th:text="${tc.name}">Název</td>
+                            <td>
+                                <select class="form-control" th:name="|workTCList[${stat.index}].priority|">
+                                    <option th:each="priority : ${priorityList}"
+                                            th:value="${priority}"
+                                            th:selected="${tc.priority != null} ? ${#arrays.contains(tc.priority, priority)}"
+                                            th:text="${priority}">jméno projektu
+                                    </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select class="form-control" th:name="|workTCList[${stat.index}].assignee_id|">
+                                    <option th:value="null">---</option>
+                                    <option th:each="person : ${persons}"
+                                            th:value="${person.id}"
+                                            th:selected="${tc.assignee_id != null} ? ${#strings.contains(person.id, tc.assignee_id)}"
+                                            th:text="${person.name}">Assignee
+                                    </option>
+                                </select>
+                            </td>
+                            <td th:text="${tc.updatedDateTime}">datum změny</td>
+                            <td>
+                                <a th:href="@{'/worklist/history/'+${tc.id}}"
+                                   th:text="#{table.history}">Historie</a>
+                            </td>
+                            <td sec:authorize="hasAuthority('TESTER')">
+                                <a th:href="@{'/tc/run/'+${tc.tcMuster_id}+'?worktc='+${tc.id}}"
+                                   th:text="#{table.run}">run</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <span th:if="${workListDTO.id != null}" th:remove="tag">
+                             <input type="submit" value="Upravit" th:value="#{common.editButton}"
+                                    class="btn btn-primary"/>
+                        </span>
+                    <span th:if="${workListDTO.id == null}" th:remove="tag">
+                             <input type="submit" value="Vytvořit" class="btn btn-primary"
+                                    th:value="#{common.createButton}"/>
+                        </span>
+
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <p><a th:href="@{/worklist/}+${workListDTO.id}" class="btn btn-primary" th:text="#{common.worklist}">Worklist</a> </p>
+            </div>
+        </div>
+
+        <!--Page Content - End-->
+
+        <!-- Footer -->
+        <div th:replace="/fragment/thymeFragment :: footer"></div>
+
+    </div>
+</div>
+<!-- /.container -->
+
+<div th:replace="/fragment/thymeFragment :: script"></div>
+</body>
+
+</html>
