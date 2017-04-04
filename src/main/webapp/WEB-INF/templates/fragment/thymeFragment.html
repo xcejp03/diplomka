@@ -36,7 +36,6 @@
 </div>
 
 
-
 <div th:fragment="menu">
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
@@ -63,12 +62,9 @@
                     <li>
                         <a href="/project/projects" th:text="#{navbar.myprojects}">My Projects</a>
                     </li>
-                    <!--<li>-->
-                    <!--<a href="/suite/suites">Suity</a>-->
-                    <!--</li>-->
-                    <li sec:authorize="!hasAuthority('ROLE_ANALYTIC')">
-                        <a href="/tc/tcs" th:text="#{navbar.testcases}">Test Casy</a>
-                    </li>
+                        <li sec:authorize="hasAuthority('ANALYTIC')">
+                            <a href="/tc/tcs">Test Casy</a>
+                        </li>
                     <li>
                         <a href="/defect/defects" th:text="#{navbar.defects}">Defekty</a>
                     </li>
@@ -76,7 +72,8 @@
                         <a href="/worklist" th:text="#{navbar.worklists}">Worklist</a>
                     </li>
                     <span class="dropdown navbar-brand">
-                    <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" th:text="#{navbar.language}">Jazyk
+                    <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown"
+                            th:text="#{navbar.language}">Jazyk
                         <span class="caret"></span></button>
                     <ul class="dropdown-menu">
                         <li class="dropdown-header" th:text="#{navbar.chooselanguage}">Výběr jazyka</li>

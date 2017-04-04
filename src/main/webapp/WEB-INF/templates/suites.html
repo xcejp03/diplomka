@@ -68,7 +68,7 @@
                    data-updated=${suite.updatedDateTime}" data-id="#detailDialog">Detail</a>
             </td>
             <td th:text="${suite.createdDateTime}" sec:authorize="hasAuthority('ANALYTIC')">Projekt</td>
-            <td><a th:href="@{'/tc/tc-by-suite/'+${suite.id}}">Test Cases</a></td>
+            <td><a th:href="@{'/tc/tc-by-suite/'+${suite.id}}" th:text="#{tc.testCases}">Test Cases</a></td>
             <td sec:authorize="hasAuthority('ANALYTIC')"><a th:href="@{'/suite/edit/'+${suite.id}}" th:text="#{table.edit}">editace</a></td>
             <td><a href="#" class="opener" data-id="#moreDialog"
                    th:attr="data-objectid=${suite.id},

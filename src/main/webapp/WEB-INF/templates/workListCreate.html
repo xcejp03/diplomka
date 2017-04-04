@@ -176,11 +176,11 @@
                         </div>
 
                         <span th:if="${workListForm.id != null}" th:remove="tag">
-                             <input type="submit" value="Upravit" th:value="#{common.editButton}"
+                             <input type="submit" value="Uložit" th:value="#{common.saveButton}"
                                     class="btn btn-primary"/>
                         </span>
                         <span th:if="${workListForm.id == null}" th:remove="tag">
-                             <input type="submit" value="Vytvořit" th:value="#{common.editButton}"
+                             <input type="submit" value="Vytvořit" th:value="#{common.createButton}"
                                     class="btn btn-primary"/>
                         </span>
                     </form>
@@ -189,7 +189,7 @@
             <div class="col-sm-5">
                 <p th:if="${workListForm.id == null}">
                     <button type="button" class="btn btn-primary"
-                            onclick="window.open('', '_self', ''); window.close();">Close tab
+                            onclick="window.open('', '_self', ''); window.close();" th:text="#{common.closeTab}">Close tab
                     </button>
                 </p>
             </div>

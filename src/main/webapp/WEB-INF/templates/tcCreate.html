@@ -63,7 +63,7 @@
 
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="name" th:text="#{form.name}">Název</label>
+                                <label for="name" th:text="#{form.name}">Název</label> *
 
                                 <input type="text" id="name" name="name" th:value="*{name}" class="form-control"
                                        autofocus="autofocus"/>
@@ -82,19 +82,9 @@
                         </div>
                         </span>
                         </div>
-                        <!--<span th:if="${tcForm.id != null}" th:remove="tag">-->
-                        <!--<div class=" control-group form-group">-->
-                        <!--<div class="controls">-->
-                        <!--<label for="project_id">Projekt</label>:-->
-                        <!--<input type="text" id="project_id" name="project_id" th:value="${tcForm.project}"-->
-                        <!--readonly="readonly" class="form-control"/>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</span>-->
-                        <!--<span th:if="*{id == null}" th:remove="tag">-->
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="project_id" th:text="#{form.project}">Projekt</label>
+                                <label for="project_id" th:text="#{form.project}">Projekt</label> *
                                 <input type="text" id="project_id" name="project_id" th:field="*{project_id}"
                                        readonly="readonly" class="form-control"/>
                                 <div th:if="${#fields.hasErrors('project_id')}" th:errorclass="alert-danger"
@@ -121,7 +111,7 @@
 
                         <div class=" control-group form-group">
                             <div class="controls">
-                                <label for="priority" th:text="#{form.priority}">Priorita</label>
+                                <label for="priority" th:text="#{form.priority}">Priorita</label> *
 
                                 <select class="form-control" id="priority" name="priority"
                                         th:with="priorities=${T(cz.vse.entity.PriorityTCEnum).values()}">
@@ -131,11 +121,6 @@
                                             th:selected="*{priority != null} ? ${#arrays.contains(prioritka, TCMusterForm.priority)}"
                                             th:text="${prioritka}">jméno projektu
                                     </option>
-                                    <!--<option th:each="prioritka : ${priorities}"-->
-                                    <!--th:value="${prioritka}"-->
-                                    <!--th:selected="*{priority != null} ? *{#arrays.contains(priority, prioritka)}"-->
-                                    <!--th:text="${prioritka}">jméno projektu-->
-                                    <!--</option>-->
                                 </select>
                                 <div th:if="${#fields.hasErrors('priority')}" th:errorclass="alert-danger"
                                      th:errors="*{priority}">form field error

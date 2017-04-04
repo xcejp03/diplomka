@@ -1,6 +1,7 @@
 package cz.vse.controller;
 
 import cz.vse.dto.SuiteForm;
+import cz.vse.entity.TestSuite;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
 import cz.vse.service.SuiteService;
@@ -69,7 +70,12 @@ public class TestSuiteController {
         if (bindingResult.hasErrors()) {
             l.error("form has errors");
             Long personId = securityUtils.getLoggedPersonId();
+            Long suiteId = suiteForm.getId();
+            TestSuite testSuite = suiteService.findTestSuiteById(suiteId);
+            l.error("Id projektu: "+suiteId);
+            model.addAttribute("tcMustersByProject", tcMusterService.findTCMusterNamesByProjectId(testSuite.getProject().getId()));
             model.addAttribute("usersProjects", projectService.findAllTestProjectNamesByUserId(personId));
+            model.addAttribute("tcMusterNames", tcMusterService.findAllTestCaseMusterNamesByTestSuiteId(suiteService.findTestSuiteDTOById(suiteId).getId()));
             return "suiteCreate";
         }
 
