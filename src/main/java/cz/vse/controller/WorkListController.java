@@ -153,6 +153,9 @@ public class WorkListController {
     public String showWorkTCList(@PathVariable("id") int id, Model model) {
         l.info("/worklist/worktc/" + id);
         Long personId = securityUtils.getLoggedPersonId();
+        model.addAttribute("workTCWrapper", workListService.findWorkTCWrapperByWorklistId(id));
+
+
         model.addAttribute("workListDTO", workListService.findWorkListDTOById(id));
 //        model.addAttribute("listTCByProject", tcMusterService.findAllTestCaseMusters());
         model.addAttribute("usersProjects", projectService.findAllTestProjectNamesByUserId(personId));
@@ -162,10 +165,11 @@ public class WorkListController {
     }
 
     @RequestMapping(value = "/worktc/edit", method = RequestMethod.POST)
-    public String editWorkTC(@ModelAttribute("workListDTO") WorkListForm workListForm) {
+    public String editWorkTC(Model model,WorkTCWrapper workTCWrapper) {
         l.info("/worklist/worktc/edit");
-        workListService.updateWorkList(workListForm);
-        return "redirect:/worklist/worktc/" + workListForm.getId();
+//        workListService.updateWorkList(workListForm);
+        workListService.updateWorkTC(workTCWrapper);
+        return "redirect:/worklist/worktc/" + workTCWrapper.getWorkList_id();
     }
 
 

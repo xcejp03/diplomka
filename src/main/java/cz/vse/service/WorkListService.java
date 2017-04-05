@@ -3,6 +3,7 @@ package cz.vse.service;
 import cz.vse.dto.WorkListDTO;
 import cz.vse.dto.WorkListForm;
 import cz.vse.dto.WorkListList;
+import cz.vse.dto.WorkTCWrapper;
 import cz.vse.entity.Person;
 import cz.vse.entity.WorkList;
 
@@ -36,6 +37,8 @@ public interface WorkListService {
 
     WorkListDTO findWorkListDTOById(long id);
 
+    WorkTCWrapper findWorkTCWrapperByWorklistId(long id);
+
     WorkListForm findWorkListFormById(long id);
 
     List<Long> getListTCMusterIdByWorklistInWorkTCDTO(long id);
@@ -45,4 +48,6 @@ public interface WorkListService {
     List<WorkListDTO> findAllWorkListDTOByMemberTomorrow(Person person);
 
     List<WorkListDTO> findAllWorkListDTOByMemberLastThreeDays(Person person);
+
+    void updateWorkTC(WorkTCWrapper workTCWrapper);
 }
