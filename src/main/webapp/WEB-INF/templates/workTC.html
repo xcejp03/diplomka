@@ -48,6 +48,9 @@
                           default-target-url="/index">
                         <h1 th:text="#{worklist.tcWorkList}">TC work list</h1>
                         <input type="text" id="workList_id" th:value="${workTCWrapper.workList_id}" name="workList_id" hidden="hidden"/>
+                        <div th:if="${workTCWrapper.workTCDTOList == null}" class="alert alert-warning">
+                            <h3 th:text="#{common.nothing}">Nic tu není</h3>
+                        </div>
                         <table class="table table-striped datatable">
                             <thead>
                             <tr>

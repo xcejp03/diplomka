@@ -32,7 +32,8 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/dashboard">Home</a></li>
-                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right" th:text="#{common.backButton}">Zpět</a>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right"
+                   th:text="#{common.backButton}">Zpět</a>
             </ol>
         </div>
     </div>
@@ -45,8 +46,61 @@
 
 
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h3 th:value="#{worklist.byMember}">By member</h3></div>
+                    <div class="panel-heading"><h3 th:text="#{worklist.byAuthor}">By Author</h3></div>
                     <div class="panel-body">
+                        <div th:if="${authorsWorkLists == null}" class="alert alert-warning">
+                            <h3 th:text="#{common.nothing}">Nic tu není</h3>
+                        </div>
+                        <table class="table table-striped datatable">
+                            <thead>
+                            <tr>
+                                <th th:text="#{table.id}">ID</th>
+                                <th th:text="#{table.name}">Název</th>
+                                <th th:text="#{table.project}">Projekt</th>
+                                <th th:text="#{table.planned}">Naplánováno</th>
+                                <th th:text="#{table.priority}">Priorita</th>
+                                <th th:text="#{table.author}">Autor</th>
+                                <th th:text="#{table.detail}">Detail</th>
+                                <th th:text="#{table.worktc}">WorkTC</th>
+                            </tr>
+                            </thead>
+                            <tbody th:remove="all-but-first">
+                            <tr th:each="workList : ${authorsWorkLists}">
+                                <td th:text="${workList.id}">00</td>
+                                <td th:text="${workList.name}">Název</td>
+                                <td th:text="${workList.project}">Projekt</td>
+                                <td th:text="${workList.plannedExecution}">Naplánováno</td>
+                                <td><span th:class="${workList.priority}"
+                                          th:text="${workList.priority}"> Priorita</span></td>
+                                <td th:text="${workList.author}">Autor</td>
+                                <td><a th:href="@{'/worklist/'+${workList.id}}" th:text="#{common.detail}">Detail</a>
+                                </td>
+                                <td><a th:href="@{'/worklist/worktc/'+${workList.id}}"
+                                       th:text="#{common.workTC}">WorkTC</a></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-sm-3">
+                <p><a href="/worklist/create" class="btn btn-primary" th:text="#{worklist.createNew}">Vytvořit nový</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-9">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3 th:text="#{worklist.byMember}">By member</h3></div>
+                    <div class="panel-body">
+                        <div th:if="${membersWorkLists == null}" class="alert alert-warning">
+                            <h3 th:text="#{common.nothing}">Nic tu není</h3>
+                        </div>
                         <table class="table table-striped datatable">
                             <thead>
                             <tr>
@@ -71,53 +125,13 @@
                                 <td><span th:class="${workList.priority}"
                                           th:text="${workList.priority}"> Priorita</span></td>
                                 <td th:text="${workList.author}">Autor</td>
-                                <td><a th:href="@{'/worklist/edit/'+${workList.id}}" th:text="#{common.editButton}">Editace</a></td>
-                                <td><a th:href="@{'/worklist/'+${workList.id}}" th:text="#{common.detail}">Detail</a></td>
-                                <td><a th:href="@{'/worklist/worktc/'+${workList.id}}" th:text="#{common.workTC}">WorkTC</a></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-3">
-                <p><a href="/worklist/create" class="btn btn-primary" th:text="#{worklist.createNew}">Vytvořit nový</a>
-                </p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-9">
-
-                <div class="panel panel-default">
-                    <div class="panel-heading"><h3 th:text="#{worklist.byAuthor}">By Author</h3></div>
-                    <div class="panel-body">
-                        <table class="table table-striped datatable">
-                            <thead>
-                            <tr>
-                                <th th:text="#{table.id}">ID</th>
-                                <th th:text="#{table.name}">Název</th>
-                                <th th:text="#{table.project}">Projekt</th>
-                                <th th:text="#{table.planned}">Naplánováno</th>
-                                <th th:text="#{table.priority}">Priorita</th>
-                                <th th:text="#{table.author}">Autor</th>
-                                <th th:text="#{table.edit}">Edit</th>
-                            </tr>
-                            </thead>
-                            <tbody th:remove="all-but-first">
-                            <tr th:each="workList : ${authorsWorkLists}">
-                                <td th:text="${workList.id}">00</td>
-                                <td th:text="${workList.name}">Název</td>
-                                <td th:text="${workList.project}">Projekt</td>
-                                <td th:text="${workList.plannedExecution}">Naplánováno</td>
-                                <td><span th:class="${workList.priority}"
-                                          th:text="${workList.priority}"> Priorita</span></td>
-                                <td th:text="${workList.author}">Autor</td>
-                                <td><a th:href="@{'/worklist/edit/'+${workList.id}}" th:text="#{table.edit}">Editace</a>
+                                <td><a th:href="@{'/worklist/edit/'+${workList.id}}" th:text="#{common.editButton}">Editace</a>
                                 </td>
+                                <td><a th:href="@{'/worklist/'+${workList.id}}" th:text="#{common.detail}">Detail</a>
+                                </td>
+                                <td><a th:href="@{'/worklist/worktc/'+${workList.id}}"
+                                       th:text="#{common.workTC}">WorkTC</a></td>
                             </tr>
-
                             </tbody>
                         </table>
                     </div>

@@ -29,7 +29,8 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/dashboard">Home</a></li>
-                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right" th:text="#{common.backButton}">Zpět</a>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right"
+                   th:text="#{common.backButton}">Zpět</a>
             </ol>
         </div>
     </div>
@@ -45,43 +46,50 @@
     </div>
 
     <h1 th:text="#{suites.suiteList}"> Test Suite list</h1>
-    <table class="table table-striped datatable">
-        <thead>
-        <tr>
-            <th th:text="#{table.id}">Suite ID</th>
-            <th th:text="#{table.status}" sec:authorize="hasAuthority('TESTER')">Stav</th>
-            <th th:text="#{table.name}">Název</th>
-            <th th:text="#{table.detail}">Detail</th>
-            <th th:text="#{table.created}" sec:authorize="hasAuthority('ANALYTIC')">Vytvořeno</th>
-            <th th:text="#{tc.testCases}">Test Cases</th>
-            <th th:text="#{table.edit}" sec:authorize="hasAuthority('ANALYTIC')">Editace</th>
-            <th th:text="#{table.more}">Více</th>
-        </tr>
-        </thead>
-        <tbody th:remove="all-but-first">
-        <tr th:each="suite : ${suites}">
-            <td th:text="${suite.id}">00</td>
-            <td sec:authorize="hasAuthority('TESTER')">Výsledek Suitu</td>
-            <td th:text="${suite.name}">Projekt</td>
-            <td><a href="#" class="opener"
-                   th:attr="data-name=${suite.name}, data-objectid=${suite.id},
+    <div th:if="${suites.empty}" class="alert alert-warning">
+        <h3 th:text="#{common.nothing}">Nic tu není</h3>
+    </div>
+    <div th:if="${!suites.empty}">
+        <table class="table table-striped datatable">
+            <thead>
+            <tr>
+                <th th:text="#{table.id}">Suite ID</th>
+                <th th:text="#{table.status}" sec:authorize="hasAuthority('TESTER')">Stav</th>
+                <th th:text="#{table.name}">Název</th>
+                <th th:text="#{table.detail}">Detail</th>
+                <th th:text="#{table.created}" sec:authorize="hasAuthority('ANALYTIC')">Vytvořeno</th>
+                <th th:text="#{tc.testCases}">Test Cases</th>
+                <th th:text="#{table.edit}" sec:authorize="hasAuthority('ANALYTIC')">Editace</th>
+                <th th:text="#{table.more}">Více</th>
+            </tr>
+            </thead>
+            <tbody th:remove="all-but-first">
+            <tr th:each="suite : ${suites}">
+                <td th:text="${suite.id}">00</td>
+                <td sec:authorize="hasAuthority('TESTER')">Výsledek Suitu</td>
+                <td th:text="${suite.name}">Projekt</td>
+                <td><a href="#" class="opener"
+                       th:attr="data-name=${suite.name}, data-objectid=${suite.id},
                    data-updated=${suite.updatedDateTime}" data-id="#detailDialog">Detail</a>
-            </td>
-            <td th:text="${suite.createdDateTime}" sec:authorize="hasAuthority('ANALYTIC')">Projekt</td>
-            <td><a th:href="@{'/tc/tc-by-suite/'+${suite.id}}" th:text="#{tc.testCases}">Test Cases</a></td>
-            <td sec:authorize="hasAuthority('ANALYTIC')"><a th:href="@{'/suite/edit/'+${suite.id}}" th:text="#{table.edit}">editace</a></td>
-            <td><a href="#" class="opener" data-id="#moreDialog"
-                   th:attr="data-objectid=${suite.id},
+                </td>
+                <td th:text="${suite.createdDateTime}" sec:authorize="hasAuthority('ANALYTIC')">Projekt</td>
+                <td><a th:href="@{'/tc/tc-by-suite/'+${suite.id}}" th:text="#{tc.testCases}">Test Cases</a></td>
+                <td sec:authorize="hasAuthority('ANALYTIC')"><a th:href="@{'/suite/edit/'+${suite.id}}"
+                                                                th:text="#{table.edit}">editace</a></td>
+                <td><a href="#" class="opener" data-id="#moreDialog"
+                       th:attr="data-objectid=${suite.id},
                    data-updated=${suite.updatedDateTime}" th:text="#{table.more}">Více</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
     <div class="row" sec:authorize="hasAuthority('ANALYTIC')">
         <div class="col-sm-4">
             <div th:if="${project != null}" th:remove="tag">
-                <a th:href="@{'/suite/create/'+'?project='+ ${project.id}}" class="btn btn-primary" th:text="#{suites.createTestSuite}">Založit Test
+                <a th:href="@{'/suite/create/'+'?project='+ ${project.id}}" class="btn btn-primary"
+                   th:text="#{suites.createTestSuite}">Založit Test
                     Suite</a>
             </div>
         </div>

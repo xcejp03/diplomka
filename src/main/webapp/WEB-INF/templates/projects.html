@@ -32,7 +32,8 @@
             <ol class="breadcrumb">
                 <li><a href="/dashboard">Home</a></li>
                 <li>Seznam dostupných projektů pro uživatele</li>
-                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right" th:text="#{common.backButton}">Zpět</a>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right"
+                   th:text="#{common.backButton}">Zpět</a>
             </ol>
         </div>
     </div>
@@ -52,40 +53,50 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><h3 th:text="#{projects.projectList}">Project list</h3></div>
                 <div class="panel-body">
-                    <table class="table table-striped datatable">
-                        <thead>
-                        <tr>
-                            <th th:text="#{table.id}">ID</th>
-                            <th th:text="#{table.name}">Název</th>
-                            <th th:text="#{table.detail}">Detail</th>
-                            <th th:text="#{defects.createDefect}" sec:authorize="hasAuthority('TESTER')">Založit defekt</th>
-                            <th th:text="#{suites.testSuites}">Test Suity</th>
-                            <th th:text="#{table.edit}" sec:authorize="hasAuthority('ANALYTIC')">Edit Project</th>
-                            <th th:text="#{table.more}">Více</th>
-                        </tr>
-                        </thead>
-                        <tbody th:remove="all-but-first">
-                        <tr th:each="project : ${projects}">
-                            <td th:text="${project.id}">00</td>
-                            <td><a th:href="@{'/project/'+${project.id}}" th:text="${project.name}">Project</a>
-                            </td>
-                            <td><a href="#" class="opener"
-                                   th:attr="data-name=${project.name}, data-owner=${project.projectOwnerName}"
-                                   data-id="#detailDialog">Detail</a>
-                            </td>
-                            <td sec:authorize="hasAuthority('TESTER')"><a
-                                    th:href="@{'/defect/create'(source='projectSource_id', sourceid=${project.id})}"
-                                    target="_blank" th:text="#{defects.createDefect}">Založit Defekt</a></td>
-                            <td><a th:href="@{'/suite/suites-by-project/'+${project.id}}" th:text="#{suites.testSuites}">Test Suity</a></td>
-                            <td sec:authorize="hasAuthority('ANALYTIC')"><a
-                                    th:href="@{'/project/edit/'+${project.id}}" th:text="#{table.edit}">Editace</a></td>
-                            <td><a href="#" class="opener"
-                                   th:attr="data-objectid=${project.id}, data-sourceid=${project.id} "
-                                   data-id="#moreDialog" th:text="#{table.more}">Více</a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div th:if="${projects.empty}" class="alert alert-warning">
+                        <h3 th:text="#{common.nothing}">Nic tu není</h3>
+                    </div>
+                    <div th:if="${!projects.empty}">
+                        <table class="table table-striped datatable">
+                            <thead>
+                            <tr>
+                                <th th:text="#{table.id}">ID</th>
+                                <th th:text="#{table.name}">Název</th>
+                                <th th:text="#{table.detail}">Detail</th>
+                                <th th:text="#{defects.createDefect}" sec:authorize="hasAuthority('TESTER')">Založit
+                                    defekt
+                                </th>
+                                <th th:text="#{suites.testSuites}">Test Suity</th>
+                                <th th:text="#{table.edit}" sec:authorize="hasAuthority('ANALYTIC')">Edit Project</th>
+                                <th th:text="#{table.more}">Více</th>
+                            </tr>
+                            </thead>
+                            <tbody th:remove="all-but-first">
+                            <tr th:each="project : ${projects}">
+                                <td th:text="${project.id}">00</td>
+                                <td><a th:href="@{'/project/'+${project.id}}" th:text="${project.name}">Project</a>
+                                </td>
+                                <td><a href="#" class="opener"
+                                       th:attr="data-name=${project.name}, data-owner=${project.projectOwnerName}"
+                                       data-id="#detailDialog">Detail</a>
+                                </td>
+                                <td sec:authorize="hasAuthority('TESTER')"><a
+                                        th:href="@{'/defect/create'(source='projectSource_id', sourceid=${project.id})}"
+                                        target="_blank" th:text="#{defects.createDefect}">Založit Defekt</a></td>
+                                <td><a th:href="@{'/suite/suites-by-project/'+${project.id}}"
+                                       th:text="#{suites.testSuites}">Test Suity</a></td>
+                                <td sec:authorize="hasAuthority('ANALYTIC')"><a
+                                        th:href="@{'/project/edit/'+${project.id}}" th:text="#{table.edit}">Editace</a>
+                                </td>
+                                <td><a href="#" class="opener"
+                                       th:attr="data-objectid=${project.id}, data-sourceid=${project.id} "
+                                       data-id="#moreDialog" th:text="#{table.more}">Více</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
             </div>
         </div>

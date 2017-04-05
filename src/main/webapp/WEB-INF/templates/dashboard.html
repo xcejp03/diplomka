@@ -53,7 +53,10 @@
             <div class="panel panel-primary">
                 <div class="panel-heading"><h3 th:text="#{dashboard.worklists}">Worklisty</h3></div>
                 <div class="panel-body">
-    				<span th:if="${workListsToday != null}" th:remove="tag">
+                    <div th:if="${workListsToday == null}" class="alert alert-warning">
+                        <h3 th:text="#{common.nothing}">Nic tu není</h3>
+                    </div>
+                    <span th:if="${workListsToday != null}" th:remove="tag">
                         <div class="panel panel-default">
 							<div class="panel-heading"><h4 th:text="#{dashboard.worklistsToday}">Worklisty plánované na dnes</h4></div>
              				<div class="panel-body">
@@ -99,7 +102,10 @@
     <div class="panel panel-primary">
         <div class="panel-heading"><h3 th:text="#{dashboard.norunTC}">Moje nespuštěné TC</h3></div>
         <div class="panel-body">
-				<span th:if="${myOpenTC != null}" th:remove="tag">
+            <div th:if="${myOpenTC == null}" class="alert alert-warning">
+                <h3 th:text="#{common.nothing}">Nic tu není</h3>
+            </div>
+            <span th:if="${myOpenTC != null}" th:remove="tag">
 							<div class="row">
 								<div class="col-sm-12">
 									<div class="well">
@@ -140,13 +146,16 @@
             <div class="panel panel-primary">
                 <div class="panel-heading"><h3 th:text="#{dashboard.defects}">Defekty</h3></div>
                 <div class="panel-body">
+
              <span th:if="${myAssignedOpenDefects != null}" th:remove="tag">
 					<div class="col-sm-6">
                          <div class="panel panel-default">
 							<div class="panel-heading">	<h4 th:text="#{dashboard.defectsAssignedToMe}">Assignované na mě</h4></div>
              				<div class="panel-body">
 
-
+<div th:if="${myAssignedOpenDefects == null}" class="alert alert-warning">
+						<h3 th:text="#{common.nothing}">Nic tu není</h3>
+					</div>
 								<table class="table table-striped">
 									<thead>
 										<tr>
@@ -181,7 +190,7 @@
              </span>
 
                     <span th:if="${myOpenDefects != null}">
-        <span th:if="${#lists.size(myOpenDefects) >= 1}" th:remove="tag">
+        				<span th:if="${#lists.size(myOpenDefects) >= 1}" th:remove="tag">
 					<div class="col-sm-6">
                        <div class="panel panel-default">
 							<div class="panel-heading">	<h4
@@ -230,7 +239,10 @@
     <div class="panel panel-primary">
         <div class="panel-heading"><h3 th:text="#{project.projectsStats}">Statistika projektů</h3></div>
         <div class="panel-body">
-    <span th:if="${MyProjectsStat != null}" th:remove="tag">
+            <div th:if="${MyProjectsStat == null}" class="alert alert-warning">
+                <h3 th:text="#{common.nothing}">Nic tu není</h3>
+            </div>
+            <span th:if="${MyProjectsStat != null}" th:remove="tag">
 				<div class="row">
 					<div class="col-sm-12">
                         <div class="well">
@@ -270,6 +282,9 @@
     <div class="panel panel-primary">
         <div class="panel-heading"><h3 th:text="#{project.projectsWithStats}">Projekty se statistikou</h3></div>
         <div class="panel-body">
+			<div th:if="${myProjectsStatistics == null}" class="alert alert-warning">
+				<h3 th:text="#{common.nothing}">Nic tu není</h3>
+			</div>
     <span th:if="${myProjectsStatistics != null}" th:remove="tag">
 				<div class="row">
 					<div class="col-sm-12">
@@ -314,7 +329,9 @@
     <div class="panel panel-primary">
         <div class="panel-heading"><h3 th:text="#{dashboard.worklists}">Worklisty</h3></div>
         <div class="panel-body">
-
+			<div th:if="${workListsLastThreeDays == null}" class="alert alert-warning">
+				<h3 th:text="#{common.nothing}">Nic tu není</h3>
+			</div>
     <span th:if="${workListsLastThreeDays != null}" th:remove="tag">
 				<div class="row">
 					<div class="col-sm-12">
@@ -353,7 +370,9 @@
 					</div>
 				</div>
     </span>
-
+			<div th:if="${workListsTomorrow == null}" class="alert alert-warning">
+				<h3 th:text="#{common.nothing}">Nic tu není</h3>
+			</div>
             <span th:if="${workListsTomorrow != null}" th:remove="tag">
 				<div class="row">
                     <div class="col-sm-12">
