@@ -126,6 +126,8 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .mapNullsInReverse(false).mapNulls(false)
                 .field("assignee", "assignee_id")
                 .field("assignee.name", "assignee")
+                .field("reporter", "reporter_id")
+                .field("reporter.name", "reporter")
                 .byDefault()
                 .register();
         factory.classMap(Person.class, PersonForm.class)

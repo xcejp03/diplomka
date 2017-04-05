@@ -81,22 +81,19 @@
             <div class="panel panel-primary">
                 <div class="panel-heading"><h3 th:text="#{defects.defectsByAssignee}">by assigneee</h3></div>
                 <div class="panel-body">
-                    <div th:if="${defectsByAssignee == null}" class="alert alert-warning">
+                    <div th:if="${defectListByAssignee == null}" class="alert alert-warning">
                         <h3 th:text="#{common.nothing}">Nic tu není</h3>
                     </div>
-                    <div th:if="${defectsByAssignee != null}">
+                    <div th:if="${defectListByAssignee   != null}">
                         <table class="table table-striped datatable">
                             <thead>
                             <tr>
                                 <th th:text="#{table.id}">TC ID</th>
                                 <th th:text="#{table.priority}">Priorita</th>
                                 <th th:text="#{table.name}">Název</th>
-                                <!--<th>Affected Version</th>-->
                                 <th th:text="#{table.status}">Status</th>
-                                <!--<th>created</th>-->
                                 <th th:text="#{table.updated}">updated</th>
-                                <th th:text="#{table.assignee}">Assignee</th>
-                                <!--<th>Reporter</th>-->
+                                <th th:text="#{table.author}">Reporter</th>
                                 <th th:text="#{table.detail}">Detail</th>
                                 <th th:text="#{table.edit}">Edit</th>
                                 <th th:text="#{table.more}">Více</th>
@@ -108,12 +105,9 @@
                                 <td><span th:class="${defect.priority}" th:text="${defect.priority}">Priorita</span>
                                 </td>
                                 <td th:text="${defect.name}">Název</td>
-                                <!--<td th:text="${defect.affectsVersion}">Affected version</td>-->
                                 <td th:text="${defect.status}">Status</td>
-                                <!--<td th:text="${defect.createdDateTime}">Vytvořeno</td>-->
                                 <td th:text="${defect.updatedDateTime}">updated</td>
-                                <td th:text="${defect.assignee}">Assignee</td>
-                                <!--<td th:text="${defect.reporter_id}">reporter</td>-->
+                                <td th:text="${defect.reporter}">Reporter</td>
                                 <td><a href="#" th:href="@{'/defect/'+${defect.id}}"
                                        th:attr="data-name=${defect.description}"
                                        data-id="#detailDialog" th:text="#{table.detail}">Detail</a>
@@ -141,10 +135,10 @@
             <div class="panel panel-primary">
                 <div class="panel-heading"><h3 th:text="#{defects.defectsByReporter}">by reporter</h3></div>
                 <div class="panel-body">
-                    <div th:if="${defectsByReporter == null}" class="alert alert-warning">
+                    <div th:if="${defectListByReporter == null}" class="alert alert-warning">
                         <h3 th:text="#{common.nothing}">Nic tu není</h3>
                     </div>
-                    <div th:if="${defectsByReporter != null}">
+                    <div th:if="${defectListByReporter != null}">
                         <table class="table table-striped datatable">
                             <thead>
                             <tr>
@@ -163,7 +157,7 @@
                             </tr>
                             </thead>
                             <tbody th:remove="all-but-first">
-                            <tr th:each="defect : ${myOpenDefects}">
+                            <tr th:each="defect : ${defectListByReporter}">
                                 <td th:text="${defect.id}">00</td>
                                 <td><span th:class="${defect.priority}" th:text="${defect.priority}">Priorita</span>
                                 </td>

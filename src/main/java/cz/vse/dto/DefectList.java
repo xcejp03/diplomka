@@ -14,14 +14,9 @@ public class DefectList extends BaseDTO {
     private String updatedDateTime;
     private Long assignee_id;
     private String assignee;
+    private Long reporter_id;
+    private String reporter;
 
-
-//    private Long reporter_id;
-//    private String createdDateTime;
-//    private String affectsVersion;
-//    private Long projectSource_id;
-//    private Long tcInstanceSource_id;
-//    private Long tsInstanceSource_id;
 
 
     public String getName() {
@@ -78,6 +73,23 @@ public class DefectList extends BaseDTO {
 
     public void setAssignee(String assignee) {
         this.assignee = assignee;
+    }
+
+
+    public Long getReporter_id() {
+        return reporter_id;
+    }
+
+    public void setReporter_id(Long reporter_id) {
+        this.reporter_id = reporter_id;
+    }
+
+    public String getReporter() {
+        return reporter;
+    }
+
+    public void setReporter(String reporter) {
+        this.reporter = reporter;
     }
 
     @Override
