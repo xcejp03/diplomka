@@ -133,13 +133,14 @@ public class TCController {
 
     @RequestMapping("/run/{id}")
     public String runTCMuster(Model model, @PathVariable("id") long id,
-                              @RequestParam(required = false, value = "worktc") Long worktcId) {
+                              @RequestParam(required = false, value = "worktc") Long worktcId, @RequestParam(required = false, defaultValue = "null", value = "backid") String backId,
+                              @RequestParam(required = false, defaultValue = "null", value = "origin") String instanceOrigin) {
         l.info("/tc/run/" + id);
         TCInstanceRunDTO tcInstanceRunDTO;
         TCInstance tcInstance;
         Person person = securityUtils.getLoggedPerson();
 //        tcInstanceRunDTO = tcService.runNewTC(id, person);
-        tcInstance = tcService.runNewTC(id, person);
+        tcInstance = tcService.runNewTC(id, person, backId, instanceOrigin);
         l.info("tcService.runNewTC(id, person): " + tcInstance);
 
         if (worktcId != null) {

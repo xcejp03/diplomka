@@ -95,10 +95,10 @@
                                        th:text="#{table.history}">Historie</a>
                                 </td>
                                 <td sec:authorize="hasAuthority('TESTER')">
-                                    <a th:href="@{'/tc/run/'+${tc.tcMuster_id}+'?worktc='+${tc.id}}"
+                                    <a th:href="@{'/tc/run/'+${tc.tcMuster_id}+'?backid='+${workTCWrapper.workList_id}+'&amp;'+'origin=worklist&amp;worktc='+${tc.id}}"
                                        th:text="#{table.run}">run</a>
                                 </td>
-
+                                <!--<a th:href="@{'/tc/run/+${tc.tcMuster_id}'+(origin='worklist', worktc=${tc.id})}"-->
                             </tr>
 
                        <!--     <tr th:each="tc, stat : ${workListDTO.workTCList}">

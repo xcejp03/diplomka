@@ -15,6 +15,8 @@ public class TCInstanceRunDTO extends BaseDTO {
     private Long tester_id;
     private String prerequisite;
     private String note;
+    private String instanceOrigin;
+    private String backId;
 
     public String getName() {
         return name;
@@ -70,6 +72,23 @@ public class TCInstanceRunDTO extends BaseDTO {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+
+    public String getBackId() {
+        return backId;
+    }
+
+    public void setBackId(String backId) {
+        this.backId = backId;
+    }
+
+    public String getInstanceOrigin() {
+        return instanceOrigin;
+    }
+
+    public void setInstanceOrigin(String instanceOrigin) {
+        this.instanceOrigin = instanceOrigin;
     }
 
     @Override

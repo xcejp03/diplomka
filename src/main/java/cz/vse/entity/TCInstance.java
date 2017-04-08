@@ -16,6 +16,8 @@ public class TCInstance extends BaseEntity {
     private String prerequisite;
     private String note;
     private StatusEnum status;
+    private String backId;
+    private String instanceOrigin;
 
     @ManyToOne
     @JoinColumn(name = "tcMuster_id")
@@ -118,6 +120,23 @@ public class TCInstance extends BaseEntity {
         this.status = status;
     }
 
+
+    public String getBackId() {
+        return backId;
+    }
+
+    public void setBackId(String backId) {
+        this.backId = backId;
+    }
+
+    public String getInstanceOrigin() {
+        return instanceOrigin;
+    }
+
+    public void setInstanceOrigin(String instanceOrigin) {
+        this.instanceOrigin = instanceOrigin;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -150,7 +169,7 @@ public class TCInstance extends BaseEntity {
 
     @Override
     public String toString() {
-        return "TCInstance - "+id+" {" +
+        return "TCInstance - " + id + " {" +
                 "name='" + name + '\'' +
                 ", prerequisite='" + prerequisite + '\'' +
                 ", note='" + note + '\'' +

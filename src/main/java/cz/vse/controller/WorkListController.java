@@ -235,12 +235,13 @@ public class WorkListController {
     }
 
     @RequestMapping("/run/{id}")
-    public String runTCMuster(Model model, @PathVariable("id") long id) {
+    public String runTCMuster(Model model, @PathVariable("id") long id,  @RequestParam(required = false, defaultValue = "null", value = "origin") String instanceOrigin,
+                              @RequestParam(required = false, defaultValue = "null", value = "backid") String backId) {
         l.info("/worklist/run/" + id);
         TCInstanceRunDTO tcInstanceRunDTO;
         TCInstance tcInstance;
         Person person = securityUtils.getLoggedPerson();
-        tcInstance = tcService.runNewTC(id, person);
+        tcInstance = tcService.runNewTC(id, person, backId, instanceOrigin);
         tcInstanceRunDTO = tcInstanceService.findTCInstanceRunDTOById(tcInstance.getId());
 //        model.addAttribute("tcInstance", tcInstanceRunDTO);
 //        model.addAttribute("tsInstances", tsInstanceService.findAllTSInstanceListsByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));

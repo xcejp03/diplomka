@@ -53,14 +53,21 @@ public class TCServiceImpl implements TCService {
 //        return tcInstanceRunDTO;
 //    }
 
-    public TCInstance runNewTC(long tcMusterId, Person person) {
+    public TCInstance runNewTC(long tcMusterId, Person person, String backId, String instanceOrigin) {
         l.info("with: "+ tcMusterId+" and "+person);
         TCInstance tcInstance;
-        TCInstanceRunDTO tcInstanceRunDTO;
-        tcInstance = createAndSaveTCInstanceFromTCMusterId(tcMusterId, person);
+        tcInstance = createAndSaveTCInstanceFromTCMusterId(tcMusterId, person, backId, instanceOrigin);
         l.info("run: "+tcInstance);
         return tcInstance;
     }
+
+//    public TCInstance runNewTC(long tcMusterId, Person person, String instanceOrigin, String backId) {
+//        l.info("with: "+ tcMusterId+" and "+person);
+//        TCInstance tcInstance;
+//        tcInstance = createAndSaveTCInstanceFromTCMusterId(tcMusterId, person, backId, instanceOrigin);
+//        l.info("run: "+tcInstance);
+//        return tcInstance;
+//    }
 
     /**
      * Mapuje TCMudster na TC instnace. Nahrazuje (obchází orika).
@@ -93,7 +100,7 @@ public class TCServiceImpl implements TCService {
         return tsInstanceMappedList;
     }
 
-    private TCInstance createAndSaveTCInstanceFromTCMusterId(long tcMusterId, Person tester) {
+    private TCInstance createAndSaveTCInstanceFromTCMusterId(long tcMusterId, Person tester, String backId, String instanceOrigin) {
         l.info("with: "+ tcMusterId+" and "+tester);
         TCMuster tcMuster;
         TCInstance tcInstance = new TCInstance();
@@ -106,6 +113,8 @@ public class TCServiceImpl implements TCService {
         tcInstance.setTester(tester);
         tcInstance.setPrerequisite(tcMuster.getPrerequisite());
         tcInstance.setNote(tcMuster.getNote());
+        tcInstance.setBackId(backId);
+        tcInstance.setInstanceOrigin(instanceOrigin);
 
         tcInstanceService.createTestCaseInstance(tcInstance);
 
