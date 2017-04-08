@@ -1,5 +1,6 @@
 package cz.vse.controller;
 
+import cz.vse.dto.DefectDTO;
 import cz.vse.dto.TCMusterCopyDTO;
 import cz.vse.entity.Defect;
 import cz.vse.entity.DefectStatusEnum;
@@ -102,7 +103,6 @@ public class RootController {
     }
 
 
-
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(Model model) {
         l.info("request mapping root/index");
@@ -129,9 +129,11 @@ public class RootController {
 
         if (loggedPersonAuthorities.contains(new SimpleGrantedAuthority("ANALYTIC"))) {
             l.warn("role je analytik");
+            List<DefectDTO> emptyListDefectDTO = new ArrayList<>();
             model.addAttribute("myProjectsStatistics", projectService.getMyProjectsWithStatistics(securityUtils.getLoggedPerson()));
             model.addAttribute("myAssignedOpenDefects", defectService.findAllDefectDTOByAssigneeAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open)); // DODĚLAT
             model.addAttribute("myOpenDefects", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
+//            model.addAttribute("workListsToday", emptyListDefectDTO);
         }
 
 
