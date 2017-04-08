@@ -48,13 +48,10 @@
         </div>
     </div>
 
-    <h1 th:text="#{tcs.testCasesList}" > Test Cases list</h1>
+    <h1 th:text="#{tcs.testCasesList}"> Test Cases list</h1>
     <div class="alert alert-warning" th:if="${tcs.empty}">
         <h3 th:text="#{common.nothing}">Nic tu není</h3>
     </div>
-
-
-
     <div th:if="${!tcs.empty}">
         <table class="table table-striped datatable">
             <thead>
@@ -94,7 +91,9 @@
                 </td>
                 <td sec:authorize="hasAuthority('TESTER')"><a th:href="@{'/tc/history/'+${tc.id}}"
                                                               th:text="#{table.history}">historie</a></td>
-                <td sec:authorize="hasAuthority('TESTER')"><a th:href="@{'/tc/run/'+${tc.id}+'?origin=tc&amp;backid='+${suite.id}}" th:text="#{table.run}">run</a>
+                <td sec:authorize="hasAuthority('TESTER')"><a
+                        th:href="@{'/tc/run/'+${tc.id}+'?origin=tc&amp;backid='+${suite.id}}"
+                        th:text="#{table.run}">run</a>
                 </td>
                 <td sec:authorize="hasAuthority('ANALYTIC')"><a th:href="@{'/ts/ts-by-tcmuster/'+${tc.id}}"
                                                                 th:text="#{table.ts}">Test Stepy</a>
@@ -109,7 +108,7 @@
     </div>
     <div th:if="${suite != null}" th:remove="tag">
         <a th:href="@{'/tc/create/'(project=${suite.project_id},suite=${suite.id})}"
-           class="btn btn-primary" th:text="#{tc.create}"  sec:authorize="hasAuthority('ANALYTIC')">Založit Test Case</a>
+           class="btn btn-primary" th:text="#{tc.create}" sec:authorize="hasAuthority('ANALYTIC')">Založit Test Case</a>
     </div>
 
     <!--<p><a href="/tc/create" class="btn btn-default" sec:authorize="hasAuthority('ANALYTIC')">Založit Test Case</a></p>-->
