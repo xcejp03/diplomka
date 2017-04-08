@@ -59,7 +59,7 @@
             <th th:text="#{table.status}">Status</th>
             <th th:text="#{table.name}">Název</th>
             <th th:text="#{tcRun.ranDate}">TC spuštěno</th>
-            <th th:text="#{common.deleteButton}">Delete</th>
+            <!--<th th:text="#{common.deleteButton}">Delete</th>-->
             <th th:text="#{table.run}">Spuštění</th>
         </tr>
         </thead>
@@ -70,7 +70,7 @@
                       th:class="${tc.status}">Status</span></td>
             <td th:text="${tc.name}">Projekt</td>
             <td th:text="${tc.createdDateTime}">datum a čas vytvoření</td>
-            <td><a th:href="@{'/tc/instance/remove/' +${tc.id}}" th:text="#{common.deleteButton}">delete</a></td>
+            <!--<td><a th:href="@{'/tc/instance/remove/' +${tc.id}}" th:text="#{common.deleteButton}">delete</a></td>-->
             <td><a th:href="@{'/tc/show/'+${tc.id}}" th:text="#{common.ShowButton}">Ukaž</a></td>
         </tr>
         </tbody>

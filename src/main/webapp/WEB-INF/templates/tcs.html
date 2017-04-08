@@ -64,6 +64,7 @@
                 <th th:text="#{table.status}" sec:authorize="hasAuthority('TESTER')">Stav</th>
                 <th th:text="#{table.name}">Název</th>
                 <th th:text="#{table.detail}">Detail</th>
+                <th th:text="#{table.lastRunDateTime}">lastRunDateTime</th>
                 <th th:text="#{table.created}" sec:authorize="hasAuthority('ANALYTIC')">Vytvořeno</th>
                 <th th:text="#{table.edit}" sec:authorize="hasAuthority('ANALYTIC')">Editace</th>
                 <th th:text="#{table.history}" sec:authorize="hasAuthority('TESTER')">Historie</th>
@@ -85,6 +86,7 @@
                     data-note=${tc.note}"
                        data-id="#detailDialog" th:text="#{table.detail}">Detail</a>
                 </td>
+                <td th:text="${tc.lastRunDateTime}">lastRunDateTime</td>
                 <td th:text="${tc.createdDateTime}" sec:authorize="hasAuthority('ANALYTIC')">datum a čas vytvoření</td>
                 <td sec:authorize="hasAuthority('ANALYTIC')"><a
                         th:href="@{'/tc/edit/'+${tc.id}(project=${suite.project_id},suiteFrom=${suite} != null ? ${suite.id} : null )}"

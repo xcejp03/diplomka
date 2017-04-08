@@ -3,6 +3,7 @@ package cz.vse.dto;
 import cz.vse.entity.PriorityTCEnum;
 import cz.vse.entity.StatusEnum;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -22,6 +23,7 @@ public class TCMusterList extends BaseDTO {
     private String createdDateTime;
     private String prerequisite;
     private String note;
+    private String lastRunDateTime;
 
 
     public String getName() {
@@ -80,14 +82,6 @@ public class TCMusterList extends BaseDTO {
         this.priority = priority;
     }
 
-    public String getCreatedDateTime() {
-        return createdDateTime;
-    }
-
-    public void setCreatedDateTime(String createdDateTime) {
-        this.createdDateTime = createdDateTime;
-    }
-
     public String getPrerequisite() {
         return prerequisite;
     }
@@ -104,37 +98,21 @@ public class TCMusterList extends BaseDTO {
         this.note = note;
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (!(o instanceof TCMusterDTO)) return false;
-//        if (!super.equals(o)) return false;
-//
-//        TCMusterDTO that = (TCMusterDTO) o;
-//
-//        if (getCreatedDateTime() != null ? !getCreatedDateTime().equals(that.getCreatedDateTime()) : that.getCreatedDateTime() != null)
-//            return false;
-//        if (getName() != null ? !getName().equals(that.getName()) : that.getName() != null) return false;
-//        return project_id != null ? project_id.equals(that.project_id) : that.project_id == null;
-//
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        int result = super.hashCode();
-//        result = 31 * result + (getCreatedDateTime() != null ? getCreatedDateTime().hashCode() : 0);
-//        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
-//        result = 31 * result + (project_id != null ? project_id.hashCode() : 0);
-//        return result;
-//    }
 
-    @Override
-    public String toString() {
-        return "TCMusterDTO{" +
-                "createdDateTime=" + createdDateTime +
-                ", name='" + name + '\'' +
-                ", project_id=" + project_id +
-                '}';
+    public String getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    public void setCreatedDateTime(String createdDateTime) {
+        this.createdDateTime = createdDateTime;
+    }
+
+    public String getLastRunDateTime() {
+        return lastRunDateTime;
+    }
+
+    public void setLastRunDateTime(String lastRunDateTime) {
+        this.lastRunDateTime = lastRunDateTime;
     }
 
     public Long getProject_id() {
@@ -143,5 +121,18 @@ public class TCMusterList extends BaseDTO {
 
     public void setProject_id(Long project_id) {
         this.project_id = project_id;
+    }
+
+    @Override
+    public String toString() {
+        return "TCMusterList{" +
+                "name='" + name + '\'' +
+                ", project_id=" + project_id +
+                ", author_id=" + author_id +
+                ", status=" + status +
+                ", priority=" + priority +
+                ", note='" + note + '\'' +
+                ", lastRunDateTime=" + lastRunDateTime +
+                '}';
     }
 }
