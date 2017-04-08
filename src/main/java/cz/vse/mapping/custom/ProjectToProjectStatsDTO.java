@@ -41,6 +41,7 @@ public class ProjectToProjectStatsDTO extends CustomMapper<Project, ProjectStats
         projectStatsDTO.setName(project.getName());
         projectStatsDTO.setNumberOfFailedTCs(tcInstanceService.getNumberOfTCsInProjectByStatus(project, StatusEnum.FAILED));
         projectStatsDTO.setNumberOfPassedTCs(tcInstanceService.getNumberOfTCsInProjectByStatus(project, StatusEnum.PASSED));
+        projectStatsDTO.setNumberOfNorunTCs(tcInstanceService.getNumberOfTCsInProjectByStatus(project, StatusEnum.NORUN));
         projectStatsDTO.setNumberOfTCs(tcMusterService.getNumberOfTCsInProject(project));
         projectStatsDTO.setProjectOwner_name(project.getProjectOwner().getName());
         projectStatsDTO.setProject_id(project.getId());

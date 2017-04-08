@@ -240,50 +240,9 @@
     </div>
 
 
+
+
     <div class="panel panel-primary">
-        <div class="panel-heading"><h3 th:text="#{project.projectsStats}">Statistika projektů</h3></div>
-        <div class="panel-body">
-            <div th:if="${MyProjectsStat == null}" class="alert alert-warning">
-                <h3 th:text="#{common.nothing}">Nic tu není</h3>
-            </div>
-            <span th:if="${MyProjectsStat != null}" th:remove="tag">
-				<div class="row">
-					<div class="col-sm-12">
-                        <div class="well">
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th th:text="#{table.name}">Název</th>
-									<th th:text="#{table.owner}">Vlastník</th>
-									<th th:text="#{table.passed}">Passed</th>
-									<th th:text="#{table.failed}">Failed</th>
-									<th th:text="#{table.count}">Počet TC</th>
-                                    <th th:text="#{table.detail}">Detail</th>
-								</tr>
-							</thead>
-							<tbody th:remove="all-but-first">
-								<tr th:each="project : ${MyProjectsStat}">
-									<td th:text="${project.name}">Název</td>
-									<td th:text="${project.projectOwner_name}">vlastník</td>
-									<td th:text="${project.numberOfPassedTCs}">passed</td>
-									<td th:text="${project.numberOfFailedTCs}">failed</td>
-									<td th:text="${project.numberOfTCs}">passed</td>
-                                    <td>
-                                        <a href="#" th:href="@{'/project/'+${project.project_id}}"
-                                           th:text="#{table.projectsDetail}">detail projektu</a>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-                            </div>
-					</div>
-                </div>
-    </span>
-        </div>
-    </div>
-
-
-    <div class="panel panel-primary" sec:authorize="hasAuthority('ANALYTIC')">
         <div class="panel-heading"><h3 th:text="#{project.projectsWithStats}">Projekty se statistikou</h3></div>
         <div class="panel-body">
             <div th:if="${myProjectsStatistics == null}" class="alert alert-warning">
@@ -304,6 +263,7 @@
 									<th th:text="#{table.owner}">Vlastník</th>
 									<th th:text="#{table.passed}">Passed</th>
 									<th th:text="#{table.failed}">Failed</th>
+									<!--<th th:text="#{table.norun}">No run</th>    nedává moc smysl, tak nezobrazuju-->
 									<th th:text="#{table.count}">Počet TC</th>
                                     <th th:text="#{table.detail}">Detail</th>
 								</tr>
@@ -314,6 +274,7 @@
 									<td th:text="${project.projectOwner_name}">vlastník</td>
 									<td th:text="${project.numberOfPassedTCs}">passed</td>
 									<td th:text="${project.numberOfFailedTCs}">failed</td>
+									<!--<td th:text="${project.numberOfNorunTCs}">norun</td>-->
 									<td th:text="${project.numberOfTCs}">passed</td>
                                     <td>
                                         <a href="#" th:href="@{'/project/'+${project.project_id}}"
