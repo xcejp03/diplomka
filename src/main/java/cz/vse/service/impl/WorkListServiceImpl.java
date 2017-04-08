@@ -18,6 +18,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -133,6 +135,7 @@ public class WorkListServiceImpl implements WorkListService {
 
         List<WorkTC> workTCS = workList.getWorkTCList();
         List<WorkTCDTO> workTCDTOS = mapper.mapAsList(workTCS, WorkTCDTO.class);
+        workTCDTOS.sort(Comparator.comparing(WorkTCDTO::getId));            // seřazení
         workTCWrapper.setWorkList_id(id);
         workTCWrapper.setWorkTCDTOList(workTCDTOS);
 
