@@ -83,8 +83,8 @@
                                     <td th:text="${worklist.author_id}">failed</td>
                                     <td th:text="${worklist.author_id}">passed</td>
                                     <td>
-                                        <a href="#" th:href="@{'/worklist/'+${worklist.project_id}}"
-                                           th:text="#{table.projectsDetail}">detail projektu</a>
+                                     <a href="#" th:href="@{'/worklist/'+${worklist.id}}"
+                                        th:text="#{common.detail}">detail worklistu</a>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -130,7 +130,7 @@
 												<td th:text="${worktc.priority}">priorita</td>
 												<td th:text="${worktc.workList_id}">worklist</td>
 												<td>
-													<a href="#" th:href="@{'/worklist/show/'+${worktc.workList_id}}"
+													<a href="#" th:href="@{'/worklist/worktc/'+${worktc.workList_id}}"
                                                        th:text="#{table.detail}">detail</a>
 												</td>
 											</tr>
@@ -283,7 +283,7 @@
     </div>
 
 
-    <div class="panel panel-primary">
+    <div class="panel panel-primary" sec:authorize="hasAuthority('ANALYTIC')">
         <div class="panel-heading"><h3 th:text="#{project.projectsWithStats}">Projekty se statistikou</h3></div>
         <div class="panel-body">
             <div th:if="${myProjectsStatistics == null}" class="alert alert-warning">
@@ -364,7 +364,8 @@
 									<td th:text="${worklist.author_id}">failed</td>
 									<td th:text="${worklist.author_id}">passed</td>
                                     <td>
-                                        <a href="#" th:href="@{'/worklist/'+${worklist.project_id}}" th:text="#{table.projectsDetail}">detail projektu</a>
+                                      <a href="#" th:href="@{'/worklist/'+${worklist.id}}"
+                                         th:text="#{common.detail}">detail worklistu</a>
 									</td>
 								</tr>
 							</tbody>
@@ -402,8 +403,8 @@
 									<td th:text="${worklist.author_id}">failed</td>
 									<td th:text="${worklist.author_id}">passed</td>
                                     <td>
-                                        <a href="#" th:href="@{'/worklist/'+${worklist.project_id}}"
-                                           th:text="#{table.projectsDetail}">detail projektu</a>
+                                        <a href="#" th:href="@{'/worklist/'+${worklist.id}}"
+                                           th:text="#{common.detail}">detail worklistu</a>
 									</td>
 								</tr>
 							</tbody>
