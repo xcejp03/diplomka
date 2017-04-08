@@ -2,9 +2,11 @@ package cz.vse.mapping.custom;
 
 import cz.vse.dto.TCMusterDTO;
 import cz.vse.dto.TCMusterList;
+import cz.vse.entity.StatusEnum;
 import cz.vse.entity.TCInstance;
 import cz.vse.entity.TCMuster;
 import cz.vse.service.TCInstanceService;
+import groovy.util.IFileNameFinder;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MappingContext;
 import org.apache.log4j.Logger;
@@ -29,9 +31,14 @@ public class TCMusterToTCMusterList extends CustomMapper<TCMuster, TCMusterList>
 //        StatusEnum statusEnum = tcInstance!= null ? getTCInstanceStatusFromTSInstancesStatuses(tcInstance) : StatusEnum.NORUN;
 //        tcMusterDTO.setStatus(statusEnum);
         super.mapAtoB(tcMuster, tcMusterList, context);
-        tcMusterList.setStatus(tcInstance.getStatus());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd. MM. yyyy HH:mm");
-        tcMusterList.setLastRunDateTime(tcInstance.getCreatedDateTime().format(formatter));
+        if (tcInstance != null) {
+            tcMusterList.setStatus(tcInstance.getStatus());
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd. MM. yyyy HH:mm");
+            tcMusterList.setLastRunDateTime(tcInstance.getCreatedDateTime().format(formatter));
+        } else {
+            tcMusterList.setStatus(StatusEnum.NORUN);
+        }
+
     }
 
 //    private StatusEnum getTCInstanceStatusFromTSInstancesStatuses(TCInstance tcInstance) {

@@ -54,7 +54,7 @@
             <thead>
             <tr>
                 <th th:text="#{table.id}">Suite ID</th>
-                <th th:text="#{table.status}" sec:authorize="hasAuthority('TESTER')">Stav</th>
+                <!--<th th:text="#{table.status}" sec:authorize="hasAuthority('TESTER')">Stav</th>-->
                 <th th:text="#{table.name}">Název</th>
                 <th th:text="#{table.detail}">Detail</th>
                 <th th:text="#{table.created}" sec:authorize="hasAuthority('ANALYTIC')">Vytvořeno</th>
@@ -66,7 +66,7 @@
             <tbody th:remove="all-but-first">
             <tr th:each="suite : ${suites}">
                 <td th:text="${suite.id}">00</td>
-                <td sec:authorize="hasAuthority('TESTER')">Výsledek Suitu</td>
+                <!--<td sec:authorize="hasAuthority('TESTER')">Výsledek Suitu</td>-->
                 <td th:text="${suite.name}">Projekt</td>
                 <td><a href="#" class="opener"
                        th:attr="data-name=${suite.name}, data-objectid=${suite.id},
