@@ -86,6 +86,7 @@ public class WorkListServiceImpl implements WorkListService {
     }
 
     @Override
+    /** ÚPRAVA WORKLISTU - optimalizace */
     public void updateWorkList(WorkListForm workListForm) {
         l.info("with: " + workListForm);
         WorkList workList = findWorkListById(workListForm.getId());
@@ -187,8 +188,9 @@ public class WorkListServiceImpl implements WorkListService {
     public List<WorkListDTO> findAllWorkListDTOByMemberToday(Person person) {
         l.info("with: " + person);
         LocalDate plannedExecution = LocalDate.now();
-        List<WorkList> workListList = workListRepository.findAllWorkListDTOByMemberToday(person, plannedExecution);
-
+        long personId = person.getId();
+        List<WorkList> workListList = workListRepository.findAllWorkListDTOByMemberToday(plannedExecution, personId);
+        l.warn("xxx: " + workListList);
         List<WorkListDTO> workListDTOList = mapper.mapAsList(workListList, WorkListDTO.class);
 
         l.info("found: " + workListDTOList);
@@ -198,8 +200,9 @@ public class WorkListServiceImpl implements WorkListService {
     public List<WorkListDTO> findAllWorkListDTOByMemberTomorrow(Person person) {
         l.info("with: " + person);
         LocalDate plannedExecution = LocalDate.now().plus(1, ChronoUnit.DAYS);
-        List<WorkList> workListList = workListRepository.findAllWorkListDTOByMemberToday(person, plannedExecution);
-
+        long personId = person.getId();
+        List<WorkList> workListList = workListRepository.findAllWorkListDTOByMemberToday(plannedExecution, personId);
+        l.warn("xxx2: " + workListList);
         List<WorkListDTO> workListDTOList = mapper.mapAsList(workListList, WorkListDTO.class);
 
         l.info("found: " + workListDTOList);
@@ -211,8 +214,8 @@ public class WorkListServiceImpl implements WorkListService {
         l.info("with: " + person);
         LocalDate dayStart = LocalDate.now().minus(3, ChronoUnit.DAYS);
         LocalDate dayEnd = LocalDate.now();
-
-        List<WorkList> workListList = workListRepository.findAllWorkListDTOByMemberBetweenDays(person, dayStart, dayEnd);
+        long personId = person.getId();
+        List<WorkList> workListList = workListRepository.findAllWorkListDTOByMemberBetweenDays(personId, dayStart, dayEnd);
         List<WorkListDTO> workListDTOList = mapper.mapAsList(workListList, WorkListDTO.class);
         l.info("found: " + workListDTOList);
         return workListDTOList;
@@ -233,6 +236,6 @@ public class WorkListServiceImpl implements WorkListService {
 
 
         l.fatal("PO");
-        l.info("updated: "+workList);
+        l.info("updated: " + workList);
     }
 }

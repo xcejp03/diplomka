@@ -1,12 +1,16 @@
 package cz.vse.utils;
 
+import cz.vse.dto.PersonName;
+import cz.vse.dto.WorkListDTO;
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
 import cz.vse.repository.PersonRepository;
 import cz.vse.repository.ProjectRepository;
 import cz.vse.repository.TestSuiteRepository;
+import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
 import cz.vse.service.RoleService;
+import cz.vse.service.WorkListService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -40,6 +44,12 @@ public class StartupHousekeeper {
     @Autowired
     private TestSuiteRepository testSuiteRepository;
 
+    @Autowired
+    private WorkListService workListService;
+
+    @Autowired
+    private PersonService personService;
+
     @EventListener(ContextRefreshedEvent.class)
     public void contextRefreshedEvent() {
         // do whatever you need here
@@ -53,10 +63,24 @@ public class StartupHousekeeper {
 //        userRoleTesty();
 //        helpService.najdiPosledniTCInstanci(40);
         playSoundAfterStart();
+        l.info(".");
+        l.info(".");
+        l.info(".");
+        l.info(".");
+        l.info(".");
+
+        l.info(".");
+        l.info(".");
+        l.info(".");
+        l.info(".");
+        l.info(".");
+        l.info(".");
+
 
 //        kontrolniVypisDB();
 
     }
+
 
     private void kontrolniVypisDB() {
         l.warn("delej");
@@ -66,14 +90,11 @@ public class StartupHousekeeper {
 //
 //        l.warn("getNumberOfSuitesInProject: " + testSuiteRepository.getNumberOfSuitesInProject(project));
 
-        l.warn("osoba: "+personRepository.findOne(16L));
-        l.warn("projekt: "+projectService.findAllTestProjects());
-        l.warn("projekt: "+projectService.findAllTestProjectsDTO());
+        l.warn("osoba: " + personRepository.findOne(16L));
+        l.warn("projekt: " + projectService.findAllTestProjects());
+        l.warn("projekt: " + projectService.findAllTestProjectsDTO());
 
     }
-
-
-
 
 
     public void playSoundAfterStart() {

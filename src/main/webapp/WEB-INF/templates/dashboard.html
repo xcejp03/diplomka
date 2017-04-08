@@ -53,41 +53,45 @@
             <div class="panel panel-primary">
                 <div class="panel-heading"><h3 th:text="#{dashboard.worklists}">Worklisty</h3></div>
                 <div class="panel-body">
-                    <div th:if="${workListsToday == null}" class="alert alert-warning">
-                        <h3 th:text="#{common.nothing}">Nic tu není</h3>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+
+                            <h4 th:text="#{dashboard.worklistsToday}">Worklisty plánované na dnes</h4>
+                        </div>
+                        <div th:if="${workListsToday.empty}" class="alert alert-warning">
+                            <h3 th:text="#{common.nothing}">Nic tu není</h3>
+                        </div>
+                        <span th:if="${!workListsToday.empty }" th:remove="tag">
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th th:text="#{table.name}">Název</th>
+                                    <th th:text="#{table.priority}">Priorita</th>
+                                    <th th:text="#{table.planned}">Plánováno</th>
+                                    <th th:text="#{table.owner}">Vlastník</th>
+                                    <th th:text="#{table.project}">Projekt</th>
+                                    <th th:text="#{table.detail}">Detail</th>
+                                </tr>
+                                </thead>
+                                <tbody th:remove="all-but-first">
+                                <tr th:each="worklist : ${workListsToday}">
+                                    <td th:text="${worklist.name}">Název</td>
+                                    <td th:text="${worklist.priority}">vlastník</td>
+                                    <td th:text="${worklist.plannedExecution}">passed</td>
+                                    <td th:text="${worklist.author_id}">failed</td>
+                                    <td th:text="${worklist.author_id}">passed</td>
+                                    <td>
+                                        <a href="#" th:href="@{'/worklist/'+${worklist.project_id}}"
+                                           th:text="#{table.projectsDetail}">detail projektu</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+						</span>
                     </div>
-                    <span th:if="${workListsToday != null}" th:remove="tag">
-                        <div class="panel panel-default">
-							<div class="panel-heading"><h4 th:text="#{dashboard.worklistsToday}">Worklisty plánované na dnes</h4></div>
-             				<div class="panel-body">
-								<table class="table table-striped">
-									<thead>
-										<tr>
-											<th th:text="#{table.name}">Název</th>
-											<th th:text="#{table.priority}">Priorita</th>
-											<th th:text="#{table.planned}">Plánováno</th>
-											<th th:text="#{table.owner}">Vlastník</th>
-											<th th:text="#{table.project}">Projekt</th>
-											<th th:text="#{table.detail}">Detail</th>
-										</tr>
-									</thead>
-									<tbody th:remove="all-but-first">
-										<tr th:each="worklist : ${workListsToday}">
-											<td th:text="${worklist.name}">Název</td>
-											<td th:text="${worklist.priority}">vlastník</td>
-											<td th:text="${worklist.plannedExecution}">passed</td>
-											<td th:text="${worklist.author_id}">failed</td>
-											<td th:text="${worklist.author_id}">passed</td>
-											<td>
-												<a href="#" th:href="@{'/worklist/'+${worklist.project_id}}"
-                                                   th:text="#{table.projectsDetail}">detail projektu</a>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</span>
 
                     <div class="well">přidat statistiku postupu práce na worklistu: <br/>
                         počet TC, počet passed, failed, zbývá (norun)
@@ -99,7 +103,7 @@
         </div>
     </div>
 
-    <div class="panel panel-primary">
+    <div class="panel panel-primary" sec:authorize="hasAuthority('TESTER')">
         <div class="panel-heading"><h3 th:text="#{dashboard.norunTC}">Moje nespuštěné TC</h3></div>
         <div class="panel-body">
             <div th:if="${myOpenTC == null}" class="alert alert-warning">
@@ -337,7 +341,7 @@
 					<div class="col-sm-12">
 
 						  <div class="panel panel-default">
-							<div class="panel-heading">	<h4 th:text="#{dashboard.wortklistsWithinThreeDays}">Worklisty za tři dny</h4></div>
+							<div class="panel-heading">	<h4 th:text="#{dashboard.worklistsWithinThreeDays}">Worklisty za tři dny</h4></div>
              				<div class="panel-body">
 
 
@@ -360,7 +364,7 @@
 									<td th:text="${worklist.author_id}">failed</td>
 									<td th:text="${worklist.author_id}">passed</td>
                                     <td>
-                                        <a href="#" th:href="@{'/worklist/'+${worklist.project_id}}" th:text="#{pro">detail projektu</a>
+                                        <a href="#" th:href="@{'/worklist/'+${worklist.project_id}}" th:text="#{table.projectsDetail}">detail projektu</a>
 									</td>
 								</tr>
 							</tbody>
@@ -391,7 +395,7 @@
 								</tr>
 							</thead>
 							<tbody th:remove="all-but-first">
-								<tr th:each="worklist : ${workListsToday}">
+								<tr th:each="worklist : ${workListsTomorrow}">
 									<td th:text="${worklist.name}">Název</td>
 									<td th:text="${worklist.priority}">vlastník</td>
 									<td th:text="${worklist.plannedExecution}">passed</td>

@@ -124,6 +124,7 @@ public class RootController {
             model.addAttribute("myAssignedOpenDefects", defectService.findAllDefectDTOByAssigneeAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
             model.addAttribute("myOpenDefects", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
             model.addAttribute("MyProjectsStat", projectService.getMyProjectsWithStatistics(securityUtils.getLoggedPerson()));
+            model.addAttribute("workListsLastThreeDays", workListService.findAllWorkListDTOByMemberLastThreeDays(securityUtils.getLoggedPerson()));
         }
 
         if (loggedPersonAuthorities.contains(new SimpleGrantedAuthority("ANALYTIC"))) {
