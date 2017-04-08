@@ -158,14 +158,14 @@ public class MappingConfigurator extends ConfigurableMapper implements Applicati
                 .byDefault()
                 .register();
         factory.classMap(TCMuster.class, TCMusterList.class)
-                .mapNullsInReverse(false)
+                .mapNullsInReverse(false)           // xxx
                 .mapNulls(false)
                 .field("project", "project_id")
                 .field("tsMusters", "tsMusters_id")
                 .field("tcInstances", "tcInstances_id")
                 .field("testSuites", "testSuite_id")
                 .field("author", "author_id")
-//                .customize((Mapper<TCMuster, TCMusterDTO>) customMappers.get(TCMuster.class, TCMusterDTO.class))
+                .customize((Mapper<TCMuster, TCMusterList>) customMappers.get(TCMuster.class, TCMusterList.class))
                 .byDefault()
                 .register();
         factory.classMap(TCMuster.class, TCMusterName.class)
