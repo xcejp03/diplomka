@@ -167,7 +167,7 @@ public class TCInstanceServiceImpl implements TCInstanceService {
     @Override
     public int getNumberOfTCsInProjectByStatus(Project project, StatusEnum status) {
         l.info("with: " + project + " and " + status);
-        int number = tcInstanceRepository.getNumberOfTCsInProjectByStatus();
+        int number = tcInstanceRepository.getNumberOfTCsInProjectByStatus(status, project.getId());
         l.info("getted: "+ number);
         return number;
     }

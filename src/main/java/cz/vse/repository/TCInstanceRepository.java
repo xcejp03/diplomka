@@ -23,9 +23,9 @@ public interface TCInstanceRepository extends BaseRepository<TCInstance> {
 //    @Query("select count (p.id) from Project p join p.tcMusters t where t.Author in :loggedPerson")
 //    @Query("select count (p.id) from Project p join p.tcMusters t where t.Author in :loggedPerson")     //UKÁZKA JOIN
 
-    @Query("select count(tci.id) from TCInstance tci WHERE tci.id in (select max(tci.id) from TCInstance tci join tci.tCMuster tcm WHERE tcm.project ='20'" +
-            "GROUP BY tci.tCMuster) and tci.status = '1'")
-    int getNumberOfTCsInProjectByStatus();
+    @Query("select count(tci.id) from TCInstance tci WHERE tci.id in (select max(tci.id) from TCInstance tci join tci.tCMuster tcm WHERE tcm.project.id = :projectId " +
+            "GROUP BY tci.tCMuster) and tci.status = :status")
+    int getNumberOfTCsInProjectByStatus(@Param("status") StatusEnum status, @Param("projectId") long projectId);
 
 
 }
