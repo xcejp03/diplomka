@@ -37,13 +37,14 @@ public class ProjectToProjectStatsDTO extends CustomMapper<Project, ProjectStats
 
     @Override
     public void mapAtoB(Project project, ProjectStatsDTO projectStatsDTO, MappingContext context) {
-        l.warn("ProjectToProjectStatsDTO A -> B");
+        l.info("ProjectToProjectStatsDTO A -> B");
         projectStatsDTO.setName(project.getName());
         projectStatsDTO.setNumberOfFailedTCs(tcInstanceService.getNumberOfTCsInProjectByStatus(project, StatusEnum.FAILED));
         projectStatsDTO.setNumberOfPassedTCs(tcInstanceService.getNumberOfTCsInProjectByStatus(project, StatusEnum.PASSED));
         projectStatsDTO.setNumberOfNorunTCs(tcInstanceService.getNumberOfTCsInProjectByStatus(project, StatusEnum.NORUN));
         projectStatsDTO.setNumberOfTCs(tcMusterService.getNumberOfTCsInProject(project));
         projectStatsDTO.setProjectOwner_name(project.getProjectOwner().getName());
+        l.warn("id projektu UUU: "+project.getId());
         projectStatsDTO.setProject_id(project.getId());
 
 //        super.mapAtoB(project, projectStatsDTO, context);
@@ -51,7 +52,7 @@ public class ProjectToProjectStatsDTO extends CustomMapper<Project, ProjectStats
 
     @Override
     public void mapBtoA(ProjectStatsDTO projectStatsDTO, Project project, MappingContext context) {
-        l.warn("ProjectToProjectStatsDTO B -> A");
+        l.info("ProjectToProjectStatsDTO B -> A");
         super.mapBtoA(projectStatsDTO, project, context);
     }
 

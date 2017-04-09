@@ -1,9 +1,8 @@
 package cz.vse.utils.excelexport;
 
-import cz.vse.dto.DefectList;
 import cz.vse.dto.ProjectStatsDTO;
-import cz.vse.entity.DefectStatusEnum;
-import cz.vse.entity.PriorityDefectEnum;
+import cz.vse.dto.TCInstanceList;
+import cz.vse.entity.StatusEnum;
 import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -26,7 +25,7 @@ import java.util.Map;
  *
  */
 @Component
-public class ExcelBuilderDefects extends AbstractExcelView {
+public class ExcelBuilderTCHistory extends AbstractExcelView {
     private final Logger l = Logger.getLogger(this.getClass());
     @Override
     protected void buildExcelDocument(Map<String, Object> model,
@@ -34,10 +33,10 @@ public class ExcelBuilderDefects extends AbstractExcelView {
             throws Exception {
         l.warn("ExcelBuilder začátek ");
         // get data model which is passed by the Spring container
-        List<DefectList> defects = (List<DefectList>) model.get("defects");
+        List<TCInstanceList> tcInstanceLists = (List<TCInstanceList>) model.get("tcInstanceLists");
 
         // create a new Excel sheet
-        HSSFSheet sheet = workbook.createSheet("Defects");
+        HSSFSheet sheet = workbook.createSheet("TC History");
         sheet.setDefaultColumnWidth(30);
 
         // create style for header cells
@@ -50,9 +49,9 @@ public class ExcelBuilderDefects extends AbstractExcelView {
         font.setColor(HSSFColor.WHITE.index);
         style.setFont(font);
 
+
         // create header row
         HSSFRow header = sheet.createRow(0);
-
 
         header.createCell(0).setCellValue("Název");
         header.getCell(0).setCellStyle(style);
@@ -60,35 +59,23 @@ public class ExcelBuilderDefects extends AbstractExcelView {
         header.createCell(1).setCellValue("ID");
         header.getCell(1).setCellStyle(style);
 
-        header.createCell(2).setCellValue("Řešitel");
+        header.createCell(2).setCellValue("Status");
         header.getCell(2).setCellStyle(style);
 
-        header.createCell(3).setCellValue("Status");
+        header.createCell(3).setCellValue("Spuštěno");
         header.getCell(3).setCellStyle(style);
 
-        header.createCell(4).setCellValue("Priorita");
-        header.getCell(4).setCellStyle(style);
-
-        header.createCell(5).setCellValue("Autor");
-        header.getCell(5).setCellStyle(style);
-
-        header.createCell(6).setCellValue("Popis");
-        header.getCell(6).setCellStyle(style);
 
 
         // create data rows
         int rowCount = 1;
 
-        for (DefectList record : defects) {
+        for (TCInstanceList record : tcInstanceLists) {
             HSSFRow aRow = sheet.createRow(rowCount++);
             aRow.createCell(0).setCellValue(record.getName());
             aRow.createCell(1).setCellValue(record.getId());
-            aRow.createCell(2).setCellValue(record.getAssignee());
-            aRow.createCell(3).setCellValue(record.getStatus().toString());
-            aRow.createCell(4).setCellValue(record.getPriority().toString());
-            aRow.createCell(5).setCellValue(record.getReporter());
-            aRow.createCell(6).setCellValue(record.getDescription());
-
+            aRow.createCell(2).setCellValue(record.getStatus().toString());
+            aRow.createCell(3).setCellValue(record.getCreatedDateTime());
         }
     }
 

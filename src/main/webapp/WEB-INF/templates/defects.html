@@ -192,6 +192,8 @@
         <div class="col-sm-12">
             <p><a href="/defect/create" class="btn btn-default" target="_blank" th:text="#{defects.createDefect}">Založit
                 Defect</a></p>
+            <p> <a th:href="@{'/downloadExcelDefects/'}" th:text="#{common.exportExcel}" class="btn btn-default">Export
+                do excelu</a></p>
         </div>
     </div>
 

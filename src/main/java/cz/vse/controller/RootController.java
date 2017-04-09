@@ -1,13 +1,16 @@
 package cz.vse.controller;
 
-import cz.vse.dto.DefectDTO;
-import cz.vse.dto.TCMusterCopyDTO;
+import cz.vse.dto.*;
 import cz.vse.entity.Defect;
 import cz.vse.entity.DefectStatusEnum;
+import cz.vse.entity.Project;
 import cz.vse.repository.*;
 import cz.vse.service.*;
 import cz.vse.utils.SecurityUtils;
 import cz.vse.utils.excelexport.ExcelBuilderDefects;
+import cz.vse.utils.excelexport.ExcelBuilderProjects;
+import cz.vse.utils.excelexport.ExcelBuilderTC;
+import cz.vse.utils.excelexport.ExcelBuilderTCHistory;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -75,6 +79,12 @@ public class RootController {
     @Autowired
     private WorkTCRepository workTCRepository;
 
+    @Autowired
+    private TCService tcService;
+
+    @Autowired
+    TCInstanceService tcInstanceService;
+
 
     /**
      * Handle request to download an Excel document
@@ -85,14 +95,49 @@ public class RootController {
         // create some sample data
         List<Defect> defects = new ArrayList<>();
 
-        defects.add(defectService.findDefect(110L));
-        defects.add(defectService.findDefect(112L));
-        defects.add(defectService.findDefect(114L));
+        defects.add(defectService.findDefect(160L));
+        defects.add(defectService.findDefect(161L));
+        defects.add(defectService.findDefect(520L));
 
 
         // return a view which will be resolved by an excel view resolver
         return new ModelAndView(new ExcelBuilderDefects(), "defects", defects);
     }
+
+    @RequestMapping(value = "/downloadExcelProjects", method = RequestMethod.GET)
+    public ModelAndView downloadExcelProjects() {
+        l.warn("stahování excelu projekty");
+        Long loggedPersonId = securityUtils.getLoggedPersonId();
+
+        List<Project> projects = projectService.findAllTestProjectByUserId(loggedPersonId);
+        List<ProjectStatsDTO> projectStatsDTOS = mapper.mapAsList(projects, ProjectStatsDTO.class);
+
+        // return a view which will be resolved by an excel view resolver
+        return new ModelAndView(new ExcelBuilderProjects(), "projects", projectStatsDTOS);
+    }
+
+    @RequestMapping(value = "/downloadExcelTC/{id}", method = RequestMethod.GET)
+    public ModelAndView downloadExcelTC(@PathVariable("id") long id) {
+        l.warn("stahování excelu TC");
+        List<TCMusterList> tcMusterLists = tcService.findAllTCMusterListsBySuiteId(id);
+        return new ModelAndView(new ExcelBuilderTC(), "tcs", tcMusterLists);
+    }
+
+    @RequestMapping(value = "/downloadExcelTCHistory/{id}", method = RequestMethod.GET)
+    public ModelAndView downloadExcelTCHistory(@PathVariable("id") long id) {
+        l.warn("stahování excelu TC History");
+        List<TCInstanceList> tcInstanceLists = tcInstanceService.findAllTCInstanceListsByTCMusterId(id);
+        return new ModelAndView(new ExcelBuilderTCHistory(), "tcInstanceLists", tcInstanceLists);
+    }
+
+    @RequestMapping(value = "/downloadExcelDefects", method = RequestMethod.GET)
+    public ModelAndView downloadExcelDefects() {
+        l.warn("stahování excelu Defekty ");
+        List<DefectList> defectLists = defectService.findAllDefectLists();
+        return new ModelAndView(new ExcelBuilderDefects(), "defects", defectLists);
+    }
+
+
 
     @RequestMapping(value = "/manualTest")
     public String manualTest(@ModelAttribute("project") TCMusterCopyDTO tcMusterCopyDTO, Model model) {

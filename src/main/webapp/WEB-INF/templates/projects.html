@@ -43,8 +43,7 @@
 
         <div class="col-sm-12">
 
-            <h1>test excelu</h1>
-            <h3><a href="/downloadExcel">Download Excel Document</a></h3>
+            <h3><a href="/downloadExcelProjects">Download projekty</a></h3>
         </div>
     </div>
 
@@ -104,13 +103,13 @@
 
     <br/>
     <div class="row">
-        <div class="col-sm-4">
-            <a href="/project/create" class="btn btn-primary" sec:authorize="hasAuthority('ADMIN')">Založit Projekt</a>
-            <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default">Zpět</a>
-            <button onclick="swal('sdfds')" class="btn btn-default">sweet alert</button>
-        </div>
         <div class="col-sm-8">
-
+                <a href="/project/create" class="btn btn-primary" sec:authorize="hasAuthority('ADMIN')">Založit
+                    Projekt</a>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default">Zpět</a>
+                <button onclick="swal('sdfds')" class="btn btn-default">sweet alert</button>
+                <a th:href="@{'/downloadExcelProjects/'}" th:text="#{common.exportExcel}" class="btn btn-default">Export
+                    do excelu</a>
         </div>
     </div>
 

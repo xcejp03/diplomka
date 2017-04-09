@@ -30,7 +30,8 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/dashboard">Home</a></li>
-                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right" th:text="#{common.backButton}">Zpět</a>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right"
+                   th:text="#{common.backButton}">Zpět</a>
             </ol>
         </div>
     </div>
@@ -75,7 +76,10 @@
         </tr>
         </tbody>
     </table>
-
+    <p>
+        <a th:href="@{'/downloadExcelTCHistory/'+${tc.id}}" th:text="#{common.exportExcel}" class="btn btn-default">Export
+            do excelu</a>
+    </p>
 
     <div id="detailDialog" title="Detail projektu">
 

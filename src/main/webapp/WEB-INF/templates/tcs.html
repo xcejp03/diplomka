@@ -110,6 +110,9 @@
         <a th:href="@{'/tc/create/'(project=${suite.project_id},suiteFrom=${suite.id})}"
            class="btn btn-primary" th:text="#{tc.create}" sec:authorize="hasAuthority('ANALYTIC')">Založit Test Case</a>
     </div>
+    <p>
+        <a th:href="@{'/downloadExcelTC/'+${suite.id}}" th:text="#{common.exportExcel}" class="btn btn-default">Export do excelu</a>
+    </p>
 
     <!--<p><a href="/tc/create" class="btn btn-default" sec:authorize="hasAuthority('ANALYTIC')">Založit Test Case</a></p>-->
 
