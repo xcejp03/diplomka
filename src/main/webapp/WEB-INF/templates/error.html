@@ -24,11 +24,13 @@
 <div class="container">
 
 
-
     <h1>Obecná chybová stránka</h1>
 
     <div th:text="${status}"></div>
     <hr/>
+
+    <img th:src="@{/img/server-error.jpg}"/>
+
     <div class="well">
         <div th:text="${error}"></div>
     </div>
