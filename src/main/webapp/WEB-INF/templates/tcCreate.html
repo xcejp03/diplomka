@@ -76,8 +76,11 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="suiteFrom" th:text="#{form.testsuite}">Test Suite</label>
-                                <input type="text" id="suiteFrom" name="suiteFrom" th:value="*{suiteFrom}"
+                                <input type="text" id="suiteFrom" name="suiteFrom" th:value="${helpContext.suiteFrom}"
                                        readonly="readonly" class="form-control"/>
+                                  <!--<input type="text" id="testSuite_id" name="testSuite_id" th:value="*{suiteFrom}"-->
+                                         <!--hidden="hidden"/>-->
+
                             </div>
                         </div>
                         </span>
@@ -152,6 +155,14 @@
                             </div>
                         </div>
 
+                        <div th:if="${helpContext !=null}">
+                            <div th:object="${helpContext}">
+                                <input type="text" id="suiteFrom" name="suiteFrom" th:value="*{suiteFrom}" hidden="hidden"/>
+                                <input type="text" id="projectId" name="projectId" th:value="*{projectId}"
+                                       hidden="hidden"/>
+                            </div>
+                        </div>
+
                         <span th:if="*{id != null}" th:remove="tag">
                                      <input type="submit" value="Upravit" th:value="#{common.editButton}"
                                             class="btn btn-primary"/>
@@ -162,6 +173,7 @@
                                 </span>
 
                     </form>
+
                 </div>
             </div>
 

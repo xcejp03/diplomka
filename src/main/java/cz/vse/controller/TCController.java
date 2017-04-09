@@ -59,9 +59,14 @@ public class TCController {
     TCMusterLogic tcMusterLogic;
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String createTC(Model model, TCMusterForm tcMusterForm, @RequestParam(required = false, value = "project") Long projectId) {
+    public String createTC(Model model, TCMusterForm tcMusterForm, HelpContext helpContext,
+                           @RequestParam(required = false, defaultValue = "", value = "project") Long projectId,
+                           @RequestParam(required = false, defaultValue = "", value = "suiteFrom") Long suiteFrom) {
         l.info("/tc/create");
         Long personId = securityUtils.getLoggedPersonId();
+        helpContext.setProjectId(projectId);
+        helpContext.setSuiteFrom(suiteFrom);
+
 //        TCMusterForm tcMusterForm = new TCMusterForm();
         if (tcMusterForm.getProject_id() == null) {
             tcMusterForm.setProject_id(projectId);
@@ -73,38 +78,46 @@ public class TCController {
 //        model.addAttribute("targetProject", projectId);
 //        model.addAttribute("tcMusterForm", tcMusterForm);
         model.addAttribute("usersProjects", projectService.findAllTestProjectNamesByUserId(personId));
-        model.addAttribute("projectsSuites", suiteService.findAllTestSuiteListsByProjectId(projectId));    // xxx
+//        model.addAttribute("projectsSuites", suiteService.findAllTestSuiteListsByProjectId(projectId));    // xxx
+        model.addAttribute("helpContext", helpContext);
+
         return "tcCreate";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createTSPost(Model model, @Valid TCMusterForm TCMusterForm, BindingResult bindingResult, HttpServletRequest request) {
+    public String createTSPost(Model model, @Valid TCMusterForm tcMusterForm, BindingResult bindingResult, HttpServletRequest request,
+                               HelpContext helpContext) {
         l.info("/tc/create saving");
-
+        model.addAttribute("helpContext", helpContext);
         if (bindingResult.hasErrors()) {
             l.error("form has errors");
             Long personId = securityUtils.getLoggedPersonId();
-//            model.addAttribute("tcMusterForm", tcMusterForm);
             model.addAttribute("usersProjects", projectService.findAllTestProjectNamesByUserId(personId));
-            model.addAttribute("projectsSuites", suiteService.findAllTestSuiteListsByProjectId(TCMusterForm.getProject_id()));
+//            model.addAttribute("projectsSuites", suiteService.findAllTestSuiteListsByProjectId(TCMusterForm.getProject_id()));
+
             return "tcCreate";
         }
 
-        if (TCMusterForm.getId() == null) {
-            TCMusterForm.setAuthor_id(securityUtils.getLoggedPersonId());
-            tcMusterService.createTestCaseMuster(TCMusterForm);
+        if (tcMusterForm.getId() == null) {
+            tcMusterForm.setAuthor_id(securityUtils.getLoggedPersonId());
+            tcMusterService.createTestCaseMuster(tcMusterForm);
         } else {
-            tcMusterService.updateTestCaseMuster(TCMusterForm);
+            tcMusterService.updateTestCaseMuster(tcMusterForm);
         }
-        String referer = request.getHeader("Referer");
-        return "redirect:" + referer;
+//        String referer = request.getHeader("Referer");
+//        return "redirect:" + referer;
+        return "redirect:/tc/tc-by-suite/" + helpContext.getSuiteFrom();
     }
 
     @RequestMapping("/edit/{id}")
-    public String editTCMuster(@PathVariable("id") long id, Model model, TCMusterForm tcMusterForm) {
+    public String editTCMuster(@PathVariable("id") long id, Model model, TCMusterForm tcMusterForm,
+                               @RequestParam(required = false, defaultValue = "", value = "project") Long projectId,
+                               @RequestParam(required = false, defaultValue = "", value = "suiteFrom") Long suiteFrom,
+                               HelpContext helpContext) {
         l.info("/tc/edit/{id}" + id);
         Long personId = securityUtils.getLoggedPersonId();
-        Long suiteFrom = tcMusterForm.getSuiteFrom();
+        helpContext.setProjectId(projectId);
+        helpContext.setSuiteFrom(suiteFrom);
         tcMusterForm = tcMusterService.findTestCaseMusterFormById(id);
         tcMusterForm.setSuiteFrom(suiteFrom);
         model.addAttribute("tcForm", tcMusterForm);
@@ -236,7 +249,7 @@ public class TCController {
         tcMusterLogic.copyTCMuster(TCMusterCopyDTO);
         l.warn("kopírování hotovo");
 
-        return "redirect:/tc/tcs?filter="+filter;
+        return "redirect:/tc/tcs?filter=" + filter;
     }
 
 }
