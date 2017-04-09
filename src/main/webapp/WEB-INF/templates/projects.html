@@ -107,7 +107,7 @@
                 <a href="/project/create" class="btn btn-primary" sec:authorize="hasAuthority('ADMIN')">Založit
                     Projekt</a>
                 <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default">Zpět</a>
-                <button onclick="swal('sdfds')" class="btn btn-default">sweet alert</button>
+                <!--<button onclick="swal('sdfds')" class="btn btn-default">sweet alert</button>-->
                 <a th:href="@{'/downloadExcelProjects/'}" th:text="#{common.exportExcel}" class="btn btn-default">Export
                     do excelu</a>
         </div>
