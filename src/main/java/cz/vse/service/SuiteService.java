@@ -5,6 +5,7 @@ import cz.vse.dto.SuiteForm;
 import cz.vse.dto.SuiteList;
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
+import cz.vse.entity.TCMuster;
 import cz.vse.entity.TestSuite;
 
 import java.util.List;
@@ -54,5 +55,7 @@ public interface SuiteService {
     int getNumberOfSuitesInProject(Project project);
 
     int getNumberOfSuitesInProject(long id);
+
+    void addTCToTestSuite(Long id, TCMuster tcMuster);
 
 }

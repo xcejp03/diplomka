@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -52,7 +53,11 @@ public class TCMusterServiceImpl implements TCMusterService {
        l.info("with: "+ tcMusterForm);
         TCMuster tcMuster = mapper.map(tcMusterForm, TCMuster.class);
         tcMuster.setCreatedDateTime(LocalDateTime.now());
-        tcMusterRepository.save(tcMuster);
+        TestSuite testSuite = suiteService.findTestSuiteById(tcMusterForm.getSuiteFrom());
+        tcMuster.setTestSuites(Arrays.asList(testSuite));
+
+        TCMuster tcMusterSaved = tcMusterRepository.save(tcMuster);
+//        updateTestSuites(tcMusterForm.getSuiteFrom(), tcMusterSaved);
         l.info("created: " + tcMuster);
     }
 
@@ -331,5 +336,11 @@ public class TCMusterServiceImpl implements TCMusterService {
         List<TCMusterName> tcMusterNames = mapper.mapAsList(tcMusters, TCMusterName.class);
         l.info("found: "+tcMusterNames);
         return tcMusterNames;
+    }
+
+    private void updateTestSuites(Long id, TCMuster tcMuster) {
+        l.info("with: "+ id +" - "+tcMuster);
+        suiteService.addTCToTestSuite(id, tcMuster);
+        l.info("updated");
     }
 }

@@ -32,7 +32,8 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/dashboard">Home</a></li>
-                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right" th:text="#{common.backButton}">Zpět</a>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right"
+                   th:text="#{common.backButton}">Zpět</a>
             </ol>
         </div>
     </div>
@@ -101,12 +102,17 @@
                             </div>
                         </div>
 
+
                         <span th:if="*{id != null}" th:remove="tag">
-                             <input type="submit" value="Upravit" th:value="#{common.editButton}" class="btn btn-primary"/>
+                             <input type="submit" value="Upravit" th:value="#{common.editButton}"
+                                    class="btn btn-primary"/>
                         </span>
                         <span th:if="*{id == null}" th:remove="tag">
-                             <input type="submit" value="Vytvořit" th:value="#{common.createButton}" class="btn btn-primary"/>
+                             <input type="submit" value="Vytvořit" th:value="#{common.createButton}"
+                                    class="btn btn-primary"/>
                         </span>
+
+                        <a th:href="@{'/ts/ts-by-tcmuster/'+${param.tcmuster[0]}}" th:text="#{ts.backToTestStepsList}" class="btn btn-default"> Zpět na seznam kroků</a>
 
                     </form>
                 </div>
