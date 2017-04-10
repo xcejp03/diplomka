@@ -53,23 +53,17 @@
                             <tr>
                                 <th th:text="#{table.id}">ID</th>
                                 <th th:text="#{table.name}">Název</th>
-                                <th th:text="#{table.detail}">Detail</th>
                                 <th th:text="#{defects.createDefect}" sec:authorize="hasAuthority('TESTER')">Založit
                                     defekt
                                 </th>
                                 <th th:text="#{suites.testSuites}">Test Suity</th>
                                 <th th:text="#{table.edit}" sec:authorize="hasAuthority('ANALYTIC')">Edit Project</th>
-                                <th th:text="#{table.more}">Více</th>
                             </tr>
                             </thead>
                             <tbody th:remove="all-but-first">
                             <tr th:each="project : ${projects}">
                                 <td th:text="${project.id}">00</td>
                                 <td><a th:href="@{'/project/'+${project.id}}" th:text="${project.name}">Project</a>
-                                </td>
-                                <td><a href="#" class="opener"
-                                       th:attr="data-name=${project.name}, data-owner=${project.projectOwnerName}"
-                                       data-id="#detailDialog">Detail</a>
                                 </td>
                                 <td sec:authorize="hasAuthority('TESTER')"><a
                                         th:href="@{'/defect/create'(source='projectSource_id', sourceid=${project.id})}"
@@ -78,10 +72,6 @@
                                        th:text="#{suites.testSuites}">Test Suity</a></td>
                                 <td sec:authorize="hasAuthority('ANALYTIC')"><a
                                         th:href="@{'/project/edit/'+${project.id}}" th:text="#{table.edit}">Editace</a>
-                                </td>
-                                <td><a href="#" class="opener"
-                                       th:attr="data-objectid=${project.id}, data-sourceid=${project.id} "
-                                       data-id="#moreDialog" th:text="#{table.more}">Více</a>
                                 </td>
                             </tr>
                             </tbody>
@@ -96,44 +86,12 @@
     <br/>
     <div class="row">
         <div class="col-sm-8">
-                <a href="/project/create" class="btn btn-primary" sec:authorize="hasAuthority('ADMIN')">Založit
-                    Projekt</a>
-                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default">Zpět</a>
-                <!--<button onclick="swal('sdfds')" class="btn btn-default">sweet alert</button>-->
-                <a th:href="@{'/downloadExcelProjects/'}" th:text="#{common.exportExcel}" class="btn btn-default">Export
-                    do excelu</a>
+            <a href="/project/create" class="btn btn-primary" sec:authorize="hasAuthority('ADMIN')">Založit
+                Projekt</a>
+            <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default">Zpět</a>
+            <a th:href="@{'/downloadExcelProjects/'}" th:text="#{common.exportExcel}" class="btn btn-default">Export
+                do excelu</a>
         </div>
-    </div>
-
-    <!--dialogová okna-->
-    <div id="moreDialog" title="Více">
-        <h3>Project ID: <span id="spanDataObjectId"></span></h3>
-        <a th:href="@{'/defect/create'(source='projectSource')}" onclick="addSourceIdToURL(this)"
-           class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Založit defekt</a>
-        <a href="#" class="btn btn-default" sec:authorize="hasAuthority('ANALYTIC')">Žádost o smazání</a>
-        <a href="/defect/defects" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Seznam Defektů</a>
-    </div>
-
-    <div id="detailDialog" title="Detail projektu">
-        <h3>Detail projektu: <span id="spanDataName"></span></h3>
-        <h3>Vlastník projektu: <span id="spanDataOwnerName"> </span></h3>
-    </div>
-
-    <div id="membersDialog" title="Členové projektu" sec:authorize="hasAuthority('ANALYTIC')">
-        <div class="well"><h3>členové projektu</h3>
-        </div>
-        <h3 th:text="#{projects.membersAnalytics}">analytici</h3>
-        <ul th:each="member : ${membersAnalytics}">
-            <li th:text="${member.name}"></li>
-        </ul>
-        <h3 th:text="#{projects.membersTesters}">testeři</h3>
-        <ul th:each="member : ${membersTesters}">
-            <li th:text="${member.name}"></li>
-        </ul>
-        <h3 th:text="#{projects.membersAll}">všichni</h3>
-        <ul th:each="member : ${membersAll}">
-            <li th:text="${member.name}"></li>
-        </ul>
     </div>
 
     <!-- Footer -->

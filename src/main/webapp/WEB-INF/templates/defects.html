@@ -94,7 +94,6 @@
                                 <th th:text="#{table.status}">Status</th>
                                 <th th:text="#{table.updated}">updated</th>
                                 <th th:text="#{table.author}">Reporter</th>
-                                <th th:text="#{table.detail}">Detail</th>
                                 <th th:text="#{table.edit}">Edit</th>
                                 <th th:text="#{table.more}">Více</th>
                             </tr>
@@ -114,10 +113,6 @@
                                 </td>
                                 <td><a href="#" th:href="@{'/defect/edit/'+${defect.id}}"
                                        th:text="#{table.edit}">Edit</a>
-                                </td>
-                                <td><a href="#" class="opener"
-                                       th:attr="data-objectid=${defect.id}" data-id="#moreDialog"
-                                       th:text="#{table.more}">Více</a>
                                 </td>
                             </tr>
                             </tbody>
@@ -145,15 +140,11 @@
                                 <th th:text="#{table.id}">TC ID</th>
                                 <th th:text="#{table.priority}">Priorita</th>
                                 <th th:text="#{table.name}">Název</th>
-                                <!--<th>Affected Version</th>-->
                                 <th th:text="#{table.status}">Status</th>
-                                <!--<th>created</th>-->
                                 <th th:text="#{table.updated}">updated</th>
                                 <th th:text="#{table.assignee}">Assignee</th>
-                                <!--<th>Reporter</th>-->
                                 <th th:text="#{table.detail}">Detail</th>
                                 <th th:text="#{table.edit}">Edit</th>
-                                <th th:text="#{table.more}">Více</th>
                             </tr>
                             </thead>
                             <tbody th:remove="all-but-first">
@@ -162,22 +153,15 @@
                                 <td><span th:class="${defect.priority}" th:text="${defect.priority}">Priorita</span>
                                 </td>
                                 <td th:text="${defect.name}">Název</td>
-                                <!--<td th:text="${defect.affectsVersion}">Affected version</td>-->
                                 <td th:text="${defect.status}">Status</td>
-                                <!--<td th:text="${defect.createdDateTime}">Vytvořeno</td>-->
                                 <td th:text="${defect.updatedDateTime}">updated</td>
                                 <td th:text="${defect.assignee}">Assignee</td>
-                                <!--<td th:text="${defect.reporter_id}">reporter</td>-->
                                 <td><a href="#" th:href="@{'/defect/'+${defect.id}}"
                                        th:attr="data-name=${defect.description}"
                                        data-id="#detailDialog" th:text="#{table.detail}">Detail</a>
                                 </td>
                                 <td><a href="#" th:href="@{'/defect/edit/'+${defect.id}}"
                                        th:text="#{table.edit}">Edit</a>
-                                </td>
-                                <td><a href="#" class="opener"
-                                       th:attr="data-objectid=${defect.id}" data-id="#moreDialog"
-                                       th:text="#{table.more}">Více</a>
                                 </td>
                             </tr>
                             </tbody>
@@ -195,24 +179,6 @@
             <p> <a th:href="@{'/downloadExcelDefects/'}" th:text="#{common.exportExcel}" class="btn btn-default">Export
                 do excelu</a></p>
         </div>
-    </div>
-
-    <!--dialogová okna-->
-    <div id="moreDialog" title="Více">
-        <h3>TC ID: <span id="spanDataObjectId"></span></h3>
-        <a href="/defect/create" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Založit
-            defekt</a>
-        <a th:href="@{'/tc/delete/'}" class="btn btn-default" sec:authorize="hasAuthority('ANALYTIC')">Smazat</a>
-        <a href="/defect/defects" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Seznam
-            Defektů</a>
-    </div>
-
-    <div id="detailDialog" title="Detail projektu">
-        <h3>Detail Test Casu <span id="spanDataName"></span></h3>
-        <h3>Autor test casu: <span id="spanDataOwnerName"> </span></h3>
-        <h3>Počet Test Stepů: //dodělat</h3>
-        <h4>Datum poslední úpravy: </h4>
-        <h4>Autor poslední úpravy: </h4>
     </div>
 
     <!-- Footer -->

@@ -85,21 +85,6 @@
         <div class="col-sm-8"></div>
     </div>
     <br/>
-
-    <!--dialogová okna-->
-    <div id="moreDialog" title="Více">
-        <h3>Project ID: <span id="spanDataObjectId"></span></h3>
-        <a href="/defect/create" class="btn btn-default" th:text="#{defects.createDefect}">Založit defekt</a>
-        <a href="#" class="btn btn-default">Žádost o smazání</a>
-        <a href="/defect/defects" class="btn btn-default" th:text="#{defect.defectList}">Seznam Defektů</a>
-    </div>
-
-    <div id="detailDialog" title="Detail projektu">
-        <h3>Detail projektu: <span id="spanDataName"></span></h3>
-        <h3>Vlastník projektu: <span id="spanDataOwnerName"> </span></h3>
-        <h3>Počet Test Suitů: //dodělat</h3>
-    </div>
-
     <!-- Footer -->
     <div th:replace="/fragment/thymeFragment :: footer"></div>
 

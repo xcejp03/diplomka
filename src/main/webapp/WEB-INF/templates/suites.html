@@ -54,13 +54,10 @@
             <thead>
             <tr>
                 <th th:text="#{table.id}">Suite ID</th>
-                <!--<th th:text="#{table.status}" sec:authorize="hasAuthority('TESTER')">Stav</th>-->
                 <th th:text="#{table.name}">Název</th>
-                <th th:text="#{table.detail}">Detail</th>
                 <th th:text="#{table.created}" sec:authorize="hasAuthority('ANALYTIC')">Vytvořeno</th>
                 <th th:text="#{tc.testCases}">Test Cases</th>
                 <th th:text="#{table.edit}" sec:authorize="hasAuthority('ANALYTIC')">Editace</th>
-                <th th:text="#{table.more}">Více</th>
             </tr>
             </thead>
             <tbody th:remove="all-but-first">
@@ -68,18 +65,10 @@
                 <td th:text="${suite.id}">00</td>
                 <!--<td sec:authorize="hasAuthority('TESTER')">Výsledek Suitu</td>-->
                 <td th:text="${suite.name}">Projekt</td>
-                <td><a href="#" class="opener"
-                       th:attr="data-name=${suite.name}, data-objectid=${suite.id},
-                   data-updated=${suite.updatedDateTime}" data-id="#detailDialog">Detail</a>
-                </td>
                 <td th:text="${suite.createdDateTime}" sec:authorize="hasAuthority('ANALYTIC')">Projekt</td>
                 <td><a th:href="@{'/tc/tc-by-suite/'+${suite.id}}" th:text="#{tc.testCases}">Test Cases</a></td>
                 <td sec:authorize="hasAuthority('ANALYTIC')"><a th:href="@{'/suite/edit/'+${suite.id}}"
                                                                 th:text="#{table.edit}">editace</a></td>
-                <td><a href="#" class="opener" data-id="#moreDialog"
-                       th:attr="data-objectid=${suite.id},
-                   data-updated=${suite.updatedDateTime}" th:text="#{table.more}">Více</a>
-                </td>
             </tr>
             </tbody>
         </table>
@@ -95,25 +84,6 @@
         </div>
         <div class="col-sm-8"></div>
     </div>
-
-    <!--dialogová okna-->
-    <div id="moreDialog" title="Více">
-        <h3>Project ID: <span id="spanDataObjectId"></span></h3>
-        <a href="/suite/remove/" onclick="addIdToURL(this)" class="btn btn-default">Smazat</a>
-        <a href="#" class="btn btn-default" sec:authorize="hasAuthority('TESTER')">Nahlásit chybu</a>
-    </div>
-
-    <div id="detailDialog" title="Detail projektu">
-        <h3>Detail test suitu: </h3>
-        <span id="spanDataName"></span>
-        <h3 sec:authorize="hasAuthority('ANALYTIC')">Datum poslední úpravy: </h3>
-        <span sec:authorize="hasAuthority('ANALYTIC')" id="spanDataUpdated"> </span>
-
-        <h3>Počet TC: </h3>
-        -
-        <h3 sec:authorize="hasAuthority('TESTER')">Stav TC: XXX prošlo a YYY je failed</h3>
-    </div>
-
 
     <!-- Footer -->
     <div th:replace="/fragment/thymeFragment :: footer"></div>

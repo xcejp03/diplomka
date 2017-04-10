@@ -79,35 +79,6 @@
         </div>
     </div>
 
-    <!--<div class="row">-->
-        <!--<div class="col-sm-4">-->
-            <!--<a href="/tc/create" class="btn btn-default"  th:text="#{common.createButton}">Založit Test Case</a>-->
-        <!--</div>-->
-        <!--<div class="col-sm-8"></div>-->
-    <!--</div>-->
-    <!--<br/>-->
-
-    <!--dialogová okna-->
-    <div id="moreDialog" title="Více">
-        <h3>Project ID: <span id="spanDataObjectId"></span></h3>
-        <a href="/defect/create" class="btn btn-default">Založit defekt</a>
-        <a href="#" class="btn btn-default">Žádost o smazání</a>
-        <a href="/defect/defects" class="btn btn-default">Seznam Defektů</a>
-    </div>
-
-    <div id="detailDialog" title="Detail projektu">
-        <h3>Detail projektu: <span id="spanDataName"></span></h3>
-        <h3>Vlastník projektu: <span id="spanDataOwnerName"> </span></h3>
-        <h3>Počet Test Suitů: //dodělat</h3>
-        <hr/>
-        <h3>Prerekvizity</h3>
-        <div id="divDataPrerequisite"></div>
-        <hr/>
-
-        <h3>Poznámka</h3>
-        <div id="divDataNote"></div>
-    </div>
-
     <!-- Footer -->
     <div th:replace="/fragment/thymeFragment :: footer"></div>
 

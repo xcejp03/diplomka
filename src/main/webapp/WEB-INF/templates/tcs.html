@@ -60,14 +60,12 @@
                 <th th:text="#{table.priority}">Priorita</th>
                 <th th:text="#{table.status}" sec:authorize="hasAuthority('TESTER') or hasAuthority('MANAGER')">Stav</th>
                 <th th:text="#{table.name}">Název</th>
-                <th th:text="#{table.detail}">Detail</th>
                 <th th:text="#{table.lastRunDateTime}">lastRunDateTime</th>
                 <th th:text="#{table.created}" sec:authorize="hasAuthority('ANALYTIC')">Vytvořeno</th>
                 <th th:text="#{table.edit}" sec:authorize="hasAuthority('ANALYTIC')">Editace</th>
                 <th th:text="#{table.history}" sec:authorize="hasAuthority('TESTER') or hasAuthority('MANAGER')">Historie</th>
                 <th th:text="#{table.run}" sec:authorize="hasAuthority('TESTER')">Spustit</th>
                 <th th:text="#{table.ts}" sec:authorize="hasAuthority('ANALYTIC')">Test Stepy</th>
-                <th th:text="#{table.more}">Více</th>
             </tr>
             </thead>
             <tbody th:remove="all-but-first">
@@ -77,12 +75,6 @@
                 <td sec:authorize="hasAuthority('TESTER') or hasAuthority('MANAGER')"><span th:text="${tc.status}"
                                                                  th:class="${tc.status}">Stav TC</span></td>
                 <td th:text="${tc.name}">Název</td>
-                <td><a href="#" class="opener"
-                       th:attr="data-name=${tc.name},
-                    data-prerequisite=${tc.prerequisite},
-                    data-note=${tc.note}"
-                       data-id="#detailDialog" th:text="#{table.detail}">Detail</a>
-                </td>
                 <td th:text="${tc.lastRunDateTime}">lastRunDateTime</td>
                 <td th:text="${tc.createdDateTime}" sec:authorize="hasAuthority('ANALYTIC')">datum a čas vytvoření</td>
                 <td sec:authorize="hasAuthority('ANALYTIC')"><a
@@ -97,10 +89,6 @@
                 </td>
                 <td sec:authorize="hasAuthority('ANALYTIC')"><a th:href="@{'/ts/ts-by-tcmuster/'+${tc.id}}"
                                                                 th:text="#{table.ts}">Test Stepy</a>
-                </td>
-                <td><a href="#" class="opener"
-                       th:attr="data-sourceid=${tc.id}, data-objectid=${tc.id}" data-id="#moreDialog"
-                       th:text="#{table.more}">Více</a>
                 </td>
             </tr>
             </tbody>
