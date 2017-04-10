@@ -119,7 +119,7 @@ public class PersonController {
 //        model.addAttribute("personDTOList", personService.findAllPersonsDTO());
 //        model.addAttribute("enumRoles", RoleEnum.values());
         roleService.updateRoleForUser(personForm);
-        return "redirect:role";
+        return "redirect:/person/edit";
     }
 
     @RequestMapping(value = "/prihlasit", method = RequestMethod.GET)

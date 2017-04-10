@@ -28,6 +28,7 @@ public class CustomErrorController implements ErrorController {
 
     @RequestMapping(value = PATH)
     String error(HttpServletRequest request, HttpServletResponse response, Model model) {
+        l.info("vlastní error controller");
         model.addAttribute("status", response.getStatus());
         model.addAttribute("atributy", getErrorAttributes(request, false));
         model.addAttribute("error", getErrorAttributes(request, false).get("error"));
@@ -47,6 +48,11 @@ public class CustomErrorController implements ErrorController {
         if (response.getStatus() == 400) {
             l.warn("return page 400");
             return "400";
+        }
+
+        if (response.getStatus() == 403) {
+            l.warn("return page 403");
+            return "403";
         }
 
         if (response.getStatus() == 500) {

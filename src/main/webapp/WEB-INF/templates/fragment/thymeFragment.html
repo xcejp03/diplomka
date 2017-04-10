@@ -48,7 +48,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/admin">[--]</a>
+                <a class="navbar-brand" href="/admin" sec:authorize="hasAuthority('ADMIN')" >[--]</a>
                 <span sec:authorize="!hasAuthority('ROLE_ANONYMOUS')">
                     <a href="/dashboard" sec:authentication="principal.username" class="navbar-brand"></a>
                 </span>
@@ -69,7 +69,7 @@
                         <a href="/defect/defects" th:text="#{navbar.defects}">Defekty</a>
                     </li>
                     <li>
-                        <a href="/worklist" th:text="#{navbar.worklists}">Worklist</a>
+                        <a href="/worklist" th:text="#{navbar.worklists}" sec:authorize="!hasAuthority('MANAGER')">Worklist</a>
                     </li>
                     <span class="dropdown navbar-brand">
                     <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown"

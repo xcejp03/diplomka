@@ -1,5 +1,6 @@
 package cz.vse.config;
 
+import cz.vse.security.CustomAccessDeniedHandler;
 import cz.vse.security.CustomAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,6 +34,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
     @Autowired
+    private CustomAccessDeniedHandler customAccessDeniedHandler;
+
+    @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
@@ -41,10 +45,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-//                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/login", "/home", "/", "/login-error", "/person/prihlasit", "/script.js", "/style.css").permitAll()
                 .antMatchers("/test/thym", "/font-awesome/**",  "/sweetalert/**",  "/datatable/**",  "/jquery/**" ).permitAll()
                 .anyRequest().authenticated()
+                .antMatchers("/admin", "/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/admin", "/admin/**").hasRole("ADMIN")
                 .and()
                 .formLogin().loginPage("/login")
                 .defaultSuccessUrl("/dashboard")
@@ -54,7 +60,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout().logoutSuccessUrl("/login?logout")
                 .and()
-                .exceptionHandling().accessDeniedPage("/403")
+                .exceptionHandling()
+                .accessDeniedPage("/403")
+                .accessDeniedHandler(customAccessDeniedHandler)
                 .and()
                 .csrf();
     }

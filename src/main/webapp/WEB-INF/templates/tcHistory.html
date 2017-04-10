@@ -52,7 +52,12 @@
     <a th:href="@{'/suite/suites-by-project/'+${tc.project_id}}" th:text="#{tcHistory.backToSuites}">Zpět na suity
         projektu</a>
 
+
     <h1 th:text="#{tc.tcList}"> Test Cases list</h1>
+    <div th:if="${tcInstances.empty}" class="alert alert-warning">
+        <h3 th:text="#{common.nothing}">Nic tu není</h3>
+    </div>
+    <span th:if="${!tcInstances.empty}" th:remove="tag">
     <table class="table table-striped">
         <thead>
         <tr>
@@ -60,7 +65,6 @@
             <th th:text="#{table.status}">Status</th>
             <th th:text="#{table.name}">Název</th>
             <th th:text="#{tcRun.ranDate}">TC spuštěno</th>
-            <!--<th th:text="#{common.deleteButton}">Delete</th>-->
             <th th:text="#{table.run}">Spuštění</th>
         </tr>
         </thead>
@@ -76,6 +80,7 @@
         </tr>
         </tbody>
     </table>
+    </span>
     <p>
         <a th:href="@{'/downloadExcelTCHistory/'+${tc.id}}" th:text="#{common.exportExcel}" class="btn btn-default">Export
             do excelu</a>

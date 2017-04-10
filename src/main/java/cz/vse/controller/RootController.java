@@ -4,6 +4,7 @@ import cz.vse.dto.*;
 import cz.vse.entity.Defect;
 import cz.vse.entity.DefectStatusEnum;
 import cz.vse.entity.Project;
+import cz.vse.entity.RoleEnum;
 import cz.vse.repository.*;
 import cz.vse.service.*;
 import cz.vse.utils.SecurityUtils;
@@ -138,7 +139,6 @@ public class RootController {
     }
 
 
-
     @RequestMapping(value = "/manualTest")
     public String manualTest(@ModelAttribute("project") TCMusterCopyDTO tcMusterCopyDTO, Model model) {
         l.warn("manualTest: " + model);
@@ -171,24 +171,51 @@ public class RootController {
             model.addAttribute("myProjectsStatistics", projectService.getMyProjectsWithStatistics(securityUtils.getLoggedPerson()));
         }
 
-        if (loggedPersonAuthorities.contains(new SimpleGrantedAuthority("ANALYTIC"))) {
+       else if (loggedPersonAuthorities.contains(new SimpleGrantedAuthority("ANALYTIC"))) {
             l.warn("role je analytik");
             List<DefectDTO> emptyListDefectDTO = new ArrayList<>();
             model.addAttribute("myProjectsStatistics", projectService.getMyProjectsWithStatistics(securityUtils.getLoggedPerson()));
             model.addAttribute("myAssignedOpenDefects", defectService.findAllDefectDTOByAssigneeAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open)); // DODĚLAT
             model.addAttribute("myOpenDefects", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
-//            model.addAttribute("workListsToday", emptyListDefectDTO);
+
+            model.addAttribute("workListsToday", new ArrayList<WorkListDTO>());
+            model.addAttribute("workListsTomorrow", new ArrayList<WorkListDTO>());
+            model.addAttribute("workListsLastThreeDays", new ArrayList<WorkListDTO>());
+            model.addAttribute("myOpenTC", new ArrayList<WorkTCDTO>());
         }
 
 
-        if (loggedPersonAuthorities.contains(new SimpleGrantedAuthority("MANAGER"))) {
+        else if (loggedPersonAuthorities.contains(new SimpleGrantedAuthority("MANAGER"))) {
             l.warn("role je manager");
             model.addAttribute("myAssignedOpenDefects", defectService.findAllDefectDTOByAssigneeAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
             model.addAttribute("myOpenDefects", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
             model.addAttribute("myProjectsStatistics", projectService.getMyProjectsWithStatistics(securityUtils.getLoggedPerson()));
-            model.addAttribute("workListsToday", workListService.findAllWorkListDTOByMemberToday(securityUtils.getLoggedPerson()));
-            model.addAttribute("workListsTomorrow", workListService.findAllWorkListDTOByMemberTomorrow(securityUtils.getLoggedPerson()));
-            model.addAttribute("workListsLastThreeDays", workListService.findAllWorkListDTOByMemberLastThreeDays(securityUtils.getLoggedPerson()));
+            model.addAttribute("workListsToday", new ArrayList<WorkListDTO>());
+            model.addAttribute("workListsTomorrow", new ArrayList<WorkListDTO>());
+            model.addAttribute("workListsLastThreeDays", new ArrayList<WorkListDTO>());
+            model.addAttribute("myOpenTC", new ArrayList<WorkTCDTO>());
+        }
+
+      else  if (loggedPersonAuthorities.contains(new SimpleGrantedAuthority("ADMIN"))) {
+            l.warn("role je admin");
+            model.addAttribute("myAssignedOpenDefects", new ArrayList<DefectDTO>());
+            model.addAttribute("myOpenDefects", new ArrayList<DefectDTO>());
+            model.addAttribute("myProjectsStatistics",  new ArrayList<ProjectStatsDTO>());
+            model.addAttribute("workListsToday", new ArrayList<WorkListDTO>());
+            model.addAttribute("workListsTomorrow", new ArrayList<WorkListDTO>());
+            model.addAttribute("workListsLastThreeDays", new ArrayList<WorkListDTO>());
+            model.addAttribute("myOpenTC", new ArrayList<WorkTCDTO>());
+        }
+
+        else {
+            l.warn("role je žádná");
+            model.addAttribute("myAssignedOpenDefects", new ArrayList<DefectDTO>());
+            model.addAttribute("myOpenDefects", new ArrayList<DefectDTO>());
+            model.addAttribute("myProjectsStatistics",  new ArrayList<ProjectStatsDTO>());
+            model.addAttribute("workListsToday", new ArrayList<WorkListDTO>());
+            model.addAttribute("workListsTomorrow", new ArrayList<WorkListDTO>());
+            model.addAttribute("workListsLastThreeDays", new ArrayList<WorkListDTO>());
+            model.addAttribute("myOpenTC", new ArrayList<WorkTCDTO>());
         }
 
         return "dashboard";
