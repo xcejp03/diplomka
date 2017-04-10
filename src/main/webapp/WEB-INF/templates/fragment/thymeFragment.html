@@ -50,13 +50,10 @@
                 </button>
                 <a class="navbar-brand" href="/admin" sec:authorize="hasAuthority('ADMIN')" >[--]</a>
                 <span sec:authorize="!hasAuthority('ROLE_ANONYMOUS')">
-                    <a href="/dashboard" sec:authentication="principal.username" class="navbar-brand"></a>
+                    <a href="/dashboard" sec:authentication="principal.username" class="navbar-brand">Moje jméno</a>
                 </span>
-                <!--<a href="/person/prihlasit" class="btn btn-default">prih</a>-->
             </div>
 
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
