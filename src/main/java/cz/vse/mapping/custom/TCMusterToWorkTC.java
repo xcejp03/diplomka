@@ -31,9 +31,4 @@ public class TCMusterToWorkTC extends CustomMapper<TCMuster, WorkTC> {
 
     }
 
-//    @Override
-//    public void mapBtoA(TSMuster tsMuster, TSInstance tsInstance, MappingContext context) {
-//        tsInstance.setTsMuster(tsMuster);
-//        super.mapBtoA(tsMuster, tsInstance, context);
-//    }
 }

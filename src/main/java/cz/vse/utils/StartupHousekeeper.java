@@ -55,30 +55,16 @@ public class StartupHousekeeper {
         // do whatever you need here
         System.out.println("OOOOOOOO po staru");
 //        createPersonAndProject();
-        l.info("QQOOOOOOOOOQQQQQ - po novu");
-        l.info("-.-.-.- 6.2. 11:45");
+        l.info("QQOOOOOOOOOQQQQQ - with log4j");
 //        clearProjectMembers();
 //        l.fatal("Výpis projektu: " + projectRepository.findOne(10L));
 //        helpService.userRoleTesty();
 //        userRoleTesty();
 //        helpService.najdiPosledniTCInstanci(40);
         playSoundAfterStart();
-        l.info(".");
-        l.info(".");
-        l.info(".");
-        l.info(".");
-        l.info(".");
 
         l.info(".");
         l.info(".");
-        l.info(".");
-        l.info(".");
-        l.info(".");
-        l.info(".");
-
-
-//        kontrolniVypisDB();
-
     }
 
 
