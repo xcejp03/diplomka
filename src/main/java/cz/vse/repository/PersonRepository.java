@@ -18,22 +18,15 @@ public interface PersonRepository extends BaseRepository<Person> {
 
     List<Person> findAllPersonByProjectsMemberAndUserRoleOrderById(Project project, RoleEnum role);
 
-    //    @Query("select * from Project pr join pr.personMembers pe");
-//    List<Person> getOsoby('ddd');
-//    projectsMember
     Person findByUsername(String username);
 
     @Query("select p from Person p where p.name = 'nic'")
     Person findXXX();
 
-//    List<Person> findByProjectsMember_name(String name); taky funguje
-
 
     @Query("select p from Person p join p.projectsMember pm where pm in (:projects)")
     List<Person> getProjectMembers(@Param("projects") Collection<Project> projects);
 
-    //    @Query("select p from Person p join p.projectsMember pm where pm in (:projects) and p.userRole in (:roles)")
     @Query("select p from Person p join p.projectsMember pm join p.userRole ur where pm in (:projects) and ur.role = :role")
     List<Person> getProjectMembers(@Param("projects") Collection<Project> projects, @Param("role") RoleEnum role);
-//    List<Person> getProjectMembers(@Param("projects") Collection<Project> projects);
 }

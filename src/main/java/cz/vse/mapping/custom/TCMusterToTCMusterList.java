@@ -26,8 +26,6 @@ public class TCMusterToTCMusterList extends CustomMapper<TCMuster, TCMusterList>
     @Override
     public void mapAtoB(TCMuster tcMuster, TCMusterList tcMusterList, MappingContext context) {
         TCInstance tcInstance = tcInstanceService.findLastTCInstanceByTCMuster(tcMuster);
-//        StatusEnum statusEnum = tcInstance!= null ? getTCInstanceStatusFromTSInstancesStatuses(tcInstance) : StatusEnum.NORUN;
-//        tcMusterDTO.setStatus(statusEnum);
         super.mapAtoB(tcMuster, tcMusterList, context);
         if (tcInstance != null) {
             tcMusterList.setStatus(tcInstance.getStatus());
@@ -39,46 +37,4 @@ public class TCMusterToTCMusterList extends CustomMapper<TCMuster, TCMusterList>
 
     }
 
-//    private StatusEnum getTCInstanceStatusFromTSInstancesStatuses(TCInstance tcInstance) {
-//        List<TSInstance> tsInstanceList = tcInstance.getTsInstances();
-//        List<StatusEnum> statusEnumList = new ArrayList<>();
-//
-//        for (TSInstance tsInstance : tsInstanceList) {
-//            statusEnumList.add(tsInstance.getStatus());
-//        }
-//
-//        if (statusEnumList.contains(StatusEnum.FAILED)) {
-//            return StatusEnum.FAILED;
-//        }
-//        if (statusEnumList.contains(StatusEnum.BLOCKED)) {
-//            return StatusEnum.BLOCKED;
-//        }
-//
-//        if (isItAllNorun(statusEnumList)) {
-//            return StatusEnum.NORUN;
-//        }
-//        if (isItAllPassed(statusEnumList)) {
-//            return StatusEnum.PASSED;
-//        }
-//
-//        return StatusEnum.NOTCOMPLETED;
-//    }
-//
-//    private boolean isItAllPassed(List<StatusEnum> tsInstanceList) {
-//        for (StatusEnum statusEnum : tsInstanceList) {
-//            if (statusEnum != StatusEnum.PASSED) {
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
-//
-//    private boolean isItAllNorun(List<StatusEnum> tsInstanceList) {
-//        for (StatusEnum statusEnum : tsInstanceList) {
-//            if (statusEnum != StatusEnum.NORUN) {
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
 }

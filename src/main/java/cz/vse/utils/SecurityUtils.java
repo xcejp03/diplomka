@@ -36,13 +36,6 @@ public class SecurityUtils {
         return personId;
     }
 
-//    public PersonDTO getLoggedPersonDTO() {
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        Person person = personService.findPersonByAuthentication(auth);
-//        PersonDTO personDTO;
-//        personDTO = mapper.map(person, PersonDTO.class);
-//        return personDTO;
-//    }
 
     public PersonName getLoggedPersonName() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

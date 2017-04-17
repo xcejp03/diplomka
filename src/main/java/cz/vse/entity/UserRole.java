@@ -33,7 +33,6 @@ public class UserRole extends BaseEntity {
         this.user = user;
     }
 
-    //        @Column(name = "role", length = 45)
     public RoleEnum getRole() {
         return this.role;
     }

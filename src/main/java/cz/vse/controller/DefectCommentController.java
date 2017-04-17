@@ -81,8 +81,6 @@ public class DefectCommentController {
         model.addAttribute("personNames", personService.findAllPersonNames());
         model.addAttribute("listDefectCommentByDefectDTO", defectCommentService.findAllDefectCommentDTOByDefectId(defectId));
 
-//        String referer = request.getHeader("Referer");
-//        return "redirect:" + referer;
         return "defect";
     }
 
@@ -95,7 +93,6 @@ public class DefectCommentController {
         model.addAttribute("defects", defectService.findAllDefects());
         model.addAttribute("persons", personService.findAllPersons());
         model.addAttribute("defect", defectService.findDefectDTO(commentDTO.getDefect_id()));
-//        model.addAttribute("person", personService.findPersonById(commentDTO.getAuthor_id()));
 
         return "commentCreate";
     }

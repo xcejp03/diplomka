@@ -70,18 +70,11 @@ public class TCController {
         helpContext.setProjectId(projectId);
         helpContext.setSuiteFrom(suiteFrom);
 
-//        TCMusterForm tcMusterForm = new TCMusterForm();
         if (tcMusterForm.getProject_id() == null) {
             tcMusterForm.setProject_id(projectId);
         }
 
-//        model.addAttribute("listTCMusters", tcMusterService.findAllTestCaseMustersDTO());
-//        model.addAttribute("listTSMusters", tsMusterService.findAllTestStepMustersDTO());
-//        model.addAttribute("listProjects", projectService.findAllTestProjects());
-//        model.addAttribute("targetProject", projectId);
-//        model.addAttribute("tcMusterForm", tcMusterForm);
         model.addAttribute("usersProjects", projectService.findAllTestProjectNamesByUserId(personId));
-//        model.addAttribute("projectsSuites", suiteService.findAllTestSuiteListsByProjectId(projectId));    // xxx
         model.addAttribute("helpContext", helpContext);
 
         return "tcCreate";
@@ -96,7 +89,6 @@ public class TCController {
             l.error("form has errors");
             Long personId = securityUtils.getLoggedPersonId();
             model.addAttribute("usersProjects", projectService.findAllTestProjectNamesByUserId(personId));
-//            model.addAttribute("projectsSuites", suiteService.findAllTestSuiteListsByProjectId(TCMusterForm.getProject_id()));
 
             return "tcCreate";
         }
@@ -107,8 +99,6 @@ public class TCController {
         } else {
             tcMusterService.updateTestCaseMuster(tcMusterForm);
         }
-//        String referer = request.getHeader("Referer");
-//        return "redirect:" + referer;
         return "redirect:/tc/tc-by-suite/" + helpContext.getSuiteFrom();
     }
 
@@ -126,8 +116,6 @@ public class TCController {
         model.addAttribute("tcForm", tcMusterForm);
         model.addAttribute("TCMusterForm", tcMusterForm);
 
-//        model.addAttribute("listPersons", personService.findAllPersons());
-//        model.addAttribute("listProjects", projectService.findAllTestProjects());
         model.addAttribute("listUsersProjects", projectService.findAllTestProjectNamesByUserId(personId));
         return "tcCreate";
     }
@@ -155,7 +143,6 @@ public class TCController {
         TCInstanceRunDTO tcInstanceRunDTO;
         TCInstance tcInstance;
         Person person = securityUtils.getLoggedPerson();
-//        tcInstanceRunDTO = tcService.runNewTC(id, person);
         tcInstance = tcService.runNewTC(id, person, backId, instanceOrigin);
         l.info("tcService.runNewTC(id, person): " + tcInstance);
 
@@ -164,9 +151,6 @@ public class TCController {
             workTCService.addWorkTCHistory(worktcId, tcInstance);
         }
         tcInstanceRunDTO = tcInstanceService.findTCInstanceRunDTOById(tcInstance.getId());
-//        model.addAttribute("tcInstanceRunDTO", tcInstanceRunDTO);
-//        model.addAttribute("tsInstances", tsInstanceService.
-//                findAllTSInstanceListsByTCInstanceId(tcInstanceRunDTO.getTcInstance_id()));
 
         return "redirect:/tc/show/" + tcInstanceRunDTO.getTcInstance_id();
     }
@@ -186,7 +170,6 @@ public class TCController {
     public String showTCHistory(@PathVariable("id") long id, Model model) {
         l.info("/tc/history/{id}" + id);
         model.addAttribute("tc", tcMusterService.findTCMusterListById(id));
-//        model.addAttribute("listTCInstances", tcInstanceService.findAllTCInstancesByTCMusterId(id));
         model.addAttribute("tcInstances", tcInstanceService.findAllTCInstanceListsByTCMusterId(id));
         return "tcHistory";
     }

@@ -7,10 +7,6 @@ import java.util.List;
  * Created by pcejka on 21.09.2016.
  */
 @Entity
-//@Table(name = "Defect")
-
-
-//@EntityListeners(AuditingEntityListener.class)
 public class Defect extends BaseEntity {
     private String name;
     private String description;

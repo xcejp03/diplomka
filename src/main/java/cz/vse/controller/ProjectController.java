@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
-//import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * Created by pcejka on 09.10.2016.
@@ -73,7 +72,6 @@ public class ProjectController {
         model.addAttribute("projectForm", projectService.findTestProjectFormById(id));
         model.addAttribute("persons", personService.findAllPersonNames());
         model.addAttribute("members", personService.findAllPersonNamesByProjectIdOrderById(id));
-//        model.addAttribute("listSuites", suiteService.findAllTestSuites());
         return "projectCreate";
     }
 

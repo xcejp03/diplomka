@@ -1,10 +1,8 @@
 package cz.vse.controller;
 
 import cz.vse.dto.*;
-import cz.vse.entity.Defect;
 import cz.vse.entity.DefectStatusEnum;
 import cz.vse.entity.Project;
-import cz.vse.repository.*;
 import cz.vse.service.*;
 import cz.vse.utils.SecurityUtils;
 import cz.vse.utils.excelexport.ExcelBuilderDefects;
@@ -47,12 +45,6 @@ public class RootController {
     private MapperFacade mapper;
 
     @Autowired
-    private TSInstanceRepository tsInstanceRepository;
-
-    @Autowired
-    private TCInstanceRepository tcInstanceRepository;
-
-    @Autowired
     private WorkTCService workTCService;
 
     @Autowired
@@ -65,44 +57,11 @@ public class RootController {
     private SecurityUtils securityUtils;
 
     @Autowired
-    private PersonRepository personRepository;
-
-    @Autowired
-    private WorkListRepository workListRepository;
-
-    @Autowired
-    private ProjectRepository projectRepository;
-
-    @Autowired
-    private TCMusterRepository tcMusterRepository;
-
-    @Autowired
-    private WorkTCRepository workTCRepository;
-
-    @Autowired
     private TCService tcService;
 
     @Autowired
     TCInstanceService tcInstanceService;
 
-
-    /**
-     * Handle request to download an Excel document
-     */
-    @RequestMapping(value = "/downloadExcel", method = RequestMethod.GET)
-    public ModelAndView downloadExcel() {
-        l.warn("stahování excelu");
-        // create some sample data
-        List<Defect> defects = new ArrayList<>();
-
-        defects.add(defectService.findDefect(160L));
-        defects.add(defectService.findDefect(161L));
-        defects.add(defectService.findDefect(520L));
-
-
-        // return a view which will be resolved by an excel view resolver
-        return new ModelAndView(new ExcelBuilderDefects(), "defects", defects);
-    }
 
     @RequestMapping(value = "/downloadExcelProjects", method = RequestMethod.GET)
     public ModelAndView downloadExcelProjects() {
@@ -112,7 +71,6 @@ public class RootController {
         List<Project> projects = projectService.findAllTestProjectByUserId(loggedPersonId);
         List<ProjectStatsDTO> projectStatsDTOS = mapper.mapAsList(projects, ProjectStatsDTO.class);
 
-        // return a view which will be resolved by an excel view resolver
         return new ModelAndView(new ExcelBuilderProjects(), "projects", projectStatsDTOS);
     }
 

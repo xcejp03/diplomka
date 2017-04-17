@@ -28,13 +28,6 @@ public class WorkListToWorkListForm extends CustomMapper<WorkList, WorkListForm>
     @Autowired
     private WorkTCService workTCService;
 
-//    @Override
-//    public void mapAtoB(WorkList workList, WorkListDTO workListDTO, MappingContext context) {
-//        l.info("A -> B");
-//        super.mapAtoB(workList, workListDTO, context);
-//        workListDTO.setTcMuster_id(getTCMusterIdFromWorkTCDTO(workList));
-//    }
-
 
     @Override
     public void mapAtoB(WorkList workList, WorkListForm workListForm, MappingContext context) {
@@ -45,12 +38,8 @@ public class WorkListToWorkListForm extends CustomMapper<WorkList, WorkListForm>
     @Override
     public void mapBtoA(WorkListForm workListForm, WorkList workList, MappingContext context) {
         l.info("B -> A");
-//        super.mapBtoA(workListDTO, workList, context);
-
-//        if (workList.getWorkTCList() == null) {
         List<WorkTC> workTCList = createWorkTCForWorkList(workList, workListForm.getTcMuster_id());
         workList.setWorkTCList(workTCList);
-//        }
     }
 
     private List<Long> getTCMusterIdFromWorkTCDTO(WorkList workList) {
@@ -72,7 +61,6 @@ public class WorkListToWorkListForm extends CustomMapper<WorkList, WorkListForm>
             workTCList.addAll(workList.getWorkTCList());
             for (WorkTC workTC : workList.getWorkTCList()) {
                 tcMusterIdListOld.add(workTCService.findWorkTCById(workTC.getId()).getTcMuster().getId());
-//            tcMusterIdListOld.add(workTC.getTcMuster().getId());
             }
         }
 

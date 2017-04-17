@@ -56,7 +56,6 @@ public class TCMusterServiceImpl implements TCMusterService {
         tcMuster.setTestSuites(Arrays.asList(testSuite));
 
         TCMuster tcMusterSaved = tcMusterRepository.save(tcMuster);
-//        updateTestSuites(tcMusterForm.getSuiteFrom(), tcMusterSaved);
         l.info("created: " + tcMuster);
     }
 

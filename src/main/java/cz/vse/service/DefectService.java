@@ -11,7 +11,7 @@ import java.util.List;
  * Created by pcejka on 03.10.2016.
  */
 public interface DefectService {
-    public void createDefect(Defect defect);
+    void createDefect(Defect defect);
 
     void createDefect(DefectForm defectForm);
 

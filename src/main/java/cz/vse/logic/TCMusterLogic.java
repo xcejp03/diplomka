@@ -36,7 +36,6 @@ public class TCMusterLogic {
         List<TCMuster> tcMusters = new ArrayList<>();
 
         for (Long tcMusterId : tcMusterIDs) {
-//            TCMuster tcMuster = tcMusterService.findTestCaseMusterById(tcMusterId);
             TCMusterDTO tcMusterDTO = tcMusterService.findTestCaseMusterDTOById(tcMusterId);
             tcMusterDTO.setId(null);
             tcMusterDTO.setTcInstances_id(null);

@@ -43,26 +43,14 @@ public class TestSuiteController {
     SecurityUtils securityUtils;
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-//    public String defectShowByUser(Model model, @RequestParam(required = false, defaultValue = "open", value = "filter") String filter) {
     public String createTestSuite(Model model, SuiteForm suiteForm, @RequestParam(required = false, value = "project") Long projectId) {
         l.info("/suite/create get");
         Long personId = securityUtils.getLoggedPersonId();
 
-//        SuiteForm suiteForm = new SuiteForm();
         if (projectId != null) {
             suiteForm.setProject_id(projectId);
         }
-
-//        model.addAttribute("suiteForm", suiteForm);
-//        model.addAttribute("listSuites", suiteService.findAllTestSuites());
-//        model.addAttribute("listSuitesDTO", suiteService.findAllTestSuitesDTO());
-//        model.addAttribute("listProjects", projectService.findAllTestProjects());
-//        model.addAttribute("listProjectsDTO", projectService.findAllTestProjectsDTO());
-//        model.addAttribute("listPersons", personService.findAllPersons());
-//        model.addAttribute("listTcMusters", tcMusterService.findAllTestCaseMusters());
-
         model.addAttribute("usersProjects", projectService.findAllTestProjectNamesByUserId(personId));
-
         return "suiteCreate";
     }
 
@@ -98,17 +86,9 @@ public class TestSuiteController {
         SuiteForm suiteForm = suiteService.findTestSuiteFormById(id);
 
         model.addAttribute("suiteForm", suiteForm);
-//        model.addAttribute("suiteE", suiteService.findTestSuiteById(id));
-//        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
-//        model.addAttribute("listPersons", personService.findAllPersons());
-//        model.addAttribute("listTcMusters", tcMusterService.findAllTestCaseMusters());
-//        model.addAttribute("listTcMustersDTO", tcMusterService.findAllTestCaseMustersDTO());
         model.addAttribute("tcMustersByProject", tcMusterService.findTCMusterNamesByProjectId(suiteForm.getProject_id()));
         model.addAttribute("usersProjects", projectService.findAllTestProjectNamesByUserId(personId));
         model.addAttribute("tcMusterNames", tcMusterService.findAllTestCaseMusterNamesByTestSuiteId(suiteService.findTestSuiteDTOById(id).getId()));
-//        model.addAttribute("tcmusterdto", tcMusterService.findTestCaseMusterDTOById(suiteService.findTestSuiteDTOById(id).getId()));
-//        model.addAttribute("listUsersProjectsDTO", projectService.findAllTestProjectNameDTOByUserId(personId));
-//        tcMusterNames, tcmuster
         return "suiteCreate";
     }
 
@@ -133,7 +113,6 @@ public class TestSuiteController {
     public String suitesAllShow(Model model) {
         l.info("/suite/suites}");
         model.addAttribute("suites", suiteService.findAllTestSuitesDTOByUser(securityUtils.getLoggedPerson()));
-//        model.addAttribute("project", projectService.findTestProjectById(id));
         return "suites";
     }
 

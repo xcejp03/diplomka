@@ -12,7 +12,6 @@ import java.util.List;
 /**
  * Created by pcejka on 03.10.2016.
  */
-//@Service("userDetailsService")
 public interface PersonService {
     void createPerson(PersonForm personForm);
 
@@ -56,6 +55,5 @@ public interface PersonService {
 
     List<PersonName> getProjectMembers(long projectId, RoleEnum roleEnum);
 
-//    List<PersonDTO> getProjectMembersByProjectIdAndRole(long id, UserRole role);
 
 }

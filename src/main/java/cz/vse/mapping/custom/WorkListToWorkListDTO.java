@@ -28,14 +28,6 @@ public class WorkListToWorkListDTO extends CustomMapper<WorkList, WorkListDTO> {
     @Autowired
     private WorkTCService workTCService;
 
-//    @Override
-//    public void mapAtoB(WorkList workList, WorkListDTO workListDTO, MappingContext context) {
-//        l.info("A -> B");
-//        super.mapAtoB(workList, workListDTO, context);
-//        workListDTO.setTcMuster_id(getTCMusterIdFromWorkTCDTO(workList));
-//    }
-
-
     @Override
     public void mapAtoB(WorkList workList, WorkListDTO workListDTO, MappingContext context) {
         l.warn("A -> B");
@@ -47,12 +39,8 @@ public class WorkListToWorkListDTO extends CustomMapper<WorkList, WorkListDTO> {
     @Override
     public void mapBtoA(WorkListDTO workListDTO, WorkList workList, MappingContext context) {
         l.info("B -> A");
-//        super.mapBtoA(workListDTO, workList, context);
-
-//        if (workList.getWorkTCList() == null) {
         List<WorkTC> workTCList = createWorkTCForWorkList(workList, workListDTO.getTcMuster_id());
         workList.setWorkTCList(workTCList);
-//        }
     }
 
     private List<Long> getTCMusterIdFromWorkTCDTO(WorkList workList) {
@@ -74,7 +62,6 @@ public class WorkListToWorkListDTO extends CustomMapper<WorkList, WorkListDTO> {
             workTCList.addAll(workList.getWorkTCList());
             for (WorkTC workTC : workList.getWorkTCList()) {
                 tcMusterIdListOld.add(workTCService.findWorkTCById(workTC.getId()).getTcMuster().getId());
-//            tcMusterIdListOld.add(workTC.getTcMuster().getId());
             }
         }
 

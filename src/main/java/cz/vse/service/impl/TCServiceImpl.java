@@ -43,14 +43,6 @@ public class TCServiceImpl implements TCService {
     @Autowired
     private SuiteService suiteService;
 
-//    public TCInstanceRunDTO runNewTC(long tcMusterId, Person person) {
-//        TCInstance tcInstance;
-//        TCInstanceRunDTO tcInstanceRunDTO;
-//        tcInstance = createAndSaveTCInstanceFromTCMusterId(tcMusterId, person);
-//        tcInstanceRunDTO = mapper.map(tcInstance, TCInstanceRunDTO.class);
-//        l.info(tcInstanceRunDTO);
-//        return tcInstanceRunDTO;
-//    }
 
     public TCInstance runNewTC(long tcMusterId, Person person, String backId, String instanceOrigin) {
         l.info("with: " + tcMusterId + " and " + person);
@@ -60,17 +52,8 @@ public class TCServiceImpl implements TCService {
         return tcInstance;
     }
 
-//    public TCInstance runNewTC(long tcMusterId, Person person, String instanceOrigin, String backId) {
-//        l.info("with: "+ tcMusterId+" and "+person);
-//        TCInstance tcInstance;
-//        tcInstance = createAndSaveTCInstanceFromTCMusterId(tcMusterId, person, backId, instanceOrigin);
-//        l.info("run: "+tcInstance);
-//        return tcInstance;
-//    }
-
     /**
      * Mapuje TCMudster na TC instnace. Nahrazuje (obchází orika).
-     * ZJISTIT JAK TO UDĚLAT PŘES ORIKU
      *
      * @param tcMuster
      * @return
@@ -128,21 +111,12 @@ public class TCServiceImpl implements TCService {
         TCMuster tcMuster = tcMusterRepository.findOne(tcMusterId);
         List<TSMuster> tsMusterList;
         List<TSInstance> tsInstanceList;
-        List<TSInstance> tsInstanceListMapped;
         List<TSInstance> vsechny = new ArrayList<>();
-        List<TSInstance> vsechny2 = new ArrayList<>();
-////////////////
 
         tsMusterList = tsMusterService.findAllTestStepMustersByTCMuster(tcMuster);
         tsInstanceList = mapper.mapAsList(tsMusterList, TSInstance.class);
 
         mapper.map(tsMusterList, vsechny);
-        vsechny2 = mapper.mapAsList(tsMusterList, TSInstance.class);
-//        tsInstanceList = mapper.mapAsList(tsMusterList, TSInstance.class);
-//        mapper.map(tsMusterList, tsInstanceList);
-//        tsInstanceListMapped = mapTSMusterToTSInstance(tsMusterList);
-//        mapper.map(tsInstanceList, tsInstanceListMapped);
-//        mapper.map(tsInstanceListMapped, tsInstanceList);
         l.info(tsInstanceList);
 
         for (TSInstance tsInstance : tsInstanceList) {

@@ -12,15 +12,6 @@ import java.util.Locale;
 @Component
 public class LocalDateTimeToStringConverter extends BidirectionalConverter<LocalDateTime, String> {
     private final Logger l = Logger.getLogger(this.getClass());
-//    @Override
-//    public LocalDate convertTo(LocalDate source, Type<LocalDate> destinationType) {
-//       return source;
-//    }
-//
-//    @Override
-//    public LocalDate convertFrom(LocalDate source, Type<LocalDate> destinationType) {
-//        return source;
-//    }
 
     @Override
     public String convertTo(LocalDateTime localDateTime, Type<String> type) {
@@ -36,7 +27,6 @@ public class LocalDateTimeToStringConverter extends BidirectionalConverter<Local
     public LocalDateTime convertFrom(String s, Type<LocalDateTime> type) {
         l.info("convertFrom");
         l.info("data: " + s + "->" + type);
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd. MM. yyyy HH:mm");
         formatter = formatter.withLocale(Locale.UK);  // Locale specifies human language for translating, and cultural norms for lowercase/uppercase and abbreviations and such. Example: Locale.US or Locale.CANADA_FRENCH
         LocalDateTime date = LocalDateTime.parse(s, formatter);

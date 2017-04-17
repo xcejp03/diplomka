@@ -83,7 +83,6 @@ public class WorkListServiceImpl implements WorkListService {
         workTCService.updateWorkTCEntity(workList.getWorkTCList());
         workListRepository.save(workList);
         l.info("updated: " + workList);
-//        workTCService.updateWorkTCEntity();
     }
 
     @Override
@@ -231,7 +230,6 @@ public class WorkListServiceImpl implements WorkListService {
         List<WorkTCDTO> workTCDTOS = workTCWrapper.getWorkTCDTOList();
         List<WorkTC> workTCS = mapper.mapAsList(workTCDTOS, WorkTC.class);
         workList.setWorkTCList(workTCS);
-//        updateWorkList(workList);
 
         workTCService.updateWorkTCEntity(workList.getWorkTCList());
         workListRepository.save(workList);

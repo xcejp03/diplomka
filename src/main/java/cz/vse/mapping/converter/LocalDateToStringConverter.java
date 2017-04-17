@@ -12,15 +12,6 @@ import java.util.Locale;
 @Component
 public class LocalDateToStringConverter extends BidirectionalConverter<LocalDate, String> {
     private final Logger l = Logger.getLogger(this.getClass());
-//    @Override
-//    public LocalDate convertTo(LocalDate source, Type<LocalDate> destinationType) {
-//       return source;
-//    }
-//
-//    @Override
-//    public LocalDate convertFrom(LocalDate source, Type<LocalDate> destinationType) {
-//        return source;
-//    }
 
     @Override
     public String convertTo(LocalDate localDate, Type<String> type) {

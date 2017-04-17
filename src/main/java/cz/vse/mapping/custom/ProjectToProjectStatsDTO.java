@@ -28,13 +28,6 @@ public class ProjectToProjectStatsDTO extends CustomMapper<Project, ProjectStats
     @Autowired
     private TCMusterService tcMusterService;
 
-//    @Override
-//    public void mapAtoB(WorkList workList, WorkListDTO workListDTO, MappingContext context) {
-//        l.info("A -> B");
-//        super.mapAtoB(workList, workListDTO, context);
-//        workListDTO.setTcMuster_id(getTCMusterIdFromWorkTCDTO(workList));
-//    }
-
 
     @Override
     public void mapAtoB(Project project, ProjectStatsDTO projectStatsDTO, MappingContext context) {
@@ -48,7 +41,6 @@ public class ProjectToProjectStatsDTO extends CustomMapper<Project, ProjectStats
         l.warn("id projektu UUU: " + project.getId());
         projectStatsDTO.setProject_id(project.getId());
 
-//        super.mapAtoB(project, projectStatsDTO, context);
     }
 
     @Override

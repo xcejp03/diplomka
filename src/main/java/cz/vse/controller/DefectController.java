@@ -44,24 +44,10 @@ public class DefectController {
     @Autowired
     private DefectCommentService defectCommentService;
 
-//    @RequestMapping(method = RequestMethod.GET)
-//    public String defectDefault(Model model) {
-//        l.info("request mapping defect/create");
-//        model.addAttribute("defect", new DefectDTO());
-//        model.addAttribute("defectList", defectService.findAllDefects());
-//        model.addAttribute("listPersons", personService.findAllPersons());
-//        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
-//
-//        return "tabulkaDefaultVypis";
-//    }
-
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createDefect(Model model, DefectForm defectForm) {
         l.info("request mapping defect/create");
-//        model.addAttribute("defectForm", new DefectForm());
-//        model.addAttribute("defectList", defectService.findAllDefects());
         model.addAttribute("persons", personService.findAllPersonNames());
-//        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
 
         return "defectCreate";
     }
@@ -89,7 +75,6 @@ public class DefectController {
     public String editDefect(@PathVariable("id") long id, Model model) {
         l.info("/edit/{id}" + id);
         model.addAttribute("defectForm", defectService.findDefectForm(id));
-//        model.addAttribute("person", personService.findPersonById(id));
         model.addAttribute("personNames", personService.findAllPersonNames());
         return "defectCreate";
     }
@@ -97,7 +82,6 @@ public class DefectController {
     @RequestMapping("/remove/{id}")
     public String removeDefect(@PathVariable("id") long id, Model model) {
         defectService.deleteDefect(id);
-//        model.addAttribute("defect", new DefectDTO());
         return "redirect:/defect/create";
 
     }
@@ -106,12 +90,8 @@ public class DefectController {
     public String defectShowByUser(Model model, @RequestParam(required = false, defaultValue = "open", value = "filter") String filter) {
         l.info("request mapping defect/defects");
         DefectStatusEnum filterStatus = DefectStatusEnum.valueOf(filter);
-
-//        model.addAttribute("defect", new DefectDTO());
         model.addAttribute("defectListByReporter", defectService.findAllDefectListsByReporterAndStatus(securityUtils.getLoggedPerson(), filterStatus));
         model.addAttribute("defectListByAssignee", defectService.findAllDefectListsByAssigneeAndStatus(securityUtils.getLoggedPerson(), filterStatus));
-//        model.addAttribute("listProjectsDTO", projectService.findAllTestProjectsDTO());
-
         return "defects";
     }
 
@@ -121,10 +101,7 @@ public class DefectController {
         l.info("request mapping defect/" + id);
         model.addAttribute("defectDTO", defectService.findDefectDTO(id));
 
-//        model.addAttribute("listDefectByReporterDTO", defectService.findAllDefectsByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
-//        model.addAttribute("listDefectByAssigneeDTO", defectService.findAllDefectsByAssigneeAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
         model.addAttribute("personNames", personService.findAllPersonNames());
-//        model.addAttribute("listProjectsDTO", projectService.findAllTestProjectsDTO());
         model.addAttribute("listDefectCommentByDefectDTO", defectCommentService.findAllDefectCommentDTOByDefectId(id));
         model.addAttribute("defectCommentsByDefect", defectCommentService.findAllDefectCommentDTOByDefectId(id));
         model.addAttribute("commentDTO", new DefectCommentDTO());
@@ -137,7 +114,6 @@ public class DefectController {
     public String writeAssigneeChange(DefectDTO defectDTO) {
         String redirectSite;
         defectService.changeDefectAssignee(defectDTO, securityUtils.getLoggedPerson());
-//        defectCommentService.writeDefectAssigneeChange(defectDTO,  securityUtils.getLoggedPerson());
         redirectSite = "redirect:/defect/" + defectDTO.getId();
         return redirectSite;
     }
@@ -147,18 +123,9 @@ public class DefectController {
         l.info("/writeStatusChange");
         String redirectSite;
         defectService.changeDefectStatus(defectDTO, securityUtils.getLoggedPerson());
-//        defectCommentService.writeDefectStatusChange(defectDTO,  securityUtils.getLoggedPerson());
         redirectSite = "redirect:/defect/" + defectDTO.getId();
 
         return redirectSite;
     }
-
-//    @RequestMapping(value = "/param", method = RequestMethod.GET)
-//    public String createDedfect(@RequestParam(required = false, defaultValue = "open", value = "filter") String foo) {
-//        l.info("request mapping defect/create");
-//        l.info("foo: " + foo);
-//        return "login";
-//    }
-
 
 }

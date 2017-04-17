@@ -23,7 +23,6 @@ public class WorkListForm extends BaseDTO {
     private List<Long> tcMuster_id;
     private String createdDateTime;
     private String updatedDateTime;
-    //    @Future
     @Size(min = 1, max = 15)    //hotfix
     private String plannedExecution;
     @NotNull

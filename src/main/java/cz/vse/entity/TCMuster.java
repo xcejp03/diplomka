@@ -42,19 +42,6 @@ public class TCMuster extends BaseEntity {
     @OneToMany(mappedBy = "tCMuster", fetch = FetchType.EAGER)
     private List<TSMuster> tsMusters;
 
-//    public TCMuster() {
-//    }
-//
-//    public TCMuster(final TCMuster tcMuster) {
-//
-//    }
-//
-//    public class C {
-//        public C(final C c) {
-//            // initialize this with c
-//        }
-//    }
-
 
     public String getName() {
         return name;

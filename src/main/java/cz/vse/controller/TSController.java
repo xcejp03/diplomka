@@ -49,11 +49,8 @@ public class TSController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createTS(Model model, TSMusterForm tsMusterForm, @RequestParam(required = false, value = "tcmuster") Long tcmusterId) {
         l.info("/ts/create");
-//        TSMusterForm tsMusterForm = new TSMusterForm();
         tsMusterForm.setTcMuster_id(tcmusterId);
 
-//        model.addAttribute("tsMusterForm", tsMusterForm);
-//        model.addAttribute("listTSMusters", tsMusterService.findAllTestStepMustersDTO());
         model.addAttribute("persons", personService.findAllPersonNames());
         model.addAttribute("loggedPerson", securityUtils.getLoggedPerson());
         model.addAttribute("tcMusters", tcMusterService.findAllTestCaseMustersNames());
@@ -102,7 +99,6 @@ public class TSController {
 
         if (bindingResult.hasErrors()) {
             l.error("form has errors");
-//            model.addAttribute("tsInstanceRun", tsInstanceService.findTestStepInstanceRunDTOById(id));
             return "tsRun";
         }
 
