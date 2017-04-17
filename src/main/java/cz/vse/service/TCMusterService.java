@@ -55,19 +55,27 @@ public interface TCMusterService {
     List<TCMuster> findAllTestCaseMustersByTestSuite(TestSuite testSuite);
 
     List<TCMusterDTO> findAllTestCaseMustersDTOByTestSuiteId(long id);
+
     List<TCMusterName> findAllTestCaseMusterNamesByTestSuiteId(long id);
 
     List<TCMusterDTO> findAllTCDTOByUser(Person person);
+
     List<TCMusterList> findAllTCListsByUser(Person person);
 
     List<TCMusterDTO> findAllTCDTOByUser(Long projectId);
 
     List<TCMusterDTO> findTCMustersDTOByProject(Project project);
+
     List<TCMusterDTO> findTCMustersDTOByProject(List<Project> projects);
+
     List<TCMusterDTO> findTCMustersDTOByProjectId(long projectId);
+
     List<TCMusterList> findTCMusterListsByProject(List<Project> projects);
+
     List<TCMusterList> findTCMusterListByProject(Project project);
+
     List<TCMusterName> findTCMusterNamesByProjectId(long projectId);
+
     int getNumberOfMyTCsInProject(Person person, Project project);
 
     int getNumberOfTCsInProject(Project project);

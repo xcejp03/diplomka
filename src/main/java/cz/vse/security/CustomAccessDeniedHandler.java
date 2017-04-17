@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

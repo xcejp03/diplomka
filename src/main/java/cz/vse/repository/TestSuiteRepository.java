@@ -17,5 +17,5 @@ public interface TestSuiteRepository extends BaseRepository<TestSuite> {
     List<TestSuite> findAllTestSuitesByProjectIn(List<Project> projectList);
 
     @Query("select count(ts.id) from TestSuite ts where ts.project = :project")
-        int getNumberOfSuitesInProject(@Param("project") Project project);
+    int getNumberOfSuitesInProject(@Param("project") Project project);
 }

@@ -15,12 +15,16 @@ public interface TCService {
 //    TCInstance runNewTC(long tcMusterId, Person person, String instanceOrigin);
 
     TCInstance mapTCMusterToTCInstance(TCMuster tcMuster);
+
     List<TSInstance> mapTSMusterToTSInstance(List<TSMuster> tsMusterList);
 //    TCInstance createAndSaveTCInstanceFromTCMusterId(long tcMusterId, Person person);
 //    List<TSInstance> createAndSaveTSInstanceFromTCMusterId(long tcMusterId, TCInstance tcInstance);
 
     List<TCMusterDTO> findAllTCMustersDTO();
+
     List<TCMuster> findAllTCMusters();
+
     List<TCMusterDTO> findAllTCMustersDTOBySuiteId(Long id);
+
     List<TCMusterList> findAllTCMusterListsBySuiteId(Long id);
 }

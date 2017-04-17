@@ -32,7 +32,8 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/dashboard">Home</a></li>
-                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right" th:text="#{common.backButton}">Zpět</a>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right"
+                   th:text="#{common.backButton}">Zpět</a>
             </ol>
         </div>
     </div>
@@ -158,7 +159,7 @@
                                 </td>
                                 <td sec:authorize="hasAuthority('TESTER')">
                                     <a th:href="@{'/tc/run/'+${tc.tcMuster_id}+'?worktc='+${tc.id}}"
-                                        th:text="#{table.run}">run</a>
+                                       th:text="#{table.run}">run</a>
                                 </td>
                             </tr>
                             </tbody>

@@ -1,8 +1,8 @@
 package cz.vse.service;
 
+import cz.vse.dto.ProjectDTO;
 import cz.vse.dto.ProjectForm;
 import cz.vse.dto.ProjectName;
-import cz.vse.dto.ProjectDTO;
 import cz.vse.dto.ProjectStatsDTO;
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;

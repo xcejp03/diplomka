@@ -1,7 +1,5 @@
 package cz.vse.dto;
 
-import cz.vse.entity.PriorityTCEnum;
-
 import java.util.List;
 
 /**

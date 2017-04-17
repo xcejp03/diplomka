@@ -1,9 +1,4 @@
 package cz.vse.utils;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import cz.vse.entity.Person;
 import org.apache.log4j.Logger;
@@ -17,14 +12,20 @@ import org.apache.poi.ss.usermodel.Font;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.document.AbstractExcelView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+import java.util.Map;
+
 /**
  * This class builds an Excel spreadsheet document using Apache POI library.
- * @author www.codejava.net
  *
+ * @author www.codejava.net
  */
 @Component
 public class ExcelBuilder extends AbstractExcelView {
     private final Logger l = Logger.getLogger(this.getClass());
+
     @Override
     protected void buildExcelDocument(Map<String, Object> model,
                                       HSSFWorkbook workbook, HttpServletRequest request, HttpServletResponse response)

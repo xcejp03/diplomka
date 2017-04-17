@@ -29,7 +29,7 @@ public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthent
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
         logger.debug("Logování přihlášení uživatele");
-        l.info("Přihlášení bylo úspěšné v "+LocalDateTime.now());
+        l.info("Přihlášení bylo úspěšné v " + LocalDateTime.now());
         super.onAuthenticationSuccess(request, response, authentication);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Person person = personService.findPersonByAuthentication(auth);

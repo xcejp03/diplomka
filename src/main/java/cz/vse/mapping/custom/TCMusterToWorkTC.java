@@ -1,8 +1,6 @@
 package cz.vse.mapping.custom;
 
 import cz.vse.entity.TCMuster;
-import cz.vse.entity.TSInstance;
-import cz.vse.entity.TSMuster;
 import cz.vse.entity.WorkTC;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MappingContext;

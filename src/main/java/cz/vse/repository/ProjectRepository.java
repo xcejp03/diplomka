@@ -19,9 +19,11 @@ public interface ProjectRepository extends BaseRepository<Project> {
 
 
     List<Person> findAllPersonsByPersonMembers(List<Project> projects);
+
     List<Person> findAllPersonByPersonMembers(List<Project> projects);
 
     List<Person> findAllPersonsByPersonMembers(Project project);
+
     List<Person> findAllPersonByPersonMembers(Project project);
 
 
@@ -31,7 +33,6 @@ public interface ProjectRepository extends BaseRepository<Project> {
 
     @Query("select count(p.id) from Project p join p.personMembers pm where p.id = :projectId")
     int getProjectMembersNumber(@Param("projectId") long projectId);
-
 
 
 }

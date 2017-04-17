@@ -3,7 +3,6 @@ package cz.vse.entity;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import java.time.LocalDateTime;
 
 /**
  * Created by pcejka on 21.09.2016.

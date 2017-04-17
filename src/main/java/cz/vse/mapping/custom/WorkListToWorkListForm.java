@@ -77,8 +77,6 @@ public class WorkListToWorkListForm extends CustomMapper<WorkList, WorkListForm>
         }
 
 
-
-
         for (Long tcMusterId : tcMusterIdList) {
             if (!tcMusterIdListOld.contains(tcMusterId)) {
                 WorkTC workTC = new WorkTC();

@@ -1,8 +1,9 @@
 package cz.vse.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import cz.vse.dto.*;
-import cz.vse.entity.*;
+import cz.vse.entity.Person;
+import cz.vse.entity.Project;
+import cz.vse.entity.TCInstance;
 import cz.vse.logic.TCMusterLogic;
 import cz.vse.service.*;
 import cz.vse.utils.SecurityUtils;
@@ -11,11 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -101,7 +101,8 @@
                         <div class="control-group form-group">
                             <div class="controls">
                                 <label for="enabled">Aktivní</label> *
-                                <input type="checkbox" th:checked="*{enabled}" th:text="#{form.enabled}" name="enabled" id="enabled"
+                                <input type="checkbox" th:checked="*{enabled}" th:text="#{form.enabled}" name="enabled"
+                                       id="enabled"
                                        class="checkbox"/>
                                 <!--<input type="enabled" id="enabled" class="form-control" name="enabled"/> <br/>-->
                             </div>
@@ -144,7 +145,7 @@
                             <td th:text="${user.username}">username</td>
                             <td th:text="${user.createdDateTime}">vytvořeno</td>
                             <td th:text="${user.lastLogged}">poslední přihlášení</td>
-                            <td><a th:href="@{'/person/role/'+${user.id}}" th:text="#{table.roles}">úprava rolí</a> </td>
+                            <td><a th:href="@{'/person/role/'+${user.id}}" th:text="#{table.roles}">úprava rolí</a></td>
                             <td><a th:href="@{'/person/edit/'+${user.id}}" th:text="#{table.edit}">Editace</a></td>
                         </tr>
                         </tbody>

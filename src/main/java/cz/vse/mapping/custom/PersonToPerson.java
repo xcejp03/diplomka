@@ -1,7 +1,6 @@
 package cz.vse.mapping.custom;
 
 import cz.vse.entity.Person;
-import cz.vse.entity.WorkTC;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MappingContext;
 import org.apache.log4j.Logger;
@@ -18,7 +17,7 @@ public class PersonToPerson extends CustomMapper<Person, Person> {
     public void mapAtoB(Person person, Person person2, MappingContext context) {
         l.info(person + " -> " + person2);
 
-        l.info("hloubka: "+context.getDepth());
+        l.info("hloubka: " + context.getDepth());
         person2 = person;
     }
 

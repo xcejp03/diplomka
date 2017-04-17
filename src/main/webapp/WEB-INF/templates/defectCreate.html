@@ -32,7 +32,8 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/dashboard">Home</a></li>
-                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right" th:text="#{common.backButton}">Zpět</a>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right"
+                   th:text="#{common.backButton}">Zpět</a>
             </ol>
         </div>
     </div>
@@ -79,7 +80,8 @@
                                 <input type="text" id="name" name="name" th:value="*{name}"
                                        class="form-control"/>
                                 <div th:if="${#fields.hasErrors('name')}" th:errorclass="alert-danger"
-                                     th:errors="*{name}">form field error</div>
+                                     th:errors="*{name}">form field error
+                                </div>
                             </div>
                         </div>
 
@@ -90,7 +92,8 @@
                                           th:text="*{description}"
                                           class="form-control"/>
                                 <div th:if="${#fields.hasErrors('description')}" th:errorclass="alert-danger"
-                                     th:errors="*{description}">form field error</div>
+                                     th:errors="*{description}">form field error
+                                </div>
                             </div>
                         </div>
 
@@ -101,7 +104,8 @@
                                        th:value="*{affectsVersion}"
                                        class="form-control"/>
                                 <div th:if="${#fields.hasErrors('name')}" th:errorclass="alert-danger"
-                                     th:errors="*{affectsVersion}">form field error</div>
+                                     th:errors="*{affectsVersion}">form field error
+                                </div>
                             </div>
                         </div>
 
@@ -119,7 +123,8 @@
                                     </option>
                                 </select>
                                 <div th:if="${#fields.hasErrors('assignee_id')}" th:errorclass="alert-danger"
-                                     th:errors="*{assignee_id}">form field error</div>
+                                     th:errors="*{assignee_id}">form field error
+                                </div>
                             </div>
                         </div>
 
@@ -137,16 +142,19 @@
                                     </option>
                                 </select>
                                 <div th:if="${#fields.hasErrors('priority')}" th:errorclass="alert-danger"
-                                     th:errors="*{priority}">form field error</div>
+                                     th:errors="*{priority}">form field error
+                                </div>
                             </div>
                         </div>
 
 
                         <span th:if="*{id != null}" th:remove="tag">
-                             <input type="submit" value="Upravit" th:value="#{common.editButton}" class="btn btn-primary"/>
+                             <input type="submit" value="Upravit" th:value="#{common.editButton}"
+                                    class="btn btn-primary"/>
                         </span>
                         <span th:if="*{id == null}" th:remove="tag">
-                             <input type="submit" value="Vytvořit" th:value="#{common.createButton}" class="btn btn-primary"/>
+                             <input type="submit" value="Vytvořit" th:value="#{common.createButton}"
+                                    class="btn btn-primary"/>
                         </span>
 
                     </form>
@@ -155,10 +163,12 @@
             <div class="col-sm-5">
                 <p th:if="${defectForm.id == null}">
                     <button type="button" class="btn btn-primary"
-                            onclick="window.open('', '_self', ''); window.close();" th:text="#{common.closeButton}">Close tab
+                            onclick="window.open('', '_self', ''); window.close();" th:text="#{common.closeButton}">
+                        Close tab
                     </button>
                 </p>
-                <p><a href="/defect/defects" class="btn btn-default" th:text="#{defect.defectList}">Seznam Defektů</a></p>
+                <p><a href="/defect/defects" class="btn btn-default" th:text="#{defect.defectList}">Seznam Defektů</a>
+                </p>
             </div>
         </div>
 

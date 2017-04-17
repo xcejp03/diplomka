@@ -1,9 +1,6 @@
 package cz.vse.utils.excelexport;
 
-import cz.vse.dto.ProjectStatsDTO;
 import cz.vse.dto.TCMusterList;
-import cz.vse.entity.PriorityTCEnum;
-import cz.vse.entity.StatusEnum;
 import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -22,12 +19,13 @@ import java.util.Map;
 
 /**
  * This class builds an Excel spreadsheet document using Apache POI library.
- * @author www.codejava.net
  *
+ * @author www.codejava.net
  */
 @Component
 public class ExcelBuilderTC extends AbstractExcelView {
     private final Logger l = Logger.getLogger(this.getClass());
+
     @Override
     protected void buildExcelDocument(Map<String, Object> model,
                                       HSSFWorkbook workbook, HttpServletRequest request, HttpServletResponse response)

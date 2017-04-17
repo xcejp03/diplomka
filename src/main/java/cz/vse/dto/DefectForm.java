@@ -19,7 +19,7 @@ public class DefectForm extends BaseDTO {
     @NotNull
     private PriorityDefectEnum priority;
     private DefectStatusEnum status;
-//    private String createdDateTime;
+    //    private String createdDateTime;
 //    private String updatedDateTime;
     @NotNull
     private Long assignee_id;

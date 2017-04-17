@@ -1,10 +1,5 @@
 package cz.vse.dto;
 
-import cz.vse.entity.PriorityTCEnum;
-import cz.vse.entity.StatusEnum;
-
-import java.util.List;
-
 /**
  * Created by pcejka on 10.10.2016.
  */

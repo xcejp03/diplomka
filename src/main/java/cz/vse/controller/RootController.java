@@ -4,7 +4,6 @@ import cz.vse.dto.*;
 import cz.vse.entity.Defect;
 import cz.vse.entity.DefectStatusEnum;
 import cz.vse.entity.Project;
-import cz.vse.entity.RoleEnum;
 import cz.vse.repository.*;
 import cz.vse.service.*;
 import cz.vse.utils.SecurityUtils;
@@ -169,9 +168,7 @@ public class RootController {
             model.addAttribute("myOpenDefects", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
             model.addAttribute("workListsLastThreeDays", workListService.findAllWorkListDTOByMemberLastThreeDays(securityUtils.getLoggedPerson()));
             model.addAttribute("myProjectsStatistics", projectService.getMyProjectsWithStatistics(securityUtils.getLoggedPerson()));
-        }
-
-       else if (loggedPersonAuthorities.contains(new SimpleGrantedAuthority("ANALYTIC"))) {
+        } else if (loggedPersonAuthorities.contains(new SimpleGrantedAuthority("ANALYTIC"))) {
             l.warn("role je analytik");
             List<DefectDTO> emptyListDefectDTO = new ArrayList<>();
             model.addAttribute("myProjectsStatistics", projectService.getMyProjectsWithStatistics(securityUtils.getLoggedPerson()));
@@ -182,10 +179,7 @@ public class RootController {
             model.addAttribute("workListsTomorrow", new ArrayList<WorkListDTO>());
             model.addAttribute("workListsLastThreeDays", new ArrayList<WorkListDTO>());
             model.addAttribute("myOpenTC", new ArrayList<WorkTCDTO>());
-        }
-
-
-        else if (loggedPersonAuthorities.contains(new SimpleGrantedAuthority("MANAGER"))) {
+        } else if (loggedPersonAuthorities.contains(new SimpleGrantedAuthority("MANAGER"))) {
             l.warn("role je manager");
             model.addAttribute("myAssignedOpenDefects", defectService.findAllDefectDTOByAssigneeAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
             model.addAttribute("myOpenDefects", defectService.findAllDefectDTOByReporterAndStatus(securityUtils.getLoggedPerson(), DefectStatusEnum.open));
@@ -194,24 +188,20 @@ public class RootController {
             model.addAttribute("workListsTomorrow", new ArrayList<WorkListDTO>());
             model.addAttribute("workListsLastThreeDays", new ArrayList<WorkListDTO>());
             model.addAttribute("myOpenTC", new ArrayList<WorkTCDTO>());
-        }
-
-      else  if (loggedPersonAuthorities.contains(new SimpleGrantedAuthority("ADMIN"))) {
+        } else if (loggedPersonAuthorities.contains(new SimpleGrantedAuthority("ADMIN"))) {
             l.warn("role je admin");
             model.addAttribute("myAssignedOpenDefects", new ArrayList<DefectDTO>());
             model.addAttribute("myOpenDefects", new ArrayList<DefectDTO>());
-            model.addAttribute("myProjectsStatistics",  new ArrayList<ProjectStatsDTO>());
+            model.addAttribute("myProjectsStatistics", new ArrayList<ProjectStatsDTO>());
             model.addAttribute("workListsToday", new ArrayList<WorkListDTO>());
             model.addAttribute("workListsTomorrow", new ArrayList<WorkListDTO>());
             model.addAttribute("workListsLastThreeDays", new ArrayList<WorkListDTO>());
             model.addAttribute("myOpenTC", new ArrayList<WorkTCDTO>());
-        }
-
-        else {
+        } else {
             l.warn("role je žádná");
             model.addAttribute("myAssignedOpenDefects", new ArrayList<DefectDTO>());
             model.addAttribute("myOpenDefects", new ArrayList<DefectDTO>());
-            model.addAttribute("myProjectsStatistics",  new ArrayList<ProjectStatsDTO>());
+            model.addAttribute("myProjectsStatistics", new ArrayList<ProjectStatsDTO>());
             model.addAttribute("workListsToday", new ArrayList<WorkListDTO>());
             model.addAttribute("workListsTomorrow", new ArrayList<WorkListDTO>());
             model.addAttribute("workListsLastThreeDays", new ArrayList<WorkListDTO>());

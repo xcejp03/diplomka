@@ -10,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -59,8 +62,8 @@ public class TSController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createTSPost(Model model, @Valid TSMusterForm tsMusterForm, BindingResult bindingResult, HttpServletRequest request) {
-        l.info("/ts/create post" );
-        Person loggedPerson =  securityUtils.getLoggedPerson();
+        l.info("/ts/create post");
+        Person loggedPerson = securityUtils.getLoggedPerson();
 
         if (bindingResult.hasErrors()) {
             l.error("form has errors");
@@ -121,21 +124,21 @@ public class TSController {
 
     @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
     public String showTSInstancePost(@PathVariable("id") long id, Model model) {
-        l.info("/ts/show/"+id);
+        l.info("/ts/show/" + id);
         model.addAttribute("TSInstanceRunDTO", tsInstanceService.findTestStepInstanceRunDTOById(id));
         return "tsShow";
     }
 
     @RequestMapping("/remove/{id}")
     public String removeTSMuster(@PathVariable("id") long id) {
-        l.info("/ts/remove/"+id);
+        l.info("/ts/remove/" + id);
         tsMusterService.deleteTestStepMuster(id);
         return "redirect:/ts/create";
     }
 
     @RequestMapping("/instance/remove/{id}")
     public String removeTSInstance(@PathVariable("id") long id) {
-        l.info("/ts/instance/remove/"+id);
+        l.info("/ts/instance/remove/" + id);
         Long tcInstanceId = tsInstanceService.findTestStepInstanceById(id).gettCInstance().getId();
         tsInstanceService.deleteTestStepInstanceById(id);
         return "redirect:/tc/show/" + tcInstanceId;

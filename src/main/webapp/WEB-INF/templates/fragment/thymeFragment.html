@@ -48,7 +48,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/admin" sec:authorize="hasAuthority('ADMIN')" >[--]</a>
+                <a class="navbar-brand" href="/admin" sec:authorize="hasAuthority('ADMIN')">[--]</a>
                 <span sec:authorize="!hasAuthority('ROLE_ANONYMOUS')">
                     <a href="/dashboard" sec:authentication="principal.username" class="navbar-brand">Moje jméno</a>
                 </span>
@@ -59,9 +59,9 @@
                     <li>
                         <a href="/project/projects" th:text="#{navbar.myprojects}">My Projects</a>
                     </li>
-                        <li sec:authorize="hasAuthority('ANALYTIC')">
-                            <a href="/tc/tcs">Test Casy</a>
-                        </li>
+                    <li sec:authorize="hasAuthority('ANALYTIC')">
+                        <a href="/tc/tcs">Test Casy</a>
+                    </li>
                     <li>
                         <a href="/defect/defects" th:text="#{navbar.defects}">Defekty</a>
                     </li>

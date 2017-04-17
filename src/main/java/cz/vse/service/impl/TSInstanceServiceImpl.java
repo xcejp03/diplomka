@@ -51,7 +51,7 @@ public class TSInstanceServiceImpl implements TSInstanceService {
         tsInstance.setUpdatedDateTime(LocalDateTime.now());
         tsInstanceRepository.save(tsInstance);
         tcInstanceService.refreshTCInstanceStatus(tsInstance.gettCInstance().getId());
-        l.info("updated: "+ tsInstance);
+        l.info("updated: " + tsInstance);
     }
 
     public void updateTestStepInstance(TSInstanceRunDTO tsInstanceRunDTO) {
@@ -63,27 +63,27 @@ public class TSInstanceServiceImpl implements TSInstanceService {
         l.info(tsInstance);
         tsInstanceRepository.save(tsInstance);
         tcInstanceService.refreshTCInstanceStatus(tsInstance.gettCInstance().getId());
-        l.info("updated: "+ tsInstance);
+        l.info("updated: " + tsInstance);
     }
 
     public void deleteTestStepInstance(TSInstance tsInstanceToDelete) {
         l.info("with: " + tsInstanceToDelete);
         tsInstanceRepository.save(tsInstanceToDelete);
-        l.info("deleted: "+ tsInstanceToDelete);
+        l.info("deleted: " + tsInstanceToDelete);
     }
 
     public void deleteTestStepInstanceById(long testStepInstanceToDeleteById) {
         l.info("with: " + testStepInstanceToDeleteById);
         TSInstance TSInstanceToDelete;
         tsInstanceRepository.delete(testStepInstanceToDeleteById);
-        l.info("deleted: "+ testStepInstanceToDeleteById);
+        l.info("deleted: " + testStepInstanceToDeleteById);
     }
 
     public TSInstance findTestStepInstanceById(long id) {
         l.info("with: " + id);
         TSInstance tsInstance;
         tsInstance = tsInstanceRepository.findOne(id);
-        l.info("found: "+ tsInstance);
+        l.info("found: " + tsInstance);
         return tsInstance;
     }
 
@@ -93,7 +93,7 @@ public class TSInstanceServiceImpl implements TSInstanceService {
 
         TCInstance tcInstance = tcInstanceRepository.findOne(id);
         tsInstanceList = tsInstanceRepository.findAllTestStepInstancesByTCInstanceOrderById(tcInstance);
-        l.info("found: "+ tsInstanceList);
+        l.info("found: " + tsInstanceList);
         return tsInstanceList;
     }
 
@@ -112,14 +112,14 @@ public class TSInstanceServiceImpl implements TSInstanceService {
         l.info("with: " + id);
         TSInstance tsInstance = tsInstanceRepository.findOne(id);
         TSInstanceRunDTO tsInstanceRunDTO = mapper.map(tsInstance, TSInstanceRunDTO.class);
-        l.info("found: "+ tsInstanceRunDTO);
+        l.info("found: " + tsInstanceRunDTO);
         return tsInstanceRunDTO;
     }
 
     public List<TSInstance> findAllTestStepInstances() {
         List<TSInstance> tsInstanceList;
         tsInstanceList = tsInstanceRepository.findAll(new Sort(Sort.Direction.ASC, "id"));
-        l.info("found: "+ tsInstanceList);
+        l.info("found: " + tsInstanceList);
         return tsInstanceList;
     }
 }

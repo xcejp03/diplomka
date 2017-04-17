@@ -18,7 +18,6 @@ public class DefectList extends BaseDTO {
     private String reporter;
 
 
-
     public String getName() {
         return name;
     }

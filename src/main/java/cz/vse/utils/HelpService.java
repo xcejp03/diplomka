@@ -14,8 +14,6 @@ import cz.vse.repository.UserRoleRepository;
 import cz.vse.service.PersonService;
 import cz.vse.service.RoleService;
 import cz.vse.service.TCInstanceService;
-import cz.vse.service.UserDetailService;
-import cz.vse.service.impl.PersonServiceImpl;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -58,8 +56,8 @@ public class HelpService {
         TCInstance tcInstance;
         tcInstance = tcInstanceService.findLastTCInstanceByTCMusterId(id);
         l.warn(tcInstance);
-        l.error("jméno: "+tcInstance.getName());
-        l.error("id: "+tcInstance.getId());
+        l.error("jméno: " + tcInstance.getName());
+        l.error("id: " + tcInstance.getId());
 
     }
 

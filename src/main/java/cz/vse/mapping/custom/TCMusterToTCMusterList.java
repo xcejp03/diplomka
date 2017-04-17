@@ -1,12 +1,10 @@
 package cz.vse.mapping.custom;
 
-import cz.vse.dto.TCMusterDTO;
 import cz.vse.dto.TCMusterList;
 import cz.vse.entity.StatusEnum;
 import cz.vse.entity.TCInstance;
 import cz.vse.entity.TCMuster;
 import cz.vse.service.TCInstanceService;
-import groovy.util.IFileNameFinder;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MappingContext;
 import org.apache.log4j.Logger;

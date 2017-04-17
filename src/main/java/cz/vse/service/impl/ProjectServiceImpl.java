@@ -1,10 +1,12 @@
 package cz.vse.service.impl;
 
+import cz.vse.dto.ProjectDTO;
 import cz.vse.dto.ProjectForm;
 import cz.vse.dto.ProjectName;
-import cz.vse.dto.ProjectDTO;
 import cz.vse.dto.ProjectStatsDTO;
-import cz.vse.entity.*;
+import cz.vse.entity.Person;
+import cz.vse.entity.Project;
+import cz.vse.entity.TestSuite;
 import cz.vse.repository.ProjectRepository;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
@@ -42,7 +44,7 @@ public class ProjectServiceImpl implements ProjectService {
     private HelpService hs;
 
     public void createTestProject(ProjectDTO projectDTO) {
-        l.debug("with: "+projectDTO);
+        l.debug("with: " + projectDTO);
         Project project = mapper.map(projectDTO, Project.class);
         project.setCreatedDateTime(LocalDateTime.now());
         projectRepository.save(project);
@@ -50,7 +52,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     public void createTestProject(Project project) {
-        l.debug("with: "+project);
+        l.debug("with: " + project);
         projectRepository.save(project);
         project.setCreatedDateTime(LocalDateTime.now());
         l.info("created: " + project);
@@ -58,7 +60,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void createTestProject(ProjectForm projectForm) {
-        l.debug("with: "+projectForm);
+        l.debug("with: " + projectForm);
         Project project = mapper.map(projectForm, Project.class);
         project.setCreatedDateTime(LocalDateTime.now());
         projectRepository.save(project);
@@ -66,7 +68,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     public void updateTestProject(ProjectDTO projectDTO) {
-        l.debug("with: "+projectDTO);
+        l.debug("with: " + projectDTO);
         Project project = projectRepository.findOne(projectDTO.getId());
         project.setUpdatedDateTime(LocalDateTime.now());
         mapper.map(projectDTO, project);
@@ -76,7 +78,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void updateTestProject(ProjectForm projectForm) {
-        l.debug("with: "+projectForm);
+        l.debug("with: " + projectForm);
         Project project = projectRepository.findOne(projectForm.getId());
         project.setUpdatedDateTime(LocalDateTime.now());
         mapper.map(projectForm, project);
@@ -85,19 +87,19 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     public void deleteTestProject(Project projectToDelete) {
-        l.info("with: "+projectToDelete);
+        l.info("with: " + projectToDelete);
         projectRepository.delete(projectToDelete);
         l.info("deleted " + projectToDelete);
     }
 
     public void deleteTestProjectById(long testProjectToDeleteById) {
-        l.info("with: "+testProjectToDeleteById);
+        l.info("with: " + testProjectToDeleteById);
         projectRepository.delete(testProjectToDeleteById);
         l.info("deleted: " + testProjectToDeleteById);
     }
 
     public Project findTestProjectById(long id) {
-        l.info("with: "+id);
+        l.info("with: " + id);
         Project project;
         project = projectRepository.findOne(id);
         l.info("found: " + project);
@@ -105,7 +107,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     public ProjectDTO findTestProjectDTOById(long id) {
-        l.info("with: "+id);
+        l.info("with: " + id);
         Project project;
         ProjectDTO projectDTO;
         project = projectRepository.findOne(id);
@@ -116,7 +118,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectForm findTestProjectFormById(long id) {
-       l.info("with: "+id);
+        l.info("with: " + id);
         Project project = projectRepository.findOne(id);
         ProjectForm projectForm = mapper.map(project, ProjectForm.class);
         l.info("found: " + projectForm);
@@ -125,7 +127,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectName findTestProjectNameById(long id) {
-        l.info("with: "+id);
+        l.info("with: " + id);
         Project project = projectRepository.findOne(id);
         ProjectName projectName = mapper.map(project, ProjectName.class);
         l.info("found: " + projectName);

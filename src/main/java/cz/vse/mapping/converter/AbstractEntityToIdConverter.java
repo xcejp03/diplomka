@@ -17,7 +17,7 @@ public abstract class AbstractEntityToIdConverter<E extends BaseEntity, ID exten
     @Override
     public ID convertTo(E source, Type<ID> destinationType) {
         if (source != null) {
-            return (ID)source.getId();
+            return (ID) source.getId();
         }
 
         return null;
@@ -31,7 +31,6 @@ public abstract class AbstractEntityToIdConverter<E extends BaseEntity, ID exten
 
         return null;
     }
-
 
 
 }

@@ -4,8 +4,6 @@ import cz.vse.entity.Defect;
 import cz.vse.entity.DefectStatusEnum;
 import cz.vse.entity.Person;
 import cz.vse.repository.base.BaseRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.scheduling.annotation.Async;
 
 import java.util.List;
 

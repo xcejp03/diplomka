@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  * Created by pcejka on 21.09.2016.
  */
 @MappedSuperclass
-public abstract class BaseEntity implements Serializable,Persistable<Long> {
+public abstract class BaseEntity implements Serializable, Persistable<Long> {
     private static final long serialVersionUID = 8985474789151478070L;
 
     @Id

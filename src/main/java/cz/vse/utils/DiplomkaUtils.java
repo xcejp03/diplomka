@@ -10,7 +10,6 @@ public class DiplomkaUtils {
     private static String activeProfiles;
 
 
-
     @Value("${spring.profiles.active}")
     public void setActiveProfiles(String activeProfiles) {
         DiplomkaUtils.activeProfiles = activeProfiles;

@@ -1,12 +1,10 @@
 package cz.vse.mapping.custom;
 
-        import cz.vse.entity.RoleEnum;
-        import cz.vse.entity.TSInstance;
-        import cz.vse.entity.TSMuster;
-        import cz.vse.entity.UserRole;
-        import ma.glasnost.orika.CustomMapper;
-        import ma.glasnost.orika.MappingContext;
-        import org.springframework.stereotype.Component;
+import cz.vse.entity.RoleEnum;
+import cz.vse.entity.UserRole;
+import ma.glasnost.orika.CustomMapper;
+import ma.glasnost.orika.MappingContext;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by pcejka on 26.11.2016.

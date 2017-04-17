@@ -30,6 +30,7 @@ public class ProjectToProjectName extends CustomMapper<Project, ProjectName> {
 
     @Autowired
     private SuiteService suiteService;
+
     @Override
     public void mapAtoB(Project project, ProjectName projectName, MappingContext context) {
         l.warn("ProjectToProjectNamesDTO A->B");

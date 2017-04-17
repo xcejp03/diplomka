@@ -48,6 +48,7 @@ public interface SuiteService {
     List<SuiteDTO> findAllTestSuitesDTOByProjectId(Long projectId);
 
     List<SuiteDTO> findAllTestSuitesDTOByUser(Person person);
+
     List<SuiteList> findAllTestSuiteListsByUser(Person person);
 
     List<SuiteDTO> findAllTestSuitesDTOByUser(Long projectId);

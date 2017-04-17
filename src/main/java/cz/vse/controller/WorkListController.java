@@ -1,7 +1,11 @@
 package cz.vse.controller;
 
-import cz.vse.dto.*;
-import cz.vse.entity.*;
+import cz.vse.dto.TCInstanceRunDTO;
+import cz.vse.dto.WorkListForm;
+import cz.vse.dto.WorkTCWrapper;
+import cz.vse.entity.Person;
+import cz.vse.entity.PriorityTCEnum;
+import cz.vse.entity.TCInstance;
 import cz.vse.service.*;
 import cz.vse.utils.SecurityUtils;
 import org.apache.log4j.Logger;
@@ -9,10 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.List;
 
 /**
  * Created by pcejka on 09.10.2016.
@@ -165,7 +171,7 @@ public class WorkListController {
     }
 
     @RequestMapping(value = "/worktc/edit", method = RequestMethod.POST)
-    public String editWorkTC(Model model,WorkTCWrapper workTCWrapper) {
+    public String editWorkTC(Model model, WorkTCWrapper workTCWrapper) {
         l.info("/worklist/worktc/edit");
 //        workListService.updateWorkList(workListForm);
         workListService.updateWorkTC(workTCWrapper);
@@ -235,7 +241,7 @@ public class WorkListController {
     }
 
     @RequestMapping("/run/{id}")
-    public String runTCMuster(Model model, @PathVariable("id") long id,  @RequestParam(required = false, defaultValue = "null", value = "origin") String instanceOrigin,
+    public String runTCMuster(Model model, @PathVariable("id") long id, @RequestParam(required = false, defaultValue = "null", value = "origin") String instanceOrigin,
                               @RequestParam(required = false, defaultValue = "null", value = "backid") String backId) {
         l.info("/worklist/run/" + id);
         TCInstanceRunDTO tcInstanceRunDTO;

@@ -1,6 +1,5 @@
 package cz.vse.mapping.converter;
 
-import cz.vse.entity.TCInstance;
 import cz.vse.entity.WorkTC;
 import org.springframework.stereotype.Component;
 

@@ -3,7 +3,10 @@ package cz.vse.service;
 import cz.vse.dto.TCInstanceDTO;
 import cz.vse.dto.TCInstanceList;
 import cz.vse.dto.TCInstanceRunDTO;
-import cz.vse.entity.*;
+import cz.vse.entity.Project;
+import cz.vse.entity.StatusEnum;
+import cz.vse.entity.TCInstance;
+import cz.vse.entity.TCMuster;
 
 import java.util.List;
 
@@ -31,6 +34,7 @@ public interface TCInstanceService {
     List<TCInstanceList> findAllTCInstanceListsByTCMusterId(long id);
 
     List<TCInstanceDTO> findTCInstancesDTOByWorkTCId(long id);
+
     List<TCInstanceList> findTCInstanceListsByWorkTCId(long id);
 
     TCInstanceRunDTO findTCInstanceRunDTOById(long id);

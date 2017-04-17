@@ -32,7 +32,8 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/dashboard">Home</a></li>
-                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right" th:text="#{common.backButton}">Zpět</a>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right"
+                   th:text="#{common.backButton}">Zpět</a>
             </ol>
         </div>
     </div>
@@ -60,7 +61,8 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="action">Akce</label>:
-                                <input type="text" id="action" readonly="true" name="action" th:value="${tsInstanceRun.action}"
+                                <input type="text" id="action" readonly="true" name="action"
+                                       th:value="${tsInstanceRun.action}"
                                        class="form-control"
                                 />
                             </div>
@@ -78,7 +80,8 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="result">Výsledek</label>:
-                                <input type="text" id="result" name="result" th:value="${tsInstanceRun.result}" readonly="true"
+                                <input type="text" id="result" name="result" th:value="${tsInstanceRun.result}"
+                                       readonly="true"
                                        class="form-control"/>
                             </div>
                         </div>

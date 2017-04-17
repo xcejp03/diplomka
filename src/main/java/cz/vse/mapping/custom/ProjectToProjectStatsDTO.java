@@ -1,7 +1,8 @@
 package cz.vse.mapping.custom;
 
 import cz.vse.dto.ProjectStatsDTO;
-import cz.vse.entity.*;
+import cz.vse.entity.Project;
+import cz.vse.entity.StatusEnum;
 import cz.vse.service.TCInstanceService;
 import cz.vse.service.TCMusterService;
 import cz.vse.service.WorkTCService;
@@ -44,7 +45,7 @@ public class ProjectToProjectStatsDTO extends CustomMapper<Project, ProjectStats
         projectStatsDTO.setNumberOfNorunTCs(tcInstanceService.getNumberOfTCsInProjectByStatus(project, StatusEnum.NORUN));
         projectStatsDTO.setNumberOfTCs(tcMusterService.getNumberOfTCsInProject(project));
         projectStatsDTO.setProjectOwner_name(project.getProjectOwner().getName());
-        l.warn("id projektu UUU: "+project.getId());
+        l.warn("id projektu UUU: " + project.getId());
         projectStatsDTO.setProject_id(project.getId());
 
 //        super.mapAtoB(project, projectStatsDTO, context);

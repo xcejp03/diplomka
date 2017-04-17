@@ -5,12 +5,12 @@ package cz.vse.entity;
  */
 
 public enum StatusEnum {
-    NORUN ("norun", 3),
-    NOTCOMPLETED ("not-completed",2),
-    BLOCKED ("blocked", 1),
-    PASSED ("passed", 4),
-    FAILED ("failed", 0),
-    TESTOVACU ("tewsatovani", 10);
+    NORUN("norun", 3),
+    NOTCOMPLETED("not-completed", 2),
+    BLOCKED("blocked", 1),
+    PASSED("passed", 4),
+    FAILED("failed", 0),
+    TESTOVACU("tewsatovani", 10);
 
     private String statusText;
     private int priorityOrder;

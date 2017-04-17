@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -26,11 +25,10 @@ public class WorkTC extends BaseEntity {
     @JoinColumn(name = "workList_id")
     private WorkList workList;
 
-    @OneToMany (mappedBy = "workTC")
+    @OneToMany(mappedBy = "workTC")
     private List<TCInstance> tcRunHistory;
 
     private PriorityTCEnum priority;
-
 
 
     public TCMuster getTcMuster() {
@@ -65,7 +63,7 @@ public class WorkTC extends BaseEntity {
         this.tcRunHistory = tcRunHistory;
     }
 
-    public void addTcRunHistory(TCInstance tcInstance)  {
+    public void addTcRunHistory(TCInstance tcInstance) {
         this.tcRunHistory.add(tcInstance);
     }
 

@@ -9,11 +9,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * Created by pcejka on 30.11.2016.
  */
 
-    @Configuration
-    @EnableJpaRepositories(basePackages = ConfigConstants.REPOSITORIES_PACKAGE)
-    @EntityScan(basePackages = ConfigConstants.ENTITIES_PACKAGE)
-    @EnableTransactionManagement
-    public class JpaConfig {
+@Configuration
+@EnableJpaRepositories(basePackages = ConfigConstants.REPOSITORIES_PACKAGE)
+@EntityScan(basePackages = ConfigConstants.ENTITIES_PACKAGE)
+@EnableTransactionManagement
+public class JpaConfig {
 
-    }
+}
 

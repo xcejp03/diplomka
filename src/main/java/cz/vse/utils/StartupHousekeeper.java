@@ -1,7 +1,5 @@
 package cz.vse.utils;
 
-import cz.vse.dto.PersonName;
-import cz.vse.dto.WorkListDTO;
 import cz.vse.entity.Person;
 import cz.vse.entity.Project;
 import cz.vse.repository.PersonRepository;
@@ -18,7 +16,6 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import java.awt.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 

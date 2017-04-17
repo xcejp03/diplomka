@@ -14,9 +14,11 @@ import java.util.List;
 public interface TSMusterService {
 
     void createTestStepMuster(TSMusterDTO tsMusterDTO);
+
     void createTestStepMuster(TSMusterForm tsMusterForm);
 
     void updateTestStepMuster(TSMusterDTO tsMusterDTO);
+
     void updateTestStepMuster(TSMusterForm tsMusterForm);
 
     void deleteTestStepMuster(TSMuster TSMusterToDelete);
@@ -35,7 +37,7 @@ public interface TSMusterService {
 
     List<TSMusterForm> findAllTestStepMusterForms();
 
-    List<TSMuster> findAllTestStepMustersByTCMuster (TCMuster tcMuster);
+    List<TSMuster> findAllTestStepMustersByTCMuster(TCMuster tcMuster);
 
     List<TSMusterDTO> findAllTSMustersDTOByTCMusterId(Long id);
 
@@ -43,5 +45,5 @@ public interface TSMusterService {
 
     List<TSMusterList> findAllTSMusterListsByTCMusterId(Long id);
 
-    List<TSMuster>findAllTSMustersByTCMuster (TCMuster tcMuster);
+    List<TSMuster> findAllTSMustersByTCMuster(TCMuster tcMuster);
 }

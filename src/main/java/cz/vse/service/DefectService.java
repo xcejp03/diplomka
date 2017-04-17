@@ -1,8 +1,8 @@
 package cz.vse.service;
 
+import cz.vse.dto.DefectDTO;
 import cz.vse.dto.DefectForm;
 import cz.vse.dto.DefectList;
-import cz.vse.dto.DefectDTO;
 import cz.vse.entity.*;
 
 import java.util.List;
@@ -33,7 +33,7 @@ public interface DefectService {
 
     DefectForm findDefectForm(long id);
 
-    DefectList findDefectList (long id);
+    DefectList findDefectList(long id);
 
     List<Defect> findAllDefects();
 
@@ -53,5 +53,5 @@ public interface DefectService {
 
     void changeDefectStatus(DefectDTO defectDTO, Person author);
 
-    void changeDefectAssignee (DefectDTO defectDTO, Person author);
+    void changeDefectAssignee(DefectDTO defectDTO, Person author);
 }

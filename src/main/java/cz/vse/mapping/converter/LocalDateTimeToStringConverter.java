@@ -5,7 +5,6 @@ import ma.glasnost.orika.metadata.Type;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;

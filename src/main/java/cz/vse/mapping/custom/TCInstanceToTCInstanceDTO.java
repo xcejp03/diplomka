@@ -1,7 +1,7 @@
 package cz.vse.mapping.custom;
 
 import cz.vse.dto.TCInstanceDTO;
-import cz.vse.entity.*;
+import cz.vse.entity.TCInstance;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MappingContext;
 import org.apache.log4j.Logger;

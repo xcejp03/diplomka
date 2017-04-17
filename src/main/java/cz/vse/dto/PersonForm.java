@@ -2,7 +2,6 @@ package cz.vse.dto;
 
 import cz.vse.entity.RoleEnum;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 

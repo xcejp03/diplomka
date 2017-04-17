@@ -32,7 +32,8 @@
             <ol class="breadcrumb">
                 <ol class="breadcrumb">
                     <li><a href="/dashboard">Home</a></li>
-                    <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right" th:text="#{common.backButton}">Zpět</a>
+                    <a th:href="@{${#httpServletRequest.getHeader('referer')}}"
+                       class="btn btn-default btn-xs pull-right" th:text="#{common.backButton}">Zpět</a>
                 </ol>
             </ol>
         </div>
@@ -60,7 +61,8 @@
                         <div class=" control-group form-group">
                             <div class="controls">
                                 <label for="commentText">commentText</label>:
-                                <input type="text" id="commentText" name="commentText" th:value="${commentDTO.commentText}" class="form-control"/>
+                                <input type="text" id="commentText" name="commentText"
+                                       th:value="${commentDTO.commentText}" class="form-control"/>
                             </div>
                         </div>
 

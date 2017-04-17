@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.springframework.org/security/tags">
+>
 
 <head>
 
@@ -33,7 +33,8 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/dashboard">Home</a></li>
-                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right" th:text="#{common.backButton}">Zpět</a>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right"
+                   th:text="#{common.backButton}">Zpět</a>
             </ol>
         </div>
     </div>

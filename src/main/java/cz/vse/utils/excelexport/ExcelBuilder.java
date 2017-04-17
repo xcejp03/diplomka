@@ -1,9 +1,4 @@
 package cz.vse.utils.excelexport;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import cz.vse.entity.Person;
 import org.apache.log4j.Logger;
@@ -16,8 +11,14 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
 import org.springframework.web.servlet.view.document.AbstractExcelView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+import java.util.Map;
+
 public class ExcelBuilder extends AbstractExcelView {
     private final Logger l = Logger.getLogger(this.getClass());
+
     @Override
     protected void buildExcelDocument(Map<String, Object> model,
                                       HSSFWorkbook workbook, HttpServletRequest request, HttpServletResponse response)

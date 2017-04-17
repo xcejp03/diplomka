@@ -1,9 +1,15 @@
 package cz.vse.service.impl;
 
 import cz.vse.dto.WorkTCDTO;
-import cz.vse.entity.*;
+import cz.vse.entity.Person;
+import cz.vse.entity.TCInstance;
+import cz.vse.entity.WorkList;
+import cz.vse.entity.WorkTC;
 import cz.vse.repository.WorkTCRepository;
-import cz.vse.service.*;
+import cz.vse.service.PersonService;
+import cz.vse.service.TCInstanceService;
+import cz.vse.service.WorkListService;
+import cz.vse.service.WorkTCService;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +60,7 @@ public class WorkTCServiceImpl implements WorkTCService {
     @Override
     public void updateWorkTC(WorkTC workTC) {
         workTC.setUpdatedDateTime(LocalDateTime.now());
-        l.warn("updateWorkTC: "+workTCRepository.save(workTC));
+        l.warn("updateWorkTC: " + workTCRepository.save(workTC));
     }
 
     @Override

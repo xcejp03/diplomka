@@ -34,7 +34,7 @@ public interface PersonService {
 
     List<PersonForm> findAllPersonForms();
 
-    List<PersonName> findAllPersonNames ();
+    List<PersonName> findAllPersonNames();
 
     List<Person> findAllPersonByProjectOrderById(Project project);
 
@@ -44,7 +44,7 @@ public interface PersonService {
 
     List<PersonName> findAllPersonNamesByProjectIdOrderById(long id);
 
-    List<PersonForm> findAllPersonFormsByProjectId (long id);
+    List<PersonForm> findAllPersonFormsByProjectId(long id);
 
     Person findPersonByLogin(String login);
 

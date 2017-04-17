@@ -58,12 +58,15 @@
             <tr>
                 <th th:text="#{table.id}">TC ID</th>
                 <th th:text="#{table.priority}">Priorita</th>
-                <th th:text="#{table.status}" sec:authorize="hasAuthority('TESTER') or hasAuthority('MANAGER')">Stav</th>
+                <th th:text="#{table.status}" sec:authorize="hasAuthority('TESTER') or hasAuthority('MANAGER')">Stav
+                </th>
                 <th th:text="#{table.name}">Název</th>
                 <th th:text="#{table.lastRunDateTime}">lastRunDateTime</th>
                 <th th:text="#{table.created}" sec:authorize="hasAuthority('ANALYTIC')">Vytvořeno</th>
                 <th th:text="#{table.edit}" sec:authorize="hasAuthority('ANALYTIC')">Editace</th>
-                <th th:text="#{table.history}" sec:authorize="hasAuthority('TESTER') or hasAuthority('MANAGER')">Historie</th>
+                <th th:text="#{table.history}" sec:authorize="hasAuthority('TESTER') or hasAuthority('MANAGER')">
+                    Historie
+                </th>
                 <th th:text="#{table.run}" sec:authorize="hasAuthority('TESTER')">Spustit</th>
                 <th th:text="#{table.ts}" sec:authorize="hasAuthority('ANALYTIC')">Test Stepy</th>
             </tr>
@@ -73,7 +76,8 @@
                 <td th:text="${tc.id}">00</td>
                 <td><span th:class="${tc.priority}" th:text="${tc.priority}">Priorita</span></td>
                 <td sec:authorize="hasAuthority('TESTER') or hasAuthority('MANAGER')"><span th:text="${tc.status}"
-                                                                 th:class="${tc.status}">Stav TC</span></td>
+                                                                                            th:class="${tc.status}">Stav TC</span>
+                </td>
                 <td th:text="${tc.name}">Název</td>
                 <td th:text="${tc.lastRunDateTime}">lastRunDateTime</td>
                 <td th:text="${tc.createdDateTime}" sec:authorize="hasAuthority('ANALYTIC')">datum a čas vytvoření</td>
@@ -81,8 +85,9 @@
                         th:href="@{'/tc/edit/'+${tc.id}(project=${suite.project_id},suiteFrom=${suite} != null ? ${suite.id} : null )}"
                         th:text="#{table.edit}">editace</a>
                 </td>
-                <td sec:authorize="hasAuthority('TESTER') or hasAuthority('MANAGER')"><a th:href="@{'/tc/history/'+${tc.id}}"
-                                                              th:text="#{table.history}">historie</a></td>
+                <td sec:authorize="hasAuthority('TESTER') or hasAuthority('MANAGER')"><a
+                        th:href="@{'/tc/history/'+${tc.id}}"
+                        th:text="#{table.history}">historie</a></td>
                 <td sec:authorize="hasAuthority('TESTER')"><a
                         th:href="@{'/tc/run/'+${tc.id}+'?origin=tc&amp;backid='+${suite.id}}"
                         th:text="#{table.run}">run</a>
@@ -99,7 +104,8 @@
            class="btn btn-primary" th:text="#{tc.create}" sec:authorize="hasAuthority('ANALYTIC')">Založit Test Case</a>
     </div>
     <p>
-        <a th:href="@{'/downloadExcelTC/'+${suite.id}}" th:text="#{common.exportExcel}" class="btn btn-default">Export do excelu</a>
+        <a th:href="@{'/downloadExcelTC/'+${suite.id}}" th:text="#{common.exportExcel}" class="btn btn-default">Export
+            do excelu</a>
     </p>
 
     <!-- Footer -->

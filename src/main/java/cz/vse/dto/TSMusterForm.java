@@ -5,7 +5,6 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 
-
 /**
  * Created by pcejka on 10.10.2016.
  */

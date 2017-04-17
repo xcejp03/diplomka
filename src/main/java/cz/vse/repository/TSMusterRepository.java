@@ -11,5 +11,6 @@ import java.util.List;
  */
 public interface TSMusterRepository extends BaseRepository<TSMuster> {
     List<TSMuster> findAllTestStepMustersByTCMusterOrderById(TCMuster tcMuster);
+
     List<TSMuster> findAllTSMustersByTCMusterOrderById(TCMuster tcMuster);
 }

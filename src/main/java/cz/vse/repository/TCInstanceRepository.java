@@ -1,6 +1,9 @@
 package cz.vse.repository;
 
-import cz.vse.entity.*;
+import cz.vse.entity.StatusEnum;
+import cz.vse.entity.TCInstance;
+import cz.vse.entity.TCMuster;
+import cz.vse.entity.WorkTC;
 import cz.vse.repository.base.BaseRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,6 +15,7 @@ import java.util.List;
  */
 public interface TCInstanceRepository extends BaseRepository<TCInstance> {
     List<TCInstance> findByTCMusterOrderById(TCMuster tcMuster);
+
     List<TCInstance> findByWorkTCOrderById(WorkTC workTC);
 
     TCInstance findTop1ByTCMusterOrderByCreatedDateTimeDesc(TCMuster tcMuster);

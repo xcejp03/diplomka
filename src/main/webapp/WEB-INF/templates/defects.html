@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="cs" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.springframework.org/security/tags">
+>
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -176,7 +176,7 @@
         <div class="col-sm-12">
             <p><a href="/defect/create" class="btn btn-default" target="_blank" th:text="#{defects.createDefect}">Založit
                 Defect</a></p>
-            <p> <a th:href="@{'/downloadExcelDefects/'}" th:text="#{common.exportExcel}" class="btn btn-default">Export
+            <p><a th:href="@{'/downloadExcelDefects/'}" th:text="#{common.exportExcel}" class="btn btn-default">Export
                 do excelu</a></p>
         </div>
     </div>

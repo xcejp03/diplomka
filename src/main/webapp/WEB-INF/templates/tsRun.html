@@ -32,7 +32,8 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/dashboard">Home</a></li>
-                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right" th:text="#{common.backButton}">Zpět</a>
+                <a th:href="@{${#httpServletRequest.getHeader('referer')}}" class="btn btn-default btn-xs pull-right"
+                   th:text="#{common.backButton}">Zpět</a>
             </ol>
         </div>
     </div>
@@ -72,9 +73,9 @@
                             <div class="controls">
                                 <label for="expected" th:text="#{form.expected}">Očekávané chování</label>:
                                 <textarea type="text" id="expected"
-                                       readonly="true" name="expected"
-                                       th:text="*{expected}"
-                                       class="form-control"
+                                          readonly="true" name="expected"
+                                          th:text="*{expected}"
+                                          class="form-control"
                                 />
                             </div>
                         </div>
@@ -83,8 +84,8 @@
                             <div class="controls">
                                 <label for="result" th:text="#{form.result}">Výsledek</label>:
                                 <textarea type="text" id="result" name="result"
-                                       th:text="*{result}"
-                                       autofocus="autofocus" class="form-control"/>
+                                          th:text="*{result}"
+                                          autofocus="autofocus" class="form-control"/>
                             </div>
                         </div>
 
@@ -104,7 +105,8 @@
                                 </select>
                             </div>
                             <div th:if="${#fields.hasErrors('status')}" th:errorclass="alert-danger"
-                                 th:errors="*{status}">form field error</div>
+                                 th:errors="*{status}">form field error
+                            </div>
                         </div>
 
                         <div class=" control-group form-group">
@@ -115,10 +117,12 @@
                         </div>
 
                         <span th:if="*{id != null}" th:remove="tag">
-                             <input type="submit" value="Upravit" th:value="#{common.editButton}" class="btn btn-primary"/>
+                             <input type="submit" value="Upravit" th:value="#{common.editButton}"
+                                    class="btn btn-primary"/>
                         </span>
                         <span th:if="*{id == null}" th:remove="tag">
-                             <input type="submit" value="Vytvořit" th:value="#{common.createButton}" class="btn btn-primary"/>
+                             <input type="submit" value="Vytvořit" th:value="#{common.createButton}"
+                                    class="btn btn-primary"/>
                         </span>
 
                     </form>
@@ -128,7 +132,8 @@
 
 
                 <p><a th:href="@{'/defect/create'(source='tsInstanceSource_id', sourceid=${TSInstanceRunDTO.id})}"
-                      class="btn btn-default" target="_blank" th:text="#{defects.createDefect}">Založit Defekt pro step</a></p>
+                      class="btn btn-default" target="_blank" th:text="#{defects.createDefect}">Založit Defekt pro
+                    step</a></p>
             </div>
             <div class="col-sm-8">
                 <p><a th:href="@{'/tc/show/'+${TSInstanceRunDTO.tcInstance_id}}"

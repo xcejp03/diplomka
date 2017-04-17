@@ -10,11 +10,11 @@ import java.util.List;
 public class Project extends BaseEntity {
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "projectOwner_id")
     private Person projectOwner;
 
-    @ManyToMany (cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "PERSON_PROJECT",
             joinColumns = @JoinColumn(name = "PROJECT_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "PERSON_ID", referencedColumnName = "ID"))
@@ -26,7 +26,7 @@ public class Project extends BaseEntity {
     @OneToMany(mappedBy = "project")
     private List<TCMuster> tcMusters;
 
-    @OneToMany (mappedBy = "projectSource")
+    @OneToMany(mappedBy = "projectSource")
     private List<Defect> defectList;
 
     public String getName() {

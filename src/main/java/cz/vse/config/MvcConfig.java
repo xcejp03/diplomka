@@ -15,8 +15,8 @@ import java.util.Locale;
 
 //@EnableWebMvc
 @Configuration
-@ComponentScan({ "cz.vse" })
-@Import({ SecurityConfig.class })
+@ComponentScan({"cz.vse"})
+@Import({SecurityConfig.class})
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
     @Bean(name = "dataSource")
@@ -50,7 +50,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
     }
-
 
 
 }

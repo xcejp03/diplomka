@@ -1,8 +1,8 @@
 package cz.vse.service.impl;
 
+import cz.vse.dto.DefectDTO;
 import cz.vse.dto.DefectForm;
 import cz.vse.dto.DefectList;
-import cz.vse.dto.DefectDTO;
 import cz.vse.entity.*;
 import cz.vse.repository.DefectRepository;
 import cz.vse.service.DefectCommentService;

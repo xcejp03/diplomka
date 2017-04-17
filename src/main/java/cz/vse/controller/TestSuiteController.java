@@ -12,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -72,7 +75,7 @@ public class TestSuiteController {
             Long personId = securityUtils.getLoggedPersonId();
             Long suiteId = suiteForm.getId();
             TestSuite testSuite = suiteService.findTestSuiteById(suiteId);
-            l.error("Id projektu: "+suiteId);
+            l.error("Id projektu: " + suiteId);
             model.addAttribute("tcMustersByProject", tcMusterService.findTCMusterNamesByProjectId(testSuite.getProject().getId()));
             model.addAttribute("usersProjects", projectService.findAllTestProjectNamesByUserId(personId));
             model.addAttribute("tcMusterNames", tcMusterService.findAllTestCaseMusterNamesByTestSuiteId(suiteService.findTestSuiteDTOById(suiteId).getId()));

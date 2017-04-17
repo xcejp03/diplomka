@@ -1,7 +1,6 @@
 package cz.vse.entity;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -14,7 +13,7 @@ import java.util.List;
 public class TCMuster extends BaseEntity {
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id")
     private Person Author;
 

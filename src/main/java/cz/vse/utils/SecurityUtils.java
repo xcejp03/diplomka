@@ -54,6 +54,6 @@ public class SecurityUtils {
 
     public Collection<? extends GrantedAuthority> getLoggedPersonAuthorities() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return  auth.getAuthorities();
+        return auth.getAuthorities();
     }
 }

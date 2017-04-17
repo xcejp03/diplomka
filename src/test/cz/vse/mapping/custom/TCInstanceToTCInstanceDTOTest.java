@@ -1,20 +1,17 @@
 package cz.vse.mapping.custom;
 
-import cz.vse.dto.DefectCommentDTO;
 import cz.vse.dto.TCInstanceDTO;
-import cz.vse.entity.DefectComment;
 import cz.vse.entity.StatusEnum;
 import cz.vse.entity.TCInstance;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
-import ma.glasnost.orika.impl.MapperFacadeImpl;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by pcejk on 15.04.2017.

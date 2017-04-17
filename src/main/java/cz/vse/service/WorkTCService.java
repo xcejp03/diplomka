@@ -1,7 +1,10 @@
 package cz.vse.service;
 
 import cz.vse.dto.WorkTCDTO;
-import cz.vse.entity.*;
+import cz.vse.entity.Person;
+import cz.vse.entity.TCInstance;
+import cz.vse.entity.WorkList;
+import cz.vse.entity.WorkTC;
 
 import java.util.List;
 

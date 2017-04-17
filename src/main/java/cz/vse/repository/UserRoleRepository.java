@@ -1,7 +1,6 @@
 package cz.vse.repository;
 
 import cz.vse.entity.Person;
-import cz.vse.entity.Project;
 import cz.vse.entity.UserRole;
 import cz.vse.repository.base.BaseRepository;
 

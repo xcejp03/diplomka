@@ -1,7 +1,6 @@
 package cz.vse.entity;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -26,10 +25,10 @@ public class TSInstance extends BaseEntity {
     private TCInstance tCInstance;
 
     @ManyToOne
-    @JoinColumn (name = "testerUpdate_id")
+    @JoinColumn(name = "testerUpdate_id")
     private Person testerUpdate;
 
-    @OneToMany (mappedBy = "tsInstanceSource")
+    @OneToMany(mappedBy = "tsInstanceSource")
     private List<Defect> defectList;
 
     public String getAction() {

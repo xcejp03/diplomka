@@ -168,12 +168,12 @@ public class TCInstanceServiceImpl implements TCInstanceService {
     public int getNumberOfTCsInProjectByStatus(Project project, StatusEnum status) {
         l.info("with: " + project + " and " + status);
         int number = tcInstanceRepository.getNumberOfTCsInProjectByStatus(status, project.getId());
-        l.info("getted: "+ number);
+        l.info("getted: " + number);
         return number;
     }
 
     public void refreshTCInstanceStatus(long id) {
-        l.info("with: "+ id);
+        l.info("with: " + id);
         TCInstance tcInstance = findTestCaseInstanceById(id);
         StatusEnum refreshedStatus = getTCInstanceStatusFromTSInstancesStatuses(tcInstance);
         tcInstance.setStatus(refreshedStatus);
@@ -182,7 +182,7 @@ public class TCInstanceServiceImpl implements TCInstanceService {
     }
 
     private StatusEnum getTCInstanceStatusFromTSInstancesStatuses(TCInstance tcInstance) {
-        l.info("with: "+ tcInstance);
+        l.info("with: " + tcInstance);
         List<TSInstance> tsInstanceList = tcInstance.getTsInstances();
         List<StatusEnum> statusEnumList = new ArrayList<>();
 

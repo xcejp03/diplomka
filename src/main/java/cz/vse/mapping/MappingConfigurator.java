@@ -1,21 +1,12 @@
 package cz.vse.mapping;
 
 import cz.vse.dto.*;
-import cz.vse.dto.DefectCommentDTO;
-import cz.vse.dto.DefectDTO;
-import cz.vse.dto.ProjectDTO;
-import cz.vse.dto.ProjectStatsDTO;
-import cz.vse.dto.TCInstanceDTO;
-import cz.vse.dto.TCInstanceRunDTO;
-import cz.vse.dto.TSInstanceRunDTO;
-import cz.vse.dto.TSMusterDTO;
-import cz.vse.dto.SuiteDTO;
-import cz.vse.dto.WorkListDTO;
-import cz.vse.dto.WorkTCDTO;
 import cz.vse.entity.*;
 import cz.vse.mapping.utils.CustomMapperMap;
 import cz.vse.repository.TSMusterRepository;
-import ma.glasnost.orika.*;
+import ma.glasnost.orika.Converter;
+import ma.glasnost.orika.Mapper;
+import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.ConfigurableMapper;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;

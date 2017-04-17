@@ -7,5 +7,5 @@ import org.springframework.stereotype.Component;
  * Created by pcejka on 02.12.2016.
  */
 @Component
-public class ProjectToLongIdConverter extends AbstractEntityToIdConverter<Project,Long> {
+public class ProjectToLongIdConverter extends AbstractEntityToIdConverter<Project, Long> {
 }

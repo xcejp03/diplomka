@@ -2,16 +2,15 @@ package cz.vse.controller;
 
 import cz.vse.dto.DefectCommentDTO;
 import cz.vse.service.DefectCommentService;
-import cz.vse.service.impl.DefectServiceImpl;
 import cz.vse.service.PersonService;
 import cz.vse.service.ProjectService;
+import cz.vse.service.impl.DefectServiceImpl;
 import cz.vse.utils.SecurityUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,10 +44,8 @@ public class DefectCommentController {
     public String createDefect(Model model, DefectCommentDTO defectCommentDTO) {
         l.info("request mapping comment/create");
         model.addAttribute("commentDTO", new DefectCommentDTO());
-//        model.addAttribute("listComments", defectCommentService.findAllDefectsCommentsDTOAllTest());
         model.addAttribute("defects", defectService.findAllDefects());
         model.addAttribute("persons", personService.findAllPersons());
-//        model.addAttribute("listProjects", projectService.findAllTestProjectsDTO());
 
         return "commentCreate";
     }
