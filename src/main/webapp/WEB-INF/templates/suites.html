@@ -63,7 +63,6 @@
             <tbody th:remove="all-but-first">
             <tr th:each="suite : ${suites}">
                 <td th:text="${suite.id}">00</td>
-                <!--<td sec:authorize="hasAuthority('TESTER')">Výsledek Suitu</td>-->
                 <td th:text="${suite.name}">Projekt</td>
                 <td th:text="${suite.createdDateTime}" sec:authorize="hasAuthority('ANALYTIC')">Projekt</td>
                 <td><a th:href="@{'/tc/tc-by-suite/'+${suite.id}}" th:text="#{tc.testCases}">Test Cases</a></td>

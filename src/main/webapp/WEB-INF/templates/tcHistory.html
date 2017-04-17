@@ -75,7 +75,6 @@
                       th:class="${tc.status}">Status</span></td>
             <td th:text="${tc.name}">Projekt</td>
             <td th:text="${tc.createdDateTime}">datum a čas vytvoření</td>
-            <!--<td><a th:href="@{'/tc/instance/remove/' +${tc.id}}" th:text="#{common.deleteButton}">delete</a></td>-->
             <td><a th:href="@{'/tc/show/'+${tc.id}}" th:text="#{common.ShowButton}">Ukaž</a></td>
         </tr>
         </tbody>

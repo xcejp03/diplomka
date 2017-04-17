@@ -204,8 +204,6 @@
             <div class="well">
                 <h3 th:text="#{defect.changeStatus}">Změna stavu defektu.</h3>
                 <form th:action="@{/defect/writeStatusChange}" method="post">
-                    <!--<div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"-->
-                    <!--class="alert alert-danger"></div>-->
                     <div class=" control-group form-group">
                         <div class="controls">
                              <span th:if="${defectDTO.id != null}" th:remove="tag">
@@ -247,7 +245,6 @@
             <div class="well">
                 <h3 th:text="#{defect.defectsComment}">Komentáře defektu <span th:text="${defectDTO.id}"></span></h3>
                 <div style="overflow: auto; max-height: 600px">
-                    <!--th:if="${not #lists.isEmpty(tblUserList)}"-->
                     <span th:if="${not #lists.isEmpty(defectCommentsByDefect)}" th:remove="tag">
                     <table class="table table-striped">
                         <thead>

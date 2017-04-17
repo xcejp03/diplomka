@@ -242,7 +242,6 @@
                                     <th th:text="#{table.owner}">Vlastník</th>
                                     <th th:text="#{table.passed}">Passed</th>
                                     <th th:text="#{table.failed}">Failed</th>
-                                     <!--<th th:text="#{table.norun}">No run</th>    nedává moc smysl, tak nezobrazuju-->
                                     <th th:text="#{table.count}">Počet TC</th>
                                     <th th:text="#{table.detail}">Detail</th>
                                  </tr>
@@ -253,7 +252,6 @@
                                     <td th:text="${project.projectOwner_name}">vlastník</td>
                                     <td th:text="${project.numberOfPassedTCs}">passed</td>
                                     <td th:text="${project.numberOfFailedTCs}">failed</td>
-                                     <!--<td th:text="${project.numberOfNorunTCs}">norun</td>-->
                                     <td th:text="${project.numberOfTCs}">passed</td>
                                     <td>
                                        <a href="#" th:href="@{'/project/'+${project.project_id}}"

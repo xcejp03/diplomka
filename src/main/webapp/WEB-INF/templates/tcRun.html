@@ -79,7 +79,6 @@
             <th th:text="#{table.expected}">Očekávaný výsledek</th>
             <th th:text="#{table.result}">Výsledek</th>
             <th th:text="#{table.insertResult}">zadat výsledek</th>
-            <!--<th th:text="#{table.delete}">Delete</th>-->
         </tr>
         </thead>
         <tbody th:remove="all-but-first">
@@ -91,7 +90,6 @@
             <td th:text="${ts.expected}">Projekt</td>
             <td th:text="${ts.result}">Projekt</td>
             <td><a th:href="@{'/ts/run/'+${ts.id}}" th:text="#{table.insertResult}">zadat výsledek</a></td>
-            <!--<td><a th:href="@{'/ts/instance/remove/'+${ts.id}}" th:text="#{common.deleteButton}">Delete</a></td>-->
         </tr>
         </tbody>
     </table>

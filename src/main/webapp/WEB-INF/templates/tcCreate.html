@@ -46,10 +46,6 @@
                 <div class="well">
                     <form th:action="@{/tc/create}" method="post" th:object="${TCMusterForm}"
                           default-target-url="/index">
-                        <!--<div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"-->
-                        <!--class="alert alert-danger">-->
-
-                        <!--</div>-->
 
                         <span th:if="*{id != null}" th:remove="tag">
                             <div class=" control-group form-group">
@@ -78,8 +74,6 @@
                                 <label for="suiteFrom" th:text="#{form.testsuite}">Test Suite</label>
                                 <input type="text" id="suiteFrom" name="suiteFrom" th:value="${helpContext.suiteFrom}"
                                        readonly="readonly" class="form-control"/>
-                                <!--<input type="text" id="testSuite_id" name="testSuite_id" th:value="*{suiteFrom}"-->
-                                <!--hidden="hidden"/>-->
 
                             </div>
                         </div>
@@ -95,22 +89,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!--</span>-->
-                        <!--TEST SUITE SE TED NEUKLÁDÁ - POTŘEBA UPRAVIT SERVICE PRO SAVE-->
-
-                        <!--<div class=" control-group form-group" th:with="suiteFilterId=${param.suite[0]}">-->
-                        <!--<div class="controls">-->
-                        <!--<label for="suite_id">Test Suite</label>:-->
-
-                        <!--<select class="form-control" id="suite_id" name="suite_id">-->
-                        <!--<option th:each="suite : ${projectsSuites}"-->
-                        <!--th:value="${suite.id}"-->
-                        <!--th:selected="${suite != null} ? ${#strings.contains(suite.id, suiteFilterId)}"-->
-                        <!--th:text="${suite.name}">jméno projektu-->
-                        <!--</option>-->
-                        <!--</select>-->
-                        <!--</div>-->
-                        <!--</div>-->
 
                         <div class=" control-group form-group">
                             <div class="controls">
@@ -177,10 +155,6 @@
 
                 </div>
             </div>
-
-            <!--<div class="col-sm-5">-->
-            <!--<p><a th:href="@{'/tc/tc-by-suite/'+ ${param.suite[0]}}" class="btn btn-primary">Zpět</a></p>-->
-            <!--</div>-->
 
         </div>
 

@@ -49,8 +49,6 @@
                 <div class="col-sm-4">
                     <div class="well">
                         <form th:action="@{/person/create}" method="post" th:object="${personForm}">
-                            <!--<div th:if="${#fields.hasErrors('*')}" th:text="#{form.error.all}"-->
-                            <!--class="alert alert-danger"></div>-->
                             <span th:if="*{id != null}" th:remove="tag">
                             <div class=" control-group form-group">
                             <div class="controls">
@@ -104,7 +102,6 @@
                                 <input type="checkbox" th:checked="*{enabled}" th:text="#{form.enabled}" name="enabled"
                                        id="enabled"
                                        class="checkbox"/>
-                                <!--<input type="enabled" id="enabled" class="form-control" name="enabled"/> <br/>-->
                             </div>
                         </div>
                         </span>

@@ -65,7 +65,6 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <!--<tr th:each="tc : ${workTCWrapper.workTCDTOList}">-->
                             <tr th:each="tc, stat : ${workTCWrapper.workTCDTOList}">
                                 <input type="hidden" th:field="*{workTCDTOList[__${stat.index}__].id}"/>
                                 <input type="hidden" th:field="*{workTCDTOList[__${stat.index}__].tcMuster_id}"/>
@@ -99,51 +98,8 @@
                                     <a th:href="@{'/tc/run/'+${tc.tcMuster_id}+'?backid='+${workTCWrapper.workList_id}+'&amp;'+'origin=worklist&amp;worktc='+${tc.id}}"
                                        th:text="#{table.run}">run</a>
                                 </td>
-                                <!--<a th:href="@{'/tc/run/+${tc.tcMuster_id}'+(origin='worklist', worktc=${tc.id})}"-->
                             </tr>
 
-                            <!--     <tr th:each="tc, stat : ${workListDTO.workTCList}">
-                                     <td th:text="${tc.id}">id</td>
-                                     <td th:text="${tc.name}">Název</td>
-                                     <td>
-                                         <input type="hidden" th:field="*{workTCList[__${stat.index}__].id}"/>
-                                         <input type="hidden" th:field="*{workTCList[__${stat.index}__].tcMuster_id}"/>
-                                         <input type="text" id="tcMuster_id" th:value="${workListDTO.tcMuster_id}" name="tcMuster_id"
-                                                hidden="hidden"/>
-                                     </td>
-                                     <td>
-                                         <input type="text" id="tcMuster" name="tcMuster" th:value="456456"
-                                                hidden="hidden"/>
-                                     </td>
-                                     <td>
-                                         <select class="form-control" th:name="|workTCList[${stat.index}].priority|">
-                                             <option th:each="priority : ${priorityList}"
-                                                     th:value="${priority}"
-                                                     th:selected="${tc.priority != null} ? ${#arrays.contains(tc.priority, priority)}"
-                                                     th:text="${priority}">jméno projektu
-                                             </option>
-                                         </select>
-                                     </td>
-                                     <td>
-                                         <select class="form-control" th:name="|workTCList[${stat.index}].assignee_id|">
-                                             <option th:value="null">-&#45;&#45;</option>
-                                             <option th:each="person : ${persons}"
-                                                     th:value="${person.id}"
-                                                     th:selected="${tc.assignee_id != null} ? ${#strings.contains(person.id, tc.assignee_id)}"
-                                                     th:text="${person.name}">Assignee
-                                             </option>
-                                         </select>
-                                     </td>
-                                     <td th:text="${tc.updatedDateTime}">datum změny</td>
-                                     <td>
-                                         <a th:href="@{'/worklist/history/'+${tc.id}}"
-                                            th:text="#{table.history}">Historie</a>
-                                     </td>
-                                     <td sec:authorize="hasAuthority('TESTER')">
-                                         <a th:href="@{'/tc/run/'+${tc.tcMuster_id}+'?worktc='+${tc.id}}"
-                                            th:text="#{table.run}">run</a>
-                                     </td>
-                                 </tr>-->
                             </tbody>
                         </table>
                         <span th:if="${workListDTO.id != null}" th:remove="tag">
